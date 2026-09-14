@@ -1,0 +1,11 @@
+# Astro and Node artifacts
+node_modules/
+dist/
+.astro/
+
+# Local media generation and review artifacts
+media-work/
+comfyui-runs/
+
+# Editor and OS files
+.DS_Store
