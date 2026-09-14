@@ -2,33 +2,71 @@
 
 ## Purpose
 
-Mars AI Simulation is a real-world testbed for orchestrating AI-assisted creative
-work. Its fictional output is Red Horizon: a plausible, evolving Mars exploration
-mission assembled by an international coalition.
+Mars AI Simulation is a real-world testbed for multi-agent creative and technical
+work. Its fictional output is **Red Horizon**, a plausible international Mars
+exploration programme experienced as an ongoing public project rather than a
+finished story archive.
 
-## Public promise
+The experiment tests local models and agent orchestration across writing, image
+and video generation, continuity review, web development, operations, and
+deployment. This purpose is stated plainly on the site's About/Method page and
+linked in every public-page footer.
 
-Readers encounter a living project, not a retrospective archive. Updates may
-announce partners, sensor choices, launch decisions, operations, discoveries and
-setbacks as the mission progresses. Fictional status and the AI-assisted process
-are disclosed on the future site's About/Method page and in its footer.
+## Audience and public experience
 
-## Canon policy
+The site serves curious space readers and people interested in the creative
+process. A reader should be able to understand the current mission state from a
+single page, then explore deeper news and wiki links without needing to know the
+private scenario or technical stack.
 
-The private timeline is the continuity source of truth. A fact becomes public
-canon only after a human approves the underlying draft and linked media. The
-public site must never expose unreleased milestones, scenario notes, raw prompts,
-or experimental assets.
+The default public voice is a careful, optimistic project newsroom: direct,
+specific, and calm under uncertainty. It is neither a governmental archive nor a
+conspiracy publication. Updates acknowledge trade-offs and setbacks without
+manufacturing drama.
 
-## Repository boundaries
+## Story world
 
-- This repository: Astro site, approved MDX, approved static assets, editorial docs.
-- `~/Projects/mars-image-gen`: local ComfyUI workflows and render experiments.
-- Beads: durable task state, dependencies, decisions, and handoffs.
+- A coalition of fictionalised European, American, Japanese, and other research
+  partners develops a robotic Mars mission.
+- RH-01 Pathfinder is the first surface rover. It maps terrain, examines rocks,
+  and proves the coalition's operating model.
+- The arc progresses through planning, commitments, payload selection, vehicle
+  design, launch choice, launch, cruise, landing, commissioning, exploration,
+  repair, and end of life.
+- Real agencies and technologies may be referenced only when the content clearly
+  distinguishes fact from the fictional Red Horizon narrative. Prefer invented
+  institutions for material that could otherwise imply a real endorsement.
 
-## Narrative baseline
+## Canon, drafts, and publication
 
-Red Horizon begins with Europe, NASA, Japan, and other partners discussing a joint
-Mars project. The initial robotic vehicle is **RH-01 Pathfinder**, a rugged survey
-rover. Institutions and technical details remain fictional unless deliberately
-created and approved as in-universe canon.
+| State | Meaning | May appear on public site? |
+| --- | --- | --- |
+| `scenario` | Private possible/approved future event | No |
+| `proposal` | Agent work awaiting review | No |
+| `draft` | Edited candidate, not yet approved | No |
+| `approved` | Human-selected canon and asset | Not until scheduled |
+| `published` | Released public content | Yes |
+| `superseded` | Replaced by a correction or later decision | Keep only with an editorial note |
+
+The private timeline is the authoritative order of events. A public page is
+canonical only after human approval. Never reveal later milestones, prompt text,
+unselected images, experimental videos, or hidden decision notes through public
+content, page metadata, GitHub deployment artifacts, filenames, or alt text.
+
+## Repository and asset boundaries
+
+- This repository contains the Astro application, approved MDX, approved stable
+  assets, editorial documentation, and project-local skills.
+- `~/Projects/mars-image-gen` contains local ComfyUI workflows, model-specific
+  work, prompts, references, generated candidates, and run records.
+- Beads contains durable work state, task dependencies, handoffs, and approval
+  decisions. It is not a content-management system.
+- Hosting credentials, domains, provider API keys, machine-local model files, and
+  unapproved media must not be committed.
+
+## Media policy
+
+Every approved visual needs a stable filename, public caption, meaningful alt
+text, a linked story/vehicle subject, approval status, and private provenance
+reference. Images must preserve the canonical vehicle silhouette; visual style
+cannot overrule established equipment placement or mission chronology.

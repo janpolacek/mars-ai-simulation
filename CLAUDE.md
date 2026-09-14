@@ -2,6 +2,22 @@
 
 This file provides instructions and context for AI coding agents working on this project.
 
+## Mars AI Simulation operating rules
+
+Before making product, editorial, media, site, or deployment changes, read
+`docs/INSTRUCTIONS.md` and the matching role contract under `docs/agents/`.
+The private mission timeline (`docs/timeline/`) is continuity material only: never
+place its unreleased content in public routes, metadata, assets, or summaries.
+
+Agents prepare bounded, reviewable deliverables. A human alone approves public
+canon, content publication, external deployments, hosting credentials, domain/DNS
+changes, and media uploads. Technical agents may implement local site work and
+validate builds but must not deploy or configure external services without a
+separate current human instruction.
+
+Use project-local skills in `.agents/skills/` for SEO content, project Markdown,
+Red Horizon brand voice, and copy editing when relevant.
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
 ## Beads Issue Tracker
 
@@ -60,18 +76,22 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 
 ## Build & Test
 
-_Add your build and test commands here_
-
-```bash
-# Example:
-# npm install
-# npm test
-```
+The Astro application has not yet been bootstrapped. When it exists, document the
+exact install, type-check, content-validation, build, and link-check commands
+here. Do not mark a release ready unless its production build succeeds and proves
+that private timeline and non-published content are excluded.
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+This will be a static Astro + MDX site with typed collections for news, wiki,
+mission updates, and media. `docs/` contains project and private continuity
+material; it is not public application content. See `docs/PLAN.md` for the staged
+architecture and `docs/GENERAL.md` for repository boundaries.
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+- Keep public content Markdown/MDX-first and enforce state filtering in the
+  application rather than relying on author discipline.
+- Treat selected ComfyUI exports as immutable assets. Candidate images and raw
+  workflows stay in `~/Projects/mars-image-gen`.
+- Record durable work and approvals in Beads, not Markdown task lists.

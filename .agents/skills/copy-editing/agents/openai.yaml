@@ -1,0 +1,4 @@
+interface:
+  display_name: "Red Horizon Copy Editing"
+  short_description: "Edit public copy without changing canon"
+  default_prompt: "Copy edit this Red Horizon draft for clarity, accessibility, and consistency."

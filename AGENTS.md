@@ -1,5 +1,21 @@
 # Agent Instructions
 
+## Mars AI Simulation operating rules
+
+Before making product, editorial, media, site, or deployment changes, read
+`docs/INSTRUCTIONS.md` and the matching role contract under `docs/agents/`.
+The private mission timeline (`docs/timeline/`) is continuity material only: never
+place its unreleased content in public routes, metadata, assets, or summaries.
+
+Agents prepare bounded, reviewable deliverables. A human alone approves public
+canon, content publication, external deployments, hosting credentials, domain/DNS
+changes, and media uploads. Technical agents may implement local site work and
+validate builds but must not deploy or configure external services without a
+separate current human instruction.
+
+Use project-local skills in `.agents/skills/` for SEO content, project Markdown,
+Red Horizon brand voice, and copy editing when relevant.
+
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
 > **Architecture in one line:** Issues live in a local Dolt database

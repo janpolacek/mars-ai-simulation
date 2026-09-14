@@ -1,35 +1,61 @@
-# Editorial and agent instructions
+# Project instructions
 
-## Shared rules
+These rules apply to every human and agent. Role-specific contracts live in the
+[agent playbook](agents/README.md); a role follows both documents.
 
-- Run `bd prime` before work; create and claim a Beads issue before producing a deliverable.
-- Treat `docs/timeline/` as private continuity material. Do not copy it into public site content.
-- Never publish content, media, or canon changes without human approval.
-- Use fictional organizations, programmes, and people unless a real reference is intentionally required and clearly framed.
-- Keep science and engineering plausible; label deliberately fictional technology.
+## Mandatory working sequence
 
-## Writer
+1. Run `bd prime`, inspect `bd ready`, then create or claim the relevant issue.
+2. Read the role contract and the minimum relevant source material before acting.
+3. Produce one bounded deliverable: a draft, review, visual brief, implementation,
+   deployment plan, or validation result.
+4. Record affected canon, files, validation, open questions, and next owner in the
+   Beads issue.
+5. Never mark work as published or complete when a required review, test, or human
+   decision remains outstanding.
 
-Draft a single news item, wiki entry, or scenario proposal per task. State its
-timeline step, proposed canon facts, source dependencies, and open continuity
-questions. Do not claim an event occurred unless its timeline step is approved.
+## Source-of-truth order
 
-## Image and video creator
+1. Explicit current human instruction.
+2. Approved public canon and the private timeline's event order.
+3. Vehicle dossiers and approved media metadata.
+4. Repository conventions and agent role contracts.
+5. A well-marked proposal, never an invented fact presented as established canon.
 
-Write a visual brief linked to an approved narrative moment. Use local ComfyUI
-through `~/Projects/mars-image-gen`; preserve the relevant workflow, prompt,
-source references, and selection rationale outside this repository. Submit only
-selected stable exports with proposed filename, caption, and alt text.
+When sources conflict, stop the affected claim, describe the conflict in Beads,
+and ask the human story owner for a decision. Do not silently reconcile it.
 
-## Redactor / continuity reviewer
+## Canon and information safety
 
-Compare material against the private timeline, vehicle dossier, existing public
-canon, and disclosure rules. Return a correction list or mark it ready for human
-approval. Check chronology, terminology, technical plausibility, accessibility,
-and that no unreleased information leaks into the copy or image metadata.
+- `docs/timeline/` is private continuity material; do not route, import, quote,
+  include, or expose it in public builds.
+- Never place unapproved scenario facts in a public title, summary, slug, image
+  filename, alt text, Open Graph metadata, sitemap, git commit message, or issue
+  visible outside the project.
+- Keep real-world political, scientific, and organisational claims accurate when
+  used. Clearly label the fictional Red Horizon programme and avoid implying a
+  real agency partnership or endorsement.
+- Preserve earlier public facts. Corrections must be explicit, dated, and reviewed
+  rather than silently replacing the record.
 
-## Human approval gate
+## Quality baseline
 
-The human reviewer chooses whether a proposal becomes canon, which media asset is
-authoritative, its release order, and the public publish date. Record the decision
-in the relevant Beads issue before changing content to `published`.
+All public-facing copy is plain, concrete, accessible, and jargon-light. Define a
+necessary technical term on first use. Every image has descriptive alt text; every
+video has a text summary and, where speech matters, captions/transcript. Pages
+must be keyboard usable, responsive, and performant on ordinary mobile networks.
+
+## External actions and secrets
+
+Agents may prepare code, configuration, preview instructions, and deployment
+checklists. They must not create public deployments, alter DNS, attach a domain,
+enable analytics, upload media to external storage, create provider accounts, or
+use credentials without explicit current human approval. Never log, commit, or
+repeat secrets.
+
+## Handoff format
+
+Every handoff states: **result**, **source/timeline step**, **canon impact**,
+**files or assets**, **validation completed**, **review required**, and **next
+action/owner**. A handoff that is ready for human approval includes a short
+release recommendation and the exact proposed public scope.

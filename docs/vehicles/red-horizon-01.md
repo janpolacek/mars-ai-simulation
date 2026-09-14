@@ -1,29 +1,53 @@
 # RH-01 Pathfinder
 
-## Role
+## Status and role
 
-RH-01 Pathfinder is the first Red Horizon surface vehicle: a compact robotic Mars
-surveyor intended to map local terrain, inspect rocks, and establish safe routes
-for later science targets.
+**Status:** proposed private canon. Human approval is required before a public
+vehicle page or canonical visual is published.
 
-## Canonical design direction
+RH-01 Pathfinder is Red Horizon's first surface vehicle: a compact robotic Mars
+surveyor that maps local terrain, investigates rocks in context, and establishes
+safe routes for later science targets. It is an instrument, not a character: its
+design should show the constraints of dust, terrain, power, communication delay,
+and remote operations.
 
-- Low, two-metre-class unmanned rover with a warm-white equipment body, muted red
-  identification panels, a dark instrument deck, and no cabin.
-- Six metal-mesh wheels on visible articulated suspension; wheel geometry and
-  ground contact must remain mechanically coherent in every approved image.
-- A short central stereo-camera mast and a single front-mounted two-joint contact
-  science arm. The arm folds into a travel cradle.
-- Matte ceramic-coated panels, brushed metal arm sections, dark protected pivots,
-  restrained fasteners, and sealed equipment housings.
+## Canonical physical baseline
+
+| System | Approved direction | Must not appear |
+| --- | --- | --- |
+| Body | Low, roughly two-metre-class warm-white equipment body with muted red identification panels and a dark instrument deck | Cockpit, passenger cabin, windows, weapons, decorative fins |
+| Mobility | Six broad metal-mesh wheels on visible articulated suspension | Tracks, legs, hover hardware, mismatched wheel count |
+| Vision | Short central mast with a compact stereo-camera pair | Tall human-like head, multiple arbitrary antennae, floating sensors |
+| Contact science | One front-centre two-joint arm ending in a small contact tool; it folds into a travel cradle | Extra arms, disconnected joints, oversized drilling rig |
+| Materials | Matte ceramic coating, brushed metal arm, protected dark pivots, restrained seams and fasteners | Toy gloss, loose cables, exposed fantasy energy parts |
+
+Every approved image must retain these features, natural occlusion, plausible
+suspension/ground contact, and consistent front/rear orientation. New instruments
+need an approved mounting location before they appear in copy or media.
+
+## Science and operations
+
+The rover's initial payload direction includes panorama/navigation imaging, local
+weather observations, mineral/rock context sensing, and a close-contact tool. It
+operates in short deliberate traverses: survey, select target, approach, inspect,
+record results, then choose the next safe route. Exact names, measurement limits,
+power source, communications architecture, and landing region remain open.
+
+## Visual states
+
+1. **Canonical reference:** clean studio-style views, arm folded, every system
+   visible enough to establish identity.
+2. **Early surface operations:** newly deployed, restrained dust, short tracks,
+   functioning mast and folded/active arm only when the event calls for it.
+3. **Mature operations:** naturally accumulated dust and small abrasion, but no
+   unannounced hardware damage or missing equipment.
+4. **Late mission:** wear follows approved timeline decisions; it remains a
+   maintained scientific machine, not an abandoned cinematic wreck.
 
 ## Visual source workflow
 
-Use the existing `vehicle-01-atlas` pattern in `~/Projects/mars-image-gen` as a
-technical workflow reference, not as published Red Horizon canon. Establish a new
-RH-01 story set and canonical reference package before publishing the rover.
-
-## Status
-
-Proposed private canon. Exact instruments, colours, scientific payload, and final
-image set require human approval before a public vehicle page is created.
+Use the `vehicle-01-atlas` pattern in `~/Projects/mars-image-gen` as a workflow
+reference only. Create a dedicated RH-01 story set, generate canonical reference
+views, and have a human select the authoritative package before scene generation.
+Record prompt/workflow provenance privately in that generator workspace. Copy only
+the selected stable exports, with captions and alt text, into this repository.

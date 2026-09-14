@@ -1,0 +1,4 @@
+interface:
+  display_name: "Red Horizon SEO"
+  short_description: "Optimise public mission pages without spoilers"
+  default_prompt: "Review this Red Horizon page for honest search intent, metadata, and internal links."
