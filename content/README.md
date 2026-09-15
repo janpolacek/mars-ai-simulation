@@ -19,13 +19,5 @@ build syncs that canonical public media directory to `website/public/media/`. Do
 not put drafts, unapproved images, prompts, or private scenario material in
 `website/public/`.
 
-Create a workflow with:
-
-```sh
-fnm exec --using website/.node-version node scripts/article-workflow.mjs create \
-  --title "Example article" --slug example-article \
-  --brief "Describe the requested article." --timeline-step site-foundation
-```
-
-See [the workflow runbook](../docs/CONTENT_WORKFLOW.md) for the worker lifecycle
-and the dispatch command.
+See [the workflow runbook](../docs/CONTENT_WORKFLOW.md) for the Beads creation
+sequence, artifact requirements, and worker lifecycle.

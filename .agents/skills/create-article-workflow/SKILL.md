@@ -11,15 +11,15 @@ non-story material). Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
 `docs/agents/story-coordinator.md`, and only the timeline material needed to
 validate that step. Never copy private timeline text into a public artifact.
 
-Allowed tools: `bd`, `fnm exec --using website/.node-version node`, and normal
-repository inspection. Do not publish, deploy, alter provider configuration, or
-approve canon.
+Allowed tools: `bd` and normal repository inspection/editing. Do not publish,
+deploy, alter provider configuration, or approve canon.
 
-Run `scripts/article-workflow.mjs create` to create the epic, the five child
-issues, their blocking dependencies, and artifact templates. Required outputs
-are `content/briefs/<slug>.md`, `content/sources/<slug>.md`,
-`content/articles/<slug>.md`, `content/reviews/<slug>.md`, and
-`assets/articles/<slug>/assets.md`.
+Follow the manual `bd create` and `bd dep add` sequence in
+`docs/CONTENT_WORKFLOW.md` to create the epic, five child issues, and their
+blocking dependencies. Create the artifact templates during the claimed workflow
+issue. Required outputs are `content/briefs/<slug>.md`,
+`content/sources/<slug>.md`, `content/articles/<slug>.md`,
+`content/reviews/<slug>.md`, and `assets/articles/<slug>/assets.md`.
 
 Reject a missing brief, invalid slug, unspecified timeline step, duplicate slug,
 or any request that would reveal private future material. Acceptance checks: the

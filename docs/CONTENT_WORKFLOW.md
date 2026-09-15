@@ -7,40 +7,74 @@ No worker relies on an earlier worker's chat response.
 
 ## Create an article graph
 
-From the repository root, with the pinned Node version available:
+The story coordinator creates the graph directly with `bd`; no Node or workflow
+runtime is required. Before creating it, validate a lowercase hyphenated slug,
+a public-safe brief, author, and timeline step. Use `site-foundation` only for
+material outside the scenario.
 
 ```sh
-fnm exec --using website/.node-version node scripts/article-workflow.mjs create \
-  --title "Article title" \
-  --slug article-title \
-  --brief "The requested public-safe article scope." \
-  --author "Red Horizon editorial team" \
-  --timeline-step site-foundation
+bd create "Article: <title>" --type epic \
+  --labels content,article,slug:<slug> \
+  --description "Public-safe article workflow; brief: content/briefs/<slug>.md; timeline step: <step>." \
+  --acceptance "All child tasks have evidence; editorial review passes; human approval is recorded before deployment."
+
+bd create "Research source pack: <slug>" --parent <ARTICLE> \
+  --labels content,article,slug:<slug>,role:research,stage:research \
+  --skills research-and-fact-check \
+  --description "Read content/briefs/<slug>.md; write content/sources/<slug>.md." \
+  --acceptance "Every material claim has a canonical source or an explicit unresolved note."
+
+bd create "Draft article: <slug>" --parent <ARTICLE> \
+  --labels content,article,slug:<slug>,role:redactor,stage:draft \
+  --skills article-drafting \
+  --description "Read the brief and source pack; write content/articles/<slug>.md." \
+  --acceptance "The article preserves draft status and traces every material claim to the source pack."
+
+bd create "Create visual assets: <slug>" --parent <ARTICLE> \
+  --labels content,article,slug:<slug>,role:visual,stage:assets \
+  --skills image-generation \
+  --description "Read the brief and draft; write assets/articles/<slug>/assets.md." \
+  --acceptance "The manifest records private provenance, placement, alt text, caption, tool, and rights."
+
+bd create "Editorial final gate: <slug>" --parent <ARTICLE> \
+  --labels content,article,slug:<slug>,role:editor,stage:review \
+  --skills editorial-review \
+  --description "Review article, source pack, and asset manifest; write content/reviews/<slug>.md." \
+  --acceptance "The review is approved with no unresolved material failure."
+
+bd create "Build and deploy: <slug>" --parent <ARTICLE> \
+  --labels content,article,slug:<slug>,role:tech,stage:deploy \
+  --skills site-deployment \
+  --description "Validate locally after approved review; record approval or exact deployment blocker." \
+  --acceptance "Build and preview pass; production deploy closes only with human approval and verified URL."
+
+bd dep add <DRAFT> <RESEARCH>
+bd dep add <IMAGES> <DRAFT>
+bd dep add <REVIEW> <IMAGES>
+bd dep add <DEPLOY> <REVIEW>
 ```
 
-`--timeline-step` is required. Supply an approved timeline identifier for story
-content, or `site-foundation` only for material outside the scenario. The command
-rejects an invalid slug or an existing article artifact. It creates an `ARTICLE`
-epic and the serial graph `RESEARCH -> DRAFT -> IMAGES -> REVIEW -> DEPLOY`, with
-role and stage labels on each child.
-
-The command also creates the brief, source pack, article, review, and asset
-manifest templates under `content/` and `assets/articles/`. Those locations are
-not public web routes. The asset manifest is the authoritative handoff record;
-raw candidate files, prompts, and generation records remain in
+Record the title, brief, timeline step, acceptance criteria, artifact paths, and
+created IDs in the epic note. The coordinator also creates the brief, source
+pack, article, review, and asset-manifest files under `content/` and
+`assets/articles/`, using the contracts in the relevant skill. Those locations
+are not public web routes. The asset manifest is the authoritative handoff
+record; raw candidate files, prompts, and generation records remain in
 `~/Projects/mars-image-gen` until a human selects an approved stable export.
 
 ## Dispatch a ready task
 
 ```sh
-fnm exec --using website/.node-version node scripts/article-workflow.mjs dispatch
+bd ready --json
+bd show <READY_ISSUE>
+bd update <READY_ISSUE> --claim
 ```
 
-The command reads `bd ready --json` and prints JSON dispatch records only for
-article tasks with exactly one `role:` label. Each includes the Beads ID, skill,
-artifact paths, and a worker prompt. It does not claim, edit, or launch an agent.
-The dispatcher may hand each record to the matching worker. Because the graph is
-serial, a given article can never have two stage tasks ready at once.
+The dispatcher is the person or agent reading `bd ready --json`, identifying the
+single `role:` label, and routing that issue to the matching skill. The worker
+then claims the issue, reads the declared artifacts, and follows that skill.
+Because the graph is serial, a given article can never have two stage tasks ready
+at once.
 
 Every worker runs `bd prime`, reads its issue and declared artifact inputs, claims
 that one issue, performs its bounded scope, records paths/URLs/checks in a Beads
@@ -55,19 +89,10 @@ locally after that gate, but production deployment requires a current explicit
 human approval reference and a verified public URL. The repository contains no
 automation that creates an external deployment.
 
-## Validation
+## Verification
 
-Run the harness contract test with:
-
-```sh
-fnm exec --using website/.node-version node scripts/article-workflow.test.mjs
-```
-
-It uses a temporary fake Beads command to confirm artifact creation, labels,
-dependencies, and dispatch filtering without changing the project Beads database.
-
-Verify core documentation links and policy safeguards with:
-
-```sh
-fnm exec --using website/.node-version node scripts/verify-docs.mjs
-```
+Before closing a workflow-creation issue, inspect its epic and children with
+`bd show <id>` and confirm the five role/stage labels, four blocking edges, and
+five artifact paths. Use `rg` to check Markdown links in the affected documents.
+Workers record their commands and outcomes in Beads notes, which remain the
+durable evidence for the workflow.
