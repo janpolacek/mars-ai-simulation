@@ -33,3 +33,21 @@ deployment output self-contained. Generated files are ignored by Git.
 | `npm run build` | Sync shared assets and build static output in `dist/`. |
 | `npm run preview` | Serve the last production build locally. |
 | `npm run astro -- check` | Run Astro's project checks once configured. |
+
+## Cloudflare Pages
+
+The approved production target is Cloudflare Pages using its Git integration.
+When creating the project in Cloudflare, connect this repository and use:
+
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Root directory | `website` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js version | `26.8.2` |
+
+Cloudflare Pages installs dependencies and runs the build from the configured
+root directory. Do not commit provider tokens, project IDs, custom-domain
+settings, or other credentials. The first live deployment and any custom domain
+remain a human release decision.
