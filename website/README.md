@@ -34,10 +34,10 @@ deployment output self-contained. Generated files are ignored by Git.
 | `npm run preview` | Serve the last production build locally. |
 | `npm run astro -- check` | Run Astro's project checks once configured. |
 
-## Cloudflare Pages
+## Cloudflare Workers static assets
 
-The approved production target is Cloudflare Pages using its Git integration.
-When creating the project in Cloudflare, connect this repository and use:
+The production target is a Cloudflare Worker that serves Astro's static build
+output. The connected Cloudflare Workers Build uses:
 
 | Setting | Value |
 | --- | --- |
@@ -47,7 +47,7 @@ When creating the project in Cloudflare, connect this repository and use:
 | Build output directory | `dist` |
 | Node.js version | `26.8.2` |
 
-Cloudflare Pages installs dependencies and runs the build from the configured
-root directory. Do not commit provider tokens, project IDs, custom-domain
-settings, or other credentials. The first live deployment and any custom domain
-remain a human release decision.
+`wrangler.jsonc` points Workers Static Assets at `dist/`; no Worker application
+code is needed. Do not commit provider tokens, project IDs, custom-domain
+settings, or other credentials. Preview deployments are disabled so branches
+cannot create public URLs for unapproved content.
