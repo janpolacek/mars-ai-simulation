@@ -18,9 +18,11 @@ npm run dev
 
 Do not add approved reusable assets directly to `public/`. Put publication
 media in repository-root `assets/media/` and approved identity files in
-`assets/brand/`, where each remains the canonical source. The `predev` and
-`prebuild` scripts copy those directories to `public/media/` and `public/brand/`,
-making assets available in pages at `/media/<filename>` and `/brand/<filename>`.
+`assets/brand/identity/`, where each remains the canonical source. The `predev`
+and `prebuild` scripts copy those directories to `public/media/` and
+`public/brand/`, making assets available in pages at `/media/<filename>` and
+`/brand/<filename>`. Favicon exports are the exception: they live directly in
+`public/`, while their stable source artwork lives in `assets/brand/favicon/`.
 
 This prevents duplicate source files while keeping Astro's public directory and
 deployment output self-contained. Generated files are ignored by Git.

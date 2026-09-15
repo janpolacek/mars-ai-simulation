@@ -9,14 +9,19 @@ instead of copies managed by individual pages.
 
 ```text
 assets/
-├── brand/     Approved logos, marks, and identity source files
-└── media/     Approved images and videos for publication
+├── brand/
+│   ├── identity/  Approved logos, marks, and identity source files
+│   └── favicon/   Stable source artwork for application favicon exports
+├── media/         Approved images and videos for publication
+└── articles/      Per-article asset manifests; never candidate media
 ```
 
-`website/scripts/sync-assets.mjs` copies `assets/media/` and `assets/brand/` into
-the generated `website/public/media/` and `website/public/brand/` directories
-before local development and production builds. Website code references them as
-`/media/<filename>` and `/brand/<filename>`.
+`website/scripts/sync-assets.mjs` copies `assets/media/` and
+`assets/brand/identity/` into the generated `website/public/media/` and
+`website/public/brand/` directories before local development and production
+builds. Website code references them as `/media/<filename>` and
+`/brand/<filename>`. Favicon exports remain application files under
+`website/public/`; their stable source artwork remains in `assets/brand/favicon/`.
 
 The approved Red Horizon mark and its usage guidance are maintained separately:
 [Brand guidelines](../docs/BRAND_GUIDELINES.md).

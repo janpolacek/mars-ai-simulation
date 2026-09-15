@@ -1,14 +1,17 @@
-import { cp, mkdir, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const websiteDirectory = resolve(scriptDirectory, '..');
-const assetGroups = ['media', 'brand'];
+const assetGroups = [
+  { source: 'media', destination: 'media' },
+  { source: 'brand/identity', destination: 'brand' },
+];
 
 for (const group of assetGroups) {
-  const sourceDirectory = resolve(websiteDirectory, '..', 'assets', group);
-  const destinationDirectory = resolve(websiteDirectory, 'public', group);
+  const sourceDirectory = resolve(websiteDirectory, '..', 'assets', group.source);
+  const destinationDirectory = resolve(websiteDirectory, 'public', group.destination);
 
   await mkdir(sourceDirectory, { recursive: true });
   await rm(destinationDirectory, { recursive: true, force: true });
@@ -20,6 +23,4 @@ for (const group of assetGroups) {
       recursive: entry.isDirectory(),
     });
   }
-
-  await writeFile(resolve(destinationDirectory, '.gitkeep'), '');
 }

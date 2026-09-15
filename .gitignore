@@ -5,7 +5,6 @@
 
 # Generated website copies of root shared assets
 website/public/media/*
-!website/public/media/.gitkeep
 
 # Local media generation and review artifacts
 media-work/
