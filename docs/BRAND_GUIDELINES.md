@@ -43,23 +43,24 @@ issue `mars-ai-simulator-2tm`.
 - **The black field is intentional negative space.** Do not fill it with a
   star field, labels, spacecraft, badges, or decorative orbit lines.
 
-## Working colour palette
+## Primary colours in the approved mark
 
-These design tokens are distilled from the approved raster mark. They provide
-consistent working colours for future layouts and vector tracing; they are not
-a claim that the generated raster uses only flat pixel values.
+These are direct representative samples from the approved PNG. The mark has
+soft raster variation around its sunrise glow, so use these as the canonical
+working palette for future layouts and vector tracing rather than treating the
+raster as a strictly flat-colour file.
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| Void | `#000000` | Primary background and negative space |
-| Mars ember | `#D85D38` | Sunlit upper region of Mars |
-| Mars oxide | `#B63A1D` | Main lower Mars mass |
-| Relief shadow | `#8F2818` | Interior hill planes and restrained depth |
-| Rim light | `#FFD08A` | Thin relief edge and sunrise-lit rim |
-| Sunrise gold | `#FFE7A0` | Exposed solar disc |
-| Sunrise amber | `#D97B27` | Soft halo and nearby reflected warmth |
-| Earth blue | `#79AFFF` | Distant Earth point |
-| Moon blue-gray | `#9AA9BE` | Smaller, dimmer Moon point |
+| Void black | `#010000` | Primary background and negative space |
+| Mars oxide | `#A0301D` | Main lower Mars mass |
+| Mars ember | `#CD553A` | Sunlit upper region of Mars |
+| Relief shadow | `#9F321F` | Interior hill planes and restrained depth |
+| Rim light | `#FCC78B` | Thin relief edge and sunrise-lit rim |
+| Sun core | `#FCA042` | Exposed solar disc |
+| Sunrise halo | `#895215` | Soft halo and nearby reflected warmth |
+| Earth blue | `#7BA7FA` | Distant Earth point |
+| Moon blue-gray | `#94A3B0` | Smaller, dimmer Moon point |
 
 Keep Mars as the dominant warm mass. The Sun and rim light are accents only;
 Earth blue should be the sole cool contrast. Do not introduce saturated greens,
