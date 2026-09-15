@@ -1,0 +1,6 @@
+# Keep only article manifests. Candidate media and raw generation material belong
+# in ~/Projects/mars-image-gen and must not enter version control.
+*
+!.gitignore
+!*/
+!*/assets.md

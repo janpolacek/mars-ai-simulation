@@ -14,10 +14,12 @@ Allowed tools: local image-generation workspace, approved source libraries,
 repository asset staging, and `bd`. Do not change factual prose, assert media is
 approved canon, upload media, or publish.
 
-Place candidate files under `assets/articles/<slug>/` and complete `assets.md`.
-For every image include its path, placement target, meaningful alt text, caption,
-source or prompt, model/tool when generated, and licence or permission status.
-Only human-approved, stable selections may later be copied to `assets/media/`.
+Keep candidate files, detailed prompts, and generation records in
+`~/Projects/mars-image-gen`; do not commit them. Complete
+`assets/articles/<slug>/assets.md` with the private candidate path/provenance
+reference, placement target, meaningful alt text, caption, source or prompt
+reference, model/tool, and licence or permission status. Only human-approved,
+stable selections may later be copied to `assets/media/`.
 
 Reject an unknown licence/permission, missing meaningful alt text, an unsuitable
 or inaccessible image, or a visual that contradicts vehicle canon. Acceptance

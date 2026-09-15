@@ -20,5 +20,8 @@ Red Horizon moment while preserving technical and visual continuity.
 
 For each selected candidate provide proposed stable filename, subject, story step,
 caption, alt text, crop notes, aspect ratio, and private provenance reference.
-The human chooses the authoritative file; the site engineer copies only that file
-to the future `public/media/` path.
+Keep raw candidates, prompts, and generation records in
+`~/Projects/mars-image-gen`; the repository stores only a manifest that points to
+the private record. The human chooses the authoritative file; the site engineer
+copies only that approved stable export to `assets/media/`, which the build syncs
+to `website/public/media/`.

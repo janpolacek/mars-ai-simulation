@@ -64,6 +64,7 @@ else if (args[0] === 'ready') process.stdout.write(process.env.BD_TEST_READY || 
   assert.ok(existsSync(join(fixture, created.paths.brief)));
   assert.match(readFileSync(join(fixture, created.paths.article), 'utf8'), /status: draft/);
   assert.match(readFileSync(join(fixture, created.paths.review), 'utf8'), /Final status: pending/);
+  assert.match(readFileSync(join(fixture, created.paths.assets), 'utf8'), /not committed here/);
 
   const calls = readFileSync(logPath, 'utf8').trim().split('\n').map(JSON.parse);
   assert.equal(calls.filter((call) => call[0] === 'create').length, 6);

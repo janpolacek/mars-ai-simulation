@@ -92,7 +92,7 @@ function articleTemplates({ title, slug, brief, author, timelineStep }) {
     [paths.sources]: `# Source pack: ${title}\n\nStatus: pending research\n\n| Material claim | Canonical URL | Publisher / author | Published or updated | Accessed | Support note |\n| --- | --- | --- | --- | --- | --- |\n`,
     [paths.article]: `---\ntitle: ${quoteYaml(title)}\nslug: ${slug}\nstatus: draft\nauthor: ${quoteYaml(author)}\npublished_at: null\nsources_file: ${quoteYaml(paths.sources)}\nreview_file: ${quoteYaml(paths.review)}\nasset_manifest: ${quoteYaml(paths.assets)}\ntimeline_step: ${quoteYaml(timelineStep)}\n---\n\n<!-- The redactor replaces this comment after the source pack is complete. -->\n`,
     [paths.review]: `# Editorial review: ${title}\n\nFinal status: pending\n\n| Check | Result | Evidence or required correction |\n| --- | --- | --- |\n| Factual claims and citations | pending | |\n| Broken or misleading links | pending | |\n| Title/body coherence and internal consistency | pending | |\n| Audience, voice, grammar, and house style | pending | |\n| Image placement, captions, and meaningful alt text | pending | |\n| Metadata and CMS-content schema | pending | |\n\n## Decision\n\nEditorial result: pending\n\nAn editorial approval does not approve canon, publication, or deployment.\n`,
-    [paths.assets]: `# Asset manifest: ${title}\n\nStatus: pending visual work\n\n| Path | Placement target | Alt text | Caption | Source or prompt | Model/tool | Licence or permission status |\n| --- | --- | --- | --- | --- | --- |\n`,
+    [paths.assets]: `# Asset manifest: ${title}\n\nStatus: pending visual work\n\nCandidate media, prompts, and raw run records remain in ~/Projects/mars-image-gen and are not committed here.\n\n| Private candidate path or provenance reference | Placement target | Alt text | Caption | Source or prompt reference | Model/tool | Licence or permission status |\n| --- | --- | --- | --- | --- | --- | --- |\n`,
   };
 }
 
@@ -149,8 +149,8 @@ function createWorkflow(args) {
     `Read ${paths.brief} and ${paths.sources}. Draft ${paths.article}; preserve metadata and cite the source pack.`,
     `Article exists at ${paths.article}; it follows the brief, preserves draft status, and every material claim traces to ${paths.sources}.`);
   ids.images = createIssue(`Create visual assets: ${slug}`, epic, [...baseLabels, 'role:visual', 'stage:assets'], ROLES.visual,
-    `Read ${paths.article} and ${paths.brief}. Place candidates under assets/articles/${slug}/ and complete ${paths.assets}.`,
-    `Asset manifest exists at ${paths.assets}; candidates have placement, alt text, caption, source/prompt, tool, and rights records.`);
+    `Read ${paths.article} and ${paths.brief}. Keep candidate media in ~/Projects/mars-image-gen and complete ${paths.assets} with private provenance references.`,
+    `Asset manifest exists at ${paths.assets}; each candidate has private provenance, placement, alt text, caption, tool, and rights records.`);
   ids.review = createIssue(`Editorial final gate: ${slug}`, epic, [...baseLabels, 'role:editor', 'stage:review'], ROLES.editor,
     `Review ${paths.article}, ${paths.sources}, and ${paths.assets}. Record pass/fail evidence in ${paths.review}; create a corrective dependency for any material failure.`,
     `Review record at ${paths.review} is approved and the article has integrated, accessible, rights-cleared asset evidence.`);

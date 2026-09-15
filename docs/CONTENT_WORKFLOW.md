@@ -27,7 +27,8 @@ role and stage labels on each child.
 The command also creates the brief, source pack, article, review, and asset
 manifest templates under `content/` and `assets/articles/`. Those locations are
 not public web routes. The asset manifest is the authoritative handoff record;
-candidate files remain in the article asset folder until media approval.
+raw candidate files, prompts, and generation records remain in
+`~/Projects/mars-image-gen` until a human selects an approved stable export.
 
 ## Dispatch a ready task
 
@@ -64,3 +65,9 @@ fnm exec --using website/.node-version node scripts/article-workflow.test.mjs
 
 It uses a temporary fake Beads command to confirm artifact creation, labels,
 dependencies, and dispatch filtering without changing the project Beads database.
+
+Verify core documentation links and policy safeguards with:
+
+```sh
+fnm exec --using website/.node-version node scripts/verify-docs.mjs
+```

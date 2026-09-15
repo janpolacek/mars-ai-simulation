@@ -43,3 +43,18 @@ Project-local skills live under `.agents/skills/`. Use the matching skill for SE
 content, project documentation, Red Horizon brand voice, or copy editing. They
 supplement this playbook; they do not grant publishing, deployment, or canon
 authority.
+
+## Article harness mapping
+
+The [content workflow harness](../CONTENT_WORKFLOW.md) turns a single article
+brief into a serial Beads graph. Its skills extend the role contracts above;
+they do not replace human approval or the continuity redactor's review.
+
+| Harness task | Skill | Role contract(s) to apply |
+| --- | --- | --- |
+| Workflow creation | `create-article-workflow` | Story coordinator |
+| Source pack | `research-and-fact-check` | Story coordinator; human-approved brief |
+| Article draft | `article-drafting` | Writer; brand voice |
+| Visual manifest | `image-generation` | Visual creator |
+| Editorial gate | `editorial-review` | Copy editor; continuity redactor where chronology is in scope |
+| Local validation / authorised release | `site-deployment` | Site engineer; deployment engineer |
