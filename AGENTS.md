@@ -15,6 +15,8 @@ separate current human instruction.
 
 ## Content workflow policy
 
+- `content/` is the only project source root. Do not create a parallel root
+  `assets/` directory; `tools/visual-generator/assets/` is tool-local only.
 - Beads is the source of truth for article state and dependencies.
 - Claim one ready issue before editing; work only within its acceptance criteria.
 - Persist handoffs in repository artifacts and Beads notes, never only in chat.

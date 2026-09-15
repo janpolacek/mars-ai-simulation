@@ -25,6 +25,16 @@ These rules apply to every human and agent. Role-specific contracts live in the
 When sources conflict, stop the affected claim, describe the conflict in Beads,
 and ask the human story owner for a decision. Do not silently reconcile it.
 
+## Project source layout
+
+`content/` is the only project source root. Keep article handoffs in its
+`briefs/`, `sources/`, `articles/`, and `reviews/` directories; approved public
+media in `media/`; identity artwork in `brand/`; and per-article visual manifests
+in `assets/`. Do not create a parallel repository-root `assets/` directory.
+
+`tools/visual-generator/assets/` is an ignored, tool-local generation workspace,
+not a project content source.
+
 ## Canon and information safety
 
 - `docs/timeline/` is private continuity material; do not route, import, quote,
