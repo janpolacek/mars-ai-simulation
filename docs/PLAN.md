@@ -24,7 +24,8 @@ the source of truth, and produce a reviewable handoff without inventing policy.
 
 **Outcome:** a deployable but intentionally sparse public site.
 
-1. Bootstrap Astro with TypeScript and MDX.
+1. Bootstrap Astro with TypeScript and MDX in `website/`, with its Node runtime
+   pinned through `fnm`.
 2. Build the Preparing landing page, logo treatment, site metadata, and About /
    Method disclosure page with a persistent footer link.
 3. Add accessible global navigation, responsive layout, favicon/social-card

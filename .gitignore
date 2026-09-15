@@ -1,7 +1,11 @@
 # Astro and Node artifacts
-node_modules/
-dist/
-.astro/
+**/node_modules/
+**/dist/
+**/.astro/
+
+# Generated website copies of root shared assets
+website/public/media/*
+!website/public/media/.gitkeep
 
 # Local media generation and review artifacts
 media-work/

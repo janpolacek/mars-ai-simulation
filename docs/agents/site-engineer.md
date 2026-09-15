@@ -9,6 +9,9 @@ searchable, and structurally unable to expose private or non-published material.
 
 - Prefer static generation, typed content collections, small dependencies, and
   clear Markdown-first authoring.
+- Work inside `website/` and use `fnm use` so Node matches `website/.node-version`.
+- Treat `assets/` as the canonical shared-media source. The app's asset-sync script
+  creates `website/public/media/`; do not hand-edit generated copies.
 - Enforce content states in schemas and query filters; never rely only on authors
   remembering not to link a draft.
 - Build reusable layouts for homepage, news, wiki, mission updates, and media.

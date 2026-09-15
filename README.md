@@ -37,14 +37,33 @@ surface campaign. It must never masquerade as a real space programme.
 
 ```text
 docs/                 Project, agent, lore, and private timeline documentation
+assets/               Canonical approved logos and publication media
+website/              Astro application, its scripts, and static build output
 .agents/skills/       Project-local editorial skills and Beads integration
-src/                  Future Astro application source
-public/media/         Future approved, immutable publication assets
 ```
 
+`assets/` is the source for reusable approved media. The website copies
+`assets/media/` to `website/public/media/` during development and production
+builds, then refers to it at `/media/...`. Do not manually edit that generated
+website directory.
+
 `~/Projects/mars-image-gen` is the local ComfyUI generation workspace. It is not
-a site dependency: copy a selected approved export into this repository rather
+a site dependency: copy a selected approved export into `assets/media/` rather
 than linking to a mutable sibling file.
+
+## Website development
+
+The website is an isolated Astro project at `website/`, using Node `26.8.2`
+managed with `fnm`. From that directory:
+
+```sh
+fnm use
+npm run dev
+npm run build
+```
+
+The first command uses the pinned version in `website/.node-version`. `npm run
+build` also refreshes the generated local media copy before building.
 
 ## Work tracking and release authority
 
