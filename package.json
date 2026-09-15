@@ -1,0 +1,15 @@
+{
+  "name": "mars-ai-simulator",
+  "version": "1.0.0",
+  "description": "Mars AI Simulator",
+  "scripts": {
+    "lint:biome": "biome check --apply-unsafe",
+    "format:biome": "biome format --write",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.13",
+    "@vitest/ui": "^5.0.1",
+    "vitest": "^5.0.1"
+  }
+}
