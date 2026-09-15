@@ -16,10 +16,11 @@ npm run dev
 
 ## Shared assets
 
-Do not add approved reusable media directly to `public/media/`. Put it in the
-repository-root `assets/media/`, where it remains the canonical source. The
-`predev` and `prebuild` scripts copy that source to `public/media/`, making assets
-available in pages at `/media/<filename>`.
+Do not add approved reusable assets directly to `public/`. Put publication
+media in repository-root `assets/media/` and approved identity files in
+`assets/brand/`, where each remains the canonical source. The `predev` and
+`prebuild` scripts copy those directories to `public/media/` and `public/brand/`,
+making assets available in pages at `/media/<filename>` and `/brand/<filename>`.
 
 This prevents duplicate source files while keeping Astro's public directory and
 deployment output self-contained. Generated files are ignored by Git.

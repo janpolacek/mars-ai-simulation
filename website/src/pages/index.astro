@@ -1,17 +1,95 @@
 ---
-
+const identityMark = '/brand/red-horizon-sunrise-mark.png';
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content="Red Horizon is a fictional, AI-assisted Mars exploration project." />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Red Horizon | Preparing</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<main id="main-content" tabindex="-1">
+			<div class="site-shell">
+				<p class="eyebrow">Mars AI Simulation</p>
+				<img class="site-mark" src={identityMark} alt="" width="1254" height="1254" />
+				<h1>Red Horizon</h1>
+				<p class="status">Preparing</p>
+				<p class="summary">A fictional, AI-assisted Mars exploration project.</p>
+			</div>
+		</main>
+
+		<section id="intro" class="intro" hidden aria-labelledby="intro-title" aria-describedby="intro-summary" aria-modal="true" role="dialog">
+			<div class="intro-content">
+				<p class="eyebrow">Mars AI Simulation</p>
+				<img class="intro-mark" src={identityMark} alt="" width="1254" height="1254" />
+				<h1 id="intro-title">Red Horizon</h1>
+				<p id="intro-summary">A fictional, AI-assisted Mars exploration project.</p>
+				<button id="enter-site" type="button">Enter site</button>
+			</div>
+		</section>
+
+		<script is:inline>
+			const intro = document.querySelector('#intro');
+			const enterSite = document.querySelector('#enter-site');
+			const main = document.querySelector('#main-content');
+			const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+			if (intro && enterSite && main) {
+				let dismissed = false;
+				let timer;
+
+				const dismiss = () => {
+					if (dismissed) return;
+					dismissed = true;
+					window.clearTimeout(timer);
+					intro.classList.add('is-closing');
+					document.body.classList.remove('intro-active');
+					main.inert = false;
+
+					const finish = () => {
+						intro.hidden = true;
+						main.focus({ preventScroll: true });
+					};
+
+					if (reducedMotion.matches) finish();
+					else window.setTimeout(finish, 240);
+				};
+
+				intro.hidden = false;
+				main.inert = true;
+				document.body.classList.add('intro-active');
+				enterSite.focus({ preventScroll: true });
+				enterSite.addEventListener('click', dismiss);
+
+				if (!reducedMotion.matches) timer = window.setTimeout(dismiss, 3400);
+			}
+		</script>
 	</body>
 </html>
+
+<style>
+	:global(*) { box-sizing: border-box; }
+	:global(html) { background: #010000; }
+	:global(body) { margin: 0; min-width: 20rem; background: #010000; color: #fff8e8; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+	:global(body.intro-active) { overflow: hidden; }
+	main { display: grid; min-height: 100svh; place-items: center; padding: 2rem; }
+	.site-shell, .intro-content { width: min(100%, 36rem); text-align: center; }
+	.eyebrow { margin: 0 0 1rem; color: #7ba7fa; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+	.site-mark { display: block; width: min(68vw, 20rem); height: auto; margin: 0 auto 1.5rem; }
+	.intro-mark { display: block; width: min(76vw, 24rem); height: auto; margin: 0 auto 1.75rem; }
+	h1 { margin: 0; font-size: clamp(2.75rem, 11vw, 5.5rem); font-weight: 750; letter-spacing: -0.06em; line-height: 0.9; }
+	.status { margin: 1.25rem 0 0; color: #fca042; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+	.summary, #intro-summary { max-width: 28rem; margin: 1rem auto 0; color: #dcc6b1; font-size: 1rem; line-height: 1.5; }
+	.intro { position: fixed; z-index: 10; inset: 0; display: grid; place-items: center; padding: 2rem; background: #010000; opacity: 1; transition: opacity 240ms ease-out; }
+	.intro.is-closing { opacity: 0; }
+	button { margin-top: 2rem; padding: 0.72rem 1rem; border: 1px solid #fcc78b; border-radius: 999px; background: transparent; color: #fff8e8; font: inherit; font-size: 0.86rem; font-weight: 700; cursor: pointer; }
+	button:hover { background: #fca042; border-color: #fca042; color: #010000; }
+	button:focus-visible { outline: 3px solid #7ba7fa; outline-offset: 4px; }
+	@media (prefers-reduced-motion: reduce) { .intro { transition: none; } }
+</style>

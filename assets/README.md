@@ -13,9 +13,10 @@ assets/
 └── media/     Approved images and videos for publication
 ```
 
-`website/scripts/sync-assets.mjs` copies `assets/media/` into the generated
-`website/public/media/` directory before local development and production builds.
-Website code references them as `/media/<filename>`.
+`website/scripts/sync-assets.mjs` copies `assets/media/` and `assets/brand/` into
+the generated `website/public/media/` and `website/public/brand/` directories
+before local development and production builds. Website code references them as
+`/media/<filename>` and `/brand/<filename>`.
 
 The approved Red Horizon mark and its usage guidance are maintained separately:
 [Brand guidelines](../docs/BRAND_GUIDELINES.md).

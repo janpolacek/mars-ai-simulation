@@ -84,6 +84,6 @@ purples, or additional celestial colours.
 ## Publication boundary
 
 The source file is stored under `assets/brand/` as an approved identity asset.
-It has not been copied to `assets/media/`, referenced by the website, or
-deployed. A separate human release decision is required before any public-site
-or social use.
+It is available to the local website through the generated `public/brand/`
+directory, but it has not been deployed. A separate human release decision is
+required before any public-site or social use.

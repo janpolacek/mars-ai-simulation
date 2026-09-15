@@ -1,5 +1,9 @@
 # build output
 dist/
+
+# generated copies of canonical repository assets
+public/brand/*
+!public/brand/.gitkeep
 # generated types
 .astro/
 
