@@ -60,7 +60,7 @@ pack, article, review, and asset-manifest files under `content/` and
 `assets/articles/`, using the contracts in the relevant skill. Those locations
 are not public web routes. The asset manifest is the authoritative handoff
 record; raw candidate files, prompts, and generation records remain in
-`~/Projects/mars-image-gen` until a human selects an approved stable export.
+`tools/visual-generator/` until a human selects an approved stable export.
 
 ## Dispatch a ready task
 

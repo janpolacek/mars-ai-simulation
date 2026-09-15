@@ -46,7 +46,7 @@ power source, communications architecture, and landing region remain open.
 
 ## Visual source workflow
 
-Use the `vehicle-01-atlas` pattern in `~/Projects/mars-image-gen` as a workflow
+Use the `vehicle-01-atlas` pattern in `tools/visual-generator/` as a workflow
 reference only. Create a dedicated RH-01 story set, generate canonical reference
 views, and have a human select the authoritative package before scene generation.
 Record prompt/workflow provenance privately in that generator workspace. Copy only

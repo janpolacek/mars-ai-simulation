@@ -19,7 +19,7 @@ Website code references them as `/media/<filename>`.
 
 ## Intake rules
 
-1. Generate candidates locally in `~/Projects/mars-image-gen`.
+1. Generate candidates locally in `tools/visual-generator/`.
 2. A human selects the stable public asset after visual and continuity review.
 3. Copy the selected source to `assets/media/` with a descriptive stable filename.
 4. Record its caption, alt text, subject, timeline step, and private provenance in

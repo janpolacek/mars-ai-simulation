@@ -15,7 +15,7 @@ repository asset staging, and `bd`. Do not change factual prose, assert media is
 approved canon, upload media, or publish.
 
 Keep candidate files, detailed prompts, and generation records in
-`~/Projects/mars-image-gen`; do not commit them. Complete
+`tools/visual-generator/`; do not commit them. Complete
 `assets/articles/<slug>/assets.md` with the private candidate path/provenance
 reference, placement target, meaningful alt text, caption, source or prompt
 reference, model/tool, and licence or permission status. Only human-approved,

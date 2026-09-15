@@ -48,9 +48,9 @@ website/              Astro application, its scripts, and static build output
 builds, then refers to it at `/media/...`. Do not manually edit that generated
 website directory.
 
-`~/Projects/mars-image-gen` is the local ComfyUI generation workspace. It is not
-a site dependency: copy a selected approved export into `assets/media/` rather
-than linking to a mutable sibling file.
+`tools/visual-generator/` is the local ComfyUI generation workspace. It is not a site
+dependency: copy a selected approved export into `assets/media/` rather than
+linking the website to its mutable local files.
 
 ## Website development
 

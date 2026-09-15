@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "identity": "Red Horizon is a clearly fictional, AI-assisted Mars exploration project. Its visual identity is a quiet, precise abstract horizon: a thin warm-red arc rising over a dark charcoal field, paired with a single small pale star-like point. It is an emblem, not a real agency seal, flag, or government mark.",
+    "instruction": "Square logo-concept sheet on a clean off-white background. Centre one simple abstract emblem: a restrained warm-red horizon arc, a dark charcoal semicircle or field below it, and one small pale point above. Flat vector-like geometry, measured spacing, crisp edges, no texture, no gradients, no spacecraft, no astronaut, no flags, no official seals, no letters, no words, no numbers, no watermark.",
+    "style": "Minimal graphic-design concept, contemporary technical editorial identity, warm oxide red, charcoal, and off-white only. Exact simple shapes, generous negative space, high contrast, no pseudo-text or decorative illustration.",
+    "variants": [
+      "Use a thin, low horizon arc over a broad charcoal field; make the pale point a small circular dot.",
+      "Use a compact circular horizon-disc composition, with the red arc rising from a charcoal lower hemisphere and one small circular point above.",
+      "Use a horizontal technical signal composition: one precise red arc, a narrow charcoal base, and a single distant circular point.",
+      "Use a restrained asymmetric horizon: a red rising arc offset slightly left, a charcoal ground plane, and one small circular point above-right."
+    ]
+  },
+  "rh01": {
+    "identity": "RH-01 Pathfinder: a compact fictional robotic Mars survey rover. Low roughly two-metre-class warm-white equipment body with muted red identification panels and a dark instrument deck. Six broad metal-mesh wheels on visible articulated suspension. One short central mast with a compact stereo-camera pair. One front-centre two-joint arm ending in a small contact tool, folded into a travel cradle when not working. Matte ceramic coating, brushed metal arm, protected dark pivots, restrained seams and fasteners. No cockpit, passengers, cabin, windows, weapons, tracks, legs, hover hardware, decorative fins, extra arms, loose cables, or fantasy energy parts.",
+    "canonical_instruction": "Front-left three-quarter reference view at body height. Entire rover visible on a seamless neutral white floor and white background, with a faint grounded contact shadow. Fold the single front-centre arm into its travel cradle. Keep all six mesh wheels, visible articulated suspension, mast, and dark instrument deck mechanically coherent and readable. This is a fictional engineering reference candidate, not an official agency image.",
+    "scene_instruction": "A calm first field-check scene on a broad rusty Martian plain. RH-01 is stationary, seen from front-left with the whole rover visible. Fine ochre dust lightly touches the lower panels and mesh-wheel contact patches; the mast is upright and the arm stays folded. Dark basalt fragments, subtle shallow tracks, and a low eroded horizon sit under a muted dusty-peach sky. Operational survey photograph, candid and restrained, no landing drama, no people, no flags, no text, no logo overlays.",
+    "reference_style": "Photograph of a tangible full-size robotic field vehicle, not a miniature. Restrained saturation, natural tonal transitions, fine material texture, matte painted panels, subdued brushed-metal reflections, small dark sensor lenses, plausible scale, and securely mounted equipment. No glossy toy finish, theatrical bloom, captions, graphic overlays, or artificial hero lighting.",
+    "scene_style": "Barren Martian terrain: fine rusty ochre dust, dark basalt fragments, dry gravel, weathered layered outcrops, and a distant eroded horizon under a muted dusty-peach sky. No plants, cities, open water, people, or real agency equipment. Believable terrain scale and distant atmospheric haze.",
+    "canonical_variants": [
+      "Keep the arm fully folded into its front travel cradle and make all six wheel positions mechanically plausible.",
+      "Use a slightly lower camera and a compact, low-slung rover stance; keep the folded arm entirely below mast height.",
+      "Use a higher front-left engineering view with enough clearance to read the mesh wheels, suspension links, instrument deck, and folded arm.",
+      "Use a level front-left reference view with the rover compact in frame; keep the mast short and the folded arm visibly stowed against the front body."
+    ],
+    "scene_variants": [
+      "Use quiet early-morning side light and faint shallow tracks curving away behind the rover.",
+      "Use muted overcast dusty light and a low dark basalt outcrop beyond the rover.",
+      "Use late-afternoon cross light and a few wind-rippled patches of fine dust around the wheels.",
+      "Use calm diffuse peach-sky light and a distant layered ridge, with no dramatic weather."
+    ]
+  }
+}

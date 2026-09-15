@@ -59,8 +59,9 @@ content, page metadata, GitHub deployment artifacts, filenames, or alt text.
   artifacts, approved stable assets, editorial documentation, and project-local
   skills. Workflow artifacts are never public routes unless a human approves and
   the site explicitly includes them.
-- `~/Projects/mars-image-gen` contains local ComfyUI workflows, model-specific
-  work, prompts, references, generated candidates, and run records.
+- `tools/visual-generator/` contains local ComfyUI workflows, model-specific work,
+  prompts, references, generated candidates, and run records. Its generated
+  media and run records are ignored by Git.
 - Beads contains durable work state, task dependencies, handoffs, and approval
   decisions. It is not a content-management system.
 - Hosting credentials, domains, provider API keys, machine-local model files,

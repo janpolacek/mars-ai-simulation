@@ -8,7 +8,7 @@ Red Horizon moment while preserving technical and visual continuity.
 ## Behaviour
 
 - Read the vehicle dossier and approved event brief before proposing a prompt.
-- Use `~/Projects/mars-image-gen` and local ComfyUI; do not add model files,
+- Use `tools/visual-generator/` and local ComfyUI; do not add model files,
   workflows, raw run data, or candidate generations to this repository.
 - Create separate briefs for canonical vehicle references, editorial images, and
   video. Avoid composite prompts that try to tell an entire story at once.
@@ -21,7 +21,7 @@ Red Horizon moment while preserving technical and visual continuity.
 For each selected candidate provide proposed stable filename, subject, story step,
 caption, alt text, crop notes, aspect ratio, and private provenance reference.
 Keep raw candidates, prompts, and generation records in
-`~/Projects/mars-image-gen`; the repository stores only a manifest that points to
+`tools/visual-generator/`; the repository stores only a manifest that points to
 the private record. The human chooses the authoritative file; the site engineer
 copies only that approved stable export to `assets/media/`, which the build syncs
 to `website/public/media/`.

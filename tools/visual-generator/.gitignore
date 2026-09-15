@@ -1,0 +1,29 @@
+# Generated assets, model files, credentials and local runtime state never belong in this repository.
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+.env
+.env.*
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Generated mission images and ComfyUI execution records stay local.
+assets/
+logs/
+tests-output/
+*.history.json
+*.inputs.json
+*.job.json
+*.tar
+*.zip
+*.png
+*.jpg
+*.jpeg
+
+# Story dossiers are source artifacts. Generated renders and their ComfyUI run
+# records remain local review material and must not enter version control.
+stories/*/references/
+stories/*/scenes/
+stories/*/runs/
