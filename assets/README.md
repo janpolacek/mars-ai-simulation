@@ -17,6 +17,9 @@ assets/
 `website/public/media/` directory before local development and production builds.
 Website code references them as `/media/<filename>`.
 
+The approved Red Horizon mark and its usage guidance are maintained separately:
+[Brand guidelines](../docs/BRAND_GUIDELINES.md).
+
 ## Intake rules
 
 1. Generate candidates locally in `tools/visual-generator/`.

@@ -29,6 +29,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Product intent, boundaries, and terminology | [General information](docs/GENERAL.md) |
 | Ordered build/release work | [Delivery plan](docs/PLAN.md) |
 | How all contributors must work | [Project instructions](docs/INSTRUCTIONS.md) |
+| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md) |
 | Role contracts and handoffs | [Agent playbook](docs/agents/README.md) |
 | Beads-driven article preparation | [Content workflow harness](docs/CONTENT_WORKFLOW.md) |
 | Hidden mission source of truth | [Private timeline](docs/timeline/README.md) |

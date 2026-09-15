@@ -50,8 +50,8 @@ def main() -> None:
 
     if args.stage in ("all", "logo"):
         for index, variation in enumerate(selected(brand["variants"]), start=1):
-            graph, output = build(brand["identity"], f'{brand["instruction"]}\n\nVariation: {variation}', brand["style"], [], f"mars-ai-stories/red-horizon/logo/logo-concept-{index:02d}", seed=910100 + index)
-            save(root, server, f"logo-concept-{index:02d}", graph, output, assets / "logo" / f"logo-concept-{index:02d}.png")
+            graph, output = build(brand["identity"], f'{brand["instruction"]}\n\nVariation: {variation}', brand["style"], [], f"mars-ai-stories/red-horizon/logo/mars-horizon-circle-{index:02d}", seed=920400 + index)
+            save(root, server, f"logo-mars-horizon-circle-{index:02d}", graph, output, assets / "logo" / f"logo-mars-horizon-circle-{index:02d}.png")
     if args.stage in ("all", "canonical"):
         for index, variation in enumerate(selected(rover["canonical_variants"]), start=1):
             graph, output = build(rover["identity"], f'{rover["canonical_instruction"]}\n\nVariation: {variation}', rover["reference_style"], [], f"mars-ai-stories/red-horizon/rh01/canonical-{index:02d}", seed=910200 + index)
