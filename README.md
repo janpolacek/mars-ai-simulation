@@ -30,6 +30,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Ordered build/release work | [Delivery plan](docs/PLAN.md) |
 | How all contributors must work | [Project instructions](docs/INSTRUCTIONS.md) |
 | Role contracts and handoffs | [Agent playbook](docs/agents/README.md) |
+| Beads-driven article preparation | [Content workflow harness](docs/CONTENT_WORKFLOW.md) |
 | Hidden mission source of truth | [Private timeline](docs/timeline/README.md) |
 | Vehicle canonical baseline | [RH-01 Pathfinder](docs/vehicles/red-horizon-01.md) |
 

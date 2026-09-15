@@ -13,6 +13,17 @@ changes, and media uploads. Technical agents may implement local site work and
 validate builds but must not deploy or configure external services without a
 separate current human instruction.
 
+## Content workflow policy
+
+- Beads is the source of truth for article state and dependencies.
+- Claim one ready issue before editing; work only within its acceptance criteria.
+- Persist handoffs in repository artifacts and Beads notes, never only in chat.
+- Cite a canonical source for every material factual claim.
+- Editorial approval is required before technical validation; human canon and
+  release approval are still required before any public deployment.
+- Do not overwrite another worker's artifact without a Beads-linked corrective
+  task. Record paths, URLs, commands, and verification results before closing.
+
 Use project-local skills in `.agents/skills/` for SEO content, project Markdown,
 Red Horizon brand voice, and copy editing when relevant.
 
