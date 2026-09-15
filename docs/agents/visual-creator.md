@@ -23,5 +23,5 @@ caption, alt text, crop notes, aspect ratio, and private provenance reference.
 Keep raw candidates, prompts, and generation records in
 `tools/visual-generator/`; the repository stores only a manifest that points to
 the private record. The human chooses the authoritative file; the site engineer
-copies only that approved stable export to `assets/media/`, which the build syncs
+copies only that approved stable export to `content/media/`, which the build syncs
 to `website/public/media/`.

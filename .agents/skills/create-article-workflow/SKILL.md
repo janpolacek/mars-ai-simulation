@@ -19,7 +19,7 @@ Follow the manual `bd create` and `bd dep add` sequence in
 blocking dependencies. Create the artifact templates during the claimed workflow
 issue. Required outputs are `content/briefs/<slug>.md`,
 `content/sources/<slug>.md`, `content/articles/<slug>.md`,
-`content/reviews/<slug>.md`, and `assets/articles/<slug>/assets.md`.
+`content/reviews/<slug>.md`, and `content/assets/<slug>/assets.md`.
 
 Reject a missing brief, invalid slug, unspecified timeline step, duplicate slug,
 or any request that would reveal private future material. Acceptance checks: the

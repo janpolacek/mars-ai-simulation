@@ -7,7 +7,7 @@ description: Produce or select reviewable Red Horizon article visuals with compl
 
 Required inputs: the claimed Beads issue, completed article draft,
 `content/briefs/<slug>.md`, vehicle/canon references where applicable, and
-`assets/articles/<slug>/assets.md`. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
+`content/assets/<slug>/assets.md`. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
 and `docs/agents/visual-creator.md` first.
 
 Allowed tools: local image-generation workspace, approved source libraries,
@@ -16,10 +16,10 @@ approved canon, upload media, or publish.
 
 Keep candidate files, detailed prompts, and generation records in
 `tools/visual-generator/`; do not commit them. Complete
-`assets/articles/<slug>/assets.md` with the private candidate path/provenance
+`content/assets/<slug>/assets.md` with the private candidate path/provenance
 reference, placement target, meaningful alt text, caption, source or prompt
 reference, model/tool, and licence or permission status. Only human-approved,
-stable selections may later be copied to `assets/media/`.
+stable selections may later be copied to `content/media/`.
 
 Reject an unknown licence/permission, missing meaningful alt text, an unsuitable
 or inaccessible image, or a visual that contradicts vehicle canon. Acceptance

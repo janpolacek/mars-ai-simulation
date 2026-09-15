@@ -10,7 +10,7 @@ const assetGroups = [
 ];
 
 for (const group of assetGroups) {
-  const sourceDirectory = resolve(websiteDirectory, '..', 'assets', group.source);
+  const sourceDirectory = resolve(websiteDirectory, '..', 'content', group.source);
   const destinationDirectory = resolve(websiteDirectory, 'public', group.destination);
 
   await mkdir(sourceDirectory, { recursive: true });

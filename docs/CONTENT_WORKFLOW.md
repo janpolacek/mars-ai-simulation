@@ -33,7 +33,7 @@ bd create "Draft article: <slug>" --parent <ARTICLE> \
 bd create "Create visual assets: <slug>" --parent <ARTICLE> \
   --labels content,article,slug:<slug>,role:visual,stage:assets \
   --skills image-generation \
-  --description "Read the brief and draft; write assets/articles/<slug>/assets.md." \
+  --description "Read the brief and draft; write content/assets/<slug>/assets.md." \
   --acceptance "The manifest records private provenance, placement, alt text, caption, tool, and rights."
 
 bd create "Editorial final gate: <slug>" --parent <ARTICLE> \
@@ -57,7 +57,7 @@ bd dep add <DEPLOY> <REVIEW>
 Record the title, brief, timeline step, acceptance criteria, artifact paths, and
 created IDs in the epic note. The coordinator also creates the brief, source
 pack, article, review, and asset-manifest files under `content/` and
-`assets/articles/`, using the contracts in the relevant skill. Those locations
+`content/assets/`, using the contracts in the relevant skill. Those locations
 are not public web routes. The asset manifest is the authoritative handoff
 record; raw candidate files, prompts, and generation records remain in
 `tools/visual-generator/` until a human selects an approved stable export.

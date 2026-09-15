@@ -39,20 +39,20 @@ surface campaign. It must never masquerade as a real space programme.
 
 ```text
 docs/                 Project, agent, lore, and private timeline documentation
-assets/               Canonical approved logos and publication media
+content/              Article handoffs, approved media, and identity sources
 website/              Astro application, its scripts, and static build output
 .agents/skills/       Project-local editorial skills and Beads integration
 ```
 
-`assets/` is the source for reusable approved media and identity artwork. The
-website copies `assets/media/` and `assets/brand/identity/` to its generated
+`content/` is the source for reusable approved media and identity artwork. The
+website copies `content/media/` and `content/brand/identity/` to its generated
 public directories during development and production builds, then refers to them
 at `/media/...` and `/brand/...`. Do not manually edit those generated website
 directories. Application favicon exports live directly under `website/public/`,
-with their stable source artwork under `assets/brand/favicon/`.
+with their stable source artwork under `content/brand/favicon/`.
 
 `tools/visual-generator/` is the local ComfyUI generation workspace. It is not a site
-dependency: copy a selected approved export into `assets/media/` rather than
+dependency: copy a selected approved export into `content/media/` rather than
 linking the website to its mutable local files.
 
 ## Website development
