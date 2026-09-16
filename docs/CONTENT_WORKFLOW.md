@@ -22,27 +22,27 @@ hermes kanban create "Article: <title>" --priority 1 \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Public-safe article workflow; brief: docs/content/briefs/<slug>.md; timeline step: <step>. Acceptance: every child card has evidence; editorial review passes; human approval is recorded before deployment."
 
-hermes kanban create "Research source pack: <slug>" --parent <ARTICLE> \
+hermes kanban create "Research source pack: <slug>" \
   --assignee mars-ai-simulator-planner \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: research. Read docs/content/briefs/<slug>.md; write docs/content/sources/<slug>.md. Acceptance: every material claim has a canonical source or an explicit unresolved note."
 
-hermes kanban create "Draft article: <slug>" --parent <ARTICLE> \
+hermes kanban create "Draft article: <slug>" --parent <RESEARCH> \
   --assignee mars-ai-simulator-writer \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: draft. Read the brief and source pack; prepare website/news/<slug>.mdx. Acceptance: the article preserves draft status and traces every material claim to the source pack."
 
-hermes kanban create "Create visual assets: <slug>" --parent <ARTICLE> \
+hermes kanban create "Create visual assets: <slug>" --parent <DRAFT> \
   --assignee mars-ai-simulator-visuals \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: assets. Read the brief and draft; write docs/content/assets/<slug>/assets.md. Acceptance: the manifest records private provenance, placement, alt text, caption, tool, and rights."
 
-hermes kanban create "Editorial final gate: <slug>" --parent <ARTICLE> \
+hermes kanban create "Editorial final gate: <slug>" --parent <IMAGES> \
   --assignee mars-ai-simulator-editor \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: review. Review article, source pack, and asset manifest; write docs/content/reviews/<slug>.md. Acceptance: the review is approved with no unresolved material failure. Consult the continuity redactor through the editorial-review skill; the card's assignee stays the editor."
 
-hermes kanban create "Build and deploy: <slug>" --parent <ARTICLE> \
+hermes kanban create "Build and deploy: <slug>" --parent <REVIEW> \
   --assignee mars-ai-simulator-dev \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: deploy. Validate locally after approved review; record approval or the exact deployment blocker. Acceptance: build and preview pass; production deploy completes only with human approval and a verified URL."
@@ -52,6 +52,14 @@ hermes kanban link <DRAFT> <IMAGES>
 hermes kanban link <IMAGES> <REVIEW>
 hermes kanban link <REVIEW> <DEPLOY>
 ```
+
+**Direction of the cardinality matters.** Each stage card takes the *previous stage* as its
+`--parent`, and the article parent card is linked as the **child of the final stage**
+(`hermes kanban link <DEPLOY> <ARTICLE>`) so it stays `todo` until the article is fully delivered.
+Never make the article parent a blocking parent of its own stage cards: on the board that inverts the
+graph — every stage waits for the article card to be done while the article card waits for its
+stages, so nothing can ever start and the dispatcher keeps re-spawning the coordinator on the epic.
+
 
 Record the title, brief, timeline step, acceptance criteria, artifact paths, and
 created card IDs as a comment on the parent card

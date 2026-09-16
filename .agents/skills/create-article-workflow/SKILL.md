@@ -31,3 +31,10 @@ five child cards carry the required assignee profile and stage name; DRAFT
 depends on RESEARCH, IMAGES on DRAFT, REVIEW on IMAGES, and DEPLOY on REVIEW; all
 artifact templates exist. Record the created card IDs and paths as a comment on
 the parent card. Complete the orchestration card only after those checks pass.
+
+**Card direction:** each stage card's `--parent` is the *previous stage*, and the
+article parent card is linked as the child of the final stage
+(`hermes kanban link <DEPLOY> <ARTICLE>`) so it closes when the article is
+delivered. Never pass `--parent <ARTICLE>` on a stage card — the article parent
+must not block its own stages, or the graph deadlocks (stages wait for the
+article card, the article card waits for its stages) and nothing can start.
