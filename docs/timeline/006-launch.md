@@ -12,7 +12,8 @@ limited ability to intervene physically.
   control to deep-space operations and the remaining risk.
 - Decide whether launch coverage uses an approved generated visual, a graphic, or
   text-only reporting; never present generated imagery as documentary evidence.
-- Exact launch date/time and flight telemetry are optional canon choices.
+- The launch day is fixed as 17 February 2031 by the mission baseline. Exact
+  time and flight telemetry remain later operational choices.
 
 ## Allowed public angle
 

@@ -5,6 +5,9 @@ distinct, ordered mission step; it may later yield one or more public pages, but
 no public page may reveal a later step. The timeline is not automatically
 published, imported into Astro collections, or copied into site metadata.
 
+The [locked mission baseline](000-mission-baseline.md) defines the programme,
+architecture, budget, and calendar that every numbered step must follow.
+
 ## How to use the timeline
 
 The story coordinator reads only the upcoming step and its direct dependencies,
