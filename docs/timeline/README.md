@@ -5,7 +5,7 @@ distinct, ordered mission step; it may later yield one or more public pages, but
 no public page may reveal a later step. The timeline is not automatically
 published, imported into Astro collections, or copied into site metadata.
 
-The [locked scenario canon](../scenario.md) defines the programme, architecture,
+The [locked scenario canon](../SCENARIO.md) defines the programme, architecture,
 budget, and calendar that every numbered step must follow. The numbered steps in
 this directory control when those facts may become public.
 

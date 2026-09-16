@@ -28,7 +28,7 @@ stewardship, and retain an independent technical review.
 
 Red Horizon may now be announced publicly, with its shared scientific purpose, its
 partner groups, the target region, the science objective, and the launch window and
-lifecycle budget frame as locked in `docs/scenario.md`. The announcement may state
+lifecycle budget frame as locked in `docs/SCENARIO.md`. The announcement may state
 who, where, why, and the price and schedule frame, and may establish recurring
 organisational names. Use the window and year only; the exact launch and landing
 dates wait for their authorised release steps.

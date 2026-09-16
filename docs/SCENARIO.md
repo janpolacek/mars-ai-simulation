@@ -108,7 +108,7 @@ Field dossier and map package.
 
 **Reconciliation — 16 September 2026:** the approved Asteria Field dossier and generated PNG map package supersede the
 earlier baseline placeholder of 5.60°S, 353.50°E and the 15 km by 10 km ellipse. The coordinates, ellipse, local units,
-science zones, hazards, routes, and communications rules in `docs/area/` are now the canonical local
+science zones, hazards, routes, and communications rules in `docs/AREA.md` are now the canonical local
 mission definition.
 
 The dedicated Asteria Field task owns the detailed geology, fictional local feature names, traverse zones, hazards,

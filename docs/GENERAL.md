@@ -58,7 +58,7 @@ content, page metadata, GitHub deployment artifacts, filenames, or alt text.
 - `docs/` is the project documentation and content root. Article handoffs,
   approved media, identity artwork, favicon source artwork, and per-article
   asset manifests belong under `docs/content/`; established vehicle and area
-  references remain in their existing `docs/vehicle/` and `docs/area/` dossiers.
+  references remain in their existing `docs/vehicle/` and `docs/AREA.md` dossiers.
   Articles are authored as MDX directly in `website/news/`; do not create a
   parallel project-root `assets/` directory.
 - This repository contains the Astro application, versioned editorial workflow

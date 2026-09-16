@@ -226,16 +226,18 @@ from this regional dossier.
 
 ## Map package
 
-The canonical package contains three generated PNG planning images. Each image
-contains a title, scale note, north arrow, legend, labels, and scenario
-provenance. They are generated visualizations and must not be presented as
-orbital imagery.
+The canonical package contains three generated PNG planning images, stored with
+their manifest in [`docs/content/maps/`](content/maps/). The machine-readable list
+(plate IDs, stable filenames, scale, provenance) is
+[`content/maps/MAP_PACKAGE.md`](content/maps/MAP_PACKAGE.md). Each image contains a
+title, scale note, north arrow, legend, labels, and scenario provenance. They are
+generated visualizations and must not be presented as orbital imagery.
 
-| Plate | File                                                                            | Purpose                                                                                       |
-| ----- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| AF-01 | [Mars locator image](maps/asteria-field-01-mars-locator.png)                    | Whole-planet view with an arrow targeting the fictional field inside Margaritifer Terra       |
-| AF-02 | [Regional satellite view](maps/asteria-field-02-regional-context.png)           | Shows the 12.5–24°S / 327–338°E scenario envelope and working terrain units                   |
-| AF-03 | [Local landing and operations view](maps/asteria-field-03-local-operations.png) | Shows the landing ellipse, P0, science zones, hazards, traverses, and communications shoulder |
+| Plate | File                                                                                    | Purpose                                                                                       |
+| ----- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| AF-01 | [Mars locator image](content/maps/asteria-field-01-mars-locator.png)                    | Whole-planet view with an arrow targeting the fictional field inside Margaritifer Terra       |
+| AF-02 | [Regional satellite view](content/maps/asteria-field-02-regional-context.png)           | Shows the 12.5–24°S / 327–338°E scenario envelope and working terrain units                   |
+| AF-03 | [Local landing and operations view](content/maps/asteria-field-03-local-operations.png) | Shows the landing ellipse, P0, science zones, hazards, traverses, and communications shoulder |
 
 ### Map provenance
 

@@ -34,8 +34,9 @@ surface campaign. It must never masquerade as a real space programme.
 | Project-local task procedures                | [Skill catalog](.agents/README.md)                                           |
 | Kanban-driven article preparation            | [Content workflow harness](docs/CONTENT_WORKFLOW.md)                         |
 | Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)                                  |
-| Locked private scenario canon                | [Red Horizon scenario](docs/scenario.md)                                     |
+| Locked private scenario canon                | [Red Horizon scenario](docs/SCENARIO.md)                                     |
 | Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)                           |
+| Landing region and operations area           | [Asteria Field dossier](docs/AREA.md)                                        |
 
 ## Repository map
 

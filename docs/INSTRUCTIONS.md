@@ -38,7 +38,7 @@ reconcile it.
 approved public media and per-article visual manifests under
 `docs/content/media/` and `docs/content/assets/`; and identity artwork under
 `docs/content/brand/`. Existing vehicle and area dossiers remain under
-`docs/vehicle/` and `docs/area/`. Article copy is authored as MDX directly in
+`docs/vehicle/` and `docs/AREA.md`. Article copy is authored as MDX directly in
 `website/news/` for publication. Do not create a parallel repository-root
 `assets/` directory.
 
