@@ -24,16 +24,17 @@ surface campaign. It must never masquerade as a real space programme.
 
 ## Start here
 
-| Need | Read |
-| --- | --- |
-| Product intent, boundaries, and terminology | [General information](docs/GENERAL.md) |
-| Ordered build/release work | [Delivery plan](docs/PLAN.md) |
-| How all contributors must work | [Project instructions](docs/INSTRUCTIONS.md) |
+| Need                                         | Read                                                    |
+| -------------------------------------------- | ------------------------------------------------------- |
+| Product intent, boundaries, and terminology  | [General information](docs/GENERAL.md)                  |
+| Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                           |
+| How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)            |
 | Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md) |
-| Role contracts and handoffs | [Agent playbook](docs/agents/README.md) |
-| Beads-driven article preparation | [Content workflow harness](docs/CONTENT_WORKFLOW.md) |
-| Hidden mission source of truth | [Private timeline](docs/timeline/README.md) |
-| Vehicle canonical baseline | [RH-01 Pathfinder](docs/vehicles/red-horizon-01.md) |
+| Role contracts and handoffs                  | [Agent playbook](docs/agents/README.md)                 |
+| Project-local task procedures                | [Skill catalog](.agents/README.md)                      |
+| Beads-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
+| Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)             |
+| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicles/red-horizon-01.md)     |
 
 ## Repository map
 
@@ -41,7 +42,7 @@ surface campaign. It must never masquerade as a real space programme.
 docs/                 Project, agent, lore, and private timeline documentation
 content/              Article handoffs, approved media, and identity sources
 website/              Astro application, its scripts, and static build output
-.agents/skills/       Project-local editorial skills and Beads integration
+.agents/              Project-local skills and Beads integration
 ```
 
 `content/` is the source for reusable approved media and identity artwork. The
