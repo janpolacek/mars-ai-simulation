@@ -1,0 +1,36 @@
+{
+    "lineWidth": 120,
+    "indentWidth": 4,
+    "useTabs": false,
+    "newLineKind": "lf",
+    "excludes": [
+        "**/*-lock.json",
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/.astro/**"
+    ],
+    "typescript": {
+        "lineWidth": 120,
+        "indentWidth": 4,
+        "useTabs": false,
+        "quoteStyle": "preferSingle",
+        "semiColons": "always",
+        "trailingCommas": "onlyMultiLine"
+    },
+    "ruff": {
+        "lineLength": 120,
+        "indentWidth": 4,
+        "quoteStyle": "double",
+        "indentStyle": "space",
+        "lineEnding": "lf"
+    },
+    "plugins": [
+        "https://plugins.dprint.dev/typescript-0.96.1.wasm",
+        "https://plugins.dprint.dev/json-0.23.0.wasm",
+        "https://plugins.dprint.dev/markdown-0.24.0.wasm",
+        "https://plugins.dprint.dev/ruff-0.8.7.wasm",
+        "https://plugins.dprint.dev/toml-0.8.0.wasm",
+        "npm:dprint-plugin-yaml@0.6.0",
+        "npm:dprint-plugin-markup@0.27.3"
+    ]
+}
