@@ -4,6 +4,18 @@ This is the static Astro application for Mars AI Simulation. It will begin as th
 Red Horizon Preparing site and later render approved news, wiki, mission-update,
 and media content.
 
+## News content
+
+Homepage news items are authored as MDX files in [`news/`](./news/). The Astro
+content collection discovers every `*.mdx` file in that folder during the build
+and orders items by their frontmatter `order` value. Each file must include:
+`title`, `category`, `status`, `summary`, `linkLabel`, and `order`. Optional
+`media`, `mediaAlt`, `mediaLabel`, and `accent` fields control the card artwork.
+
+Keep news copy within approved public canon. The private mission timeline under
+the repository root is continuity material and must not be imported into this
+folder or the public build.
+
 ## Runtime
 
 Node is managed by `fnm` and pinned in `.node-version`.
