@@ -11,6 +11,7 @@ const news = defineCollection({
         title: z.string(),
         category: z.string(),
         status: z.string(),
+        publication: z.enum(['draft', 'published']).default('published'),
         summary: z.string(),
         linkLabel: z.string(),
         order: z.number().int().nonnegative(),

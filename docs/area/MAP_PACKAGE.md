@@ -12,5 +12,5 @@ sources listed in the dossier.
 | AF-02 | `asteria-field-02-regional-context.png` | Regional satellite-style view with field envelope, working units, and centre marker                 | 327–338°E by 12.5–24°S; approximate 200 km scale bar | GPT Image generation, 2026-09-16; generated terrain and cartographic overlays |
 | AF-03 | `asteria-field-03-local-operations.png` | Local view with landing ellipse, touchdown zone, science zones, hazards, routes, and comms shoulder | 8 × 6 km frame; 1 km scale bar                       | GPT Image generation, 2026-09-16; generated terrain and cartographic overlays |
 
-The package is not copied to `content/media/` or `website/public/` yet. A
+The package is not copied to `docs/content/media/` or `website/public/` yet. A
 human must approve any stable public export separately.

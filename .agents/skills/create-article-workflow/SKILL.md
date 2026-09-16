@@ -8,7 +8,8 @@ description: Turn one approved-to-draft Red Horizon article request into a Beads
 Required inputs: a public-safe title, a lowercase hyphenated slug, the user's
 brief, author, and an allowed timeline step (use `site-foundation` only for
 non-story material). Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
-`.agents/roles/story-coordinator.md`, and only the timeline material needed to
+your own role definition (your agent's `SOUL.md` — the `planner` profile owns this
+workflow), and only the timeline material needed to
 validate that step. Never copy private timeline text into a public artifact.
 
 Allowed tools: `bd` and normal repository inspection/editing. Do not publish,
@@ -17,9 +18,9 @@ deploy, alter provider configuration, or approve canon.
 Follow the manual `bd create` and `bd dep add` sequence in
 `docs/CONTENT_WORKFLOW.md` to create the epic, five child issues, and their
 blocking dependencies. Create the artifact templates during the claimed workflow
-issue. Required outputs are `content/briefs/<slug>.md`,
-`content/sources/<slug>.md`, `content/articles/<slug>.md`,
-`content/reviews/<slug>.md`, and `content/assets/<slug>/assets.md`.
+issue. Required outputs are `docs/content/briefs/<slug>.md`,
+`docs/content/sources/<slug>.md`, `website/news/<slug>.mdx`,
+`docs/content/reviews/<slug>.md`, and `docs/content/assets/<slug>/assets.md`.
 
 Reject a missing brief, invalid slug, unspecified timeline step, duplicate slug,
 or any request that would reveal private future material. Acceptance checks: the

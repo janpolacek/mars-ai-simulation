@@ -1,12 +1,15 @@
 # Project instructions
 
-These rules apply to every human and agent. Role-specific contracts live in the
-[agent playbook](../.agents/roles/README.md); a role follows both documents.
+These rules apply to every human and agent. Role definitions live with the agent,
+not in this repository: each role is a Hermes profile whose `SOUL.md` holds its
+authority, boundaries, and handoff duties, and this repository keeps only task
+procedures under `.agents/skills/`.
 
 ## Mandatory working sequence
 
 1. Run `bd prime`, inspect `bd ready`, then create or claim the relevant issue.
-2. Read the role contract and the minimum relevant source material before acting.
+2. Read your role definition (your agent's `SOUL.md`) and the minimum relevant source
+   material before acting.
 3. Produce one bounded deliverable: a draft, review, visual brief, implementation,
    deployment plan, or validation result.
 4. Record affected canon, files, validation, open questions, and next owner in the
@@ -19,7 +22,7 @@ These rules apply to every human and agent. Role-specific contracts live in the
 1. Explicit current human instruction.
 2. Approved public canon and the private timeline's event order.
 3. Vehicle dossiers and approved media metadata.
-4. Repository conventions and agent role contracts.
+4. Repository conventions and the agent's own role definition (`SOUL.md`).
 5. A well-marked proposal, never an invented fact presented as established canon.
 
 When sources conflict, stop the affected claim, describe the conflict in Beads,
@@ -27,10 +30,14 @@ and ask the human story owner for a decision. Do not silently reconcile it.
 
 ## Project source layout
 
-`content/` is the only project source root. Keep article handoffs in its
-`briefs/`, `sources/`, `articles/`, and `reviews/` directories; approved public
-media in `media/`; identity artwork in `brand/`; and per-article visual manifests
-in `assets/`. Do not create a parallel repository-root `assets/` directory.
+`docs/` is the project documentation and content root. Keep article handoffs in
+`docs/content/briefs/`, `docs/content/sources/`, and `docs/content/reviews/`;
+approved public media and per-article visual manifests under
+`docs/content/media/` and `docs/content/assets/`; and identity artwork under
+`docs/content/brand/`. Existing vehicle and area dossiers remain under
+`docs/vehicle/` and `docs/area/`. Article copy is authored as MDX directly in
+`website/news/` for publication. Do not create a parallel repository-root
+`assets/` directory.
 
 `tools/visual-generator/assets/` is an ignored, tool-local generation workspace,
 not a project content source.

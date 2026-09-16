@@ -6,7 +6,7 @@
 current Preparing site.
 
 The approved source mark is
-[`red-horizon-sunrise-mark.png`](../content/brand/identity/red-horizon-sunrise-mark.png).
+[`red-horizon-sunrise-mark.png`](content/brand/identity/red-horizon-sunrise-mark.png).
 It is a 1254 × 1254 PNG with SHA-256
 `f9543989560da54fc56a8973002833b2b8dbe3d1c085fc1293af3faca457b749`.
 
@@ -70,7 +70,7 @@ purples, or additional celestial colours.
 
 The browser favicon is a compact derivative of the approved mark. Its stable
 source artwork is
-[`red-horizon-favicon-source.png`](../content/brand/favicon/red-horizon-favicon-source.png).
+[`red-horizon-favicon-source.png`](content/brand/favicon/red-horizon-favicon-source.png).
 The website exports it as `favicon.ico` (16, 32, and 48 pixels) and
 `favicon-32.png`; do not use the favicon derivative as a replacement for the
 full identity mark.
@@ -92,7 +92,7 @@ full identity mark.
 
 ## Publication boundary
 
-The source file is stored under `content/brand/identity/` as an approved identity
+The source file is stored under `docs/content/brand/identity/` as an approved identity
 asset. It is available to the website through the generated `public/brand/`
 directory. A separate human release decision is still required before any new
 public-site or social use beyond the current Preparing site.

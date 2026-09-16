@@ -15,31 +15,31 @@ material outside the scenario.
 ```sh
 bd create "Article: <title>" --type epic \
   --labels content,article,slug:<slug> \
-  --description "Public-safe article workflow; brief: content/briefs/<slug>.md; timeline step: <step>." \
+  --description "Public-safe article workflow; brief: docs/content/briefs/<slug>.md; timeline step: <step>." \
   --acceptance "All child tasks have evidence; editorial review passes; human approval is recorded before deployment."
 
 bd create "Research source pack: <slug>" --parent <ARTICLE> \
   --labels content,article,slug:<slug>,role:research,stage:research \
   --skills research-and-fact-check \
-  --description "Read content/briefs/<slug>.md; write content/sources/<slug>.md." \
+  --description "Read docs/content/briefs/<slug>.md; write docs/content/sources/<slug>.md." \
   --acceptance "Every material claim has a canonical source or an explicit unresolved note."
 
 bd create "Draft article: <slug>" --parent <ARTICLE> \
   --labels content,article,slug:<slug>,role:redactor,stage:draft \
   --skills article-drafting \
-  --description "Read the brief and source pack; write content/articles/<slug>.md." \
+  --description "Read the brief and source pack; prepare website/news/<slug>.mdx." \
   --acceptance "The article preserves draft status and traces every material claim to the source pack."
 
 bd create "Create visual assets: <slug>" --parent <ARTICLE> \
   --labels content,article,slug:<slug>,role:visual,stage:assets \
   --skills image-generation \
-  --description "Read the brief and draft; write content/assets/<slug>/assets.md." \
+  --description "Read the brief and draft; write docs/content/assets/<slug>/assets.md." \
   --acceptance "The manifest records private provenance, placement, alt text, caption, tool, and rights."
 
 bd create "Editorial final gate: <slug>" --parent <ARTICLE> \
   --labels content,article,slug:<slug>,role:editor,stage:review \
   --skills editorial-review \
-  --description "Review article, source pack, and asset manifest; write content/reviews/<slug>.md." \
+  --description "Review article, source pack, and asset manifest; write docs/content/reviews/<slug>.md." \
   --acceptance "The review is approved with no unresolved material failure."
 
 bd create "Build and deploy: <slug>" --parent <ARTICLE> \
@@ -56,9 +56,12 @@ bd dep add <DEPLOY> <REVIEW>
 
 Record the title, brief, timeline step, acceptance criteria, artifact paths, and
 created IDs in the epic note. The coordinator also creates the brief, source
-pack, article, review, and asset-manifest files under `content/` and
-`content/assets/`, using the contracts in the relevant skill. Those locations
-are not public web routes. The asset manifest is the authoritative handoff
+pack, review, and asset-manifest files under `docs/content/` and prepare the
+article as `website/news/<slug>.mdx`, using the contracts in the relevant skill.
+The handoff locations are not public web routes; `website/news/` is the direct
+MDX publication source. Draft MDX may be staged there only with
+`publication: draft`, which the website filters out; cleared articles use
+`publication: published`. The asset manifest is the authoritative handoff
 record; raw candidate files, prompts, and generation records remain in
 `tools/visual-generator/` until a human selects an approved stable export.
 

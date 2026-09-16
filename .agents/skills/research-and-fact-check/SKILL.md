@@ -5,16 +5,17 @@ description: Build a claim-level, canonical source pack for one Red Horizon arti
 
 # Research and fact check
 
-Required inputs: the claimed Beads issue, `content/briefs/<slug>.md`, relevant
+Required inputs: the claimed Beads issue, `docs/content/briefs/<slug>.md`, relevant
 approved canon, and permitted factual sources. Read `AGENTS.md`,
-`docs/INSTRUCTIONS.md`, and `.agents/roles/story-coordinator.md` first.
+`docs/INSTRUCTIONS.md`, and your own role definition (your agent's `SOUL.md` — the
+`planner` profile) first.
 
 Allowed tools: web research, repository inspection, and `bd`. Prefer official
 documentation, original research, primary institutions, and direct statements.
 Do not publish, change article prose, generate media, or turn unsupported claims
 into facts.
 
-Write `content/sources/<slug>.md`. For every material claim, record the claim,
+Write `docs/content/sources/<slug>.md`. For every material claim, record the claim,
 canonical URL, publisher or author, publication/update date when known, access
 date, and a short statement of support. Record a source limitation or uncertainty
 instead of filling a gap from memory.

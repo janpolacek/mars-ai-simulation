@@ -55,9 +55,12 @@ content, page metadata, GitHub deployment artifacts, filenames, or alt text.
 
 ## Repository and asset boundaries
 
-- `content/` is the single project source root. It contains article handoffs,
+- `docs/` is the project documentation and content root. Article handoffs,
   approved media, identity artwork, favicon source artwork, and per-article
-  asset manifests. Do not create a parallel project-root `assets/` directory.
+  asset manifests belong under `docs/content/`; established vehicle and area
+  references remain in their existing `docs/vehicle/` and `docs/area/` dossiers.
+  Articles are authored as MDX directly in `website/news/`; do not create a
+  parallel project-root `assets/` directory.
 - This repository contains the Astro application, versioned editorial workflow
   artifacts, approved stable assets, editorial documentation, and project-local
   skills. Workflow artifacts are never public routes unless a human approves and

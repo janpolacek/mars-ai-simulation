@@ -7,15 +7,15 @@ description: Apply the final editorial and factual-quality gate to a prepared Re
 
 Required inputs: the claimed Beads issue, article draft, source pack, asset
 manifest and candidate assets, brief, and applicable public canon. Read
-`AGENTS.md`, `docs/INSTRUCTIONS.md`, `.agents/roles/copy-editor.md`,
-`.agents/roles/continuity-redactor.md`, and `.agents/skills/copy-editing/SKILL.md`
-first.
+`AGENTS.md`, `docs/INSTRUCTIONS.md`, your own role definition (your agent's `SOUL.md` —
+the `editor` and `continuity` profiles own this gate), and
+`.agents/skills/copy-editing/SKILL.md` first.
 
 Allowed tools: repository inspection/editing limited to the review record,
 link/check commands, and `bd`. Do not deploy, approve public canon for the
 human, or silently repair another worker's artifact.
 
-Write `content/reviews/<slug>.md` with pass/fail findings for citations, links,
+Write `docs/content/reviews/<slug>.md` with pass/fail findings for citations, links,
 coherence, voice/grammar, image placement/captions/alt text, and metadata/schema.
 Set its final status to `approved`, `changes_requested`, or `blocked`.
 

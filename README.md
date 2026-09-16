@@ -30,7 +30,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                           |
 | How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)            |
 | Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md) |
-| Role contracts and handoffs                  | [Agent playbook](.agents/roles/README.md)               |
+| Role contracts and handoffs                  | Held by each agent as its `SOUL.md` (Hermes profile), not in this repository |
 | Project-local task procedures                | [Skill catalog](.agents/README.md)                      |
 | Beads-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
 | Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)             |
@@ -39,21 +39,23 @@ surface campaign. It must never masquerade as a real space programme.
 ## Repository map
 
 ```text
-docs/                 Project, lore, and private timeline documentation
-content/              Article handoffs, approved media, and identity sources
+docs/                 Project, lore, private timeline, and content sources
 website/              Astro application, its scripts, and static build output
-.agents/              Role contracts, project-local skills, and Beads integration
+.agents/              Project-local skills and Beads integration
 ```
 
-`content/` is the source for reusable approved media and identity artwork. The
-website copies `content/media/` and `content/brand/identity/` to its generated
-public directories during development and production builds, then refers to them
-at `/media/...` and `/brand/...`. Do not manually edit those generated website
-directories. Application favicon exports live directly under `website/public/`,
-with their stable source artwork under `content/brand/favicon/`.
+`docs/content/` is the source for article handoffs, reusable approved media, and
+identity artwork. Articles are authored as MDX directly in `website/news/` for
+publication. The website copies approved media and identity files to its
+generated public directories during development and production builds, then
+refers to them at `/media/...` and `/brand/...`. Do not manually edit those
+generated website directories. Application favicon exports live directly under
+`website/public/`, with their stable source artwork under
+`docs/content/brand/favicon/`. Existing vehicle reference exports remain under
+`docs/vehicle/` and are reused by the website without duplicate copies.
 
 `tools/visual-generator/` is the local ComfyUI generation workspace. It is not a site
-dependency: copy a selected approved export into `content/media/` rather than
+dependency: copy a selected approved export into `docs/content/media/` rather than
 linking the website to its mutable local files.
 
 ## Website development

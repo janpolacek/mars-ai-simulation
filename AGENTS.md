@@ -3,11 +3,10 @@
 ## Mars AI Simulation operating rules
 
 Before making product, editorial, media, site, deployment, or documentation
-changes, read `docs/INSTRUCTIONS.md`, the relevant role contract(s) under
-`.agents/roles/` when one exists, and the matching project-local skill under
-`.agents/skills/` when one exists. The [agent playbook](.agents/roles/README.md)
-defines role authority; the [skill catalog](.agents/README.md) defines task
-procedures.
+changes, read `docs/INSTRUCTIONS.md`, your own role definition (your agent's
+`SOUL.md`), and the matching project-local skill under `.agents/skills/` when one
+exists. Role authority lives with the agent, not in this repository; the
+[skill catalog](.agents/README.md) defines task procedures.
 The private mission timeline (`docs/timeline/`) is continuity material only: never
 place its unreleased content in public routes, metadata, assets, or summaries.
 
@@ -19,7 +18,8 @@ separate current human instruction.
 
 ## Content workflow policy
 
-- `content/` is the only project source root. Do not create a parallel root
+- `docs/` is the project documentation and content root; article handoffs and
+  identity sources belong under `docs/content/`. Do not create a parallel root
   `assets/` directory; `tools/visual-generator/assets/` is tool-local only.
 - Beads is the source of truth for article state and dependencies.
 - Claim one ready issue before editing; work only within its acceptance criteria.
@@ -31,8 +31,8 @@ separate current human instruction.
   task. Record paths, URLs, commands, and verification results before closing.
 
 Use the matching project-local skill in `.agents/skills/` for task-specific
-procedures. Skills supplement the role contracts in `.agents/roles/`; they must
-not broaden a role's authority or override project instructions.
+procedures. Skills supplement the agent's own role definition (its `SOUL.md`);
+they must not broaden a role's authority or override project instructions.
 
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
