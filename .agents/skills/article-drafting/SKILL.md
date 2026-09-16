@@ -5,8 +5,8 @@ description: Draft one accessible Red Horizon article strictly from its brief an
 
 # Article drafting
 
-Required inputs: the claimed kanban card, `docs/content/briefs/<slug>.md`,
-`docs/content/sources/<slug>.md`, the article template, and the relevant writer and
+Required inputs: the claimed kanban card, `.agents/work/briefs/<slug>.md`,
+`.agents/work/sources/<slug>.md`, the article template, and the relevant writer and
 brand-voice contracts. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
 your own role definition (your agent's `SOUL.md` — the `mars-ai-simulator-writer` profile),
 `.agents/skills/brand-voice/SKILL.md`, and the source

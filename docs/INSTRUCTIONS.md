@@ -33,17 +33,28 @@ reconcile it.
 
 ## Project source layout
 
-`docs/` is the project documentation and content root. Keep article handoffs in
-`docs/content/briefs/`, `docs/content/sources/`, and `docs/content/reviews/`;
-approved public media and per-article visual manifests under
-`docs/content/media/` and `docs/content/assets/`; and identity artwork under
-`docs/content/brand/`. Existing vehicle and area dossiers remain under
-`docs/vehicle/` and `docs/AREA.md`. Article copy is authored as MDX directly in
-`website/news/` for publication. Do not create a parallel repository-root
-`assets/` directory.
+`docs/` is the project documentation root, and [README.md](README.md) inside it maps
+every file and folder. Its shape: the four root files that own intent, canon, rules,
+and plan; `docs/timeline/` for the private release order; and one folder per subject
+holding that subject's dossier together with its assets — `docs/vehicle/`,
+`docs/area/`, and `docs/brand/`.
 
-`tools/visual-generator/assets/` is an ignored, tool-local generation workspace,
-not a project content source.
+Per-article working papers live outside `docs/`, under `.agents/work/`: briefs in
+`.agents/work/briefs/`, source packs in `.agents/work/sources/`, asset manifests in
+`.agents/work/assets/<slug>/`, and editorial reviews in `.agents/work/reviews/`.
+They are working material, not documentation and not public routes. Task procedures
+are the project skills under `.agents/skills/`.
+
+Approved media stays with its subject: the identity mark under `docs/brand/`, the
+vehicle renders under `docs/vehicle/`, and the Asteria Field map plates under
+`docs/area/`. The website copies the release-cleared PNGs into its generated public
+asset directory at build time. Article copy is authored as MDX directly in
+`website/news/` for publication. Do not create a parallel repository-root `assets/`
+directory.
+
+`tools/visual-generator/` is a processor, not a store: its `spec.json`, `assets/` and `stories/`
+paths are disposable scratch, git-ignored, with approved inputs copied out of `docs/` before a run
+and a human-selected result copied back into `docs/` afterwards.
 
 ## Canon and information safety
 

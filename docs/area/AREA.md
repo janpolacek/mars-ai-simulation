@@ -226,18 +226,17 @@ from this regional dossier.
 
 ## Map package
 
-The canonical package contains three generated PNG planning images, stored with
-their manifest in [`docs/content/maps/`](content/maps/). The machine-readable list
-(plate IDs, stable filenames, scale, provenance) is
-[`content/maps/MAP_PACKAGE.md`](content/maps/MAP_PACKAGE.md). Each image contains a
-title, scale note, north arrow, legend, labels, and scenario provenance. They are
-generated visualizations and must not be presented as orbital imagery.
+The canonical package contains three generated PNG planning images, stored beside
+this dossier in `docs/area/`. The machine-readable list (plate IDs, stable
+filenames, scale, provenance) is the table below. Each image contains a title, scale
+note, north arrow, legend, labels, and scenario provenance. They are generated
+visualizations and must not be presented as orbital imagery.
 
-| Plate | File                                                                                    | Purpose                                                                                       |
-| ----- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| AF-01 | [Mars locator image](content/maps/asteria-field-01-mars-locator.png)                    | Whole-planet view with an arrow targeting the fictional field inside Margaritifer Terra       |
-| AF-02 | [Regional satellite view](content/maps/asteria-field-02-regional-context.png)           | Shows the 12.5–24°S / 327–338°E scenario envelope and working terrain units                   |
-| AF-03 | [Local landing and operations view](content/maps/asteria-field-03-local-operations.png) | Shows the landing ellipse, P0, science zones, hazards, traverses, and communications shoulder |
+| Plate | Stable filename                                                                  | Image description                                                                                                            | Scale / frame                                        | Provenance                                                                    |
+| ----- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------- |
+| AF-01 | [`asteria-field-01-mars-locator.png`](asteria-field-01-mars-locator.png)         | Whole-planet Mars view with Margaritifer Terra and an arrow targeting the fictional Asteria Field                            | Planet-scale view; approximate 1,000 km scale bar    | GPT Image generation, 2026-09-16; generated terrain and cartographic overlays |
+| AF-02 | [`asteria-field-02-regional-context.png`](asteria-field-02-regional-context.png) | Regional satellite-style view of the 12.5–24°S / 327–338°E scenario envelope with working terrain units and centre marker    | 327–338°E by 12.5–24°S; approximate 200 km scale bar | GPT Image generation, 2026-09-16; generated terrain and cartographic overlays |
+| AF-03 | [`asteria-field-03-local-operations.png`](asteria-field-03-local-operations.png) | Local operations view with the landing ellipse, the P0 touchdown zone, science zones, hazards, traverses, and comms shoulder | 8 × 6 km frame; 1 km scale bar                       | GPT Image generation, 2026-09-16; generated terrain and cartographic overlays |
 
 ### Map provenance
 
@@ -248,6 +247,9 @@ other orbital imagery. Real-world context is limited to the cited parent
 geography and the regional processes described above; local geometry is
 fictional. The images are canonical for scenario continuity after human
 approval.
+
+The package is not copied into `website/public/` yet. A human must approve any
+stable public export separately.
 
 ## Canon and release boundary
 

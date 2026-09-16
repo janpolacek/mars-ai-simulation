@@ -18,9 +18,11 @@ separate current human instruction.
 
 ## Content workflow policy
 
-- `docs/` is the project documentation and content root; article handoffs and
-  identity sources belong under `docs/content/`. Do not create a parallel root
-  `assets/` directory; `tools/visual-generator/assets/` is tool-local only.
+- `docs/` is the project documentation root; per-article working papers belong
+  under `.agents/work/` and approved assets stay with their subject dossier under
+  `docs/` (see the [docs map](docs/README.md)). Do not create a parallel root
+  `assets/` directory; `tools/visual-generator/` is tool-local scratch only — inputs are copied out
+  of `docs/`, and only a human-selected export is copied back into `docs/`.
 - The Hermes kanban board is the source of truth for article state and
   dependencies.
 - Claim one ready card before editing; work only within its acceptance criteria.

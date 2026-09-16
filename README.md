@@ -24,41 +24,41 @@ surface campaign. It must never masquerade as a real space programme.
 
 ## Start here
 
-| Need                                         | Read                                                                         |
-| -------------------------------------------- | ---------------------------------------------------------------------------- |
-| Product intent, boundaries, and terminology  | [General information](docs/GENERAL.md)                                       |
-| Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                                                |
-| How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)                                 |
-| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md)                      |
-| Role contracts and handoffs                  | Held by each agent as its `SOUL.md` (Hermes profile), not in this repository |
-| Project-local task procedures                | [Skill catalog](.agents/README.md)                                           |
-| Kanban-driven article preparation            | [Content workflow harness](docs/CONTENT_WORKFLOW.md)                         |
-| Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)                                  |
-| Locked private scenario canon                | [Red Horizon scenario](docs/SCENARIO.md)                                     |
-| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)                           |
-| Landing region and operations area           | [Asteria Field dossier](docs/AREA.md)                                        |
+| Need                                         | Read                                                                               |
+| -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| The map of `docs/`                           | [Docs map](docs/README.md)                                                         |
+| Product intent, boundaries, and terminology  | [General information](docs/GENERAL.md)                                             |
+| Locked private scenario canon                | [Red Horizon scenario](docs/SCENARIO.md)                                           |
+| How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)                                       |
+| Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                                                      |
+| Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)                                        |
+| Kanban-driven article preparation            | [`create-article-workflow` skill](.agents/skills/create-article-workflow/SKILL.md) |
+| Per-article working papers                   | [`.agents/work/`](.agents/work/)                                                   |
+| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/brand/BRAND_GUIDELINES.md)                      |
+| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/VEHICLE.md)                                        |
+| Landing region and operations area           | [Asteria Field dossier](docs/area/AREA.md)                                         |
+| Project-local task procedures                | [Skill catalog](.agents/README.md)                                                 |
+| Role contracts and handoffs                  | Held by each agent as its `SOUL.md` (Hermes profile), not in this repository       |
 
 ## Repository map
 
 ```text
-docs/                 Project, lore, private timeline, and content sources
+docs/                 Project documentation: intent, canon, rules, plan, and dossiers
+.agents/              Project-local skills, procedures, and per-article working papers
 website/              Astro application, its scripts, and static build output
-.agents/              Project-local skills and task procedures
+tools/                Local ComfyUI generation workspace (scratch, git-ignored)
 ```
 
-`docs/content/` is the source for article handoffs, reusable approved media, and
-identity artwork. Articles are authored as MDX directly in `website/news/` for
-publication. The website copies approved media and identity files to its
-generated public directories during development and production builds, then
-refers to them at `/media/...` and `/brand/...`. Do not manually edit those
-generated website directories. Application favicon exports live directly under
-`website/public/`, with their stable source artwork under
-`docs/content/brand/favicon/`. Existing vehicle reference exports remain under
-`docs/vehicle/` and are reused by the website without duplicate copies.
+[docs/README.md](docs/README.md) maps that folder file by file. Dossiers keep
+their subject's assets beside them — `docs/brand/`, `docs/vehicle/`, `docs/area/` —
+and the website copies the release-cleared PNGs into its generated
+`website/public/assets/` directory, served at `/assets/...`. Article working papers
+live under `.agents/work/`; articles are authored as MDX directly in
+`website/news/`. Do not manually edit the generated website directories.
 
 `tools/visual-generator/` is the local ComfyUI generation workspace. It is not a site
-dependency: copy a selected approved export into `docs/content/media/` rather than
-linking the website to its mutable local files.
+dependency: copy a selected approved export into its subject dossier under `docs/`
+rather than linking the website to its mutable local files.
 
 ## Website development
 

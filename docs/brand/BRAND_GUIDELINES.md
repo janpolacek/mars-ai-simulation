@@ -5,9 +5,8 @@
 **Status:** approved by the human story owner on 2026-09-15 and used on the
 current Preparing site.
 
-The approved source mark is
-[`red-horizon-sunrise-mark.png`](content/brand/identity/red-horizon-sunrise-mark.png).
-It is a 1254 × 1254 PNG with SHA-256
+The approved source mark is [`logo-bg-black.png`](logo-bg-black.png). It is a
+1254 × 1254 PNG with SHA-256
 `f9543989560da54fc56a8973002833b2b8dbe3d1c085fc1293af3faca457b749`.
 
 **Subject:** a stylised view of Mars at sunrise. A rust-red planetary disc
@@ -21,12 +20,11 @@ rim; Earth and the Moon appear as a small paired cue at upper right.
 A small Sun rises behind its upper-left edge, while blue Earth and a smaller
 Moon point appear at upper right._
 
-**Private provenance:** selected GPT Image candidate, retained locally as
-`tools/visual-generator/assets/red-horizon/logo/logo-gpt-image-mars-horizon-sunrise-large-earth-01.png`.
-The exact generation record and prompt remain in the local visual-generator
-workspace. Approval, refinement history, and validation were recorded in the
-retired issue tracker as `mars-ai-simulator-2tm`; that pre-kanban history is
-archived read-only at `docs/beads-archive.jsonl`.
+**Private provenance:** the selected GPT Image candidate and its exact generation record are
+scratch material in the local visual-generator workspace, which keeps no permanent assets; the
+approved mark above plus its SHA-256 is the durable record. Approval, refinement history, and
+validation were recorded in the retired issue tracker as `mars-ai-simulator-2tm`; that pre-kanban
+history is archived read-only at `docs/beads-archive.jsonl`.
 
 ## Core composition
 
@@ -69,12 +67,10 @@ purples, or additional celestial colours.
 
 ## Favicon derivative
 
-The browser favicon is a compact derivative of the approved mark. Its stable
-source artwork is
-[`red-horizon-favicon-source.png`](content/brand/favicon/red-horizon-favicon-source.png).
-The website exports it as `favicon.ico` (16, 32, and 48 pixels) and
-`favicon-32.png`; do not use the favicon derivative as a replacement for the
-full identity mark.
+The browser favicon is a compact derivative of the approved mark. Its tracked exports
+are `favicon.ico` (16, 32, and 48 pixels) and `favicon-32.png`, kept as tracked site
+files in `website/public/assets/` alongside the copies generated from `docs/brand/`.
+Do not use the favicon derivative as a replacement for the full identity mark.
 
 ## Use and accessibility
 
@@ -93,7 +89,7 @@ full identity mark.
 
 ## Publication boundary
 
-The source file is stored under `docs/content/brand/identity/` as an approved identity
-asset. It is available to the website through the generated `public/brand/`
+The source file is stored in `docs/brand/` as an approved identity asset, beside this
+guidance. It is available to the website through the generated `website/public/assets/`
 directory. A separate human release decision is still required before any new
 public-site or social use beyond the current Preparing site.

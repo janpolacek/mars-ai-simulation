@@ -6,7 +6,10 @@ Each phase creates a usable, verifiable state. Do not make a visually elaborate
 site before its content boundaries, approval states, and build safeguards exist.
 Every implementation task is a Hermes kanban card with a named owner (its
 assignee profile), acceptance criteria, relevant dependencies, and a human
-approval checkpoint where needed.
+approval checkpoint where needed. The article pipeline that turns one brief into a
+serial card graph is specified in
+[`.agents/skills/create-article-workflow/SKILL.md`](../.agents/skills/create-article-workflow/SKILL.md);
+this plan does not repeat its card, dispatch, or approval mechanics.
 
 ## Phase 0 — Operating foundation
 

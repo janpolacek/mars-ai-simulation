@@ -18,22 +18,29 @@ guidance.
 
 ## Skill catalog
 
-| Skill                     | Owning profile                                                                                | Purpose                                                |
-| ------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice                                                       | Draft one source-aware article                         |
-| `brand-voice`             | Cross-cutting                                                                                | Keep public prose grounded and candid                  |
-| `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice                                             | Polish copy without changing canon                     |
-| `create-article-workflow` | Profile `mars-ai-simulator-planner`                                              | Create the serial article task graph                   |
-| `editorial-review`        | Profiles `mars-ai-simulator-editor` + `mars-ai-simulator-continuity`     | Run the final editorial gate                           |
-| `image-generation`        | Profile `mars-ai-simulator-visuals`                                                    | Prepare reviewable visual candidates and metadata      |
-| `project-documentation`   | Owning profile's `SOUL.md`                                                                         | Revise project guidance and runbooks                   |
-| `research-and-fact-check` | Profile `mars-ai-simulator-planner`                                                                             | Build a claim-level source pack                        |
-| `seo-content`             | Profile `mars-ai-simulator-seo`                                               | Review honest search intent and metadata               |
-| `site-deployment`         | Profile `mars-ai-simulator-dev` | Validate locally and prepare authorised release inputs |
+| Skill                     | Owning profile                                                       | Purpose                                                          |
+| ------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice                      | Draft one source-aware article                                   |
+| `brand-voice`             | Cross-cutting                                                        | Keep public prose grounded and candid                            |
+| `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice                      | Polish copy without changing canon                               |
+| `create-article-workflow` | Profile `mars-ai-simulator-planner`                                  | Create the serial article task graph                             |
+| `editorial-review`        | Profiles `mars-ai-simulator-editor` + `mars-ai-simulator-continuity` | Run the final editorial gate                                     |
+| `image-generation`        | Profile `mars-ai-simulator-visuals`                                  | Prepare reviewable visual candidates and metadata                |
+| `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`                                  | Render vehicle references and scenes with the local ComfyUI tool |
+| `project-documentation`   | Owning profile's `SOUL.md`                                           | Revise project guidance and runbooks                             |
+| `research-and-fact-check` | Profile `mars-ai-simulator-planner`                                  | Build a claim-level source pack                                  |
+| `seo-content`             | Profile `mars-ai-simulator-seo`                                      | Review honest search intent and metadata                         |
+| `site-deployment`         | Profile `mars-ai-simulator-dev`                                      | Validate locally and prepare authorised release inputs           |
 
 Task tracking is not a project skill: the Hermes kanban board and its commands
-are documented in `AGENTS.md` and `docs/CONTENT_WORKFLOW.md`, and the role
+are described in [AGENTS.md](../AGENTS.md), the article graph mechanics are in
+[`create-article-workflow`](skills/create-article-workflow/SKILL.md), and the role
 authority for each card lives in the assignee profile's `SOUL.md`, not here.
+
+Per-article working papers live in [work/](work/): briefs, source packs, asset
+manifests, and editorial reviews for articles in flight. They are pipeline working
+material, not documentation — the documentation tree is mapped in
+[docs/README.md](../docs/README.md).
 
 If a new skill introduces a new responsibility or approval boundary, update the
 corresponding agent profile's `SOUL.md` first, then add the skill to this catalog.
