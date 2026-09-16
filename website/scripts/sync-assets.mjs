@@ -1,29 +1,14 @@
-import { cp, mkdir, readdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+/* global console */
+import { syncAssets } from './assets.mjs';
 
-const scriptDirectory = dirname(fileURLToPath(import.meta.url));
-const websiteDirectory = resolve(scriptDirectory, '..');
-const projectDirectory = resolve(websiteDirectory, '..');
-const destinationDirectory = resolve(websiteDirectory, 'public', 'assets');
-const sourceDirectories = [
-    resolve(projectDirectory, 'docs/brand'),
-    resolve(projectDirectory, 'docs/vehicle'),
-];
+const { gated, pruned } = await syncAssets();
 
-await mkdir(destinationDirectory, { recursive: true });
+if (gated.length > 0) {
+    console.log(
+        `[sync-assets] withheld ${gated.length} gated asset(s) from the public build: ${gated.join(', ')}`,
+    );
+}
 
-for (const sourceDirectory of sourceDirectories) {
-    let entries;
-    try {
-        entries = await readdir(sourceDirectory, { withFileTypes: true });
-    } catch (error) {
-        if (error.code === 'ENOENT') continue;
-        throw error;
-    }
-
-    for (const entry of entries) {
-        if (!entry.isFile() || !entry.name.endsWith('.png')) continue;
-        await cp(resolve(sourceDirectory, entry.name), resolve(destinationDirectory, entry.name));
-    }
+if (pruned.length > 0) {
+    console.log(`[sync-assets] pruned gated asset(s) left by an earlier run: ${pruned.join(', ')}`);
 }
