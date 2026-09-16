@@ -1,4 +1,4 @@
-# 008 — Landing preparation
+# 007 — Landing preparation
 
 ## Private situation
 
@@ -21,4 +21,4 @@ what the team will know first, and when another update will follow.
 ## Spoilers and handoff
 
 Do not show the landed rover, release a first image, or name a success condition
-as already achieved. Dependency: 007.
+as already achieved. Dependency: 006.

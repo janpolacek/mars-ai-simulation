@@ -1,4 +1,4 @@
-# 011 — Operations and discovery
+# 010 — Operations and discovery
 
 ## Private situation
 
@@ -25,4 +25,4 @@ instruments, and findings.
 ## Spoilers and handoff
 
 Do not claim a full repair, terminal failure, or mission conclusion. Dependency:
-010. Continuity review is required for every new observation and scene image.
+009. Continuity review is required for every new observation and scene image.

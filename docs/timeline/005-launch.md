@@ -1,4 +1,4 @@
-# 006 — Launch
+# 005 — Launch
 
 ## Private situation
 
@@ -12,8 +12,9 @@ limited ability to intervene physically.
   control to deep-space operations and the remaining risk.
 - Decide whether launch coverage uses an approved generated visual, a graphic, or
   text-only reporting; never present generated imagery as documentary evidence.
-- The launch day is fixed as 17 February 2031 by the mission baseline. Exact
-  time and flight telemetry remain later operational choices.
+- The launch day is fixed as 17 February 2031 by the locked scenario
+  (`docs/scenario.md`). Exact time and flight telemetry remain later operational
+  choices.
 
 ## Allowed public angle
 
@@ -24,4 +25,4 @@ disclosure where site standards require it.
 ## Spoilers and handoff
 
 Do not report cruise anomalies, landing success, or surface targets. Dependency:
-005; publishing requires a human review of all launch wording and visual labelling.
+004; publishing requires a human review of all launch wording and visual labelling.

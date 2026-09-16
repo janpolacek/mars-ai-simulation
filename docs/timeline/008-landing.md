@@ -1,4 +1,4 @@
-# 009 — Landing
+# 008 — Landing
 
 ## Private situation
 
@@ -12,7 +12,7 @@ margin, or intermittent thermal/communications behaviour. It is not a catastroph
 - Confirm basic power, communications, and rover survival before reporting a
   successful landing.
 - Decide the exact condition only after it is technically reviewed and consistent
-  with steps 010–012.
+  with steps 009–011.
 - Avoid false drama; an early uncertainty can be public without a premature cause.
 
 ## Allowed public angle
@@ -24,4 +24,4 @@ approved and not depict unreleased rover actions.
 ## Spoilers and handoff
 
 Do not claim all systems are perfect, publish the first rover POV, or disclose the
-final repair plan. Dependency: 008.
+final repair plan. Dependency: 007.

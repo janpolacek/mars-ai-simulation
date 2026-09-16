@@ -1,4 +1,4 @@
-# 012 — Repair and end of life
+# 011 — Repair and end of life
 
 ## Private situation
 
@@ -27,4 +27,4 @@ for future missions.
 
 This is the only step allowed to close the mission. Before release, the human story
 owner approves the final sequence, public wording, authoritative final media, and
-archival strategy. Dependency: 011.
+archival strategy. Dependency: 010.

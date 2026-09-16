@@ -1,4 +1,4 @@
-# 005 — Launch provider
+# 004 — Launch provider
 
 ## Private situation
 
@@ -23,4 +23,4 @@ mission-architecture diagram or approved launch integration image.
 ## Spoilers and handoff
 
 Do not state that the vehicle is already in transit, name the landing site, or
-show Mars surface images. Dependency: 004.
+show Mars surface images. Dependency: 003.

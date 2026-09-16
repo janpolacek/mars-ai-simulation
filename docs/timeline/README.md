@@ -5,8 +5,9 @@ distinct, ordered mission step; it may later yield one or more public pages, but
 no public page may reveal a later step. The timeline is not automatically
 published, imported into Astro collections, or copied into site metadata.
 
-The [locked mission baseline](000-mission-baseline.md) defines the programme,
-architecture, budget, and calendar that every numbered step must follow.
+The [locked scenario canon](../scenario.md) defines the programme, architecture,
+budget, and calendar that every numbered step must follow. The numbered steps in
+this directory control when those facts may become public.
 
 ## How to use the timeline
 
@@ -21,20 +22,19 @@ Each step states its private situation, decisions/constraints, allowed public
 angle, dependencies, future spoilers, and media possibilities. The "public angle"
 is a release suggestion, not permission to publish.
 
-| Step                                   | Private event                      | Minimum public prerequisite |
-| -------------------------------------- | ---------------------------------- | --------------------------- |
-| [001](001-coalition-proposal.md)       | Initial joint-mission proposal     | —                           |
-| [002](002-partner-commitments.md)      | Coalition and responsibility split | 001                         |
-| [003](003-payload-selection.md)        | Sensor/payload selection           | 002                         |
-| [004](004-vehicle-design.md)           | RH-01 design freeze                | 003                         |
-| [005](005-launch-provider.md)          | Launch vehicle decision            | 004                         |
-| [006](006-launch.md)                   | Departure from Earth               | 005                         |
-| [007](007-cruise.md)                   | Interplanetary flight              | 006                         |
-| [008](008-landing-preparation.md)      | Landing readiness                  | 007                         |
-| [009](009-landing.md)                  | Mars landing                       | 008                         |
-| [010](010-first-surface-checks.md)     | Commissioning and first image      | 009                         |
-| [011](011-operations-and-discovery.md) | Traverse, scans, discovery         | 010                         |
-| [012](012-repair-and-end-of-life.md)   | Repairs and mission close          | 011                         |
+| Step                                   | Private event                                  | Minimum public prerequisite |
+| -------------------------------------- | ---------------------------------------------- | --------------------------- |
+| [001](001-project-announcement.md)     | Programme announcement and partner commitments | —                           |
+| [002](002-payload-selection.md)        | Sensor/payload selection                       | 001                         |
+| [003](003-vehicle-design.md)           | RH-01 design freeze                            | 002                         |
+| [004](004-launch-provider.md)          | Launch vehicle decision                        | 003                         |
+| [005](005-launch.md)                   | Departure from Earth                           | 004                         |
+| [006](006-cruise.md)                   | Interplanetary flight                          | 005                         |
+| [007](007-landing-preparation.md)      | Landing readiness                              | 006                         |
+| [008](008-landing.md)                  | Mars landing                                   | 007                         |
+| [009](009-first-surface-checks.md)     | Commissioning and first image                  | 008                         |
+| [010](010-operations-and-discovery.md) | Traverse, scans, discovery                     | 009                         |
+| [011](011-repair-and-end-of-life.md)   | Repairs and mission close                      | 010                         |
 
 ## Continuity invariants
 

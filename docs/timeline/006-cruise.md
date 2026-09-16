@@ -1,4 +1,4 @@
-# 007 — Cruise
+# 006 — Cruise
 
 ## Private situation
 
@@ -22,5 +22,5 @@ or a cautious explanation of a manageable technical concern and the next review.
 
 ## Spoilers and handoff
 
-Do not name the final landing site, claim entry readiness before step 008, or imply
-a surface discovery. Dependency: 006.
+Do not name the final landing site, claim entry readiness before step 007, or imply
+a surface discovery. Dependency: 005.

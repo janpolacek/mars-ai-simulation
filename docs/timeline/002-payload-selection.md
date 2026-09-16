@@ -1,4 +1,4 @@
-# 003 — Payload selection
+# 002 — Payload selection
 
 ## Private situation
 
@@ -22,6 +22,6 @@ instrument in plain language.
 
 ## Spoilers and handoff
 
-Do not publish a final rover render unless step 004 is approved. Do not promise
+Do not publish a final rover render unless step 003 is approved. Do not promise
 the landing site, launch vehicle, or discovery. Candidate media: labelled but
 non-final instrument concept, or a sensor-focused editorial illustration.

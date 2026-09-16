@@ -30,9 +30,9 @@ manufacturing drama.
   partners develops a robotic Mars mission.
 - RH-01 Pathfinder is the first surface rover. It maps terrain, examines rocks,
   and proves the coalition's operating model.
-- The arc progresses through planning, commitments, payload selection, vehicle
-  design, launch choice, launch, cruise, landing, commissioning, exploration,
-  repair, and end of life.
+- The arc progresses through announcement, payload selection, vehicle design,
+  launch choice, launch, cruise, landing, commissioning, exploration, repair, and
+  end of life.
 - Real agencies and technologies may be referenced only when the content clearly
   distinguishes fact from the fictional Red Horizon narrative. Prefer invented
   institutions for material that could otherwise imply a real endorsement.

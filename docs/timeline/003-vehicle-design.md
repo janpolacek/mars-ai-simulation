@@ -1,4 +1,4 @@
-# 004 — Vehicle design freeze
+# 003 — Vehicle design freeze
 
 ## Private situation
 
@@ -24,4 +24,4 @@ design's science role and limitations, avoiding unverified performance statistic
 
 No launch announcement, landing site, surface photography, damage, or discovery.
 The visual creator must produce and the human approve canonical references before
-editorial scene images. Dependency: 003.
+editorial scene images. Dependency: 002.

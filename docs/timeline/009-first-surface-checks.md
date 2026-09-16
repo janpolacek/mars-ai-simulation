@@ -1,4 +1,4 @@
-# 010 — First surface checks
+# 009 — First surface checks
 
 ## Private situation
 
@@ -22,4 +22,4 @@ what the initial drive demonstrates, and what the team is still monitoring.
 ## Spoilers and handoff
 
 Do not claim the major discovery, a solved repair, or long-range mobility. The
-visual creator may now propose POV and full-rover scene media. Dependency: 009.
+visual creator may now propose POV and full-rover scene media. Dependency: 008.

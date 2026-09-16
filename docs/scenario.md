@@ -1,13 +1,13 @@
-# Red Horizon mission baseline
+# Red Horizon scenario (locked)
 
 > **Private scenario canon — locked 16 September 2026.** Red Horizon, its coalition, Asteria Field, RH-01
 > Pathfinder, the assignments below, and every programme date and budget figure are fictional. Real places,
 > technologies, institutions, and scientific sources are cited only to make the scenario technically grounded. Nothing
 > in this document implies participation, approval, funding, or endorsement by a real organisation.
 
-This document is the common baseline for the numbered private timeline. The numbered steps control when facts may
-become public; this document controls what the programme is internally understood to be. A public release may use only
-the facts allowed by its current timeline step, even when later facts are already fixed here.
+This document is the private scenario canon for Red Horizon: it defines what the programme is internally understood to
+be. The numbered steps in `docs/timeline/` are the release order and control when facts may become public. A public
+release may use only the facts allowed by its current timeline step, even when later facts are already fixed here.
 
 ## Mission identity
 
@@ -178,7 +178,7 @@ as the planning anchor; later mission design may refine hours and targeting para
 
 | Date              | Milestone                                                              |
 | ----------------- | ---------------------------------------------------------------------- |
-| 16 September 2026 | Mission baseline and two-Mars-year design life approved                |
+| 16 September 2026 | Scenario and two-Mars-year design life approved                        |
 | 12 October 2026   | Red Horizon Council charter takes effect                               |
 | 19 March 2027     | Mission Concept Review                                                 |
 | 24 September 2027 | System Requirements Review and Asteria Field target confirmation       |
@@ -208,7 +208,7 @@ as the planning anchor; later mission design may refine hours and targeting para
 
 The supported surface interval is exactly **1,374 Earth days**, using 687 Earth days as the planning length of one Mars
 year. The 30-day listening campaign is closeout, not an extension of supported science operations. The final-contact cause
-and any late-life mitigation remain reserved for timeline step 012 so that they can be made consistent with the anomalies
+and any late-life mitigation remain reserved for timeline step 011 so that they can be made consistent with the anomalies
 actually established in earlier releases.
 
 ## Lifecycle budget
@@ -271,9 +271,10 @@ economic conditions. Currency, year, scope, and accounting differences prevent d
 
 ## Continuity and release controls
 
-- Timeline steps 001–012 remain the release order. This baseline does not make later facts public.
-- The coalition and budget may first be introduced only when the appropriate partner-commitment material is approved.
-- Payload details wait for step 003; RH-01 imagery waits for step 004; Ariane 64 waits for step 005; exact launch and
+- Timeline steps 001–011 remain the release order. This scenario document does not make later facts public.
+- The coalition and the lifecycle budget frame are introduced with the project announcement (step 001); anything beyond
+  that frame waits for a later step.
+- Payload details wait for step 002; RH-01 imagery waits for step 003; Ariane 64 waits for step 004; exact launch and
   landing dates wait for their authorised release steps.
 - Asteria Field is not published until the landing-preparation sequence allows it. Its maps are scenario planning assets.
 - Generated visuals are labelled as fictional or illustrative and are never presented as documentary mission imagery.

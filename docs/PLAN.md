@@ -72,7 +72,7 @@ all public pages clearly disclose the project’s fictional AI-assisted nature.
 
 **Outcome:** a sustainable cadence from coalition to end of life.
 
-Release milestones in timeline order: commitment, payload, vehicle, launch
+Release milestones in timeline order: announcement, payload, vehicle, launch
 provider, launch, cruise, approach, landing, first checks, operations, repair,
 and end of life. New content may expand a current milestone but never spoil a
 later one. Technical agents keep CI, performance, accessibility, security headers,

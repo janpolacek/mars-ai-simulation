@@ -24,17 +24,18 @@ surface campaign. It must never masquerade as a real space programme.
 
 ## Start here
 
-| Need                                         | Read                                                    |
-| -------------------------------------------- | ------------------------------------------------------- |
-| Product intent, boundaries, and terminology  | [General information](docs/GENERAL.md)                  |
-| Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                           |
-| How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)            |
-| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md) |
+| Need                                         | Read                                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
+| Product intent, boundaries, and terminology  | [General information](docs/GENERAL.md)                                       |
+| Ordered build/release work                   | [Delivery plan](docs/PLAN.md)                                                |
+| How all contributors must work               | [Project instructions](docs/INSTRUCTIONS.md)                                 |
+| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md)                      |
 | Role contracts and handoffs                  | Held by each agent as its `SOUL.md` (Hermes profile), not in this repository |
-| Project-local task procedures                | [Skill catalog](.agents/README.md)                      |
-| Kanban-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
-| Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)             |
-| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)      |
+| Project-local task procedures                | [Skill catalog](.agents/README.md)                                           |
+| Kanban-driven article preparation            | [Content workflow harness](docs/CONTENT_WORKFLOW.md)                         |
+| Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)                                  |
+| Locked private scenario canon                | [Red Horizon scenario](docs/scenario.md)                                     |
+| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)                           |
 
 ## Repository map
 
