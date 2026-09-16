@@ -5,22 +5,22 @@ import { fileURLToPath } from 'node:url';
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const websiteDirectory = resolve(scriptDirectory, '..');
 const assetGroups = [
-  { source: 'media', destination: 'media' },
-  { source: 'brand/identity', destination: 'brand' },
+    { source: 'media', destination: 'media' },
+    { source: 'brand/identity', destination: 'brand' },
 ];
 
 for (const group of assetGroups) {
-  const sourceDirectory = resolve(websiteDirectory, '..', 'content', group.source);
-  const destinationDirectory = resolve(websiteDirectory, 'public', group.destination);
+    const sourceDirectory = resolve(websiteDirectory, '..', 'content', group.source);
+    const destinationDirectory = resolve(websiteDirectory, 'public', group.destination);
 
-  await mkdir(sourceDirectory, { recursive: true });
-  await rm(destinationDirectory, { recursive: true, force: true });
-  await mkdir(destinationDirectory, { recursive: true });
+    await mkdir(sourceDirectory, { recursive: true });
+    await rm(destinationDirectory, { recursive: true, force: true });
+    await mkdir(destinationDirectory, { recursive: true });
 
-  for (const entry of await readdir(sourceDirectory, { withFileTypes: true })) {
-    if (entry.name === '.gitkeep') continue;
-    await cp(resolve(sourceDirectory, entry.name), resolve(destinationDirectory, entry.name), {
-      recursive: entry.isDirectory(),
-    });
-  }
+    for (const entry of await readdir(sourceDirectory, { withFileTypes: true })) {
+        if (entry.name === '.gitkeep') continue;
+        await cp(resolve(sourceDirectory, entry.name), resolve(destinationDirectory, entry.name), {
+            recursive: entry.isDirectory(),
+        });
+    }
 }

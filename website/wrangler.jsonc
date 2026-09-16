@@ -1,24 +1,24 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "mars-ai-simulation",
-  "compatibility_date": "2026-09-15",
-  "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": true,
-  "preview_urls": false,
-  "observability": {
-    "logs": {
-      "enabled": true,
-      "head_sampling_rate": 1,
-      "invocation_logs": true,
-      "persist": true
+    "$schema": "./node_modules/wrangler/config-schema.json",
+    "name": "mars-ai-simulation",
+    "compatibility_date": "2026-09-15",
+    "compatibility_flags": ["nodejs_compat"],
+    "workers_dev": true,
+    "preview_urls": false,
+    "observability": {
+        "logs": {
+            "enabled": true,
+            "head_sampling_rate": 1,
+            "invocation_logs": true,
+            "persist": true,
+        },
+        "traces": {
+            "enabled": false,
+            "head_sampling_rate": 1,
+            "persist": true,
+        },
     },
-    "traces": {
-      "enabled": false,
-      "head_sampling_rate": 1,
-      "persist": true
-    }
-  },
-  "assets": {
-    "directory": "./dist"
-  }
+    "assets": {
+        "directory": "./dist",
+    },
 }
