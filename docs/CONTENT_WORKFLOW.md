@@ -1,88 +1,98 @@
 # Article workflow harness
 
-This repository uses a small, serial Beads workflow for article preparation.
+This repository uses a small, serial kanban workflow for article preparation.
 It turns one public-safe user brief into persistent artifacts and five specialised
-tasks. Beads records state and dependencies; Markdown and assets record handoffs.
-No worker relies on an earlier worker's chat response.
+tasks. The Hermes kanban board records state and dependencies; Markdown and assets
+record handoffs. No worker relies on an earlier worker's chat response.
 
 ## Create an article graph
 
-The story coordinator creates the graph directly with `bd`; no Node or workflow
-runtime is required. Before creating it, validate a lowercase hyphenated slug,
-a public-safe brief, author, and timeline step. Use `site-foundation` only for
-material outside the scenario.
+The story coordinator creates the graph directly with `hermes kanban`; no Node or
+workflow runtime is required. One card is one stage with one assignee profile, and
+every card is scoped to this repository with
+`--workspace dir:/home/janpolacek/Projects/mars-ai-simulator`. Do not pass
+`--project`: the Hermes project registry holds no entry for this repository, so
+the workspace flag is the only scoping a card needs. Before creating the graph,
+validate a lowercase hyphenated slug, a public-safe brief, author, and timeline
+step. Use `site-foundation` only for material outside the scenario.
 
 ```sh
-bd create "Article: <title>" --type epic \
-  --labels content,article,slug:<slug> \
-  --description "Public-safe article workflow; brief: docs/content/briefs/<slug>.md; timeline step: <step>." \
-  --acceptance "All child tasks have evidence; editorial review passes; human approval is recorded before deployment."
+hermes kanban create "Article: <title>" --priority 1 \
+  --assignee mars-ai-simulator-planner \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Public-safe article workflow; brief: docs/content/briefs/<slug>.md; timeline step: <step>. Acceptance: every child card has evidence; editorial review passes; human approval is recorded before deployment."
 
-bd create "Research source pack: <slug>" --parent <ARTICLE> \
-  --labels content,article,slug:<slug>,role:research,stage:research \
-  --skills research-and-fact-check \
-  --description "Read docs/content/briefs/<slug>.md; write docs/content/sources/<slug>.md." \
-  --acceptance "Every material claim has a canonical source or an explicit unresolved note."
+hermes kanban create "Research source pack: <slug>" --parent <ARTICLE> \
+  --assignee mars-ai-simulator-planner \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Stage: research. Read docs/content/briefs/<slug>.md; write docs/content/sources/<slug>.md. Acceptance: every material claim has a canonical source or an explicit unresolved note."
 
-bd create "Draft article: <slug>" --parent <ARTICLE> \
-  --labels content,article,slug:<slug>,role:redactor,stage:draft \
-  --skills article-drafting \
-  --description "Read the brief and source pack; prepare website/news/<slug>.mdx." \
-  --acceptance "The article preserves draft status and traces every material claim to the source pack."
+hermes kanban create "Draft article: <slug>" --parent <ARTICLE> \
+  --assignee mars-ai-simulator-writer \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Stage: draft. Read the brief and source pack; prepare website/news/<slug>.mdx. Acceptance: the article preserves draft status and traces every material claim to the source pack."
 
-bd create "Create visual assets: <slug>" --parent <ARTICLE> \
-  --labels content,article,slug:<slug>,role:visual,stage:assets \
-  --skills image-generation \
-  --description "Read the brief and draft; write docs/content/assets/<slug>/assets.md." \
-  --acceptance "The manifest records private provenance, placement, alt text, caption, tool, and rights."
+hermes kanban create "Create visual assets: <slug>" --parent <ARTICLE> \
+  --assignee mars-ai-simulator-visuals \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Stage: assets. Read the brief and draft; write docs/content/assets/<slug>/assets.md. Acceptance: the manifest records private provenance, placement, alt text, caption, tool, and rights."
 
-bd create "Editorial final gate: <slug>" --parent <ARTICLE> \
-  --labels content,article,slug:<slug>,role:editor,stage:review \
-  --skills editorial-review \
-  --description "Review article, source pack, and asset manifest; write docs/content/reviews/<slug>.md." \
-  --acceptance "The review is approved with no unresolved material failure."
+hermes kanban create "Editorial final gate: <slug>" --parent <ARTICLE> \
+  --assignee mars-ai-simulator-editor \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Stage: review. Review article, source pack, and asset manifest; write docs/content/reviews/<slug>.md. Acceptance: the review is approved with no unresolved material failure. Consult the continuity redactor through the editorial-review skill; the card's assignee stays the editor."
 
-bd create "Build and deploy: <slug>" --parent <ARTICLE> \
-  --labels content,article,slug:<slug>,role:tech,stage:deploy \
-  --skills site-deployment \
-  --description "Validate locally after approved review; record approval or exact deployment blocker." \
-  --acceptance "Build and preview pass; production deploy closes only with human approval and verified URL."
+hermes kanban create "Build and deploy: <slug>" --parent <ARTICLE> \
+  --assignee mars-ai-simulator-dev \
+  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
+  --body "Stage: deploy. Validate locally after approved review; record approval or the exact deployment blocker. Acceptance: build and preview pass; production deploy completes only with human approval and a verified URL."
 
-bd dep add <DRAFT> <RESEARCH>
-bd dep add <IMAGES> <DRAFT>
-bd dep add <REVIEW> <IMAGES>
-bd dep add <DEPLOY> <REVIEW>
+hermes kanban link <RESEARCH> <DRAFT>
+hermes kanban link <DRAFT> <IMAGES>
+hermes kanban link <IMAGES> <REVIEW>
+hermes kanban link <REVIEW> <DEPLOY>
 ```
 
 Record the title, brief, timeline step, acceptance criteria, artifact paths, and
-created IDs in the epic note. The coordinator also creates the brief, source
-pack, review, and asset-manifest files under `docs/content/` and prepare the
-article as `website/news/<slug>.mdx`, using the contracts in the relevant skill.
-The handoff locations are not public web routes; `website/news/` is the direct
-MDX publication source. Draft MDX may be staged there only with
+created card IDs as a comment on the parent card
+(`hermes kanban comment <id> "..."`). The coordinator also creates the brief,
+source pack, review, and asset-manifest files under `docs/content/` and prepares
+the article as `website/news/<slug>.mdx`, using the contracts in the relevant
+skill. The handoff locations are not public web routes; `website/news/` is the
+direct MDX publication source. Draft MDX may be staged there only with
 `publication: draft`, which the website filters out; cleared articles use
 `publication: published`. The asset manifest is the authoritative handoff
 record; raw candidate files, prompts, and generation records remain in
 `tools/visual-generator/` until a human selects an approved stable export.
 
-## Dispatch a ready task
+The pre-kanban issue history from the retired tracker is archived read-only at
+`docs/beads-archive.jsonl`.
+
+## Dispatch a ready card
 
 ```sh
-bd ready --json
-bd show <READY_ISSUE>
-bd update <READY_ISSUE> --claim
+hermes kanban list --status ready
+hermes kanban show <READY_CARD>
+hermes kanban claim <READY_CARD>
 ```
 
-The dispatcher is the person or agent reading `bd ready --json`, identifying the
-single `role:` label, and routing that issue to the matching skill. The worker
-then claims the issue, reads the declared artifacts, and follows that skill.
-Because the graph is serial, a given article can never have two stage tasks ready
-at once.
+The dispatcher is the person or agent reading
+`hermes kanban list --status ready`, identifying the card's single assignee
+profile, and routing that card to the matching skill. The worker then claims the
+card, reads the declared artifacts, and follows that skill. Because the graph is
+serial, a given article can never have two stage tasks ready at once.
 
-Every worker runs `bd prime`, reads its issue and declared artifact inputs, claims
-that one issue, performs its bounded scope, records paths/URLs/checks in a Beads
-note, then closes it only if its acceptance checks pass. A failed editorial gate
-must create or request a corrective dependency; it must not be fixed informally.
+Every worker reads `AGENTS.md`, `docs/INSTRUCTIONS.md`, and the matching project
+skill, then reads its card (`hermes kanban show <id>`) and declared artifact
+inputs, claims that one card (`hermes kanban claim <id>`), performs its bounded
+scope, records paths/URLs/checks as a card comment
+(`hermes kanban comment <id> "..."`), and completes it
+(`hermes kanban complete <id> --result "..." --summary "..."`) only if its
+acceptance checks pass. A worker may only claim, comment on, and complete its own
+card; it does not create or reassign cards, with the single exception of the
+corrective card an editorial gate may open. A failed editorial gate must create or
+request a corrective card linked as a blocking dependency
+(`hermes kanban link <CORRECTIVE> <REVIEW>`); it must not be fixed informally.
 
 ## Approval boundary
 
@@ -94,8 +104,10 @@ automation that creates an external deployment.
 
 ## Verification
 
-Before closing a workflow-creation issue, inspect its epic and children with
-`bd show <id>` and confirm the five role/stage labels, four blocking edges, and
-five artifact paths. Use `rg` to check Markdown links in the affected documents.
-Workers record their commands and outcomes in Beads notes, which remain the
-durable evidence for the workflow.
+Before completing a workflow-creation card, inspect the parent card and its
+children with `hermes kanban show <id>` and confirm the five stage cards with
+their assignee profiles, the four blocking edges, and the five artifact paths. Use
+`rg` to check Markdown links in the affected documents. Workers record their
+commands and outcomes as card comments and in the repository artifact. The board
+is local to this machine and has no cross-machine sync, so the durable record for
+a task is the artifact under `docs/content/` plus the card's result and comments.

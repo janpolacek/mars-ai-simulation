@@ -255,7 +255,7 @@ approval.
 - Do not call Asteria Field an official place name or imply an agency
   partnership, endorsement, or real mission.
 - If a later source review changes the parent-region interpretation, update the
-  “What is real” section and the Beads task before changing local scenario
+  “What is real” section and the kanban card before changing local scenario
   geometry.
 
 ## Sources

@@ -24,8 +24,9 @@ Moon point appear at upper right._
 **Private provenance:** selected GPT Image candidate, retained locally as
 `tools/visual-generator/assets/red-horizon/logo/logo-gpt-image-mars-horizon-sunrise-large-earth-01.png`.
 The exact generation record and prompt remain in the local visual-generator
-workspace. Approval, refinement history, and validation are recorded in Beads
-issue `mars-ai-simulator-2tm`.
+workspace. Approval, refinement history, and validation were recorded in the
+retired issue tracker as `mars-ai-simulator-2tm`; that pre-kanban history is
+archived read-only at `docs/beads-archive.jsonl`.
 
 ## Core composition
 

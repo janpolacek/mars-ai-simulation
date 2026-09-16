@@ -7,13 +7,15 @@ procedures under `.agents/skills/`.
 
 ## Mandatory working sequence
 
-1. Run `bd prime`, inspect `bd ready`, then create or claim the relevant issue.
+1. Read `AGENTS.md`, this file, and the matching project skill, then inspect
+   `hermes kanban list --status ready` (or `--mine`) and create or claim the
+   relevant card.
 2. Read your role definition (your agent's `SOUL.md`) and the minimum relevant source
    material before acting.
 3. Produce one bounded deliverable: a draft, review, visual brief, implementation,
    deployment plan, or validation result.
-4. Record affected canon, files, validation, open questions, and next owner in the
-   Beads issue.
+4. Record affected canon, files, validation, open questions, and next owner as a
+   card comment (`hermes kanban comment <id> "..."`).
 5. Never mark work as published or complete when a required review, test, or human
    decision remains outstanding.
 
@@ -25,8 +27,9 @@ procedures under `.agents/skills/`.
 4. Repository conventions and the agent's own role definition (`SOUL.md`).
 5. A well-marked proposal, never an invented fact presented as established canon.
 
-When sources conflict, stop the affected claim, describe the conflict in Beads,
-and ask the human story owner for a decision. Do not silently reconcile it.
+When sources conflict, stop the affected claim, describe the conflict on the
+kanban card, and ask the human story owner for a decision. Do not silently
+reconcile it.
 
 ## Project source layout
 

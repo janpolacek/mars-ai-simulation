@@ -12,3 +12,6 @@ comfyui-runs/
 
 # Editor and OS files
 .DS_Store
+
+# Retired task tracker (Beads dropped; history in docs/beads-archive.jsonl)
+.beads/

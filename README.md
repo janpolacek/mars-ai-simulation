@@ -32,7 +32,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Approved visual identity and colour guidance | [Red Horizon visual identity](docs/BRAND_GUIDELINES.md) |
 | Role contracts and handoffs                  | Held by each agent as its `SOUL.md` (Hermes profile), not in this repository |
 | Project-local task procedures                | [Skill catalog](.agents/README.md)                      |
-| Beads-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
+| Kanban-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
 | Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)             |
 | Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)      |
 
@@ -41,7 +41,7 @@ surface campaign. It must never masquerade as a real space programme.
 ```text
 docs/                 Project, lore, private timeline, and content sources
 website/              Astro application, its scripts, and static build output
-.agents/              Project-local skills and Beads integration
+.agents/              Project-local skills and task procedures
 ```
 
 `docs/content/` is the source for article handoffs, reusable approved media, and
@@ -74,9 +74,18 @@ build` also refreshes the generated local media copy before building.
 
 ## Work tracking and release authority
 
-This project uses [Beads](https://github.com/gastownhall/beads). Begin with
-`bd prime`, then choose an unblocked issue using `bd ready`. Create and claim an
-issue before starting a deliverable; record decisions and review outcomes there.
+This project uses the **Hermes kanban board** for task tracking: a SQLite queue
+shared by all Hermes profiles on this machine. One card is one deliverable with
+one assignee profile, and cards are scoped to this repository only through
+`--workspace dir:/home/janpolacek/Projects/mars-ai-simulator` (the `--project`
+flag is not used). Read `AGENTS.md`, `docs/INSTRUCTIONS.md`, and the matching
+project-local skill, then choose an unblocked card using
+`hermes kanban list --status ready` (a worker finds its own with
+`hermes kanban list --mine`). Claim or create one card before starting a
+deliverable; record decisions, review outcomes, and handoffs as card comments.
+The board is local to this machine and has no cross-machine sync, so the durable
+record for a task is the repository artifact plus the card's result and comments.
+Pre-kanban issue history is archived read-only at `docs/beads-archive.jsonl`.
 
 The user explicitly authorizes commits and pushes for completed requested work.
 Do not create a public deployment, configure a domain, connect provider

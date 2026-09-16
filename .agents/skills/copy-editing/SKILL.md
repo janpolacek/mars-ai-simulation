@@ -6,7 +6,7 @@ description: Edit Red Horizon Markdown and interface copy for clarity, consisten
 # Copy editing for Red Horizon
 
 Use this skill when polishing content after drafting and before continuity review.
-Read your own role definition (your agent's `SOUL.md` — the `editor` profile) and
+Read your own role definition (your agent's `SOUL.md` — the `mars-ai-simulator-editor` profile) and
 apply the brand voice skill when working on
 public text. Correct grammar, structure, repetition, weak verbs, unexplained
 acronyms, ambiguous references, inaccessible image text, and inconsistent

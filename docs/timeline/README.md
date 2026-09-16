@@ -11,8 +11,9 @@ architecture, budget, and calendar that every numbered step must follow.
 ## How to use the timeline
 
 The story coordinator reads only the upcoming step and its direct dependencies,
-then creates a bounded release brief in Beads. Writers may use the approved facts
-from that brief; continuity reviewers compare output against the relevant step.
+then creates a bounded release brief as a kanban card. Writers may use the
+approved facts from that brief; continuity reviewers compare output against the
+relevant step.
 Open decisions remain open until the human story owner selects them—agents must
 not fill gaps with apparently canonical detail.
 

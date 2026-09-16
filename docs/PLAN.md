@@ -4,8 +4,9 @@
 
 Each phase creates a usable, verifiable state. Do not make a visually elaborate
 site before its content boundaries, approval states, and build safeguards exist.
-Every implementation task is a Beads issue with a named owner, acceptance
-criteria, relevant dependencies, and a human approval checkpoint where needed.
+Every implementation task is a Hermes kanban card with a named owner (its
+assignee profile), acceptance criteria, relevant dependencies, and a human
+approval checkpoint where needed.
 
 ## Phase 0 — Operating foundation
 
@@ -13,12 +14,14 @@ criteria, relevant dependencies, and a human approval checkpoint where needed.
 
 1. Maintain this documentation, the private scenario, vehicle baseline, and
    project-local skills.
-2. Configure Beads for task tracking and use its dependency graph for handoffs.
+2. Configure the Hermes kanban board for task tracking and use its dependency
+   graph for handoffs.
 3. Keep raw media and provider credentials outside version control.
 4. Define release authority: humans approve canon and public deployment.
 
-**Exit check:** a new agent can select a role, find its task in Beads, identify
-the source of truth, and produce a reviewable handoff without inventing policy.
+**Exit check:** a new agent can select a role, find its task on the kanban board,
+identify the source of truth, and produce a reviewable handoff without inventing
+policy.
 
 ## Phase 1 — Minimal Astro presence
 
@@ -60,7 +63,7 @@ and confirm that neither draft nor scenario material reaches `dist/`.
    documented review chain; technical agent opens a preview.
 3. Publish only a coherent initial set—homepage status, first update, and any
    necessary wiki context—rather than a complete future archive.
-4. Record canon and deployment decisions in Beads.
+4. Record canon and deployment decisions on the kanban card.
 
 **Exit check:** each public fact can be traced to an approved timeline step and
 all public pages clearly disclose the project’s fictional AI-assisted nature.

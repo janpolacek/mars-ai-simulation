@@ -69,8 +69,8 @@ content, page metadata, GitHub deployment artifacts, filenames, or alt text.
   prompts, references, generated candidates, and run records. Its generated
   media and run records are ignored by Git. Its nested `assets/` directory is a
   tool-local working area, not a second project source root.
-- Beads contains durable work state, task dependencies, handoffs, and approval
-  decisions. It is not a content-management system.
+- The Hermes kanban board contains durable work state, task dependencies,
+  handoffs, and approval decisions. It is not a content-management system.
 - Hosting credentials, domains, provider API keys, machine-local model files,
   generation prompts, and unapproved media must not be committed. A versioned
   asset manifest may point to a private provenance record without copying it.

@@ -20,17 +20,20 @@ guidance.
 
 | Skill                     | Owning profile                                                                                | Purpose                                                |
 | ------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `article-drafting`        | Profile `writer`, brand voice                                                       | Draft one source-aware article                         |
-| `beads`                   | Project-wide workflow                                                                        | Manage durable task state and handoffs                 |
+| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice                                                       | Draft one source-aware article                         |
 | `brand-voice`             | Cross-cutting                                                                                | Keep public prose grounded and candid                  |
-| `copy-editing`            | Profile `editor`, brand voice                                             | Polish copy without changing canon                     |
-| `create-article-workflow` | Profile `planner`                                              | Create the serial article task graph                   |
-| `editorial-review`        | Profiles `editor` + `continuity`     | Run the final editorial gate                           |
-| `image-generation`        | Profile `visuals`                                                    | Prepare reviewable visual candidates and metadata      |
+| `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice                                             | Polish copy without changing canon                     |
+| `create-article-workflow` | Profile `mars-ai-simulator-planner`                                              | Create the serial article task graph                   |
+| `editorial-review`        | Profiles `mars-ai-simulator-editor` + `mars-ai-simulator-continuity`     | Run the final editorial gate                           |
+| `image-generation`        | Profile `mars-ai-simulator-visuals`                                                    | Prepare reviewable visual candidates and metadata      |
 | `project-documentation`   | Owning profile's `SOUL.md`                                                                         | Revise project guidance and runbooks                   |
-| `research-and-fact-check` | Profile `planner`                                                                             | Build a claim-level source pack                        |
-| `seo-content`             | Profile `seo`                                               | Review honest search intent and metadata               |
-| `site-deployment`         | Profile `dev` | Validate locally and prepare authorised release inputs |
+| `research-and-fact-check` | Profile `mars-ai-simulator-planner`                                                                             | Build a claim-level source pack                        |
+| `seo-content`             | Profile `mars-ai-simulator-seo`                                               | Review honest search intent and metadata               |
+| `site-deployment`         | Profile `mars-ai-simulator-dev` | Validate locally and prepare authorised release inputs |
+
+Task tracking is not a project skill: the Hermes kanban board and its commands
+are documented in `AGENTS.md` and `docs/CONTENT_WORKFLOW.md`, and the role
+authority for each card lives in the assignee profile's `SOUL.md`, not here.
 
 If a new skill introduces a new responsibility or approval boundary, update the
 corresponding agent profile's `SOUL.md` first, then add the skill to this catalog.
