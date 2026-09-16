@@ -1,16 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 
-const identityMark = '/brand/red-horizon-sunrise-mark.png';
-const newsItems = (await getCollection('news')).sort((a, b) => a.data.order - b.data.order);
+const identityMark = '/assets/logo.png';
+const newsItems = (await getCollection('news', ({ data }) => data.publication === 'published')).sort(
+    (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+        <link rel="icon" href="/assets/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width" />
         <meta name="description" content="Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface." />
         <meta name="generator" content={Astro.generator} />

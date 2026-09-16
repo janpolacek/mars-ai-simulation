@@ -6,10 +6,14 @@ and media content.
 
 ## News content
 
-Homepage news items are authored as MDX files in [`news/`](./news/). The Astro
-content collection discovers every `*.mdx` file in that folder during the build
-and orders items by their frontmatter `order` value. Each file must include:
+Homepage news items are authored as MDX files in [`news/`](./news/) and are the
+website's direct publication source. Drafts may be staged there with
+`publication: draft`; the homepage filters them out. Use `publication: published`
+for content cleared for the public site. The Astro content collection discovers
+every `*.mdx` file in that folder during the build and orders published items by
+their frontmatter `order` value. Each file must include:
 `title`, `category`, `status`, `summary`, `linkLabel`, and `order`. Optional
+`publication`,
 `media`, `mediaAlt`, `mediaLabel`, and `accent` fields control the card artwork.
 
 Keep news copy within approved public canon. The private mission timeline under
@@ -28,13 +32,11 @@ npm run dev
 
 ## Shared assets
 
-Do not add approved reusable assets directly to `public/`. Put publication
-media in repository-root `content/media/` and approved identity files in
-`content/brand/identity/`, where each remains the canonical source. The `predev`
-and `prebuild` scripts copy those directories to `public/media/` and
-`public/brand/`, making assets available in pages at `/media/<filename>` and
-`/brand/<filename>`. Favicon exports are the exception: they live directly in
-`public/`, while their stable source artwork lives in `content/brand/favicon/`.
+Approved reusable assets remain in `../docs/brand/` and `../docs/vehicle/`,
+where they are the canonical sources. The `predev` and `prebuild` scripts copy
+their PNG exports to `public/assets/`, making them available at
+`/assets/<filename>`. The favicon exports are kept in `public/assets/` as
+tracked site files alongside the generated copies.
 
 This prevents duplicate source files while keeping Astro's public directory and
 deployment output self-contained. Generated files are ignored by Git.

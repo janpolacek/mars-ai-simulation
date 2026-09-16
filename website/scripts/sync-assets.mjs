@@ -1,26 +1,29 @@
-import { cp, mkdir, readdir, rm } from 'node:fs/promises';
+import { cp, mkdir, readdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const websiteDirectory = resolve(scriptDirectory, '..');
-const assetGroups = [
-    { source: 'media', destination: 'media' },
-    { source: 'brand/identity', destination: 'brand' },
+const projectDirectory = resolve(websiteDirectory, '..');
+const destinationDirectory = resolve(websiteDirectory, 'public', 'assets');
+const sourceDirectories = [
+    resolve(projectDirectory, 'docs/brand'),
+    resolve(projectDirectory, 'docs/vehicle'),
 ];
 
-for (const group of assetGroups) {
-    const sourceDirectory = resolve(websiteDirectory, '..', 'content', group.source);
-    const destinationDirectory = resolve(websiteDirectory, 'public', group.destination);
+await mkdir(destinationDirectory, { recursive: true });
 
-    await mkdir(sourceDirectory, { recursive: true });
-    await rm(destinationDirectory, { recursive: true, force: true });
-    await mkdir(destinationDirectory, { recursive: true });
+for (const sourceDirectory of sourceDirectories) {
+    let entries;
+    try {
+        entries = await readdir(sourceDirectory, { withFileTypes: true });
+    } catch (error) {
+        if (error.code === 'ENOENT') continue;
+        throw error;
+    }
 
-    for (const entry of await readdir(sourceDirectory, { withFileTypes: true })) {
-        if (entry.name === '.gitkeep') continue;
-        await cp(resolve(sourceDirectory, entry.name), resolve(destinationDirectory, entry.name), {
-            recursive: entry.isDirectory(),
-        });
+    for (const entry of entries) {
+        if (!entry.isFile() || !entry.name.endsWith('.png')) continue;
+        await cp(resolve(sourceDirectory, entry.name), resolve(destinationDirectory, entry.name));
     }
 }
