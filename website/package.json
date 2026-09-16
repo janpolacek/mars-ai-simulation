@@ -12,9 +12,8 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "prettier --write 'src/**/*.astro' 'scripts/**/*.mjs' '*.config.mjs' 'eslint.config.js' 'tsconfig.json' 'package.json' 'wrangler.jsonc'",
-        "format:check": "prettier --check 'src/**/*.astro' 'scripts/**/*.mjs' '*.config.mjs' 'eslint.config.js' 'tsconfig.json' 'package.json' 'wrangler.jsonc'",
         "lint": "eslint .",
+        "format": "print fmt ../",
         "typecheck": "astro check",
         "test": "vitest run"
     },
@@ -27,8 +26,6 @@
         "@vitest/ui": "^5.0.1",
         "eslint": "^9.39.5",
         "eslint-plugin-astro": "^1.7.0",
-        "prettier": "^3.9.6",
-        "prettier-plugin-astro": "^0.14.1",
         "typescript": "^5.9.3",
         "vitest": "^5.0.1",
         "wrangler": "4.132.0"

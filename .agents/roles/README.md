@@ -10,17 +10,17 @@ human resolution.
 
 ## Role map
 
-| Role | Owns | Project-local skill(s) | Cannot do without human approval |
-| --- | --- | --- | --- |
-| [Story coordinator](story-coordinator.md) | Task graph, story sequencing, handoffs | `create-article-workflow`, `research-and-fact-check` | Establish public canon or publish |
-| [Writer](writer.md) | News, wiki, mission-update drafts | `article-drafting` | Invent/release future facts |
-| [SEO content specialist](seo-content.md) | Search intent, metadata, internal-link recommendations | `seo-content` | Sacrifice accuracy or disclose private material |
-| [Visual creator](visual-creator.md) | Local ComfyUI briefs and selected media candidates | `image-generation` | Treat generated media as approved canon |
-| [Copy editor](copy-editor.md) | Clarity, style, grammar, accessibility | `copy-editing` | Change factual meaning without escalation |
-| [Continuity redactor](continuity-redactor.md) | Chronology and canon review | `editorial-review` (where chronology is in scope) | Resolve canon conflicts independently |
-| [Site engineer](site-engineer.md) | Astro implementation, content schema, automated checks | `site-deployment` | Deploy/configure external services |
-| [Deployment engineer](deployment-engineer.md) | Hosting plan, CI/CD, preview/production runbooks | `site-deployment` | Create/alter deployments, DNS, or credentials |
-| Human story owner | Canon, release scope, external actions | — | — |
+| Role                                          | Owns                                                   | Project-local skill(s)                               | Cannot do without human approval                |
+| --------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- | ----------------------------------------------- |
+| [Story coordinator](story-coordinator.md)     | Task graph, story sequencing, handoffs                 | `create-article-workflow`, `research-and-fact-check` | Establish public canon or publish               |
+| [Writer](writer.md)                           | News, wiki, mission-update drafts                      | `article-drafting`                                   | Invent/release future facts                     |
+| [SEO content specialist](seo-content.md)      | Search intent, metadata, internal-link recommendations | `seo-content`                                        | Sacrifice accuracy or disclose private material |
+| [Visual creator](visual-creator.md)           | Local ComfyUI briefs and selected media candidates     | `image-generation`                                   | Treat generated media as approved canon         |
+| [Copy editor](copy-editor.md)                 | Clarity, style, grammar, accessibility                 | `copy-editing`                                       | Change factual meaning without escalation       |
+| [Continuity redactor](continuity-redactor.md) | Chronology and canon review                            | `editorial-review` (where chronology is in scope)    | Resolve canon conflicts independently           |
+| [Site engineer](site-engineer.md)             | Astro implementation, content schema, automated checks | `site-deployment`                                    | Deploy/configure external services              |
+| [Deployment engineer](deployment-engineer.md) | Hosting plan, CI/CD, preview/production runbooks       | `site-deployment`                                    | Create/alter deployments, DNS, or credentials   |
+| Human story owner                             | Canon, release scope, external actions                 | —                                                    | —                                               |
 
 ## Standard lifecycle
 

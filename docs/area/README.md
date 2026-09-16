@@ -6,19 +6,19 @@
 
 ## Control record
 
-| Field | Value |
-| --- | --- |
-| Scenario designation | **Asteria Field** |
-| Designation type | Fictional Red Horizon operational region |
-| Real parent geography | Margaritifer Terra, Mars |
-| Planning centre | 17.80°S, 332.20°E (27.80°W) |
-| Planning envelope | 12.5–24.0°S, 327.0–338.0°E |
-| Local operations frame | 8 × 6 km, centred on the planning centre |
-| Revision | AF-0.1 · 2026-09-16 |
-| Canon status | Draft; human canon approval required |
-| Public status | No publication, route, metadata, or media release approved |
+| Field                  | Value                                                      |
+| ---------------------- | ---------------------------------------------------------- |
+| Scenario designation   | **Asteria Field**                                          |
+| Designation type       | Fictional Red Horizon operational region                   |
+| Real parent geography  | Margaritifer Terra, Mars                                   |
+| Planning centre        | 17.80°S, 332.20°E (27.80°W)                                |
+| Planning envelope      | 12.5–24.0°S, 327.0–338.0°E                                 |
+| Local operations frame | 8 × 6 km, centred on the planning centre                   |
+| Revision               | AF-0.1 · 2026-09-16                                        |
+| Canon status           | Draft; human canon approval required                       |
+| Public status          | No publication, route, metadata, or media release approved |
 
-The centre and boundaries above are scenario coordinates chosen for internal
+The centre and boundaries above are scenario coordinates chosen for mission
 planning. They are not a claim that a real Mars feature exists at that point.
 The name **Asteria Field** must remain qualified as “fictional” wherever this
 material is copied into another working document.
@@ -95,13 +95,13 @@ The labels below are a scenario stratigraphy for mission planning. “Unit” me
 an operational mapping class, not a newly discovered or officially mapped
 Martian formation.
 
-| Sequence | Scenario unit | Working interpretation | Why RH-01 cares |
-| --- | --- | --- | --- |
-| 1 | AF-H0 · cratered highland basement | Resistant, dark-to-neutral fractured bedrock with scattered blocky ejecta | Baseline for texture, abrasion, and unaltered-versus-altered comparison |
-| 2 | AF-B1 · basin-margin bench | Laterally persistent, finer-grained bench material accumulated against the shallow depression | Tests whether fine sediment records transport and aqueous alteration |
-| 3 | AF-C2 · paleochannel fill | Discontinuous low-relief channel and bar-like surfaces crossing AF-H0/AF-B1 | Tests flow direction, sorting, rounding, and contact relationships |
-| 4 | AF-L3 · light-toned layered exposure | Eroded, thin-bedded exposure on the northwestern bench | Highest-priority context target for hydration and stratigraphic observations |
-| 5 | AF-E4 · young eolian mantle | Patchy wind-redistributed dust and sand draped over older units | Operational nuisance and a control on how much primary material is exposed |
+| Sequence | Scenario unit                        | Working interpretation                                                                        | Why RH-01 cares                                                              |
+| -------- | ------------------------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| 1        | AF-H0 · cratered highland basement   | Resistant, dark-to-neutral fractured bedrock with scattered blocky ejecta                     | Baseline for texture, abrasion, and unaltered-versus-altered comparison      |
+| 2        | AF-B1 · basin-margin bench           | Laterally persistent, finer-grained bench material accumulated against the shallow depression | Tests whether fine sediment records transport and aqueous alteration         |
+| 3        | AF-C2 · paleochannel fill            | Discontinuous low-relief channel and bar-like surfaces crossing AF-H0/AF-B1                   | Tests flow direction, sorting, rounding, and contact relationships           |
+| 4        | AF-L3 · light-toned layered exposure | Eroded, thin-bedded exposure on the northwestern bench                                        | Highest-priority context target for hydration and stratigraphic observations |
+| 5        | AF-E4 · young eolian mantle          | Patchy wind-redistributed dust and sand draped over older units                               | Operational nuisance and a control on how much primary material is exposed   |
 
 The scenario history is: ancient basement formation and impact modification;
 later weathering and incision; deposition of basin-margin and channel material;
@@ -158,13 +158,13 @@ landing dispersions are outside this dossier.
 
 ### Terrain classes
 
-| Class | Scenario character | RH-01 operating rule |
-| --- | --- | --- |
-| H0 open highland | Firm-looking gravel and scattered blocks, 0–8° nominal slope | Preferred first-drive surface; inspect before committing |
-| B1 bench | Fine mantling over weak-looking ledges, 2–10° | Cross only on mapped bench lines; avoid unverified edges |
-| C2 channel floor | Low relief, loose sediment, local wheel-trap pockets | Enter only after imaging; use short, reversible approach |
-| L3 layered scarp | Benches and short scarps, 8–16° local slopes | Science stop from the toe or shoulder; no direct scarp ascent |
-| E4 mantle | Dust ripples and sand sheets, variable bearing strength | Use as a hazard overlay; do not infer bedrock from colour alone |
+| Class            | Scenario character                                           | RH-01 operating rule                                            |
+| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| H0 open highland | Firm-looking gravel and scattered blocks, 0–8° nominal slope | Preferred first-drive surface; inspect before committing        |
+| B1 bench         | Fine mantling over weak-looking ledges, 2–10°                | Cross only on mapped bench lines; avoid unverified edges        |
+| C2 channel floor | Low relief, loose sediment, local wheel-trap pockets         | Enter only after imaging; use short, reversible approach        |
+| L3 layered scarp | Benches and short scarps, 8–16° local slopes                 | Science stop from the toe or shoulder; no direct scarp ascent   |
+| E4 mantle        | Dust ripples and sand sheets, variable bearing strength      | Use as a hazard overlay; do not infer bedrock from colour alone |
 
 Nominal rover driving stays at or below 12° sustained slope, with a 15°
 scenario stop threshold. A wheel-slip or tilt trend, a continuous loose mantle,
@@ -184,18 +184,18 @@ layered scarp face; observations are made from stable shoulders and toes.
 5. **Dust and visibility:** local dust movement can erase tracks and reduce
    image contrast; preserve a return route before entering a low-contrast patch.
 
-The 75 m stand-off, 12° drive limit, and 15° stop threshold are internal
-scenario controls. They are not RH-01 flight or mobility specifications.
+The 75 m stand-off, 12° drive limit, and 15° stop threshold are scenario
+controls. They are not RH-01 flight or mobility specifications.
 
 ## Science zones and traverse logic
 
-| ID | Scenario zone | Location / approach | Science objective | Priority |
-| --- | --- | --- | --- | --- |
-| P0 | Inner touchdown zone | Western half of ellipse | Health check, horizon panorama, wheel-soil baseline | Mandatory |
-| S1 | Paleochannel Bench | 2.6 km ENE of P0; approach along H0 shoulder | Channel geometry, sorting, clast shape, alteration at contacts | 1 |
-| S2 | Layered Exposure | 3.8 km NNW of P0; stop at southern shoulder | Bedding, colour/texture changes, hydrated-mineral candidate sampling | 2 |
-| S3 | Crater-fill Contact | 2.9 km SSE of P0; approach on western rim | Compare fine fill with H0 basement and test oxidation/alteration gradient | 3 |
-| S4 | Highlands Control | 1.4 km W of P0 | Fresh-looking control surface for regional comparison | 1A |
+| ID | Scenario zone        | Location / approach                          | Science objective                                                         | Priority  |
+| -- | -------------------- | -------------------------------------------- | ------------------------------------------------------------------------- | --------- |
+| P0 | Inner touchdown zone | Western half of ellipse                      | Health check, horizon panorama, wheel-soil baseline                       | Mandatory |
+| S1 | Paleochannel Bench   | 2.6 km ENE of P0; approach along H0 shoulder | Channel geometry, sorting, clast shape, alteration at contacts            | 1         |
+| S2 | Layered Exposure     | 3.8 km NNW of P0; stop at southern shoulder  | Bedding, colour/texture changes, hydrated-mineral candidate sampling      | 2         |
+| S3 | Crater-fill Contact  | 2.9 km SSE of P0; approach on western rim    | Compare fine fill with H0 basement and test oxidation/alteration gradient | 3         |
+| S4 | Highlands Control    | 1.4 km W of P0                               | Fresh-looking control surface for regional comparison                     | 1A        |
 
 Baseline sequence is **P0 → S4 → S1 → S2**, with **S3** added only if the
 return route remains demonstrably safe. The first science loop is approximately
@@ -226,25 +226,26 @@ from this regional dossier.
 
 ## Map package
 
-The canonical plates are original vector planning graphics. Each file
-contains an embedded title and description, scale note, north arrow, legend,
-labels, and provenance note. They are intentionally schematic and must not be
-presented as orbital imagery.
+The canonical package contains three generated PNG planning images. Each image
+contains a title, scale note, north arrow, legend, labels, and scenario
+provenance. They are generated visualizations and must not be presented as
+orbital imagery.
 
-| Plate | File | Purpose |
-| --- | --- | --- |
-| AF-01 | [Mars locator map](maps/asteria-field-01-mars-locator.svg) | Places the fictional field inside the real parent feature at planet scale |
-| AF-02 | [Regional geology/topography map](maps/asteria-field-02-regional-context.svg) | Keeps the 12.5–24°S / 327–338°E scenario envelope and working units coherent |
-| AF-03 | [Local landing-ellipse/operations map](maps/asteria-field-03-local-operations.svg) | Defines P0, science zones, hazards, traverses, scale, and communications shoulder |
+| Plate | File                                                                            | Purpose                                                                                       |
+| ----- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| AF-01 | [Mars locator image](maps/asteria-field-01-mars-locator.png)                    | Whole-planet view with an arrow targeting the fictional field inside Margaritifer Terra       |
+| AF-02 | [Regional satellite view](maps/asteria-field-02-regional-context.png)           | Shows the 12.5–24°S / 327–338°E scenario envelope and working terrain units                   |
+| AF-03 | [Local landing and operations view](maps/asteria-field-03-local-operations.png) | Shows the landing ellipse, P0, science zones, hazards, traverses, and communications shoulder |
 
 ### Map provenance
 
-The visible geometry, terrain fills, contours, labels, landing ellipse, science
-zones, hazards, and routes were authored for Red Horizon scenario planning on
-2026-09-16. No external raster or vector base layer is embedded. Real-world
-context is limited to the cited parent geography and the regional processes
-described above; local geometry is fictional. The plates are canonical only for
-internal continuity after human approval.
+The visible terrain imagery, geometry, labels, landing ellipse, science zones,
+hazards, and routes were generated for Red Horizon scenario planning on
+2026-09-16. The PNGs do not reproduce NASA, ESA, USGS, HiRISE, CTX, MOLA, or
+other orbital imagery. Real-world context is limited to the cited parent
+geography and the regional processes described above; local geometry is
+fictional. The images are canonical for scenario continuity after human
+approval.
 
 ## Canon and release boundary
 
@@ -259,13 +260,13 @@ internal continuity after human approval.
 
 ## Sources
 
-1. Irwin, R. P., & Grant, J. A. (2013), *Geologic map of MTM -15027,
-   -20027, -25027, and -25032 quadrangles, Margaritifer Terra region of Mars*,
+1. Irwin, R. P., & Grant, J. A. (2013), _Geologic map of MTM -15027,
+   -20027, -25027, and -25032 quadrangles, Margaritifer Terra region of Mars_,
    USGS SIM 3209. [USGS map record](https://www.usgs.gov/maps/geologic-map-mtm-15027-20027-25027-and-25032-quadrangles-margaritifer-terra-region-mars)
-2. Wilson, S. A., Grant, J. A., & Williams, K. K. (2022), *Geologic map of
+2. Wilson, S. A., Grant, J. A., & Williams, K. K. (2022), _Geologic map of
    MTM −10022 and −15022 quadrangles, Morava Valles and Margaritifer basin,
-   Mars*, USGS SIM 3489. [USGS map record](https://www.usgs.gov/maps/geologic-map-mtm-10022-and-15022-quadrangles-morava-valles-and-margaritifer-basin-mars)
-3. NASA/JPL-Caltech/JHU-APL (2010), *Regions of Mars with Clays and Hydrated
-   Minerals Identified from Orbit*. [NASA Science resource](https://science.nasa.gov/resource/regions-of-mars-with-clays-and-hydrated-minerals-identified-from-orbit/)
-4. USGS Gazetteer of Planetary Nomenclature, *Margaritifer Terra*. [Feature
+   Mars_, USGS SIM 3489. [USGS map record](https://www.usgs.gov/maps/geologic-map-mtm-10022-and-15022-quadrangles-morava-valles-and-margaritifer-basin-mars)
+3. NASA/JPL-Caltech/JHU-APL (2010), _Regions of Mars with Clays and Hydrated
+   Minerals Identified from Orbit_. [NASA Science resource](https://science.nasa.gov/resource/regions-of-mars-with-clays-and-hydrated-minerals-identified-from-orbit/)
+4. USGS Gazetteer of Planetary Nomenclature, _Margaritifer Terra_. [Feature
    record](https://planetarynames.wr.usgs.gov/Feature/3701)

@@ -17,19 +17,19 @@ guidance.
 
 ## Skill catalog
 
-| Skill | Role contract(s) | Purpose |
-| --- | --- | --- |
-| `article-drafting` | [Writer](roles/writer.md), brand voice | Draft one source-aware article |
-| `beads` | Project-wide workflow | Manage durable task state and handoffs |
-| `brand-voice` | Cross-cutting | Keep public prose grounded and candid |
-| `copy-editing` | [Copy editor](roles/copy-editor.md), brand voice | Polish copy without changing canon |
-| `create-article-workflow` | [Story coordinator](roles/story-coordinator.md) | Create the serial article task graph |
-| `editorial-review` | [Copy editor](roles/copy-editor.md), [Continuity redactor](roles/continuity-redactor.md) | Run the final editorial gate |
-| `image-generation` | [Visual creator](roles/visual-creator.md) | Prepare reviewable visual candidates and metadata |
-| `project-documentation` | Owning role contract | Revise project guidance and runbooks |
-| `research-and-fact-check` | [Story coordinator](roles/story-coordinator.md) | Build a claim-level source pack |
-| `seo-content` | [SEO content specialist](roles/seo-content.md) | Review honest search intent and metadata |
-| `site-deployment` | [Site engineer](roles/site-engineer.md), [Deployment engineer](roles/deployment-engineer.md) | Validate locally and prepare authorised release inputs |
+| Skill                     | Role contract(s)                                                                             | Purpose                                                |
+| ------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `article-drafting`        | [Writer](roles/writer.md), brand voice                                                       | Draft one source-aware article                         |
+| `beads`                   | Project-wide workflow                                                                        | Manage durable task state and handoffs                 |
+| `brand-voice`             | Cross-cutting                                                                                | Keep public prose grounded and candid                  |
+| `copy-editing`            | [Copy editor](roles/copy-editor.md), brand voice                                             | Polish copy without changing canon                     |
+| `create-article-workflow` | [Story coordinator](roles/story-coordinator.md)                                              | Create the serial article task graph                   |
+| `editorial-review`        | [Copy editor](roles/copy-editor.md), [Continuity redactor](roles/continuity-redactor.md)     | Run the final editorial gate                           |
+| `image-generation`        | [Visual creator](roles/visual-creator.md)                                                    | Prepare reviewable visual candidates and metadata      |
+| `project-documentation`   | Owning role contract                                                                         | Revise project guidance and runbooks                   |
+| `research-and-fact-check` | [Story coordinator](roles/story-coordinator.md)                                              | Build a claim-level source pack                        |
+| `seo-content`             | [SEO content specialist](roles/seo-content.md)                                               | Review honest search intent and metadata               |
+| `site-deployment`         | [Site engineer](roles/site-engineer.md), [Deployment engineer](roles/deployment-engineer.md) | Validate locally and prepare authorised release inputs |
 
 If a new skill introduces a new responsibility or approval boundary, add or
 update the corresponding role contract in `.agents/roles/` first, then add the

@@ -11,19 +11,19 @@ the facts allowed by its current timeline step, even when later facts are alread
 
 ## Mission identity
 
-| Field                  | Locked scenario value                                                            |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| Programme              | Red Horizon                                                                      |
-| First mission          | Red Horizon One                                                                  |
-| Surface vehicle        | RH-01 Pathfinder                                                                 |
-| Mission type           | Uncrewed international Mars lander-and-rover mission                             |
-| Primary science        | Mineralogy and reconstruction of ancient habitable conditions                    |
-| Landing target         | Asteria Field, a fictional operational designation in eastern Margaritifer Terra |
-| Launcher               | Ariane 64 from Europe's Spaceport near Kourou, French Guiana                     |
-| Launch                 | 17 February 2031                                                                 |
-| Mars landing           | 16 September 2031                                                                |
-| Supported surface life | Two Mars years, ending 21 June 2035                                              |
-| Lifecycle budget       | €2.10 billion in constant 2026 euros                                             |
+| Field                  | Locked scenario value                                                    |
+| ---------------------- | ------------------------------------------------------------------------ |
+| Programme              | Red Horizon                                                              |
+| First mission          | Red Horizon One                                                          |
+| Surface vehicle        | RH-01 Pathfinder                                                         |
+| Mission type           | Uncrewed international Mars lander-and-rover mission                     |
+| Primary science        | Mineralogy and reconstruction of ancient habitable conditions            |
+| Landing target         | Asteria Field, a fictional operational designation in Margaritifer Terra |
+| Launcher               | Ariane 64 from Europe's Spaceport near Kourou, French Guiana             |
+| Launch                 | 17 February 2031                                                         |
+| Mars landing           | 16 September 2031                                                        |
+| Supported surface life | Two Mars years, ending 21 June 2035                                      |
+| Lifecycle budget       | €2.10 billion in constant 2026 euros                                     |
 
 The mission does not search for living organisms, claim evidence of life, return samples to Earth, carry people, or
 prepare a crewed landing. Its habitability work asks whether the site once possessed water, chemistry, energy sources,
@@ -97,17 +97,22 @@ evaporitic conditions. The mission may discuss preservation potential but does n
 ## Asteria Field
 
 **Asteria Field is fictional.** It is Red Horizon's operational name for a landing and traverse area centred at
-approximately **5.60°S, 353.50°E** in eastern Margaritifer Terra. It is not an official International Astronomical Union
-place name.
+**17.80°S, 332.20°E** in Margaritifer Terra. It is not an official International Astronomical Union place name.
 
-The location is grounded in real observations of eastern Margaritifer Terra: ancient channelled terrain, a shallow basin,
-and nearby exposures interpreted as phyllosilicates and chlorides. These materials make the area useful for studying
-water-rock interaction and changing aqueous conditions. The locked mission landing ellipse is **15 km by 10 km** on
-smoother plains west of the principal layered outcrops. The science zone begins beyond the ellipse and includes basaltic
-reference terrain, clay-bearing layers, chloride-bearing layers, and channel deposits.
+The location is grounded in the real Margaritifer Terra context of ancient cratered highlands, basin-margin material,
+paleochannel benches, and later eolian modification. These regional characteristics make the area useful for studying
+water-rock interaction and changing aqueous conditions without claiming a confirmed local mineral detection. The
+canonical mission landing ellipse is **6.4 km by 3.2 km**, oriented 078°/258°, with a **2.4 km by 1.2 km** inner
+touchdown zone in its western half. The science plan uses the P0 touchdown zone and S1-S4 points defined in the Asteria
+Field dossier and map package.
+
+**Reconciliation — 16 September 2026:** the approved Asteria Field dossier and generated PNG map package supersede the
+earlier baseline placeholder of 5.60°S, 353.50°E and the 15 km by 10 km ellipse. The coordinates, ellipse, local units,
+science zones, hazards, routes, and communications rules in `docs/area/` are now the canonical local
+mission definition.
 
 The dedicated Asteria Field task owns the detailed geology, fictional local feature names, traverse zones, hazards,
-landing-ellipse refinement, and canonical maps. It may refine local coordinates inside the locked eastern Margaritifer
+landing-ellipse refinement, and canonical maps. It may refine local coordinates inside the approved Margaritifer Terra
 area but may not move the mission to another Martian region without an eight-vote Council decision.
 
 ## Flight system
@@ -270,10 +275,10 @@ economic conditions. Currency, year, scope, and accounting differences prevent d
 - The coalition and budget may first be introduced only when the appropriate partner-commitment material is approved.
 - Payload details wait for step 003; RH-01 imagery waits for step 004; Ariane 64 waits for step 005; exact launch and
   landing dates wait for their authorised release steps.
-- Asteria Field remains private until the landing-preparation sequence allows it. Its maps are private planning assets.
+- Asteria Field is not published until the landing-preparation sequence allows it. Its maps are scenario planning assets.
 - Generated visuals are labelled as fictional or illustrative and are never presented as documentary mission imagery.
 - Real institutions, including FEI STU and Arianespace, require explicit review before any public mention. Their appearance
-  in this internal scenario does not imply real participation.
+  in this scenario does not imply real participation.
 
 ## Real-world grounding sources
 

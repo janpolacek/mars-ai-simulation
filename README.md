@@ -34,7 +34,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Project-local task procedures                | [Skill catalog](.agents/README.md)                      |
 | Beads-driven article preparation             | [Content workflow harness](docs/CONTENT_WORKFLOW.md)    |
 | Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)             |
-| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicles/red-horizon-01.md)     |
+| Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/red-horizon-01.md)      |
 
 ## Repository map
 
