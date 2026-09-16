@@ -6,8 +6,8 @@
 
 ## References
 
-| Canonical | Front-left | Side | Rear-right |
-| --- | --- | --- | --- |
+| Canonical                             | Front-left                              | Side                        | Rear-right                              |
+| ------------------------------------- | --------------------------------------- | --------------------------- | --------------------------------------- |
 | [canonical](references/canonical.png) | [front-left](references/front-left.png) | [side](references/side.png) | [rear-right](references/rear-right.png) |
 
 ## Scenes

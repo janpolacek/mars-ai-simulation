@@ -1,7 +1,7 @@
 {
-  "database": "dolt",
-  "backend": "dolt",
-  "dolt_mode": "embedded",
-  "dolt_database": "mars_ai_simulator",
-  "project_id": "bf97b8ee-8307-4169-9789-d89a6170bff2"
+    "database": "dolt",
+    "backend": "dolt",
+    "dolt_mode": "embedded",
+    "dolt_database": "mars_ai_simulator",
+    "project_id": "bf97b8ee-8307-4169-9789-d89a6170bff2"
 }

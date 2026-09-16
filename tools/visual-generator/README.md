@@ -34,10 +34,10 @@ Those files are ignored by Git. Review and select generated images yourself befo
 Each dossier retains the exact identity and scene instructions sent to the
 workflow, followed by links to every generated reference and scene image.
 
-| Vehicle | Dossier | Generated images |
-| --- | --- | --- |
-| ATLAS-01 | [Vehicle dossier](stories/vehicle-01-atlas/README.md) | [References](stories/vehicle-01-atlas/references/) · [Scenes](stories/vehicle-01-atlas/scenes/) |
-| TAIGA-02 | [Vehicle dossier](stories/vehicle-02-taiga/README.md) | [References](stories/vehicle-02-taiga/references/) · [Scenes](stories/vehicle-02-taiga/scenes/) |
+| Vehicle     | Dossier                                                  | Generated images                                                                                      |
+| ----------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| ATLAS-01    | [Vehicle dossier](stories/vehicle-01-atlas/README.md)    | [References](stories/vehicle-01-atlas/references/) · [Scenes](stories/vehicle-01-atlas/scenes/)       |
+| TAIGA-02    | [Vehicle dossier](stories/vehicle-02-taiga/README.md)    | [References](stories/vehicle-02-taiga/references/) · [Scenes](stories/vehicle-02-taiga/scenes/)       |
 | VANGUARD-03 | [Vehicle dossier](stories/vehicle-03-vanguard/README.md) | [References](stories/vehicle-03-vanguard/references/) · [Scenes](stories/vehicle-03-vanguard/scenes/) |
 
 ## Requirements
@@ -92,22 +92,22 @@ Add an object to `vehicles` in `story_set.json`; do not copy or create a workflo
 
 ```json
 {
-  "id": "vehicle-04-orbiter",
-  "name": "ORBITER-04",
-  "mission": "One sentence of mission context.",
-  "identity": "Short concrete description of body, locomotion, instruments, materials and limits.",
-  "assets": [],
-  "reference_pose": "White seamless studio background, front-left quarter view.",
-  "reference_angles": [
-    ["front-left", "front-left quarter view high-angle shot medium shot"],
-    ["side", "left side view eye-level shot medium shot"],
-    ["rear-right", "back-right quarter view eye-level shot medium shot"]
-  ],
-  "scenes": [
-    {"id": "01-landing", "description": "One visible landing moment."},
-    {"id": "02-investigation", "description": "One visible investigation moment."},
-    {"id": "03-years-later", "description": "One visible aged-but-maintained moment."}
-  ]
+    "id": "vehicle-04-orbiter",
+    "name": "ORBITER-04",
+    "mission": "One sentence of mission context.",
+    "identity": "Short concrete description of body, locomotion, instruments, materials and limits.",
+    "assets": [],
+    "reference_pose": "White seamless studio background, front-left quarter view.",
+    "reference_angles": [
+        ["front-left", "front-left quarter view high-angle shot medium shot"],
+        ["side", "left side view eye-level shot medium shot"],
+        ["rear-right", "back-right quarter view eye-level shot medium shot"]
+    ],
+    "scenes": [
+        { "id": "01-landing", "description": "One visible landing moment." },
+        { "id": "02-investigation", "description": "One visible investigation moment." },
+        { "id": "03-years-later", "description": "One visible aged-but-maintained moment." }
+    ]
 }
 ```
 
@@ -142,12 +142,12 @@ Available stages are `canonical`, `references`, `angles`, `scenes` and `all`. Us
 
 During generation, `stories/<vehicle>/runs/` may contain an ignored audit trail:
 
-| File | Meaning |
-| --- | --- |
-| `*.api.json` | Exact ComfyUI graph submitted for one image. |
-| `*.inputs.json` | Resolved prompt text and source-image hashes. |
-| `*.job.json` | Submission ID and graph hash, written immediately after queueing. |
-| `*.history.json` | Final ComfyUI execution record. |
+| File             | Meaning                                                           |
+| ---------------- | ----------------------------------------------------------------- |
+| `*.api.json`     | Exact ComfyUI graph submitted for one image.                      |
+| `*.inputs.json`  | Resolved prompt text and source-image hashes.                     |
+| `*.job.json`     | Submission ID and graph hash, written immediately after queueing. |
+| `*.history.json` | Final ComfyUI execution record.                                   |
 
 They are useful for reproducing or recovering a render but are not inputs for adding a new vehicle. Delete them together with a finished local batch when they are no longer needed.
 

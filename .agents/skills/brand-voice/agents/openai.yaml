@@ -1,4 +1,4 @@
 interface:
-  display_name: "Red Horizon Voice"
-  short_description: "Write in the grounded live-mission voice"
-  default_prompt: "Review this copy for the Red Horizon brand voice and flag factual concerns."
+    display_name: "Red Horizon Voice"
+    short_description: "Write in the grounded live-mission voice"
+    default_prompt: "Review this copy for the Red Horizon brand voice and flag factual concerns."

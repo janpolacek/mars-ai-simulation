@@ -39,13 +39,13 @@ manufacturing drama.
 
 ## Canon, drafts, and publication
 
-| State | Meaning | May appear on public site? |
-| --- | --- | --- |
-| `scenario` | Private possible/approved future event | No |
-| `proposal` | Agent work awaiting review | No |
-| `draft` | Edited candidate, not yet approved | No |
-| `approved` | Human-selected canon and asset | Not until scheduled |
-| `published` | Released public content | Yes |
+| State        | Meaning                                    | May appear on public site?       |
+| ------------ | ------------------------------------------ | -------------------------------- |
+| `scenario`   | Private possible/approved future event     | No                               |
+| `proposal`   | Agent work awaiting review                 | No                               |
+| `draft`      | Edited candidate, not yet approved         | No                               |
+| `approved`   | Human-selected canon and asset             | Not until scheduled              |
+| `published`  | Released public content                    | Yes                              |
 | `superseded` | Replaced by a correction or later decision | Keep only with an editorial note |
 
 The private timeline is the authoritative order of events. A public page is

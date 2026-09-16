@@ -15,11 +15,11 @@ contains a low segmented relief line, with a broad Olympus Mons-inspired rise
 slightly left of centre. A small Sun emerges behind the planet’s upper-left
 rim; Earth and the Moon appear as a small paired cue at upper right.
 
-**Public caption:** *Red Horizon — Mars at sunrise.*
+**Public caption:** _Red Horizon — Mars at sunrise._
 
-**Alt text:** *A rust-red Mars disc on black, crossed by low highlighted hills.
+**Alt text:** _A rust-red Mars disc on black, crossed by low highlighted hills.
 A small Sun rises behind its upper-left edge, while blue Earth and a smaller
-Moon point appear at upper right.*
+Moon point appear at upper right._
 
 **Private provenance:** selected GPT Image candidate, retained locally as
 `tools/visual-generator/assets/red-horizon/logo/logo-gpt-image-mars-horizon-sunrise-large-earth-01.png`.
@@ -50,17 +50,17 @@ soft raster variation around its sunrise glow, so use these as the canonical
 working palette for future layouts and vector tracing rather than treating the
 raster as a strictly flat-colour file.
 
-| Token | Hex | Use |
-| --- | --- | --- |
-| Void black | `#010000` | Primary background and negative space |
-| Mars oxide | `#A0301D` | Main lower Mars mass |
-| Mars ember | `#CD553A` | Sunlit upper region of Mars |
-| Relief shadow | `#9F321F` | Interior hill planes and restrained depth |
-| Rim light | `#FCC78B` | Thin relief edge and sunrise-lit rim |
-| Sun core | `#FCA042` | Exposed solar disc |
-| Sunrise halo | `#895215` | Soft halo and nearby reflected warmth |
-| Earth blue | `#7BA7FA` | Distant Earth point |
-| Moon blue-gray | `#94A3B0` | Smaller, dimmer Moon point |
+| Token          | Hex       | Use                                       |
+| -------------- | --------- | ----------------------------------------- |
+| Void black     | `#010000` | Primary background and negative space     |
+| Mars oxide     | `#A0301D` | Main lower Mars mass                      |
+| Mars ember     | `#CD553A` | Sunlit upper region of Mars               |
+| Relief shadow  | `#9F321F` | Interior hill planes and restrained depth |
+| Rim light      | `#FCC78B` | Thin relief edge and sunrise-lit rim      |
+| Sun core       | `#FCA042` | Exposed solar disc                        |
+| Sunrise halo   | `#895215` | Soft halo and nearby reflected warmth     |
+| Earth blue     | `#7BA7FA` | Distant Earth point                       |
+| Moon blue-gray | `#94A3B0` | Smaller, dimmer Moon point                |
 
 Keep Mars as the dominant warm mass. The Sun and rim light are accents only;
 Earth blue should be the sole cool contrast. Do not introduce saturated greens,

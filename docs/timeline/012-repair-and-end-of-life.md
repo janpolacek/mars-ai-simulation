@@ -11,7 +11,7 @@ The mission closes transparently with its scientific and operational record inta
 ## Constraints and decisions
 
 - Select the mitigation, remaining capability, final failure mode, and final
-message only after reviewing every preceding public fact.
+  message only after reviewing every preceding public fact.
 - End of life is dignified and technically coherent: no melodramatic destruction,
   unexplained rescue, or sudden miraculous breakthrough.
 - Preserve a distinction between a final contact, an official end declaration,

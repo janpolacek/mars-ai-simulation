@@ -29,25 +29,25 @@ deployment output self-contained. Generated files are ignored by Git.
 
 ## Commands
 
-| Command | Result |
-| --- | --- |
-| `npm run dev` | Sync shared assets and start Astro locally. |
-| `npm run build` | Sync shared assets and build static output in `dist/`. |
-| `npm run preview` | Serve the last production build locally. |
-| `npm run astro -- check` | Run Astro's project checks once configured. |
+| Command                  | Result                                                 |
+| ------------------------ | ------------------------------------------------------ |
+| `npm run dev`            | Sync shared assets and start Astro locally.            |
+| `npm run build`          | Sync shared assets and build static output in `dist/`. |
+| `npm run preview`        | Serve the last production build locally.               |
+| `npm run astro -- check` | Run Astro's project checks once configured.            |
 
 ## Cloudflare Workers static assets
 
 The production target is a Cloudflare Worker that serves Astro's static build
 output. The connected Cloudflare Workers Build uses:
 
-| Setting | Value |
-| --- | --- |
-| Production branch | `main` |
-| Root directory | `website` |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Node.js version | `26.8.2` |
+| Setting                | Value           |
+| ---------------------- | --------------- |
+| Production branch      | `main`          |
+| Root directory         | `website`       |
+| Build command          | `npm run build` |
+| Build output directory | `dist`          |
+| Node.js version        | `26.8.2`        |
 
 `wrangler.jsonc` points Workers Static Assets at `dist/`; no Worker application
 code is needed. Do not commit provider tokens, project IDs, custom-domain

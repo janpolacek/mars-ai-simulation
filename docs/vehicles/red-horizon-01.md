@@ -1,53 +1,164 @@
 # RH-01 Pathfinder
 
-## Status and role
-
-**Status:** proposed private canon. Human approval is required before a public
-vehicle page or canonical visual is published.
-
 RH-01 Pathfinder is Red Horizon's first surface vehicle: a compact robotic Mars
 surveyor that maps local terrain, investigates rocks in context, and establishes
-safe routes for later science targets. It is an instrument, not a character: its
-design should show the constraints of dust, terrain, power, communication delay,
+safe routes for later science targets. It is an instrument, not a character. Its
+design reflects the constraints of dust, terrain, power, communication delay,
 and remote operations.
 
-## Canonical physical baseline
+## Visual identity and silhouette
 
-| System | Approved direction | Must not appear |
-| --- | --- | --- |
-| Body | Low, roughly two-metre-class warm-white equipment body with muted red identification panels and a dark instrument deck | Cockpit, passenger cabin, windows, weapons, decorative fins |
-| Mobility | Six broad metal-mesh wheels on visible articulated suspension | Tracks, legs, hover hardware, mismatched wheel count |
-| Vision | Short central mast with a compact stereo-camera pair | Tall human-like head, multiple arbitrary antennae, floating sensors |
-| Contact science | One front-centre two-joint arm ending in a small contact tool; it folds into a travel cradle | Extra arms, disconnected joints, oversized drilling rig |
-| Materials | Matte ceramic coating, brushed metal arm, protected dark pivots, restrained seams and fasteners | Toy gloss, loose cables, exposed fantasy energy parts |
+### Proportions and silhouette
 
-Every approved image must retain these features, natural occlusion, plausible
-suspension/ground contact, and consistent front/rear orientation. New instruments
-need an approved mounting location before they appear in copy or media.
+RH-01 Pathfinder is a compact, unmanned Mars survey rover built to move slowly
+and deliberately across uncertain ground. Its defining silhouette is a low
+rectangular equipment body, six open-mesh wheels, a short camera mast, and one
+small arm folded at the front. It is an instrument that has been made mobile,
+not a car, a miniature tank, a spaceplane, or a crew vehicle.
+
+The rover's proportions are roughly two metres in class. The body is low and
+broad rather than tall and narrow, with its equipment mass visually concentrated
+close to the chassis. Its corners are protected and modestly rounded, but the
+overall form remains rectilinear enough to show where the sealed body ends and
+the mobility hardware begins. The front is the science end and carries the
+stowed contact arm; the quieter rear is a plain service end. Front-to-rear
+orientation is consistent, with the arm fixed to the front-centre of the body.
+
+RH-01 looks useful before it looks beautiful. Its silhouette comes from clear
+attachment points, working clearance, and the need to protect equipment from
+dust. It has no heroic stance, aggressive nose, exaggerated wheel arches, or
+decorative geometry whose only purpose is visual spectacle.
+
+### Body and colour blocking
+
+The primary equipment housing is warm white with a matte ceramic-like finish.
+The white is not a glossy showroom white: it has fine surface variation, softly
+visible edges, and enough tonal separation from a neutral background to keep the
+body readable. A small number of muted red identification panels provide the Red
+Horizon connection without turning the rover into a painted mascot. The red is
+restrained, opaque, and integrated into the body panels rather than applied as
+racing stripes, warning graphics, or a large logo.
+
+The upper equipment deck is dark and flat. It provides a visual counterweight to
+the pale body and makes the mast mount easy to locate, but it is not a solar
+panel field, cockpit roof, or open platform. The deck is a sealed instrument
+surface with a few necessary mounting points. It carries no text, national flag,
+official agency insignia, or invented technical label.
+
+Body panels meet in narrow, controlled seams. Recessed fasteners and small
+service boundaries are visible where they explain how the machine is assembled
+and maintained, while remaining subordinate to the main form. The
+body has no windows, transparent covers, passenger hatch, cockpit, air intake,
+decorative fins, exposed fuel tanks, or loose external wiring. Any dark region
+must have a mechanical explanation such as a deck, pivot cover, hub, lens, or
+protected recess.
+
+### Six-wheel mobility system
+
+The lower structure is the defining engineering feature. RH-01 has **exactly
+six broad open-mesh wheels**: a front, middle, and rear wheel on the left side,
+and a corresponding front, middle, and rear wheel on the right. The wheel count
+is a fixed six-wheel arrangement. The mobility system has no seventh support
+wheel, hidden auxiliary roller, duplicate wheel, track assembly, or leg
+substituted for a wheel.
+
+Each wheel is a real load-bearing element with a clear circular hub, a broad
+mesh or perforated metal face, and a dark inner structure. The mesh resembles
+engineered wheel material rather than a bicycle spoke pattern, solid tire tread,
+or toy-like plastic lattice. The wheel diameter suits the compact body and the
+irregular gravel of the Martian surface.
+
+The wheels connect to the body through visible articulated suspension. Links,
+pivots, and hubs form continuous mechanical chains rather than isolated bars
+that disappear into the chassis. The suspension has a believable relationship
+between each wheel axle, the body, and the available movement envelope. It
+provides enough clearance for the wheels to travel over small stones without
+the body resting on the ground.
+
+The six-wheel arrangement remains readable from multiple angles. The front,
+middle, and rear positions are distinct on each side, with visible hubs, axles,
+and suspension relationships. Every wheel sits at a plausible working height
+with grounded contact.
+
+### Mast and vision system
+
+The mast is short, central, and restrained. It rises from a compact mount on the
+dark instrument deck and carries one horizontal stereo-camera housing. The
+housing contains a closely spaced pair of dark lenses, giving the rover a clear
+forward-looking vision system without making the mast resemble a head.
+
+The mast is not a tower; it is visibly shorter and more compact than the large
+mast assemblies associated with heavier exploration rovers. There is no second
+camera tower, arbitrary antenna cluster, dish, radar boom, or floating sensor.
+The mast's support, camera housing, and cable routing are integrated into the
+body, with wiring protected from the environment.
+
+### Front contact arm and travel cradle
+
+RH-01 carries one front-centre contact arm for close inspection of rocks and
+soil. It has exactly two connected joints and ends in one small contact tool.
+The arm is not an oversized excavator, crane, drill mast, weapon, or articulated
+decoration. Its scale matches the compact rover and its purpose as a local
+contact instrument.
+
+In the baseline travel configuration, the arm's two links nest
+inside a shallow travel cradle built into the front body. The cradle supports the
+links along their length, the small tool is secured within the protected outline,
+and the whole assembly stays below the visual height of the mast base. No link
+is raised vertically, stretched away from the rover, or left dangling toward the
+floor. The arm is one continuous two-joint mechanism from its front mount to its
+retained tool, with no disconnected rods or duplicated end effectors.
+
+The travel cradle is a practical restraint that protects the arm during driving.
+It is distinct from the science arm and contains no second instrument. The front
+face has a small protected recess around the mount and remains visually simple.
+
+### Rear, materials, and surface character
+
+The rear of RH-01 is intentionally uneventful. It is a plain sealed service
+panel with no second science arm, exhaust assembly, cargo rack, ladder, or
+ornamental engine detail. Its quiet geometry provides a stable orientation
+landmark when the rover is viewed from behind.
+
+Materials suggest a real field machine: matte ceramic-coated body panels,
+subdued brushed metal on the arm, dark protected pivots, durable wheel mesh, and
+small recessed fasteners. Reflections are soft and physically restrained. The
+baseline vehicle is clean and new, with machining marks and slight material
+variation but no accumulated Mars dust, impact damage, missing panels, burn
+marks, or dramatic wear.
+
+The baseline studio appearance places the full-size vehicle on a seamless
+neutral white floor with a white background, broad soft light, and a faint
+grounded shadow. The body is slightly darker than the background so the white
+panels retain their edges. The result is an engineering reference appearance,
+with no rocks, red soil, landing platform, astronaut, smoke, dust plume, captions,
+or graphic overlay.
+
+### Design character
+
+RH-01 is distinct through its low rectangular body, warm-white and muted-red
+colour blocking, short stereo mast, compact open-mesh wheels, and single front
+arm visibly nested into its travel cradle. The overall character is compact,
+instrument-first, and mechanically legible.
 
 ## Science and operations
 
-The rover's initial payload direction includes panorama/navigation imaging, local
-weather observations, mineral/rock context sensing, and a close-contact tool. It
-operates in short deliberate traverses: survey, select target, approach, inspect,
-record results, then choose the next safe route. Exact names, measurement limits,
-power source, communications architecture, and landing region remain open.
+The rover's payload includes panorama and navigation imaging, local weather
+observations, mineral and rock-context sensing, and a close-contact tool. It
+operates through short, deliberate traverses: surveying the terrain, selecting a
+target, approaching it, performing contact and context observations, recording
+the results, and choosing the next safe route. Its science role is observational
+and methodical; it gathers evidence before an interpretation is made.
 
-## Visual states
+## Operating appearance
 
-1. **Canonical reference:** clean studio-style views, arm folded, every system
-   visible enough to establish identity.
-2. **Early surface operations:** newly deployed, restrained dust, short tracks,
-   functioning mast and folded/active arm only when the event calls for it.
-3. **Mature operations:** naturally accumulated dust and small abrasion, but no
-   unannounced hardware damage or missing equipment.
-4. **Late mission:** wear follows approved timeline decisions; it remains a
-   maintained scientific machine, not an abandoned cinematic wreck.
-
-## Visual source workflow
-
-Use the `vehicle-01-atlas` pattern in `tools/visual-generator/` as a workflow
-reference only. Create a dedicated RH-01 story set, generate canonical reference
-views, and have a human select the authoritative package before scene generation.
-Record prompt/workflow provenance privately in that generator workspace. Copy only
-the selected stable exports, with captions and alt text, into this repository.
+1. **Baseline configuration:** clean body panels, folded contact arm, intact mast,
+   readable suspension, and all six wheels visible against a neutral background.
+2. **Early surface operations:** newly deployed, with restrained dust and short
+   wheel tracks while the original silhouette and equipment placement remain
+   unchanged.
+3. **Mature operations:** naturally accumulated dust, faded paint, rubbed wheel
+   surfaces, and small abrasion, without missing equipment or catastrophic
+   damage.
+4. **Late mission:** wear reflects the rover's operational history while the
+   maintained scientific machine remains recognizable and functional.

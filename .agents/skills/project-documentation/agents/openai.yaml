@@ -1,4 +1,4 @@
 interface:
-  display_name: "Red Horizon Documentation"
-  short_description: "Maintain project documentation and runbooks"
-  default_prompt: "Create or revise project documentation while preserving canon and privacy boundaries."
+    display_name: "Red Horizon Documentation"
+    short_description: "Maintain project documentation and runbooks"
+    default_prompt: "Create or revise project documentation while preserving canon and privacy boundaries."
