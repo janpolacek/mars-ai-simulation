@@ -6,8 +6,8 @@ description: Build a claim-level, canonical source pack for one Red Horizon arti
 # Research and fact check
 
 Required inputs: the claimed Beads issue, `content/briefs/<slug>.md`, relevant
-approved canon, and permitted factual sources. Read `AGENTS.md` and
-`docs/INSTRUCTIONS.md` first.
+approved canon, and permitted factual sources. Read `AGENTS.md`,
+`docs/INSTRUCTIONS.md`, and `.agents/roles/story-coordinator.md` first.
 
 Allowed tools: web research, repository inspection, and `bd`. Prefer official
 documentation, original research, primary institutions, and direct statements.

@@ -1,7 +1,7 @@
 # Project instructions
 
 These rules apply to every human and agent. Role-specific contracts live in the
-[agent playbook](agents/README.md); a role follows both documents.
+[agent playbook](../.agents/roles/README.md); a role follows both documents.
 
 ## Mandatory working sequence
 

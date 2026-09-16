@@ -8,7 +8,7 @@ description: Produce or select reviewable Red Horizon article visuals with compl
 Required inputs: the claimed Beads issue, completed article draft,
 `content/briefs/<slug>.md`, vehicle/canon references where applicable, and
 `content/assets/<slug>/assets.md`. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
-and `docs/agents/visual-creator.md` first.
+and `.agents/roles/visual-creator.md` first.
 
 Allowed tools: local image-generation workspace, approved source libraries,
 repository asset staging, and `bd`. Do not change factual prose, assert media is

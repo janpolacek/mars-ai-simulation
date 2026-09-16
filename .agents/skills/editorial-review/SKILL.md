@@ -7,8 +7,9 @@ description: Apply the final editorial and factual-quality gate to a prepared Re
 
 Required inputs: the claimed Beads issue, article draft, source pack, asset
 manifest and candidate assets, brief, and applicable public canon. Read
-`AGENTS.md`, `docs/INSTRUCTIONS.md`, `docs/agents/copy-editor.md`, and
-`.agents/skills/copy-editing/SKILL.md` first.
+`AGENTS.md`, `docs/INSTRUCTIONS.md`, `.agents/roles/copy-editor.md`,
+`.agents/roles/continuity-redactor.md`, and `.agents/skills/copy-editing/SKILL.md`
+first.
 
 Allowed tools: repository inspection/editing limited to the review record,
 link/check commands, and `bd`. Do not deploy, approve public canon for the

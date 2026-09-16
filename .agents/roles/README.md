@@ -2,10 +2,10 @@
 
 This is the canonical role-policy layer for the project. Each contract below
 defines ownership, approval boundaries, and handoff expectations. The
-project-local [skill catalog](../../.agents/README.md) adds task-specific
+project-local [skill catalog](../README.md) adds task-specific
 procedures and acceptance checks; it does not replace or broaden these
 contracts. When guidance appears to conflict, follow the source-of-truth order
-in [`docs/INSTRUCTIONS.md`](../INSTRUCTIONS.md) and record the conflict for
+in [`docs/INSTRUCTIONS.md`](../../docs/INSTRUCTIONS.md) and record the conflict for
 human resolution.
 
 ## Role map
@@ -56,7 +56,7 @@ metadata only and is not an additional policy source.
 
 ## Article harness mapping
 
-The [content workflow harness](../CONTENT_WORKFLOW.md) turns a single article
+The [content workflow harness](../../docs/CONTENT_WORKFLOW.md) turns a single article
 brief into a serial Beads graph. Its skills extend the role contracts above;
 they do not replace human approval or the continuity redactor's review.
 

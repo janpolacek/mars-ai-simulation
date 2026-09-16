@@ -1,10 +1,10 @@
 # Project-local skills
 
-This directory contains executable task guidance for agents working in the
-Mars AI Simulation repository. Use it together with the canonical [agent
-playbook](../docs/agents/README.md):
+This directory contains the canonical agent guidance for the Mars AI Simulation
+repository. Role contracts live in [roles/](roles/); executable task guidance
+lives in [skills/](skills/). Start with the [agent playbook](roles/README.md):
 
-1. Read `docs/INSTRUCTIONS.md` and the relevant role contract in `docs/agents/`.
+1. Read `docs/INSTRUCTIONS.md` and the relevant role contract in `.agents/roles/`.
 2. Read the matching skill below for the task procedure and acceptance checks.
 3. Follow the narrower boundary if a skill and role contract differ, and record
    any genuine conflict for human resolution.
@@ -19,18 +19,18 @@ guidance.
 
 | Skill | Role contract(s) | Purpose |
 | --- | --- | --- |
-| `article-drafting` | [Writer](../docs/agents/writer.md), brand voice | Draft one source-aware article |
+| `article-drafting` | [Writer](roles/writer.md), brand voice | Draft one source-aware article |
 | `beads` | Project-wide workflow | Manage durable task state and handoffs |
 | `brand-voice` | Cross-cutting | Keep public prose grounded and candid |
-| `copy-editing` | [Copy editor](../docs/agents/copy-editor.md), brand voice | Polish copy without changing canon |
-| `create-article-workflow` | [Story coordinator](../docs/agents/story-coordinator.md) | Create the serial article task graph |
-| `editorial-review` | [Copy editor](../docs/agents/copy-editor.md), [Continuity redactor](../docs/agents/continuity-redactor.md) | Run the final editorial gate |
-| `image-generation` | [Visual creator](../docs/agents/visual-creator.md) | Prepare reviewable visual candidates and metadata |
+| `copy-editing` | [Copy editor](roles/copy-editor.md), brand voice | Polish copy without changing canon |
+| `create-article-workflow` | [Story coordinator](roles/story-coordinator.md) | Create the serial article task graph |
+| `editorial-review` | [Copy editor](roles/copy-editor.md), [Continuity redactor](roles/continuity-redactor.md) | Run the final editorial gate |
+| `image-generation` | [Visual creator](roles/visual-creator.md) | Prepare reviewable visual candidates and metadata |
 | `project-documentation` | Owning role contract | Revise project guidance and runbooks |
-| `research-and-fact-check` | [Story coordinator](../docs/agents/story-coordinator.md) | Build a claim-level source pack |
-| `seo-content` | [SEO content specialist](../docs/agents/seo-content.md) | Review honest search intent and metadata |
-| `site-deployment` | [Site engineer](../docs/agents/site-engineer.md), [Deployment engineer](../docs/agents/deployment-engineer.md) | Validate locally and prepare authorised release inputs |
+| `research-and-fact-check` | [Story coordinator](roles/story-coordinator.md) | Build a claim-level source pack |
+| `seo-content` | [SEO content specialist](roles/seo-content.md) | Review honest search intent and metadata |
+| `site-deployment` | [Site engineer](roles/site-engineer.md), [Deployment engineer](roles/deployment-engineer.md) | Validate locally and prepare authorised release inputs |
 
 If a new skill introduces a new responsibility or approval boundary, add or
-update the corresponding role contract in `docs/agents/` first, then add the
+update the corresponding role contract in `.agents/roles/` first, then add the
 skill to this catalog and the playbook mapping.

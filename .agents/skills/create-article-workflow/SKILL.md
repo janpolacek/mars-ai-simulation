@@ -8,7 +8,7 @@ description: Turn one approved-to-draft Red Horizon article request into a Beads
 Required inputs: a public-safe title, a lowercase hyphenated slug, the user's
 brief, author, and an allowed timeline step (use `site-foundation` only for
 non-story material). Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
-`docs/agents/story-coordinator.md`, and only the timeline material needed to
+`.agents/roles/story-coordinator.md`, and only the timeline material needed to
 validate that step. Never copy private timeline text into a public artifact.
 
 Allowed tools: `bd` and normal repository inspection/editing. Do not publish,

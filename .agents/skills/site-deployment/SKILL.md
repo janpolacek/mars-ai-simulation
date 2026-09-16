@@ -8,8 +8,8 @@ description: Validate a reviewed article in the Astro site and prepare, but neve
 Required inputs: the claimed Beads issue, an editorial review whose final status
 is `approved`, the article, asset manifest, a human canon/release approval
 reference, and the repository deployment configuration. Read `AGENTS.md`,
-`docs/INSTRUCTIONS.md`, `docs/agents/site-engineer.md`, and
-`docs/agents/deployment-engineer.md` first.
+`docs/INSTRUCTIONS.md`, `.agents/roles/site-engineer.md`, and
+`.agents/roles/deployment-engineer.md` first.
 
 Allowed tools: local schema checks, `fnm use`, local build/preview commands,
 repository inspection, and `bd`. Do not create a provider project, deploy,

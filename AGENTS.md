@@ -4,8 +4,8 @@
 
 Before making product, editorial, media, site, deployment, or documentation
 changes, read `docs/INSTRUCTIONS.md`, the relevant role contract(s) under
-`docs/agents/` when one exists, and the matching project-local skill under
-`.agents/skills/` when one exists. The [agent playbook](docs/agents/README.md)
+`.agents/roles/` when one exists, and the matching project-local skill under
+`.agents/skills/` when one exists. The [agent playbook](.agents/roles/README.md)
 defines role authority; the [skill catalog](.agents/README.md) defines task
 procedures.
 The private mission timeline (`docs/timeline/`) is continuity material only: never
@@ -31,7 +31,7 @@ separate current human instruction.
   task. Record paths, URLs, commands, and verification results before closing.
 
 Use the matching project-local skill in `.agents/skills/` for task-specific
-procedures. Skills supplement the role contracts in `docs/agents/`; they must
+procedures. Skills supplement the role contracts in `.agents/roles/`; they must
 not broaden a role's authority or override project instructions.
 
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.

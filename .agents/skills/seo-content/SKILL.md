@@ -10,7 +10,7 @@ homepage copy for search discoverability. Do not use it to generate hidden
 scenario material or to optimise an unpublished draft for public indexing.
 
 Read `docs/GENERAL.md`, `docs/INSTRUCTIONS.md`, and
-`docs/agents/seo-content.md` before making recommendations. Optimise for an
+`.agents/roles/seo-content.md` before making recommendations. Optimise for an
 honest reader question, not traffic volume: choose one clear intent, a descriptive
 title and meta description, a stable human-readable slug, useful heading order,
 and a small set of natural internal links.

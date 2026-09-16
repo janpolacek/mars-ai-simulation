@@ -8,7 +8,7 @@ description: Draft one accessible Red Horizon article strictly from its brief an
 Required inputs: the claimed Beads issue, `content/briefs/<slug>.md`,
 `content/sources/<slug>.md`, the article template, and the relevant writer and
 brand-voice contracts. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
-`docs/agents/writer.md`, `.agents/skills/brand-voice/SKILL.md`, and the source
+`.agents/roles/writer.md`, `.agents/skills/brand-voice/SKILL.md`, and the source
 pack before writing.
 
 Allowed tools: repository editing, source-pack inspection, and `bd`. Do not
