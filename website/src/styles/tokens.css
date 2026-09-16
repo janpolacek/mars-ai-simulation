@@ -1,0 +1,43 @@
+/*
+ * Red Horizon design tokens.
+ *
+ * The colour values are the palette recorded in `docs/brand/BRAND.md`
+ * plus the two text tints the Preparing site already uses. Components consume
+ * these instead of repeating hex values.
+ */
+:root {
+    /* Brand palette — docs/brand/BRAND.md */
+    --rh-void-black: #010000;
+    --rh-mars-oxide: #a0301d;
+    --rh-mars-ember: #cd553a;
+    --rh-relief-shadow: #9f321f;
+    --rh-rim-light: #fcc78b;
+    --rh-sun-core: #fca042;
+    --rh-sunrise-halo: #895215;
+    --rh-earth-blue: #7ba7fa;
+    --rh-moon-blue-gray: #94a3b0;
+
+    /* Surfaces and text */
+    --rh-surface-field: #17110f;
+    --rh-surface-plate: #eeebe5;
+    --rh-surface-amber: #fcc78b;
+    --rh-text-primary: #fff8e8;
+    --rh-text-muted: #dcc6b1;
+    --rh-text-faint: #7e7067;
+
+    /* Hairlines and focus */
+    --rh-hairline: rgba(255, 248, 232, 0.13);
+    --rh-hairline-soft: rgba(255, 248, 232, 0.3);
+    --rh-hairline-strong: rgba(255, 248, 232, 0.35);
+    --rh-focus-ring: #7ba7fa;
+
+    /* The small uppercase label shared by several sections */
+    --rh-label-size: 0.69rem;
+    --rh-label-weight: 750;
+    --rh-label-tracking: 0.17em;
+
+    /* Type scale */
+    --rh-heading-weight: 720;
+    --rh-heading-tracking: -0.055em;
+    --rh-heading-leading: 0.96;
+}

@@ -34,7 +34,7 @@ surface campaign. It must never masquerade as a real space programme.
 | Hidden mission source of truth               | [Private timeline](docs/timeline/README.md)                                        |
 | Kanban-driven article preparation            | [`create-article-workflow` skill](.agents/skills/create-article-workflow/SKILL.md) |
 | Per-article working papers                   | [`.agents/work/`](.agents/work/)                                                   |
-| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/brand/BRAND_GUIDELINES.md)                      |
+| Approved visual identity and colour guidance | [Red Horizon visual identity](docs/brand/BRAND.md)                      |
 | Vehicle canonical baseline                   | [RH-01 Pathfinder](docs/vehicle/VEHICLE.md)                                        |
 | Landing region and operations area           | [Asteria Field dossier](docs/area/AREA.md)                                         |
 | Project-local task procedures                | [Skill catalog](.agents/README.md)                                                 |

@@ -38,7 +38,7 @@ remaining approval as a card comment (`hermes kanban comment <id> "..."`) and in
   names, imagery, and unexplained values. Report surface failures in the same
   record — the gate covers the published package, not just the copy.
 - Verify asset provenance by content, not by path: compare `sha256sum` of the file
-  actually in use against the approved hash in `docs/brand/BRAND_GUIDELINES.md`. A
+  actually in use against the approved hash in `docs/brand/BRAND.md`. A
   re-exported or transparent-background variant of the same artwork still fails the
   approved-hash check and needs a human release decision.
 - Re-read the gate inputs and re-run `git status` immediately before writing the

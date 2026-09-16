@@ -17,7 +17,7 @@ order of work.
 | [INSTRUCTIONS.md](INSTRUCTIONS.md) | The rules every human and agent follows, including the source-of-truth order and where each file lives | `project-documentation`; human approval for rule changes                                   |
 | [PLAN.md](PLAN.md)                 | Delivery phases and their order, plus the pointer to the article pipeline skill                        | Story coordinator (`mars-ai-simulator-planner`), with human approval                       |
 | [timeline/](timeline/)             | The private release order: one numbered step per file, plus its [README](timeline/README.md)           | Human story owner with the story coordinator                                               |
-| [brand/](brand/)                   | [BRAND_GUIDELINES.md](brand/BRAND_GUIDELINES.md) and the approved identity mark and its derivative     | Human story owner approves; `mars-ai-simulator-visuals` produces; documentation records it |
+| [brand/](brand/)                   | [BRAND.md](brand/BRAND.md) and the approved identity mark and its derivative     | Human story owner approves; `mars-ai-simulator-visuals` produces; documentation records it |
 | [vehicle/](vehicle/)               | [VEHICLE.md](vehicle/VEHICLE.md), the RH-01 Pathfinder dossier, and its reference renders              | `project-documentation` with `mars-ai-simulator-visuals`; human approval for canon changes |
 | [area/](area/)                     | [AREA.md](area/AREA.md), the Asteria Field dossier with its map package, and the three map plates      | `project-documentation` with `mars-ai-simulator-visuals`; human approval for canon changes |
 
