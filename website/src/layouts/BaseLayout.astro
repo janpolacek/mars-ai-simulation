@@ -26,6 +26,20 @@ import { site } from '../lib/site';
  * splash on exactly `/` — the gate is a prop, not a pathname comparison, so it
  * cannot misfire under `trailingSlash: 'always'`, `build.format`, or a differently
  * normalised `Astro.url.pathname` during the build.
+ *
+ * The prop decides *whether a document may splash*; the inline script below
+ * decides whether *this* landing does. A fragment landing on the homepage is a
+ * first-class entry URL — the header, the footer and the hero link into
+ * `/#mission`, `/#top`, `/#timeline` and `#updates` — and a visitor following one
+ * must not sit behind the loading screen: the browser needs to perform the
+ * fragment jump, and the 2 s splash would hold `.page` back (`opacity: 0`,
+ * `visibility: hidden`) while showing a screen that is not their destination. So
+ * the script sets `data-splash-skip` on `<html>` for any non-empty
+ * `location.hash`, and for a document served at a path other than `/`. It runs
+ * in `<head>`, during parse, before the splash markup exists, so nothing is ever
+ * painted: no flash, no retraction to wait for. `layout.css` keys on the marker
+ * attribute to hide `.splash` and reveal `.page`, and `scripts/splash-scope.mjs`
+ * fails the build when the marker or its stylesheet rule goes missing.
  */
 const { title = site.defaultTitle, description = site.defaultDescription, noindex = false, splash = false } =
     Astro.props;
@@ -37,6 +51,15 @@ const canonical = noindex ? undefined : canonicalUrl(Astro.url.pathname, Astro.s
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        {
+            splash && (
+                <script is:inline>
+                    if (location.pathname !== '/' || location.hash) {
+                        document.documentElement.setAttribute('data-splash-skip', '');
+                    }
+                </script>
+            )
+        }
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
         <link rel="icon" href="/assets/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width" />

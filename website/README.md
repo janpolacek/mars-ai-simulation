@@ -191,6 +191,20 @@ What is enforced:
 
 `npm run check:dist` runs the same check without building.
 
+The splash scope is the other rule the same pass enforces, from
+`scripts/splash-scope.mjs`: the loading screen — the `<div id="splash">` element
+and the `is-loading` body class — belongs to `/` alone. The homepage must also
+carry the pre-paint inline gate that sets `data-splash-skip` on `<html>` for any
+non-empty `location.hash` (a landing such as `/#mission`, which the header, the
+footer and the hero all link to) or for a document served at another path, plus
+the stylesheet rules that act on it by hiding `.splash` and revealing `.page`. A
+fragment landing therefore never sees the splash and the browser still performs
+the fragment jump, and a build that loses the gate, its document order or its
+marker rules exits non-zero. `test/splash-scope.test.mjs` exercises the rules
+against fixtures and against the real build, and runs the built gate in a
+`node:vm` sandbox so that the decision is shown to execute, not merely to be
+present.
+
 The suite in `test/guards.test.mjs` exercises the rules against temporary
 fixtures and, when `dist/` exists, against the real build. It asserts the
 publication gate (no page, no listing entry, no card for an unpublished item),

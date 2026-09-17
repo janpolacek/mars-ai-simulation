@@ -18,6 +18,24 @@ body:not(.is-loading) .page {
     visibility: visible;
 }
 
+/*
+ * Pre-paint skip marker. The homepage's inline gate sets `data-splash-skip` on
+ * `<html>` when the URL is not an exact `/` — a fragment landing such as
+ * `/#mission`, or the document served at another path — so the marker is on the
+ * root element before the document is painted and there is no retraction to
+ * wait for. `body` in the page rule is not decoration: it lifts the selector
+ * above `body:not(.is-loading) .page` regardless of the order the stylesheets
+ * end up bundled in, which ordering alone would not guarantee.
+ */
+html[data-splash-skip] .splash {
+    display: none;
+}
+
+html[data-splash-skip] body .page {
+    opacity: 1;
+    visibility: visible;
+}
+
 @media (max-width: 760px) {
     .page {
         padding: 0 1.25rem 1.25rem;
