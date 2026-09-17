@@ -56,8 +56,11 @@ stage's prescribed artifact is the deployment record on the card itself.
   planting a single withheld marker under `website/public/assets/` and rebuilding
   — `postbuild` (`scripts/check-dist.mjs`) must report the offence, prune the file
   from `dist/`, and exit non-zero, so a stale output cannot be served. Remove the
-  probe and rebuild clean afterwards: `dist/` is gitignored but `public/` is
-  tracked, so an orphaned probe shows in `git status` and stays publicly served.
+  probe and rebuild clean afterwards: `website/public/assets/*` is itself
+  gitignored (root `.gitignore`), so an orphaned probe does **not** show in
+  `git status` and a clean status is not proof it is gone — confirm removal on
+  disk (`ls website/public/assets/`), because the file stays publicly served
+  either way.
 - Measure image presentation instead of inferring it. Read the rendered box,
   `object-fit` and natural size in the browser, compute the visible source
   rectangle per breakpoint, and, where a cue's visibility matters, match its
@@ -91,3 +94,21 @@ stage's prescribed artifact is the deployment record on the card itself.
   `class="card-label[^"]*"[^>]*>` (or `card-kicker[^>]*>`), and count the elements
   (`grep -c '<a class="card-label"'`) so a pattern that silently matches nothing
   cannot be read as a pass.
+- `grep -c` counts matching *lines*, and Astro minifies built HTML onto one line,
+  so an element count needs `grep -o '<a class="card-label"' dist/index.html |
+  wc -l`. With one element the line-based form looks correct and cannot tell two
+  from one: exercise the multi-item case (a temporary second article with
+  `publication: published`) before trusting any "equals the expected count" check.
+- An element's own `display` beats the UA's `[hidden]` rule, so a component styled
+  `display: grid` stays rendered *and tabbable* while carrying `hidden` and
+  `aria-hidden="true"` — a carousel can put every slide in the tab order and the
+  layout at once. Never take those attributes as proof a slide is out of the tab
+  order: drive a real Tab trace
+  (`cdp('Input.dispatchKeyEvent', type='keyDown'/'keyUp', key='Tab', code='Tab',
+  windowsVirtualKeyCode=9)` N times, reading `document.activeElement` and
+  `activeElement.closest('[hidden]')`), and check
+  `getComputedStyle(card).display` plus `offsetParent === null`. Fix it with a
+  scoped `.<component>[hidden] { display: none; }`. To assert the rule shipped,
+  grep the built HTML as well as `dist/_astro/*.css`: Astro inserts its scope
+  attribute between the compound parts (`.news-card[data-astro-cid-…][hidden]`)
+  and inlines small scoped stylesheets into `<style>` blocks.
