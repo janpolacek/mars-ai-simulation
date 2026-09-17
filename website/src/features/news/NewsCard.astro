@@ -84,15 +84,33 @@ const articleHref = routes.newsArticle(item.id);
 .news-card {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
-    /*
-     * Every slide is placed in the carousel's single cell (`NewsCarousel.astro`
-     * makes the container a grid), so the section is exactly as tall as the
-     * tallest published slide and its box does not change when the reader
-     * switches slides. A published set of one is the same shape with one item.
-     */
-    grid-area: 1 / 1;
     min-height: 27rem;
     background: var(--rh-surface-field);
+}
+
+/*
+ * The carousel's shared cell, scoped to the carousel: `NewsCarousel.astro` makes
+ * `.news-carousel` a grid and every slide is placed in its single cell, so the
+ * section is exactly as tall as the tallest published slide and its box does not
+ * change when the reader switches slides. A published set of one is the same
+ * shape with one item.
+ *
+ * It has to stay scoped, because this card renders on two surfaces. As a bare
+ * `.news-card` rule the placement also applied on the newsroom index, where the
+ * card is a grid item of `NewsList`'s own `.news-index-list` (`display: grid;
+ * gap: 2rem`): measured on a build of `origin/main` (2026-09-17) at 1280x800,
+ * both cards were in row 1 / column 1, the list measured one card tall
+ * (644.562px, list 645px) and the second card painted underneath the first
+ * (document 1295px), so the page was exactly one card tall whichever card it
+ * showed.
+ *
+ * `:global()` here is the other way round from the usual scoped-CSS trap: the
+ * element being placed is this file's own `.news-card`, and the ancestor that
+ * makes the placement mean "one cell across all slides" is written in
+ * `NewsCarousel.astro`.
+ */
+:global(.news-carousel) .news-card {
+    grid-area: 1 / 1;
 }
 
 /*
