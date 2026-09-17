@@ -1,0 +1,46 @@
+---
+import SectionHeading from '../../components/SectionHeading.astro';
+import NewsCard from './NewsCard.astro';
+import { getPublishedNews } from './query';
+
+// The feature owns its query: the index renders the published set itself.
+const items = await getPublishedNews();
+---
+
+<section class="news-index" aria-labelledby="news-index-title">
+    <div class="section-heading">
+        <SectionHeading
+            eyebrow="Newsroom"
+            title="The story starts before launch."
+            titleId="news-index-title"
+            level={1}
+        />
+    </div>
+    <div class="news-index-list">
+        {
+            /* Page-level `h1` above, so card titles are `h2` here; `h3` only inside a section, as on the homepage. */
+        }
+        {items.map((item, index) => <NewsCard item={item} index={index} headingLevel={2} />)}
+    </div>
+</section>
+
+<style>
+.news-index {
+    padding: 5rem 0 7rem;
+}
+
+.section-heading {
+    margin-bottom: 2.75rem;
+}
+
+.news-index-list {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (max-width: 760px) {
+    .news-index {
+        padding: 3.5rem 0 4.5rem;
+    }
+}
+</style>

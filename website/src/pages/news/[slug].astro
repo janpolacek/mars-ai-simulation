@@ -1,0 +1,22 @@
+---
+import ArticleView from '../../features/news/ArticleView.astro';
+import { getReleasedNews } from '../../features/news/query';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../lib/site';
+
+/**
+ * Article detail pages exist only for slugs a human release reference
+ * authorises (`src/lib/releases.ts`). The list is empty by default, so an
+ * approved editorial review alone cannot put an article body on the site.
+ */
+export async function getStaticPaths() {
+    const items = await getReleasedNews();
+    return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+---
+
+<BaseLayout title={`${item.data.title} | ${site.name}`} description={item.data.summary}>
+    <ArticleView item={item} />
+</BaseLayout>

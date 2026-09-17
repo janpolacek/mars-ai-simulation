@@ -11,7 +11,8 @@
 | Skill           | `editorial-review`                                                                                                                                                                                                                                                                                    |
 | Card            | `t_3302ef7e`                                                                                                                                                                                                                                                                                          |
 | Corrective card | `t_fc952c7d` (site owner `mars-ai-simulator-dev`), linked as a blocking parent of this review                                                                                                                                                                                                         |
-| Status          | `changes_requested`                                                                                                                                                                                                                                                                                   |
+| Status          | `approved` — retro editorial gate 2026-09-17 (card `t_8059da5f`); supersedes the `changes_requested` verdict recorded above, which stays as the record of what was wrong before the corrective completed                                                                                                                                                                                                                                                                                   |
+| Status (revision, 2026-09-17) | `changes_requested` — revision editorial gate `t_ff937d33`; its `## Revision: 2026-09-17` section records the findings and the required changes (C1–C5). This row is **additive**: every retro row above is unchanged, and §10's `approved` remains the retro verdict on the pre-revision text. |
 | Record origin   | This file is the record the planner created as a template on `t_67539573`; its review table was replaced and expanded with the checks required by the `editorial-review` skill.                                                                                                                       |
 
 ## Verdict
@@ -238,6 +239,309 @@ These are not part of the 001 article gate; they are recorded so they are not lo
   workflow document into the `create-article-workflow` skill. The quoted snapshot
   stays as the record of the tree at review time.
 
+---
+
+## Revision: 2026-09-17 (card `t_ff937d33`) — editorial final gate for the revised article
+
+**Verdict: `changes_requested`.** Editorial gate only: not a release, not canon
+approval, not deployment authorisation. The card stays **open** — R0 explains why.
+
+| Field                  | Value                                                                                                                                                                                    |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card                   | `t_ff937d33` (`mars-ai-simulator-editor`), child of revision parent `t_855de80a`; parent `t_23c10313` (continuity, done, verdict `human decision required`)                                 |
+| Reviewer role          | copy editor — editorial final gate                                                                                                                                                       |
+| Skill                  | `editorial-review`                                                                                                                                                                       |
+| Mission-timeline step  | `site-foundation` / step 001 (project announcement)                                                                                                                                      |
+| **Verdict**            | **`changes_requested`** — one blocking human decision (H1) and five scoped changes, all listed in R5                                                                                     |
+| Article under check    | `website/news/001-project-announcement.mdx`, SHA-256 `5755f92e…`, 4,778 B, 76 lines, mtime 01:54:13 — **unchanged since the continuity check**, so that verdict's reading of the text still applies |
+| Verdict written        | 2026-09-17 02:10 CEST (host date)                                                                                                                                                        |
+| Supersedes             | Nothing. This is the first editorial pass on the revised text. Sections 1–10 are the retro record and are preserved byte-for-byte; §10's `approved` is the verdict on the **pre-revision** 252-word article. One additive row was added to the metadata table above (`Status (revision …)`); no existing row was edited. |
+
+### R0. Why this gate is not closing — the card body's own prerequisite
+
+The card body requires a `continuity clear` verdict before this gate runs and says:
+"if the verdict is `return for revision` or `human decision required`, do not close
+this gate." The continuity re-check `t_23c10313` returned **`human decision required`**
+(`.agents/work/continuity/001-project-announcement.md` §R9, final line; SHA-256
+`f3072da9…`) with **H1 blocking**: whether the recorded 2026-09-17 plate release
+covers what plates AF-02 and AF-03 depict.
+
+This gate therefore records its findings (this section) and does **not** close the
+card. The editorial-review skill's corrective mechanism is used instead: a scoped
+corrective card is created and linked as a blocking parent, and this gate is blocked
+on `dependency` so it resumes for re-verification. Scope (R5) is the writer's copy
+pass, and it cannot start before the human answers H1, so the corrective card is
+created in `blocked` state with the question written into its body.
+
+### R1. Gate inputs, hashes at gate time, and what moved during the run
+
+Read at **2026-09-17 02:09–02:11 CEST**. Hashes are from this gate's own `sha256sum`
+run, not quoted from another record.
+
+| Input | SHA-256 at gate time | Note |
+| ----- | -------------------- | ---- |
+| Revised article | `5755f92e…` | identical to the continuity check's hash — the text was not edited between the two gates |
+| Brief (revision) | `73f850ed…` | unchanged |
+| Source pack | `2c81eaea…` | unchanged |
+| Asset manifest | `5e33d451…` | unchanged; its §Findings 1–2 are the pixel evidence this gate uses |
+| SEO package | `e0cc702b…` | **moved since the continuity check** (`9c14cfc6…`): `t_5a6fe8da` appended §R17 (heading-scale decision). Additive, documented, and it does not touch the article; recorded as movement, not drift |
+| Continuity verdict | `f3072da9…` | read; final line is the current label (§R9) |
+| Editorial record | `5bb7408c…` | read before writing; this section changes it |
+| Released step 001 | `3aa1bca7…` | unchanged |
+| `docs/SCENARIO.md` | `c045a4c9…` | unchanged since the continuity check |
+| `docs/area/AREA.md` | `ae5bf08c…` | unchanged; §Control record lines 17–19 = the partial release |
+| `docs/brand/BRAND.md` | `34e6345a…` | unchanged |
+| `website/src/content.config.ts` | `27da28e9…` | unchanged |
+| `website/scripts/guards.mjs` | `65d31b91…` | unchanged (released name retired from `gatedTextMarkers`) |
+| `website/src/lib/releases.ts` | `9173aa3a…` | `releasedNewsSlugs = []` — no detail route |
+
+**Movement in the shared checkout, recorded with timestamps.** This gate is not
+reporting any path as broken; two inputs changed value under it:
+
+1. The **build** now carries more routes than the continuity pass saw: this gate's
+   build at 02:10:17 emitted `/404.html`, `/about/index.html`, `/index.html`,
+   `/news/index.html` (the continuity check at 02:05 saw two). That is the
+   concurrent `/about/` card (`t_e89fb389`), not a change to the 001 package. Every
+   surface row in R4 was measured on the build this gate produced, in the same shell
+   call as the build (the `website/dist/` hotspot).
+2. The **SEO package** and **card `t_5a6fe8da`'s section** moved as described above.
+
+### R2. Method and evidence (this pass)
+
+Read-only inspection, one build, one guard run, two test/typecheck runs, three link
+checks and one scratch script tree outside the repository (`/tmp/rh-editor-ff937d33/`),
+so no withheld token is added to the tree by this gate. Gated material is cited **by
+class or by location**, never copied. No file under `docs/`, `website/src/`,
+`website/scripts/` or `website/news/` was edited by this gate; the article hash above
+is unchanged by it.
+
+| Check | Command (repository root, 2026-09-17 02:09–02:11 CEST) | Result |
+| ----- | ----------------------------------------------------- | ------ |
+| Gate-input snapshot | `sha256sum` on 14 inputs | R1 |
+| Forbidden token set — the planner's updated grep, **substring** | `grep -inE "17 february\|…\|crewed\|…" website/news/001-project-announcement.mdx` | 2 matching lines, both the substring inside the already-public word "un**crewed**" (frontmatter `summary` line 6; body line 25). The card's "expected: no matches" is an artefact of the substring `crewed`; it is not a hit |
+| Forbidden token set — same list, **word-boundary** | same pattern with `\b…\b` | **0 hits** (exit 1) |
+| Forbidden token set — the **brief's full set** (incl. `guiana`, `payload-selection`, `instrument-selection`, `isotope-power`), word-boundary | `grep -inE "\b(17 february\|…)\b"` | **0 hits** (exit 1) |
+| Released values present and exact | value scan of frontmatter + body | planning centre `17.80`/`332.20`/`27.80` ×1, envelope `12.5`/`24.0`/`327.0`/`338.0` ×1, `1,374` ×1, `two Mars years` ×1, `687` ×1, `2.10` ×1, `2031` ×2, `Asteria Field` ×2, `Margaritifer Terra` ×2 — all exactly as released, no `~1,375` |
+| Body measurement | `awk` body extraction + `wc` | 56 lines, **541 words**, 3,665 characters, **0 headings**, **4 links** (1 internal + 3 external) |
+| External citations | `curl -s -o /dev/null -w '%{http_code}' -L` on the article's three links | **200, 200, 200** |
+| Build + postbuild guard (same shell call) | `npm --prefix website run build` | **exit 0**; `astro build Complete` in 619 ms; 4 routes; postbuild `check-dist` → "[check-dist] no reference into a withheld directory, and no withheld file or marker in dist/" |
+| Guard, run directly | `npm --prefix website run check:dist` | **exit 0**, same output |
+| Frontmatter / schema contract | `npm --prefix website run test` (vitest) | **2 files, 38/38 pass** — the suite pins the media-key contract (`asteria-plates` = exactly 3 plates / 3 alts / 3 captions + label) and the caption provenance strings |
+| Type/schema validation | `npm --prefix website run typecheck` (`astro check`) | 43 files, **0 errors, 0 warnings, 0 hints** |
+| Release gate | read of `website/src/lib/releases.ts` | `releasedNewsSlugs` empty (line 10); `isReleasedNewsSlug`/`releasedSlugsFrom` gate every detail route |
+| Homepage card image (planner ruling A) | `<img>` extraction from the built `dist/index.html` | the card renders `_astro/asteria-field-01-mars-locator.DGegv0O8_Z1Alky4.webp`, 66,004 B, 1024 × 683, `loading="eager"`, **alt = the article's AF-01 alt verbatim**, beside the label `AF-01 · Mars locator` — the expected and approved state |
+| Article body public? | case-sensitive count of the released field name + route list | `Asteria` occurs **0 times** in `dist/index.html` and `dist/news/index.html`; no `/news/001-project-announcement/` route is generated. The only case-insensitive match is the AF-01 asset **file name** in the image path |
+| Withheld-class scan over the built pages | grep for the vehicle/provider/date/instrument class and for landing-design terms over both built pages | **0 hits** (exit 1) |
+| Unreferenced plate sources in the build | `find website/dist/_astro -printf '%f %s\n'` | AF-02 (3,311,859 B) and AF-03 (3,492,102 B) **source PNGs** are emitted with no HTML referencing them; AF-01's raw copy is consumed by the card. H2 — disposition in R6 |
+| Card copy as built | visible-text extraction | `<h3>A Mars mission takes shape in public.</h3>`, `Announcement 01`, `First public briefing`, `AF-01 · Mars locator`, and the 147-character summary |
+
+**Reader's caveat on plate pixels.** This environment has no OCR tool, so this gate
+did **not** re-read the text printed inside the three PNGs. Every statement here about
+what a plate *shows* comes from the asset manifest's recorded `vision_analyze` pixel
+read of 2026-09-17 02:00–02:03 CEST or from `docs/area/AREA.md` §Map package (the
+plates' own canonical description). R5's caption item (C2) rests on that recorded
+read and is stated as a conflict between two records, not as this gate's measurement.
+
+### R3. Card-body checks a–f
+
+| Check | Result | Evidence |
+| ----- | ------ | -------- |
+| a. Every material claim traces to the brief's allowed list | **PASS for the article's text** (see the caveat on the plate set) | Every added claim maps to a brief allowance: Margaritifer Terra as a real, officially catalogued equatorial highland region with craters, valley networks, basin deposits and orbital mineral evidence → brief §2 + its cited USGS/NASA sources; the highland-to-basin transition evidence-class argument → brief §1; the fictional field name always qualified in the same sentence, the release-discipline framing → brief §2; centre, envelope and 8 × 6 km frame → brief's "Released facts" table, matching `docs/area/AREA.md` §Control record exactly; the clay/sulfate logic and the no-life-detection invariant → brief §1 and `docs/SCENARIO.md` lines 28–30, 89–91; "two Mars years — 1,374 Earth days" with "at least one full seasonal cycle" → brief §3 verbatim, exact interval, no `≈1,375`; 687 Earth days → `docs/SCENARIO.md` line 209. No claim in the text goes past the step-001 allowance. **Caveat:** the plate *set* delivers material the same brief gates (C1/H1) |
+| b. Forbidden token set absent (grep verification) | **PASS** | 0 word-boundary hits on both the planner's updated list and the brief's full set; the two substring matches are inside "uncrewed". Nothing from step 002 or later, no vehicle designation, no provider or spaceport, no instrument, no payload or ownership item, no exact date, no absolute end date |
+| c. Frontmatter parses and satisfies `website/src/content.config.ts` | **PASS** | The site's own parser and schema run in the build: `npm run build` exit 0 with the article in the collection, `astro check` 0 errors, and 38/38 tests pass, including the media-key contract that the article's `media: asteria-plates` + 3 alts + 3 captions + label must satisfy. All 15 frontmatter keys are present and none is extra |
+| d. `summary` updated if the pitch changes | **PASS (accepted, with a note)** | The pitch broadened (target, position, lifetime) and the summary was re-applied by the SEO pass to 147 characters (`A Mars mission takes shape in public.` / the new summary are both in the built card). It answers the identity question and states only released facts. It deliberately omits the three new depth areas — correct, because this string doubles as the meta description and must stay inside the snippet budget (`seo/…` §R5). Accepted as-is, with the SEO package's recorded revert string |
+| e. Brand voice preserved (concrete, unsentimental, no grandeur, no urgency, no unearned certainty) | **PASS, one micro-item** | Ten short declarative paragraphs, no headings, no superlatives, no deadline pressure; uncertainty is stated as uncertainty ("Technical selections … are still ahead of us", "Landing-site design work stays out of the public record for now"); the fiction disclosure is in the first clause of both the body and the summary; the scenario coordinates are explicitly disclaimed in the same paragraph that states them. One rhetorical tail is routed to the writer (R5, C5) |
+| f. No publication, canon, or deployment decision made here | **PASS** | No deploy, no DNS/provider action, no canon or content edit, no `releasedNewsSlugs` entry, no route generated. This gate wrote only this record |
+
+### R4. Published-surface verification (the package, not only the MDX)
+
+Measured on this gate's own build (02:10:17), the way the skill requires.
+
+- **Homepage and newsroom cards.** Both built pages render one 001 card: title
+  `A Mars mission takes shape in public.`, kicker `Announcement 01`, label
+  `First public briefing` as a non-interactive `<span>` (`releasedNewsSlugs` is empty,
+  so `NewsCard.astro` emits no `<a>`), the 147-character summary, and the **AF-01**
+  plate with the article's AF-01 alt. Planner ruling A is satisfied as written.
+- **Retro §10.3 item 5 is superseded, and this gate re-verified the replacement.**
+  The card image is no longer the identity mark; the three `logo-bg-black` webp
+  derivatives are still emitted for the other surfaces (wordmark, splash, mission
+  panel) and the AF-01 derivative is byte-size 66,004 B as ruled. What the card
+  image must now be judged on is the plate and its alt, both of which check out.
+- **The article body is not public.** No `/news/001-project-announcement/` route is
+  generated; the released field name appears **0 times** as text in either built
+  page. The body's own claims, including line 58, are therefore not on a live
+  surface today — which is why C1 is an exposure-on-release finding and not a live
+  leak, stated that way in R5.
+- **Build guard.** `check:dist` exit 0; no reference into a withheld directory, no
+  withheld file or marker in `dist/`. A withheld-class scan over both built pages
+  (vehicle designation, provider, spaceport, absolute dates, instrument and
+  landing-design classes) returns 0 hits.
+- **Unreferenced plate sources.** AF-02/AF-03 source PNGs sit in `dist/_astro/` with
+  no HTML referencing them. Planner ruling B accepts this as standard Astro
+  behaviour until the detail route is released; recorded here as H2's disposition,
+  and as a deployable-artifact observation if the human's H1 answer makes those
+  plates unshippable (R6).
+- **Links.** All three external citations return 200 and are the URLs canon cites;
+  the one internal link (`/#mission`) resolves to the built homepage anchor. No
+  built page links to a route that was not generated.
+- **Plate captions and provenance.** The composed captions carry the mandatory
+  "Generated visualization for Red Horizon scenario planning, 2026-09-16. Not
+  orbital imagery." sentence plus the AF-03 fictional-planning note, from the media
+  registry rather than from frontmatter, so a caption cannot ship without them
+  (`test/news-media.test.mjs`, 38/38 green). No plate is presented as orbital
+  imagery.
+
+### R5. Required changes — the content of this verdict
+
+**C1 — the plate set contradicts the article's own claim about landing-site design
+(blocking; owner: human story owner, then `mars-ai-simulator-writer`).**
+Article line 58 says "Landing-site design work stays out of the public record for
+now." The package it ships contradicts that. Canon's own description of the plates
+(`docs/area/AREA.md` §Map package) and the asset manifest's pixel read of the same
+day agree that AF-02 prints the working-unit identifiers and the envelope, and AF-03
+prints the landing ellipse, the P0 touchdown zone, science zones, hazards, traverses
+and the comms shoulder — exactly the class the brief's gated items 2 and 5 keep out
+of the announcement. The continuity gate raised this as **H1** and could not decide
+it; neither can this gate (role authority). Two outcomes, and the human's answer
+decides which applies:
+
+- *(i) the release covers what the plates depict* → line 58 must be reworded by the
+  writer (and the release wording in `docs/area/AREA.md` §Control record and
+  `docs/SCENARIO.md` release controls amended to say so), plus C2–C4 in the same pass;
+- *(ii) the release covers the plate files as orientation graphics only* → AF-02 and
+  AF-03 cannot ship on article 001; the writer drops them from `mediaAlt`/
+  `mediaCaption` and the registry/visuals owner re-scopes the plate key, and line 58
+  stands unchanged.
+
+**C2 — the AF-01 caption states a scale that two records disagree about (owner:
+writer; canon line routed to the planner).** `mediaCaption[0]` reads "at roughly
+1,000 km scale". `docs/area/AREA.md` §Map package says "approximate 1,000 km scale
+bar", but the asset manifest's recorded pixel read of the same plate says its printed
+bar runs 0–4,000 km. One of the two is wrong and this gate cannot measure which.
+Required: **remove the number** ("at planet scale") — the orientation caption does not
+need it — or resolve the conflict with a pixel read and correct the canon line first.
+A caption is the one place a reader can check a number against the image, so an
+unverifiable figure does not ship.
+
+**C3 — the released field name is unqualified in `mediaLabel` (owner: writer).**
+`mediaLabel` reads `Red Horizon // Asteria Field planning plates` while
+`docs/area/AREA.md` line 23 requires the name to "remain qualified as 'fictional'
+wherever this material is copied into another working document" and the brief says it
+"must always be qualified as 'fictional' in prose". The captions and alts do qualify
+it; the label is the one string that does not. Required: `Red Horizon // fictional
+Asteria Field planning plates`.
+
+**C4 — the card's copy calls, decided here (owner: writer, to apply).**
+These are this role's decisions, not canon questions, and they were routed here by
+the retro gate (§10.7.2), the continuity verdict (§7.7) and the SEO package (§12):
+
+- `linkLabel: First public briefing` → **`Announcement summary`** (21 chars). The
+  label currently names a briefing page that does not exist; the replacement promises
+  nothing and stays honest while the label is a plain `<span>`.
+- `status: Now opening` → **`Programme announced`**. The kicker then reads
+  `Announcement 01 · Programme announced` — plain, meaning-preserving, no new fact,
+  and no longer reads like a live event.
+
+**C5 — one rhetorical tail (owner: writer, minor).** In the lifetime paragraph, "…
+designed to keep working past its first year, not to stop after one result." The
+first clause is trivially true of a two-Mars-year design and the trailing clause
+describes nothing. Required: drop the tail (end the sentence at "…past its first
+year.") or replace it with the released fact that does the work ("…for a second
+full seasonal cycle", per `docs/area/AREA.md` line 146).
+
+**Accessibility finding folded into C1.** The AF-03 alt says "scenario planning
+overlays" while a sighted reader sees landing- and science-planning overlays; the
+AF-03 caption note bounds it and the writer's neutral wording was deliberate to avoid
+publishing gated inventory (SEO §R9 recorded the residual and routed it here). It is
+a real asymmetry between what the image shows and what a screen reader is told, and
+it resolves only with C1: either the full description becomes publishable (option i)
+or the plate does not ship (option ii). Not a separate card.
+
+### R6. Dispositions and accepted states (so nothing is re-litigated)
+
+| Item | Disposition | Basis |
+| ---- | ----------- | ----- |
+| Homepage card image is AF-01 | **Accepted** — verified in the built page (R4) | planner ruling A on `t_8274703e`, comment on this card |
+| Unreferenced AF-02/AF-03 source PNGs in `dist/_astro/` (continuity H2) | **Accepted as-is, non-blocking** — standard Astro emission, resolves when the detail route renders the block; becomes a build issue only if H1 lands as option (ii) | planner ruling B on `t_8274703e` |
+| Per-plate provenance evidence scope on the BUILD card | **Accepted** — card alt + component/unit evidence; the three-plate block cannot appear in a built route while `releasedNewsSlugs` is empty (timing, not a verification gap) | planner ruling C; independently confirmed here (no 001 route generated; registry provenance pinned by tests) |
+| 147-character `summary` and the `A Mars mission takes shape in public.` title applied by the SEO pass | **Accepted** — both truthful, in-frame, inside budget; revert strings recorded in `seo/…` §R12 | this gate, R3(d) |
+| The three plate alts (neutral wording, provenance sentence) | **Accepted on wording and provenance**; the AF-03 asymmetry is folded into C1 | this gate, R4 |
+| Retro §10.3 item 5 (identity-mark presentation on the card) | **Superseded** by ruling A and re-verified as the AF-01 plate | R4 |
+| Continuity's O4 (the canon control records do not name the released lifetime) | **Routed, not mine** — canon/control-record owner (`project-documentation`/planner) | continuity §R6 |
+
+### R7. Open human decisions (nothing settled here)
+
+1. **H1 (blocking) — does the 2026-09-17 plate release cover what AF-02 and AF-03
+   depict?** The question, both options and the "not mine to decide" reasoning are in
+   `.agents/work/continuity/001-project-announcement.md` §R5; C1 carries it into the
+   required changes. This is the item that keeps the gate open.
+2. **H3 — does the operator's 01:26 no-numeric-coordinate instruction still stand?**
+   The article publishes the released centre and envelope with explicit scenario
+   framing; the article publishes **no** numeric extent for the real region. If the
+   human stands by the prohibition, the coordinate sentences come out (writer edit,
+   then continuity re-check).
+3. Carried forward from the retro gate (§10.6) and unchanged by this pass: the
+   identity-mark variant and any new public placement of the mark; the public title
+   and author credit; whether any budget figure beyond the announced frame may go
+   public; the Slovak partner institution's public wording; whether article 001 gets
+   a released detail route at all. Numbers 4 (surface-life duration) and 7
+   (`linkLabel`/`status` copy) are **closed by this pass** — the duration is released
+   and published, and the copy calls are C4.
+
+### R8. Confidentiality check on this record
+
+Passed. This record names no withheld value: no vehicle designation, no provider or
+spaceport, no launch or landing date, no absolute end date, no payload or instrument
+item, and no landing-design figure, unit identifier, science-point label or
+hazard/traverse inventory. Gated material is cited **by class** or **by location**
+(`docs/area/AREA.md` §Map package; the brief's gated items 2 and 5; the brief's
+forbidden token set) so a human can act on the ruling without this file becoming a
+second copy of what is withheld. The released values quoted here (the field name, the
+planning centre, the envelope, the local frame, the 1,374-day lifetime) are already
+public in the article under the recorded release, and quoting them is what makes
+R2/R3 checkable. Scratch work lives in `/tmp/rh-editor-ff937d33/`, outside the
+repository. This record is private working material under `.agents/work/`; it is not
+imported into the site and creates no public surface.
+
+### R9. What this verdict means, and what happens next
+
+`changes_requested` means: the revised **article text, frontmatter, metadata and the
+built card pass this gate** — every material claim traces to the brief's allowances
+and to released canon, the forbidden set is absent, the frontmatter satisfies the
+site schema, the summary and title serve their surfaces, the voice holds, the links
+resolve, and the published card is correct — but the **package as submitted does not**,
+because its plate set delivers material the same brief gates (C1), one caption states
+a figure two records disagree about (C2), one public-facing string carries the
+released name unqualified (C3), and two copy calls decided here are not yet applied
+(C4–C5). C1 also decides the AF-03 accessibility asymmetry.
+
+It is **not** a rejection of the text, and it is **not** an approval: this gate is
+open, `releasedNewsSlugs` stays empty, the body has no route, and human canon and
+release approval remain outstanding. Nothing was published, deployed or decided about
+canon by this gate.
+
+Next owners and actions:
+
+1. **Human story owner** (via the planner) — answer H1 and record it in
+   `docs/area/AREA.md` §Control record and `docs/SCENARIO.md` §Continuity and release
+   controls, not only on a card. H1 is the blocking item.
+2. **`mars-ai-simulator-writer`** (corrective card created and linked by this gate) —
+   apply C1's wording outcome plus C2–C5 in one pass, then hand to continuity.
+3. **`mars-ai-simulator-planner`** — the canon line behind C2 (`AREA.md` §Map package
+   scale) and O4's control-record gap.
+4. **This gate** (`t_ff937d33`) — blocked on the corrective as a dependency; resumes
+   to re-verify the package (re-hash the article first: an unchanged article hash is
+   what would let part of this reading stand) and close as `approved` only if every
+   required change is applied.
+5. **`mars-ai-simulator-dev`** (`t_f63be155`, BUILD) — stays behind this gate. Its own
+   body already says not to run the build on a `changes_requested` gate.
+
+---
+
+**Final label: `changes_requested`**
+
+---
+
 ## 9. Corrective card and next owner
 
 - **Corrective card:** `t_fc952c7d` — "Fix pre-release canon exposure on the public
@@ -255,3 +559,225 @@ These are not part of the 001 article gate; they are recorded so they are not lo
   `t_fc952c7d`.
 - Editorial approval, when it comes, is a gate only: human canon and release
   approval remain required before any public deployment.
+
+---
+
+## 10. Retro editorial gate — final verdict (2026-09-17, card `t_8059da5f`)
+
+**Verdict: `approved`.** This is an editorial gate only. It is not a release, not
+canon approval, not an approval of the fictional programme, and not authorisation
+to deploy. Human canon and release approval remain outstanding, and the open
+human decisions in section 6 stay open (carried forward in 10.6).
+
+Sections 1–9 above are the retro record of the package as it stood on 2026-09-16
+(`changes_requested`, five published-surface failures). They are preserved
+unchanged: this section is the verdict on the repaired package, not a rewrite of
+that record.
+
+### 10.1 What changed since sections 1–9
+
+| Card                          | Result                                                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `t_fc952c7d` (dev, done)      | Closed all five published-surface items: withheld vehicle renders out of the build, the vehicle name out of the chrome, the stray coordinate removed, the false link affordance removed, the news-card image presentation fixed. |
+| `t_774e7298` (dev, done)      | Rebuilt the site: file-based routes, the hash-approved identity mark imported from `docs/brand/`, a fail-closed build guard, and article detail routes gated by an empty release list. |
+| `t_16c7ba1c` (seo, done)      | Wrote the retro SEO package and applied one frontmatter value (`mediaAlt`, the measured Earth/Moon cue).                                   |
+| `t_0b3434e8` (continuity, done) | Returned `continuity clear`, with the five corrective items re-verified rather than accepted on narrative.                                |
+
+Per the card body, the five corrective items are incorporated here as **resolved**
+(10.3) and are not re-reported as failures.
+
+### 10.2 Gate inputs and state at verdict time
+
+State re-read at **2026-09-17 01:40:47 CEST**, immediately before this verdict.
+
+| Input                              | Path                                              | State                                                                                          |
+| ---------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Published article + frontmatter    | `website/news/001-project-announcement.mdx`       | modified vs HEAD (frontmatter only); SHA-256 `e7652bd6b8dfd2d31c3b290420760cac5cf64b6bc7ff92a22d9a39f17860ffd8` |
+| Released timeline step             | `docs/timeline/001-project-announcement.md`       | unchanged; SHA-256 `3aa1bca721348fcc9d4a2594974480528031726168fb37a0d685f8e4d038e942`          |
+| Locked scenario canon              | `docs/SCENARIO.md`                                | SHA-256 `c045a4c9ba12823e27cc4e188f709dc1716ad0a87c2c7f5e8aab8e2cffa16293` — see the drift note below |
+| Approved identity asset            | `docs/brand/logo-bg-black.png`                    | SHA-256 `f9543989560da54fc56a8973002833b2b8dbe3d1c085fc1293af3faca457b749` = the hash recorded in `docs/brand/BRAND.md` lines 9–10 |
+| SEO package                        | `.agents/work/seo/001-project-announcement.md`    | present, 16 sections + sources, one applied change (`mediaAlt`)                                 |
+| Continuity verdict                 | `.agents/work/continuity/001-project-announcement.md` | present, final line `continuity clear` (single occurrence)                                  |
+| Brief / source pack / asset manifest | `.agents/work/briefs/`, `.agents/work/sources/`, `.agents/work/assets/001-project-announcement/` | present; the revision-chain templates, not inputs to this retro verdict     |
+| Site source                        | `website/src/**`, `website/scripts/**`, `website/news/**` | current as of the timestamps in 10.5                                                    |
+| Build output                       | `website/dist/`                                   | built 01:38:26, after the newest source file (`website/src/lib/site.ts`, 01:38:08); 10 files, 2 routes |
+
+Two paths named by sections 1–9 or by the card no longer exist and were resolved
+to their current equivalents instead of being reported as broken:
+`website/scripts/sync-assets.mjs` and `website/scripts/assets.mjs` (deleted by the
+site refactor; the work now lives in `website/scripts/guards.mjs`,
+`website/scripts/check-dist.mjs` and `website/src/lib/assets.ts`), and
+`docs/brand/BRAND_GUIDELINES.md` (renamed to `docs/brand/BRAND.md`).
+
+**Canon drift during the run:** `docs/SCENARIO.md` changed under this gate — one
+hunk, `git diff -U2 docs/SCENARIO.md`, adding a note to the release controls that
+the field name, its centre coordinates and the three plates were partially
+released for article 001 on 2026-09-17. Every locked value the published article
+uses (mission identity, mission type, primary science, the ten partners, the 2031
+window, the €2.10 bn frame) is byte-identical at both hashes. No claim in this
+section is asserted from the earlier snapshot.
+
+**Shared-checkout note:** `website/` was being edited concurrently by `t_3922071d`
+(schema/guard work for the revision) while this gate ran, and `website/src/lib/site.ts`
+changed at 01:38:08. The article, the timeline step, the identity asset and the
+build output were stable across the checks in 10.5; the observations in 10.7 are
+timestamped.
+
+### 10.3 Corrective card `t_fc952c7d` — re-verified closed, not re-reported
+
+| # | Item                                        | Re-verification by this gate (real output)                                                                                                        |
+| - | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | Withheld vehicle imagery out of the build   | `npm --prefix website run check:dist` → pass at 01:40:47; `find website/dist -type f` → 2 HTML routes, 2 CSS, 4 webp derivatives of the identity mark, 2 favicons; no dossier asset, no map. `website/scripts/guards.mjs` fails the build on a gated path, a gated file by name/stem/content hash, and gated markers, then prunes: fail-closed, not reviewer-dependent. |
+| 2 | Vehicle name out of the chrome              | Visible-text extraction of `website/dist/index.html` reads "the work of its first surface vehicle" and "the surface vehicle"; the designation appears nowhere in `dist/`. |
+| 3 | Stray unlabelled coordinate removed         | `\d+°` scan over both built pages → no match.                                                                                                      |
+| 4 | False link affordance removed               | The built card renders `linkLabel` inside `<span class="card-label">`, and no `href` in either page targets the article route; `website/src/features/news/NewsCard.astro` emits an `<a>` only when `isReleasedNewsSlug()` is true, which it is not (`releasedNewsSlugs = []`). |
+| 5 | News-card image presentation                | `object-fit: contain` in `NewsCard.astro`, square intrinsic size, and the emitted 1024 × 1024 webp keeps the full frame: measured in `docs/brand/logo-bg-black.png`, the Earth cue centres at 0.802 × 0.264 of the frame and the Moon cue at 0.813 × 0.272; in the emitted derivative they centre at 0.797 × 0.258 and 0.812 × 0.271 — no crop, and every cue named in `mediaAlt` is present. |
+
+Because `dist/` is gitignored and shared, another worker's guard proof can plant a
+withheld asset there briefly. That was observed at 01:25 on 2026-09-17 (continuity
+record section 5), the guard failed closed while it was present, and it cleared
+without a card. Nothing of the sort was present during this gate.
+
+### 10.4 Retro-gate review table
+
+| Check                                                          | Result                             | Evidence                                                                                                                                                                                                                               |
+| -------------------------------------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gate inputs present, continuity verdict is `continuity clear`   | PASS                               | SEO package, continuity verdict, brief, source pack and asset manifest all exist at the paths in 10.2; the continuity file's final line is `continuity clear`, one occurrence.                                                           |
+| Citations                                                      | PASS                               | Every material claim is a fictional-programme claim from locked canon; no real agency, institution, university or company is named or implied, so no real-world citation is required.                                                   |
+| Coherence and chronology                                       | PASS                               | Claim-level re-check against `docs/SCENARIO.md` at the current hash: mission identity, mission type, primary science, the ten partners in canon order, equal governance, the 2031 window (year only), the €2.10 bn frame. Nothing pre-empts a later step; the "no life detection" invariant holds. |
+| Voice and grammar                                              | PASS                               | Body: 248 words, 1,642 characters, 5 paragraphs, 0 headings, 0 links; fiction disclosure once. Concrete, unsentimental, no grandeur, no urgency, uncertainty stated as uncertainty. One optional copy suggestion from section 7 ("technical risks and anomalies") is unchanged and deliberately not applied — the file is rewritten by the revision chain. |
+| Article: no later-step fact, no withheld material              | PASS                               | Word-boundary, case-insensitive scan of frontmatter + body against two gated lists read from their files at run time (the brief's "Forbidden token set", 23 entries; the section 1 grep list, 15 entries) → **0 hits**. A substring scan returns 4 hits, all inside "uncrewed" (printed with context and confirmed); no date, provider, payload, instrument, ownership, designation or landing detail appears. |
+| Published surface: no gated name, imagery or unexplained value  | PASS                               | 0 hits across all 4 text files in `website/dist/` and across every `dist/` file name for both gated lists; `\d+°` → no match; the only quantitative claims on either page are `2031` and `€2.10 billion` (the carousel counter `01 / 01` and the `Announcement 01` kicker are series labels, not facts). Both built pages were read in full as visible text. |
+| Article body is not public                                     | PASS                               | Three distinctive body phrases → 0 occurrences in `dist/index.html` and `dist/news/index.html`; `website/src/lib/releases.ts` ships `releasedNewsSlugs = []`, and `website/src/pages/news/[slug].astro` generates paths from that gate. Only the card is public. |
+| Image placement, caption, label                                | PASS (was FAIL, resolved)          | One figure, 1024 × 1024, `object-fit: contain` in a wider box, full frame visible (10.3 item 5); `mediaLabel` "Red Horizon // programme identity" is accurate and restrained.                                                           |
+| Alt text                                                       | PASS                               | `mediaAlt` (187 chars) describes only cues measured in the asset the site imports; the wording is background-neutral, so it does not repeat the "on black" conflict between `docs/brand/BRAND.md` and the light card panel. The SEO package records a one-line revert string (§8). |
+| Media variant and asset provenance                             | PASS (human release decision still open) | The only import of the mark in the site source is `docs/brand/logo-bg-black.png` (`website/src/lib/assets.ts`), whose SHA-256 equals the approved hash in `docs/brand/BRAND.md`; the RGBA derivative (`…23ff0f5`) is referenced nowhere in `website/src/`, `website/news/` or `website/scripts/`. The variant/placement decision itself is the human's (10.6.1). |
+| Metadata and schema                                            | PASS                               | Frontmatter parsed with the site's own parser (`website/node_modules/js-yaml`): all 11 keys present, none missing, none extra; `order: 1`; `publication: published`; `accent: oxide`; `media: programme-identity` is a valid key in `website/src/lib/media.ts`; `mediaAlt` non-empty where `media` is set (schema refinement in `website/src/content.config.ts`); `summary` 250 chars. |
+| Links                                                          | PASS                               | The article has no links (regex scan: 0). Every `href` in both built pages resolves: `/#mission`, `/#timeline`, `/#top` → `dist/index.html` with a matching anchor id; `#updates` → present in `dist/index.html`; `/news/` → `dist/news/index.html`; the stylesheet and favicon paths exist. No href points at a route that was not generated. |
+| Accessibility: disclosure, headings, page metadata             | PASS (2 routed observations)       | Fiction/AI disclosure appears in the body, the card, the page aside and the meta description. One `h1` per route. Two non-blocking observations, routed in 10.7.1: the news index renders the card title as `h3` directly under the page `h1` (skipping `h2`), and `/news/` repeats the homepage `<title>` and description. Neither breaks reading or navigation and neither involves gated material. |
+| Budget figure within the allowed frame                          | PASS                               | "€2.10 billion in constant 2026 euros, covering concept work through the final science archive" matches `docs/SCENARIO.md` (lifecycle budget, re-read at the current hash). No breakdown, no per-partner share, no cost table.            |
+| Supported surface-life duration                                | PASS (absent; revision release noted) | No duration appears in the current article, frontmatter or either built page. The human released the duration for the **revision** on 2026-09-17 (brief, "Human release approval reference"); that is a revision-chain input and does not make the current published text wrong or this verdict stale. |
+| FEI STU not mentioned                                          | PASS                               | The institution and the Slovak contribution are absent from the article, its frontmatter and both built pages.                                                                                                                          |
+| Public title and author credit                                 | PASS (no policy requires a byline) | No byline field exists in `website/src/content.config.ts` and no policy in `AGENTS.md` / `docs/INSTRUCTIONS.md` requires one, so no check fails; the human's confirmation of the public title and credit is still outstanding (10.6.2). |
+
+### 10.5 Validation performed by this gate
+
+All commands run from the repository root at 2026-09-17 01:38–01:41 CEST. Scratch
+checkers live in `/tmp/rh-editor-001/`, outside the repository.
+
+- `python3 /tmp/rh-editor-001/check.py` — frontmatter key inventory; body
+  measurement; two gated-list scans (word-boundary and substring) over the article
+  and over all 4 text files in `dist/` plus every `dist/` file name; `dist/` title,
+  description, canonical, Open Graph, Twitter card, `ld+json`, `keywords` and
+  `robots` probes; heading counts; three body-render probes; href resolution.
+- `python3 /tmp/rh-editor-001/substring.py` — the 4 substring hits printed with
+  their context (all "uncrewed").
+- `python3 /tmp/rh-editor-001/cues.py` — pixel measurement of the approved mark,
+  the RGBA derivative, the 4 emitted webp derivatives and the 2 favicons.
+- `python3 /tmp/rh-editor-001/visible.py` — visible-text extraction of both built
+  pages, numeric/coordinate scan, per-route title and description.
+- `node /tmp/rh-editor-001/fm.mjs` — frontmatter parsed with the site's own
+  `js-yaml`; types, enums and string lengths printed.
+- `npm --prefix website run check:dist` → pass; generated routes
+  `/index.html`, `/news/index.html`.
+- `npm --prefix website test` → 16/16 tests pass (surface guards included).
+- `git status --short`, `sha256sum`, `git diff -U2 docs/SCENARIO.md` → 10.2.
+
+Tooling note: `dprint` is not on `PATH` and `npm run format` calls an uninstalled
+`print` binary; `~/.dprint/bin/dprint check` reports this file as unformatted
+(pre-existing table padding) — see 10.7.7.
+
+**Not run by this gate:** no build, no preview, no deployment, no DNS/provider
+action, no asset regeneration, no canon or content edit. Technical validation
+belongs to the build/deploy stage (`t_f63be155` for the revision).
+
+### 10.6 Open human decisions (carried forward; nothing settled here)
+
+1. Identity-mark variant and any new public placement of the mark
+   (`docs/brand/BRAND.md`, "Publication boundary").
+2. Public title and author credit for article 001.
+3. Whether any budget figure beyond the announced frame may go public (none is).
+4. The supported surface-life duration in the announced schedule frame — now
+   released for the revision only; whether the published article carries it is the
+   revision chain's question, not this gate's.
+5. The Slovak partner institution's public wording, if it is ever used.
+6. Whether article 001 gets a released detail route (needs a recorded release
+   reference; while the release list is empty the body is unrendered).
+7. The copy calls routed to this role — the `linkLabel` wording and the `status`
+   string — recommendation in 10.7.2.
+
+The Asteria Field partial release (2026-09-17) is recorded in
+`docs/SCENARIO.md` release controls and `docs/area/AREA.md` and is scoped to the
+revision; the currently published article does not use it.
+
+### 10.7 Routed observations (not failures; no owner settled here, none fixed here)
+
+1. **News-index page metadata and heading level.** `/news/` repeats the homepage
+   `<title>` and `<meta name="description">`, and its card title renders as `h3`
+   under the page-level `h1`, while the SEO package specifies a page-level `h1`
+   with card titles as `h2` on the index (`…/seo/001-project-announcement.md` §6,
+   §10). Owners: `mars-ai-simulator-dev` for the route metadata and the heading
+   level, `mars-ai-simulator-seo` for the convention. The duplicate title was
+   already an open question on `t_774e7298`'s handoff.
+2. **`linkLabel` and `status` copy.** "First public briefing" reads like a link to
+   a briefing page; the label is correctly non-interactive now, but the wording is
+   routed to this role by the SEO package (§12) and the continuity verdict (§7.7).
+   Not applied here because the file is rewritten by `t_30760665` and the call
+   belongs to the revision's editorial gate. Recommendation recorded: prefer a
+   plain label that promises nothing (the SEO package offers "Announcement
+   summary" / "Programme announcement").
+3. **Cross-surface wording consistency.** The body says "Ten national programme
+   teams"; the card `summary` says "Ten partner groups". Canon uses "programme
+   partners" and "fictional national programme teams" (`docs/SCENARIO.md`,
+   coalition section). Route to the revision chain (writer, with SEO/editor
+   sign-off); not fixed here.
+4. **Favicons.** The two tracked favicons in `website/public/assets/` are
+   downscales of the approved mark. They predate this pipeline and the current
+   Preparing site; they fall under open decision 10.6.1, not a new failure.
+5. **`docs/brand/BRAND.md` publication-boundary drift.** The paragraph still
+   describes the mark reaching the website through a generated
+   `website/public/assets/` directory; the site now imports it from `docs/brand/`
+   through Astro's asset pipeline and copies nothing into `public/`. Owner:
+   `project-documentation` (also recorded by continuity §8).
+6. **Build guard vs. the revision.** `website/scripts/guards.mjs` line 43 still
+   lists the field name among `gatedTextMarkers`, so the revision — released to
+   name the field — will trip the build guard until `t_3922071d` retires that
+   marker and updates the guard test. That card is open and scoped to exactly this;
+   recorded so the collision is not discovered at build time.
+7. **This record is not dprint-clean.** `dprint check` reports it unformatted: the
+   pre-existing review table (sections above) pads its pipe columns differently
+   from the markdown plugin's output. Not fixed here, because reformatting would
+   rewrite another worker's retro record wholesale; section 10 is hand-formatted.
+
+### 10.8 What this verdict means, and the next handoff
+
+`approved` means: the assembled step-001 package — article, frontmatter, card,
+built pages and assets — is canon-safe, accurate to released canon, honest about
+uncertainty, accessible in its alt text and labels, valid in its metadata, and free
+of broken links and dead affordances. It incorporates the five closed corrective
+items as resolved.
+
+It does **not** mean the package is released, published, deployable or
+canon-approved: `releasedNewsSlugs` stays empty until a human records a release
+reference, and human canon and release approval remain required.
+
+- **Mission-timeline step:** 001 (project announcement), retro gate.
+- **Card:** `t_8059da5f` (`mars-ai-simulator-editor`).
+- **Output:** this record (sections 10 and the metadata Status row).
+- **Public/canon impact:** none — no article, frontmatter, site, asset or canon
+  file was edited by this gate; the tree already contained the SEO package's one
+  applied `mediaAlt` value.
+- **Confidentiality check:** the gated lists are cited by location (the brief's
+  "Forbidden token set" and section 1 above) and reported as hit counts only; no
+  withheld token, coordinate, provider, date or payload item was added to the
+  repository by this gate, and the scratch checkers live outside it.
+- **Validation completed:** 10.5. **Review outstanding:** none for this card; the
+  revision's own editorial gate re-verifies the rewritten text, and human canon and
+  release approval remain outstanding.
+- **Next owner and action:** `t_30760665` (writer, revision draft) unblocks on this
+  completion, then the revision chain SEO → IMAGES → CONTINUITY → REVIEW → BUILD,
+  with `t_3922071d` (dev) landing the schema/guard changes first. The revision's
+  continuity pass must cover its own HELD items; the plates and the field name are
+  released for article 001 only.
+- **Corrective card:** none created — this gate found no material factual,
+  accessibility, licensing or coherence failure.

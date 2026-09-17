@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+
+import { identityMark } from '../lib/assets';
+import { site } from '../lib/site';
+---
+
+<div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-inner">
+        <Image src={identityMark} alt="" width={352} height={352} format="webp" />
+        <p>{site.name}</p>
+        <span>{site.splashLabel}</span>
+    </div>
+</div>
+
+<script>
+const splash = document.querySelector('#splash');
+
+window.setTimeout(() => {
+    document.body.classList.remove('is-loading');
+    document.body.classList.add('is-ready');
+    splash?.setAttribute('hidden', '');
+}, 2000);
+</script>
+
+<style>
+.splash {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--rh-void-black);
+    animation: splash-exit 500ms ease 1.5s forwards;
+}
+
+.splash-inner {
+    display: grid;
+    justify-items: center;
+    gap: 0.75rem;
+    text-align: center;
+    animation: splash-rise 700ms ease-out both;
+}
+
+.splash img {
+    width: clamp(7rem, 21vw, 11rem);
+    height: auto;
+    margin-bottom: 0.75rem;
+}
+
+.splash p {
+    margin: 0;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+}
+
+.splash span {
+    color: var(--rh-sun-core);
+}
+
+@keyframes splash-rise {
+    from {
+        opacity: 0;
+        transform: translateY(0.8rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes splash-exit {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+</style>

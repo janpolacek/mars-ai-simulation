@@ -1,10 +1,6 @@
 # build output
 dist/
 
-# generated copies of canonical repository assets
-public/assets/*
-!public/assets/favicon-32.png
-!public/assets/favicon.ico
 # generated types
 .astro/
 

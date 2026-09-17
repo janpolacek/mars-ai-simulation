@@ -14,9 +14,9 @@
 | Planning centre        | 17.80°S, 332.20°E (27.80°W)                                |
 | Planning envelope      | 12.5–24.0°S, 327.0–338.0°E                                 |
 | Local operations frame | 8 × 6 km, centred on the planning centre                   |
-| Revision               | AF-0.1 · 2026-09-16                                        |
-| Canon status           | Draft; human canon approval required                       |
-| Public status          | No publication, route, metadata, or media release approved |
+| Revision               | AF-0.2 · 2026-09-17                                            |
+| Canon status           | Partial release approved 2026-09-17 — name, centre coordinates, and plates AF-01/AF-02/AF-03 released for article 001 only; dossier as a whole remains draft pending full human approval |
+| Public status          | Partially released (article 001 only) — name, centre coordinates, and three plates; all other material requires separate human approval |
 
 The centre and boundaries above are scenario coordinates chosen for mission
 planning. They are not a claim that a real Mars feature exists at that point.

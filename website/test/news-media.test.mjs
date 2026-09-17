@@ -1,0 +1,184 @@
+/*
+ * Media contract suite: the `media:` frontmatter rules and the plate registry.
+ *
+ * These are the checks the content schema applies (`src/lib/media.ts`) and the
+ * text composition the plate figures render (`src/features/news/plates.ts`).
+ * They are asserted directly because `astro:content` is not loadable under
+ * vitest, and because a three-plate article must fail the build — not render
+ * two plates and a caption that lies — when its frontmatter is short.
+ */
+import { describe, expect, it } from 'vitest';
+
+import { isNewsMediaKey, newsMediaIssues, newsMediaKeys, newsMediaRequirements, newsMediaTextList } from '../src/lib/media';
+import { newsMedia, resolveNewsMedia } from '../src/features/news/media';
+import { isPlateSet, plateAltText, plateCaptionText, plateFigures } from '../src/features/news/plates';
+
+/** The provenance sentence every `asteria-plates` caption must carry. */
+const provenance = 'Generated visualization for Red Horizon scenario planning, 2026-09-16. Not orbital imagery.';
+
+const asteriaFrontmatter = {
+    media: 'asteria-plates',
+    mediaAlt: ['AF-01 alt text', 'AF-02 alt text', 'AF-03 alt text'],
+    mediaLabel: 'Asteria Field // three map plates',
+    mediaCaption: ['AF-01 caption', 'AF-02 caption', 'AF-03 caption'],
+};
+
+const fieldsOf = (issues) => issues.map((issue) => issue.field);
+
+describe('media keys and their requirements', () => {
+    it('keeps programme-identity, and adds asteria-plates', () => {
+        expect(newsMediaKeys).toEqual(['programme-identity', 'asteria-plates']);
+        expect(isNewsMediaKey('programme-identity')).toBe(true);
+        expect(isNewsMediaKey('asteria-plates')).toBe(true);
+        expect(isNewsMediaKey('asteria-field')).toBe(false);
+    });
+
+    it('requires three plates, three alts and three captions for asteria-plates', () => {
+        expect(newsMediaRequirements['asteria-plates']).toEqual({
+            plateCount: 3,
+            altCount: 3,
+            captionCount: 3,
+            requiresLabel: true,
+        });
+        expect(newsMediaRequirements['programme-identity']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('accepts the existing programme-identity frontmatter', () => {
+        expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual([]);
+    });
+
+    it('accepts the three-plate frontmatter', () => {
+        expect(newsMediaIssues(asteriaFrontmatter)).toEqual([]);
+    });
+
+    it('still fails an unknown media key, naming the keys that exist', () => {
+        const issues = newsMediaIssues({ ...asteriaFrontmatter, media: 'asteria-field' });
+
+        expect(fieldsOf(issues)).toEqual(['media']);
+        expect(issues[0].message).toContain('media must be one of: programme-identity, asteria-plates');
+    });
+
+    it('fails a three-plate key that lists two alts instead of three', () => {
+        const issues = newsMediaIssues({ ...asteriaFrontmatter, mediaAlt: ['AF-01 alt text', 'AF-02 alt text'] });
+
+        expect(fieldsOf(issues)).toEqual(['mediaAlt']);
+        expect(issues[0].message).toContain('exactly 3 non-empty entries');
+    });
+
+    it('fails a plate set with a blank alt entry or no alt at all', () => {
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaAlt: '   ' }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaAlt: undefined }))).toEqual(['mediaAlt']);
+    });
+
+    it('fails a plate set with no label and with missing or blank captions', () => {
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaLabel: '  ' }))).toEqual(['mediaLabel']);
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaCaption: undefined }))).toEqual(['mediaCaption']);
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaCaption: ['a', 'b', ' '] }))).toEqual(['mediaCaption']);
+    });
+
+    it('fails a caption the declared key does not render, rather than ignoring it', () => {
+        const issues = newsMediaIssues({
+            media: 'programme-identity',
+            mediaAlt: 'The Red Horizon programme mark.',
+            mediaCaption: 'A caption nobody renders',
+        });
+
+        expect(fieldsOf(issues)).toEqual(['mediaCaption']);
+        expect(issues[0].message).toContain('remove mediaCaption');
+    });
+
+    it('reads one entry and a per-plate list alike', () => {
+        expect(newsMediaTextList('only')).toEqual(['only']);
+        expect(newsMediaTextList(['a', 'b', 'c'])).toEqual(['a', 'b', 'c']);
+        expect(newsMediaTextList(undefined)).toEqual([]);
+    });
+});
+
+describe('plate registry', () => {
+    it('resolves every declared key to its required plate count', () => {
+        for (const key of newsMediaKeys) {
+            const set = newsMedia[key];
+
+            expect(set, `no registry entry for ${key}`).toBeDefined();
+            expect(set.plates.length, `plate count for ${key}`).toBe(newsMediaRequirements[key].plateCount);
+            expect(set.plates.every((plate) => plate.label.trim().length > 0), `labels for ${key}`).toBe(true);
+        }
+    });
+
+    it('renders three plates for asteria-plates and one for programme-identity', () => {
+        expect(newsMedia['asteria-plates'].plates.map((plate) => plate.label)).toEqual([
+            'AF-01 · Mars locator',
+            'AF-02 · Regional context',
+            'AF-03 · Local operations frame',
+        ]);
+        expect(isPlateSet(newsMedia['asteria-plates'])).toBe(true);
+        expect(isPlateSet(newsMedia['programme-identity'])).toBe(false);
+    });
+
+    it('resolves the two keys and nothing else', () => {
+        expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
+        expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
+        expect(resolveNewsMedia(undefined)).toBeUndefined();
+    });
+});
+
+describe('plate alt text and captions', () => {
+    const set = newsMedia['asteria-plates'];
+    const alts = asteriaFrontmatter.mediaAlt;
+    const captions = asteriaFrontmatter.mediaCaption;
+
+    it('uses one frontmatter alt entry per plate', () => {
+        const rendered = set.plates.map((_, index) => plateAltText({ value: alts, plates: set.plates, index }));
+
+        expect(rendered).toEqual(alts);
+        expect(new Set(rendered).size).toBe(3);
+    });
+
+    it('labels a shared alt entry with the plate it describes', () => {
+        expect(plateAltText({ value: 'One shared description.', plates: set.plates, index: 0 })).toBe(
+            'AF-01 · Mars locator. One shared description.',
+        );
+    });
+
+    it('prints the provenance sentence on every plate caption', () => {
+        const rendered = set.plates.map((plate, index) =>
+            plateCaptionText({ plate, plates: set.plates, captions, provenance: set.provenance, index })
+        );
+
+        expect(set.provenance).toBe(provenance);
+        for (const caption of rendered) expect(caption).toContain(provenance);
+        expect(rendered[0]).toBe(`AF-01 · Mars locator — AF-01 caption ${provenance}`);
+        expect(rendered[1]).toBe(`AF-02 · Regional context — AF-02 caption ${provenance}`);
+    });
+
+    it('notes on AF-03 that the local-operations frame is fictional planning', () => {
+        const rendered = plateCaptionText({
+            plate: set.plates[2],
+            plates: set.plates,
+            captions,
+            provenance: set.provenance,
+            index: 2,
+        });
+
+        expect(rendered).toContain('AF-03 caption');
+        expect(rendered).toContain('fictional scenario planning, not a confirmed operational plan');
+        expect(rendered).toContain(provenance);
+    });
+
+    it('builds the three figures the plate block renders, in plate order', () => {
+        const figures = plateFigures({ set, mediaAlt: alts, mediaCaption: captions });
+
+        expect(figures.map((figure) => figure.src)).toEqual(set.plates.map((plate) => plate.src));
+        expect(figures.map((figure) => figure.alt)).toEqual(alts);
+        expect(figures.map((figure) => figure.caption)).toEqual([
+            `AF-01 · Mars locator — AF-01 caption ${provenance}`,
+            `AF-02 · Regional context — AF-02 caption ${provenance}`,
+            `AF-03 · Local operations frame — AF-03 caption The local-operations frame is fictional scenario planning, not a confirmed operational plan. ${provenance}`,
+        ]);
+    });
+});

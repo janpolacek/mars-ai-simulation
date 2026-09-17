@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { notFound } from '../lib/not-found';
+
+/*
+ * The error route renders inside `BaseLayout` so the chrome, the site-wide
+ * disclosure, and the About link persist. It is the one route that opts out of
+ * the document head's default identity: `noindex` suppresses the canonical and
+ * marks the page `robots: noindex`, because the pathname under it is whatever
+ * the reader mistyped, not a URL this document owns. The meta description stays
+ * at the site default — inert behind `noindex`.
+ */
+---
+
+<BaseLayout title={notFound.title} noindex>
+    <section class="not-found" aria-labelledby="not-found-title">
+        <h1 id="not-found-title">{notFound.heading}</h1>
+        {notFound.paragraphs.map((paragraph) => <p class="not-found-body">{paragraph}</p>)}
+        <div class="not-found-links">
+            {notFound.links.map((link) => <a href={link.href}>{link.label}</a>)}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+.not-found {
+    padding: 5.5rem 0 6.5rem;
+}
+
+h1 {
+    max-width: 34rem;
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+.not-found-body {
+    max-width: 38rem;
+    margin: 1.75rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.not-found-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.not-found-links a {
+    border-bottom: 1px solid rgba(252, 160, 66, 0.5);
+    padding-bottom: 0.35rem;
+    color: var(--rh-sun-core);
+    font-size: 0.83rem;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.not-found-links a:hover,
+.not-found-links a:focus-visible {
+    color: var(--rh-rim-light);
+}
+
+@media (max-width: 760px) {
+    .not-found {
+        padding: 4rem 0 4.5rem;
+    }
+}
+</style>

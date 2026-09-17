@@ -1,0 +1,25 @@
+/*
+ * Layout utilities: the centred page column and the fade the splash script
+ * drives. Scoped to `body.is-ready` / `body:not(.is-loading)` so the page is
+ * revealed once the splash has run.
+ */
+.page {
+    width: min(100%, 90rem);
+    margin: 0 auto;
+    padding: 0 4.5rem 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease;
+}
+
+body.is-ready .page,
+body:not(.is-loading) .page {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 760px) {
+    .page {
+        padding: 0 1.25rem 1.25rem;
+    }
+}

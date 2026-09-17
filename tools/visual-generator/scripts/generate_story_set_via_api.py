@@ -61,6 +61,22 @@ def image_info(record: dict, node: str) -> dict:
     return record["outputs"][node]["images"][0]
 
 
+def scenes_of(vehicle: dict) -> list:
+    """Scene entries as ``(id, description)`` pairs.
+
+    The spec form is ``[["01-landing", "one visible moment"], ...]``; a mapping with
+    ``id``/``description`` is accepted too, because that shape used to be documented.
+    """
+    pairs = []
+    for scene in vehicle.get("scenes", []):
+        if isinstance(scene, dict):
+            pairs.append((scene.get("id", ""), scene.get("description", "")))
+        else:
+            name, description = scene
+            pairs.append((name, description))
+    return pairs
+
+
 def download(server: str, image: dict) -> bytes:
     query = urllib.parse.urlencode(
         {"filename": image["filename"], "subfolder": image.get("subfolder", ""), "type": image.get("type", "output")}
@@ -112,13 +128,28 @@ def main() -> None:
     parser.add_argument("--stage", choices=["all", "canonical", "references", "angles", "scenes"], default="all")
     parser.add_argument("--vehicle", help="Run only this vehicle slug")
     parser.add_argument(
+        "--spec",
+        type=Path,
+        help="Job spec JSON. Defaults to <root>/spec.json — a scratch file you write per job "
+        "(identity and scene text copied from docs/, reference images copied into the tool).",
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help="Reuse locally successful images only when their exact graph still matches",
     )
     args = parser.parse_args()
     root, server = args.root.resolve(), args.server.rstrip("/")
-    config = json.loads((root / "story_set.json").read_text())
+    spec_path = (args.spec or root / "spec.json").resolve()
+    if not spec_path.is_file():
+        parser.error(
+            f"job spec not found: {spec_path}\n"
+            "The tool keeps no project canon of its own: copy the identity/scene text out of "
+            "docs/ (for example docs/vehicle/VEHICLE.md, docs/area/AREA.md) into a "
+            "scratch spec.json next to the tool, and copy any reference images you need out of "
+            "docs/ into the tool before running. See README.md > Job spec."
+        )
+    config = json.loads(spec_path.read_text())
     if args.vehicle and args.vehicle not in {v["slug"] for v in config["vehicles"]}:
         parser.error("Unknown vehicle slug: " + args.vehicle)
     for _, camera in config["reference_angles"]:
@@ -215,7 +246,7 @@ def main() -> None:
                 refs[angle] = upload_reference(
                     path.read_bytes(), path.name, f"mars-ai-stories/stories/{slug}/references"
                 )
-            for name, scene in vehicle["scenes"]:
+            for name, scene in scenes_of(vehicle):
                 execute(name, prompt_inputs.scene(scene), list(refs.values()), scene=True)
             continue
         assets = []
@@ -235,7 +266,7 @@ def main() -> None:
             refs[angle] = execute(angle, prompt_inputs.angle(camera, vehicle), [canonical])
         if args.stage in ("angles", "references"):
             continue
-        for name, scene in vehicle["scenes"]:
+        for name, scene in scenes_of(vehicle):
             execute(name, prompt_inputs.scene(scene), list(refs.values()), scene=True)
 
 

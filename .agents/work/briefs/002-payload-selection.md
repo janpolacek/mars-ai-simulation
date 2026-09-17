@@ -17,7 +17,14 @@ _(Human story owner: fill in the public-safe article brief here. What public ang
 
 ### Allowed angle (from `docs/timeline/002-payload-selection.md`)
 
-_(read the timeline step before drafting — this section will be updated once the step file is confirmed)_
+A public payload-selection update explaining what questions RH-01 will investigate at Mars
+and why a compact multi-sensor package matters for those science goals. It covers the
+four ranked science objectives (mineral mapping, alteration environment, habitability
+assessment, and international operations demonstration) and the types of instruments
+the rover carries — panoramic and navigation imaging, weather measurement,
+mineral/rock sensing, and a contact tool for close inspection — without naming the
+European sensor contribution or any specific approved instrument. A future wiki page may
+define each approved instrument in plain language.
 
 ### Forbidden angle (spoilers from later steps)
 

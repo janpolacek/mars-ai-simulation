@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+
+import { identityMark } from '../lib/assets';
+import { headerNavigation, homeAnchor } from '../lib/navigation';
+import { site } from '../lib/site';
+
+const wordmarkHref = homeAnchor('top');
+---
+
+<header class="site-header">
+    <a class="wordmark" href={wordmarkHref} aria-label={`${site.name} home`}>
+        <Image src={identityMark} alt="" width={72} height={72} format="webp" />
+        <span>{site.name}</span>
+    </a>
+    <nav aria-label="Primary navigation">
+        {headerNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+</header>
+
+<style>
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 5.5rem;
+    border-bottom: 1px solid var(--rh-hairline);
+}
+
+.wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--rh-text-primary);
+    font-size: 0.95rem;
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+}
+
+.wordmark img {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+nav {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2.75rem);
+}
+
+nav a {
+    color: var(--rh-text-muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--rh-sun-core);
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        min-height: 4.75rem;
+    }
+
+    nav {
+        gap: 0.85rem;
+    }
+
+    nav a {
+        font-size: 0.7rem;
+    }
+}
+</style>

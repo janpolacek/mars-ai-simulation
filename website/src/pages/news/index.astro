@@ -1,0 +1,23 @@
+---
+import NewsList from '../../features/news/NewsList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../lib/site';
+
+/**
+ * The newsroom is its own page: without its own title and description it
+ * inherits the homepage pair from `BaseLayout`, and two routes present one
+ * identity to a search engine. The title is shared site metadata
+ * (`site.newsTitle`, the string the about-method SEO pass applied and the 001
+ * re-pass confirmed); neither string is visible copy — the page heading stays
+ * the section heading inside `NewsList`.
+ *
+ * The description is the string that pass applied; editorial adopt-or-revert is
+ * still open, and the homepage default is its revert.
+ */
+const description =
+    'Red Horizon is a fictional Mars mission. Every step the programme has published so far is listed here.';
+---
+
+<BaseLayout title={site.newsTitle} description={description}>
+    <NewsList />
+</BaseLayout>

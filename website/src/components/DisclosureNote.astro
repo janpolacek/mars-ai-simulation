@@ -1,0 +1,49 @@
+---
+import { site } from '../lib/site';
+---
+
+<aside class="disclosure" aria-label="Content disclosure">
+    <div class="disclosure-mark">{site.disclosure.mark}</div>
+    <div>
+        <p class="disclosure-title">{site.disclosure.title}</p>
+        <p>{site.disclosure.body}</p>
+    </div>
+</aside>
+
+<style>
+.disclosure {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    border: 1px solid rgba(252, 199, 139, 0.38);
+    background: rgba(252, 160, 66, 0.08);
+    padding: 1.1rem 1.25rem;
+}
+
+.disclosure-mark {
+    display: grid;
+    width: 2.7rem;
+    height: 2.7rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--rh-sun-core);
+    border-radius: 50%;
+    color: var(--rh-sun-core);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.disclosure p {
+    margin: 0;
+    color: var(--rh-text-muted);
+    font-size: 0.79rem;
+    line-height: 1.45;
+}
+
+.disclosure .disclosure-title {
+    margin-bottom: 0.15rem;
+    color: var(--rh-text-primary);
+    font-weight: 750;
+}
+</style>

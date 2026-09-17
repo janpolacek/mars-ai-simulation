@@ -13,9 +13,9 @@ decides, the project owns the canon and the asset manifest.
 
 `tools/visual-generator/` is a processor with a disposable scratch area. Nothing in it is canon.
 
-- **Input:** copy the identity or scene text out of `docs/vehicle/VEHICLE.md` or
-  `docs/area/AREA.md` into a scratch `spec.json`, and copy any reference image you need out
-  of `docs/` into the tool before running.
+- **Input:** copy the identity or scene text out of the vehicle and area dossiers under
+  `docs/vehicle/` and `docs/area/` into a scratch `spec.json`, and copy any reference image you
+  need out of `docs/` into the tool before running.
 - **Output:** candidates, run records and the spec stay in the scratch paths (`spec.json`,
   `assets/`, `stories/`), all git-ignored and deletable at any time. A human-selected export is
   copied into `docs/` (with a manifest entry) by the site engineer — never by this tool, and never

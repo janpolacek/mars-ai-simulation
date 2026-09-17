@@ -1,0 +1,7 @@
+/*
+ * Page-wide stylesheet, imported once by `src/layouts/BaseLayout.astro`.
+ * Component and feature styles are scoped inside their own `.astro` files.
+ */
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';

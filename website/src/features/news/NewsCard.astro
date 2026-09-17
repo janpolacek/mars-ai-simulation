@@ -1,0 +1,219 @@
+---
+import { Image } from 'astro:assets';
+
+import { routes } from '../../lib/navigation';
+import { isReleasedNewsSlug } from '../../lib/releases';
+import { resolveNewsMedia } from './media';
+import { plateAltText } from './plates';
+
+/**
+ * One news card. `index` is its position in the list (placeholder number and
+ * eager/lazy loading), `active` is whether it is currently shown — a carousel
+ * passes `false` for the slides it hides.
+ *
+ * The card carries one image, so a multi-plate set leads with its first plate
+ * (AF-01, the locator) and is labelled with that plate's label rather than the
+ * set label, which describes three plates the card does not show.
+ *
+ * `headingLevel` is the element the card title renders as, with the same split
+ * `SectionHeading` documents: `2` when the card sits directly under the route's
+ * own `h1` (the newsroom index, `NewsList`), `3` when it sits inside a section
+ * that already carries an `h2` (the homepage carousel).
+ */
+const { item, index, active = true, headingLevel = 3 } = Astro.props;
+const media = resolveNewsMedia(item.data.media);
+const leadPlate = media?.plates[0];
+const cardLabel = media && media.plates.length > 1 ? leadPlate?.label : item.data.mediaLabel;
+/**
+ * The label advertises an article, so it is only interactive when a released
+ * detail route exists for this item (`src/lib/releases.ts`). With no release
+ * reference it stays a plain span: no dead href, no false affordance.
+ */
+const articleHref = isReleasedNewsSlug(item.id) ? routes.newsArticle(item.id) : undefined;
+---
+
+<article
+    class:list={['news-card', active && 'is-active']}
+    data-slide={index}
+    aria-hidden={active ? 'false' : 'true'}
+    hidden={active ? undefined : true}
+>
+    {media && leadPlate ? (
+        <div class="news-image">
+            <Image
+                src={leadPlate.src}
+                alt={plateAltText({ value: item.data.mediaAlt, plates: media.plates, index: 0 })}
+                width={1024}
+                format="webp"
+                loading={index === 0 && active ? 'eager' : 'lazy'}
+            />
+            <span class="image-label">{cardLabel}</span>
+        </div>
+    ) : (
+         <div
+             class:list={['news-placeholder', item.data.accent === 'amber' && 'placeholder-amber']}
+             aria-hidden="true"
+         >
+             <span class="placeholder-number">{String(index + 1).padStart(2, '0')}</span>
+             <span class="placeholder-rule"></span>
+             <span class="placeholder-caption">{item.data.category}</span>
+         </div>
+     )}
+    <div class="news-copy">
+        <p class="card-kicker">{item.data.category} <span>·</span> {item.data.status}</p>
+        {headingLevel === 2 ? <h2>{item.data.title}</h2> : <h3>{item.data.title}</h3>}
+        <p>{item.data.summary}</p>
+        {articleHref
+            ? <a class="card-label" href={articleHref}>{item.data.linkLabel}</a>
+            : <span class="card-label">{item.data.linkLabel}</span>}
+    </div>
+</article>
+
+<style>
+.news-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+    min-height: 27rem;
+    background: var(--rh-surface-field);
+}
+
+.news-image,
+.news-placeholder {
+    position: relative;
+    min-height: 22rem;
+    overflow: hidden;
+    background: var(--rh-surface-plate);
+}
+
+.news-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.image-label {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.15rem;
+    max-width: calc(100% - 2.5rem);
+    background: rgba(1, 0, 0, 0.78);
+    padding: 0.45rem 0.6rem;
+    color: var(--rh-text-primary);
+    font-size: 0.63rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.news-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--rh-relief-shadow);
+    padding: 3rem;
+}
+
+.placeholder-amber {
+    background: var(--rh-surface-amber);
+    color: var(--rh-void-black);
+}
+
+.placeholder-number {
+    font-size: clamp(7rem, 17vw, 14rem);
+    font-weight: 750;
+    letter-spacing: -0.1em;
+    line-height: 0.75;
+    opacity: 0.9;
+}
+
+.placeholder-rule {
+    width: 55%;
+    margin-top: 2rem;
+    border-top: 2px solid currentColor;
+    opacity: 0.5;
+}
+
+.placeholder-caption {
+    margin-top: 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.news-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.card-kicker {
+    margin: 0 0 1.6rem;
+    color: var(--rh-sun-core);
+}
+
+.card-kicker span {
+    color: var(--rh-text-muted);
+}
+
+.news-copy h2,
+.news-copy h3 {
+    max-width: 24rem;
+}
+
+.news-copy p:not(.card-kicker) {
+    max-width: 27rem;
+    margin: 1.5rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.card-label {
+    margin-top: 2rem;
+    color: var(--rh-text-muted);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+a.card-label {
+    border-bottom: 1px solid rgba(252, 160, 66, 0.5);
+    padding-bottom: 0.35rem;
+    color: var(--rh-sun-core);
+    text-decoration: none;
+}
+
+a.card-label:hover,
+a.card-label:focus-visible {
+    color: var(--rh-text-primary);
+}
+
+@media (max-width: 760px) {
+    .news-card {
+        grid-template-columns: 1fr;
+    }
+
+    .news-image,
+    .news-placeholder {
+        min-height: 15rem;
+    }
+
+    .news-copy {
+        min-height: 23rem;
+        padding: 2rem 1.5rem 2.5rem;
+    }
+
+    .news-placeholder {
+        padding: 2rem;
+    }
+
+    .placeholder-number {
+        font-size: 8rem;
+    }
+}
+</style>

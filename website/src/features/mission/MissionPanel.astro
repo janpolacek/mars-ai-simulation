@@ -1,0 +1,92 @@
+---
+import SectionHeading from '../../components/SectionHeading.astro';
+import { missionFacts, missionIntro } from './facts';
+---
+
+<section class="mission-panel" id="mission" aria-labelledby="mission-title">
+    <div class="section-intro">
+        <SectionHeading
+            eyebrow={missionIntro.eyebrow}
+            title={missionIntro.title}
+            titleId="mission-title"
+            description={missionIntro.description}
+        />
+    </div>
+    <dl class="mission-facts">
+        {missionFacts.map((fact) => (
+            <div class={fact.wide ? 'fact-wide' : undefined}>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+            </div>
+        ))}
+    </dl>
+</section>
+
+<style>
+.mission-panel {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1.3fr);
+    gap: 4rem;
+    border-top: 1px solid var(--rh-hairline);
+    border-bottom: 1px solid var(--rh-hairline);
+    padding: 4.5rem 0;
+}
+
+.mission-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+}
+
+.mission-facts div {
+    min-height: 7rem;
+    border-left: 1px solid var(--rh-hairline);
+    border-bottom: 1px solid var(--rh-hairline);
+    padding: 0 1.5rem 1.5rem;
+}
+
+.mission-facts div:nth-child(2n) {
+    border-left: 0;
+}
+
+.mission-facts .fact-wide {
+    grid-column: 1 / -1;
+    min-height: auto;
+    border-left: 0;
+    border-bottom: 0;
+    padding-top: 1.5rem;
+}
+
+dt {
+    color: var(--rh-earth-blue);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+dd {
+    margin: 0.8rem 0 0;
+    color: var(--rh-text-primary);
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-weight: 650;
+    line-height: 1.2;
+}
+
+.fact-wide dd {
+    max-width: 37rem;
+    color: var(--rh-text-muted);
+    font-size: 1.02rem;
+    font-weight: 450;
+    line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+    .mission-panel {
+        grid-template-columns: 1fr;
+        gap: 2.75rem;
+        padding: 4.5rem 0;
+    }
+}
+</style>

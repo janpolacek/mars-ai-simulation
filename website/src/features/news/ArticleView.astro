@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+
+import { render } from 'astro:content';
+
+import { resolveNewsMedia } from './media';
+import MediaPlates from './MediaPlates.astro';
+import { isPlateSet, plateAltText } from './plates';
+
+/**
+ * Renders one released article: its header, its declared media, and its MDX
+ * body. A set that resolves to one plate renders as the lead figure; a set with
+ * two or more plates (`asteria-plates`) renders as a labelled plate block, so a
+ * multi-plate key cannot fall back to one image and drop the rest.
+ */
+const { item } = Astro.props;
+const media = resolveNewsMedia(item.data.media);
+const plateSet = media ? isPlateSet(media) : false;
+const leadPlate = media?.plates[0];
+const { Content } = await render(item);
+---
+
+<article class="article" aria-labelledby="article-title">
+    <header class="article-header">
+        <p class="card-kicker">{item.data.category} <span>·</span> {item.data.status}</p>
+        <h1 id="article-title">{item.data.title}</h1>
+        <p class="article-summary">{item.data.summary}</p>
+    </header>
+
+    {media && leadPlate && !plateSet && (
+        <figure class="article-media">
+            <Image
+                src={leadPlate.src}
+                alt={plateAltText({ value: item.data.mediaAlt, plates: media.plates, index: 0 })}
+                width={1024}
+                height={1024}
+                format="webp"
+                loading="eager"
+            />
+            {item.data.mediaLabel && <figcaption>{item.data.mediaLabel}</figcaption>}
+        </figure>
+    )}
+
+    {media && plateSet && (
+        <MediaPlates
+            set={media}
+            mediaAlt={item.data.mediaAlt}
+            mediaCaption={item.data.mediaCaption}
+            mediaLabel={item.data.mediaLabel}
+        />
+    )}
+
+    <div class="article-body">
+        <Content />
+    </div>
+</article>
+
+<style>
+.article {
+    padding: 5rem 0 7rem;
+}
+
+.article-header {
+    max-width: 44rem;
+    border-bottom: 1px solid var(--rh-hairline);
+    padding-bottom: 2.5rem;
+}
+
+.card-kicker {
+    margin: 0 0 1.6rem;
+    color: var(--rh-sun-core);
+}
+
+.card-kicker span {
+    color: var(--rh-text-muted);
+}
+
+.article-header h1 {
+    max-width: 40rem;
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+}
+
+.article-summary {
+    max-width: 38rem;
+    margin: 1.75rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.65;
+}
+
+.article-media {
+    max-width: 44rem;
+    margin: 3rem 0 0;
+}
+
+.article-media img {
+    width: 100%;
+    max-width: 24rem;
+    height: auto;
+}
+
+.article-media figcaption {
+    margin-top: 0.85rem;
+    color: var(--rh-text-faint);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.article-body {
+    max-width: 44rem;
+    margin-top: 3rem;
+}
+
+.article-body :global(h2) {
+    margin: 3rem 0 0;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.article-body :global(h3) {
+    margin: 2.25rem 0 0;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+.article-body :global(p),
+.article-body :global(li) {
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.article-body :global(p) {
+    margin: 1.15rem 0 0;
+}
+
+.article-body :global(ul) {
+    margin: 1.15rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.article-body :global(li + li) {
+    margin-top: 0.5rem;
+}
+
+.article-body :global(a) {
+    color: var(--rh-sun-core);
+}
+</style>

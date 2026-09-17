@@ -276,7 +276,7 @@ economic conditions. Currency, year, scope, and accounting differences prevent d
   that frame waits for a later step.
 - Payload details wait for step 002; RH-01 imagery waits for step 003; Ariane 64 waits for step 004; exact launch and
   landing dates wait for their authorised release steps.
-- Asteria Field is not published until the landing-preparation sequence allows it. Its maps are scenario planning assets.
+- Asteria Field is not published until the landing-preparation sequence allows it. Its maps are scenario planning assets. (Note: name, centre coordinates, and plates AF-01/AF-02/AF-03 were partially released 2026-09-17 for article 001 only — all other Asteria Field material remains gated.)
 - Generated visuals are labelled as fictional or illustrative and are never presented as documentary mission imagery.
 - Real institutions, including FEI STU and Arianespace, require explicit review before any public mention. Their appearance
   in this scenario does not imply real participation.

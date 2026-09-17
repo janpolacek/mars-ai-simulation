@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about, aboutMetadata, inlineLinks } from '../lib/about';
+
+/*
+ * `/about/` renders the approved copy in `src/lib/about.ts` as a page's own
+ * sections: one `h1` (the copy's title), the six `h2` sections in the draft's
+ * order, and the copy's two internal links as anchors inside the last
+ * paragraph. The eyebrow is a label, not a heading. The layout supplies the
+ * chrome and the site-wide disclosure.
+ */
+const sections = about.sections.map((section, index) => ({
+    id: `about-section-${index + 1}`,
+    heading: section.heading,
+    paragraphs: section.paragraphs.map((paragraph) => inlineLinks(paragraph)),
+}));
+---
+
+<BaseLayout title={aboutMetadata.title} description={aboutMetadata.description}>
+    <article class="about">
+        <header class="about-intro">
+            <p class="eyebrow">{about.eyebrow}</p>
+            <h1>{about.title}</h1>
+            <p class="about-standfirst">{about.standfirst}</p>
+        </header>
+
+        {sections.map((section) => (
+            <section class="about-section" aria-labelledby={section.id}>
+                <h2 id={section.id}>{section.heading}</h2>
+                <div class="about-body">
+                    {section.paragraphs.map((paragraph) => (
+                        <p>
+                            {paragraph.map((part) => ('href' in part ? (
+                                <a href={part.href}>{part.label}</a>
+                            ) : part.text))}
+                        </p>
+                    ))}
+                </div>
+            </section>
+        ))}
+    </article>
+</BaseLayout>
+
+<style>
+.about {
+    padding: 5rem 0 6.5rem;
+}
+
+.about-intro {
+    max-width: 46rem;
+    padding-bottom: 3.25rem;
+}
+
+h1 {
+    max-width: 39rem;
+}
+
+.about-standfirst {
+    max-width: 34rem;
+    margin: 1.75rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.65;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.62fr) minmax(0, 1.38fr);
+    gap: 3rem;
+    border-top: 1px solid var(--rh-hairline);
+    padding: 3rem 0;
+}
+
+.about-section h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+}
+
+.about-body p {
+    max-width: 42rem;
+    margin: 0 0 1.15rem;
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.about-body p:last-child {
+    margin-bottom: 0;
+}
+
+.about-body a {
+    color: var(--rh-sun-core);
+    text-decoration: underline;
+    text-decoration-color: rgba(252, 160, 66, 0.5);
+    text-underline-offset: 0.2em;
+}
+
+.about-body a:hover,
+.about-body a:focus-visible {
+    color: var(--rh-rim-light);
+}
+
+@media (max-width: 760px) {
+    .about {
+        padding: 3.5rem 0 4.5rem;
+    }
+
+    .about-intro {
+        padding-bottom: 2.25rem;
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 2.25rem 0;
+    }
+}
+</style>

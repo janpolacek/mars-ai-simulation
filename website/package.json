@@ -6,12 +6,12 @@
         "node": ">=22.12.0"
     },
     "scripts": {
-        "predev": "node scripts/sync-assets.mjs",
-        "prebuild": "node scripts/sync-assets.mjs",
         "dev": "astro dev",
         "build": "astro build",
+        "postbuild": "node scripts/check-dist.mjs",
         "preview": "astro preview",
         "astro": "astro",
+        "check:dist": "node scripts/check-dist.mjs",
         "lint": "eslint .",
         "format": "print fmt ../",
         "typecheck": "astro check",

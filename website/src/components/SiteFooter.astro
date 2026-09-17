@@ -1,0 +1,46 @@
+---
+import { navigation } from '../lib/navigation';
+import { site } from '../lib/site';
+---
+
+<footer class="site-footer">
+    <span>{site.footerLabel}</span>
+    <span>{site.footerNote}</span>
+    <nav aria-label="Footer navigation">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+</footer>
+
+<style>
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2.5rem 0 0.5rem;
+    color: var(--rh-text-faint);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--rh-sun-core);
+}
+
+@media (max-width: 760px) {
+    .site-footer {
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+}
+</style>

@@ -1,0 +1,63 @@
+---
+/**
+ * Carousel controls for the news section. `total` is the slide count; keep this
+ * component presentational by passing the number in rather than a collection.
+ *
+ * Props are read from `Astro.props` without a TypeScript `Props` interface:
+ * ESLint parses `.astro` frontmatter with espree, and this project has no
+ * TypeScript parser for it (see `website/README.md`, "Typing").
+ */
+const total = Astro.props.total;
+/**
+ * Rendered as one expression on purpose: the separator space has to live inside
+ * the template literal, because the formatter may reflow markup whitespace
+ * between nodes and the counter must stay "01 / 02".
+ */
+const slideCounterSuffix = ` / ${String(total).padStart(2, '0')}`;
+---
+
+<div class="carousel-controls" aria-label="News carousel controls">
+    <button class="carousel-button" id="previous-news" type="button" aria-label="Previous news item">←</button>
+    <span class="carousel-count" aria-live="polite"><span id="current-news">01</span>{slideCounterSuffix}</span>
+    <button class="carousel-button" id="next-news" type="button" aria-label="Next news item">→</button>
+</div>
+
+<style>
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-shrink: 0;
+}
+
+.carousel-button {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid var(--rh-hairline-strong);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--rh-text-primary);
+    font: inherit;
+    font-size: 1.05rem;
+    cursor: pointer;
+}
+
+.carousel-button:hover,
+.carousel-button:focus-visible {
+    border-color: var(--rh-sun-core);
+    background: var(--rh-sun-core);
+    color: var(--rh-void-black);
+}
+
+.carousel-count {
+    color: var(--rh-text-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+}
+
+#current-news {
+    color: var(--rh-sun-core);
+}
+</style>

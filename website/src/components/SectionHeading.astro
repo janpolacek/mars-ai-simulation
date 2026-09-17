@@ -1,0 +1,30 @@
+---
+/**
+ * Shared section heading: a small uppercase label, a title, and an optional
+ * description. The enclosing section supplies the wrapper and the id it points
+ * at with `aria-labelledby`. `level` is `1` on a route whose heading is the page
+ * title, `2` inside a section.
+ *
+ * This component owns the title's type scale: a parent styles its own wrapper
+ * only and must not restyle the `h1`/`h2`, which renders here.
+ */
+const { eyebrow, title, titleId, level = 2, description } = Astro.props;
+---
+
+<div>
+    <p class="eyebrow">{eyebrow}</p>
+    {level === 1 ? <h1 id={titleId}>{title}</h1> : <h2 id={titleId}>{title}</h2>}
+    {description ? <p class="section-description">{description}</p> : <slot />}
+</div>
+
+<style>
+/* A level-1 section heading is a route title: below the homepage hero tier, above the card tier. */
+h1 {
+    max-width: 35rem;
+    font-size: clamp(2.25rem, 4.8vw, 4.5rem);
+}
+
+h2 {
+    max-width: 35rem;
+}
+</style>

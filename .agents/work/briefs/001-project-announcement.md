@@ -1,5 +1,17 @@
 # Brief: 001-project-announcement (revision)
 
+## Human release approval reference
+
+**Date:** 2026-09-17
+**Source:** Human story owner, relayed by operator (this is the "explicit current human instruction" per `docs/INSTRUCTIONS.md` Source-of-truth order)
+
+**Verbatim answers:**
+1. **Yes** — the article may state the designed surface mission lifetime: two Mars years.
+2. **Yes** — the article may state the target **name and its coordinates** (source: `docs/area/AREA.md`) and should be "a little descriptive".
+3. **No new imagery is needed** — three map plates already exist in `docs/area/` and are to be used: AF-01 planet view with arrow, AF-02 region, AF-03 zoomed-in locality.
+
+---
+
 ## Release goal
 
 Expand the published step-001 project-announcement article to give it more substance
@@ -8,6 +20,8 @@ why that class of terrain, (b) where it goes and what can honestly be said about
 position before any site release, and (c) how long the programme and the surface
 mission are designed to last. All additions stay inside the step-001 allowance;
 nothing from a later step appears.
+
+The added prose is descriptive, not promotional — no grandeur, no urgency, no unearned certainty (`brand-voice`).
 
 ## Article
 
@@ -54,7 +68,7 @@ Sources: USGS SIM 3041, SIM 3209, SIM 3489; NASA orbital spectroscopy context
 (`docs/SCENARIO.md` lines 289-294).
 
 Forbidden from this paragraph:
-- Any coordinates, landing site name, or site-specific unit (Asteria Field is HELD).
+- Any coordinates, landing site name, or site-specific unit (Asteria Field is now RELEASED — see below).
 - Any mention of a specific rover, vehicle design detail, or instrument.
 
 ### 2. Where it goes — geographic setting and what can honestly be said about position
@@ -72,21 +86,23 @@ Allowed facts (all from released step-001 canon or real Mars grounding):
   on Earth (Margaritifer Terra = "Pearl-bearing land").
 - Regionally it is characterised by impact craters, valley networks, basin deposits,
   and mineralogical evidence of past water activity documented in USGS maps.
-- The mission's stated target is the Margaritifer Terra region — not a named crater,
-  valley, or landing site — which is the permitted level of geographic specificity at
-  step 001.
-- No coordinate, no site name, no map, and no local operations frame may appear.
+- The mission targets Asteria Field, a designated operational region within Margaritifer Terra
+  (RELEASED 2026-09-17; see approval reference above). The name Asteria Field must
+  always be qualified as "fictional" in prose. Never call it an official place name
+  or imply any real agency partnership, endorsement, or mission.
+- Coordinates RELEASED (2026-09-17): planning centre **17.80°S, 332.20°E (27.80°W)**;
+  planning envelope **12.5–24.0°S, 327.0–338.0°E** (source: `docs/area/AREA.md` §Control record).
+  These are scenario planning coordinates; do not present them as a real Mars feature.
 
 Sources: USGS Gazetteer of Planetary Nomenclature (Margaritifer Terra, Feature 3701);
-USGS SIM 3041, SIM 3209, SIM 3489; `docs/SCENARIO.md` lines 289-294.
+USGS SIM 3041, SIM 3209, SIM 3489; `docs/SCENARIO.md` lines 289-294; `docs/area/AREA.md` §Control record.
 
 Forbidden:
-- Any coordinate (17.80°S / 332.20°E or any other specific value).
-- "Asteria Field" (HELD — `docs/SCENARIO.md` line 21, 279).
-- Any map or planning-envelope reference (`docs/area/AREA.md` public status: no
-  publication, route, metadata, or media release approved).
-- The unexplained coordinate from `index.astro` line 58 (18°42′S / 226°14′E) — not
-  used in the article, flagged as a separate corrective item.
+- The landing-design material inside `docs/area/AREA.md`: landing ellipse geometry,
+  P0 touchdown zone, science-zone plan, hazard inventory, traverse logic, and the
+  AF-H0/AF-B1/AF-C2/AF-L3/AF-E4 unit identifiers. That is landing-preparation material
+  and stays out of the announcement even though the name and coordinates are released.
+- Any map or planning-envelope reference that goes beyond what is released here.
 
 ### 3. Programme and surface mission design lifetime
 
@@ -95,8 +111,8 @@ The existing article states the launch window (2031) and the lifecycle budget
 The human has asked for more detail on programme and mission longevity. The added
 paragraph should answer: what the lifecycle budget frame means (concept through archive
 implies a multi-year programme), that the surface mission is designed for sustained
-operations rather than a brief flyby, and — if the human approves — the specific
-duration in Mars years that the scenario uses as its design anchor.
+operations rather than a brief flyby, and — now approved — the specific duration in
+Mars years that the scenario uses as its design anchor.
 
 Allowed facts (from step-001 canon and SCENARIO.md):
 - The lifecycle budget covers "concept work through the final science archive" —
@@ -105,87 +121,84 @@ Allowed facts (from step-001 canon and SCENARIO.md):
 - The surface mission is designed for extended operations, not a short-lived lander.
 - The programme operates under an equal governance model that plans for sustained
   science return.
-- If the human approves releasing the design lifetime: "The surface mission is
-  designed to operate for two Mars years — approximately 1,375 Earth days — which
-  corresponds to a full seasonal cycle and provides the minimum time needed to
-  characterise an ancient aqueous environment across a Martian year." Source:
-  `docs/SCENARIO.md` line 25 ("Two Mars years, ending 21 June 2035") — this fact is
-  currently private canon; release requires human approval.
+- **RELEASED 2026-09-17:** The surface mission is designed to operate for two Mars years —
+  **1,374 Earth days** — providing at least one full seasonal cycle to characterise
+  an ancient aqueous environment and its mineralogical record. Source:
+  `docs/SCENARIO.md` line 25 ("Two Mars years, ending 21 June 2035") and line 209
+  ("The supported surface interval is exactly **1,374 Earth days**, using 687 Earth
+  days as the planning length of one Mars year"). Use the exact interval **1,374**,
+  never "approximately 1,375".
 
-Sources: `docs/SCENARIO.md` lines 20, 25, 216-217; NASA Mars-year explanation
+Sources: `docs/SCENARIO.md` lines 20, 25, 209, 216-217; NASA Mars-year explanation
 (`docs/SCENARIO.md` line 293).
 
 Forbidden:
-- "21 June 2035" — the absolute end date is gated.
+- "21 June 2035" — the absolute end date is gated. Item 1 releases the duration only,
+  not the calendar.
 - Any specific surface mission end date.
-- "Asteria Field" as a site name.
 
-## HELD — needs human release
+## Released facts (with canon sources — approved 2026-09-17)
 
-The following exact sentences are prepared and ready to paste. They may NOT be written
-into the article without a recorded human approval reference on this card's comment
-thread. One "yes, release X" on this card is enough for a follow-up card to apply the
-change with no new research.
+| Fact | Canon source |
+| ---- | ------------ |
+| Surface mission designed for two Mars years = **1,374 Earth days** | `docs/SCENARIO.md` lines 25, 209 |
+| Target name: **Asteria Field** (fictional) | `docs/area/AREA.md` §Control record |
+| Planning centre: **17.80°S, 332.20°E (27.80°W)** | `docs/area/AREA.md` §Control record |
+| Planning envelope: **12.5–24.0°S, 327.0–338.0°E** | `docs/area/AREA.md` §Control record |
+| Local operations frame: **8 × 6 km**, centred on planning centre | `docs/area/AREA.md` §Control record |
 
-### HELD item 1: Surface mission design lifetime
+## Three map plates — RELEASED (reuse, no generation)
 
-**Question for the human:** May the article state that the surface mission is designed
-for two Mars years (~1,375 Earth days)? This is the scenario design anchor
-(`docs/SCENARIO.md` line 25). Not releasing it means the article stays vaguer on
-longevity; releasing it gives readers a concrete operational scale.
+The three plates are approved for reuse in article 001. They are generated visualizations
+and must not be presented as orbital imagery. All three: "GPT Image generation, 2026-09-16";
+"generated visualizations and must not be presented as orbital imagery"; they "do not
+reproduce NASA, ESA, USGS, HiRISE, CTX, MOLA, or other orbital imagery."
 
-**Sentence to paste (insert after the sentence about sustained operations):**
+Any caption, alt text, label, or credit must carry that provenance and must not claim
+orbital imagery.
 
-"The surface mission is designed to operate for two Mars years — approximately 1,375
-Earth days — providing at least one full seasonal cycle to characterise an ancient
-aqueous environment and its mineralogical record."
+| Plate | Stable filename | Description | Scale / frame | Placement in article |
+| ----- | --------------- | ----------- | ------------- | -------------------- |
+| AF-01 | `asteria-field-01-mars-locator.png` | Whole-planet Mars view with arrow targeting the fictional Asteria Field | Planet-scale; ~1,000 km scale bar | Introduction / orientation |
+| AF-02 | `asteria-field-02-regional-context.png` | Regional view of the 12.5–24°S / 327–338°E envelope with terrain units and centre marker | ~200 km scale bar | Geographic-setting paragraph |
+| AF-03 | `asteria-field-03-local-operations.png` | 8 × 6 km local view: landing ellipse, P0 touchdown zone, science zones, hazards, traverses, comms shoulder | 1 km scale bar | Mission-design paragraph |
 
-**Canon source:** `docs/SCENARIO.md` line 25.
+Paths: `docs/area/asteria-field-01-mars-locator.png`, `docs/area/asteria-field-02-regional-context.png`, `docs/area/asteria-field-03-local-operations.png`
 
-### HELD item 2: Landing site name — Asteria Field
+Alt-text meaning: "Mars globe/regional/local map showing Asteria Field's fictional location/extent/operations frame; generated visualization, not orbital imagery."
 
-**Question for the human:** May "Asteria Field" be used as the mission's target
-designation in the article? This is the fictional Red Horizon operational region
-(`docs/SCENARIO.md` line 21; `docs/area/AREA.md` control record). Not releasing it
-means the article refers only to the region ("Margaritifer Terra"); releasing it adds
-a named target without revealing coordinates or maps.
+Caption requirement: each caption must include "Generated visualization for Red Horizon scenario planning, 2026-09-16. Not orbital imagery."
 
-**Sentence to paste (insert in the geographic-setting paragraph):**
+**ComfyUI:** N/A — plates are reuse, not generation.
 
-"The mission targets Asteria Field, a designated operational region within
-Margaritifer Terra."
+## What stays gated (five items — do not publish)
 
-**Canon source:** `docs/SCENARIO.md` line 21; `docs/area/AREA.md`.
+1. `21 June 2035` and any absolute end date, sol count, or mission deadline. Item 1 releases the duration only, not the calendar.
+2. The landing-design material inside `docs/area/AREA.md`: landing ellipse geometry, P0 touchdown zone, science-zone plan, hazard inventory, traverse logic, and the AF-H0/AF-B1/AF-C2/AF-L3/AF-E4 unit identifiers. That is landing-preparation material and stays out of the announcement.
+3. Payload, hardware ownership, launch provider, exact launch and landing dates, RH-01 name and imagery: unchanged (`docs/SCENARIO.md` §Continuity and release controls, lines 272-282).
+4. Nothing for timeline steps 003 and later.
+5. Landing ellipse, P0 zone, science zones, hazard inventory, traverse logic, and unit identifiers from `docs/area/AREA.md` — even though the name and centre coordinates are now released, this specific planning geometry stays private.
 
-### HELD item 3: Map or position graphic
-
-**Question for the human:** May a map or annotated position graphic showing the
-mission's target region be created for this article? This requires a separate human
-release decision because maps of the target region are currently gated
-(`docs/SCENARIO.md` line 279; `docs/area/AREA.md` public status: no publication,
-route, metadata, or media release approved). If approved, the visuals agent should
-receive a brief for a regional context map only (no landing site marker, no
-coordinates overlaid), approved by continuity before publication.
-
-## Forbidden token set
-
-The following terms must not appear in the revised article. Verify with grep before
-closing the draft card.
+## Forbidden token set (verify with grep before closing draft)
 
 ```
-asteria|Asteria
-ariane64|ariane 64|Ariane 64|Kourou
+17 February|16 September|21 June|2035
+Ariane 64|Kourou|Guiana|French Guiana
 RH-01|Pathfinder|pathfinder
-payload[ -]selection|instrument[ -]selection
 FEI STU|fei stu
-17 February|16 September|21 June|february 20|september 20|2035
-guiana|French Guiana
-sample[ -]return
+payload[- ]selection|instrument[- ]selection
+sample[- ]return
 crew|crewed
-spectrometer|raman|isotope[ -]power|americium|radioisotope
+spectrometer|raman|isotope[- ]power|americium|radioisotope
 ```
 
-Grep command: `grep -iE "asteria|ariane64|ariane 64|RH-01|pathfinder|FEI STU|17 february|16 september|21 june|guiana|sample.return|crewed|spectrometer|raman|isotope.power|americium|radioisotope" website/news/001-project-announcement.mdx`
+Note: `asteria|Asteria` is REMOVED from this list — it is now released for article 001.
+`17.80|332.20|27.80|12.5|24.0|327|338|8 × 6` are RELEASED.
+
+Grep command:
+```
+grep -iE "17 february|16 september|21 june|2035|ariane 64|kourou|rh-01|pathfinder|fei stu|sample.return|crewed|spectrometer|raman|isotope.power|americium|radioisotope" website/news/001-project-announcement.mdx
+```
 
 ## Existing review record
 
@@ -206,15 +219,13 @@ are running. Recommended sequencing:
    serially after that.
 3. The article parent for this revision (`t_0a26f1e8`) is reused as the child of the
    BUILD card, not replaced.
+4. A separate site-support card (`mars-ai-simulator-dev`, child of `t_774e7298`)
+   handles the schema/component changes and guard retirement needed to render three
+   plates; it must complete before the IMAGES card can be written.
+5. A documentation card updates the canon-status records in `docs/area/AREA.md` and
+   `docs/SCENARIO.md` to reflect the partial release.
 
-## Escalation items for human decision (three items, one "yes" each unlocks)
+## Escalation items resolved
 
-1. **Surface mission design lifetime** — two Mars years (~1,375 Earth days) as
-   stated design anchor. Approving this adds one factual sentence to section 3.
-2. **"Asteria Field" as a named target** — using the fictional operational
-   designation in the article. Approving this adds a site name without coordinates.
-3. **Map or position graphic** — a regional context map for the article. Requires
-   a recorded human release and a separate brief to visuals with no site marker,
-   no coordinate overlay.
-
-No other canon, publication, or deployment decisions are pending from this brief.
+All three escalation items have received human approval (2026-09-17). No further
+human decisions are pending from this brief.

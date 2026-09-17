@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+
+import DisclosureNote from '../components/DisclosureNote.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SplashScreen from '../components/SplashScreen.astro';
+import { canonicalUrl } from '../lib/seo';
+import { site } from '../lib/site';
+
+/**
+ * Site shell: document head, splash, page column, and the chrome a page composes
+ * around its own sections. `title` and `description` default to the site strings
+ * already in use.
+ *
+ * `noindex` is the head opt-out the error route needs: it suppresses the
+ * canonical link (the pathname an error page is served under is not a URL the
+ * document owns) and marks the page `robots: noindex`. `404.astro` is the only
+ * page that sets it — no other route may.
+ */
+const { title = site.defaultTitle, description = site.defaultDescription, noindex = false } = Astro.props;
+
+const canonical = noindex ? undefined : canonicalUrl(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+        <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={description} />
+        <meta name="generator" content={Astro.generator} />
+        {canonical && <link rel="canonical" href={canonical} />}
+        {noindex && <meta name="robots" content="noindex" />}
+        <title>{title}</title>
+    </head>
+    <body class="is-loading">
+        <SplashScreen />
+
+        <main id="main-content" class="page">
+            <slot name="header">
+                <SiteHeader />
+            </slot>
+            <slot />
+            <slot name="disclosure">
+                <DisclosureNote />
+            </slot>
+            <slot name="footer">
+                <SiteFooter />
+            </slot>
+        </main>
+
+        <noscript>
+            <style>
+            /*
+             * Without JavaScript the splash never retracts and the page
+             * fade never runs, so both are forced off. `!important` is
+             * required: the layout rule that reveals the page is more
+             * specific than a bare `.page` selector.
+             */
+            .splash {
+                display: none !important;
+            }
+            .page {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            </style>
+        </noscript>
+    </body>
+</html>

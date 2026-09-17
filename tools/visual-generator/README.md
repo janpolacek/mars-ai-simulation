@@ -1,170 +1,120 @@
-# Mars AI Stories
+# Local ComfyUI generator
 
-Mars AI Stories is a code-driven toolset for building coherent visual lore: describe a planet, an expedition, a vehicle and its exploration events, then render vehicle references and scenes through ComfyUI.
+A small, standard-library-only driver for the local ComfyUI server. It renders one vehicle in three
+stages — canonical reference, derived camera views, scene — from a job spec you write per run. It is
+the tool behind the `mars-ai-simulator-visuals` role: see `.agents/skills/mars-story-toolset/SKILL.md`
+for the procedure and the Hermes `image_gen/comfyui` plugin for single-image generations and edits.
 
-The included Mars vehicles are prompt examples only. Generated images, model weights, access tokens and machine-specific configuration are intentionally excluded from this repository.
+## This directory holds no permanent assets
 
-## What it generates
+The tool is a processor, not a store:
 
-The same shared workflows run for every vehicle:
-
-1. `01a-canonical` creates one clean canonical vehicle reference from a description and optional detail images.
-2. `01b-angle` derives front-left, side and rear-right reference views from that canonical image.
-3. `02-scene` uses the three reference views plus a scene description to create an exploration image.
-
-The pipeline stores generated files under `stories/<vehicle>/` locally:
+- **Inputs come out of `docs/`.** Copy the identity or scene text from the vehicle and area
+  dossiers under `docs/vehicle/` and `docs/area/` into a scratch `spec.json`, and copy any
+  reference image you need into the tool before running.
+- **Outputs go back to `docs/` only after a human selects one.** Candidates, run records and the
+  spec live in the scratch paths below, which are git-ignored and safe to delete at any time. An
+  approved export is copied into `docs/` with an asset manifest entry by the site engineer.
 
 ```text
-stories/<vehicle>/
-├── references/
-│   ├── canonical.png
-│   ├── front-left.png
-│   ├── side.png
-│   └── rear-right.png
-└── scenes/
-    ├── 01-landing.png
-    ├── 02-investigation.png
-    └── 03-years-later.png
+spec.json      scratch job input
+assets/        scratch reference inputs
+stories/       scratch renders and run records, per vehicle slug
 ```
 
-Those files are ignored by Git. Review and select generated images yourself before treating any detail as story canon.
+## Job spec
 
-## Vehicle dossiers and renders
-
-Each dossier retains the exact identity and scene instructions sent to the
-workflow, followed by links to every generated reference and scene image.
-
-| Vehicle     | Dossier                                                  | Generated images                                                                                      |
-| ----------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| ATLAS-01    | [Vehicle dossier](stories/vehicle-01-atlas/README.md)    | [References](stories/vehicle-01-atlas/references/) · [Scenes](stories/vehicle-01-atlas/scenes/)       |
-| TAIGA-02    | [Vehicle dossier](stories/vehicle-02-taiga/README.md)    | [References](stories/vehicle-02-taiga/references/) · [Scenes](stories/vehicle-02-taiga/scenes/)       |
-| VANGUARD-03 | [Vehicle dossier](stories/vehicle-03-vanguard/README.md) | [References](stories/vehicle-03-vanguard/references/) · [Scenes](stories/vehicle-03-vanguard/scenes/) |
-
-## Requirements
-
-- A working ComfyUI installation reachable through its HTTP API.
-- The model files referenced by the workflow JSON installed in that ComfyUI instance.
-- Python 3.11+; the runtime scripts use only the standard library.
-
-The workflow JSON names the required model files. Model licences apply separately from this repository's MIT licence.
-
-## Configure a world
-
-Edit `story_set.json`.
-
-- `planet.visual_description` is the visible terrain and atmosphere for scenes.
-- `planet.lore` and `mission` keep background context; they are not automatically added to visual prompts.
-- `identity` defines the stable vehicle shape, locomotion or propulsion, materials, instruments and front/rear landmarks.
-- `reference_pose` defines the canonical studio reference.
-- `reference_angles` defines the three requested derived views.
-- `scenes` defines one visible action or moment per image.
-
-Keep a vehicle description concrete and mechanically simple: one body type, one propulsion or locomotion system, a small fixed instrument set, and clear attachment points. Optional `assets` are reference images for a specific detail, such as a camera housing or wheel construction; they are used only for the canonical stage.
-
-## Red Horizon candidate workflow
-
-`red_horizon_assets.json` is a separate, local-review preset for the fictional
-Red Horizon project. It produces four text-free logo concepts and four RH-01
-Pathfinder canonical references with controlled composition and camera variation.
-After a human selects one canonical reference, it can produce four restrained
-mission-field-check variations. It is not a publication workflow: generated files
-and their exact prompt/run records remain ignored under `assets/red-horizon/`
-until a human selects an approved export.
-
-With ComfyUI running locally, generate the staged candidates with:
-
-```sh
-python3 scripts/generate_red_horizon_assets.py --server http://127.0.0.1:8188 --stage all
-```
-
-Run `--stage logo` or `--stage canonical` to work one set at a time, and use
-`--variants <count>` for a smaller set. The mission scene requires your selected
-canonical candidate, for example:
-
-```sh
-python3 scripts/generate_red_horizon_assets.py --server http://127.0.0.1:8188 \
-  --stage scene --canonical assets/red-horizon/rh01/canonical-02.png
-```
-
-## Add a vehicle
-
-Add an object to `vehicles` in `story_set.json`; do not copy or create a workflow per vehicle. Use an unused, folder-safe ID such as `vehicle-04-orbiter`.
+`scripts/generate_story_set_via_api.py` reads a JSON spec (`--spec`, default `./spec.json`).
+Background lore stays out of the spec: only visible text reaches a prompt.
 
 ```json
 {
-    "id": "vehicle-04-orbiter",
-    "name": "ORBITER-04",
-    "mission": "One sentence of mission context.",
-    "identity": "Short concrete description of body, locomotion, instruments, materials and limits.",
-    "assets": [],
-    "reference_pose": "White seamless studio background, front-left quarter view.",
+    "planet": { "id": "mars", "visual_description": "Visible terrain and atmosphere." },
+    "photo_style": "Shared realism, materials and photographic character.",
+    "reference_style": "Studio reference look: seamless neutral background, soft light.",
+    "scene_style": "Documentary field-camera look for scene stages.",
+    "reference_camera": "Front-left three-quarter view at body height.",
     "reference_angles": [
         ["front-left", "front-left quarter view high-angle shot medium shot"],
         ["side", "left side view eye-level shot medium shot"],
         ["rear-right", "back-right quarter view eye-level shot medium shot"]
     ],
-    "scenes": [
-        { "id": "01-landing", "description": "One visible landing moment." },
-        { "id": "02-investigation", "description": "One visible investigation moment." },
-        { "id": "03-years-later", "description": "One visible aged-but-maintained moment." }
+    "vehicles": [
+        {
+            "slug": "vehicle-04-orbiter",
+            "name": "ORBITER-04",
+            "mission": "One sentence of context; not sent to the model.",
+            "identity": "Concrete body, locomotion, instruments, materials and limits.",
+            "assets": [],
+            "reference_pose": "Front-left quarter view on a white floor.",
+            "scenes": [["01-landing", "One visible moment."]]
+        }
     ]
 }
 ```
 
+`scenes` entries are `[id, description]` pairs — the id names the output file
+(`stories/<slug>/scenes/<id>.png`). A mapping (`{"id": ..., "description": ...}`) is also accepted.
+Keep an identity mechanically simple: one body type, one propulsion or locomotion system, a small
+fixed instrument set, and clear attachment points. Optional `assets` entries
+(`{"path": "...", "instruction": "..."}`) guide one detail in the canonical stage only. Any camera
+descriptor in `reference_angles` must come from the vocabulary in `scripts/prompt_inputs.py`; an
+unsupported one fails fast before anything is queued.
+
 ## Run
 
-Set the ComfyUI address, then generate one vehicle or all configured vehicles:
+Start the server first and stop it when the batch is done — a loaded ComfyUI holds several GB of
+VRAM for as long as it runs:
 
 ```sh
-export MARS_SERVER=http://127.0.0.1:8188
-
-# Optional: refresh the editable UI workflow examples for one vehicle.
-python3 scripts/build_ui_workflows.py --server "$MARS_SERVER" --vehicle vehicle-04-orbiter
-
-# Canonical reference, three views and three scenes.
-python3 -u scripts/generate_story_set_via_api.py \
-  --server "$MARS_SERVER" --stage all --vehicle vehicle-04-orbiter
+comfyctl start                     # ~/.hermes/bin/comfyctl: idempotent, waits for readiness
+python3 -u scripts/generate_story_set_via_api.py --server http://127.0.0.1:8188 --stage scenes
+comfyctl stop                      # unloads models, then terminates the server
 ```
 
-For a manual reference-selection step, run the stages separately:
+Stages: `canonical` (one clean reference), `angles` (derived views from the canonical),
+`references` (canonical plus views), `scenes` (each scene from the three views), `all`. Narrow a run
+with `--vehicle <slug>`. Use `--resume` only after an interruption: it reuses a result only when the
+exact graph and source-image hashes still match. The runner refuses to start while the ComfyUI queue
+is busy — wait for the other job instead of forcing it.
 
-```sh
-python3 scripts/generate_story_set_via_api.py --server "$MARS_SERVER" --stage references --vehicle vehicle-04-orbiter
-# Review the three files in stories/vehicle-04-orbiter/references/.
-python3 scripts/generate_story_set_via_api.py --server "$MARS_SERVER" --stage scenes --vehicle vehicle-04-orbiter
-```
+## Run records
 
-Available stages are `canonical`, `references`, `angles`, `scenes` and `all`. Use `--resume` only after an interruption: it reuses a result only if the exact graph and source-image hashes match.
-
-## Workflows and run records
-
-`workflows/` contains the reusable API and UI workflow JSON for the three stages. They are examples to inspect or import into ComfyUI; the Python runner builds the same graphs from `story_set.json`.
-
-During generation, `stories/<vehicle>/runs/` may contain an ignored audit trail:
+Every render writes an audit trail next to the image under `stories/<slug>/runs/`:
 
 | File             | Meaning                                                           |
 | ---------------- | ----------------------------------------------------------------- |
 | `*.api.json`     | Exact ComfyUI graph submitted for one image.                      |
 | `*.inputs.json`  | Resolved prompt text and source-image hashes.                     |
-| `*.job.json`     | Submission ID and graph hash, written immediately after queueing. |
+| `*.job.json`     | Submission id and graph hash, written immediately after queueing. |
 | `*.history.json` | Final ComfyUI execution record.                                   |
 
-They are useful for reproducing or recovering a render but are not inputs for adding a new vehicle. Delete them together with a finished local batch when they are no longer needed.
+Cite these as provenance for a candidate, then delete them with the batch when they are no longer
+needed. `workflows/` holds the same three graphs in ComfyUI API and UI format for inspection or
+manual import; `scripts/build_ui_workflows.py --spec <spec>` regenerates the UI examples.
 
-## Repository layout
+## Model requirements
+
+The graphs name these files exactly, and they must exist in the target ComfyUI installation (here
+`~/Applications/ComfyUI`). `models/checkpoints/` is empty, so every graph loads through `UNETLoader`:
+
+| Stage            | Files                                                                                                                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| canonical, scene | `flux-2-klein-base-4b.safetensors`, `qwen_3_4b.safetensors` (`type: flux2`), `flux2-vae.safetensors`                                                                              |
+| angles           | `qwen_image_edit_2511_fp8mixed.safetensors`, `Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors`, `qwen_2.5_vl_7b_fp8_scaled.safetensors`, `qwen_image_vae.safetensors` |
+
+One generation at a time: an 8 GB card swaps badly with two workflows in flight. Expect roughly 1-4
+minutes per image.
+
+## Layout
 
 ```text
-story_set.json                         Editable planet, vehicle and scene inputs
-workflows/                             Shared ComfyUI API and UI workflow JSON
-scripts/generate_story_set_via_api.py  Batch runner
-scripts/build_ui_workflows.py          Populate UI workflow examples from the manifest
-scripts/workflow_factory.py            Canonical and scene graph builder
-scripts/angle_workflow.py              Camera-view graph builder
-scripts/prompt_inputs.py               Shared prompt composition
+scripts/generate_story_set_via_api.py  stage runner (spec in, renders out)
+scripts/build_ui_workflows.py          regenerate workflows/*.json from a spec
+scripts/workflow_factory.py            Flux.2 graph builder (canonical and scene)
+scripts/angle_workflow.py              Qwen-Image-Edit graph builder (angles)
+scripts/prompt_inputs.py               prompt composition and camera vocabulary
+workflows/                             reusable API and UI workflow examples
 ```
 
-## Public repository hygiene
-
-Do not commit generated imagery, detail assets, model files, logs, access tokens, machine addresses or ComfyUI run records. `.gitignore` excludes these local artifacts by default.
-
-License: [MIT](LICENSE). The repository does not grant rights to third-party models or generated content.
+License: [MIT](LICENSE). Nothing here grants rights to third-party models or to generated content.
