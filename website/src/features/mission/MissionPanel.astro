@@ -43,7 +43,8 @@ import { missionFacts, missionIntro } from './facts';
     min-height: 7rem;
     border-left: 1px solid var(--rh-hairline);
     border-bottom: 1px solid var(--rh-hairline);
-    padding: 0 1.5rem 1.5rem;
+    /* Symmetric: a label is never flush against its cell's top edge. */
+    padding: 1.5rem;
 }
 
 .mission-facts div:nth-child(2n) {
@@ -55,7 +56,6 @@ import { missionFacts, missionIntro } from './facts';
     min-height: auto;
     border-left: 0;
     border-bottom: 0;
-    padding-top: 1.5rem;
 }
 
 dt {
