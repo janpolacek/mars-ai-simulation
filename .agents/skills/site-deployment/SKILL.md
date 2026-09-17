@@ -250,3 +250,36 @@ stage's prescribed artifact is the deployment record on the card itself.
   `origin/main` is already your commit's parent, the push is a clean
   fast-forward — verify that and push; never stash or rebase over another
   worker's in-flight files.
+- The homepage's loading screen is gated at runtime on an exact `/` (card
+  `t_15a027cf`): `BaseLayout` emits an inline `data-splash-skip` gate for a
+  non-empty `location.hash` — and for a document served at another path — and
+  `layout.css` keys the marker rules on it. Verify a deploy of it with `fetch`,
+  never by eyeballing the served HTML: extract the gate with a whitespace-tolerant
+  pattern (`/<script>[\s\S]*?location\.pathname[\s\S]*?<\/script>/`), because the
+  script is templated and its indentation moves with the layout, compare it
+  whitespace-normalised against your own `dist/index.html`, check the stylesheet
+  the homepage links for both `html[data-splash-skip]` rules, and confirm no other
+  route carries the gate. Straight after the push the edge can still answer from
+  the previous deployment (`cf-cache-status: HIT`, served document a different
+  length): poll until the served byte count equals your own build rather than
+  reporting a stale copy.
+- `dprint`'s markup plugin re-indents the body of an inline `<script>` in a
+  `.astro` file, so a gate written with hand-tuned indentation lands mis-indented
+  and `dprint check` fails the tree. Emit the script's source through `set:html`
+  (the string reaches the document byte-for-byte) and the formatter has nothing to
+  re-indent. Measure the formatter gate in a fresh `npm ci` clone: the shared
+  checkout's `node_modules` predates the pinned `dprint`, so `npm run format:check`
+  there exits 127 (`dprint: not found`) and proves nothing.
+- ESLint's `recommended` set has no browser globals either, so `URL` in a
+  `website/test/*.mjs` file fails `no-undef`; stub `location` as a plain object
+  (`{ pathname, hash }`) for a `node:vm` run of a page script instead of adding
+  globals.
+- Measure a first-paint decision with `Page.addScriptToEvaluateOnNewDocument`: a
+  sampler installed before navigation records `getComputedStyle`, `window.scrollY`
+  and `document.elementFromPoint` at fixed times, which is what proves "never
+  painted" and that the fragment jump happened. `Page.captureScreenshot` times out
+  in this headless session, so it cannot be used to force frames, and CSS
+  animation clocks can sit frozen (`playState: running`, `currentTime: 0`) — a
+  state that depends on an animation finishing then reads exactly like the bug.
+  Measure the before and the after build in one session, and report which
+  properties needed no frame (`display`, `scrollY`, the hit test).
