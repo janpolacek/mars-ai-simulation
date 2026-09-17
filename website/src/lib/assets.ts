@@ -56,13 +56,21 @@ export const identityMarkTransparent: ImageMetadata = identityMarkTransparentSou
  * Release: human story owner, 2026-09-17 (relayed by the operator), recorded in
  * `.agents/work/briefs/001-project-announcement.md` and
  * `docs/SCENARIO.md` §Continuity and release controls — the name, the planning
- * centre coordinates, and these three plates are released for article 001 only.
- * Every other Asteria Field planning artefact, and the landing-design material
- * inside `docs/area/AREA.md`, stays gated (`scripts/guards.mjs`).
+ * centre coordinates, and these three plates are released for article 001. The
+ * wiki area-page node `/wiki/area/asteria-field/` is additionally public at step
+ * 003 on the strength of the operator's Gate A answer 2026-09-17 13:40 CEST on
+ * gate card `t_9b2a308d` (Gate A selected A), recorded in `docs/SCENARIO.md`
+ * §Continuity and release controls; the withheld families — landing-design
+ * facts: ellipse geometry, P0 touchdown zone, science-zone plan, hazard
+ * inventory, traverse logic, `AF-*` unit identifiers — stay withheld per H1
+ * decision 2026-09-17 option i.
  *
  * The plates are generated visualizations, not orbital imagery: whoever renders
  * them must print the provenance sentence registered in
- * `src/features/news/media.ts`. Only article 001 has a release for them.
+ * `src/features/news/media.ts`. The same exception applies to them: only article
+ * 001 and the wiki area-page node release these plates; every other Asteria
+ * Field planning artefact, and the landing-design material inside
+ * `docs/area/AREA.md`, stays gated (`scripts/guards.mjs`).
  */
 export const asteriaPlate01: ImageMetadata = asteriaMarsLocatorSource;
 export const asteriaPlate02: ImageMetadata = asteriaRegionalContextSource;
