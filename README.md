@@ -94,7 +94,7 @@ agent's work: it needs a current human instruction.
 docs/        Documentation, the locked scenario, and one dossier per subject
 .agents/     Project-local task skills, and the working papers for articles in flight
 website/     The Astro application and its build scripts
-tools/       The local image-generation workspace (scratch, git-ignored)
+tools/       The local image-generation workspace (its scratch output is git-ignored)
 ```
 
 - [`docs/`](docs/README.md) — what the project is, what is true inside the fiction, the
