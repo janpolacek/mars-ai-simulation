@@ -283,3 +283,38 @@ stage's prescribed artifact is the deployment record on the card itself.
   state that depends on an animation finishing then reads exactly like the bug.
   Measure the before and the after build in one session, and report which
   properties needed no frame (`display`, `scrollY`, the hit test).
+- A section that must keep one height across slides is built by stacking: make
+  the container a grid and give every slide one placement (`grid-area: 1 / 1`,
+  card `t_89b325e5`), then hide an inactive slide with `visibility: hidden`
+  rather than `display: none` so its box still sets the row. Sending an inactive
+  slide out of the flow hands the section's height back to whichever slide is
+  active and moves the whole page — measured on the built homepage at 1280px:
+  461px/3,159px against 645px/3,343px, 184px per switch — and a JS measurement
+  taken once on init would paint the first slide's height and then resize. The
+  `visibility` form keeps every accessibility property (`Tab` skips the inactive
+  slide's link, `Accessibility.getFullAXTree` has no node for its heading or its
+  label, `a.focus()` leaves `document.activeElement` where it was), but a
+  `guards.test.mjs` case that pinned the old `display: none` must be
+  re-expressed — assert `visibility: hidden` present _and_ `display: none`
+  absent, and say so in the handoff rather than dropping the check.
+- A slide that stays in the layout does **not** fetch its `loading="lazy"` image,
+  and showing it changes no geometry, so nothing re-triggers that decision: the
+  picture stays blank (measured, fresh cache-disabled session). Promote the image
+  of the slide the client is showing to `loading="eager"` — assigning
+  `img.loading = 'eager'` does start the fetch (new resource entry,
+  `naturalWidth` 1024). To measure a below-the-fold section at all, raise the
+  emulated viewport (`Emulation.setDeviceMetricsOverride`, 1280x3200) instead of
+  scrolling: `window.scrollTo` and `scrollIntoView` leave `window.scrollY` at 0
+  in this headless session. Accessibility-tree names follow `text-transform`, so
+  the inactive slide's label is found as the uppercased `ANNOUNCEMENT SUMMARY` —
+  a case-sensitive count returns 0 for the _visible_ slide too and reads as a
+  false pass.
+- When CI has no browser, a layout contract is still testable without one:
+  evaluate the cascade of just the properties that decide flow (`display`,
+  `position`, `visibility`, `content-visibility`, grid placement) from the built
+  page's own stylesheets against the emitted markup, in both slide states and
+  both breakpoints. The corpus needs both halves — component styles are inlined
+  into the page's `<style>` blocks while page-level rules land in `_astro/*.css`,
+  so a corpus of emitted CSS alone silently compares nothing — and the matcher
+  must fail closed on a selector it cannot evaluate while skipping at-rules other
+  than `@media`/`@supports`/`@layer` (so a `@keyframes` step never reaches it).
