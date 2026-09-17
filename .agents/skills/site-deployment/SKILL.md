@@ -421,3 +421,34 @@ stage's prescribed artifact is the deployment record on the card itself.
   no recorded hash or byte count keys on the file. Measure the candidate reflow on
   scratch copies (`dprint fmt --config <repo>/dprint.json <copy>`), never in the
   shared tree, and never `git stash` or reset the shared checkout to get there.
+- A release can break a suite that **counts cells rather than asserting a claim**, and the
+  repair belongs in the matcher, never in the count. Publishing the first item that carries
+  **no `media` key** broke `website/test/news-plate-fill.test.mjs`: `NewsCard` emits a cell's
+  class through `class:list`, so the placeholder reaches the document as
+  `class="news-placeholder placeholder-amber"` while an image cell stays bare
+  (`class="news-image"`); `cellsIn()` matched only an attribute that closed straight after the
+  cell's own class, recognised **3** cells on a homepage rendering **4**, and the two count
+  assertions then compared a number that no longer described the page. Prove the failure
+  red-first before touching it — 5/5 green on a clean `origin/main` worktree with no such
+  article, 2 failures with the publication flip alone — then read the class attribute as a
+  **class list** and take the kind from its first token, and add a build-independent fixture
+  case over the emitted markup (`<div class="news-placeholder placeholder-amber" …>`) so the
+  matcher is covered without a build. Loosening the count is not a fix.
+- A commit in this shared checkout is **not** a plain commit: the index can already hold
+  another worker's **staged** renames or edits (7 `R100` entries, a `docs/vehicle/` →
+  `docs/vehicles/` split, on 2026-09-17), and `git commit -m …` publishes those under your
+  card's message. Stage only your own paths and use the pathspec form — `git add -- <paths>`,
+  then `git commit --no-verify -m "<card id>: <change>" -- <paths>` — and prove what landed
+  with `git show --stat` (your commit names your paths and nothing else) plus `git status
+  --short` (the other worker's staged entries are still staged, still unpublished).
+- Attribute a deploy over **every route the push creates**, not one page. Build the expected
+  map from your own `website/dist/` and compare it in the same process that drives the
+  browser: the browser tool's `code` cell runs on the host, so read the local files, then
+  in-page `fetch(path, { cache: 'no-store' })` each route and
+  `crypto.subtle.digest('SHA-256', …)` the response bytes. 12/12 routes byte-identical (the
+  new article page, the index pages, the emitted assets) is what proves the live build is that
+  commit; carry the withheld-marker scan over the same sweep so one pass answers both "is it
+  my build?" and "is anything private in it?". Measured publish → live window on 2026-09-17:
+  push 17:44:14Z, the previous build still served at 17:45:06Z, the new build live by
+  17:45:23Z — a check run immediately after a push may still see the old bytes, so re-poll
+  before concluding the deploy failed.
