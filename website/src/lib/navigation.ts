@@ -60,7 +60,7 @@ export const navigation: readonly NavItem[] = [
     { label: 'News', href: routes.news },
     { label: 'Wiki', href: routes.wiki },
     { label: 'Mission', href: homeAnchor('mission') },
-    { label: 'Progress', href: homeAnchor('timeline') },
+    { label: 'Roadmap', href: homeAnchor('timeline') },
     { label: 'About', href: routes.about, footerOnly: true },
 ];
 

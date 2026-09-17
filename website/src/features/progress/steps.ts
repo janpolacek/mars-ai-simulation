@@ -6,8 +6,8 @@ import { routes } from '../../lib/navigation';
  * A curated list, not a generated one: the steps the published record carries,
  * the step the programme is working on now, and the steps after it. No string
  * here may describe a fact the record has not released, and `link` points only
- * at a published article. Move the current flag and add the link when a step's
- * article is published.
+ * at a published article. Add a step's link when its article is published; move
+ * the current flag only when the record carries the next step's opening.
  */
 export interface ProgressStep {
     /** Small label above the milestone title. */
@@ -21,10 +21,10 @@ export interface ProgressStep {
 }
 
 export const progressHeading = {
-    eyebrow: 'Progress log',
+    eyebrow: 'Mission roadmap',
     title: 'One step at a time.',
     description:
-        'The public record moves one step at a time. Published steps link to the article that carries them; the highlighted step is the work in hand, and the steps after it are not settled yet.',
+        "The programme's steps, in the order it reaches them. The highlighted step is the work in hand; the step after it is not settled yet.",
 };
 
 export const progressSteps: readonly ProgressStep[] = [
@@ -32,18 +32,19 @@ export const progressSteps: readonly ProgressStep[] = [
         state: 'Announced',
         title: 'Coalition and purpose',
         detail:
-            'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape.',
+            'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape. The schedule frame is a launch window in 2031.',
         link: { href: routes.newsArticle('001-project-announcement'), label: 'Read the announcement' },
     },
     {
-        state: 'Current progress',
+        state: 'In hand',
         title: 'Mission architecture',
         detail:
-            'Turning the announced objective into a mission: what the rover carries, who builds what, and how the mission reaches Mars.',
+            "The first rover's design is frozen and the payload scope is agreed. The mission around the rover is still being assembled.",
         current: true,
+        link: { href: routes.newsArticle('003-vehicle-design'), label: 'Read the rover design' },
     },
     {
-        state: 'Later',
+        state: 'Ahead',
         title: 'Surface operations',
         detail: 'Using the rover on the surface to survey terrain and examine rocks in context.',
     },
