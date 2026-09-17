@@ -24,7 +24,10 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # A pull request's older run is superseded by its newest one; a push run on
+  # `main` is not, because several cards push to `main` in a row and cancelling
+  # the in-flight run would leave the last commit's gates unrun.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   gates:
