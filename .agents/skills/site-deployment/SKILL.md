@@ -103,7 +103,12 @@ stage's prescribed artifact is the deployment record on the card itself.
   the element — the real markup is `class="card-label" data-astro-cid-…>`. Grep
   `class="card-label[^"]*"[^>]*>` (or `card-kicker[^>]*>`), and count the elements
   (`grep -c '<a class="card-label"'`) so a pattern that silently matches nothing
-  cannot be read as a pass.
+  cannot be read as a pass. A card body can also prescribe a class that does not
+  exist: the news card's image block is `div.news-image` with `span.image-label`
+  (`src/features/news/NewsCard.astro`), there is no `card-media` class anywhere in
+  the site, and a grep for it returns 0 on a page that does render the card image.
+  Check the prescribed selector against the component before reading 0 as "no
+  image", then assert on the emitted `<img src>`/alt/label instead.
 - `grep -c` counts matching *lines*, and Astro minifies built HTML onto one line,
   so an element count needs `grep -o '<a class="card-label"' dist/index.html |
   wc -l`. With one element the line-based form looks correct and cannot tell two
@@ -148,7 +153,10 @@ stage's prescribed artifact is the deployment record on the card itself.
   `website/.node-version` and skip the shell hook when it already matches), and
   one `find`/`ls` naming three or more paths under the documentation tree
   ("multiple credential files accessed") — split it into separate calls or read
-  the paths from a node script instead.
+  the paths from a node script instead. A URL whose host ends in `.dev` is refused
+  outright in a shell command ("lookalike TLD detected", MEDIUM), so live-origin
+  probes belong inside a `/tmp/<name>.mjs` script using `fetch`, with the origin
+  and paths as constants in the file rather than as `curl` arguments.
 - A shared `dist/` can hide a real test failure, so `npm test` passing before your
   own build proves nothing — build first, then test. Astro copies every file in
   `website/public/` verbatim into `dist/`, and `listRoutes()`
@@ -218,7 +226,16 @@ stage's prescribed artifact is the deployment record on the card itself.
   a draft exists (`unpublishedSlugs()` plus `expect(length).toBeGreaterThan(0)`).
   Reproduce it against the scratch baseline before reporting, name the flip as the
   cause, and hand the assertion repair to the release's build card instead of
-  fixing it twice.
+  fixing it twice. The repair is not a fixture written during the test run: both
+  failing tests assert over the already-built `dist/`, so a draft created while the
+  suite runs was never in the build and the assertion would pass vacuously. The
+  gate itself is already covered self-contained by the `publication gate` block in
+  `test/guards.test.mjs` (synthetic `draft`/`published` items through
+  `selectPublicNews`), so the build-output half needs either a standing draft
+  article under `website/news/` — an editorial-space decision, not a dev one — or a
+  scratch build inside the test. Settle which before editing, and never drop the
+  `toBeGreaterThan(0)` presence assertion to go green: that deletes the only thing
+  stopping the guard from reporting success while checking nothing.
 - ESLint's `recommended` set has no Node globals, so `Buffer` in a
   `website/scripts/*.mjs` file fails `no-undef`; use `Uint8Array` (sharp accepts
   it for raw pixel input) instead of adding globals.
