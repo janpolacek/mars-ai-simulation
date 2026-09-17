@@ -57,10 +57,12 @@ remaining approval as a card comment (`hermes kanban comment <id> "..."`) and in
   gone; the surface work now lives in `scripts/guards.mjs` + `scripts/check-dist.mjs`
   + `src/lib/assets.ts`). Never report a superseded path as a broken reference or
   gate on it.
-- Prove whether the article body is public at all before reviewing its surface:
-  `src/lib/releases.ts` plus the route list printed by `website/scripts/check-dist.mjs`
-  show that only the card, not the body, is reachable while the release list is
-  empty.
+- Prove whether the article body is public at all before reviewing its surface: the
+  frontmatter `publication` predicate (`src/lib/publication.ts` +
+  `src/features/news/query.ts`) plus the route list printed by
+  `website/scripts/check-dist.mjs` show that only the card, not the body, is
+  reachable while the slug is `draft`. (The older `src/lib/releases.ts` slug list was
+  retired in commit `2d9ee0d`.)
 - Name withheld material by location, not by value. Cite the gated-term list
   (`.agents/work/briefs/<slug>.md` "Forbidden token set", the review record) and
   report hit counts; keep scratch scanners outside the repository so the tree
@@ -109,6 +111,35 @@ remaining approval as a card comment (`hermes kanban comment <id> "..."`) and in
   `kanban_block(kind="dependency")`. Write the human question and its "not yours to
   decide" list into the corrective body, with the gate-side required changes as
   C-items it must apply, so no worker settles the canon question on the way through.
+
+- A **release / human-gate card** — the card that carries the verbatim approval
+  sentences and the `publication:` flip — is not an editorial gate, and its
+  acceptance criteria assume approvals that may not exist. Establish absence before
+  assuming a tool fault: scan the board for every required sentence (`task_comments`
+  in `~/.hermes/kanban.db`, opened read-only) and scan the repository, then accept
+  only matches that are **not** the planner's own template — the templates sit in the
+  planning card's body, so a hit there is not an approval. `sqlite3` is not installed
+  and `execute_code` is refused in unattended sessions, so write a scratch `python3`
+  script under `/tmp` and run it. When every gate is unrecorded the fail-closed
+  defaults hold: write the gate ledger and its evidence into the named record, prepare
+  the release change but do **not** apply it, and `kanban_block(kind="needs_input")`
+  naming the verbatim sentences the human must post. Completing instead would promote
+  the downstream BUILD child into a package no gate passed.
+- Verify the fail-closed state **in fact**, not only on paper: the article hash must
+  still equal the approved revision, and the built `website/dist/` must contain no
+  route and no reference for the slug. A draft that is merely declared `draft` is not
+  proof that it is not public.
+- A card body's placement instruction can name the wrong media key. Check it against
+  the contract in `src/lib/media.ts` (`plateCount`/`altCount`/`captionCount`) and the
+  registry in `src/features/news/media.ts` before applying it: a key whose plate count
+  differs from the asset the card means belongs to another article. Correct the
+  instruction in the record, cite the registry and the canon line that releases the
+  other key, and never place another article's plates just to make the field valid.
+- The release mechanism itself can be retired mid-run: `src/lib/releases.ts` was
+  deleted in commit `2d9ee0d`, leaving the frontmatter `publication` field as the
+  single predicate for listing, card and route. The frontmatter flip stays the correct
+  release action, and older handoffs telling a worker to "record an entry in
+  `src/lib/releases.ts`" are superseded, not broken.
 
 Acceptance checks: every review-table row passes, the record's final status is
 `approved`, and no material failure remains unresolved.
