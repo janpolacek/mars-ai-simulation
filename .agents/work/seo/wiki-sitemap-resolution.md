@@ -13,6 +13,7 @@ Confirmed by `.agents/work/seo/wiki-audit.py` on the dist tree:
 - `dist/`: no `sitemap.xml`
 
 The plan `.agents/work/briefs/wiki-tree-plan.md` line 88 stated:
+
 > "Astro's `@astrojs/sitemap` integration runs over all generated routes."
 
 This is **incorrect for the current revision** — it describes a planned integration that does not

@@ -8,9 +8,10 @@ Planner card: t_4e047758
 
 ## What the human asked for
 
-*"Plan creation of proper wiki tree (automatically indexed when new wiki is added) → landing zone (area), project, vehicle."*
+_"Plan creation of proper wiki tree (automatically indexed when new wiki is added) → landing zone (area), project, vehicle."_
 
 Three engineering properties:
+
 1. **A tree, not a page.** Hierarchical reference material, top-level nodes: landing zone (area), project, vehicle.
 2. **Self-indexing.** Adding a wiki page adds it to the index with no second edit.
 3. **Public, therefore gated.** Same fail-closed publication rule and canon approval as articles.
@@ -19,12 +20,12 @@ Three engineering properties:
 
 ## What exists to become the first nodes
 
-| File | What it is | Can be published today? |
-|------|-----------|----------------------|
-| `docs/area/AREA.md` | Asteria Field dossier + three plates AF-01..03 | **No** — gated per SCENARIO.md:279; name/coordinates/plates released 2026-09-17 for article 001 only |
-| `docs/vehicle/VEHICLE.md` | RH-01 Pathfinder dossier | **Yes** — RH-01 imagery gated per SCENARIO.md:277 (releases at step 003); dossier itself unconstrained |
-| `docs/SCENARIO.md`, `docs/GENERAL.md`, `README.md` | Scenario and project framing | Reference, not published directly |
-| `docs/payload/payload-sensor-illustration.png` | Payload illustration | Yes — approved in article 002 flow |
+| File                                               | What it is                                     | Can be published today?                                                                                |
+| -------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `docs/area/AREA.md`                                | Asteria Field dossier + three plates AF-01..03 | **No** — gated per SCENARIO.md:279; name/coordinates/plates released 2026-09-17 for article 001 only   |
+| `docs/vehicle/VEHICLE.md`                          | RH-01 Pathfinder dossier                       | **Yes** — RH-01 imagery gated per SCENARIO.md:277 (releases at step 003); dossier itself unconstrained |
+| `docs/SCENARIO.md`, `docs/GENERAL.md`, `README.md` | Scenario and project framing                   | Reference, not published directly                                                                      |
+| `docs/payload/payload-sensor-illustration.png`     | Payload illustration                           | Yes — approved in article 002 flow                                                                     |
 
 **Fourth node?** `payload` is a plausible fourth top-level node given the existing dossier set. Decision deferred to the human story owner. The wiki tree as planned has three nodes (area, vehicle, project); payload can be added as a fourth without a structural change.
 
@@ -69,6 +70,7 @@ Schema enforcement: missing `section` fails the build; missing `publication` def
 ```
 
 **Derivation of index/nav:** `src/lib/wiki-query.ts` exports `selectPublicWiki(entries)` — same predicate (`publication === 'published'`) and sort (`order asc`) as `selectPublicNews`, keyed on wiki frontmatter. It is consumed by:
+
 1. `pages/wiki/index.astro` — all published pages grouped by section
 2. `pages/wiki/[section]/index.astro` — published pages for that section only
 3. `pages/wiki/[section]/[slug].astro` — `getStaticPaths` maps the selection to routes
@@ -95,12 +97,12 @@ Schema enforcement: missing `section` fails the build; missing `publication` def
 
 ## What PLAN.md Phase 2 item 1 commits to and what this card delivers
 
-| Phase 2 item | Status |
-|-------------|--------|
-| Define MDX collections for news, wiki, mission-updates, media | **This card graph delivers wiki**; mission-updates and media out of scope |
-| Require frontmatter for title, slug, state, timeline step, publish date, related entities, canonical refs, optional media | **Delivered** (section is the entity key; timeline step not added yet — human decision) |
-| Implement listing, individual-page, tag/entity, and chronological views | **Listing and individual-page delivered; tag/entity and chronological views out of scope** |
-| Private validation command | **Out of scope** |
+| Phase 2 item                                                                                                              | Status                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Define MDX collections for news, wiki, mission-updates, media                                                             | **This card graph delivers wiki**; mission-updates and media out of scope                  |
+| Require frontmatter for title, slug, state, timeline step, publish date, related entities, canonical refs, optional media | **Delivered** (section is the entity key; timeline step not added yet — human decision)    |
+| Implement listing, individual-page, tag/entity, and chronological views                                                   | **Listing and individual-page delivered; tag/entity and chronological views out of scope** |
+| Private validation command                                                                                                | **Out of scope**                                                                           |
 
 ---
 
@@ -124,28 +126,33 @@ No scratch workspace. All cards: `--workspace dir:/home/janpolacek/Projects/mars
 The Continuity redactor and Copy editor roles merged into `mars-ai-simulator-editor`, which now
 holds the final word: **canon confirmation and releasability are the editorial role's decision, with
 no human approval sentence required.** The three decisions below are therefore routed to that role.
-What stays human-only is *advancing the release order*: publishing a node the released timeline step
+What stays human-only is _advancing the release order_: publishing a node the released timeline step
 does not yet allow is new canon and needs the human story owner's word. The fail-closed answer below
 is available to the editor without any human input.
 
 ### Gate A — Landing-zone (area) node at step 003
+
 **Source:** SCENARIO.md:279
 **Fail-closed default:** `/wiki/area/` returns 404; no Asteria Field wiki page generated.
 **Card:** t_9b2a308d — assignee now `mars-ai-simulator-editor`
 
 Options:
-- A: *"The landing-zone wiki page (Asteria Field) IS public at step 003 because [reason]."* — requires the human story owner to move the release order; the editor cannot grant this one.
-- B: *"The landing-zone wiki page IS NOT public at step 003."* — the editor's own decision, and the fail-closed default.
+
+- A: _"The landing-zone wiki page (Asteria Field) IS public at step 003 because [reason]."_ — requires the human story owner to move the release order; the editor cannot grant this one.
+- B: _"The landing-zone wiki page IS NOT public at step 003."_ — the editor's own decision, and the fail-closed default.
 
 ### Gate B — Project node at step 003
+
 **Fail-closed default:** `/wiki/project/` returns 404; no project wiki page generated.
 **Card:** t_9b2a308d — assignee now `mars-ai-simulator-editor`
 
 Options:
-- A: *"The project wiki page IS public at step 003 because [reason]."* — same release-order limit as Gate A.
-- B: *"The project wiki page IS NOT public at step 003."* — the editor's own decision, and the fail-closed default.
+
+- A: _"The project wiki page IS public at step 003 because [reason]."_ — same release-order limit as Gate A.
+- B: _"The project wiki page IS NOT public at step 003."_ — the editor's own decision, and the fail-closed default.
 
 ### Gate C — Canon confirmation and release of the first public wiki content
+
 **Fail-closed default:** no wiki page is published; all pages remain `publication: draft`.
 **Card:** t_c77be834 — assignee now `mars-ai-simulator-editor`
 
@@ -153,7 +160,7 @@ No human sentence is required. The merged editorial role confirms the pages agai
 and records its release decision on the card — the sentence below is a recommendation it may apply
 itself:
 
-> *"I approve the [vehicle/area/project] wiki page(s) for public release as of [date]. Canon facts reflect approved scenario material only."*
+> _"I approve the [vehicle/area/project] wiki page(s) for public release as of [date]. Canon facts reflect approved scenario material only."_
 
 ---
 

@@ -71,14 +71,14 @@ is only the shared vocabulary.
 
 ## Canon, drafts, and publication
 
-| State        | Meaning                                    | May appear on public site?       |
-| ------------ | ------------------------------------------ | -------------------------------- |
-| `scenario`   | Private possible/approved future event     | No                               |
-| `proposal`   | Agent work awaiting review                 | No                               |
-| `draft`      | Edited candidate, not yet approved         | No                               |
+| State        | Meaning                                                    | May appear on public site?       |
+| ------------ | ---------------------------------------------------------- | -------------------------------- |
+| `scenario`   | Private possible/approved future event                     | No                               |
+| `proposal`   | Agent work awaiting review                                 | No                               |
+| `draft`      | Edited candidate, not yet approved                         | No                               |
 | `approved`   | Canon confirmed and released by `mars-ai-simulator-editor` | Not until scheduled              |
-| `published`  | Released public content                    | Yes                              |
-| `superseded` | Replaced by a correction or later decision | Keep only with an editorial note |
+| `published`  | Released public content                                    | Yes                              |
+| `superseded` | Replaced by a correction or later decision                 | Keep only with an editorial note |
 
 The private timeline is the authoritative order of events. A public page is
 canonical once `mars-ai-simulator-editor` has confirmed it against released canon and

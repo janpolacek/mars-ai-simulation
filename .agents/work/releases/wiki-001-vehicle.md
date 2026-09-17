@@ -58,11 +58,13 @@ Fail-closed default: no wiki page is published; all pages remain `publication: d
 Fail-closed default: no sitemap, canonical links suppressed.
 
 Until a human authorises a canonical production origin:
+
 - No sitemap XML is generated (zero integration present)
 - Canonical links are suppressed across all routes including wiki
 - Never infer `SITE_URL` from an existing deployment URL
 
 Options:
+
 - Authorise a canonical production origin → triggers bounded integration card
 - Defer → no-sitemap state continues; canonical suppression unchanged
 
@@ -78,10 +80,10 @@ They are NOT a separate SEO card — they are acceptance criteria on the wiki co
 
 ### Check 1 — Titles and descriptions
 
-| Field | Rule | Enforcement |
-|-------|------|-------------|
-| Title | distinct, non-empty, ≤60 chars including " \| Red Horizon" suffix | measured at content review |
-| Description | non-empty, ≤155 chars, no silent factual truncation | measured at content review |
+| Field       | Rule                                                              | Enforcement                |
+| ----------- | ----------------------------------------------------------------- | -------------------------- |
+| Title       | distinct, non-empty, ≤60 chars including " \| Red Horizon" suffix | measured at content review |
+| Description | non-empty, ≤155 chars, no silent factual truncation               | measured at content review |
 
 If title exceeds 60 chars or description exceeds 155 chars: flag and return for
 editorial replacement. Never silently truncate the writer's summary.
@@ -125,12 +127,12 @@ Schema currently allows empty strings and duplicate titles. A regression guard
 
 ### Check 7 — Section labels (from SEO structural review)
 
-| Route | Current title | Recommended title | Recommended description |
-|-------|--------------|-------------------|------------------------|
-| `/wiki/` | Wiki \| Red Horizon | (keep) | Reference pages for Red Horizon, a fictional Mars exploration project. |
-| `/wiki/area/` | Area wiki \| Red Horizon | Landing Zones \| Red Horizon | Published reference pages about landing zones in the fictional Red Horizon Mars exploration project. |
-| `/wiki/vehicle/` | Vehicle wiki \| Red Horizon | Vehicles \| Red Horizon | Published reference pages about vehicles in the fictional Red Horizon Mars exploration project. |
-| `/wiki/project/` | Project wiki \| Red Horizon | (keep) | Published reference pages about the fictional Red Horizon Mars exploration project. |
+| Route            | Current title               | Recommended title            | Recommended description                                                                              |
+| ---------------- | --------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `/wiki/`         | Wiki \| Red Horizon         | (keep)                       | Reference pages for Red Horizon, a fictional Mars exploration project.                               |
+| `/wiki/area/`    | Area wiki \| Red Horizon    | Landing Zones \| Red Horizon | Published reference pages about landing zones in the fictional Red Horizon Mars exploration project. |
+| `/wiki/vehicle/` | Vehicle wiki \| Red Horizon | Vehicles \| Red Horizon      | Published reference pages about vehicles in the fictional Red Horizon Mars exploration project.      |
+| `/wiki/project/` | Project wiki \| Red Horizon | (keep)                       | Published reference pages about the fictional Red Horizon Mars exploration project.                  |
 
 The section title changes are SEO recommendations from t_b2c55032, not yet applied.
 They go to the merged editorial role (`mars-ai-simulator-editor`) for the label
@@ -158,6 +160,7 @@ t_4e047758 (planner — wiki tree plan) [DONE]
 ```
 
 **Note:** No content pipeline cards are created here. They are created after:
+
 1. Gate C is decided by the merged editorial role (release decision recorded on t_c77be834)
 2. Gate D (origin decision) is resolved (triggers integration card if approved)
 

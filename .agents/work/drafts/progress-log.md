@@ -2,20 +2,20 @@
 
 ## Draft metadata
 
-| Field                  | Value                                                                                                                                                                                    |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Card                   | `t_11eee417` — `mars-ai-simulator-writer`, stage `site-foundation`                                                                                                                        |
-| Deliverable            | Site copy strings (not MDX): eyebrow, title, description and the three steps of `website/src/features/progress/steps.ts`, plus one consistency string in `website/src/features/mission/facts.ts` (§7) |
-| Skills applied         | `brand-voice` (preloaded), `copy-editing`                                                                                                                                                 |
-| Timeline step          | `site-foundation` (homepage chrome copy). Advances **no** timeline step                                                                                                                   |
-| Factual bound          | The **published** record only: `website/news/001-project-announcement.mdx` (`publication: published`). Step 002 is *not* public — see §2.2                                          |
-| Structural bound       | `docs/SCENARIO.md` §"Continuity and release controls"; `docs/INSTRUCTIONS.md` §"Canon and information safety"                                                                              |
-| Status                 | `draft` — no approval exists, nothing under `website/` was edited by this card, no route changed                                                                                          |
-| Public/canon impact    | No new canon and no reworded published fact. Moves the highlighted step and states what that step is working on, in the record's own words                                                |
-| Human release reference | **None.** An editorial `approved` is not a release. The wording's first public deployment still needs the human's release reference per `docs/INSTRUCTIONS.md`                            |
-| Visual brief           | None — no new imagery; the section's markers are CSS                                                                                                                                |
+| Field                   | Value                                                                                                                                                                                                 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card                    | `t_11eee417` — `mars-ai-simulator-writer`, stage `site-foundation`                                                                                                                                    |
+| Deliverable             | Site copy strings (not MDX): eyebrow, title, description and the three steps of `website/src/features/progress/steps.ts`, plus one consistency string in `website/src/features/mission/facts.ts` (§7) |
+| Skills applied          | `brand-voice` (preloaded), `copy-editing`                                                                                                                                                             |
+| Timeline step           | `site-foundation` (homepage chrome copy). Advances **no** timeline step                                                                                                                               |
+| Factual bound           | The **published** record only: `website/news/001-project-announcement.mdx` (`publication: published`). Step 002 is _not_ public — see §2.2                                                            |
+| Structural bound        | `docs/SCENARIO.md` §"Continuity and release controls"; `docs/INSTRUCTIONS.md` §"Canon and information safety"                                                                                         |
+| Status                  | `draft` — no approval exists, nothing under `website/` was edited by this card, no route changed                                                                                                      |
+| Public/canon impact     | No new canon and no reworded published fact. Moves the highlighted step and states what that step is working on, in the record's own words                                                            |
+| Human release reference | **None.** An editorial `approved` is not a release. The wording's first public deployment still needs the human's release reference per `docs/INSTRUCTIONS.md`                                        |
+| Visual brief            | None — no new imagery; the section's markers are CSS                                                                                                                                                  |
 
-The operator's commission, verbatim: *"also, revisit 'progress log' section wording on homepage."*
+The operator's commission, verbatim: _"also, revisit 'progress log' section wording on homepage."_
 
 Word and character counts in this file were produced by a scratch script outside the repository
 (`/tmp/progress-log-measure.py`); they are measured, not estimated.
@@ -28,14 +28,14 @@ Word and character counts in this file were produced by a scratch script outside
 `<section id="timeline">`, last on the homepage (`src/pages/index.astro`). The header links to it as
 `Progress` (`src/lib/navigation.ts`, `homeAnchor('timeline')`).
 
-| Field       | Current string                                                                                                                              |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eyebrow`   | `Progress log`                                                                                                                               |
-| `title`     | `One step at a time.`                                                                                                                        |
+| Field         | Current string                                                                                                                                      |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `eyebrow`     | `Progress log`                                                                                                                                      |
+| `title`       | `One step at a time.`                                                                                                                               |
 | `description` | `The public story moves with the project. The highlighted step is where Red Horizon is now; later milestones will be added as the record develops.` |
-| step 1      | `Current progress` / `Coalition planning` / `Setting the mission’s purpose, partners, and operating principles.` (`current: true`)             |
-| step 2      | `Next chapter` / `Mission architecture` / `Turning a shared objective into a testable vehicle and science plan.`                              |
-| step 3      | `Later` / `Surface operations` / `Using the surface vehicle to survey terrain and examine rocks in context.`                                   |
+| step 1        | `Current progress` / `Coalition planning` / `Setting the mission’s purpose, partners, and operating principles.` (`current: true`)                  |
+| step 2        | `Next chapter` / `Mission architecture` / `Turning a shared objective into a testable vehicle and science plan.`                                    |
+| step 3        | `Later` / `Surface operations` / `Using the surface vehicle to survey terrain and examine rocks in context.`                                        |
 
 ## 2. The defect, against the record
 
@@ -81,12 +81,12 @@ page does not have. §4 decides what replaces it.
 
 ## One step at a time.
 
-*The public record moves one step at a time. Published steps link to the article that carries them;
-the highlighted step is the work in hand, and the steps after it are not settled yet.*
+_The public record moves one step at a time. Published steps link to the article that carries them;
+the highlighted step is the work in hand, and the steps after it are not settled yet._
 
 - **Announced** — **Coalition and purpose** — Ten national programme teams, one uncrewed lander and
   rover, and a mission to work out how water changed an ancient equatorial landscape.
-  *Read the announcement* → `/news/001-project-announcement/`
+  _Read the announcement_ → `/news/001-project-announcement/`
 - **Current progress** — **Mission architecture** — Turning the announced objective into a mission:
   what the rover carries, who builds what, and how the mission reaches Mars.
 - **Later** — **Surface operations** — Using the rover on the surface to survey terrain and examine
@@ -98,7 +98,7 @@ the highlighted step is the work in hand, and the steps after it are not settled
 the log is not a second rendering of the article list. Two of its three entries are things no
 collection can supply — the step the programme is working on now, and the steps after it — and the
 first is a canon judgement that needs a source and a continuity check, not a build rule. A generated
-list would also promote *any* future published item (a correction notice, a media update, a briefing)
+list would also promote _any_ future published item (a correction notice, a media update, a briefing)
 into a "step" without an editorial decision, and it would still need hand-maintained "current" and
 "later" entries beside it, i.e. the same array plus a new coupling. The defect was a stale string,
 not a missing mechanism, and the smallest change that fixes the wording problem is the wording.
@@ -119,11 +119,11 @@ href comes from `routes.newsArticle(slug)` in `src/lib/navigation.ts` rather tha
 
 Rejected alternatives, recorded:
 
-- *Auto-derive the list from `getPublishedNews()`* — see above: cannot express "current" or "later",
+- _Auto-derive the list from `getPublishedNews()`_ — see above: cannot express "current" or "later",
   publishes unreviewed items as steps.
-- *Replace the static array with a build-time "newest published article" flag* — the newest article
+- _Replace the static array with a build-time "newest published article" flag_ — the newest article
   is not the current step (a correction notice is newest while the step has not moved).
-- *Add a step 4 for payload selection* — rejected in §5.2: the payload work belongs inside `Mission
+- _Add a step 4 for payload selection_ — rejected in §5.2: the payload work belongs inside `Mission
   architecture`, and naming it as its own step would over-state how much of that step is done.
 
 ### 4.1 Where the copy lives
@@ -155,11 +155,11 @@ is.
 
 ### D2 — Step titles: renamed and re-scoped
 
-| Order | Was                 | Becomes                 | Why                                                                                                                                                                                                 |
-| ----- | ------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1     | `Coalition planning` | `Coalition and purpose` | *Planning* is an unannounced activity and it is finished; the record carries the outcome (partners and purpose), so the step is stated as the record states it. `state` moves from `Current progress` to `Announced`, mirroring 001's own `status: Programme announced` |
+| Order | Was                    | Becomes                       | Why                                                                                                                                                                                                                                                                                            |
+| ----- | ---------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | `Coalition planning`   | `Coalition and purpose`       | _Planning_ is an unannounced activity and it is finished; the record carries the outcome (partners and purpose), so the step is stated as the record states it. `state` moves from `Current progress` to `Announced`, mirroring 001's own `status: Programme announced`                        |
 | 2     | `Mission architecture` | `Mission architecture` (kept) | The title already names the open work and needs no rename; what changes is its **position** (`Next chapter` → current, `current: true`) and its detail, which now uses 001's own three open selections instead of promising a "testable vehicle and science plan" the record has not described |
-| 3     | `Surface operations` | `Surface operations` (kept) | Names work the record has not reached; keeping the title with `Later` is honest and the detail stays generic |
+| 3     | `Surface operations`   | `Surface operations` (kept)   | Names work the record has not reached; keeping the title with `Later` is honest and the detail stays generic                                                                                                                                                                                   |
 
 **Re-scoping question — does payload selection belong inside `Mission architecture`? Yes.** Payload
 selection is the substance of the open technical decisions ("what the rover carries"), it is not a
@@ -194,7 +194,7 @@ did not ask for.
 Decided **yes**, with the shape in §4 and two hard limits:
 
 1. **Published articles only.** Today that is exactly one article, 001, so exactly one step carries a
-   `link`. Step 2 must *not* link to the 002 draft: `/news/002-payload-selection/` is not emitted
+   `link`. Step 2 must _not_ link to the 002 draft: `/news/002-payload-selection/` is not emitted
    today (`publication: draft`), and a link to it would be a dead route and a release-bypass hint.
 2. **The href comes from the route map**, `routes.newsArticle('001-project-announcement')` in
    `src/lib/navigation.ts`, never a hand-typed string — one definition of the route, as the rest of
@@ -225,7 +225,7 @@ row.
   disturbing the progress-log change. If it is dropped, this deck should say so on the record, because
   the homepage will then carry two different statements of the current state.
 - **Not changed, and recorded as a decision:** `missionIntro.description` ("…from early coalition
-  planning to the work of its first surface vehicle.") stays as written. It describes the *range* the
+  planning to the work of its first surface vehicle.") stays as written. It describes the _range_ the
   public record covers, not the current state, so it is not stale; "surface vehicle" there is the
   generic phrasing the mission brief already owns.
 
@@ -287,7 +287,7 @@ export interface ProgressStep {
     /** Marks the milestone the programme is working on now. */
     current?: boolean;
     /** The published article that carries this step, if one is published. */
-    link?: { href: string; label: string };
+    link?: { href: string; label: string; };
 }
 
 export const progressHeading = {
@@ -301,13 +301,15 @@ export const progressSteps: readonly ProgressStep[] = [
     {
         state: 'Announced',
         title: 'Coalition and purpose',
-        detail: 'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape.',
+        detail:
+            'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape.',
         link: { href: routes.newsArticle('001-project-announcement'), label: 'Read the announcement' },
     },
     {
         state: 'Current progress',
         title: 'Mission architecture',
-        detail: 'Turning the announced objective into a mission: what the rover carries, who builds what, and how the mission reaches Mars.',
+        detail:
+            'Turning the announced objective into a mission: what the rover carries, who builds what, and how the mission reaches Mars.',
         current: true,
     },
     {
@@ -332,17 +334,17 @@ import { routes } from '../../lib/navigation';
 
 ## 9. Claim → source trace
 
-| # | Claim in the proposed copy                                                                        | Source                                                                                                            | Step's authority            |
-| - | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| 1 | Ten national programme teams                                                                       | `website/news/001-project-announcement.mdx:23` (published)                                                        | 001                         |
-| 2 | One uncrewed lander and rover, built together                                                      | same file, `:24–26`                                                                                               | 001                         |
-| 3 | A mineralogy mission about how water changed an ancient equatorial landscape                       | same file, `:28–32`                                                                                               | 001                         |
-| 4 | The record moves one step at a time / the public record is the log's source                        | same file, `:74–77` ("That is where the public record begins…"); `docs/SCENARIO.md` §"Continuity and release controls" | site-foundation (site copy) |
-| 5 | The technical selections ("what the rover carries, who builds what, and how the mission reaches Mars") are the open work | same file, `:72–74`, verbatim in substance                                                                        | 001                         |
-| 6 | That open work is what the programme is doing now                                                  | `docs/timeline/002-payload-selection.md` "Private situation"; `docs/SCENARIO.md` §"Continuity and release controls" (payload details wait for step 002). **Internal, non-public — cited only to justify the "current" flag; no 002 fact is stated publicly** | internal canon; no public release required |
-| 7 | The rover surveys terrain and examines rocks in context                                            | 001 `:28–32` (mapping the region's units) and `:38–39` ("one rover to compare altered material with unaltered material") | 001                         |
-| 8 | The link target `/news/001-project-announcement/` exists and is published                           | `website/news/001-project-announcement.mdx` frontmatter `publication: published`; route emitted by `src/pages/news/[slug].astro` (verified on the built site, §10) | site-foundation             |
-| 9 | The log's audience-facing role (a public record of the programme's steps)                          | `docs/PLAN.md` (homepage sections), `src/features/progress/ProgressLog.astro`, nav label `Progress`                | site-foundation             |
+| # | Claim in the proposed copy                                                                                               | Source                                                                                                                                                                                                                                                       | Step's authority                           |
+| - | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| 1 | Ten national programme teams                                                                                             | `website/news/001-project-announcement.mdx:23` (published)                                                                                                                                                                                                   | 001                                        |
+| 2 | One uncrewed lander and rover, built together                                                                            | same file, `:24–26`                                                                                                                                                                                                                                          | 001                                        |
+| 3 | A mineralogy mission about how water changed an ancient equatorial landscape                                             | same file, `:28–32`                                                                                                                                                                                                                                          | 001                                        |
+| 4 | The record moves one step at a time / the public record is the log's source                                              | same file, `:74–77` ("That is where the public record begins…"); `docs/SCENARIO.md` §"Continuity and release controls"                                                                                                                                       | site-foundation (site copy)                |
+| 5 | The technical selections ("what the rover carries, who builds what, and how the mission reaches Mars") are the open work | same file, `:72–74`, verbatim in substance                                                                                                                                                                                                                   | 001                                        |
+| 6 | That open work is what the programme is doing now                                                                        | `docs/timeline/002-payload-selection.md` "Private situation"; `docs/SCENARIO.md` §"Continuity and release controls" (payload details wait for step 002). **Internal, non-public — cited only to justify the "current" flag; no 002 fact is stated publicly** | internal canon; no public release required |
+| 7 | The rover surveys terrain and examines rocks in context                                                                  | 001 `:28–32` (mapping the region's units) and `:38–39` ("one rover to compare altered material with unaltered material")                                                                                                                                     | 001                                        |
+| 8 | The link target `/news/001-project-announcement/` exists and is published                                                | `website/news/001-project-announcement.mdx` frontmatter `publication: published`; route emitted by `src/pages/news/[slug].astro` (verified on the built site, §10)                                                                                           | site-foundation                            |
+| 9 | The log's audience-facing role (a public record of the programme's steps)                                                | `docs/PLAN.md` (homepage sections), `src/features/progress/ProgressLog.astro`, nav label `Progress`                                                                                                                                                          | site-foundation                            |
 
 No claim above relies on step 002's content, and none states a fact from step 003 onward. **No gap
 required escalation**: the honest current state is fully supported by 001 plus internal canon, so
@@ -352,16 +354,16 @@ reference before first public deployment.
 
 ## 10. Validation performed on this card
 
-| Check                              | Command / source                                                                                             | Result                                                                                       |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| Current strings read from source    | `read_file website/src/features/progress/steps.ts`, `progress/ProgressLog.astro`, `mission/facts.ts`           | §1 table matches the files byte-for-byte                                                      |
-| Every material claim traced         | `grep -n` over `website/news/001-project-announcement.mdx` for each quoted phrase                              | §9 rows 1–3, 5, 7 confirmed at the cited lines                                                |
-| Published/draft state of the record | frontmatter of both articles; `.agents/work/releases/002-payload-selection.md`                                 | 001 `published`; 002 `draft`, release record `blocked — human decision required`               |
-| Link target exists                  | `find website/dist -name index.html`; `website/dist/news/001-project-announcement/index.html` present          | `/news/001-project-announcement/` is a real built route; no 002 route exists                   |
-| Gated-term scan on this deck        | `grep -niE` over this file with the card's pattern list, kept **outside** the repository (`/tmp/progress-log-scan.sed`, for the same reason the 002 review kept its token list out: a scan report must not become a copy of the tokens it scans for) | 0 matches over the whole file (real output in the handoff comment)                             |
-| String length / layout fit          | scratch script `/tmp/progress-log-measure.py`                                                                  | description 184 chars (was 145); longest step detail 137 chars (was 73), inside the detail paragraph's 30 rem measure |
-| Containment of §8 strings           | scratch script, string-by-string presence check in this file                                                   | every frozen string appears verbatim                                                           |
-| No `website/` file touched          | `git status --short`                                                                                          | only this deck (and other cards' in-flight files) appear; see the handoff comment              |
+| Check                               | Command / source                                                                                                                                                                                                                                     | Result                                                                                                                |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Current strings read from source    | `read_file website/src/features/progress/steps.ts`, `progress/ProgressLog.astro`, `mission/facts.ts`                                                                                                                                                 | §1 table matches the files byte-for-byte                                                                              |
+| Every material claim traced         | `grep -n` over `website/news/001-project-announcement.mdx` for each quoted phrase                                                                                                                                                                    | §9 rows 1–3, 5, 7 confirmed at the cited lines                                                                        |
+| Published/draft state of the record | frontmatter of both articles; `.agents/work/releases/002-payload-selection.md`                                                                                                                                                                       | 001 `published`; 002 `draft`, release record `blocked — human decision required`                                      |
+| Link target exists                  | `find website/dist -name index.html`; `website/dist/news/001-project-announcement/index.html` present                                                                                                                                                | `/news/001-project-announcement/` is a real built route; no 002 route exists                                          |
+| Gated-term scan on this deck        | `grep -niE` over this file with the card's pattern list, kept **outside** the repository (`/tmp/progress-log-scan.sed`, for the same reason the 002 review kept its token list out: a scan report must not become a copy of the tokens it scans for) | 0 matches over the whole file (real output in the handoff comment)                                                    |
+| String length / layout fit          | scratch script `/tmp/progress-log-measure.py`                                                                                                                                                                                                        | description 184 chars (was 145); longest step detail 137 chars (was 73), inside the detail paragraph's 30 rem measure |
+| Containment of §8 strings           | scratch script, string-by-string presence check in this file                                                                                                                                                                                         | every frozen string appears verbatim                                                                                  |
+| No `website/` file touched          | `git status --short`                                                                                                                                                                                                                                 | only this deck (and other cards' in-flight files) appear; see the handoff comment                                     |
 
 ## 11. Review outstanding, and next owner
 

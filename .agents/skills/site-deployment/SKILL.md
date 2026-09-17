@@ -10,7 +10,7 @@ is `approved`, the article, asset manifest, the recorded release decision on the
 gate card, and the repository deployment configuration. Read `AGENTS.md`,
 `docs/INSTRUCTIONS.md`, and your own role definition (your agent's `SOUL.md`; the
 `mars-ai-simulator-dev` profile owns site work) first. The release authority is the merged
-editorial role (`mars-ai-simulator-editor`); the deploy *action* stays out of every agent's
+editorial role (`mars-ai-simulator-editor`); the deploy _action_ stays out of every agent's
 reach — no `wrangler deploy`, no hosting account, no DNS, no credentials.
 
 Allowed tools: local schema checks, `fnm use`, local build/preview commands,

@@ -2,19 +2,19 @@
 
 ## Package metadata
 
-| Field          | Value                                                                                                    |
-| -------------- | -------------------------------------------------------------------------------------------------------- |
-| Slug           | `003-vehicle-design`                                                                                     |
-| Timeline step  | `003-vehicle-design`                                                                                     |
-| Article        | `website/news/003-vehicle-design.mdx`                                                                    |
-| Brief          | `.agents/work/briefs/003-vehicle-design.md`                                                              |
-| Source pack    | `.agents/work/sources/003-vehicle-design.md`                                                             |
-| Draft card     | `t_f54d1943` (done)                                                                                      |
-| SEO card       | `t_e48168fa`                                                                                             |
-| Prepared by    | `mars-ai-simulator-seo`                                                                                   |
-| Status         | metadata applied; no release, no deploy, no canon change                                                  |
-| Public impact  | none — `publication: draft` is untouched, so nothing here is a public route, a crawlable page, or canon   |
-| Confidentiality | `docs/timeline/003` read for containment only; no gated value in any recommended metadata string           |
+| Field           | Value                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| Slug            | `003-vehicle-design`                                                                                    |
+| Timeline step   | `003-vehicle-design`                                                                                    |
+| Article         | `website/news/003-vehicle-design.mdx`                                                                   |
+| Brief           | `.agents/work/briefs/003-vehicle-design.md`                                                             |
+| Source pack     | `.agents/work/sources/003-vehicle-design.md`                                                            |
+| Draft card      | `t_f54d1943` (done)                                                                                     |
+| SEO card        | `t_e48168fa`                                                                                            |
+| Prepared by     | `mars-ai-simulator-seo`                                                                                 |
+| Status          | metadata applied; no release, no deploy, no canon change                                                |
+| Public impact   | none — `publication: draft` is untouched, so nothing here is a public route, a crawlable page, or canon |
+| Confidentiality | `docs/timeline/003` read for containment only; no gated value in any recommended metadata string        |
 
 ---
 
@@ -70,17 +70,17 @@ The article-drafting skill guideline keeps body copy heading-free under ~600 wor
 
 **Recommended heading outline:**
 
-| Level | Heading                                              | Rationale                                                              |
-| ----- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
-| h1    | The rover design, frozen. (frontmatter title)        | the one thing step 003 settles; rendered by `ArticleView` as `#article-title` |
-| h2    | What Pathfinder is                                   | compact robotic surveyor, science role, constraints — the "what"       |
-| h2    | The body                                             | low rectangular housing, equipment mass, colour blocking               |
-| h2    | Six wheels and suspension                            | the defining lower structure, open-mesh wheels, articulated links      |
-| h2    | Vision and the contact arm                           | short mast, stereo camera, two-joint arm, travel cradle               |
-| h2    | Materials and appearance                             | matte ceramic, brushed metal, baseline clean look                     |
-| h2    | How the vehicle is expected to age                   | four operating stages; ages described, not events                     |
-| h2    | The science role                                     | observational methodology, traverse model, what it gathers            |
-| h2    | What is not settled                                  | design frozen ≠ built; no launch, landing, or mission timeline        |
+| Level | Heading                                       | Rationale                                                                     |
+| ----- | --------------------------------------------- | ----------------------------------------------------------------------------- |
+| h1    | The rover design, frozen. (frontmatter title) | the one thing step 003 settles; rendered by `ArticleView` as `#article-title` |
+| h2    | What Pathfinder is                            | compact robotic surveyor, science role, constraints — the "what"              |
+| h2    | The body                                      | low rectangular housing, equipment mass, colour blocking                      |
+| h2    | Six wheels and suspension                     | the defining lower structure, open-mesh wheels, articulated links             |
+| h2    | Vision and the contact arm                    | short mast, stereo camera, two-joint arm, travel cradle                       |
+| h2    | Materials and appearance                      | matte ceramic, brushed metal, baseline clean look                             |
+| h2    | How the vehicle is expected to age            | four operating stages; ages described, not events                             |
+| h2    | The science role                              | observational methodology, traverse model, what it gathers                    |
+| h2    | What is not settled                           | design frozen ≠ built; no launch, landing, or mission timeline                |
 
 **Order:** kept as written (the article already sequences these thoughts in this order). The headings follow the reader's questions — what is it, what does it look like, how does it move, what sees, what wears, what does, what is open — which is the natural arc for a vehicle design article.
 
@@ -92,11 +92,11 @@ The article-drafting skill guideline keeps body copy heading-free under ~600 wor
 
 **Applied to `website/news/003-vehicle-design.mdx`.** Every target exists today; each was checked against the current site source.
 
-| # | Anchor text                                          | Target                          | Placement                                  | Why                                                                                                              |
-| - | ---------------------------------------------------- | ------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| 1 | fictional, AI-assisted Mars exploration programme    | `/#mission`                     | intro, paragraph 1                         | already present — links to the mission brief; keeps the fiction disclosure one hop from the claim                 |
-| 2 | second public step                                   | `/news/002-payload-selection/`  | paragraph 7 ("The science role")           | already present — links to the predecessor article where the payload scope was agreed; the natural predecessor link |
-| 3 | programme announcement                               | `/news/001-project-announcement/` | (writer's call — insert near the fiction disclosure or at the close) | completes the newsroom chain; the article already mentions "first surface vehicle" without linking to the announcement that introduced the programme |
+| # | Anchor text                                       | Target                            | Placement                                                            | Why                                                                                                                                                  |
+| - | ------------------------------------------------- | --------------------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | fictional, AI-assisted Mars exploration programme | `/#mission`                       | intro, paragraph 1                                                   | already present — links to the mission brief; keeps the fiction disclosure one hop from the claim                                                    |
+| 2 | second public step                                | `/news/002-payload-selection/`    | paragraph 7 ("The science role")                                     | already present — links to the predecessor article where the payload scope was agreed; the natural predecessor link                                  |
+| 3 | programme announcement                            | `/news/001-project-announcement/` | (writer's call — insert near the fiction disclosure or at the close) | completes the newsroom chain; the article already mentions "first surface vehicle" without linking to the announcement that introduced the programme |
 
 **Link 3 is a recommendation, not applied.** The writer decides where to place it (near the fiction disclosure paragraph, or as a closing "read the announcement" link). The target route `/news/001-project-announcement/` is not yet generated (publication is `published` but the content-schema route depends on `isPublishedEntry`), so the link will resolve only when article 001 is released. This is acceptable — internal links in draft articles are for the released state.
 
@@ -109,6 +109,7 @@ The article-drafting skill guideline keeps body copy heading-free under ~600 wor
 **Not recommended at this time.** `NewsArticle` structured data requires a recorded first-publication date, a byline policy, a stable released URL, and a machine-readable fiction disclosure — none of which exist while the article is `publication: draft` and no production origin is authorised. Emitting no canonical while no production origin is recorded is the correct state, not a gap. This matches the approach taken for articles 001 and 002.
 
 When the article is released, the site engineer should add `NewsArticle` JSON-LD to `ArticleView.astro` with:
+
 - `headline`: the frontmatter `title`
 - `datePublished`: the first-publication timestamp
 - `author`: the programme attribution (fictional entity, clearly labelled)
@@ -125,13 +126,13 @@ This is a **site-engineering card**, not an SEO-package recommendation.
 
 The frontmatter fields this package owns:
 
-| Field       | Current value                           | Recommended value (Gate 3)                             | Applied? |
-| ----------- | --------------------------------------- | ------------------------------------------------------ | -------- |
-| `title`     | `"003-vehicle-design"` (placeholder)   | `"The rover design, frozen."`                          | no — Gate 3 decision |
-| `summary`   | 157 chars (current)                     | 149 chars (recommended, §3)                            | no — writer/editor decision |
-| `slug`      | `003-vehicle-design` (file id)          | keep — no change                                        | n/a      |
-| Headings    | 0 `h2`s in body                         | 8 `h2`s recommended (§5)                               | no — writer decision |
-| Internal links | 2 present, 1 recommended            | add link to 001 announcement (§6)                      | no — writer decision |
+| Field          | Current value                        | Recommended value (Gate 3)        | Applied?                    |
+| -------------- | ------------------------------------ | --------------------------------- | --------------------------- |
+| `title`        | `"003-vehicle-design"` (placeholder) | `"The rover design, frozen."`     | no — Gate 3 decision        |
+| `summary`      | 157 chars (current)                  | 149 chars (recommended, §3)       | no — writer/editor decision |
+| `slug`         | `003-vehicle-design` (file id)       | keep — no change                  | n/a                         |
+| Headings       | 0 `h2`s in body                      | 8 `h2`s recommended (§5)          | no — writer decision        |
+| Internal links | 2 present, 1 recommended             | add link to 001 announcement (§6) | no — writer decision        |
 
 ---
 

@@ -101,14 +101,14 @@ record; raw candidate files, prompts, and generation records remain in
 
 ## Required outputs
 
-| Stage      | Card                 | Assignee profile               | Artifact                               |
-| ---------- | -------------------- | ------------------------------ | -------------------------------------- |
-| research   | Research source pack | `mars-ai-simulator-planner`    | `.agents/work/sources/<slug>.md`       |
-| draft      | Draft article        | `mars-ai-simulator-writer`     | `website/news/<slug>.mdx`              |
-| seo        | SEO pass             | `mars-ai-simulator-seo`        | `.agents/work/seo/<slug>.md`           |
-| assets     | Create visual assets | `mars-ai-simulator-visuals`    | `.agents/work/assets/<slug>/assets.md` |
-| review     | Editorial final gate | `mars-ai-simulator-editor`     | `.agents/work/reviews/<slug>.md` + `.agents/work/continuity/<slug>.md` |
-| deploy     | Build and deploy     | `mars-ai-simulator-dev`        | deployment record on the card          |
+| Stage    | Card                 | Assignee profile            | Artifact                                                               |
+| -------- | -------------------- | --------------------------- | ---------------------------------------------------------------------- |
+| research | Research source pack | `mars-ai-simulator-planner` | `.agents/work/sources/<slug>.md`                                       |
+| draft    | Draft article        | `mars-ai-simulator-writer`  | `website/news/<slug>.mdx`                                              |
+| seo      | SEO pass             | `mars-ai-simulator-seo`     | `.agents/work/seo/<slug>.md`                                           |
+| assets   | Create visual assets | `mars-ai-simulator-visuals` | `.agents/work/assets/<slug>/assets.md`                                 |
+| review   | Editorial final gate | `mars-ai-simulator-editor`  | `.agents/work/reviews/<slug>.md` + `.agents/work/continuity/<slug>.md` |
+| deploy   | Build and deploy     | `mars-ai-simulator-dev`     | deployment record on the card                                          |
 
 Create the artifact templates from the brief at `.agents/work/briefs/<slug>.md`
 during the claimed workflow card. Acceptance checks: the six child cards carry

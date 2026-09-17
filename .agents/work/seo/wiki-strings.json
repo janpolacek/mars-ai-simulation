@@ -1,6 +1,22 @@
 [
-  {"route":"/wiki/","title":"Wiki | Red Horizon","description":"Reference pages for Red Horizon, a fictional Mars exploration project."},
-  {"route":"/wiki/area/","title":"Landing Zones | Red Horizon","description":"Published reference pages about landing zones in the fictional Red Horizon Mars exploration project."},
-  {"route":"/wiki/vehicle/","title":"Vehicles | Red Horizon","description":"Published reference pages about vehicles in the fictional Red Horizon Mars exploration project."},
-  {"route":"/wiki/project/","title":"Project | Red Horizon","description":"Published reference pages about the fictional Red Horizon Mars exploration project."}
+    {
+        "route": "/wiki/",
+        "title": "Wiki | Red Horizon",
+        "description": "Reference pages for Red Horizon, a fictional Mars exploration project."
+    },
+    {
+        "route": "/wiki/area/",
+        "title": "Landing Zones | Red Horizon",
+        "description": "Published reference pages about landing zones in the fictional Red Horizon Mars exploration project."
+    },
+    {
+        "route": "/wiki/vehicle/",
+        "title": "Vehicles | Red Horizon",
+        "description": "Published reference pages about vehicles in the fictional Red Horizon Mars exploration project."
+    },
+    {
+        "route": "/wiki/project/",
+        "title": "Project | Red Horizon",
+        "description": "Published reference pages about the fictional Red Horizon Mars exploration project."
+    }
 ]

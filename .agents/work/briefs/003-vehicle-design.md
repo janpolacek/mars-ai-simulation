@@ -2,13 +2,13 @@
 
 ## Article metadata
 
-| Field             | Value                                    |
-| ----------------- | ---------------------------------------- |
-| Slug              | `003-vehicle-design`                     |
-| Title             | _(to be confirmed by human story owner)_ |
-| Author            | _(to be confirmed by human story owner)_ |
-| Timeline step     | `003-vehicle-design`                     |
-| Status            | `draft`                                  |
+| Field             | Value                                        |
+| ----------------- | -------------------------------------------- |
+| Slug              | `003-vehicle-design`                         |
+| Title             | _(to be confirmed by human story owner)_     |
+| Author            | _(to be confirmed by human story owner)_     |
+| Timeline step     | `003-vehicle-design`                         |
+| Status            | `draft`                                      |
 | Canonical sources | `.agents/work/sources/003-vehicle-design.md` |
 
 ## Brief

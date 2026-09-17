@@ -25,14 +25,14 @@ The plan's automatic sitemap claim is false in this revision. `src/lib/releases.
 
 All commands ran in `.worktrees/t_b2c55032/website` unless noted.
 
-| Command | Observed result |
-| --- | --- |
-| `npm ci --no-audit --no-fund` | Exit 0; 431 packages installed. npm reported deprecated ESLint and unapproved install-script warnings; no install-script approval was changed. |
-| `env -u SITE_URL npm run build` | Exit 0; 7 Astro pages generated; postbuild check-dist passed, no withheld file/marker or directory reference. Wiki root only; expected missing/empty wiki collection warnings. |
-| `env -u SITE_URL npm run test -- test/wiki-index.test.mjs` | Exit 0; 16/16 tests, including isolated published/draft fixture controls. |
-| `env -u SITE_URL npm test` | Exit 0; 10 files, 111/111 tests. |
-| `python3 .agents/work/seo/wiki-audit.py .worktrees/t_b2c55032/website/dist` from repository root | Exit 0; 1 wiki route, 10 internal anchor occurrences, 0 broken links, 0 canonical links, 0 JSON-LD scripts, 0 sitemaps; measured all proposed strings below. |
-| `git status --short` in audit worktree | Empty after build and tests. |
+| Command                                                                                          | Observed result                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm ci --no-audit --no-fund`                                                                    | Exit 0; 431 packages installed. npm reported deprecated ESLint and unapproved install-script warnings; no install-script approval was changed.                                 |
+| `env -u SITE_URL npm run build`                                                                  | Exit 0; 7 Astro pages generated; postbuild check-dist passed, no withheld file/marker or directory reference. Wiki root only; expected missing/empty wiki collection warnings. |
+| `env -u SITE_URL npm run test -- test/wiki-index.test.mjs`                                       | Exit 0; 16/16 tests, including isolated published/draft fixture controls.                                                                                                      |
+| `env -u SITE_URL npm test`                                                                       | Exit 0; 10 files, 111/111 tests.                                                                                                                                               |
+| `python3 .agents/work/seo/wiki-audit.py .worktrees/t_b2c55032/website/dist` from repository root | Exit 0; 1 wiki route, 10 internal anchor occurrences, 0 broken links, 0 canonical links, 0 JSON-LD scripts, 0 sitemaps; measured all proposed strings below.                   |
+| `git status --short` in audit worktree                                                           | Empty after build and tests.                                                                                                                                                   |
 
 No code changed, so no new implementation lint/typecheck claim is made. `wiki-audit.py` is a read-only package tool, not a build guard: it inventories defects rather than failing the build on every finding.
 
@@ -42,12 +42,12 @@ One reader intent for the root: find the published reference material for the fi
 
 Exact strings are also recorded in `wiki-strings.json`, counted by `wiki-audit.py`:
 
-| Route | Proposed title | Title length | Proposed description | Description length |
-| --- | --- | --- | --- | --- |
-| `/wiki/` | Wiki \| Red Horizon | 18 | Reference pages for Red Horizon, a fictional Mars exploration project. | 70 |
-| `/wiki/area/` | Landing Zones \| Red Horizon | 27 | Published reference pages about landing zones in the fictional Red Horizon Mars exploration project. | 100 |
-| `/wiki/vehicle/` | Vehicles \| Red Horizon | 22 | Published reference pages about vehicles in the fictional Red Horizon Mars exploration project. | 95 |
-| `/wiki/project/` | Project \| Red Horizon | 21 | Published reference pages about the fictional Red Horizon Mars exploration project. | 83 |
+| Route            | Proposed title               | Title length | Proposed description                                                                                 | Description length |
+| ---------------- | ---------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- | ------------------ |
+| `/wiki/`         | Wiki \| Red Horizon          | 18           | Reference pages for Red Horizon, a fictional Mars exploration project.                               | 70                 |
+| `/wiki/area/`    | Landing Zones \| Red Horizon | 27           | Published reference pages about landing zones in the fictional Red Horizon Mars exploration project. | 100                |
+| `/wiki/vehicle/` | Vehicles \| Red Horizon      | 22           | Published reference pages about vehicles in the fictional Red Horizon Mars exploration project.      | 95                 |
+| `/wiki/project/` | Project \| Red Horizon       | 21           | Published reference pages about the fictional Red Horizon Mars exploration project.                  | 83                 |
 
 Section intents/themes: find landing-zone references; find vehicle references; find project references, respectively. These generic taxonomy terms come from the commissioned plan, not hidden mission facts. Landing Zones is the recommended plain-language label, subject to the card's human label settlement. Vehicles is preferable to a singular category label; Project retains the commissioned term. Reject `Area wiki`, `Vehicle wiki`, `Project wiki` as less readable than descriptive category names; do not change section URL keys. Recommendation supersedes those three implemented title formulas only AFTER review; the root title survives unchanged. Do not claim these changes are already approved or shipped.
 
