@@ -69,6 +69,26 @@ mission photography. How the harness works is documented in [docs/HARNESS.md](do
   [`website/scripts/check-dist.mjs`](website/scripts/check-dist.mjs), which fails a build
   that carries withheld material and prunes it from the output.
 
+The harness as the operator sees it: the _Tasks_ board that tracks the work, and the
+_Assistants_ grid that holds the role profiles.
+
+![The Hermes Workspace Tasks board: the Triage, Ready, Running, Review, and Blocked
+columns, with one card per deliverable showing its stage and its assigned role
+profile.](docs/harness/hermes-workspace-tasks.png)
+
+_The Tasks board: one card per deliverable, its stage, and its assigned role profile — a
+screenshot of the operator's local harness, not mission imagery._
+
+![The Hermes Workspace Assistants grid: the operator profile and the seven
+mars-ai-simulator role profiles, each with its description.](docs/harness/hermes-workspace-assistants.png)
+
+_The Assistants grid: the operator profile and the seven `mars-ai-simulator-<role>` profiles
+the harness runs — a screenshot of the operator's local harness, not mission imagery._
+
+Both are screenshots of the operator's own machine, so they show working state rather
+than canon. Their source paths, capture dates, and hashes are recorded in
+[`docs/harness/`](docs/harness/README.md).
+
 ## Build and run it
 
 ```sh

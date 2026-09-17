@@ -21,6 +21,7 @@ order of work.
 | [brand/](brand/)                   | [BRAND.md](brand/BRAND.md) and the approved identity mark and its derivative                                          | Human story owner approves; `mars-ai-simulator-visuals` produces; documentation records it |
 | [vehicle/](vehicle/)               | [VEHICLE.md](vehicle/VEHICLE.md), the RH-01 Pathfinder dossier, and its reference renders                             | `project-documentation` with `mars-ai-simulator-visuals`; human approval for canon changes |
 | [area/](area/)                     | [AREA.md](area/AREA.md), the Asteria Field dossier with its map package, and the three map plates                     | `project-documentation` with `mars-ai-simulator-visuals`; human approval for canon changes |
+| [harness/](harness/)               | Screenshots of the operator's local Hermes Workspace and their provenance, in [README.md](harness/README.md)          | `project-documentation` records it; the operator selects the exports                       |
 
 ## Elsewhere
 
