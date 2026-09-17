@@ -45,21 +45,23 @@ const { title = site.defaultTitle, description = site.defaultDescription, noinde
     Astro.props;
 
 const canonical = noindex ? undefined : canonicalUrl(Astro.url.pathname, Astro.site);
+
+/**
+ * The homepage's pre-paint fragment gate, emitted inline into `<head>` (the
+ * reasoning is in the note above). `set:html` writes the string into the
+ * document byte-for-byte, so the decision runs during parse, with no request of
+ * its own and no flash to undo.
+ */
+const splashGate = `if (location.pathname !== '/' || location.hash) {
+    document.documentElement.setAttribute('data-splash-skip', '');
+}`;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        {
-            splash && (
-                <script is:inline>
-                    if (location.pathname !== '/' || location.hash) {
-                        document.documentElement.setAttribute('data-splash-skip', '');
-                    }
-                </script>
-            )
-        }
+        {splash && <script is:inline set:html={splashGate} />}
         <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
         <link rel="icon" href="/assets/favicon.ico" sizes="any" />
         <meta name="viewport" content="width=device-width" />

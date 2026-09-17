@@ -228,16 +228,14 @@ async function fragmentGateOffences(directory, home) {
         offences.push({
             kind: 'splash-scope',
             file,
-            detail:
-                `the homepage has no pre-paint ${splashSkipAttribute} fragment gate, so a landing such as`
+            detail: `the homepage has no pre-paint ${splashSkipAttribute} fragment gate, so a landing such as`
                 + ' /#mission still shows the splash',
         });
     } else if (html.search(splashElementPattern) !== -1 && gate.offset > html.search(splashElementPattern)) {
         offences.push({
             kind: 'splash-scope',
             file,
-            detail:
-                `the homepage's ${splashSkipAttribute} gate runs after its splash markup, so the splash can be`
+            detail: `the homepage's ${splashSkipAttribute} gate runs after its splash markup, so the splash can be`
                 + ' painted before the decision is made',
         });
     }
