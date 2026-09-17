@@ -197,7 +197,9 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   commit that adds the key serves the artwork while the article still 404s. Measure the live
   surface from outside at flip time and record it: a direct `curl` can be refused by the
   session's command scanner, so fetch in-page on the live origin and hash with
-  `crypto.subtle` (same bytes, same digest). Judge it editorially — ungated filename, no
+  `crypto.subtle` (same bytes, same digest) — and measure `arrayBuffer().byteLength` over those bytes,
+  not the decoded text: a text length undercounts a page that carries non-ASCII characters, which reads
+  as a content change that never happened. Judge it editorially — ungated filename, no
   gated marker in alt or label, unlinked from every page, content-hashed URL ⇒ an
   observation, not a blocker — and route the "should a key's asset be emitted before a route
   names it" architecture question to the card that already owns it instead of opening a new
@@ -339,6 +341,67 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   before asserting one, and where it is missing, route the schema-and-render work to the technical
   role instead of writing a field the build will reject. A frontmatter key the schema does not
   declare is a build failure, not a harmless extra.
+
+- A **gate-ledger card** whose gates are canon authorship, release-order or public-identity questions
+  is a hold, not a package verdict. `kanban_complete` on it **releases its parent-gated children** — on
+  the step-004 launch-provider ledger that is the draft card, and a writer handed a blank canon choice
+  invents the provider the gate exists to withhold. So: scan the board for a recorded answer before
+  treating a gate as unanswered (a board-wide `task_comments` search, not just the card's own thread);
+  record every fail-closed default **measured rather than restated** (the dossier that does not exist,
+  the route that 404s on the live origin, the withheld tokens absent from every served byte, the child
+  card still `todo`); state in the record that the card-body templates are unapplied, so a later reader
+  grepping for them does not read one as a decision; then `kanban_block(kind="needs_input")` naming the
+  exact sentences the human story owner owes. The 2026-09-17 authority change moved releasability and
+  canon _confirmation_ to this role; canon _authorship_, the release-order advance, and the public
+  title/byline stayed with the human, so those gates are not this role's to answer however long the
+  card sits.
+- Check whether the withheld strings for the _next_ step have any guard marker at all: on 004,
+  `gatedTextMarkers` carried only the landing-region coordinates, so a provider name or a withheld
+  launch date in public copy would have failed no build, and containment rested on the gates alone.
+  Report the coverage as a release-engineering item with a named owner (a dev card adds a marker, and
+  the step that releases the material retires it in the same change) instead of treating a missing
+  marker as a blocker or as proof the material is safe.
+- A present-tense negative claim in an already-published article ("no launch vehicle has been named")
+  is order-sensitive against a later step: true today, stale the moment the step that names it is
+  released, and unfalsifiable only once the article's own record date is on its face. Record it as a
+  release-order condition on the upcoming flip — record dates or a scoped wording corrective, owner
+  named — never as a continuity failure of the unpublished package and never as a reason to return it.
+  Assigning the record dates **is** the fix when only a flip can stale the claim (the 001–003
+  record-date card closed the step-004 ledger's C6 that way, with no wording change): state in the
+  record that the claim now reads as a statement about its date, check that an earlier article's
+  negative still holds at the later date, and record the consequence — the step that names the withheld
+  thing must carry a record date **after** the dated negative, or that negative is false in-fiction.
+  The value you set is therefore a lower bound on the next step's value: say so.
+- Choose the milestone row by matching the state the article itself claims, not by "closest in time".
+  A report of a _frozen_ design cannot be dated on a preliminary-design-review row (the record date
+  would sit before the freeze the article reports), so the step's primary anchor is the row whose
+  meaning is the step's own event (a critical design review for a design freeze). Where a candidate
+  row's text carries an event whose publication is still gated (a target confirmation), that row's text
+  is the reason to exclude it — and judge the public surface as it is: it shows a calendar date under
+  the in-fiction label, never the row's name, so a row whose wording would be a containment problem
+  stays a record-internal association.
+- Verify a frontmatter-only change in a **scratch copy** outside the repository and run the copy's own
+  gate: copy the site's `src`, `public`, `scripts`, `news`, `test`, the config and `package.json` (plus
+  a `docs/` symlink, with the installed packages linked one by one so Astro's content-layer cache stays
+  in the throwaway root), then build with the project's own CLI. Two traps in that copy: it has **no
+  `node_modules/.bin`** (dot entries are skipped by design), so run the suite as `npm test` or
+  `npm test -- <file>` rather than `node_modules/.bin/vitest`; and `test/` must be copied, or vitest
+  exits 1 with "No test files found". Pair a red-first control on the _render_ (a planted value moves
+  that page's line while its siblings hold) with one on the _schema_ (a planted prose value fails the
+  build naming the field), so a green build proves the value was read, not ignored. Scan the whole
+  `dist/` tree, not one page — the built-site half of the fixture suite is the strongest single
+  measurement — and expect a media-registry provenance sentence to carry an artwork generation date in
+  prose: pre-existing, not a machine-readable date, not the article's record date, and not a failure.
+- A step can end up with **two gate ledgers for the same five gates** when a container card re-creates a
+  graph a planner card has already built. Do not open a parallel record for the second card: append a
+  `## Revision N` section to the slug's existing record (the superseded hash, the second card id, the fresh
+  measurements) and say plainly which graph the step runs on. Establish that from the card bodies and the
+  edges — the chain whose stage bodies name the other gate id, and which holds the dossier / wiki cards, is
+  authoritative — then hold the duplicate with `kanban_block(kind="needs_input")` and recommend the operator
+  archive it (board dedupes are theirs; `hermes kanban archive` is outside this role's toolset). Completing a
+  duplicate ledger still promotes _its_ own parent-gated draft card into the same blank-canon article, so
+  duplication is a release-safety issue, not board tidiness. Also flag any output path two cards write
+  concurrently (here `.agents/work/sources/<slug>.md`) as a hotspot with the hash you measured.
 
 Acceptance checks: every review-table row passes, the record's final status is
 `approved`, the article carries one `simulatedDate` drawn from a milestone line in

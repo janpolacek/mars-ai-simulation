@@ -459,6 +459,82 @@ preview, nothing committed. Only this review record changed. The human decisions
 section 11 remain exactly as they were: an editorial `approved` is still an editorial gate
 only, and nothing here approves public canon or a release.
 
+## Record date: 2026-09-17 (card `t_531698d9`) — the simulated date of writing, applied
+
+The article now carries **exactly one** `simulatedDate`: the date, inside the fiction, on which the article
+was written. The merged editorial role assigns and verifies it from the locked milestone table in
+`docs/SCENARIO.md` — never from the article's repository history (`docs/INSTRUCTIONS.md` §"Canon and
+information safety"; `AGENTS.md` §"Content workflow policy"; `.agents/skills/editorial-review/SKILL.md`
+§"The simulated record date"). The change is one inserted frontmatter line and nothing else:
+`git diff --stat -- website/news/` reports `website/news/002-payload-selection.mdx | 1 +`, 1 insertion and 0
+deletions (across the three published articles), and `git diff` shows no other byte moved.
+
+| Item                        | Value                                                                                                                                                                                                                                                                                           |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Value applied               | `2027-03-19` — rendered `Simulated record date · 19 March 2027`                                                                                                                                                                                                                                 |
+| Milestone line it came from | `docs/SCENARIO.md` §"Launch and mission dates", line 183: the row `19 March 2027 — Mission Concept Review` (a locked row; the row text is authoritative, the line number is a pointer)                                                                                                          |
+| Applied revision            | sha256 `7b69bd7fd7f0b3aca7ff29f2bd87f9d7844b8c1c3657cf85dbb168028c6b869a`, 7,722 B                                                                                                                                                                                                              |
+| Previous revision           | sha256 `adc6a1a68cefac0e1ee0ec9e7cd705158e98d83ce9b4b430ad41523ceb709711` — the released revision this record's §8/§10 and `.agents/work/releases/002-payload-selection.md` ("Article, released revision") pinned; the pre-flip `64373791…` that §A.1/§A.4 pinned is the earlier revision still |
+| Value shape                 | unquoted `YYYY-MM-DD`, the shape `src/lib/simulated-date.ts` documents for this role; the schema accepts that shape (the `Date` js-yaml resolves) and the quoted string, and renders one wording for either                                                                                     |
+
+**Why this milestone, and not the 24 September 2027 alternative.** The alternative row —
+`24 September 2027 — System Requirements Review and Asteria Field target confirmation` — carries the
+in-fiction landing-target confirmation, whose publication canon still gates the landing-area class
+(`docs/SCENARIO.md` §"Continuity and release controls"). A record date on that row would place this writing
+after a target confirmation and make the article's own sentence "no landing site has been chosen publicly"
+depend on how that class is published, rather than being plainly true at its date. The Mission Concept
+Review row implies no such event and sits inside the payload-and-requirements window step 002 covers: the
+payload scope is agreed and the instruments are still open, with the later
+`7 April 2028 — Payload Selection Review` row comfortably ahead of the writing — which is what keeps "the
+individual instruments, and their names, have not been approved" true on the article's face.
+
+**The four checks the card requires, each stated.**
+
+| Check                                                              | Result | Evidence                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Implies no event step 002 has not released                         | PASS   | At 19 March 2027 the released material is step 002's payload-scope update: the four measurement jobs, instrument names still open, the European-led contribution still open, no launcher named, no landing site chosen, the 2031 window unchanged. The article states nothing beyond it. |
+| Cannot be read as a launch, landing or other withheld mission date | PASS   | 19 March 2027 is not a launch, landing, entry or assembly milestone; it sits nearly four years before the locked departure row. The only schedule the article states is the 2031 window, and it says in terms that no launch or landing date is being stated.                            |
+| Contradicts no sentence already public                             | PASS   | The published 001 is dated 12 October 2026 and says the technical selections are still ahead — which this article's payload step then reports. The later 003 recaps this article's payload scope correctly. `002:104`'s launch-window sentence and `001`'s window frame agree.           |
+| The three articles stay in timeline order by their dates           | PASS   | `2026-10-12` (001) before `2027-03-19` (002) before `2029-07-13` (003) — the same order as `order: 1 / 2 / 3`.                                                                                                                                                                           |
+
+**The published surface, measured in a scratch copy outside the repository** (never in the shared checkout:
+`website/scripts/check-dist.mjs` prunes on failure, so a gate must not build the shared `dist/`). The copy
+carried `src/`, `public/`, `scripts/`, `news/`, `test/`, the Astro config and `package.json`, plus a `docs/`
+symlink, with the installed packages linked one by one so Astro's content-layer cache stayed in the throwaway
+root; the project's own Astro CLI built it (8 pages, postbuild guard green).
+
+| Measurement                                                           | Result                                                                                                                                                                                                                                                                                                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The article page states the date                                      | `/news/002-payload-selection/` — one occurrence, inside the `class="article-date"` element, text `Simulated record date · 19 March 2027`                                                                                                                                                                                        |
+| The label presents it as part of the fiction                          | The rendered string is the label plus the in-fiction date; nothing introduces it as a real publication date, and the page emits no `datePublished`, `dateModified`, `lastmod`, `<time datetime>`, JSON-LD block or sitemap reference                                                                                            |
+| Site-wide machine-date scan                                           | Every file under the scratch `dist/`: **0** hits for all ten tokens the date suite lists, and no ISO-shaped form of any of the three applied values                                                                                                                                                                             |
+| The listing surfaces                                                  | `/` and `/news/` each render the article's line once, alongside the other two articles' lines                                                                                                                                                                                                                                   |
+| The site's own gate, in the scratch copy                              | `vitest run`: **14 files / 147 tests passed**, including the date suite's 9 cases (its real-build half pairs each published article's frontmatter with its own page); `node scripts/check-dist.mjs` exits 0                                                                                                                     |
+| Red-first — the page follows the frontmatter, not a hard-coded string | Planting `simulatedDate: 2024-01-01` in the scratch copy moved that page's rendered line to `1 January 2024` while the other two kept their values, and planting a prose value failed the build with `InvalidContentEntryDataError` naming `simulatedDate`. The applied values are schema-validated and rendered from the file. |
+
+**The live origin before this change** — `https://mars-ai-simulation.janpolacek.workers.dev`, in-page `fetch`
+with `crypto.subtle` hashing at 15:41 CEST on 2026-09-17: `/news/002-payload-selection/` **200**, 14,177 B,
+sha256 `e8e1a456…`, **0** occurrences of the label, no machine-date token. The public surface carries no
+record date until the technical card `t_1059c973` pushes this change.
+
+**This closes the order-sensitive negative claim the step-004 gate ledger routed here (C6).** That ledger
+(`.agents/work/reviews/004-launch-provider-gates.md`, card `t_4d1b3041`) recorded that this article's and
+003's present-tense "no launch vehicle has been named" statements are true today but go stale once a
+step-004 package names a provider, and asked either for the record dates to make them time-bound or for a
+scoped wording corrective before a step-004 flip. The dated form is what the record date supplies: the claim
+now reads as a statement about 19 March 2027 and cannot be falsified later. No wording change is needed, and
+the consequence is a bound on the next step — any step-004 article's record date must fall after this one and
+after 003's `2029-07-13`.
+
+**Revision-history note.** This record's earlier entries pin the article at sha256 `64373791…` (pre-flip,
+§A.1/§A.4) and the release record pins the released revision `adc6a1a6…`; the applied revision is
+`7b69bd7f…` (7,722 B), one frontmatter line longer than `adc6a1a6…` and otherwise byte-identical. Their
+readings stand for everything except the record date, and no row in them is contradicted by it.
+
+**Release decision for this change** is recorded on card `t_531698d9` (this role), with the three values and
+the milestone line behind each; the technical card `t_1059c973` (`mars-ai-simulator-dev`) applies and pushes
+the change. No canon file was edited: `docs/` was read only, and no withheld token is written here by value.
+
 ## Final label
 
 approved

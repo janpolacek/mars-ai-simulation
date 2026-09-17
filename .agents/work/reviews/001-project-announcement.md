@@ -1038,6 +1038,83 @@ or decided about canon by this gate.
 
 ---
 
+## Record date: 2026-09-17 (card `t_531698d9`) — the simulated date of writing, applied
+
+This article now carries **exactly one** `simulatedDate`: the date, inside the fiction, on which the
+article was written. The merged editorial role assigns and verifies it from the locked milestone table in
+`docs/SCENARIO.md` — never from the article's repository history (`docs/INSTRUCTIONS.md` §"Canon and
+information safety"; `AGENTS.md` §"Content workflow policy"; `.agents/skills/editorial-review/SKILL.md`
+§"The simulated record date"). The change is one inserted frontmatter line and nothing else:
+`git diff --stat -- website/news/` reports `website/news/001-project-announcement.mdx | 1 +`, 1 insertion
+and 0 deletions (across the three published articles), and `git diff` shows no other byte moved.
+
+| Item                        | Value                                                                                                                                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Value applied               | `2026-10-12` — rendered `Simulated record date · 12 October 2026`                                                                                                                                            |
+| Milestone line it came from | `docs/SCENARIO.md` §"Launch and mission dates", line 182: the row `12 October 2026 — Red Horizon Council charter takes effect` (a locked row; the row text is authoritative, the line number is a pointer)   |
+| Applied revision            | sha256 `923a12d87a92279712a51e61dfa8b42793474b1d239ec2bef8c3cdc03617d399`, 4,832 B                                                                                                                           |
+| Previous revision           | sha256 `73c2d04734b466a8f642f342bf1ce01c5fb3b0d343f17f6b6c8e9ee8007ab5ec`, 4,806 B — the hash this record's pass-2 sections (§S2, §S5, §S8) and `.agents/work/continuity/001-project-announcement.md` pinned |
+| Value shape                 | unquoted `YYYY-MM-DD`, the shape `src/lib/simulated-date.ts` documents for this role; the schema accepts that shape (the `Date` js-yaml resolves) and the quoted string, and renders one wording for either  |
+
+**Why this milestone, and not the alternative.** The card offered `16 September 2026` ("Scenario and
+two-Mars-year design life approved") as the alternative. It is a pre-founding internal act: this article
+reports a named coalition that "has agreed" to build one lander and one rover, equal-vote governance, and a
+Council-held reserve inside a €2.10 billion lifecycle frame — the charter taking effect is what establishes
+the body those sentences describe. A record date before the charter would place the writing ahead of the
+governance it reports as agreed, so the charter row is the honest anchor for step 001.
+
+**The four checks the card requires, each stated.**
+
+| Check                                                              | Result | Evidence                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Implies no event step 001 has not released                         | PASS   | At 12 October 2026 the released material is step 001's announcement scope: purpose, coalition, target region, window and budget frame, governance. The article states nothing beyond it; the payload, the vehicle, the launcher and the surface campaign all remain "still ahead of us" in its own words. |
+| Cannot be read as a launch, landing or other withheld mission date | PASS   | 12 October 2026 is not a launch, landing, entry or assembly milestone and sits four and a half years before the locked departure row; the only schedule the article states is the 2031 window, which step 001 released.                                                                                   |
+| Contradicts no sentence already public                             | PASS   | The published 002 and 003 do not date the announcement; 002's "first public step set the science question" and 003's recap of the payload scope both hold with an announcement dated 12 October 2026. No frontmatter string, alt text, caption or summary carries a conflicting date.                     |
+| The three articles stay in timeline order by their dates           | PASS   | `2026-10-12` (001) before `2027-03-19` (002) before `2029-07-13` (003) — the same order as `order: 1 / 2 / 3`.                                                                                                                                                                                            |
+
+**The published surface, measured in a scratch copy outside the repository.** The copy carried `src/`,
+`public/`, `scripts/`, `news/`, `test/`, the Astro config and `package.json`, plus a `docs/` symlink, with
+the installed packages linked in one by one so Astro's content-layer cache stayed in the throwaway root; the
+project's own Astro CLI built it (8 pages, postbuild guard green) and the shared checkout was not written to
+(no build, no guard CLI run there — `scripts/check-dist.mjs` prunes on failure, so a gate must not build the
+shared `dist/`).
+
+| Measurement                                                           | Result                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The article page states the date                                      | `/news/001-project-announcement/` — one occurrence, inside the `class="article-date"` element, text `Simulated record date · 12 October 2026`                                                                                                                                                                                                                                                                                         |
+| The label presents it as part of the fiction                          | The rendered string is the label plus the in-fiction date, and nothing introduces it as a real publication, modification or sitemap date: the page emits no `datePublished`, `dateModified`, `lastmod`, `<time datetime>`, JSON-LD block or sitemap reference                                                                                                                                                                         |
+| Site-wide machine-date scan                                           | Every file under the scratch `dist/`: **0** hits for all ten tokens the date suite lists, and no ISO-shaped form of any of the three applied values. (The three ISO-shaped `2026-09-16` strings on the 001 page are the plates' pre-existing provenance sentences, supplied by the media registry, not by the article file — see the routed observation below.)                                                                       |
+| The listing surfaces                                                  | `/` and `/news/` each render the article's line once, alongside the other two articles' lines                                                                                                                                                                                                                                                                                                                                         |
+| The site's own gate, in the scratch copy                              | `vitest run`: **14 files / 147 tests passed**, including the date suite's 9 cases. Its real-build half pairs every published article's frontmatter with its own page, so with three values present it now tests three pages instead of passing vacuously; `node scripts/check-dist.mjs` exits 0 with all three `/news/<slug>/` routes generated and "no reference into a withheld directory, and no withheld file or marker in dist/" |
+| Red-first — the page follows the frontmatter, not a hard-coded string | Planting `simulatedDate: 2024-01-01` in the scratch copy made that page render `Simulated record date · 1 January 2024` while the other two kept their values; planting a prose value failed the build with `InvalidContentEntryDataError` naming `simulatedDate` and the pattern. The three applied values are therefore schema-validated and rendered from the file.                                                                |
+
+**The live origin before this change** — `https://mars-ai-simulation.janpolacek.workers.dev`, in-page
+`fetch` with `crypto.subtle` hashing at 15:41 CEST on 2026-09-17 (a direct `curl` is refused by this
+session's command scanner; same bytes, same digest): `/news/001-project-announcement/` **200**, 11,792 B,
+sha256 `ba789bc9…`, **0** occurrences of the label, no machine-date token. The public surface therefore
+carries no record date until the technical card pushes this change; that card verifies the live pages
+afterwards.
+
+**Revision-history note.** The earlier entries in this record — §S2's gate-input hash row, §S5's surface
+measurements and §S8's hotspot note for `website/news/001-project-announcement.mdx` — pin sha256
+`73c2d047…` (4,806 B). The applied revision is `923a12d8…` (4,832 B): one frontmatter line longer and
+otherwise byte-identical. Their readings stand for everything except the record date, no row in them is
+contradicted by it, and this section supersedes nothing — it extends the record with a field the article
+did not declare when §S was written.
+
+**Routed observation (not a failure of this change).** The 001 page's plate captions carry the artwork's
+generation date as a provenance sentence from the media registry (`2026-09-16`), not from the article file
+— pre-existing, human-released material, rendered as prose with no machine-readable form. It is recorded
+here so a later reader does not read it as this article's record date. **Owner:** the visuals/provenance
+chain (the same class as the 003 release record's O-3) and `project-documentation` for the dossier record.
+
+**Release decision for this change** is recorded on card `t_531698d9` (this role), together with the three
+values and the milestone line behind each; the technical card `t_1059c973` (`mars-ai-simulator-dev`)
+applies and pushes the change. No canon file was edited: `docs/` was read only. Landing-design material is
+named here by location, never by value.
+
+---
+
 **Final label: `approved`** (revision re-verification, card `t_ff937d33`, pass 2; supersedes
 the pass-1 label `changes_requested` recorded above, whose §R0–R9 stays as written with
 the §S7 correction applied to it)

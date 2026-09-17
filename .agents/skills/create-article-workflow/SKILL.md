@@ -87,6 +87,45 @@ graph — every stage waits for the article card to be done while the article ca
 waits for its stages, so nothing can ever start and the dispatcher keeps
 re-spawning the coordinator on the epic.
 
+## A worker dispatched onto an Article container must verify, not rebuild
+
+The Article container card is created by the commission run alongside its graph,
+so the worker that later picks the container up does **not** create the graph —
+it verifies that one already exists. The default behaviour is fail-closed: on
+claim, the worker reads each child with `hermes kanban show`, checks the five
+blocking edges RESEARCH→DRAFT→SEO→IMAGES→REVIEW→DEPLOY, confirms the artifact
+paths exist on disk, and closes the container with `kanban_complete` (or
+`kanban_block` if a gate answer is genuinely missing), **creating nothing**.
+
+Two rules make that the only possible outcome.
+
+1. **The container body carries the real child ids and an explicit line that the
+   graph already exists.** The commission run that creates the graph also
+   writes those ids into the container body (in the same run, in the same
+   comment thread). Placeholders in a dispatched container body — `t_<research>`,
+   `t_<draft>`, `t_<seo>`, `t_<images>`, `t_<editorial>`, `t_<deploy>`,
+   `t_<release>` — are an open invitation to rebuild the graph beside the
+   existing one, because every skill in the worker's context treats them as
+   "fill this in" rather than "verify it is already filled". The corrective that
+   filed this rule is the step-004 incident (operator 2026-09-17, evidence on
+   `t_5fbd61ee` → `t_0abfd5b6` run 150, eight archived duplicates
+   `t_9e59c235`, `t_24585e00`, `t_81bc2b83`, `t_94887702`, `t_8db78a76`,
+   `t_655341e8`, `t_1e366ff0`, `t_5fa67915`): the planner worker rebuilt the
+   graph rather than verify it.
+2. **If a container must be created before its graph (the old shape), the
+   container is created `--initial-status blocked`** (or otherwise kept from
+   dispatch — for example, by depending the parent gate on the graph first) and
+   the worker that later fills in the ids is forbidden from creating any card
+   that already exists. A worker that finds the graph already on the board
+   records the verified ids and closes without creating anything; a worker that
+   finds it absent stays `blocked` and routes the missing graph to the planner
+   rather than building it itself.
+
+The single one-line rule the worker carries into the claim:
+
+> _Read the container's children with `hermes kanban show`, confirm the graph
+> is already on the board, and close — creating nothing._
+
 Record the title, brief, timeline step, acceptance criteria, artifact paths, and
 created card IDs as a comment on the parent card
 (`hermes kanban comment <id> "..."`). The coordinator also creates the brief,

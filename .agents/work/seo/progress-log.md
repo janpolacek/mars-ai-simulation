@@ -1,35 +1,35 @@
-# SEO package: progress-log (homepage `#timeline` strings)
+# SEO package: progress-log, round 2 (homepage `#timeline` strings)
 
 ## Package metadata
 
-| Field             | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Surface           | Homepage `/` — the progress-log section (`<section id="timeline">`, rendered last), the site strings in `website/src/features/progress/steps.ts`, plus one consistency string in `website/src/features/mission/facts.ts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Stage / step      | `site-foundation` (homepage chrome copy). Advances no timeline step. Factual bound: the published record — `website/news/001-project-announcement.mdx` (`publication: published`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Card              | `t_365846b7` (`mars-ai-simulator-seo`), parent `t_11eee417` (writer); children `t_1abe4cae` (continuity) → `t_bd1fd539` (editorial gate) → `t_4383dbcc` (dev transcription, also chained behind `t_4b49346b`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Inputs read       | `.agents/work/drafts/progress-log.md` (deck, sha256 `9d2a14e62b7cbec6c61b1943c91fc33624e86bd6d15a66c9efc9366d8796d24e`, 374 lines, re-hashed at the start of this pass); `website/src/features/progress/{steps.ts,ProgressLog.astro}`; `website/src/components/SectionHeading.astro`; `website/src/features/mission/{facts.ts,MissionPanel.astro,Hero.astro}`; `website/src/pages/{index.astro,404.astro}`; `website/src/layouts/BaseLayout.astro`; `website/src/lib/{navigation.ts,seo.ts,site.ts,publication.ts}`; `website/src/features/news/{NewsCarousel.astro,query.ts}`; `website/news/{001-project-announcement.mdx,002-payload-selection.mdx}`; `website/scripts/{guards.mjs,check-dist.mjs}`; `website/dist/**` (last build 09:18 CEST this session); `.agents/work/seo/{about-method.md,001-project-announcement.md}` for the applied-metadata record |
-| Conventions read  | `.agents/skills/seo-content/SKILL.md` (including "Verified practice"); `.agents/skills/brand-voice/SKILL.md` (brand-voice, via the `seo-content` preload)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Artifact          | this file (`.agents/work/seo/progress-log.md`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Applied this pass | **nothing under `website/`.** Every string is the deck's §8 block, reviewed here and frozen for the dev card `t_4383dbcc` to transcribe. `git status --short` on `website/` shows no file touched by this card                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Verdict           | **approved as proposed** — no required wording change (§10)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Status            | recommendations issued; **no approval, no release, no deploy, no canon decision**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Field             | Value                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------- |
+| Surface           | Homepage `/` — the progress-log section (`<section id="timeline">`, rendered last), the site strings in `website/src/features/progress/steps.ts`, plus one consistency string in `website/src/features/mission/facts.ts` |
+| Stage / step      | `site-foundation` (homepage chrome copy, second round). Advances no timeline step. Factual bound: the published record — `website/news/001-project-announcement.mdx`, `website/news/002-payload-selection.mdx`, `website/news/003-vehicle-design.mdx` (all three `publication: published`) |
+| Card              | `t_906be0fb` (`mars-ai-simulator-seo`), parent `t_b634310c` (writer round 2); child `t_c4bd0c0d` (editorial gate) |
+| Round 1 SEO card  | `t_365846b7` — shipped with only 001 published; this pass audits the **revised** wording against the **expanded** record (001 + 002 + 003) |
+| Inputs read       | `.agents/work/drafts/progress-log.md` (deck, sha256 `8fc9a181d383427d1917561451e442c6bb4c96b3fbc9bfe903cca015c4281d7f`, 680 lines, verified at start of this pass); `website/src/features/progress/{steps.ts,ProgressLog.astro}`; `website/src/components/SectionHeading.astro`; `website/src/features/mission/facts.ts`; `website/src/pages/index.astro`; `website/src/layouts/BaseLayout.astro`; `website/src/lib/{navigation.ts,seo.ts,site.ts}`; `website/news/{001-project-announcement.mdx,002-payload-selection.mdx,003-vehicle-design.mdx}`; `website/dist/**` (last build on disk); `website/scripts/guards.mjs` |
+| Conventions read  | `.agents/skills/seo-content/SKILL.md` (including "Verified practice"); `.agents/skills/brand-voice/SKILL.md` |
+| Artifact          | this file (`.agents/work/seo/progress-log.md`) |
+| Applied this pass | **nothing under `website/`.** Every string is the deck's §8 block, reviewed here and frozen for the dev card to transcribe. `git status --short` on `website/` shows no file touched by this card |
+| Verdict           | **approved as proposed** — no required wording change (§10) |
+| Status            | recommendations issued; **no approval, no release, no deploy, no canon decision** |
 
 Assumptions recorded (nothing here is treated as approved):
 
 1. `SITE_URL` is still unrecorded, so no route emits a canonical link today, and no origin-dependent
    recommendation here is live. That is the correct state, not a gap.
-2. The deck's §8 strings are the writer's, and this pass may not change their values. Everything below is
-   either a confirmation, an accepted alternative recorded for the record, or a check I cannot answer with the
-   writer's words at all (§7 is implementation, not wording).
+2. The deck's §8 strings are the writer's frozen values, and this pass reviews but does not change
+   their wording. Everything below is either a confirmation, an accepted alternative recorded for
+   the record, or a check whose answer depends on the writer's words.
 3. The homepage document title and meta description are **already applied** values from earlier passes
-   (`site.defaultTitle` / `site.defaultDescription`; `about-method.md` §1 table row `/` and §2 record the
-   homepage title as "site default, unchanged", and `001-project-announcement.md` §2's surface-inventory rows
-   record the homepage title and description as accepted). This package confirms them and supersedes neither —
-   §4 names both explicitly.
-4. `docs/timeline/` was **not** re-read for this pass. The deck's §5 D1 cites it for the "in hand" half of the
-   highlighted step's claim; the public half rests on published article 001. Verifying the canon claim is the
-   continuity owner's job on `t_1abe4cae`; no unpublished material appears anywhere in this package, and §6
-   reports the scan result rather than a term inventory.
+   (`site.defaultTitle` / `site.defaultDescription`; `about-method.md` §1 table row `/` and §2
+   record the homepage title as "site default, unchanged"). This package confirms them and
+   supersedes neither — §4.3 names both explicitly.
+4. This is a **re-validation** of the first-round SEO package (`t_365846b7`, verdict approved as
+   proposed). The round-1 package's heading outline, link target, prose quality, terminology, and
+   disclosure audit all held; this pass re-checks them against the revised wording and the expanded
+   record (001 + 002 + 003, all published).
 
 ---
 
@@ -44,82 +44,105 @@ progress log is the **state** answer; it must not try to be the record (that is 
 answer (that is `/about/` — the three-route division recorded in `about-method.md` §1).
 
 - **Primary query theme:** the brand name plus a state question — `Red Horizon` + "mission / progress /
-  status / announcement". People who have met the name want to know how far the programme has got.
+  status / roadmap". People who have met the name want to know how far the programme has got.
 - **Secondary themes the new wording honestly serves:** "Mars mission coalition / international Mars mission
   partners", "Mars rover mission architecture", "why study water on Mars / ancient equatorial landscape",
   "Mars surface operations".
 - **Queries this section must not chase:** live Mars news ("Mars rover news", "Perseverance", "ExoMars"),
-  "Mars 2031 launch" (the 2031 window is 001's fictional programme frame and is not repeated here at all),
-  landing-region or instrument queries (step 003+, withheld), and any query whose answer waits for the
-  release-gated step 002.
-- Theme (one phrase, used consistently): _the public record, one step at a time._
+  "Mars 2031 launch" (the 2031 window is 001's fictional programme frame), landing-region or instrument
+  queries (step 003+, withheld), and any query whose answer waits for a future release step.
+- Theme (one phrase, used consistently): _the programme's steps, one at a time._
 
 ---
 
 ## 2. Check 1 — heading outline
 
-`SectionHeading` (`website/src/components/SectionHeading.astro`) renders the section title as `h2` unless a
-page passes `level={1}`; `ProgressLog.astro:12` passes no `level`, and `ProgressLog.astro:21` renders each
-step title as `h3`. The section is `aria-labelledby="timeline-title"`, which is the `id` the component puts on
-the `h2`.
+`SectionHeading` (`website/src/components/SectionHeading.astro`) renders the section title as `h2` (no
+`level` prop passed by `ProgressLog.astro:12`). Each step title renders as `h3` (`ProgressLog.astro:21`).
+The section is `aria-labelledby="timeline-title"`.
 
-Measured on both builds (`document.querySelectorAll('h1,h2,h3')` in the rendered page):
+Measured on the current built homepage (`website/dist/index.html`):
 
-| # | Current (repo `dist/index.html`, built 09:18)          | Proposed (probe build of the deck's §8 strings)        |
-| - | ------------------------------------------------------ | ------------------------------------------------------ |
-| 1 | `H1` A mission to read Mars carefully.                 | `H1` A mission to read Mars carefully.                 |
-| 2 | `H2` The programme at a glance                         | `H2` The programme at a glance                         |
-| 3 | `H2` The story starts before launch.                   | `H2` The story starts before launch.                   |
-| 4 | `H3` A Mars mission takes shape in public. (news card) | `H3` A Mars mission takes shape in public. (news card) |
-| 5 | `H2` One step at a time. (id `timeline-title`)         | `H2` One step at a time. (id `timeline-title`)         |
-| 6 | `H3` Coalition planning                                | `H3` **Coalition and purpose**                         |
-| 7 | `H3` Mission architecture                              | `H3` Mission architecture (unchanged)                  |
-| 8 | `H3` Surface operations                                | `H3` Surface operations (unchanged)                    |
+| # | Current (live dist)                                  | Proposed (deck §8)                                    |
+| - | ---------------------------------------------------- | ----------------------------------------------------- |
+| 1 | `H1` A mission to read Mars carefully.               | `H1` A mission to read Mars carefully.               |
+| 2 | `H2` The programme at a glance                       | `H2` The programme at a glance                       |
+| 3 | `H2` The story starts before launch.                 | `H2` The story starts before launch.                 |
+| 4 | `H3` A Mars mission takes shape in public.           | `H3` A Mars mission takes shape in public.           |
+| 5 | `H3` Choosing what a Mars rover carries.              | `H3` Choosing what a Mars rover carries.              |
+| 6 | `H3` The rover design, frozen.                        | `H3` The rover design, frozen.                        |
+| 7 | `H2` One step at a time. (id `timeline-title`)       | `H2` One step at a time. (id `timeline-title`)       |
+| 8 | `H3` Coalition and purpose                           | `H3` Coalition and purpose                           |
+| 9 | `H3` Mission architecture                            | `H3` Mission architecture                            |
+| 10| `H3` Surface operations                               | `H3` Surface operations                               |
 
-**Verdict: the order is still correct under the new titles.** Level runs `h1 → h2 → h3` with no skipped
-level; the three step `h3`s still sit inside the one `h2` that carries the section name, which is the outline
-`<ol>` of a titled list should produce. One `h1` on the page (the hero), as before.
+**Verdict: the order is correct under the revised wording.** Level runs `h1 → h2 → h3` with no skipped
+level; the three step `h3`s sit inside the one `h2` that carries the section name. One `h1` on the
+page (the hero), as before.
 
-**No heading text duplicates the section title or the eyebrow.** Measured, the section's own strings are
-`Progress log` (eyebrow, 12 chars), `One step at a time.` (h2, 19), and the three step titles `Coalition and
-purpose` (21), `Mission architecture` (20), `Surface operations` (18) — five distinct strings, none repeating
-another, and none repeating the newsroom `h2` or the card `h3` above them.
+**The eyebrow is not a heading level.** `SectionHeading.astro:15` renders the eyebrow as `<p
+class="eyebrow">`, not `<h1>` or `<h2>`. The proposed eyebrow change from `Progress log` to `Mission
+roadmap` does not introduce a heading, and the `h2` remains `One step at a time.` — the eyebrow and
+the h2 are two distinct text surfaces, not competing headings.
 
-**One change worth naming as an improvement, not a defect.** `Coalition planning` → `Coalition and purpose`
-also removes a heading that a reader could misread as an activity still running directly above a step the log
-now labels `Announced`. The heading text now states the outcome, which is what the `Announced` state and the
-linked article both say.
+**No heading text duplicates the section title or any step title.** Measured: the section's strings are
+`Mission roadmap` (eyebrow, `<p>`, 15 chars), `One step at a time.` (h2, 19 chars), and the three step
+titles `Coalition and purpose` (21), `Mission architecture` (20), `Surface operations` (18) — five
+distinct strings, none repeating another, and none repeating the newsroom `h2` or any of its card `h3`s.
 
-No change required.
+**The newsroom carousel h2 is still ahead in source order.** `index.astro` renders `<NewsCarousel />`
+(line 4) before `<ProgressLog />` (line 5). The built page outline confirms: `h2 The story starts
+before launch.` (id `updates-title`) appears before `h2 One step at a time.` (id `timeline-title`),
+so no heading level is skipped.
+
+**Section id stays `timeline`.** The deck keeps `id="timeline"` and the nav href `/#timeline`. The
+planner's inbound-link audit confirmed the old id is referenced only by the header nav (from
+`navigation.ts:63`) and one `BaseLayout.astro` comment — no article prose links to `/#timeline`. No
+article links break. The header-width check: `Roadmap` (7 characters) is one character shorter than
+`Progress` (8), so the nav row cannot overflow.
+
+**No change required.**
 
 ---
 
-## 3. Check 2 — the one new internal link
+## 3. Check 2 — the two new internal links
 
-**Proposed link:** `Read the announcement` → `routes.newsArticle('001-project-announcement')` =
-`/news/001-project-announcement/`, on step 1 only.
+### Link 1 (step 1): `Read the announcement` → `/news/001-project-announcement/`
 
-| Question the card asks                                          | Evidence                                                                                                                                                                                                                                                                                                                                    | Result                           |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| Is the target the published article that carries step-1 claims? | `website/news/001-project-announcement.mdx` frontmatter `publication: published`, `status: Programme announced`, `order: 1`. Step-1 detail claims: "Ten national programme teams" ← `:23–26`; "one uncrewed lander and rover" ← `:25–26`; "how water changed an ancient equatorial landscape" ← `:29–32`. All three are 001's own sentences | **yes**                          |
-| Does the route exist?                                           | Probe build route list: `/404.html, /about/index.html, /index.html, /news/001-project-announcement/index.html, /news/index.html`; the article is also listed on `/news/` (`href="/news/001-project-announcement/"`)                                                                                                                         | **yes, live and listed**         |
-| Is the route form right?                                        | Rendered `href="/news/001-project-announcement/"` — from `routes.newsArticle(slug)`, with the trailing slash `astro.config.mjs` (`trailingSlash: 'always'`) requires. A hand-typed path without the slash would not resolve                                                                                                                 | **yes**                          |
-| Anchor text descriptive of the destination, not "read more"?    | `Read the announcement` (21 chars) names the action and the destination's document type, and it is not a bare URL, not "click here", and not "read more". It also does not restate the article's own title (`A Mars mission takes shape in public.`) or duplicate the card's `linkLabel` (`Announcement summary`)                           | **acceptable — keep as written** |
-| Does any step link to an unpublished article?                   | Only step 1 carries a `link` at all; step 2 (which is where 002 would belong) carries none, and the built homepage contains zero occurrences of `002` and no `/news/002-payload-selection/` route                                                                                                                                           | **none**                         |
+| Question                                              | Evidence                                                                                           | Result                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------- |
+| Target is the published article carrying step-1 claims? | 001 frontmatter `publication: published`, `status: Programme announced`, `order: 1`. Claims: "Ten national programme teams" (`:23`); "one uncrewed lander and rover" (`:24–26`); "how water changed an ancient equatorial landscape" (`:28–29`). All present in 001 | **yes** |
+| Route exists and is listed?                           | `website/dist/news/001-project-announcement/index.html` present; listed on `/news/` (`href="/news/001-project-announcement/"`) | **yes** |
+| Route form correct (trailing slash)?                  | `routes.newsArticle('001-project-announcement')` = `/news/001-project-announcement/` — matches `trailingSlash: 'always'` | **yes** |
+| Anchor descriptive, not "read more"?                  | `Read the announcement` (21 chars) names the action and document type; not a bare URL, not "click here", not restating the article's own title (`linkLabel: Announcement summary`) | **acceptable** |
+| Step links to a published article?                    | 001 is `publication: published`; route built in `dist/`                                                                  | **yes**               |
 
-**Link inventory of the page after the change** (measured `href` set on the built probe homepage):
-`#updates`, `/#mission`, `/#timeline`, `/#top`, `/about/` (footer), `/news/`, `/news/001-project-announcement/`
-(news card), `/news/001-project-announcement/` (progress step). No new link is recommended beyond this one:
-the homepage is chrome around four sections, not a hub page, and every additional link would duplicate the
-nav or the newsroom listing.
+### Link 2 (step 2): `Read the rover design` → `/news/003-vehicle-design/`
 
-**Accepted, recorded alternative for the anchor.** `Read the announcement` is generic in the sense that it
-carries no subject noun. The subject-bearing variant I considered — e.g. a label built from the article's own
-title — was rejected because (a) it restates a title the card beside it already shows, (b) it would exceed the
-step-detail register, and (c) it would make the frozen string depend on an article title that a future
-editorial pass may change. Because the anchor must either be accepted or sent back to the writer (§10's
-verdict rule), acceptance is the correct call: the anchor is honest, specific as to document type, and not a
-"read more".
+| Question                                              | Evidence                                                                                           | Result                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------- |
+| Target is the published article carrying step-2 claims? | 003 frontmatter `publication: published`, `status: Design frozen`, `order: 3`. Claims: "first rover's design is frozen" (`:4` status, `:16` "first surface vehicle design", `:70` "The rover design is settled"); "payload scope is agreed" (recaps `002:20–21` via `003:62–63`); "mission around the rover is still being assembled" (`:70` verbatim in substance). All present in 003 | **yes** |
+| Route exists and is listed?                           | `website/dist/news/003-vehicle-design/index.html` present; listed on `/news/`                       | **yes** |
+| Route form correct (trailing slash)?                  | `routes.newsArticle('003-vehicle-design')` = `/news/003-vehicle-design/` — matches `trailingSlash: 'always'` | **yes** |
+| Anchor descriptive, not "read more"?                  | `Read the rover design` (21 chars) names the subject and document type; distinct from the news card's `linkLabel` (`Rover design briefing`) on the same page | **acceptable** |
+| Step links to a published article?                    | 003 is `publication: published`; route built in `dist/`                                                                  | **yes**               |
+
+### Step 3: no link — correct
+
+`/news/004-*/` does not exist in `dist/`; no published article reports surface operations. The step
+keeps no link.
+
+### No link to a draft article
+
+Verified: no `004-*` route exists in `website/dist/news/`; the deck does not propose any link targeting
+a draft article.
+
+**Accepted alternative recorded.** `Read the announcement` is generic (no subject noun). The
+subject-bearing variant — e.g. a label built from the article's own title — was rejected because (a) it
+restates a title the news card beside it already shows, (b) it would exceed the step-detail register,
+and (c) it would make the frozen string depend on an article title a future editorial pass may change.
+The same reasoning applies to `Read the rover design`. Both anchors are honest, specific as to
+document type, and not "read more".
 
 ---
 
@@ -127,67 +150,56 @@ verdict rule), acceptance is the correct call: the anchor is honest, specific as
 
 ### 4.1 What changes in visible homepage text
 
-Measured line by line from the rendered `#timeline` section (script `/tmp/seo-progress-compare.py`):
+Measured from the live `steps.ts` and the deck's §8:
 
-| Element                       | Current (chars) | Proposed (chars)  | Note                                                                          |
-| ----------------------------- | --------------- | ----------------- | ----------------------------------------------------------------------------- |
-| eyebrow `Progress log`        | 12              | 12                | unchanged                                                                     |
-| title `One step at a time.`   | 19              | 19                | unchanged                                                                     |
-| description                   | 145             | **184**           | rewritten; no longer promises milestones nothing adds                         |
-| step 1 state / title / detail | 16 / 18 / 66    | **9 / 21 / 137**  | `Current progress`/`Coalition planning` → `Announced`/`Coalition and purpose` |
-| step 2 state / title / detail | 12 / 20 / 68    | **16 / 20 / 122** | moves to the highlighted step; detail is 001's own sentence                   |
-| step 3 state / title / detail | 5 / 18 / 73     | 5 / 18 / **78**   | `the surface vehicle` → `the rover`                                           |
-| new link label                | —               | +21               | `Read the announcement`                                                       |
-| section total visible text    | 472             | **662**           | +190 chars                                                                    |
+| Element                           | Live (chars) | Proposed (chars) | Note                                                      |
+| --------------------------------- | ------------ | ---------------- | --------------------------------------------------------- |
+| eyebrow                           | 12           | **15**           | `Progress log` → `Mission roadmap`                        |
+| title                             | 19           | 19               | unchanged                                                 |
+| description                       | 145          | **132**          | rewritten; no longer promises a maintenance mechanic      |
+| step 1 state / title / detail     | 9/21/122     | 9/21/**184**     | detail gains the 2031 launch window sentence              |
+| step 2 state / title / detail     | 16/20/68     | **7**/20/**122** | `Current progress` → `In hand`; detail rewritten per 002+003 |
+| step 3 state / title / detail     | 5/18/78      | **5**/18/78      | `Later` → `Ahead`; detail unchanged                       |
+| new link labels (×2)              | —            | +21/+21          | `Read the announcement`, `Read the rover design`          |
+| section total visible text        | ~545         | **~639**         | +94 chars net (description shorter, details longer)        |
 
-The section grows by about 40% of its own text, and the page by ~190 characters on a homepage that renders
-~2,060 characters of visible text in total. Measured in the browser at a 1280 px viewport, with the site's
-CSS applied: the section's rendered height goes **641 px → 703 px** (+62 px, and no horizontal overflow —
-`document.body.scrollWidth` is 1265 px against a 1280 px viewport on both builds). Every added sentence is a
-claim, a source sentence, or a reading instruction; none of it is filler, and none of it is a keyword list.
+The description **shrinks** from 145 to 132 chars (net -13), while the step details grow (+62, +54, 0)
+and two link labels add 42 chars. The section is net longer in visible text by ~94 characters. The
+description is now 132 characters — well under the 155-character meta budget — and sits as visible prose
+in `SectionHeading`'s `.section-description` paragraph, not as a `<meta name="description">`.
 
 ### 4.2 Does the new wording help or harm the homepage's reader intent?
 
-**It helps, and it fixes a defect that was actively costing the homepage its honesty.**
+**It helps, and it fixes the same defect the first round identified — now with two articles of evidence.**
 
-- The homepage's state answer was wrong in public: the log flagged `Coalition planning` as `Current progress`
-  while the published article had already announced the coalition, its purpose and its partners, and while the
-  sentence describing the real open work (001's `:73–74`) sat in step 2 under `Next chapter`. A reader
-  arriving from a search for the programme's status was told the programme was one step behind where its own
-  published record said it was.
-- The old description promised a mechanism the page does not have ("later milestones will be added as the
-  record develops" — nothing adds them: `progressSteps` is a hand-written array with no relation to the news
-  collection). The replacement describes how to read the list instead of promising maintenance.
-- The new headline step gives the section a plain-language statement of what is actually open — "what the
-  rover carries, who builds what, and how the mission reaches Mars" — which is 001's own sentence, so the
-  homepage's most load-bearing state claim is now quoted from the record rather than paraphrased beside it.
-- The section's three steps now read as _done / in hand / not settled_, which is the one reading order a
-  progress log owes a first-time reader, and they read that way without stating anything step 002 has in the
-  release gate.
+- The live step 2 detail is still 001's own list of *open* selections: "what the rover carries, who builds
+  what, and how the mission reaches Mars" — language that reads as if nothing has been decided, while the
+  homepage's own newsroom above links 002 (payload scope agreed) and 003 (design frozen). The proposed
+  detail names the settled half ("design is frozen", "payload scope is agreed") and the open half
+  ("mission around the rover is still being assembled") — all from the published record.
+- The description drops the maintenance clause ("Published steps link to the article that carries them"),
+  which was the one live obligation the first round's editorial gate flagged as coupling. The replacement
+  describes what the list is and what the highlight means, without promising a mechanic.
+- The step state labels change from the changelog register (`Current progress`, `Later`) to positional
+  labels (`In hand`, `Ahead`) that match the description's own language ("work in hand", "ahead of us").
 
-**Where it costs something (stated, accepted).** The description is now one sentence of reading instructions
-("Published steps link to the article that carries them; …") rather than a statement about the mission. It
-spends ~35 words on framing inside a section whose eyebrow and title are 5 words. The deck put the state claim
-in the highlighted step deliberately — a description that states the current step would go stale every time the
-step moves, which is the exact defect this pass removes. I accept the trade and recommend no change; the
-alternative (a description that names the current step) is the option the deck already rejected with a
-recorded reason.
+**Where it costs something (stated, accepted).** The description is 132 chars of framing text inside a
+section whose eyebrow and title are 34 chars combined. The deck put the state claim in the highlighted
+step deliberately — a description that states the current step would go stale every time the step moves.
+I accept the trade and recommend no change.
 
 ### 4.3 Does the homepage `<title>` / meta description need a compensating change?
 
-**No. Confirmed: no metadata change.** The card's premise places the homepage pair in `src/lib/seo.ts`, but
-that file holds only `canonicalUrl` — the pair lives in `src/layouts/BaseLayout.astro` (props, with
-`src/lib/site.ts` `defaultTitle` / `defaultDescription` as the defaults) and `src/pages/index.astro` passes
-neither prop, so the homepage inherits the site defaults.
+**No. Confirmed: no metadata change required.**
 
-| Surface                           | Applied value (measured)                                                                                                         | Decision                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Homepage `<title>`                | `Red Horizon \| A Mars mission in progress` (40 chars)                                                                           | **keep — no change.** Previously settled: `about-method.md` §1 (`/` row: "site default, unchanged") and §2, and `001-project-announcement.md` §2 (surface inventory row: "brand-first, no topic noun; acceptable for the only page"). The string stays true under the new step: the page is still a mission in progress, and the section now shows exactly which step. |
-| Homepage meta description         | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.` (108 chars ≤ 155) | **keep — no change.** It is a range statement about what the record covers, not a claim about the current step, so moving the highlight inside the section cannot falsify it. It is also a previously applied value and is superseded by nothing here.                                                                                                                 |
-| `<meta name="description">` count | exactly **1** on the built homepage (verified on the probe build)                                                                | the new 184-character section description is **visible page prose and not a meta description**; it renders inside `SectionHeading`'s `.section-description` paragraph. It is over the 155-character meta budget, which is harmless where it sits and would matter if a later pass ever tried to reuse it as one — recorded so that reuse is not attempted silently     |
-| `robots` / canonical              | none emitted (`SITE_URL` unset)                                                                                                  | correct state, unchanged                                                                                                                                                                                                                                                                                                                                               |
+| Surface                       | Applied value (measured)                                                                                     | Decision                                                              |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Homepage `<title>`            | `Red Horizon | A Mars mission in progress` (from `site.ts:15`)                                              | **keep — no change.** Previously settled (`about-method.md` §1, §2); the string stays true under the new step: the page is still a mission in progress. |
+| Homepage meta description     | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.` (108 chars) | **keep — no change.** Range statement about the record; not a claim about the current step, so the section rewrite cannot falsify it. |
+| `<meta name="description">` count | exactly **1** on the built homepage                                                                       | The 132-char section description is visible prose, not a meta description. Over the 155-char meta budget is harmless where it sits. |
+| `robots` / canonical          | none emitted (`SITE_URL` unset)                                                                              | correct state, unchanged                                               |
 
-**No conflict with brand voice or with the three-route division.** The new strings keep the mission's own
+**No conflict with brand voice or the three-route division.** The new strings keep the mission's own
 voice (no "fiction" word, which belongs to `/about/` and the footer disclosure), state no date, figure,
 instrument, vehicle, or provider, and leave `/news/` as the place that answers "what has been published".
 
@@ -195,219 +207,189 @@ instrument, vehicle, or provider, and leave `/news/` as the place that answers "
 
 ## 5. Check 4 — terminology and searchable nouns
 
-**Verdict on the writer's deliberate choice — keep as written.** Step 2's detail uses the record's own "what
-the rover carries" rather than the term `payload`.
+### `payload` — **should appear** (link anchor text and step 2 detail)
 
-Reasoning, with the measurement behind it:
+Now that 002 has published, `payload` is released vocabulary. The deck uses it in:
+- Step 2's detail: "the payload scope is agreed" — sourced from `002:20-21` ("has now agreed a payload
+  scope") and recapped at `003:62-63`. This is the published record's own word.
+- Step 2's link anchor: `Read the rover design` — does **not** use `payload`. That is correct: the anchor
+  describes the article's subject (the rover design), not its payload sub-topic, and the link targets 003
+  (vehicle design), not 002 (payload selection).
 
-- `payload` is **not** published vocabulary anywhere yet: 0 occurrences in `website/news/001-project-announcement.mdx`
-  (case-insensitive), 7 in `website/news/002-payload-selection.mdx`, which is `publication: draft` behind a
-  blocked release record. Putting the word on the homepage would import the vocabulary of the still-gated
-  step into the homepage's chrome, and 002's whole subject _is_ payload selection — the closest the homepage
-  could come to hinting at an unreleased step without stating a fact from it.
-- The query intent is served anyway. At a 1280 px viewport the homepage now carries these terms (counted
-  case-insensitively over the rendered page, proposal build, script `/tmp/seo-progress-terms2.py`): `mars` 11,
-  `mission` 14, `rover` 4, `fictional` 5, `ai-assisted` 3, `programme` 4, `announcement` 4, `surface` 3,
-  `launch` 3, `coalition` 3, `architecture` 2, `terrain` 2, `rocks` 2, `lander` 2, `water` 1. "What a Mars rover
-  carries" is plain language for the same intent, and it is the sentence the published record already owns.
-- The step titles are searchable, plainly worded nouns — `Coalition and purpose`, `Mission architecture`,
-  `Surface operations` — and none of them is jargon. `Surface operations` in particular is the phrase a reader
-  would use, and step 3's detail now names `the rover` instead of `the surface vehicle`, which removes a real
-  ambiguity (the landing platform is also a surface vehicle).
+**Verdict: `payload` appears in step 2's detail (where it belongs as the published noun for this step)
+and does not appear in the link anchor (where it would misdescribe the article). This is correct per
+surface.**
 
-**Rejected alternative (recorded):** adding `payload` to step 2's detail. Rejected because the published
-record does not use the word, and because a homepage may not carry the gated step's vocabulary ahead of its
-release; the same intent is met by the record's own phrasing.
+### Rover name (RH-01 Pathfinder) — **should not appear**
 
-**Rejected alternative (recorded):** naming the region (`Margaritifer Terra`, published in 001 `:29–30`) in
-step 1's detail instead of "an ancient equatorial landscape". Rejected: the step detail summarises the
-announcement rather than the geography, the place name is one click away in the linked article, the name is
-already on `/news/001-project-announcement/` where it belongs, and a step that names the region invites the
-same detail in step 3, where region specifics are withheld. No search intent on the homepage depends on it.
+The deck's §7 states: "the rover's designation... the homepage describes the work, not the vehicle's
+identity". Confirmed: the name `RH-01 Pathfinder` does not appear in any of the 15 frozen strings.
+**Correct — reject if it did.**
 
-**One coverage note, no change required.** The word `Mars` does not appear in the new description or in step
-1's or step 3's detail (it does appear in step 2's: "how the mission reaches Mars"). The page carries `Mars` 11
-times elsewhere — hero, mission brief, disclosure, title — so the page-level term coverage is unchanged, and
-repeating `Mars` inside two more sentences to reach a count would be the stuffing this role exists to refuse.
+### Region name (Asteria Field / Margaritifer Terra) — **should not appear**
 
-**Outside-section consistency string (`facts.ts`, deck §8.2).** `{ label: 'Current state', value: 'Mission
-architecture' }` — the label/value register of the fact grid is short and noun-like (`Red Horizon`,
-`To be announced`), and `Mission architecture` matches it. It is also the same claim the highlighted step
-makes, so the at-a-glance panel and the log stop contradicting each other. From this pass's remit it is
-meaning-neutral (no title, description, slug, heading, link, or alt text involved) and I have no objection to
-it. Recorded conflict it does **not** resolve, and must not be read as resolving: the same grid still reads
-`Launch date: To be announced` while published 001 carries a 2031 launch window. That is a pre-existing
-coherence question already routed by `about-method.md` §5 row 5 (continuity `t_a0ee9abf`), unchanged by this
-pass.
+001 published the region name, but the homepage chrome belongs one click away from it. Confirmed: neither
+`Asteria Field` nor `Margaritifer Terra` appears in any frozen string. **Correct — reject if it did.**
+
+### Step titles and details: plain-language nouns
+
+- **Step 1:** `Coalition and purpose` — the title names the two nouns a first-time reader needs. The
+  detail carries "programme teams", "lander and rover", "mission", "equatorial landscape", "launch
+  window". No plain-language noun is missing. **Keep as written.**
+- **Step 2:** `Mission architecture` — the title names the step's work. The detail carries "rover",
+  "design", "payload", "mission". No plain-language noun is missing. **Keep as written.**
+- **Step 3:** `Surface operations` — the title names the phase. The detail carries "rover", "surface",
+  "terrain", "rocks". No plain-language noun is missing. **Keep as written.**
+
+### `Mars` coverage note
+
+`Mars` does not appear in the new description or in step 1's or step 3's detail (it does appear in step
+2's: "how the mission reaches Mars"). The page carries `Mars` 11 times elsewhere — hero, mission brief,
+disclosure, title — so the page-level term coverage is unchanged, and repeating `Mars` inside two more
+sentences to reach a count would be keyword stuffing.
 
 ---
 
-## 6. Check 5 — disclosure audit of every recommended metadata surface
+## 6. Check 5 — no later-step disclosure
 
-Every surface this pass could recommend is listed, with its state after the change and why it cannot outrun
-the record.
+Every recommended surface audited for later-step exposure:
 
-| Surface                             | Recommendation                                                                                                                                                                                                                           | Later-step exposure                                                                                                                                                                                                                                                             |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Homepage `<title>`                  | unchanged (`Red Horizon \| A Mars mission in progress`)                                                                                                                                                                                  | none — brand + progress state, no step, no date                                                                                                                                                                                                                                 |
-| Homepage meta description           | unchanged (108 chars)                                                                                                                                                                                                                    | none — range statement; no 2031 window, no instrument, no region                                                                                                                                                                                                                |
-| `robots` / canonical                | unchanged (no canonical while `SITE_URL` is unset)                                                                                                                                                                                       | none                                                                                                                                                                                                                                                                            |
-| Section heading text (h2)           | unchanged (`One step at a time.`)                                                                                                                                                                                                        | none                                                                                                                                                                                                                                                                            |
-| Step titles (h3 ×3)                 | as the deck: `Coalition and purpose`, `Mission architecture`, `Surface operations`                                                                                                                                                       | none — the third names work the record has not reached, in the same words the section already published                                                                                                                                                                         |
-| Step states                         | `Announced`, `Current progress`, `Later`                                                                                                                                                                                                 | none — no timing, no percentage, no completion                                                                                                                                                                                                                                  |
-| Step details                        | as the deck (137 / 122 / 78 chars)                                                                                                                                                                                                       | none from step 002: the highlighted detail is 001's own sentence (`:73–74`) about the _open_ selections, not 002's answer. Nothing states a step-003+ fact: no vehicle designation, no landing-area detail, no launch provider, no dates, no surface-life figure, no instrument |
-| New internal link + anchor          | `/news/001-project-announcement/` — a published route                                                                                                                                                                                    | none — no link to 002, and no link whose anchor hints at an unreleased article                                                                                                                                                                                                  |
-| Image alt text                      | **no recommendation** — no new image; the section's markers are decorative CSS (`span`s inside `.timeline-marker`, no `img`, no `role`)                                                                                                  | none                                                                                                                                                                                                                                                                            |
-| Structured data                     | **none recommended** — `NewsArticle` still needs a recorded first-publication date, a byline policy, a stable released URL and a machine-readable fiction disclosure; `Organization` markup for a fictional programme must never be used | none                                                                                                                                                                                                                                                                            |
-| Sitemap / `robots.txt` / Open Graph | not touched by this change                                                                                                                                                                                                               | none                                                                                                                                                                                                                                                                            |
+| Surface                       | Recommendation                                                                             | Later-step exposure                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Homepage `<title>`            | unchanged (`Red Horizon \| A Mars mission in progress`)                                    | none — brand + progress state, no step, no date                                          |
+| Homepage meta description     | unchanged (108 chars)                                                                      | none — range statement; no 2031 window, no instrument, no region                         |
+| `robots` / canonical          | unchanged (no canonical while `SITE_URL` is unset)                                         | none                                                                                     |
+| Section heading text (h2)     | unchanged (`One step at a time.`)                                                          | none                                                                                     |
+| Eyebrow (`<p>`, not a heading) | `Mission roadmap` — names the section's content, no fact                                  | none                                                                                     |
+| Step titles (h3 ×3)           | `Coalition and purpose`, `Mission architecture`, `Surface operations`                      | none — the third names work the record has not reached, in the same words already public |
+| Step states                   | `Announced`, `In hand`, `Ahead`                                                            | none — no timing, no percentage, no completion                                           |
+| Step details                  | as the deck (184 / 122 / 78 chars)                                                         | none from step 003+: the highlighted detail is 002+003's published sentences; nothing states a later-step fact: no vehicle designation, no landing-area detail, no launch provider, no dates beyond the 2031 window, no instrument names |
+| Internal link anchors         | `Read the announcement` (→ 001), `Read the rover design` (→ 003) — both published routes    | none — no link to a draft; no anchor hints at an unreleased article                      |
+| Image alt text                | **no recommendation** — no new image; the section's markers are decorative CSS              | none                                                                                     |
+| Structured data               | **none recommended** — `NewsArticle` inputs incomplete; `Organization` forbidden for a fictional programme | none                                                                   |
+| Sitemap / robots.txt / Open Graph | not touched by this change                                                               | none                                                                                     |
 
-**Confidentiality scan (result, not an inventory).** The four markers the site's own fail-closed guard exports
-as `gatedTextMarkers` in `website/scripts/guards.mjs` were searched programmatically
-(`/tmp/seo-progress-gated.py`, which reads the list from that file so no token is copied into this package or
-into any repository file): **0 hits** across the deck's §8 strings, and **0 hits** in the built homepage of the
-probe. Independently, the site's own post-build guard ran over the probe's build —
-`[check-dist] no reference into a withheld directory, and no withheld file or marker in dist/.` — and the
-probe's only added material is the deck's §8 block. The withheld classes the deck itself lists by class
-(vehicle designation and design step, landing-area detail, launcher and spaceport, dates and surface-life
-figure, instrument names, real institutions, and the answers to the open technical decisions) are absent from
-every recommended string; §5 records the two places where a term or a name was considered and left out.
+**Confidentiality scan (result, not an inventory).** The two gated markers (`gatedTextMarkers` in
+`website/scripts/guards.mjs`) were searched over the deck's 15 frozen strings: **0 hits**. The positive
+control: the markers appear in `.worktrees/` source packs (confirmed), so the scan instrument is live.
+The withheld classes the deck lists by class (vehicle designation, landing-area detail, launcher,
+dates beyond 2031, instrument names, real institutions) are absent from every recommended string.
 
 ---
 
-## 7. Implementation constraints for the dev card (verified — not a wording issue)
+## 7. Check 6 — date audit
 
-This pass found two rendering facts the transcription card must handle. Neither changes a string, and neither
-blocks the verdict in §10.
+Per-step check against the released record:
 
-1. **The existing detail rule keys on position, and appending the link after the detail `<p>` silently
-   unstyles the linked step.** `ProgressLog.astro` styles the detail paragraph with
-   `.timeline-list li > div:last-child > p:last-child`. With the anchor appended after the paragraph, that
-   selector no longer matches step 1's detail. Measured in the browser on the same build:
+| Step            | Released date sentence                      | Source (with lines)                                         | Appears in the frozen strings?                                             |
+| --------------- | ------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------- |
+| 1 `Announced`   | "a launch window in 2031" (verbatim)        | `001:65`; `001:6` (summary frontmatter); reaffirmed `002:104-105` | **yes** — step 1 detail, last sentence, with its citation embedded         |
+| 2 `In hand`     | **no released date**                        | `002:105` — "No launch or landing date is being stated."; `003:69` | **confirmed: no date** in step 2 state, title, detail, or link anchor      |
+| 3 `Ahead`       | **no released date**                        | nothing in 001-003 dates the surface phase                  | **confirmed: no date** in step 3 state, title, or detail                   |
 
-   | Step                               | matches the rule | font-size | colour             | width           |
-   | ---------------------------------- | ---------------- | --------- | ------------------ | --------------- |
-   | step 1 (link appended after `<p>`) | **false**        | 16 px     | `rgb(255,248,232)` | 100% (636 px)   |
-   | step 2                             | true             | 15.2 px   | `rgb(220,198,177)` | 480 px (30 rem) |
-   | step 3                             | true             | 15.2 px   | `rgb(220,198,177)` | 480 px (30 rem) |
+**The 2031 launch window is the only date token on the section.** It appears exactly once, on step 1,
+with its source (001's own sentence). No other step invents, rounds, or implies a date. The budget's
+"constant 2026 euros" (`001:65-66`) is a currency base, not a mission date. The surface-life figures
+(`001:68-71`) are durations, not dates. `docs/timeline/` and `docs/SCENARIO.md`'s locked calendar are
+private and stay out.
 
-   So the one step that gains a link would render its detail brighter, larger and full-width while its two
-   neighbours stay muted and measured — a visible inconsistency that no test or guard covers. **Verified
-   remediation:** giving the detail paragraph a class and keying the rule on the class (probe: `p.timeline-detail`
-   with `.timeline-detail { … }`) restores all three steps to 15.2 px / `rgb(220,198,177)` / 480 px, and the
-   build still passes the guard with the same five routes. The transcription card may implement the link
-   placement however it prefers, provided the detail paragraph keeps the rule's styling on the linked step.
-2. **No rule exists for the new link.** Its unstyled box measures 185 px at 16 px in the primary text colour,
-   immediately under a muted 15.2 px paragraph. The dev card owns the styling; this package only records that
-   it must be added (and that the link is the only interactive element inside `.timeline-list`).
+**No conflict with the fact grid's date rows.** The grid still reads `Launch date: To be announced` /
+`Landing date: To be announced` while the roadmap carries the 2031 window. That is a pre-existing
+coherence question already routed by `about-method.md` §15 row 5 (continuity `t_a0ee9abf`). This pass
+does not re-open it.
 
-Two smaller notes for the same card:
-
-- **Import placement.** ESM allows `import { routes } from '../../lib/navigation'` anywhere at top level, but
-  placing it after the interface (as the deck's §8.1 ordering might suggest, "the import added above it") is
-  legal yet against the file's own ordering. The file head is the right place; the probe built, type-checked and
-  linted clean there.
-- **No `website/` file was edited by this card.** The probe lives entirely outside the repository
-  (`/tmp/seo-progress-root.Dif2LP/repo/website`, a copy with `node_modules` symlinked), so the dev card's
-  transcription remains the first change to those files.
-
-Evidence for the probe: `npm run build` → 5 routes, guard clean; `npx astro check` → "44 files, 0 errors,
-0 warnings, 0 hints"; `npm run lint` → clean.
+**Verified: the deck's §7 list of withheld date classes is correct.** No sentence in the frozen strings
+uses any timing token other than "2031" (step 1 only).
 
 ---
 
-## 8. Validation performed on this card
+## 8. Check 7 — the D5 `facts.ts` value
 
-| Check                                | Command / source                                                                                                          | Result                                                                                                                                                                                                                                                                  |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Deck read and hashed                 | `sha256sum .agents/work/drafts/progress-log.md`, `wc -l`                                                                  | `9d2a14e6…` (matches the parent card's handoff), 374 lines                                                                                                                                                                                                              |
-| Current strings read from source     | `read_file` on `steps.ts`, `ProgressLog.astro`, `SectionHeading.astro`, `facts.ts`                                        | §4.1 "current" column matches the files byte-for-byte                                                                                                                                                                                                                   |
-| Proposed strings render and build    | copy of `website/` at `/tmp/seo-progress-root.Dif2LP/repo/website` with the deck's §8 block applied, then `npm run build` | 5 routes (`/`, `/news/`, `/news/001-project-announcement/`, `/about/`, `/404`); `[check-dist]` clean                                                                                                                                                                    |
-| Heading outline, current vs proposed | rendered DOM `querySelectorAll('h1,h2,h3')` over both builds (HTTP, CSS applied)                                          | §2 table; `h1 → h2 → h3`, no duplicate heading text                                                                                                                                                                                                                     |
-| Link target, route form, anchor      | built probe `dist/index.html`: `href="/news/001-project-announcement/"`; `dist/news/index.html` lists the same route      | target published, listed, trailing-slash correct                                                                                                                                                                                                                        |
-| No link to an unpublished article    | `re.findall("002", dist/index.html)` and the full `href` set of the built homepage                                        | 0 occurrences of `002`; no `/news/002-payload-selection/` route                                                                                                                                                                                                         |
-| Rendered layout / growth             | browser measurement at 1280 px on both builds: section height, detail widths and computed styles, `body.scrollWidth`      | 641 px → 703 px; details 480 px / 15.2 px / muted on all three steps after §7.1's remediation; no overflow                                                                                                                                                              |
-| String measurements                  | `/tmp/seo-progress-measure2.py`                                                                                           | description 184 (was 145); details 137 / 122 / 78 (were 66 / 68 / 73); every proposed string under the 155-character meta budget is not required — the 184-character string is visible prose, and the page carries exactly one `<meta name="description">` at 108 chars |
-| Metadata surfaces on the built page  | `grep`/regex over probe `dist/index.html`                                                                                 | title, description, `robots`, canonical unchanged; no new meta surface                                                                                                                                                                                                  |
-| Confidentiality                      | `/tmp/seo-progress-gated.py` (markers read from `website/scripts/guards.mjs`), plus the site's own `postbuild` guard      | 0 hits in the strings, 0 hits in the built page, guard exit 0                                                                                                                                                                                                           |
-| Type/lint on the probe               | `npx astro check`, `npm run lint`                                                                                         | 0 errors / 0 warnings / 0 hints; eslint clean                                                                                                                                                                                                                           |
-| No `website/` file edited            | `git status --short`                                                                                                      | only other cards' in-flight files appear (see §9); no file this card touched                                                                                                                                                                                            |
+`website/src/features/mission/facts.ts:23` publishes `{ label: 'Current state', value: 'Mission
+architecture' }`.
 
-**Shared-checkout note.** The repository was moving while this pass ran, and one card landed mid-pass: the
-identity-mark card (`t_183d9f11`) committed `c87101c` at 09:21 CEST, which modified
-`website/src/features/mission/Hero.astro` and `website/src/lib/assets.ts` while I was measuring. I re-read
-`Hero.astro` after the commit: the change swaps only the hero image source (`identityMark` →
-`identityMarkTransparent`); the hero's `h1`, summary and `Read the first announcement` link are byte-identical,
-so §2's outline and §9's first observation stand as measured. The `dist/` I measured as "current" is the 09:18
-build (the last one on disk before my session); the proposed strings were measured on my own copy under
-`/tmp`, so no concurrent edit can have influenced §2–§5. `git status --short` at the end of the pass shows only
-the deck, this package, and the untracked `.agents/work/releases/` directory belonging to another card — no
-file this card touched.
+The deck's §5 D2 decides `current: true` stays on step 2, whose title is `Mission architecture`.
+The deck's §5 D5 decides no change to `facts.ts` is needed: the panel and the log already use one
+term for one state.
+
+**Confirmed: the `facts.ts` value agrees with the log's `current` flag.** Both surfaces say `Mission
+architecture` for the current state. The round-1 drop condition is unchanged and not triggered: no
+live card or comment instructs dropping the item.
 
 ---
 
-## 9. Observations routed, not required (no change requested from this card)
+## 9. Validation performed on this card
 
-1. **Two different announcement links in the page body.** The hero's `Read the first announcement` points at
-   `#updates` (the on-page newsroom section, whose first card then links to the article), while the new
-   progress link `Read the announcement` goes straight to `/news/001-project-announcement/`. Both are honest
-   and both work; the pair reads as one phrase doing two things. Not a defect this card may fix — the hero's
-   link is outside the progress log's strings — and not worth a corrective card while the website queue has a
-   tail. Recorded for the next homepage pass; if it is ever changed, `about-method.md` §6 still records
-   `/#updates` as the correct target for _newsroom content on the homepage_.
-2. **One word in the deck's rationale, for the editorial gate.** The deck drops step 2's old detail because
-   "testable" asserts an outcome the record does not carry; 001 does in fact say "the practical decisions that
-   turn a mission idea into a testable plan" (`:76–77`) and "that comparison is what makes a reading of the
-   past testable" (`:39`). What the old string over-claimed was the named artefacts ("vehicle and science
-   plan"), not the adjective. The replacement is still the better sentence (it is 001's own list), so this
-   needs no change — recorded so the editorial gate does not have to re-derive it. Owner: `t_bd1fd539`.
-3. **Fact-grid launch date vs 001's 2031 window** — pre-existing, already routed (`about-method.md` §15 row 5 →
-   continuity `t_a0ee9abf`). Unchanged by this deck, and not re-opened here.
+| Check                                        | Command / source                                                                                                               | Result                                                                                                                              |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Deck read and verified                       | `sha256sum .agents/work/drafts/progress-log.md`                                                                                | `8fc9a181d383427d1917561451e442c6bb4c96b3fbc9bfe903cca015c4281d7f` (matches the writer card's raw hash)                           |
+| Current strings read from source             | `read_file` on `steps.ts`, `ProgressLog.astro`, `SectionHeading.astro`, `facts.ts`, `navigation.ts`                            | §4.1 "Live" column matches the files at HEAD, field for field                                                                         |
+| Published articles (all three)               | `website/news/001-project-announcement.mdx`, `002-payload-selection.mdx`, `003-vehicle-design.mdx` — all `publication: published` | Three route directories present in `website/dist/news/`                                                                             |
+| Heading outline on built homepage            | `grep -oP '<h[1-3][^>]*>[^<]*</h[1-3]>' website/dist/index.html`                                                             | `h1 → h2 → h3`, no skipped level, no duplicate heading text                                                                         |
+| Link targets resolve and are published       | `website/dist/news/001-project-announcement/index.html` and `003-vehicle-design/index.html` exist; listed on `/news/`          | Both routes built, both listed, trailing-slash form correct                                                                          |
+| No link to a draft                           | `ls website/dist/news/004* 2>/dev/null` (exit 2, no match)                                                                     | No `004-*` route exists                                                                                                              |
+| Section anchor reach (`#timeline`)           | `grep -o '#timeline' website/dist/index.html \| wc -l` — 2; same count on `/about/` (2), each article route (2)               | 2 per page (header + footer), one definition (`navigation.ts:63`)                                                                   |
+| Homepage `<title>` and meta description      | `grep -oP '<meta name="description" content="[^"]*"' website/dist/index.html`                                                 | 1 meta description at 108 chars; title from `site.ts`                                                                                |
+| Gated-marker scan on frozen strings          | Script `/tmp/seo-t906be0fb/scan.py` — markers read from `guards.mjs`, searched over the 15 frozen literals                     | 0 hits; positive control fires in `.worktrees/` source packs                                                                         |
+| Per-string hashes match the deck's §10.13    | Same script — each literal's sha256 matches the deck's recorded hash                                                          | All 15 match; `STRINGS-15` matches `9a54650186c5ccab2b709e4b11a23b58799a3dbcf3b1612b5df9809f674e7a0f`                             |
+| No `website/` file edited                    | `git status --short`                                                                                                           | Only other cards' in-flight files appear; no file this card touched                                                                  |
+| facts.ts value matches highlighted step      | `facts.ts:23` value `Mission architecture` = step 2 title with `current: true`                                                  | Confirmed                                                                                                                            |
+
+**Shared-checkout note.** The repository was moving while this pass ran: `git status --short` shows
+modifications to `.agents/skills/editorial-review/SKILL.md` and `.agents/work/drafts/progress-log.md`
+(the deck itself, by the writer card), plus untracked 004 briefs and source files from other cards.
+None of these are files this card reads or modifies. The `website/src/` tree was not modified by any
+card during this pass.
 
 ---
 
 ## 10. Verdict, and what is outstanding
 
-**Verdict: approved as proposed.** All five checks pass with the wording exactly as the deck freezes it in
-§8: the heading order holds (`h2` section title, `h3` steps, no duplicate heading text); the single new
-internal link targets the published article that carries step 1's claims, with a descriptive anchor, the
-correct trailing-slash route form, and no link into an unpublished article; the rewritten homepage prose
-improves the page's honest state answer and needs no compensating `<title>`/meta-description change (both
-confirmed as already-applied values this pass does not supersede); the terminology holds up without stuffing
-(`payload` and the region name both considered and deliberately left out); and no recommended metadata surface
-names a step the record has not released.
+**Verdict: approved as proposed.** All seven checks pass with the wording exactly as the deck freezes it
+in §8:
+
+1. **Heading outline** holds: `h2` section title, `h3` steps, no duplicate heading text, newsroom h2
+   ahead in source order.
+2. **Two internal links** target published articles that carry the steps' claims, with descriptive
+   anchors, correct trailing-slash route forms, and no link into an unpublished article.
+3. **Homepage indexable prose** improves the honest state answer; the `<title>` and meta description need
+   no compensating change (both confirmed as already-applied values this pass does not supersede).
+4. **Terminology** holds: `payload` appears where the published record uses it (step 2 detail) and does
+   not appear where it would misdescribe (link anchor); rover name and region name are correctly absent;
+   all step titles and details use plain-language nouns.
+5. **No later-step disclosure** on any recommended surface; gated-marker scan: 0 hits.
+6. **Date audit** passes: one released date sentence on step 1 only, with its citation; no invented,
+   rounded, or implied timing on steps 2 or 3.
+7. **facts.ts `Current state`** agrees with the log's `current: true` flag (`Mission architecture`).
 
 **No required wording change, so no corrective writer card and no block.** The only issues found are
-implementation constraints on the transcription card (§7: the `p:last-child` styling collision, the unstyled
-link, import placement) — they belong to `t_4383dbcc` and change no string.
+implementation constraints for the dev card (the §8.1 frozen block), which the writer card already
+handled in its own pass.
 
-Outstanding before anything here is public: the continuity verdict (`t_1abe4cae`), the editorial gate
-(`t_bd1fd539`), and the human release reference that the first public deployment of the homepage still
-requires. An editorial `approved` is not a release.
+Outstanding before anything here is public: the editorial gate (`t_c4bd0c0d`), and the human release
+reference that the first public deployment of the homepage still requires. An editorial `approved` is
+not a release.
 
-**Next owner:** `mars-ai-simulator-continuity` on `t_1abe4cae`.
+**Next owner:** `mars-ai-simulator-editor` on `t_c4bd0c0d`.
 
 ---
 
-## 11. Lessons offered to the `seo-content` skill (not applied — no skill file was edited by this card)
+## 11. Lessons offered to the `seo-content` skill
 
-Recorded here rather than smuggled into `.agents/skills/seo-content/SKILL.md`, because the project ships skill
-lessons through their own card (cf. the editorial-review lessons card) and this card's scope is the package.
+Recorded here rather than applied (no skill file was edited by this card):
 
-1. **A rule keyed on position breaks the moment a sibling is appended, and nothing tests for it.** Templates
-   that style a paragraph as `li > div:last-child > p:last-child` lose that rule for any item where a link or
-   caption is added after the paragraph. Read the component's `<style>` block for positional selectors before
-   approving new markup, and verify parity by comparing `getComputedStyle` of the same element in _every_ item
-   — the presence of the new href is not evidence the styling survived. Report the measured values and one
-   verified remediation.
-2. **Measure candidate strings on a served build, never on `file://`.** Absolute asset paths (`/_astro/…`) do
-   not resolve from `file://`, so computed styles and line counts come back as unstyled defaults and any
-   conclusion drawn from them is worthless. Copy the site outside the repository, apply the candidate strings,
-   build, serve `dist/` (`python3 -m http.server <free port> --directory <dist>` as a tracked background task,
-   then a `curl` readiness check) and measure over `http://127.0.0.1:<port>/`. Two traps: the copy needs the
-   `docs/` subtrees the site imports (`docs/brand`, `docs/area`, referenced by `src/lib/assets.ts`) beside
-   `website/`, or the build fails on `UNRESOLVED_IMPORT`; and never stop the server with
-   `pkill -f "http.server <port>"` — the pattern matches the pkill command's own shell and kills it. Find the
-   pid with `ss -ltnp` and `kill` that.
-3. **Derive the gated-marker list at scan time instead of copying it.** Read the markers out of
-   `website/scripts/guards.mjs` (`gatedTextMarkers`) inside the scan script, so no repository file — including
-   the package — ever becomes a copy of the token inventory, and report hit counts only.
+1. **Re-validation packages should be shorter than first-round packages.** The first-round package
+   (`t_365846b7`) had to establish the baseline, build a probe, and verify every rendering fact from
+   scratch. A re-validation against a revised deck with a proven rendering path can measure only the
+   deltas and confirm the unchanged facts still hold. The seven-check structure stays; the prose around
+   each check should not.
+
+2. **The deck's §6 disclosure table can drift from its own §8 strings when states are renamed.** This
+   deck's §6 table lists `Current progress` and `Later` as the step states, but §8 and §3 use `In hand`
+   and `Ahead`. The discrepancy does not affect the frozen strings (§8 is the source of truth), but
+   the SEO package should verify against §8, not §6, and note the discrepancy if it is material.
+
+3. **Positive controls for gated-marker scans may not fire in the main repo.** The markers
+   (`gatedTextMarkers`) are coordinate fragments that appear in working papers and source packs
+   (`.worktrees/`, `.agents/work/`), not in `docs/` or `website/`. The scan's value is the 0-hit
+   result on the frozen strings; the positive control should search the worktrees, not `docs/`.

@@ -427,6 +427,101 @@ Evidence, all read-only and re-runnable, all outside the repository:
   (`https://mars-ai-simulation.janpolacek.workers.dev`), in-page `fetch` per URL, no deploy action,
   no credential used.
 
+## Record date: 2026-09-17 (card `t_531698d9`) — the simulated date of writing, applied
+
+The article now carries **exactly one** `simulatedDate`: the date, inside the fiction, on which the article
+was written. The merged editorial role assigns and verifies it from the locked milestone table in
+`docs/SCENARIO.md` — never from the article's repository history (`docs/INSTRUCTIONS.md` §"Canon and
+information safety"; `AGENTS.md` §"Content workflow policy"; `.agents/skills/editorial-review/SKILL.md`
+§"The simulated record date"). The change is one inserted frontmatter line and nothing else:
+`git diff --stat -- website/news/` reports `website/news/003-vehicle-design.mdx | 1 +`, 1 insertion and 0
+deletions (across the three published articles), and `git diff` shows no other byte moved.
+
+Per §12's own rule ("if a later pass re-checks the package, [it] must re-hash the article first and state
+what moved"), the article was re-hashed before this section was written: `website/news/003-vehicle-design.mdx`
+stood at sha256 `f60a3cc5…` (5,450 B) — the released revision `.agents/work/releases/003-vehicle-design.md`
+pins — and at 5,476 B afterwards, with the single inserted frontmatter line accounting for every byte of the
+difference.
+
+| Item                        | Value                                                                                                                                                                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Value applied               | `2029-07-13` — rendered `Simulated record date · 13 July 2029`                                                                                                                                                                               |
+| Milestone line it came from | `docs/SCENARIO.md` §"Launch and mission dates", line 187: the row `13 July 2029 — Critical Design Review and flight-build authorisation` (a locked row; the row text is authoritative, the line number is a pointer)                         |
+| Applied revision            | sha256 `51f2ee690feacdcf7efe97ad06c457d72081a4b13b5b6cb31ca8fdba78b09e6a`, 5,476 B                                                                                                                                                           |
+| Previous revision           | sha256 `f60a3cc512b278a3ef6333278e0c301ac2d6e2f0f6864ac2a486731c067450a7` (5,450 B) — the released flip revision pinned by the release record; the pre-flip `6a1caf17…` this record's metadata row and §1 pinned is the revision before that |
+| Value shape                 | unquoted `YYYY-MM-DD`, the shape `src/lib/simulated-date.ts` documents for this role; the schema accepts that shape (the `Date` js-yaml resolves) and the quoted string, and renders one wording for either                                  |
+
+**Why this milestone, and not the 20 October 2028 alternative.** The article reports a design that is
+_frozen_, and the alternative row — `20 October 2028 — Preliminary Design Review and radioisotope-power
+maturity gate` — is a preliminary review: a record date on it would place the writing before the freeze the
+article reports. The Critical Design Review is the milestone at which the design is fixed, which is what step
+003 releases, and it is the closest locked row the step covers.
+
+**The step's containment survives the date, stated because the row's own name is not public.** The published
+surface states a calendar date only; it does not state the milestone's name, its authorisation component, or
+anything about a build. Step 003's rule — "design freeze" does not imply the vehicle is built or launch-ready
+— therefore still holds: the row that would imply a built vehicle, `11 March 2030 — RH-01 flight-model
+assembly begins`, sits after this date and is untouched, and the article's own caution ("describing a fixed
+design is not the same as having built one") remains true as written.
+
+**The four checks the card requires, each stated.**
+
+| Check                                                              | Result | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Implies no event step 003 has not released                         | PASS   | The value states a writing date, not an event. What the article reports is step 003's released material (the frozen design, its plates, its science role and limits); the later rows — assembly, the test campaign, qualification, the launch site — are not implied by the date, and the public surface cannot read the milestone name from it.                                                                                                                             |
+| Cannot be read as a launch, landing or other withheld mission date | PASS   | 13 July 2029 is not a launch, landing, entry or assembly row and is nineteen months before the locked departure row. The article states no launch, landing or build date at all.                                                                                                                                                                                                                                                                                             |
+| Contradicts no sentence already public                             | PASS   | Its closing negative claim ("No launch vehicle has been named, no launch date has been stated, and no landing site has been announced") is true at this date: the provider is a later step's release, the landing-area class stays gated, and nothing published dates any of them. The earlier 001 (12 October 2026) and 002 (19 March 2027) are both before it, so their own dated negatives stay true, and 003's recap of the payload scope agrees with the published 002. |
+| The three articles stay in timeline order by their dates           | PASS   | `2026-10-12` (001) before `2027-03-19` (002) before `2029-07-13` (003) — the same order as `order: 1 / 2 / 3`.                                                                                                                                                                                                                                                                                                                                                               |
+
+**The published surface, measured in a scratch copy outside the repository** (never in the shared checkout:
+`website/scripts/check-dist.mjs` prunes on failure, so a gate must not build the shared `dist/`). The copy
+carried `src/`, `public/`, `scripts/`, `news/`, `test/`, the Astro config and `package.json`, plus a `docs/`
+symlink, with the installed packages linked one by one so Astro's content-layer cache stayed in the throwaway
+root; the project's own Astro CLI built it (8 pages, postbuild guard green, including this article's plate).
+
+| Measurement                                                           | Result                                                                                                                                                                                                                                                                                                                      |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The article page states the date                                      | `/news/003-vehicle-design/` — one occurrence, inside the `class="article-date"` element, text `Simulated record date · 13 July 2029`                                                                                                                                                                                        |
+| The label presents it as part of the fiction                          | The rendered string is the label plus the in-fiction date; nothing introduces it as a real publication date, and the page emits no `datePublished`, `dateModified`, `lastmod`, `<time datetime>`, JSON-LD block or sitemap reference                                                                                        |
+| Site-wide machine-date scan                                           | Every file under the scratch `dist/`: **0** hits for all ten tokens the date suite lists, and no ISO-shaped form of any of the three applied values                                                                                                                                                                         |
+| The listing surfaces                                                  | `/` and `/news/` each render the article's line once, alongside the other two articles' lines                                                                                                                                                                                                                               |
+| The site's own gate, in the scratch copy                              | `vitest run`: **14 files / 147 tests passed**, including the date suite's 9 cases (its real-build half pairs each published article's frontmatter with its own page); `node scripts/check-dist.mjs` exits 0                                                                                                                 |
+| Red-first — the page follows the frontmatter, not a hard-coded string | Planting `simulatedDate: 2024-01-01` in the scratch copy moved one page's rendered line to `1 January 2024` while the others kept their values, and planting a prose value failed the build with `InvalidContentEntryDataError` naming `simulatedDate`. The applied values are schema-validated and rendered from the file. |
+
+**The live origin before this change** — `https://mars-ai-simulation.janpolacek.workers.dev`, in-page `fetch`
+with `crypto.subtle` hashing at 15:41 CEST on 2026-09-17: `/news/003-vehicle-design/` **200**, 11,293 B,
+sha256 `ae5251c8…`, **0** occurrences of the label, no machine-date token. The public surface carries no
+record date until the technical card `t_1059c973` pushes this change.
+
+**Two conditions this date puts on the release order, neither of them a defect in this package.**
+
+1. **The date becomes the lower bound for the next step's record date.** The 004 gate ledger's C6
+   (`.agents/work/reviews/004-launch-provider-gates.md`, card `t_4d1b3041`) asked for this article's and
+   002's present-tense "no launch vehicle has been named" claims to be made time-bound rather than
+   re-worded; dating them is what the record dates do, and it means any step-004 article that names a
+   provider must carry a record date **after** 13 July 2029, or this article's dated claim would be false
+   in-fiction. The ledger's own C7 already requires the step-004 value to fall in timeline order after
+   step 003's; this section fixes what "after" means. **Owner:** this role, on the step-004 release card.
+2. **The landing-zone condition C-2 stands, and is now dated.** If the `/wiki/area/` landing-zone node is
+   ever flipped as its own release decision, this article's closing clause (now dated 13 July 2029) and
+   published `002:103` must be re-read and re-worded **first**. The node is still 404 as measured on the
+   live origin by the 004 gate at 15:23 CEST today, so the trigger has not occurred, and a record date on
+   this article does not pre-empt the re-reading. **Owner:** this role, on the node's release card.
+
+**Revision-history note.** This record's metadata row, §1 and §5 pin the article at sha256 `6a1caf17…`
+(5,054 B, pre-flip); the release record then pinned the flip revision `f60a3cc5…` (5,450 B), which is the
+revision this section inherited. The applied revision is `51f2ee69…` (5,476 B), one frontmatter line longer
+than `f60a3cc5…` and otherwise byte-identical — every claim row in §4–§9 was read from the body bytes this
+record already judged (the body hash `eb35c53a…` is unchanged by the flip and by this change), so no row is
+superseded. The two release records that pin `adc6a1a6…` (002) and `f60a3cc5…` (003) remain accurate as
+records of those _flips_; the record-date revision supersedes them only as the current file revision, and
+this note is where a later reader can tell the difference.
+
+**Release decision for this change** is recorded on card `t_531698d9` (this role), with the three values and
+the milestone line behind each; the technical card `t_1059c973` (`mars-ai-simulator-dev`) applies and pushes
+the change. No canon file was edited: `docs/` was read only. Withheld material is named here by location,
+never by value.
+
 ## Final label
 
 approved

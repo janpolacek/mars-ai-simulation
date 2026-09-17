@@ -1,347 +1,551 @@
-# Review: progress-log — editorial final gate (homepage `#timeline` strings)
+# Review: progress-log — editorial final gate, round 2 (homepage `#timeline` strings)
 
 ## Review metadata
 
-| Field                       | Value                                                                                                                                                                                                                                                                                          |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Slug / surface              | `progress-log` — the homepage `/` progress-log section (`<section id="timeline">`), i.e. the strings in `website/src/features/progress/steps.ts`, plus **one** consistency string in `website/src/features/mission/facts.ts`                                                                   |
-| Card                        | `t_bd1fd539` — `mars-ai-simulator-editor`, stage `site-foundation`. This gate is the last review before the dev card transcribes the strings                                                                                                                                                   |
-| Chain                       | writer `t_11eee417` (deck) → SEO `t_365846b7` (`approved as proposed`) → continuity `t_1abe4cae` (`continuity clear`) → **this gate** → dev transcription `t_4383dbcc` (also parented on `t_4b49346b`, the one-`website/`-card-at-a-time rule)                                                 |
-| Stage / timeline step       | `site-foundation` (homepage chrome copy). **Advances no timeline step.** Factual bound = the published step-001 record plus internal canon for the "work in hand" statement only                                                                                                               |
-| Deck (frozen copy)          | `.agents/work/drafts/progress-log.md` — sha256 `9d2a14e62b7cbec6c61b1943c91fc33624e86bd6d15a66c9efc9366d8796d24e`, 28,904 bytes · 374 lines. **Byte-identical to what the SEO and continuity passes read**                                                                                     |
-| Approved block §8.1         | deck lines **273–318** (`website/src/features/progress/steps.ts`); `BLOCK-8.1` sha256 `20a20b798feb3c12768e84f5dfe4625b5c1569ffdc21458054c663969f976eb1` (1,873 chars)                                                                                                                         |
-| Approved block §8.2         | deck line **330** (`website/src/features/mission/facts.ts`, one value); `BLOCK-8.2` sha256 `9cde8026932def97b378a3bc94265619ee3d63947d72b11e2d39f4935f305d73` (59 chars)                                                                                                                       |
-| Approved string payload     | the 15 rendered string literals of §8.1+§8.2, in deck order, newline-joined with one trailing newline: sha256 `e6a64c68874b6368ae176c4b1145b5698c587ca7f3017ea067fd9eb0fb2e54ea`, 710 bytes, **all ASCII** (no smart quotes — a byte-for-byte comparison is unambiguous)                       |
-| SEO package                 | `.agents/work/seo/progress-log.md` — sha256 `ffba8b0e272a2f400fa942098c53ea4e8ada6ef70383a6dc6b7cec23e19c8331`, 413 lines; verdict `approved as proposed`                                                                                                                                      |
-| Continuity verdict          | `.agents/work/continuity/progress-log.md` — sha256 `08adceaf841a6b020e84d7d80158cef52b008c62527341055cc151bf33f615d1`, 250 lines; final label `continuity clear`                                                                                                                               |
-| Published record            | `website/news/001-project-announcement.mdx` — sha256 `73c2d04734b466a8f642f342bf1ce01c5fb3b0d343f17f6b6c8e9ee8007ab5ec`; `publication: published`, `status: Programme announced`, `order: 1`                                                                                                   |
-| Step-002 state (measured)   | article sha256 `64373791…` — `publication: draft`; its release record under `.agents/work/releases/` sha256 `57758def…` — status **`blocked — human decision required`** (the step-002 slug is elided in this record, as the continuity record elides it); no route, no listing, no card image |
-| Gate inputs at verdict time | 14 inputs re-hashed against the values the continuity pass recorded: **14/14 unchanged** (§1)                                                                                                                                                                                                  |
-| Skills applied              | `editorial-review` (project), with `copy-editing` and `brand-voice` on the copy rows                                                                                                                                                                                                           |
-| Verdict written             | 2026-09-17 09:37–09:55 CEST, against the live shared working tree, HEAD `9cefa55`; `git status --short` shows only the four `.agents/work/` entries of this chain                                                                                                                              |
-| Status                      | **`approved`** — editorial gate only. Not a canon decision, not a release, not authorisation to build or deploy                                                                                                                                                                                |
+| Field                 | Value                                                                                                                                                                                                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Slug / surface        | `progress-log` — the homepage `/` progress-log section (`<section id="timeline">`, rendered last), i.e. the strings in `website/src/features/progress/steps.ts`, plus one navigation label in `website/src/lib/navigation.ts` (`§8.3`)                                               |
+| Card                  | `t_c4bd0c0d` — `mars-ai-simulator-editor`, stage `site-foundation`. **Round 2.** Advances no timeline step. This gate is the last review before the dev card transcribes the strings                                                                                                 |
+| Chain                 | writer `t_b634310c` (revised deck) → SEO `t_906be0fb` (`approved as proposed`) → **this gate** → dev transcription `t_cc2dfd29` (`mars-ai-simulator-dev`, `todo`, released by this card's completion)                                                                                |
+| Stage / timeline step | `site-foundation` (homepage chrome copy, second round). **Advances no timeline step.** Factual bound = the three published articles (001, 002, 003), all `publication: published`                                                                                                    |
+| Deck (frozen copy)    | `.agents/work/drafts/progress-log.md` — sha256 `8fc9a181d383427d1917561451e442c6bb4c96b3fbc9bfe903cca015c4281d7f`, 59,689 bytes · 681 lines. Re-hashed at 15:39:18 and 15:41:39 CEST and immediately before this verdict: **unchanged**, and equal to the hash the SEO pass recorded |
+| Frozen blocks         | `BLOCK-8.1` sha256 `a6b774eb20e26c13eaf9450362f3a56ad41cf02d4c848f645e5a404390edaf45` (2,035 bytes) · `BLOCK-8.3` sha256 `6773c7d688642088949826a03fed05b9f54d34de42e2efdf3b18e9dd319bb280` (56 bytes) — both recomputed by this gate, both match                                    |
+| Frozen string payload | the 15 rendered literals of §8.1 + §8.3, in deck order, newline-joined: sha256 `9a54650186c5ccab2b709e4b11a23b58799a3dbcf3b1612b5df9809f674e7a0f` (**recomputed, match**). All 15 per-string hashes and lengths independently recomputed and matching (§5)                           |
+| SEO package           | `.agents/work/seo/progress-log.md` — sha256 `424a44ff4a56e6b2e930948fefe8d3bfcdab81816a1a1731070a815768c1c1ae`, 35,380 bytes · 395 lines; verdict `approved as proposed`; it records the same deck hash as this gate                                                                 |
+| Continuity            | **Merged with this role** (2026-09-17). No separate card; the chronology, canon-consistency, plausibility and spoiler rows are this record's own review rows (§3, rows 2–6)                                                                                                          |
+| Published record      | `001-project-announcement.mdx` sha256 `923a12d8…` (4,832 B) · `002-payload-selection.mdx` sha256 `7b69bd7f…` (7,722 B) · `003-vehicle-design.mdx` sha256 `51f2ee69…` (5,476 B) — all three `publication: published`, measured 15:39 and 15:41 CEST                                   |
+| Live wording today    | the round-1 strings are the wording served today: eyebrow `Progress log`, the 145-character round-1 description, step 2 `Current progress`, step 3 `Later`, one link on step 1 (§9.1)                                                                                                |
+| Gate inputs re-hashed | 10 inputs at 15:39:18 and again at 15:41:39 CEST; 15/15 string hashes recomputed from `BLOCK-8.1`/`BLOCK-8.3`. Nothing moved between the two readings (§9.2)                                                                                                                         |
+| Skills applied        | `editorial-review` (project), with `copy-editing` and `brand-voice` on the copy rows                                                                                                                                                                                                 |
+| Verdict written       | 2026-09-17, 15:37–15:47 CEST, against the shared working tree, HEAD `aa71714`, `origin/main` `e67b970` (confirmed by `git ls-remote`, not only by the local ref)                                                                                                                     |
+| Status                | **`approved`** — editorial gate and recorded release decision for this wording. No Red Horizon canon is approved (§13)                                                                                                                                                               |
 
-**Path substitution recorded.** My role definition names `docs/content/reviews/` as the review-record
-location; `docs/INSTRUCTIONS.md` §"Project source layout" (line 44) places editorial reviews in
-`.agents/work/reviews/`, which is where this card, the card chain and the previous gates place them.
-This file is that record, not a second copy of it.
+**Path substitution recorded.** The card names `.agents/work/reviews/progress-log.md`; that is this
+file, the same path every earlier pass on this slug used. No substitution was needed.
 
-## Verdict
+---
 
-**`approved`.**
+## 0. Revision history
 
-All 21 review rows pass; no material factual, accessibility, licensing, coherence, or metadata failure
-remains open; the continuity prerequisite reads `continuity clear` on the same bytes and the SEO package
-reads `approved as proposed` with no required wording change. Eleven items are recorded in §10 as
-non-blocking and routed to named owners, and **one rendering condition (R1, §7) is attached to the dev
-card** — it concerns how the new link is rendered, not any string, so it does not hold up the chain.
+This is the **second** review record for the `progress-log` slug. It supersedes revision 1 and is
+additive: revision 1's full text stays recoverable from git at commit `c470741`
+(`git show c470741:.agents/work/reviews/progress-log.md`), and its identity is recorded here so that a
+later reader does not read the hash change as tampering.
 
-Nothing was changed by this gate. No file under `website/`, no article, no deck string, no other
-worker's artifact was edited; the evidence below is measurement and judgement.
+| Revision | Card         | Record identity                                                                                                                   | Verdict                                                            | What it judged                                                                      |
+| -------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| 1        | `t_bd1fd539` | as delivered `803bd15c…`; as committed at `c470741` `a9d923b6f987cf36e5641b50c3b3df0b575654107f80b29fdc8e807524ad73a1` (58,027 B) | `approved`, with one rendering condition (R1)                      | deck `9d2a14e6…` (28,904 B, 374 lines), written when **only 001 was published**     |
+| 2        | `t_c4bd0c0d` | this file                                                                                                                         | `approved`, R1 restated, release decision recorded (this revision) | deck `8fc9a181…` (59,689 B, 681 lines) against the **expanded** record, 001+002+003 |
 
-This approval releases the dev card `t_4383dbcc`. It is an **editorial gate only**: the wording's first
-public deployment still needs the human's release reference, and **no Red Horizon canon is approved by
-this record**.
+**What moved around the gate object.** The deck is a different revision of the same file (the writer
+revised it in place), the SEO pass was re-run against it, the record grew from one published article
+to three, and the published articles gained a `simulatedDate` frontmatter line while this gate ran
+(§8.3, §11 O4). The _frozen strings_ are the gate object, and revision 2's independence from revision
+1 is stated per row: this gate re-derived the block hashes, the string hashes, the claim trace, the
+surface and the confidentiality scan from the deck and the articles themselves, and carried no
+revision-1 row forward unverified.
 
-## Review table
+**Closure state of revision 1's observations** (recorded so a reader of revision 1 is not left
+guessing):
 
-| #  | Check                                                                                 | Result          | Evidence                                                                                                                                                                                                                                                                                                      |
-| -- | ------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1  | Continuity verdict present, reads `continuity clear`, unchanged since written         | PASS            | `.agents/work/continuity/progress-log.md` sha256 `08adceaf…` = the hash its own metadata records; line 250 is the single label `continuity clear`; no open-failure table                                                                                                                                      |
-| 2  | SEO package present, verdict `approved as proposed`, no required wording change       | PASS            | `.agents/work/seo/progress-log.md` §10; §7 routes only implementation constraints to the dev card                                                                                                                                                                                                             |
-| 3  | Deck unchanged and byte-identical to what SEO and continuity read                     | PASS            | Deck sha256 `9d2a14e6…` re-taken at 09:37 and again immediately before this verdict; continuity §1 and the SEO handoff record the same value, so the bytes judged here are the bytes they judged                                                                                                              |
-| 4  | The five decisions are recorded _as decisions_ and each is judged here                | PASS            | §4 judges D1–D5 one by one against their own rationale, not just the strings that carry it. (The deck's §5 heading counts four; the writer's card `t_11eee417` asked for four and D5 is the writer's own addition — see observation C)                                                                        |
-| 5  | String-by-string copy gate over the 15 rendered literals                              | PASS            | §3, one row per string, against `copy-editing` and `brand-voice`                                                                                                                                                                                                                                              |
-| 6  | Grammar, agreement, tense, punctuation                                                | PASS with note  | §3. No grammatical defect. One distributive-number looseness in the description ("Published steps link to the article that carries them") — observation D                                                                                                                                                     |
-| 7  | Plain language; no unexplained term, no jargon display                                | PASS            | Every noun in the copy is either the record's own ("mission architecture", "rover", "coalition") or ordinary English. No acronym, no initialism, no instrument or provider vocabulary appears at all                                                                                                          |
-| 8  | Brand voice: grounded, unsentimental, no grandeur, no urgency, unearned certainty     | PASS            | No superlative, no slogan, no deadline, no completion verb, no implied real-agency endorsement. Uncertainty is stated as uncertainty ("the steps after it are not settled yet") and the state claim is a question, not a result                                                                               |
-| 9  | Repetition and internal consistency of the section                                    | PASS with note  | SEO measured five distinct strings (eyebrow / h2 / three step titles), none repeating. The one echo is the description's first sentence repeating the h2's phrase — observation E                                                                                                                             |
-| 10 | Accessibility of what the dev will render                                             | PASS with note  | Eyebrow stays a `<p>`, not a heading (`SectionHeading.astro:15`); the 184-char description is body copy in a `<p>`, **not** a meta description (built page carries exactly one `<meta name="description">`, at 108 chars); no image and no icon is introduced. Anchor purpose: see §3 row 7 and observation B |
-| 11 | Every material claim traces to a canonical source                                     | PASS            | All 10 deck §9 rows re-derived against `001-project-announcement.mdx` at the cited lines and against `docs/SCENARIO.md` §"Continuity and release controls" — §5                                                                                                                                               |
-| 12 | No string carries a step-002 fact; every string stays true after 002 releases         | PASS            | §5: the step-2 detail is 001's own triple of _open_ selections; the three selections are published as open (`:73–74`) and one of them is bound by the release controls to a step later than 002                                                                                                               |
-| 13 | No withheld material in any string, title, state, label or link                       | PASS            | §9: 0 hits across the guard's four markers (list read from `guards.mjs` at scan time) with a live positive control; 0 proper nouns; 0 digits, years, coordinates, currency, percentages, URLs                                                                                                                 |
-| 14 | No timing or completion implication                                                   | PASS            | States are positional (`Announced` / `Current progress` / `Later`); 0 completion verbs, 0 temporal tokens in any rendered string. The only temporal word in the block is inside a code comment                                                                                                                |
-| 15 | The new link: single, published target, route from the route map, no unpublished link | PASS            | One `link`, on step 1, to `/news/001-project-announcement/` via `routes.newsArticle('001-project-announcement')` (`navigation.ts:13`); the published route exists in `dist/`; the 002 article has no route and its slug appears nowhere in `dist/` (§8)                                                       |
-| 16 | D5's out-of-section string agrees with the log and overwrites no canon                | PASS            | `facts.ts` `Current state` → `Mission architecture` names the same step the log flags `current: true`; continuity §6 measured that no line of `docs/` names the programme's current state, so the value is editorial, not a canon overwrite. **No live card or comment instructs the dev to drop it** (§7)    |
-| 17 | Dev scope check: the dev needs no wording decision                                    | PASS with cond. | §7. Deck §4.1 fixes the file, the interface and the strings; the dev card body names deck §8 as the source and quotes no divergent string. Condition R1 concerns rendering only                                                                                                                               |
-| 18 | Dev card body (`t_4383dbcc`) is consistent with deck §8                               | PASS            | §7: every literal the card body names matches the deck (the old header comment it replaces, `routes.newsArticle('001-project-announcement')`, the rendered `href`, the measured string lengths 184/145 and 137/73)                                                                                            |
-| 19 | Fail-closed published surface still holds                                             | PASS            | §8: route set is `/404.html, /about/index.html, /index.html, /news/001-project-announcement/index.html, /news/index.html`; read-only guard probe → 0 source offences, 0 dist offences                                                                                                                         |
-| 20 | This approval is not a release, and says so                                           | PASS            | §11: the human release reference is named as outstanding; no canon approval is implied; nothing here authorises a build or a deploy                                                                                                                                                                           |
-| 21 | No `website/` file edited by this gate; no other worker's artifact touched            | PASS            | `git status --short` at verdict time: four untracked `.agents/work/` entries of this chain only. The guard probe is read-only and never prunes; scratch checkers live in `/tmp/t_bd1fd539/`                                                                                                                   |
+| Rev-1 observation                                                              | State in round 2                                                                                                                                                                       |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A — the "published steps link" clause was a live maintenance obligation        | **Closed by removal.** The clause is gone from the description (deck §5 D3); the obligation now lives in the frozen file-header comment and the deck's §6 trigger, both verified in §7 |
+| B — two near-identical announcement labels on one page                         | **Carried** (this record §11 O1), re-measured from the built page's full anchor inventory                                                                                              |
+| C — deck heading counts four decisions, record lists five                      | **Carried** (this record §11 O5): round 2 records six rows, so the count question is live again                                                                                        |
+| D — distributive-number looseness in the description                           | **Closed by replacement.** The clause is gone (§5 row 3)                                                                                                                               |
+| E — description's first sentence echoed the h2                                 | **Closed by replacement.** The new first sentence does not echo `One step at a time.` (§5 row 3)                                                                                       |
+| F — one `surface vehicle` remains on the page by decision                      | **Carried unchanged** (`missionIntro.description`, this record §11 O6)                                                                                                                 |
+| G — deck attributed a whole D1 clause to step 2                                | **Not re-created**: the round-2 deck attributes its decisions per item (§4)                                                                                                            |
+| H — register mix across the three states                                       | **Superseded**: two of the three labels changed (`In hand`, `Ahead`); the mix is re-judged in §5 rows 4/8/12 and §11 O7                                                                |
+| I — internal stage vocabulary surviving in source comments                     | **Partly closed**: `steps.ts`'s header comment is replaced in the same edit (§7); `facts.ts` and `navigation.ts` comments stand by design (§11 O8)                                     |
+| J — the new link had no style rule                                             | **Closed**: `ProgressLog.astro` carries `.timeline-link` and its measured rationale today (file sha256 `68a4b4d5…`)                                                                    |
+| K — the earlier 001 continuity row and the two pre-existing homepage questions | **Carried, not reopened** (§11 O9): the grid's `To be announced` rows stay routed to `about-method.md` §15 row 5 / `t_a0ee9abf`                                                        |
+
+---
 
 ## 1. Scope and method
 
-Editorial gate over the progress-log wording package as it stands at 2026-09-17 09:37–09:55 CEST: the
-frozen deck, the SEO package, the continuity verdict, the published 001 record, the release state of step
-002, and the site surfaces the dev card will touch (`steps.ts`, `ProgressLog.astro`, `facts.ts`,
-`navigation.ts`, `SectionHeading.astro`, `guards.mjs`, `check-dist.mjs`, `dist/`).
+This gate judges one thing: **the fifteen string literals the dev card will transcribe** (§8.1,
+§8.3), and, for every material claim inside them, whether the _published_ record carries it. It also
+judges the surrounding surfaces the card names: the link targets, the section's outline, the
+`facts.ts` value the deck decides not to change, the dev card's scope, and the fail-closed state of
+the public build.
 
-Commands run (repository root unless noted):
+Method, in order:
 
-- `sha256sum` of every gate input at 09:37 and again immediately before this verdict — 14/14 unchanged (§ metadata table; script `/tmp/t_bd1fd539/hashes.py`).
-- `git status --short`, `git log --oneline -1` (HEAD `9cefa55`) at the start and at verdict time.
-- Python scratch extraction of the deck's §8 blocks and the 15 rendered string literals, per-string length and word counts, non-ASCII report, structural token classes (digits, years, coordinates, currency, percent, URLs, repo paths, card ids, month names, completion verbs, capitalised multi-word nouns), and a marker scan with the pattern list **read from `website/scripts/guards.mjs` at run time** (`/tmp/t_bd1fd539/scan.py`).
-- Node read-only guard probe importing `guards.mjs` and calling `checkDist()` / `listRoutes()` / `scanSourceForGatedReferences()` — **the pruning postbuild script was deliberately not run**, so no file in `dist/` could be removed by this gate (`/tmp/t_bd1fd539/guards-probe.mjs`).
-- Anchor inventory and text extraction over the built `website/dist/index.html`; `dist/` searched for the 002 route, the 002 slug, and the old strings (`/tmp/t_bd1fd539/anchors.py`, `/tmp/t_bd1fd539/probe.py`).
-- Read-only SQLite reads of `~/.hermes/kanban.db` for the dev card body, the chain's statuses, and every comment on the writer / SEO / continuity / dev cards (`/tmp/t_bd1fd539/board.py`, `/tmp/t_bd1fd539/comments.py`, `/tmp/t_bd1fd539/live.py`).
-- Printed, read-only comparison of the three strings the change replaces against the deck's §8 block.
+1. Re-hashed the deck, verified it equals the hash the SEO pass recorded, then extracted §8.1 and
+   §8.3 and recomputed `BLOCK-8.1`, `BLOCK-8.3`, `STRINGS-15` and each of the 15 per-string hashes
+   and lengths **myself** — not by trusting the deck's §10.13 table (§5).
+2. Read the three published articles in full and traced every material claim to a line (§6). The
+   trace was re-derived for 002 and 003, which did not exist when revision 1 was written.
+3. Read the live source of the section (`steps.ts`, `ProgressLog.astro`, `SectionHeading.astro`,
+   `navigation.ts`, `facts.ts`, `index.astro`) and the built homepage; measured the rendered section,
+   the heading outline, the anchor inventory and the R1 parity (§9).
+4. Re-ran the read-only guard probe (`checkDist()`, `listRoutes()`, `scanSourceForGatedReferences()`)
+   and a marker scan over the frozen strings and the built page (§9.4, §10).
+5. Re-read the gate inputs and `git status` immediately before writing this verdict, twice.
 
-**Not run, and not this card's:** any build, preview, deploy, DNS or provider action; any asset work; any
-edit to `website/`, the articles, the deck, `docs/`, or the release record.
+Scratch tools, all outside the repository, all read-only, all re-runnable:
+`/tmp/t_c4bd0c0d/{verify.py,verify2.py,verify3.py,surface.py,final_check.py,guard-probe.mjs,sec_local.py,diff_chars.py,board2.py,board3.py}`.
+
+---
 
 ## 2. What this approval covers — and what it does not
 
-**Approval names two blocks of the deck, byte-for-byte:**
+**Covers.** The fifteen rendered literals of §8.1 + §8.3, exactly as hashed in §5, together with the
+judgement in §4 that every decision affecting a rendered string is sound, and the release decision in
+§13.
 
-- **§8.1**, deck lines 273–318, `BLOCK-8.1` sha256 `20a20b79…` — the file's new header comment, the `ProgressStep` interface (with the new optional `link` field and its doc comment), `progressHeading` and `progressSteps`. The dev transcribes the block verbatim into `website/src/features/progress/steps.ts` and adds the `routes` import; property names and import placement are the dev's (see R1).
-- **§8.2**, deck line 330, `BLOCK-8.2` sha256 `9cde8026…` — the single `facts.ts` value.
-- The **string payload hash** `e6a64c68…` (15 literals, deck order) is the cheapest byte-for-byte check for the dev's acceptance criterion; it is reproducible from the deck with the recipe in the metadata table and all 15 literals are ASCII.
+**Does not cover.**
 
-**Approval scope, stated as limits:**
+1. `facts.ts` — the deck's §8.2 freezes **no** change and adds no literal. This gate confirms the
+   panel value still agrees with the log's `current` flag (`Mission architecture`), and judges nothing
+   else in that file.
+2. Rendering. **R1 (this record §7) is a condition on the dev's implementation**, not a wording
+   change: all three step details must keep identical computed styling once step 2 carries a link.
+3. The prose of the working papers. Two working-paper statements are stale (§8.3, §11 O4); neither
+   reaches a public string, and this gate may not edit the deck.
+4. Canon. No Red Horizon canon is approved here, and no claim is settled that the released record does
+   not already carry (§13).
 
-1. Only the string values above are approved. The deck's working-paper prose, its heading counts, its recommendations and its examples are **not** approved copy and are not part of the dev's remit.
-2. The approval is conditional on the render keeping the section's existing detail styling on **all three** steps (R1, §7). That is an implementation condition, not a wording change.
-3. No canon is approved. `Current state: Mission architecture` and `Current progress` / `Mission architecture` are editorial statements about what the published record and the continuity-checked canon support (§4, D1/D5).
-4. No release, no route, no publication, no deployment is approved. §11 names what is still outstanding.
+---
 
-## 3. Copy gate — the 15 rendered strings, one row each
+## 3. Review table
 
-Measured: 695 characters across the 15 literals, 1–35 words each (deck §8.1: eyebrow, title, description,
-three steps × `state`/`title`/`detail`, one link label; §8.2: two literals). Brands: `copy-editing`,
-`brand-voice`, `editorial-review`.
+| #  | Check                                                                | Verdict         | Evidence                                                                                                                                                                                                                                        |
+| -- | -------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | Deck unchanged since the SEO pass, re-hashed at verdict time         | PASS            | `8fc9a181…` at 15:39:18, at 15:41:39 and immediately before this verdict; equals the SEO package's recorded deck hash                                                                                                                           |
+| 2  | Chronology: the section's steps stay in the record's order           | PASS            | Step 1 `Announced` ← 001 (`status: Programme announced`); step 2 `In hand` ← 002 + 003 (`002:4 In selection`, `003:4 Design frozen`, `003:71`); step 3 `Ahead` ← no published article. The rows' order matches articles' `order: 1/2/3`         |
+| 3  | Canon consistency: every material claim traces to released material  | PASS            | 17-row trace re-derived from 001/002/003 this round (§6). No claim rests on internal canon and none is asserted beyond what an article states                                                                                                   |
+| 4  | Plausibility: no invented state, no completion claim                 | PASS            | The highlighted step's sentence is 003's own closing sentence in substance (`003:71`); no completion verb, percentage or schedule claim appears on any step                                                                                     |
+| 5  | Spoiler safety: no later-step fact, no withheld class                | PASS            | 0 hits for every withheld-class probe over the 15 literals (§10); no step-004 material; the only digit token in the whole payload is `2031.` on step 1                                                                                          |
+| 6  | No withheld _marker_, and the guard's markers are the only ones held | PASS            | `gatedTextMarkers` (2 values, read from `guards.mjs` at scan time) — 0 hits on the deck and on the 15 literals; positive control fires 63× in `.worktrees/` source packs (§10)                                                                  |
+| 7  | Copy: voice, grammar, register, precision (15 rows)                  | PASS            | §5, one row per literal, against `copy-editing` and `brand-voice`                                                                                                                                                                               |
+| 8  | Accessibility: anchor text, outline, no image alt recommended        | PASS            | §5 rows 7/11 and §11 O1: both anchors describe their destination out of context and are distinct from the news card's labels on the same page; the section has no `<img>` (markers are CSS div/span); the `h2` + three `h3` outline is intact   |
+| 9  | No step-002/003 fact beyond what those articles published            | PASS            | §6 — every step-2 clause is a published 002/003 sentence; nothing about the launcher, the landing site, an instrument or the vehicle's designation appears                                                                                      |
+| 10 | Date audit per step                                                  | PASS            | §8.1: step 1 carries 001's own sentence (cited); steps 2 and 3 carry no date; no date invented or rounded; the grid's date rows stay out of scope and escalated                                                                                 |
+| 11 | Link coverage: each `link` resolves to a published route             | PASS            | `/news/001-project-announcement/` and `/news/003-vehicle-design/` are present in `dist/` and listed; `/news/002-payload-selection/` exists but is intentionally not linked from the roadmap; step 3 has no link; no `004-*` route exists (§9.3) |
+| 12 | `href` from `routes.newsArticle(slug)`, never a hand-typed path      | PASS            | Deck §8.1 uses `routes.newsArticle('001-project-announcement')` / `('003-vehicle-design')`; `navigation.ts:13` defines `/news/${slug}/`; the dev card requires the same                                                                         |
+| 13 | SEO prerequisite on the revised deck                                 | PASS            | `.agents/work/seo/progress-log.md` §10 verdict `approved as proposed` (7/7 checks); hash `424a44ff…`; deck hash agrees; no required wording change                                                                                              |
+| 14 | The SEO's own metadata question answered                             | PASS            | SEO §4.3 keeps the homepage `<title>` and meta description unchanged; measured live and in `dist/`: exactly 1 meta description, title `Red Horizon \| A Mars mission in progress`; no canonical while `SITE_URL` is unset                       |
+| 15 | Dev scope check: deck §8 is what the dev transcribes, R1 carried     | PASS with cond. | §7. Deck §8.1/§8.3 against the dev card body: no divergent string; two loose phrasings recorded as §11 O2/O3, neither able to override the card's own "transcribe verbatim" rule                                                                |
+| 16 | Fail-closed state of the build, measured read-only                   | PASS            | `checkDist()` 0 offences; `scanSourceForGatedReferences()` 0 offences; 9 routes; no `004-*`; the proposed strings are **absent** from `dist/` (0 occurrences each) — the wording is not live (§9.1, §9.4)                                       |
+| 17 | No `website/` file edited by this gate                               | PASS            | `git status --short website/` shows only the three articles' in-flight `simulatedDate` lines, owned by another card (§8.3); no source file touched by this gate                                                                                 |
 
-| #  | String (deck order)                           | Result         | Copy judgement                                                                                                                                                                                                                                                                                                                                                                                                |
-| -- | --------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1  | eyebrow `Progress log` (12)                   | PASS           | Plain, self-describing, consistent with the nav label `Progress` and the section id `timeline` (D3). Not a heading, so it does not compete with the h2                                                                                                                                                                                                                                                        |
-| 2  | title `One step at a time.` (19)              | PASS           | Short, concrete, matches the section's actual structure (one step per release). Unchanged, correctly (D3)                                                                                                                                                                                                                                                                                                     |
-| 3  | description (184, 35 words)                   | PASS with note | States how to read the list instead of promising maintenance — the defect it replaces ("later milestones will be added as the record develops") is gone. Two sentences; the second is 30 words with a semicolon and a comma-plus-and. Truth of clause 1 rests on the recorded trigger (observation A), its number is distributive-loose (observation D), and its first sentence echoes the h2 (observation E) |
-| 4  | step 1 `state` `Announced` (9)                | PASS           | The record's own word — 001's frontmatter `status: Programme announced`. Replaces a label that described an activity instead of what happened (D2). No timing claim added                                                                                                                                                                                                                                     |
-| 5  | step 1 `title` `Coalition and purpose` (21)   | PASS           | States the outcome the record carries. Removes a heading a reader could misread as work still running directly above a step labelled `Announced` (SEO §2 recorded the same as an improvement)                                                                                                                                                                                                                 |
-| 6  | step 1 `detail` (137, 22 words)               | PASS           | Three claims, all 001's own: the ten teams (`:23`), the single uncrewed lander and rover (`:24–26`), the water-and-landscape question (`:29`). Noun-phrase register consistent with the list style; no verb needed and none implied wrongly                                                                                                                                                                   |
-| 7  | link label `Read the announcement` (21)       | PASS           | Describes action plus document type, not "read more" and not a bare URL; distinct from the news card's own `linkLabel` (`Announcement summary`). Out of context it is unambiguous **today** — exactly one announcement is published — and WCAG 2.4.4 is met in context (the anchor sits inside the step's `<li>` with its title and state). Observation B carries the hero-link pair forward                  |
-| 8  | step 2 `state` `Current progress` (16)        | PASS           | The label moves with the flag; it is a state of the log, not a claim of progress made. See observation C for the register mix across the three states                                                                                                                                                                                                                                                         |
-| 9  | step 2 `title` `Mission architecture` (20)    | PASS           | Kept (D2) because it already names the open work. Doubles as the `facts.ts` D5 value, so the panel and the log use one term for one state                                                                                                                                                                                                                                                                     |
-| 10 | step 2 `detail` (122, 20 words)               | PASS           | 001's own triple, verbatim in substance (`:73–74`), and the reason the log survives step 002's release: it names the questions, answers none, and does not claim that nothing is decided. Colon-plus-triple reads cleanly; "who builds what" is plain English for the work-share question                                                                                                                     |
-| 11 | step 3 `state` `Later` (5)                    | PASS           | Positional, non-committal, unchanged                                                                                                                                                                                                                                                                                                                                                                          |
-| 12 | step 3 `title` `Surface operations` (18)      | PASS           | Already published in this section today; names work the record has not reached and adds no detail about it                                                                                                                                                                                                                                                                                                    |
-| 13 | step 3 `detail` (78, 14 words)                | PASS           | `the rover` replaces `the surface vehicle` and removes a real ambiguity (the landing platform is also a surface vehicle). The phrase "examine rocks in context" is already public on the same homepage (`facts.ts` Objective), so the string introduces no new vocabulary                                                                                                                                     |
-| 14 | `Current state` (`facts.ts` label, 13)        | PASS           | Unchanged label; matches the grid's short noun register (`Name`, `Launch date`, `Objective`)                                                                                                                                                                                                                                                                                                                  |
-| 15 | `Mission architecture` (`facts.ts` value, 20) | PASS           | Same claim as the log's highlighted step, in the grid's at-a-glance form. Fixes a live contradiction: the panel above the log currently reads `Coalition planning` while the log flags a later step. See observation F for the one phrase this leaves behind on the page                                                                                                                                      |
+**Every row passes. Two rows carry a condition or a movement that must be read with them:** row 15
+(the dev card's phrasings, §11 O2/O3) and row 16 (the built page is the round-1 wording, so this gate
+judges proposed copy, not a live surface — exactly as revision 1 did).
 
-Section-level reading: the three entries now read _done / in hand / not settled_, which is the one reading
-order a progress log owes a first-time reader, and they read that way without stating anything the
-release gate holds.
+---
 
-## 4. The five decisions, judged as decisions
+## 4. The decisions, judged as decisions
 
-| Decision | As recorded by the writer (deck §5)                                                                                                                                                                                                                                           | Judgement here                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **D1**   | The honest public current state: "the coalition and its objectives are on the record, and the technical decisions that would make the mission real are still open"; carried by the highlighted step's `state`, `title` and `detail`                                           | **Accepted.** Both halves are true against published 001 (`:22–26` the coalition and purpose; `:73–74` the selections as "still ahead of us"), and the internal-canon half — that this work is in hand — is exactly the class of statement the card authorises and the continuity record checked against the private timeline. The clause states no timing, no percentage, no completion. _Attribution note:_ the deck says the clause is carried by step 2, but its first half is carried by **step 1** (`Announced` / `Coalition and purpose` / its detail) and only its second half by step 2 — observation G, working paper only |
-| **D2**   | Step 1’s title renamed `Coalition planning` → `Coalition and purpose` with `state: Announced`; steps 2 and 3 keep their titles; step 2 becomes current and its detail becomes 001's triple; payload selection belongs **inside** `Mission architecture`, not as a fourth step | **Accepted.** `Announced` is the record's own word; the old title named an unannounced activity that is finished. Keeping the three-step shape and putting the open selections inside step 2 is the choice that makes the log need no rewrite when step 002 releases, and the reasoning for rejecting a separate step is sound: a fourth step would claim a milestone the public record has not described. The three detail-level edits (state what was announced; `the rover`; 001's triple in place of "testable vehicle and science plan") all improve precision                                                                  |
-| **D3**   | Eyebrow stays `Progress log`; title stays `One step at a time.`; nav label `Progress` and section id `timeline` untouched                                                                                                                                                     | **Accepted.** No canon claim, no reader-facing drift, and it keeps the nav contract and the anchor out of review. The eyebrow and title are unchanged in `steps.ts` today, verified field for field                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **D4**   | Yes to a per-step optional `link`, published articles only, href from `routes.newsArticle(slug)`; step 1 only today; label `Read the announcement`                                                                                                                            | **Accepted.** The field is optional, so a step the record has not reached renders no anchor and cannot produce a dead route; the href comes from the route map rather than a hand-typed path (`navigation.ts:13`); and the only link that exists is to the one published article. The coupling the writer recorded — if the link is ever dropped, the description sentence must be revised in the same pass — is a real one and is carried in observation A                                                                                                                                                                          |
-| **D5**   | One string outside the section: `facts.ts` `Current state` → `Mission architecture`; `missionIntro.description` deliberately kept; the item is independently droppable                                                                                                        | **Accepted.** It removes a direct contradiction between two parts of the same page, uses the grid's register, and overwrites no canon line (no line of `docs/` names the programme's current state). No live card or comment on the board instructs the dev to drop it, so the drop condition in the dev card body is not triggered. The kept `missionIntro.description` is a range statement, not a state claim — observation F                                                                                                                                                                                                     |
+| #  | Decision                                                                                                         | Judgement                                         | Why                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| -- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| D1 | eyebrow `Progress log` → `Mission roadmap`; nav label `Progress` → `Roadmap`; section id stays `timeline`        | **Sound**                                         | The human's complaint is register, not content: `Progress log` names a record-keeping artifact, `Mission roadmap` names the course. Moving the nav label with it is necessary, because the header is the same section's other reader-facing name. Keeping `id="timeline"` is right: it is internal, the anchor is generated from one definition (`navigation.ts:63`), and no article prose links to it. `Roadmap` (7 chars) is one character _shorter_ than `Progress` (8), so the measured 187 px header row cannot overflow                                                                                                                                                  |
+| D2 | three rows; states `Announced` / `In hand` / `Ahead`; `current: true` stays on step 2; step 2 links **003** only | **Sound**                                         | `Current progress` and `Later` were the changelog register the human rejected; the replacements are positional and both words are already the page's (`the work in hand`) or the record's (`are still ahead of us`, `001:75`). The flag staying on step 2 is the deck's sharpest branch and it is the one the released record supports: `003:71` says the mission around the settled rover design is still being assembled, and no released sentence says surface operations are under way. One link per step follows from the frozen `link` field (one article), and 003 is the right target because it carries the step's lead claim _and_ the onward link to 002 (`003:63`) |
+| D3 | description replaced with the two-sentence reading rule                                                          | **Sound**                                         | It states what the list is, in what order, and what the highlight means — and promises no maintenance mechanic. It also closes revision 1's observations A, D and E (§0). Measured 132 characters of visible prose, not a meta description (the page carries exactly one `<meta name="description">`)                                                                                                                                                                                                                                                                                                                                                                          |
+| D4 | step 1 gains 001's own sentence; steps 2 and 3 carry no date                                                     | **Sound, with the record-date movement recorded** | The sentence is 001's verbatim (`001:66`), says _schedule frame_ and _launch window_ rather than launch date, and is reaffirmed by `002:105–106`. Two of three steps correctly carry no date; the deck's own §11(e) escalation is where the newly published record dates belong (§8.3)                                                                                                                                                                                                                                                                                                                                                                                         |
+| D5 | `facts.ts` `Current state` — no change                                                                           | **Sound**                                         | Under D2 the highlighted step is still step 2 and still titled `Mission architecture`, and `facts.ts:23` already publishes exactly that value. Editing it would be churn and would risk the two surfaces drifting apart. The drop condition is unchanged and not triggered (§11 O8)                                                                                                                                                                                                                                                                                                                                                                                            |
+| D6 | new: the trio is eyebrow `Mission roadmap` / nav label `Roadmap` / section id `timeline`                         | **Sound**                                         | The deck does not claim the three must match word for word, and they should not: the eyebrow names the section, the nav label has to fit the header, and the id names the component's form. The naming question is escalated to the human (§12 c)                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| D7 | new: keep the static curated array; do not drive the list from the published collection                          | **Sound as a scope decision**                     | It is a planning-level choice the deck is entitled to make, and it is the smaller change: the defect was a stale string, not a missing mechanism. A generated list would promote any future published item into a "step" without an editorial decision — the failure mode this gate exists to prevent                                                                                                                                                                                                                                                                                                                                                                          |
+| D8 | new: the maintenance trigger is corrected, not merely restated                                                   | **Sound**                                         | The round-1 header comment said "move the current flag and add the link when a step's article is published"; 002 and 003 both published and the flag correctly stayed. The corrected rule — add a link on publication; move the flag only when the record carries the _next_ step's opening — is what the frozen block now carries, and it is what this round actually did (§7)                                                                                                                                                                                                                                                                                                |
 
-## 5. Claim coverage, and the after-002 test
+---
 
-The deck's §9 table was **re-derived, not accepted**: every quoted phrase was located in the published
-article by script (`/tmp/t_bd1fd539/claims.py`, whitespace-normalised), and the load-bearing rows are:
+## 5. Copy gate — the fifteen literals, one row each
 
-| Claim in the copy                                                           | Verified at                                                                                                                                             | Result                   |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| "Ten national programme teams"                                              | `001-project-announcement.mdx:23`; the ten named partners counted in the same clause — 10                                                               | PASS                     |
-| "one uncrewed lander and rover"                                             | `:24–26` "a single uncrewed Mars lander and rover together"                                                                                             | PASS                     |
-| "how water changed an ancient equatorial landscape"                         | `:29` verbatim                                                                                                                                          | PASS                     |
-| "what the rover carries, who builds what, and how the mission reaches Mars" | `:73` verbatim; `:74` "are still ahead of us"                                                                                                           | PASS                     |
-| "survey terrain and examine rocks in context"                               | `:28–32` (unit mapping) and `:38–39` (one rover comparing altered with unaltered material); the phrase itself is already public in `facts.ts` Objective | PASS                     |
-| "The public record moves one step at a time"                                | `:76` "That is where the public record begins"; `docs/SCENARIO.md:274` §"Continuity and release controls"                                               | PASS (site-copy framing) |
-| The link target exists and is published                                     | published frontmatter; `/news/001-project-announcement/index.html` present in `dist/`                                                                   | PASS                     |
-| Which work is in hand                                                       | internal canon only (`docs/timeline/` step 002, "Private situation": the selection work is under way). **No step-002 fact is stated in any string**     | PASS, non-public support |
+Hashes and lengths recomputed from `BLOCK-8.1` / `BLOCK-8.3` by this gate; all 15 match the deck's
+§10.13 table, all 15 are **ASCII**, and `STRINGS-15` =
+`9a54650186c5ccab2b709e4b11a23b58799a3dbcf3b1612b5df9809f674e7a0f`.
 
-**Step-002 containment (the load-bearing check).** The step-2 detail names 001's own three selections as
-open and answers none of them. `docs/SCENARIO.md:277` binds payload details to step 002, the vehicle-design
-material to step 003 and the launcher to step 004 — so at least one of the three named selections cannot be
-settled by step 002 publishing, and the sentence cannot be invalidated by it. Nothing in the copy states a
-payload scope, an instrument, a provider, a vehicle, a site, a date or a surface-life figure.
+| #  | Literal (chars)                                                                                                                                          | Hash (first 16)    | Verdict | Judgement                                                                                                                                                                                                                                                                               |
+| -- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | eyebrow `Mission roadmap` (15)                                                                                                                           | `8458f7421f051cac` | PASS    | Names the section's content in words a first-time reader already has; not the changelog register; not a heading level (`SectionHeading.astro:15` renders it as a `<p>`)                                                                                                                 |
+| 2  | title `One step at a time.` (19)                                                                                                                         | `e53974be2c9c34d6` | PASS    | Unchanged, dates nothing, carries the roadmap metaphor in the section's own voice; the human's complaint does not attach to it                                                                                                                                                          |
+| 3  | description `The programme's steps, in the order it reaches them. The highlighted step is the work in hand; the step after it is not settled yet.` (132) | `7aa33eab66c56329` | PASS    | True against the record (highlighted = step 2; the step after it = step 3, unreported). Plain, scannable, no unsupported certainty, no grandeur. The ellipsis in "the order it reaches them" is readable and consistent with the label `In hand` (§11 O9)                               |
+| 4  | step 1 state `Announced` (9)                                                                                                                             | `07dfab861df1deb5` | PASS    | The record's own word (`001:4 status: Programme announced`)                                                                                                                                                                                                                             |
+| 5  | step 1 title `Coalition and purpose` (21)                                                                                                                | `f78ba01c9cf090a4` | PASS    | Unchanged; both nouns are 001's (ten teams; a named purpose)                                                                                                                                                                                                                            |
+| 6  | step 1 detail (184)                                                                                                                                      | `baeba9cdbfed08eb` | PASS    | Claims 1–4 of §6, all published; the added sentence is 001's verbatim; sentence length and register hold                                                                                                                                                                                |
+| 7  | step 1 link label `Read the announcement` (21)                                                                                                           | `649e96eb1857df08` | PASS    | Describes action plus document type; not "read more", not a bare URL; unambiguous out of context while exactly one announcement is published; in context it sits inside the step's `<li>` with its state, title and detail (WCAG 2.4.4). §11 O1 carries the hero's near-neighbour label |
+| 8  | step 2 state `In hand` (7)                                                                                                                               | `3cfbe4b0a512e082` | PASS    | Positional, no timing, no completion verb; matches the description's own phrase; replaces the rejected `Current progress`                                                                                                                                                               |
+| 9  | step 2 title `Mission architecture` (20)                                                                                                                 | `c993bf2460fc7ba6` | PASS    | Kept against the card's suggested rename, correctly: the released record describes the _mission-level_ work as open (`003:71`) while the vehicle half is settled, so a title naming only the published parts would hide the open half                                                   |
+| 10 | step 2 detail (122)                                                                                                                                      | `10f90a089a652ef4` | PASS    | Three clauses, each published (§6 rows 5–7); the closing clause is 003's own sentence with the pronoun resolved; no vehicle designation, no instrument, no provider                                                                                                                     |
+| 11 | step 2 link label `Read the rover design` (21)                                                                                                           | `35b9a90c97211b26` | PASS    | Subject-bearing, describes the destination; distinct from the news card's own `Rover design briefing` measured on the same page                                                                                                                                                         |
+| 12 | step 3 state `Ahead` (5)                                                                                                                                 | `a8f94e9869fad501` | PASS    | Positional; the word is the record's register (`001:75 are still ahead of us`); replaces the rejected `Later`                                                                                                                                                                           |
+| 13 | step 3 title `Surface operations` (18)                                                                                                                   | `90056cbe550c04f0` | PASS    | Unchanged; names the phase without dating it or claiming it                                                                                                                                                                                                                             |
+| 14 | step 3 detail (78)                                                                                                                                       | `9d986123636079eb` | PASS    | Describes the work in the gerund, claims no progress; supported by `001:30–40`, `003:18`, and already public in `facts.ts` Objective                                                                                                                                                    |
+| 15 | nav label `Roadmap` (7)                                                                                                                                  | `92375f997ffe65ab` | PASS    | Points at the unchanged anchor; one character shorter than the string it replaces; same label in header and footer because one definition renders both                                                                                                                                  |
 
-**No gap required escalation.** The honest current state is fully supported by the published announcement
-plus internal canon; this card settles no canon question and asks the human for no canon decision. The
-only human decisions outstanding are the ordinary ones (§11).
+`BLOCK-8.1` = `a6b774eb20e26c13eaf9450362f3a56ad41cf02d4c848f645e5a404390edaf45` (2,035 bytes) —
+**recomputed, match**. `BLOCK-8.3` =
+`6773c7d688642088949826a03fed05b9f54d34de42e2efdf3b18e9dd319bb280` — **recomputed, match**. The two
+strings outside `progressHeading` / `progressSteps` are the nav label (§8.3) and the two link labels;
+the `facts.ts` line in §8.2 adds no literal.
 
-## 6. Continuity and SEO verdicts: consistency, and the carried observations
+**Register and voice.** Informed, composed, candid, specific, modest: the copy states what is settled
+and what is not, sources every figure it names, and carries no heroic or corporate register, no
+unexplained acronym, and no implication that a real agency endorses the programme.
 
-Both upstream verdicts are present, are on the same deck bytes, and agree with this gate:
+---
 
-- **SEO `approved as proposed`** (`.agents/work/seo/progress-log.md` §10) — five checks, all passing: heading outline, the one internal link, homepage prose with no compensating metadata change, terminology (`payload` and the region name both considered and left out), and a clean disclosure audit of every recommended surface. Its §7 implementation constraints are routed to `t_4383dbcc` and are reflected in R1.
-- **Continuity `continuity clear`** (`.agents/work/continuity/progress-log.md`) — six checks, all passing, including the after-002 test run string by string and a marker scan with a positive control.
+## 6. Claim → source trace (re-derived this round)
 
-Every observation either pass carried is closed or explicitly carried forward below; none is left hanging.
+| #  | Claim in the frozen copy                                                          | Source (published, line numbers as they stand **today**)                                                                                                           | Carried by  |
+| -- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| 1  | Ten national programme teams                                                      | `001:24–27` (ten teams named, counted)                                                                                                                             | 001         |
+| 2  | one uncrewed lander and rover                                                     | `001:26` ("build a single uncrewed Mars lander and rover together")                                                                                                | 001         |
+| 3  | a mission to work out how water changed an ancient equatorial landscape           | `001:30–31`                                                                                                                                                        | 001         |
+| 4  | "The schedule frame is a launch window in 2031."                                  | `001:66` verbatim; `001:7` (summary frontmatter); reaffirmed `002:105–106`                                                                                         | 001         |
+| 5  | the first rover's design is frozen                                                | `003:4` (`status: Design frozen`); `003:17` ("it now has its first surface vehicle design"); `003:71` ("The rover design is settled")                              | 003         |
+| 6  | the payload scope is agreed                                                       | `002:21–22` ("has now agreed a payload scope for Red Horizon One…"); recapped `003:62–65`                                                                          | 002, in 003 |
+| 7  | the mission around the rover is still being assembled                             | `003:71` verbatim in substance                                                                                                                                     | 003         |
+| 8  | the highlighted step is the work in hand                                          | `003:71`; `002:4` (`status: In selection`); `002:23–24` ("is still open, and the programme is treating it that way")                                               | 002 + 003   |
+| 9  | using the rover on the surface to survey terrain and examine rocks in context     | `001:30–40` (unit mapping and the rover's comparison role); `003:18` ("maps local terrain, investigates rocks in context"); already public in `facts.ts` Objective | 001 + 003   |
+| 10 | `Announced` as step 1's state                                                     | `001:4`                                                                                                                                                            | 001         |
+| 11 | `Ahead` as step 3's state, and the step's title                                   | positional site copy; no dated or completed claim; the word is the record's register (`001:75`)                                                                    | site copy   |
+| 12 | Step 1's link target exists and is published                                      | 001 `publication: published`; route present in `dist/` and listed on `/news/`                                                                                      | site        |
+| 13 | Step 2's link target exists and is published                                      | 003 `publication: published`; route present in `dist/` and listed on `/news/`                                                                                      | site        |
+| 14 | 003 carries the onward link to 002                                                | `003:63` (`/news/002-payload-selection/`)                                                                                                                          | 003         |
+| 15 | the nav label points at the existing section anchor                               | `navigation.ts:63` + `ProgressLog.astro:6` (`id="timeline"`); 2 anchors per built page (header + footer)                                                           | site        |
+| 16 | "The highlighted step is the work in hand; the step after it is not settled yet." | reading rule over the frozen rows: the highlighted row is step 2 (`current: true`), the row after it is step 3, which no published article reports                 | site copy   |
+| 17 | the eyebrow, the title and the description state no programme fact                | site copy; no noun in them is a canon claim                                                                                                                        | site copy   |
 
-| Carried observation                                                                                                     | Disposition at this gate                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Continuity §10.1 — the description's plural is coupled to the maintenance trigger                                       | **Carried forward**, acknowledged here as a live obligation. It is recorded in deck §6 and in the frozen file-header comment (observation A)                               |
-| Continuity §10.2 — the deck §5 heading counts four decisions while listing five                                         | **Explained and carried** (observation C): the writer's card asked for four and D5 is the writer's addition. Working paper only; this gate may not edit the deck           |
-| Continuity §10.3 — pre-existing homepage items (`To be announced` date rows; the step-001 plate as the news card image) | **Not reopened.** Both are out of this deck's remit; the first is already routed to continuity `t_a0ee9abf` and recorded there as not a canon conflict. Carried, unchanged |
-| Continuity §10.4 — supersession note for the earlier 001 continuity row                                                 | **Accepted as recorded.** No action; that row judged the chrome as it stood and is not edited                                                                              |
-| Continuity §10.5 / SEO §7.1 — the positional detail selector un-styles the linked step                                  | **Carried as R1** (§7) with the SEO pass's measured fix, on the dev card's own thread                                                                                      |
-| SEO §9.1 — the hero's `Read the first announcement` and the new `Read the announcement`                                 | **Carried forward** (observation B); judged non-material, with the measured anchor inventory in §1                                                                         |
-| SEO §9.2 — the deck's "testable" rationale is looser than the article                                                   | **Confirmed as the SEO pass read it**: the over-claim was the _named artefacts_, not the adjective, and the replacement sentence is 001's own list. No change              |
-| SEO §9.3 — the fact-grid launch date beside 001's window frame                                                          | **Not reopened**, already routed (`about-method.md` §15 row 5 → `t_a0ee9abf`)                                                                                              |
+**Citation drift — recorded, not a failure.** Every body-line citation in the deck is now one line
+early (two for a sentence that wraps a line break), because the three articles gained a
+`simulatedDate` frontmatter line after the deck was written (§8.3). Frontmatter citations are exact.
+This gate re-located all 20 cited passages in the current files: **none is missing and none is
+misquoted** (the largest delta is +2, from a wrapped sentence).
+
+---
 
 ## 7. Dev scope check, and the rendering condition R1
 
-**The dev needs no wording decision.** Deck §4.1 fixes where the copy lives (no new file, no collection
-change, the strings stay in `steps.ts`, the stale header comment is replaced in the same edit), and the dev
-card body names deck §8 as the source of every value. Every literal and figure the dev card body itself
-states was checked against the deck:
+**The dev needs no wording decision.** The deck's §8.1 and §8.3 are the frozen bytes; the dev card
+names `.agents/work/drafts/progress-log.md` §8 as their source; and every value the dev card body
+itself states agrees with the deck — the interface (including the optional `link` field it says
+"already exists … reuse it": it does, `steps.ts:20`), the `routes` import, the `facts.ts` value
+(`Mission architecture`, unchanged), and the corrected header-comment rule. Two loose phrasings are
+recorded as non-blocking observations (§11 O2, O3); neither can override the card's own "transcribe
+it verbatim" instruction, which is the rule the dev is told to apply if the two ever disagree.
 
-- the header comment it replaces is verbatim the text currently at `steps.ts:4`;
-- `routes.newsArticle('001-project-announcement')` matches `navigation.ts:13` (`/news/${slug}/`), and the rendered form `href="/news/001-project-announcement/"` matches the route the site already emits;
-- its measured string sizes (description 184 against 145; longest step detail 137 against 73) match deck §10 and the SEO §4.1 table;
-- it does not restate, reorder or re-scope any frozen string, and it correctly forbids rejecting the SEO/continuity changes by hand;
-- the `facts.ts` item matches §8.2 exactly, with the drop condition intact and **not** triggered.
+**R1 — the condition carried from revision 1, restated for round 2.** The step that gains a `link`
+must not render its detail paragraph differently from its neighbours. Measured by this gate on the
+**built** page served locally at 15:45 CEST: all three details report the same computed style —
+`font-size 15.2px`, `color rgb(220, 198, 177)`, `max-width 480px`, rendered width 480 px — including
+step 1, **which already carries its link today**. The rule is class-keyed (`.timeline-detail`,
+`ProgressLog.astro:113`, with the measured rationale in the comment above it) rather than positional,
+so moving the link to step 2 and adding a second one cannot reintroduce the round-1 defect **unless
+the dev changes those selectors**. The dev card carries R1 in its acceptance criteria and in its
+preview measurement; this gate approves on that condition and on nothing else about the rendering.
+The `is-current` marker accent is unchanged and measured too (`rgb(252, 160, 66)` on step 2,
+`rgb(123, 167, 250)` on steps 1 and 3, i.e. `--rh-sun-core` and `--rh-earth-blue`).
 
-**R1 — the one condition attached to this approval (rendering, not wording).** The card body's prescribed
-`<p class="timeline-link">` after the detail paragraph makes the component's positional rule
-(`ProgressLog.astro:103`, `.timeline-list li > div:last-child > p:last-child`) stop matching the linked
-step's detail. The SEO pass measured the result on a built copy: the linked step's detail renders 16 px in
-the primary text colour at 100 % width while its two neighbours stay 15.2 px / muted / 30 rem. **The step
-that gains the link must not ship with a differently styled detail paragraph.** The dev may satisfy this by
-any means (the class-keyed rule the SEO pass verified, a different selector, or another arrangement) — the
-constraint is parity across all three steps, and the SEO comment on `t_4383dbcc` already gives the dev
-explicit priority for parity over the card body's literal "no change to the … detail markup". This gate
-recommends the SEO pass's suggested acceptance addition: after the build, measure `getComputedStyle` for the
-detail paragraph of **every** step and require identical font size, colour and max width.
+**Maintenance-trigger check.** The corrected rule in the frozen header comment matches what this round
+actually did and what the deck's §6 records: steps 1 and 2 carry links and the flag stayed on step 2 —
+verified by reading the frozen block and the deck's §6, not by trusting a summary.
 
-R1 does not change a string and does not hold up the chain: `t_4383dbcc` proceeds on this approval.
+---
 
-## 8. Fail-closed published surface, measured
+## 8. Date audit
 
-| Check                                | Command                                                                                                                                                  | Result                                                                                                   |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Route set                            | read-only call of `listRoutes()` from `guards.mjs`                                                                                                       | `/404.html, /about/index.html, /index.html, /news/001-project-announcement/index.html, /news/index.html` |
-| Source / dist guard                  | read-only `scanSourceForGatedReferences()` + `checkDist()` (no prune)                                                                                    | **0 source offences, 0 dist offences**                                                                   |
-| Step-002 route and reference         | `dist/` walked for any path or file containing `002`, and text-searched for the 002 slug                                                                 | **no path hit, no content hit**                                                                          |
-| The strings are not public yet       | `dist/index.html` still contains `Coalition planning` (×2), `Next chapter`, the old description and `Using the surface vehicle`; `timeline-link` count 0 | correct: the dev card has not run, so this gate judges proposed copy, not a live surface                 |
-| The link target is already reachable | `dist/index.html` `href="/news/001-project-announcement/"` → 1 occurrence (the news card)                                                                | the route this wording will point at exists and is linked from the page today                            |
+### 8.1 Per step, against the released record
 
-## 9. Confidentiality scan (commands and real hit counts)
+| Step          | Date sentence on the section                                         | Source                                                                       | Judgement                                                                                                                                                          |
+| ------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1 `Announced` | "The schedule frame is a launch window in 2031." (verbatim from 001) | `001:66`; `001:7` (summary); reaffirmed `002:105–106`                        | Correct. It is the record's own sentence, it states a _schedule frame_ and a _launch window_, not a launch date, and it implies no event the step has not released |
+| 2 `In hand`   | **no date**                                                          | `002:106` ("No launch or landing date is being stated."); `003:70`; `003:71` | Correct. The record releases no mission date for this step                                                                                                         |
+| 3 `Ahead`     | **no date**                                                          | nothing in 001–003 dates the surface phase                                   | Correct. The step is not reached, and nothing is implied                                                                                                           |
 
-Pattern list read from `website/scripts/guards.mjs` (`gatedTextMarkers`) **at scan time**, so no marker
-value is copied into this record or into any repository file; withheld classes are named by class only.
+Not used, deliberately: the budget's "constant 2026 euros" (`001:66–67`, a currency base rather than a
+mission date), the surface-life durations (`001:68–72`), and `docs/SCENARIO.md`'s locked calendar and
+`docs/timeline/` (private). The only digit token in the whole 15-literal payload is `2031.`.
 
-```
-python3 /tmp/t_bd1fd539/scan.py     # extraction, structural classes, marker scan + positive control
-```
+### 8.2 It cannot be read as a withheld mission date
 
-| Target                                                     | Guard markers (4, values withheld)                          | Structural token classes                                                                                                                                |
-| ---------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The 15 rendered string literals (what the dev transcribes) | **0 hits**                                                  | 0 digits, 0 years, 0 coordinates, 0 currency, 0 percent, 0 URLs, 0 repo paths, 0 card ids, 0 month names, 0 completion verbs, 0 multi-word proper nouns |
-| Marker **positive control** over `docs/timeline/`          | fires: 1–2 hits on the withheld step files, 0 on step 001's | — (proves the scan is live, not a silent no-op)                                                                                                         |
-| Built `website/dist/index.html`                            | —                                                           | no withheld material; guard probe clean (§8)                                                                                                            |
+The section contains no launch date, landing date, launch vehicle, provider or landing site, and
+states none. `003:70`, published, itself says no launch vehicle has been named, no launch date has been
+stated and no landing site has been announced, so the section cannot contradict the record it sits
+beside.
 
-**This record contains no gated marker and no withheld value.** Step 002 is named by number and its slug is
-elided; the withheld classes are named by class. Scratch checkers and pattern lists live outside the
-repository at `/tmp/t_bd1fd539/`.
+### 8.3 Movement recorded while this gate ran: the articles now carry `simulatedDate`
 
-## 10. Non-blocking observations (explicit; each with an owner)
+When this gate started, the record it bounds was the one the deck describes. During the run a
+concurrent card (`t_531698d9`, `mars-ai-simulator-editor`, **running**) added a `simulatedDate` line
+to all three published articles in the shared working tree, and a second card (`t_1059c973`,
+`mars-ai-simulator-dev`, `todo`) will build and push them:
 
-None of these is a material failure, and none changes a frozen string. They are recorded so that no later
-reader has to rediscover them.
+| Article | `simulatedDate` measured in the working tree | Milestone source                        |
+| ------- | -------------------------------------------- | --------------------------------------- |
+| 001     | `2026-10-12`                                 | claimed by that card, not verified here |
+| 002     | `2027-03-19`                                 | claimed by that card, not verified here |
+| 003     | `2029-07-13`                                 | claimed by that card, not verified here |
 
-- **A — the description's plural is a live obligation, not a fact.** "Published steps link to the article
-  that carries them" is true today (one published step, and it links) and stays true only while the recorded
-  trigger is honoured: when a step's article publishes, that step gains its `link`. The obligation lives in
-  deck §6 and in the frozen file-header comment ("Move the current flag and add the link when a step's
-  article is published"), and it is the one thing in this package that a future editor must actually do.
-  **Owner:** writer, on the release that publishes step 002's article. **Acknowledged as carried.**
-- **B — two announcement links with near-identical labels on one page.** The hero says
-  `Read the first announcement →` and points at the on-page newsroom anchor `#updates`; the new progress
-  link says `Read the announcement` and points straight at the published article. Measured anchor inventory
-  of the built homepage: `Red Horizon`, `News`, `Mission`, `Progress`, `Read the first announcement →`
-  (`#updates`), `Announcement summary` (`/news/001-project-announcement/`). Both labels are honest, they are
-  not identical, and the hero link is outside this deck's strings, so this is **not a material accessibility
-  or coherence failure** and does not justify a corrective card while the `website/` queue has a tail. It is
-  the obvious thing for the next homepage pass to reconcile (distinct label, or one target). **Owner:**
-  writer / homepage owner on the next homepage pass; recorded by the SEO pass too (its §9.1).
-- **C — the deck §5 heading counts four decisions and the section records five; this gate's own card body
-  repeats the mismatch.** The writer's card `t_11eee417` required _four_ explicit decisions; D5 (the
-  `facts.ts` consistency string) is the writer's own addition, so the heading is defensible as "the four the
-  card asks for" but ambiguous, and my card's acceptance criterion says "the four decision judgements" while
-  its §1 says five. **Working paper only — no frozen string is affected, and this gate may not edit the
-  deck.** This record judges all five (§4). **Owner:** writer, if the deck is ever re-titled.
-- **D — distributive-number looseness in the description.** "Published steps link to the article that
-  carries them" pairs a plural subject with a singular object; the intended reading is one article per step.
-  Understandable and accurate, and the frozen copy must not be re-punctuated by the dev. Optional future
-  wording, if the deck is ever reopened: "…link to the article that carries them" → "…link to their article".
-  **Owner:** writer, on any future pass on this deck.
-- **E — the description's first sentence echoes the h2 directly above it.** "The public record moves one
-  step at a time." sits immediately under `One step at a time.` The echo is mild and the sentence does the
-  work of introducing the reading rule, so no change is required; recorded so a later pass does not read it
-  as an oversight. Same sentence: "the record moves" is figurative (a record grows rather than moves).
-  **Owner:** writer, on any future pass on this deck.
-- **F — one `surface vehicle` remains on the page, by decision.** After the change, the homepage's only
-  instance is `missionIntro.description` ("…to the work of its first surface vehicle"), kept deliberately by
-  D5 because it describes the record's _range_ rather than the current state, and because "surface vehicle"
-  is the class name the mission brief already owns (it also names the class in the withheld-dossier
-  discussion, not the designation). The log now says `the rover` instead, which is the disambiguation D2
-  wanted. The divergence is one-sided and deliberate. **Owner:** writer, if a future homepage pass wants one
-  term throughout — no change is required now.
-- **G — the deck attributes the whole D1 clause to step 2.** Its first half (the coalition and its
-  objectives are on the record) is carried by step 1's `Announced` / `Coalition and purpose` / detail; only
-  the second half (the technical decisions are still open) is carried by step 2. The decision is realised
-  either way; the attribution sentence in the working paper is imprecise. **Owner:** writer, working paper
-  only.
-- **H — the register mix across the three states.** `Announced` (participle) / `Current progress` (noun
-  phrase) / `Later` (adverb) are three different grammatical classes. They read as one progression
-  (happened / in hand / ahead) and `Announced` is the record's own word, so this is accepted as decided —
-  recorded only so that a future editor knows the mix was seen and kept, not missed. **Owner:** none; no
-  change.
-- **I — the internal stage name survives in a source comment.** Replacing the stale header comment in
-  `steps.ts` removes one instance of the internal stage name, but the same vocabulary remains in
-  `facts.ts`'s header comment, and in `navigation.ts`, and the dev card is explicitly told not to touch
-  `facts.ts` beyond the one value. These are source comments only — they never reach `dist/`, they appear in
-  no public string, and the site's guard does not treat them as gated. Flagged only as site hygiene for a
-  future pass. **Owner:** dev/website owner on a future hygiene pass.
-- **J — the new link has no style rule today.** Nothing existing covers it (`timeline-link` count 0 in
-  `src/` and in `dist/`); the dev card asks for the muted/accent treatment, and its unstyled box was measured
-  by the SEO pass at 185 px in the primary colour directly under a muted paragraph. Covered by R1's scope
-  (rendering) and by the dev card. **Owner:** `mars-ai-simulator-dev` on `t_4383dbcc`.
-- **K — the earlier 001 continuity row and the pre-existing cartography/question are not reopened.** The
-  chrome row that judged the old wording, and the two pre-existing homepage coherence questions (the
-  `To be announced` date rows; the step-001 plate used as the news card image), stand exactly as continuity
-  §10 recorded them. **Owner:** unchanged (`t_a0ee9abf` for the first).
+**What this changes for this gate: nothing in the strings.** The frozen copy states no date on steps 2
+and 3, and the new values are _record dates_ — the in-fiction date on which each article was written —
+not mission dates. They falsify no sentence, they stay in article order, and they are consistent with
+step 1's 2031 window. Two consequences are recorded rather than acted on:
 
-## 11. Release boundary and what remains outstanding
+1. The deck's §5/D4 note ("no published article carries the field yet", measured at 15:25 CEST) and
+   its §11(e) framing are now overtaken — working-paper statements, not public strings (§11 O4).
+2. `simulatedDate` assignment and verification are this role's own business **on that card**, not this
+   one. This gate neither duplicates nor pre-empts that work; it records that the values are a second
+   released date source a _later_ homepage round could draw on for the human's "rough dates" ask
+   (§12 e).
 
-`approved` is an **editorial gate only**. It is not canon approval, not a continuity verdict for a future
-revision, not a release, and not authorisation to build, preview or deploy anything.
+Those three frontmatter lines are the only `website/` changes in `git status`, and they belong to that
+card; this gate edited nothing under `website/`.
 
-Outstanding after this verdict:
+**Post-verdict addendum (added 15:46 CEST, after this verdict was written and before it was filed).**
+While this gate was finishing, that second card **published** the values: `t_1059c973` committed
+`aab1a94` ("publish the three simulated record dates released on t_531698d9 …") at 15:44:06 CEST, and it
+is now the tip of `origin/main`, where `e67b970` (15:31:11) stood when this gate measured at 15:41. The
+articles' own bytes did not move with the commit — their mtimes are still 15:37:11 and their three
+`sha256` values are the ones tabulated in §9.2 — so the record dates are now _pushed_, not merely
+present in the working tree. The local `dist/` is still the 15:33:26 build and therefore still predates
+them. **No row of this review changes:** the gate object is the deck and its two frozen blocks,
+re-hashed after this addendum and unchanged (`8fc9a181…` / `a6b774eb…` / `6773c7d6…`), and no frozen
+string carries or depends on a record date. The values' own verification (that each sits on a locked
+milestone in `docs/SCENARIO.md`) remains that card's work and is not claimed here.
 
-1. **Dev transcription** — `t_4383dbcc` (`mars-ai-simulator-dev`), also parented on `t_4b49346b` (the
-   one-`website/`-card-at-a-time rule), transcribing deck §8 verbatim, with R1 and the SEO pass's measured
-   remediation applied.
-2. **A current human release reference** before the wording's first public deployment. The operator
-   commissioned the wording ("also, revisit 'progress log' section wording on homepage", relayed verbatim on
-   `t_11eee417`), but no release reference for this homepage surface is recorded on any card or in any
-   repository file, and none may be inferred. An editorial `approved` does not supply it.
-3. **The maintenance obligation in observation A**, on the release that publishes step 002's article — a
-   one-line, writer-owned follow-up with no card created for it (the deck records that the 002 release graph
-   is being built live by the planner and a duplicate card would collide with it).
-4. **No Red Horizon canon is approved by this record.** Where the copy makes a state claim, it is an
-   editorial statement about what the published record and the continuity-checked canon support, and it is
-   reversible by an ordinary editorial pass.
+---
 
-## 12. Record identity
+## 9. Surface measurements
 
-This is the first review record for the `progress-log` slug (`t_bd1fd539`). There is no superseded revision
-of this file to record. If a later pass re-checks the package, keep this file's revision history additive:
-re-hash the deck first, then state what moved around an unchanged article.
+### 9.1 What is live today
 
-Evidence paths for a later reader:
+The round-1 wording is live: eyebrow `Progress log`, the 145-character round-1 description, step 2
+`Current progress`, step 3 `Later`, one link on step 1 (`Read the announcement`). No `Mission roadmap`,
+`In hand`, `Ahead` or `Read the rover design` appears anywhere in `dist/` (0 occurrences each), so
+this gate judges proposed copy — exactly as revision 1 did.
 
-- `/tmp/t_bd1fd539/probe.py`, `scan.py`, `claims.py`, `hashes.py`, `anchors.py`, `guards-probe.mjs`, `board.py`, `comments.py`, `live.py` — all outside the repository, read-only, re-runnable.
+### 9.2 Inputs, hashed at two points in the run
+
+| Input                                             | Value                  | At 15:39:18 | At 15:41:39 |
+| ------------------------------------------------- | ---------------------- | ----------- | ----------- |
+| `.agents/work/drafts/progress-log.md`             | `8fc9a181…` (59,689 B) | unchanged   | unchanged   |
+| `.agents/work/seo/progress-log.md`                | `424a44ff…` (35,380 B) | unchanged   | unchanged   |
+| `website/src/features/progress/steps.ts`          | `f01ecaf8…` (1,946 B)  | unchanged   | unchanged   |
+| `website/src/features/progress/ProgressLog.astro` | `68a4b4d5…` (4,064 B)  | unchanged   | unchanged   |
+| `website/src/lib/navigation.ts`                   | `1fd3bc99…` (3,099 B)  | unchanged   | unchanged   |
+| `website/src/features/mission/facts.ts`           | `7cf85ec8…` (1,020 B)  | unchanged   | unchanged   |
+| `website/dist/index.html`                         | `a455ca48…` (17,119 B) | unchanged   | unchanged   |
+| `website/news/001-…mdx`                           | `923a12d8…` (4,832 B)  | unchanged   | unchanged   |
+| `website/news/002-…mdx`                           | `7b69bd7f…` (7,722 B)  | unchanged   | unchanged   |
+| `website/news/003-…mdx`                           | `51f2ee69…` (5,476 B)  | unchanged   | unchanged   |
+
+### 9.3 Route and link coverage (read-only)
+
+`listRoutes()` → `/404.html`, `/about/index.html`, `/googlef5c43421bd049659.html`, `/index.html`,
+`/news/001-project-announcement/index.html`, `/news/002-payload-selection/index.html`,
+`/news/003-vehicle-design/index.html`, `/news/index.html`, `/wiki/index.html`. No `004-*` route, so
+step 3's "no link" is correct and no step can point at a draft. The `#timeline` anchor resolves twice
+on each built page (header and footer, one definition), and `Roadmap` is one character shorter than
+the string it replaces, so the anchor cannot break and the measured header row cannot overflow.
+
+### 9.4 Guard probe (read-only; nothing pruned)
+
+`checkDist()` → **0 offences**; `scanSourceForGatedReferences()` → **0 offences**. Called by import
+from a scratch script outside the repository, deliberately **not** through `npm run build` or the
+postbuild `check-dist`, which _prunes_ offending files from the shared `dist/`.
+
+### 9.5 Rendered surface, measured on the built page served locally
+
+Section outline: `H2 One step at a time.` (`id="timeline-title"`, `aria-labelledby` intact) with three
+`H3` step titles; the page outline runs `h1 → h2 → h3` with no skipped level and no duplicate heading
+text; the eyebrow is a `<p>`, so this change introduces no heading. Anchors inside the section: one
+today (`Read the announcement`). Full homepage anchor inventory of every surface, for the round-2
+comparison: `Red Horizon` → `/#top`; `News` ×2 → `/news/`; `Wiki` ×2 → `/wiki/`; `Mission` ×2 →
+`/#mission`; `Progress` ×2 → `/#timeline`; `About` → `/about/`; `Read the first announcement →` →
+`#updates`; `Announcement summary` → `/news/001-…/`; `Payload selection briefing` → `/news/002-…/`;
+`Rover design briefing` → `/news/003-…/`; `Read the announcement` → `/news/001-…/`. After the change
+the only new pairs are `Read the rover design` → `/news/003-…/` (distinct from `Rover design briefing`
+on the same page) and the renamed nav label.
+
+### 9.6 Measurement integrity: the "live origin" is not attributable during this window
+
+The hostname `https://mars-ai-simulation.janpolacek.workers.dev/` was read four times while this gate
+ran, and it did not stay still:
+
+| Time (CEST)  | Response                                                                   | Matches                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| ~15:38       | 17,119 bytes                                                               | the shared checkout's `website/dist/index.html` (`a455ca48…`, built 15:33:26)                                                    |
+| ~15:41       | 17,386 bytes                                                               | nothing measured                                                                                                                 |
+| ~15:41–15:43 | 17,397 bytes, sha256 `eed47af2…`                                           | the **running card `t_e4cc3b9f`'s uncommitted worktree build** (`.worktrees/t_e4cc3b9f/website/dist/index.html`, built 15:40:36) |
+| 15:43        | progress section 2,146 B `f8e54abb…`; newsroom section 4,798 B `20b273a7…` | byte-identical to the same sections of the shared checkout's build                                                               |
+
+The two carousel CSS rules that distinguish those builds exist in **no commit** — `git ls-remote` puts
+`origin/main` at `e67b970` (and `main` is the only remote head), while `git log --all` over
+`NewsCard.astro` ends at `aa71714`; the rules live only in that worktree's modified file. So during
+this window the hostname served the newest local build on this machine rather than a fixed commit.
+**Consequence for this gate: none** — it judges the deck's frozen strings against the released
+articles and the local build's route/section surfaces, and the section under gate is byte-identical on
+every surface measured. **Consequence for the project:** a "verified live, byte-for-byte" claim made
+in such a window cannot be attributed to a commit on that evidence alone; recorded as §11 O10 with the
+site-deployment owner, and **not** raised as a blocking finding here.
+
+### 9.7 No deploy, no build, no route change by this gate
+
+No build, no preview of the shared tree, no `wrangler`, no push, no `publication` flip. `dist/` was
+read, never written; the static server this gate used served a read-only copy of `dist/` on
+`127.0.0.1` and was stopped after the R1 measurement.
+
+---
+
+## 10. Confidentiality scan
+
+Pattern lists read from `website/scripts/guards.mjs` **at scan time**, so no marker value is copied
+into this record. Withheld classes are named by class only.
+
+| Target                                                                                                                                                                                    | Result                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `gatedTextMarkers` (2 values) over the whole deck                                                                                                                                         | **0 hits**                                                                                       |
+| `gatedTextMarkers` over the 15 frozen literals                                                                                                                                            | **0 hits**                                                                                       |
+| Positive control: the same markers over `.worktrees/` source packs                                                                                                                        | **63 files hit** — the scan is live, not a silent no-op                                          |
+| Withheld-class probes over the 15 literals (vehicle designation, region name, coordinate tokens, agency names, launcher / provider / spaceport, instrument or spectrometer, landing site) | **0 hits for every probe**                                                                       |
+| `checkDist()` over `website/dist/`                                                                                                                                                        | 0 offences — no withheld file, name, stem or content hash, and no marker in any served text file |
+| `scanSourceForGatedReferences()` over `website/src/`                                                                                                                                      | 0 offences — no reference into a withheld path                                                   |
+
+**This record contains no gated marker and no withheld value.** Withheld classes are named by class;
+the private timeline and the locked calendar are not quoted; the scratch scanners live outside the
+repository under `/tmp/t_c4bd0c0d/`.
+
+**Carried coverage gap (not this card's to fix — §11 O11).** The two guard markers are landing-region
+coordinate fragments: a launcher, provider or spaceport name in public copy would fail **no** build
+guard. That is already recorded on the step-004 gate ledger with a named owner; this gate repeats it
+only because the homepage is a public surface a future round could edit.
+
+---
+
+## 11. Non-blocking observations (explicit; each with an owner)
+
+None of these is a material failure and none changes a frozen string. They are recorded so that no
+later reader has to rediscover them.
+
+- **O1 — carried from revision 1: the hero and the roadmap both say "announcement".** Measured from
+  the built page's full anchor inventory (§9.5): `Read the first announcement →` → `#updates`, and
+  `Read the announcement` → `/news/001-…/`. Two honest labels, different targets, different surfaces.
+  The new link adds no ambiguity of its own (`Read the rover design` names its subject), and both
+  roadmap anchors sit inside their step's `<li>`, so WCAG 2.4.4 is met in context. **Owner:** a future
+  homepage pass, if the two are ever reconciled. **Not material.**
+- **O2 — the dev card says "and/or" where the deck links 003 only.** Its requirement 1 offers
+  `routes.newsArticle('001-…')`, `('002-payload-selection')` and `('003-vehicle-design')` "and/or",
+  while the frozen block links step 2 to 003 alone and step 3 to nothing. The card's own first rule
+  ("Transcribe it verbatim; do not reword … or re-scope a string") and its acceptance criterion ("No
+  step links to an unpublished article") resolve it, and the deck is unambiguous. **Owner:**
+  `mars-ai-simulator-dev` on `t_cc2dfd29` — read §8.1 as the source of truth.
+- **O3 — the dev card's validation asks for "at least one" roadmap article link.** The frozen deck
+  links **two** (steps 1 and 2). A dev satisfying the letter of that bullet could ship one. **Owner:**
+  `mars-ai-simulator-dev` on `t_cc2dfd29`; the acceptance criterion ("deck §8 strings are byte-for-byte
+  what the files contain") is the binding one.
+- **O4 — the deck's `simulatedDate` statements are overtaken.** §5/D4's note and §11(e)'s framing were
+  written before the record-date card ran; the three articles carry the field now (§8.3). Working paper
+  only; no public string depends on it. **Owner:** the writer, if this deck is ever revised again.
+  **Not material.**
+- **O5 — decision-count ambiguity, again.** The deck records six decision rows in §0/§5 while its §5
+  heading frames them as D1–D5 plus new ones, and this card's body says "the five decisions the prior
+  round framed … plus any new decision the writer introduces". All are judged above (§4). **Owner:**
+  the writer, working paper only.
+- **O6 — one `surface vehicle` remains on the page by decision.** `missionIntro.description`
+  ("…to the work of its first surface vehicle") — the panel's range statement, not a state claim, and
+  the class name the mission brief already owns. The log says `the rover`. **Owner:** a future homepage
+  pass, if one term throughout is wanted. **Not material.**
+- **O7 — the three states are still three grammatical classes** (`Announced` participle, `In hand`
+  prepositional, `Ahead` adverb). They read as one progression, and each is either sourced or
+  positional; the mix is seen and kept, not missed. **Owner:** none.
+- **O8 — internal stage vocabulary survives in two source comments.** `facts.ts` and `navigation.ts`
+  header comments keep it; the deck deliberately does not touch those files. Source comments only —
+  they never reach `dist/` and the guard does not treat them as gated. **Owner:** a future website
+  hygiene pass. **Not material.**
+- **O9 — the description's ellipsis.** "The programme's steps, in the order it reaches them" elides
+  "in which" and pairs a plural noun with a singular pronoun referent. It is unambiguous, in register,
+  and consistent with the `In hand` label; the fuller alternative ("in the order the programme reaches
+  them") is not worth a corrective on a sentence this clear. **Owner:** the writer, on any future pass.
+- **O10 — measurement integrity (new; the most consequential observation here).** See §9.6: the live
+  hostname served, in order, the shared checkout's build and then a running card's _uncommitted_
+  worktree build, byte-for-byte, while `origin/main` stood still. Any card's "verified live,
+  byte-for-byte" claim made during a shared-machine rebuild window cannot be attributed to a commit on
+  that evidence alone; the check needs the served bytes compared against a _known_ local build (or a
+  deploy identifier) before attribution. **Owner:** `mars-ai-simulator-dev` / the site-deployment
+  practice. **Not a blocker for this gate** (§9.6).
+- **O11 — marker coverage for withheld classes beyond the two coordinates** (§10). **Owner:** already
+  recorded on the step-004 gate ledger; repeated here only for the homepage surface.
+
+---
+
+## 12. Escalated to the human story owner
+
+The writer's §11 list, carried forward with this round's measurements. Each has the fallback this round
+ships under, so nothing here blocks the chain.
+
+- **(a) Step 2 carries no date.** The released record states no date for the mission-architecture work.
+  Should the homepage say anything about _when_ this step happens, and if so from which released
+  sentence? **Fallback shipped:** no date on step 2.
+- **(b) The fact grid's date rows still read `To be announced`** (`facts.ts:24–25`) while the published
+  record carries a 2031 launch window, which this round puts on the same page. Reconciling the grid is
+  out of scope for this card and already routed (`about-method.md` §15 row 5 → `t_a0ee9abf`).
+  **Fallback shipped:** the grid is untouched, and the new sentence keeps 001's "schedule frame …
+  launch window" phrasing so that it states a frame, not a date.
+- **(c) The naming.** eyebrow `Mission roadmap`, nav label `Roadmap`, section id unchanged, title kept.
+  Is that the naming the human wanted? **Fallback shipped:** if the nav label should stay `Progress`, it
+  is a one-string revert in §8.3 and the eyebrow stands alone.
+- **(d) The roadmap links two of the three published articles** (steps 1 and 2); a step holds one link,
+  so linking every published article would need the `link` field widened to a list — a planning
+  decision, not a wording one. **Fallback shipped:** one link per step, with 003 carrying the onward
+  link to 002. **Owner:** the planner/operator, not canon.
+- **(e) Per-step dates, now that the record dates exist.** The human asked for "rough dates if
+  available". One released schedule date exists (step 1's 2031 window); the three published articles are
+  now acquiring in-universe **record dates** (§8.3), which are a different kind of date. Whether a later
+  homepage round puts a record date on each step is an editorial decision this deck may not pre-empt and
+  this gate does not take. **Fallback shipped:** no date anywhere except step 1, and no date invented.
+
+---
+
+## 13. Release decision, and what remains outstanding
+
+**Release decision (recorded here; this is the editorial role's own sentence, not an inference from the
+verdict above).** The fifteen frozen strings of `BLOCK-8.1` + `BLOCK-8.3`, at the hashes recorded in
+§5, are **releasable as public copy for the homepage's `#timeline` section**, conditional only on R1
+(§7) being satisfied in the dev card's implementation. Public scope of this decision: the eyebrow, the
+title, the description, the three steps' state/title/detail, the two roadmap link labels, and the one
+navigation label — nothing else. Under `AGENTS.md` (2026-09-17) the merged editorial role's recorded
+decision is the approval a public deployment needs, and the dev card's push to `main` is the
+publication event, because `main` is wired to the automatic production build.
+
+**What is recorded about a human reference.** The human's instruction for this round _is_ on the record:
+the operator relayed the story owner verbatim — "make planner update 'progress log' section on
+homepage, it does not make sense .. prefer better naming; rough dates if available, clickable links to
+articles" — on the parent planner card `t_5cccaad6`, and the deck quotes it in its metadata. What is
+**not** recorded anywhere is a separate human sentence approving these particular strings. This card's
+item 8 asks this gate to state that "the wording's first public deployment still needs the human's
+release reference": **that template sentence is recorded here as carried but NOT applied**, because the
+2026-09-17 authority change moved releasability and canon confirmation to this role — a package this
+role confirms may go public without a further human sentence. The wording fix for the card's own
+template belongs to the planner, whose card it is; this gate does not edit another role's card. If the
+operator does want a human reference recorded for this surface before the push, nothing is lost: the
+push has not happened, and O2/O3 give the dev a reason to pause and report.
+
+**Outstanding.** (1) Dev transcription on `t_cc2dfd29`, with R1. (2) The five escalations in §12 for the
+human story owner. (3) The record-date publication on `t_1059c973`, whose values this gate records but
+does not verify or set. (4) **No Red Horizon canon is approved by this record** — every state claim in
+the copy is an editorial statement about what the published record supports, reversible by an ordinary
+editorial pass.
+
+---
+
+## 14. Record identity
+
+Second revision of the review record for the `progress-log` slug (§0). Revision 1 remains readable at
+`git show c470741:.agents/work/reviews/progress-log.md`. If a later pass re-checks this package, keep
+this history additive: re-hash the deck and the two frozen blocks first, then state what moved around
+them.
+
+Evidence for a later reader, all outside the repository and re-runnable: `/tmp/t_c4bd0c0d/` —
+`verify3.py` (block and string hashes), `surface.py` (citation re-location, headings, anchor
+inventory), `final_check.py` (verdict-time hashes and route reach), `guard-probe.mjs` (read-only guard
+import, no prune), `sec_local.py` and `diff_chars.py` (live-vs-local comparison), `board2.py` and
+`board3.py` (board and card threads).
 
 ## Final label
 
