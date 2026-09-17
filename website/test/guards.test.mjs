@@ -23,8 +23,8 @@
  * file rule stays in force.
  */
 import { execFile } from 'node:child_process';
-import { existsSync } from 'node:fs';
-import { copyFile, cp, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { existsSync, lstatSync, realpathSync } from 'node:fs';
+import { copyFile, cp, mkdir, mkdtemp, readdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, join, relative, resolve } from 'node:path';
 import { execPath } from 'node:process';
@@ -287,12 +287,41 @@ async function astroBuild(root) {
 }
 
 /**
+ * A `node_modules` directory the fixture owns, holding one symlink per installed
+ * package rather than one symlink to the shared tree.
+ *
+ * A single symlink to `website/node_modules` is not enough: Astro's `cacheDir`
+ * defaults to `./node_modules/.astro`
+ * (`astro/dist/core/config/schemas/defaults.js`), so a fixture root pointing at
+ * the shared tree reads and writes the *shared* content-layer store — the same
+ * store the repository's own build and every other fixture root use. Measured
+ * 2026-09-17: this fixture's three articles landed in that one store, and the
+ * sibling fixture build in the same `vitest run` died rendering this suite's
+ * `903-guard-fixture-published-control` (`UnknownContentCollectionError`).
+ * Linking the packages individually leaves `.astro` to be created inside the
+ * throwaway root, where it is private and removed with the root.
+ */
+async function linkPackages(directory) {
+    const shared = join(websiteDirectory, 'node_modules');
+    await mkdir(directory, { recursive: true });
+
+    for (const entry of await readdir(shared)) {
+        // Dot entries are npm's own bookkeeping and the caches (`.astro`, `.vite`)
+        // whose sharing is the defect; every installed package is a plain name.
+        if (entry.startsWith('.')) continue;
+        await symlink(join(shared, entry), join(directory, entry));
+    }
+}
+
+/**
  * A throwaway project root holding the real site and its own `news/` directory,
  * with the real site build run in it.
  *
  * `src/lib/assets.ts` imports the canonical media from `../../../docs/...`, so
- * the root carries a `docs` symlink beside the copied `website/`; `node_modules`
- * is symlinked rather than copied. Nothing is written inside the repository, and
+ * the root carries a `docs` symlink beside the copied `website/`; the packages
+ * are linked in one by one rather than the shared `node_modules` being
+ * symlinked, so the content-layer cache is the fixture's own (see
+ * `linkPackages`). Nothing is written inside the repository, and
  * `temporaryDirectories` removes the whole root in `afterAll`.
  */
 async function buildFixtureProject() {
@@ -304,7 +333,7 @@ async function buildFixtureProject() {
         await cp(join(websiteDirectory, entry), join(site, entry), { recursive: true });
     }
     await symlink(join(projectDirectory, 'docs'), join(root, 'docs'), 'dir');
-    await symlink(join(websiteDirectory, 'node_modules'), join(site, 'node_modules'), 'dir');
+    await linkPackages(join(site, 'node_modules'));
 
     const news = join(site, 'news');
     await mkdir(news, { recursive: true });
@@ -431,6 +460,41 @@ describe('withheld material in the build output', () => {
         const detailRoutes = routes.filter((route) => /^\/news\/.+\/index\.html$/.test(route));
         expect(detailRoutes.sort()).toEqual(published.map((slug) => `/news/${slug}/index.html`).sort());
     });
+
+    /*
+     * The fixture build must not read or write another build's content-layer
+     * store. Astro's `cacheDir` is `./node_modules/.astro` under the project
+     * root, so a whole-tree symlink to the shared `website/node_modules` put
+     * every fixture root — and the repository's own build — on one store, where
+     * two fixture builds in one run fed each other's `news` entries and the
+     * later one died (`UnknownContentCollectionError`, measured 2026-09-17).
+     * A case rather than a line inside the builder: a builder that quietly
+     * stopped isolating its cache would otherwise only show up as the next
+     * fixture build failing, somewhere else.
+     */
+    it.runIf(hasBuild)("keeps the fixture build's content-layer cache inside its throwaway root", async () => {
+        const fixture = await fixtureBuild();
+        const nodeModules = join(fixture.site, 'node_modules');
+
+        expect(
+            lstatSync(nodeModules).isSymbolicLink(),
+            'the fixture root points at the shared website/node_modules',
+        ).toBe(false);
+
+        const cache = realpathSync(join(nodeModules, '.astro'));
+        expect(cache.startsWith(fixture.root), `the fixture's content-layer cache is ${cache}`).toBe(true);
+        expect(
+            cache.startsWith(websiteDirectory),
+            `the fixture's content-layer cache is the shared one: ${cache}`,
+        ).toBe(false);
+
+        // Non-vacuity: the cache is the one this fixture build wrote, and it
+        // holds this fixture's own articles rather than any other build's.
+        const store = await readFile(join(cache, 'data-store.json'), 'utf8');
+        expect(store, 'the fixture build wrote no content-layer store of its own').toContain(
+            fixturePublishedControl.slug,
+        );
+    }, fixtureBuildTimeout);
 
     it.runIf(hasBuild)('keeps every unpublished article body out of the build', async () => {
         const fixture = await fixtureBuild();
