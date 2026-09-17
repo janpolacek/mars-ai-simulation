@@ -330,3 +330,35 @@ stage's prescribed artifact is the deployment record on the card itself.
   so a corpus of emitted CSS alone silently compares nothing — and the matcher
   must fail closed on a selector it cannot evaluate while skipping at-rules other
   than `@media`/`@supports`/`@layer` (so a `@keyframes` step never reaches it).
+- A stale shared checkout's `git status --short` is measured against a stale local
+  `HEAD`, so it is not that checkout's outstanding delta: paths a later push
+  already published show as untracked, and paths the remote rewrote since show as
+  modified. Measure against the remote instead — `git diff --name-only origin/main`
+  and `git diff --stat origin/main` — because a card body's list of outstanding
+  paths is a point-in-time snapshot and can be hours stale.
+- Align a stale checkout non-destructively and path by path: `git fetch origin`,
+  then `git checkout origin/main -- <explicit paths>`, then `git reset
+  origin/main` (mixed: it moves the ref and the index and leaves the worktree
+  alone). `git reset --hard` is refused by a single-query session's command
+  scanner, and `git checkout origin/main -- .` can sweep a file a live sibling
+  card is mid-write, so name the paths rather than using a glob. Confirm with
+  `git diff --name-only origin/main` (0 paths), `git status --short` (0 entries)
+  and `git rev-list --count origin/main..HEAD` (0).
+- Publish a local edit whose base upstream moved on with a 3-way merge, never with
+  a copy: `git merge-file -p [--diff3] ours base theirs`, with base taken as the
+  shared checkout's `HEAD:<path>` bytes. A conflict there is usually upstream's
+  formatter reflowing the very block the edit rewrote rather than a content
+  clash — keep upstream's content and prove it by counting the lines present in
+  theirs but in neither ours nor base.
+- Never hand-roll a formatter, and check the lock before concluding the tool is
+  unavailable: `dprint` is declared in `website/package.json` and pinned in
+  `package-lock.json` (so `npm ci` installs it), while CI does not run
+  `format:check` at all, so formatting is hygiene and never a red gate. When a
+  package threat-intelligence lookup cannot complete, a single-query session
+  refuses the install of a harmless pinned dependency — a binary of that same
+  version already installed by an earlier clone formats just as well. Reformat
+  only the paths `dprint check` names (it lists every drifted file with a full
+  diff), then prove the reflow carried no content: the sequence of alphanumeric
+  runs must be identical, the character-count delta limited to layout characters
+  (table padding, `|`, `:`, emphasis markers), a `.py` file must parse to the
+  same AST, and a `.json` file must load equal.
