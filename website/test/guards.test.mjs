@@ -29,6 +29,8 @@ import {
     gatedSourceDirectories,
     gatedTextMarkers,
     listFiles,
+    listGeneratedRoutes,
+    listPassthroughRoutes,
     listRoutes,
     projectDirectory,
     scanSourceForGatedReferences,
@@ -350,12 +352,23 @@ describe('route identity', () => {
      * Two routes once shipped one document title: `/` and `/news/` both rendered
      * the site default, so the two pages competed for one identity in a result
      * list. The defect survived a build and a test suite because nothing
-     * asserted it. This is that assertion — every generated route carries its
-     * own non-empty `<title>`, so a page that forgets to pass one fails here
+     * asserted it. This is that assertion — every route a page generated carries
+     * its own non-empty `<title>`, so a page that forgets to pass one fails here
      * instead of shipping.
+     *
+     * The assertion runs over `listGeneratedRoutes()`, not over every `.html`
+     * under `dist/`. Astro copies `website/public/` into the output byte for
+     * byte, so those files are *served*, not generated: their content is authored
+     * outside the page pipeline, no layout or route can give them a `<title>`,
+     * and the file that surfaced this — `googlef5c43421bd049659.html`, the
+     * Google Search Console verification file whose whole content is prescribed
+     * by that verification method — has none by design. Asserting a title over
+     * the served set failed on a document no author may change. The separation
+     * is itself asserted below, so narrowing this route set is not a way to pass
+     * this block: two generated routes that ship one title still fail here.
      */
     it.runIf(hasBuild)('gives every generated route a distinct, non-empty title', async () => {
-        const routes = await listRoutes();
+        const routes = await listGeneratedRoutes();
         expect(routes.length).toBeGreaterThan(0);
 
         const seen = new Map();
@@ -367,6 +380,26 @@ describe('route identity', () => {
             expect(seen.has(title), `${route} shares its title with ${seen.get(title)}: ${title}`).toBe(false);
             seen.set(title, route);
         }
+    });
+
+    it.runIf(hasBuild)('counts a verbatim public/ copy as served, not as a generated route', async () => {
+        const routes = await listRoutes();
+        const generated = await listGeneratedRoutes();
+        const served = (await listPassthroughRoutes()).filter((route) => route.endsWith('.html'));
+
+        // Non-vacuity: the document this defect surfaced on is a permanent member
+        // of the served set while the human's Search Console verification depends
+        // on it living at exactly that path, so this loop has something to check.
+        expect(served.length).toBeGreaterThan(0);
+
+        for (const route of served) {
+            expect(routes, `${route} is in website/public/ but missing from the build output`).toContain(route);
+            expect(generated, `${route} is served from website/public/, not generated`).not.toContain(route);
+        }
+
+        // The generated set is the whole route set minus the served set — a rule,
+        // not a hand-maintained allowlist that could quietly excuse a real page.
+        expect(generated.sort()).toEqual(routes.filter((route) => !served.includes(route)).sort());
     });
 });
 
