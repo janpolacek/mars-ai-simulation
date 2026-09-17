@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 
 import { render } from 'astro:content';
 
+import { simulatedDateText } from '../../lib/simulated-date';
 import { resolveNewsMedia } from './media';
 import MediaPlates from './MediaPlates.astro';
 import { isPlateSet, plateAltText } from './plates';
@@ -12,11 +13,18 @@ import { isPlateSet, plateAltText } from './plates';
  * body. A set that resolves to one plate renders as the lead figure; a set with
  * two or more plates (`asteria-plates`) renders as a labelled plate block, so a
  * multi-plate key cannot fall back to one image and drop the rest.
+ *
+ * The simulated record date is a line of the header, and it is stated under the
+ * label `src/lib/simulated-date.ts` owns rather than as a bare date: a date on a
+ * public article reads as a publication date unless the surface says otherwise.
+ * An article with no value renders no line, which is the state of every article
+ * until `mars-ai-simulator-editor` assigns one.
  */
 const { item } = Astro.props;
 const media = resolveNewsMedia(item.data.media);
 const plateSet = media ? isPlateSet(media) : false;
 const leadPlate = media?.plates[0];
+const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simulatedDate) : undefined;
 const { Content } = await render(item);
 ---
 
@@ -25,6 +33,7 @@ const { Content } = await render(item);
         <p class="card-kicker">{item.data.category} <span>·</span> {item.data.status}</p>
         <h1 id="article-title">{item.data.title}</h1>
         <p class="article-summary">{item.data.summary}</p>
+        {simulatedDate && <p class="article-date">{simulatedDate}</p>}
     </header>
 
     {media && leadPlate && !plateSet && (
@@ -95,6 +104,20 @@ const { Content } = await render(item);
     color: var(--rh-text-muted);
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.65;
+}
+
+/*
+ * The simulated record date. Sentence case, not the site's uppercase label
+ * treatment: the label's own wording ("Simulated record date") is what tells the
+ * reader the value is inside the fiction, and uppercasing it would restyle the
+ * words `mars-ai-simulator-editor` fixed without changing them. Muted and small,
+ * so it reads as metadata rather than as part of the article's opening.
+ */
+.article-date {
+    margin: 1.35rem 0 0;
+    color: var(--rh-text-faint);
+    font-size: 0.8rem;
+    line-height: 1.5;
 }
 
 .article-media {

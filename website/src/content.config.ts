@@ -3,6 +3,7 @@ import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 
 import { newsMediaIssues } from './lib/media';
+import { simulatedDatePattern } from './lib/simulated-date';
 import { wikiSections } from './lib/wiki-query';
 
 const news = defineCollection({
@@ -20,6 +21,28 @@ const news = defineCollection({
              * held back rather than published.
              */
             publication: z.enum(['draft', 'published']).default('draft'),
+            /**
+             * The simulated record date: the date, inside the fiction, on which
+             * the article was written, as a `YYYY-MM-DD` calendar date from the
+             * locked milestone table in `docs/SCENARIO.md`.
+             *
+             * Optional on purpose. `mars-ai-simulator-editor` assigns and
+             * verifies the value, and the release that first carries one supplies
+             * it, so an article that has none yet is valid — and a required field
+             * would force a value this schema is not allowed to invent (a date
+             * the milestone table does not hold is new scenario canon).
+             *
+             * Both shapes the YAML frontmatter can deliver are accepted: the
+             * quoted string, and the `Date` a parser produces from an unquoted
+             * `2026-10-12` (`js-yaml` resolves a bare date at UTC midnight), so
+             * the field cannot fail the build over how an author quoted it.
+             * `src/lib/simulated-date.ts` normalises either shape into the same
+             * public wording.
+             *
+             * This is a date inside the fiction, never a real publication date:
+             * nothing machine-readable is derived from it (`src/lib/seo.ts`).
+             */
+            simulatedDate: z.union([z.string().regex(simulatedDatePattern), z.date()]).optional(),
             summary: z.string(),
             linkLabel: z.string(),
             order: z.number().int().nonnegative(),

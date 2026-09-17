@@ -2,6 +2,7 @@
 import { getImage, Image } from 'astro:assets';
 
 import { routes } from '../../lib/navigation';
+import { simulatedDateText } from '../../lib/simulated-date';
 import { resolveNewsMedia } from './media';
 import { plateAltText } from './plates';
 
@@ -43,6 +44,14 @@ const plateFillStyle = plateFill ? `--plate-fill: url('${plateFill}')` : undefin
  * `a.card-label` styles below carry the hover and `:focus-visible` treatment.
  */
 const articleHref = routes.newsArticle(item.id);
+/**
+ * The simulated record date, in the same wording the article page states (one
+ * module owns it), or `undefined` for an item that has none — the card then
+ * renders no line at all, so a card can never show a date its article does not.
+ * It sits under the summary, beside the card's link, where the card's metadata
+ * ends: the reader sees it without it displacing the teaser's own text.
+ */
+const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simulatedDate) : undefined;
 ---
 
 <article
@@ -76,6 +85,7 @@ const articleHref = routes.newsArticle(item.id);
         <p class="card-kicker">{item.data.category} <span>·</span> {item.data.status}</p>
         {headingLevel === 2 ? <h2>{item.data.title}</h2> : <h3>{item.data.title}</h3>}
         <p>{item.data.summary}</p>
+        {simulatedDate && <p class="news-date">{simulatedDate}</p>}
         <a class="card-label" href={articleHref}>{item.data.linkLabel}</a>
     </div>
 </article>
@@ -285,6 +295,19 @@ const articleHref = routes.newsArticle(item.id);
     color: var(--rh-text-muted);
     font-size: 1rem;
     line-height: 1.65;
+}
+
+/*
+ * The simulated record date's line on the card, in the wording the article page
+ * states. Same specificity as the summary rule above and later in the sheet, so
+ * it decides its own colour and size without an `!important` or a nested
+ * selector; the card's flex column gives it its spacing.
+ */
+.news-copy p.news-date {
+    margin: 1.25rem 0 0;
+    color: var(--rh-text-faint);
+    font-size: 0.8rem;
+    line-height: 1.5;
 }
 
 .card-label {
