@@ -2,6 +2,8 @@
 import mdx from '@astrojs/mdx';
 import { defineConfig } from 'astro/config';
 
+import { mediaScope } from './scripts/media-scope.mjs';
+
 /**
  * The production origin is deliberately not hard-coded: no domain, provider
  * project, or public URL has been authorised yet (`docs/PLAN.md`, "Deployment
@@ -22,7 +24,7 @@ const userConfig = {
     output: 'static',
     // Directory routes with a trailing slash: `/news/` and `/news/<slug>/`.
     trailingSlash: 'always',
-    integrations: [mdx()],
+    integrations: [mdx(), mediaScope()],
 };
 
 if (site) userConfig.site = site;
