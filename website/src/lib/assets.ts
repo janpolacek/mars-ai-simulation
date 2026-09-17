@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
+import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import asteriaMarsLocatorSource from '../../../docs/area/asteria-field-01-mars-locator.png';
 import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-regional-context.png';
@@ -24,6 +25,25 @@ import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-re
  * anywhere in the site source.
  */
 export const identityMark: ImageMetadata = identityMarkSource;
+
+/**
+ * The transparent-background variant of the approved mark, for the homepage
+ * hero only.
+ *
+ * `Hero.astro` stacks the mark over the page field and the two `.hero-orbit`
+ * rings, where the black-field square reads as a hard edge; the rest of the
+ * mark is identical, so the homepage uses this variant. It is derived
+ * mechanically from `identityMark` — never redrawn, re-rendered or cropped —
+ * by `scripts/derive-identity-mark.mjs`, and its recipe, hash and fidelity
+ * measurement are recorded in `docs/brand/BRAND.md` §Transparent variant
+ * (human instruction 2026-09-17, card `t_183d9f11`).
+ *
+ * Every other placement — the site header, the splash screen and the news
+ * `programme-identity` media key — keeps the black-field `identityMark`: the
+ * human decision of 2026-09-17 is homepage-hero only, and each further public
+ * placement is its own decision under BRAND.md's Publication boundary.
+ */
+export const identityMarkTransparent: ImageMetadata = identityMarkTransparentSource;
 
 /**
  * The Asteria Field map plates (AF-01, AF-02, AF-03), imported from their

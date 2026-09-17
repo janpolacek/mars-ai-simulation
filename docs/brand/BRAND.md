@@ -26,6 +26,43 @@ approved mark above plus its SHA-256 is the durable record. Approval, refinement
 validation were recorded in the retired issue tracker as `mars-ai-simulator-2tm`; that pre-kanban
 history is archived read-only at `docs/beads-archive.jsonl`.
 
+## Transparent variant
+
+The homepage hero places the mark over the page field and the two orbit rings,
+where the black-field square reads as a hard edge, so the hero uses a
+transparent variant derived mechanically from the approved source:
+[`logo-transparent.png`](logo-transparent.png), a 1254 × 1254 PNG of 906,047 B
+with SHA-256
+`990cc5556a9aa969f05c1d0a65374dd282e28fac0ad86479413616518ae68813`, derived from
+`logo-bg-black.png` (SHA-256 `f9543989…` above).
+
+**Derivation recipe — un-composite against the field, never redraw.** The
+approved source is the mark composited over the void black `#010000`, so every
+pixel comes back to straight alpha. Per pixel, with `m = max(R, G, B)`:
+
+- `alpha = m / 255`
+- `colour = (P − #010000 × (1 − alpha)) / alpha`, clamped to `0…255`
+
+Recomposited over `#010000`, the variant reproduces the approved source within
+1 LSB per channel: the measured maximum is 1 LSB, on the red channel of 682,385
+darkest field pixels (alpha ≤ 10), and 0 pixels differ by more than 2. No
+generative tool touches it; the recipe is executable as
+`website/scripts/derive-identity-mark.mjs`
+and `website/test/identity-mark.test.mjs` re-measures the fidelity of the
+shipped file and fails the same measurement on the rejected derivative.
+
+**Alt text (transparent variant):** _A rust-red Mars disc crossed by low
+highlighted hills. A small Sun rises behind its upper-left edge, while blue
+Earth and a smaller Moon point appear at upper right._
+
+**Review and release reference:** commissioned by the human story owner on
+2026-09-17 — “replace logo on homepage with one with a transparent background” —
+and confirmed the same day as homepage-hero only (kanban card `t_183d9f11`).
+The site header, the splash screen and the news `programme-identity` media key
+keep the black-field source above, unchanged. This derivation is a local site
+change: a public deployment still needs the separate human release decision
+described under **Publication boundary** below.
+
 ## Core composition
 
 - **Mars is the principal circle.** It must remain visually distinct from the
