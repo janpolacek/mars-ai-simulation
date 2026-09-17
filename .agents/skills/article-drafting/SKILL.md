@@ -20,9 +20,11 @@ create media, or deploy.
 
 Prepare only `website/news/<slug>.mdx`. Preserve its stable front matter and set
 `publication: draft` until a human authorises publication; the website filters
-drafts out. Use clear Markdown/MDX, link sources naturally, and distinguish
-real-world facts from the fictional, AI-assisted Red Horizon project when
-relevant.
+drafts out. Leave the simulated record date (`simulatedDate`) unset: the
+editorial gate assigns it from the milestone table in `docs/SCENARIO.md`, and a
+date chosen at drafting is new scenario canon, which no drafting role owns. Use
+clear Markdown/MDX, link sources naturally, and distinguish real-world facts from
+the fictional, AI-assisted Red Horizon project when relevant.
 
 Reject uncited material claims, a conflict with the brief/source pack/canon, or
 missing required metadata. Acceptance checks: title and body match the brief;

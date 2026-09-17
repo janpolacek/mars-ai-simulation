@@ -35,6 +35,34 @@ same pass (chronology, canon consistency, plausibility, spoiler safety — recor
 public scope, and the release decision as a card comment (`hermes kanban comment <id> "..."`)
 and in `.agents/work/reviews/<slug>.md` before `hermes kanban complete`.
 
+## The simulated record date
+
+Every published article carries exactly one **simulated record date** — the date, inside the
+fiction, on which the article was written. This role owns it: no writer, SEO, visuals or technical
+role decides it, and the article's real repository history is not part of it. It is a frontmatter
+field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same surface as the
+`publication` flip and needs no separate card.
+
+1. Read the milestone table in `docs/SCENARIO.md` ("Launch and mission dates") and pick the
+   milestone the article's released timeline step covers — step 001 the programme announcement and
+   charter, step 002 the payload and concept-review work, step 003 the design freeze, and the
+   matching milestone for each later step.
+2. Use a date that table actually holds. "Roughly matching the timeline" means the item sits on a
+   locked milestone in the timeline's order — never an invented day, month, or year that merely
+   looks plausible. If no locked milestone fits the step, leave the field unset and name the gap on
+   the card; do not fill it from imagination, because inventing a calendar date is new scenario
+   canon and belongs to the human story owner (`docs/timeline/README.md` says the same).
+3. Check the value before you apply it: it implies no event the step has not released; it cannot be
+   read as a launch, landing, or other withheld mission date; it contradicts no sentence already
+   public (an article that says "no launch or landing date has been stated" still holds, because a
+   record date is not a mission date); and the articles stay in timeline order by the dates they
+   carry, not only by their `order` field.
+4. Verify the published surface, not only the file: the built `/news/<slug>/` page states the date,
+   every label or string around it presents it as part of the fiction, and it is nowhere presented
+   as a real publication date, a `datePublished`, or a `lastmod`.
+5. Record the value and the `docs/SCENARIO.md` line it came from in
+   `.agents/work/reviews/<slug>.md`, and name both in the release decision and the card comment.
+
 ## Verified practice
 
 - Verify the published surface, not only the article file. An MDX body can pass
@@ -306,5 +334,12 @@ and in `.agents/work/reviews/<slug>.md` before `hermes kanban complete`.
   card that the decision is recorded and that the build card applies it, so no second, divergent flip
   appears later.
 
+- The **record date** field may not exist yet in the schema, and an article published before it did
+  carries no value. That is a gap to fill, not a pass: check `src/content.config.ts` for the field
+  before asserting one, and where it is missing, route the schema-and-render work to the technical
+  role instead of writing a field the build will reject. A frontmatter key the schema does not
+  declare is a build failure, not a harmless extra.
+
 Acceptance checks: every review-table row passes, the record's final status is
-`approved`, and no material failure remains unresolved.
+`approved`, the article carries one `simulatedDate` drawn from a milestone line in
+`docs/SCENARIO.md` with that line named in the record, and no material failure remains unresolved.

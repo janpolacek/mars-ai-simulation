@@ -15,7 +15,9 @@ terminology.
 
 Do not rewrite factual claims based on guesswork, silently change dates or event
 order, remove required fictional/AI disclosure, or approve release readiness on
-evidence you have not checked.
+evidence you have not checked. The article's simulated record date
+(`simulatedDate`) is the editorial gate's value: flag a date you doubt, never
+adjust one.
 List material factual ambiguities and editorial choices that the editorial gate must settle,
 and name any claim that would need canon the human story owner has not yet released.
 Preserve Markdown semantics and links unless an edit improves them.

@@ -36,6 +36,13 @@ services without a separate current human instruction.
 - Editorial approval is required before technical validation, and that approval is
   the release decision: `mars-ai-simulator-editor` confirms canon and records the
   release, so no separate human approval is needed before a public deployment.
+- Every published news article carries one **simulated record date** — the date, inside
+  the fiction, on which the article was written. It is the frontmatter field `simulatedDate`,
+  and `mars-ai-simulator-editor` alone assigns and verifies it, from the milestone table in
+  `docs/SCENARIO.md` for the step being released. A date that table does not hold is new
+  scenario canon and stays with the human story owner; a missing value is a gap to name, not
+  a value to invent. The published surface states the date under a label that presents it as
+  part of the fiction, never as a real publication date or as a search-engine date.
 - Do not overwrite another worker's artifact without a kanban-linked corrective
   card. Record paths, URLs, commands, and verification results before closing.
 

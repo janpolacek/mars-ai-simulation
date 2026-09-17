@@ -70,6 +70,11 @@ and a human-selected result copied back into `docs/` afterwards.
   real agency partnership or endorsement.
 - Preserve earlier public facts. Corrections must be explicit, dated, and reviewed
   rather than silently replacing the record.
+- A public news article's date of writing is a **simulated, in-universe date**, not the
+  article's repository history. The merged editorial role assigns it from the locked
+  milestone table in `docs/SCENARIO.md`, the frontmatter carries it (`simulatedDate`), and the
+  page labels it as part of the fiction. Never present it as a real publication date, never
+  derive it from git history, and never invent a date the locked scenario does not hold.
 
 ## Quality baseline
 

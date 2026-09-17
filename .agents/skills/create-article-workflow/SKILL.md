@@ -45,7 +45,7 @@ hermes kanban create "Research source pack: <slug>" \
 hermes kanban create "Draft article: <slug>" --parent <RESEARCH> \
   --assignee mars-ai-simulator-writer \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: draft. Read the brief and source pack; prepare website/news/<slug>.mdx. Acceptance: the article preserves draft status and traces every material claim to the source pack."
+  --body "Stage: draft. Read the brief and source pack; prepare website/news/<slug>.mdx. Acceptance: the article preserves draft status and traces every material claim to the source pack. Leave the simulated record date unset: the editorial gate assigns it from docs/SCENARIO.md, and a value chosen here is not binding."
 
 hermes kanban create "SEO pass: <slug>" --parent <DRAFT> \
   --assignee mars-ai-simulator-seo \
@@ -60,12 +60,12 @@ hermes kanban create "Create visual assets: <slug>" --parent <SEO> \
 hermes kanban create "Editorial final gate: <slug>" --parent <IMAGES> \
   --assignee mars-ai-simulator-editor \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: review. The merged editorial role runs the continuity check and the editorial gate in one pass: read the draft, the source pack, the SEO package, the asset manifest, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, and spoiler safety, then the copy and the published surface. Write the continuity verdict to .agents/work/continuity/<slug>.md and the review to .agents/work/reviews/<slug>.md, and record the release decision on this card. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, the review is approved with no unresolved material failure, and the release decision names the exact public scope."
+  --body "Stage: review. The merged editorial role runs the continuity check and the editorial gate in one pass: read the draft, the source pack, the SEO package, the asset manifest, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, and spoiler safety, then the copy and the published surface. Assign the article's simulated record date (frontmatter simulatedDate) from the milestone table in docs/SCENARIO.md that the released step covers, verify it on the built page, and name the milestone line in the record. Write the continuity verdict to .agents/work/continuity/<slug>.md and the review to .agents/work/reviews/<slug>.md, and record the release decision on this card. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, the article carries a record date drawn from a locked milestone line, the review is approved with no unresolved material failure, and the release decision names the exact public scope."
 
 hermes kanban create "Build and deploy: <slug>" --parent <REVIEW> \
   --assignee mars-ai-simulator-dev \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: deploy. Validate locally after the recorded editorial release decision; record the build result or the exact deployment blocker. Acceptance: build, guard, and preview pass, the release decision is recorded on the review card, and the flip is pushed with a verified URL."
+  --body "Stage: deploy. Validate locally after the recorded editorial release decision; record the build result or the exact deployment blocker. Acceptance: build, guard, and preview pass, the release decision is recorded on the review card, the built page states the article's simulated record date under its in-fiction label, and the flip is pushed with a verified URL."
 
 hermes kanban link <RESEARCH> <DRAFT>
 hermes kanban link <DRAFT> <SEO>
@@ -144,6 +144,22 @@ moment:
 - Create exactly one IMAGES card per article, and never two image cards that can
   become ready at once: one local 8 GB GPU serialises generations, each taking
   minutes.
+
+## Record dates in the graph
+
+Every published news article carries one **simulated record date**: the date, inside the fiction,
+on which the article was written. The field is `simulatedDate` in the article frontmatter, and the
+editorial gate owns its value — it draws the date from the milestone table in `docs/SCENARIO.md`
+("Launch and mission dates") for the step being released, because inventing a calendar date is new
+scenario canon and stays with the human story owner.
+
+The coordinator's duties are only these: the DRAFT card says the writer must leave the field unset,
+the REVIEW card requires the value and the milestone line it came from, and the DEPLOY card checks
+the built page states it under its in-fiction label. Never let a card body carry a date of its own:
+a planner-chosen date would be exactly the invented canon this rule forbids, and the card would then
+prescribe a value the gate has to overrule. Where the site has no field for it yet, the schema-and-
+render work is a separate technical card, and the review card for an article that predates the field
+routes it there rather than writing a frontmatter key the build rejects.
 
 ## Dispatch a ready card
 
