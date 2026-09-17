@@ -206,16 +206,23 @@ a second article.
 
 ## Commands
 
-| Command              | Result                                                         |
-| -------------------- | -------------------------------------------------------------- |
-| `npm run dev`        | Start Astro locally.                                           |
-| `npm run build`      | Build static output in `dist/`, then run the build guard.      |
-| `npm run preview`    | Serve the last production build locally.                       |
-| `npm run check:dist` | Run the build guard against the existing `dist/`.              |
-| `npm run typecheck`  | `astro check` — types for `.astro`/`.ts` including the config. |
-| `npm run test`       | `vitest run` — the guard suite.                                |
-| `npm run lint`       | `eslint .`                                                     |
-| `npm run format`     | `dprint fmt` over the repository (`dprint.json` at the root).  |
+| Command                | Result                                                                   |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `npm run dev`          | Start Astro locally.                                                     |
+| `npm run build`        | Build static output in `dist/`, then run the build guard.                |
+| `npm run preview`      | Serve the last production build locally.                                 |
+| `npm run check:dist`   | Run the build guard against the existing `dist/`.                        |
+| `npm run typecheck`    | `astro check` — types for `.astro`/`.ts` including the config.           |
+| `npm run test`         | `vitest run` — the guard suite.                                          |
+| `npm run lint`         | `eslint .`                                                               |
+| `npm run format`       | `dprint fmt` over the repository (`dprint.json` at the root).            |
+| `npm run format:check` | `dprint check` over the repository — reports offences, rewrites nothing. |
+
+Both format commands cover the whole repository, not only `website/`: the configuration is
+`dprint.json` at the root. `dprint` is the pinned dev dependency `dprint@0.57.4`, so `npm ci`
+(or `npm install`) is the only install step; the plugins listed in `dprint.json` download on the
+first run. `format:check` exits 20 while anything is unformatted, and the tracked tree is not
+formatter-clean today — a repository-wide reflow belongs in its own change.
 
 ## Runtime
 

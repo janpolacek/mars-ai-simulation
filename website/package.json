@@ -13,7 +13,8 @@
         "astro": "astro",
         "check:dist": "node scripts/check-dist.mjs",
         "lint": "eslint .",
-        "format": "print fmt ../",
+        "format": "dprint fmt ../",
+        "format:check": "dprint check ../",
         "typecheck": "astro check",
         "test": "vitest run"
     },
@@ -25,6 +26,7 @@
         "@astrojs/check": "^0.9.10",
         "@eslint/js": "^9.39.5",
         "@vitest/ui": "^5.0.1",
+        "dprint": "0.57.4",
         "eslint": "^9.39.5",
         "eslint-plugin-astro": "^1.7.0",
         "typescript": "^5.9.3",

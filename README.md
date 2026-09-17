@@ -65,7 +65,8 @@ mission photography. How the harness works is documented in [docs/HARNESS.md](do
 - **Node 26.8.2** — pinned in [`website/.node-version`](website/.node-version) and selected
   with `fnm`.
 - **Quality gates** — `astro check` (types), `vitest` (tests), `eslint` (lint), `dprint`
-  (format, configured in [`dprint.json`](dprint.json)), and the build guard
+  (format, configured in [`dprint.json`](dprint.json) and provided by `npm install` from the
+  pinned `dprint` dev dependency), and the build guard
   [`website/scripts/check-dist.mjs`](website/scripts/check-dist.mjs), which fails a build
   that carries withheld material and prunes it from the output.
 
@@ -100,7 +101,22 @@ npm run build     # static build into dist/, then the build guard (postbuild)
 npm run typecheck # astro check
 npm test          # vitest
 npm run lint      # eslint
+npm run format:check # dprint check (see below)
 ```
+
+The formatter is configured at the repository root, so it runs over the whole tree rather than
+the site alone:
+
+```sh
+npm run format:check # dprint check — reports offences, rewrites nothing
+npm run format       # dprint fmt — applies them
+```
+
+`dprint` comes from the `dprint` dev dependency pinned in
+[`website/package.json`](website/package.json), so `npm install` provides it; the plugins pinned
+in [`dprint.json`](dprint.json) download on the first run. The tracked tree still carries files
+`dprint` would reformat, so run `format:check` to see the current state — a repository-wide
+reflow is its own change, not part of an unrelated one.
 
 The public origin is a build input, not a constant. `website/astro.config.mjs` reads
 `SITE_URL` and emits no canonical link when it is unset, so a release build supplies it:
