@@ -405,3 +405,19 @@ stage's prescribed artifact is the deployment record on the card itself.
   runs must be identical, the character-count delta limited to layout characters
   (table padding, `|`, `:`, emphasis markers), a `.py` file must parse to the
   same AST, and a `.json` file must load equal.
+- **A working paper whose recorded hashes are cited elsewhere gets published as
+  authored, not reflowed.** When a card publishes `.agents/work/` papers that `dprint check`
+  flags (exit 20: a hand-rewritten Markdown table the plugin wants re-padded), the
+  pre-commit hook rewrites the bytes it publishes — and those bytes are usually the
+  revision the owning card recorded and that its sibling papers and card comments
+  cite by sha256 and byte count. Measured 2026-09-17 on card `t_7e3b87f4`: a reflow
+  would have moved 6,501 B over 87 lines of the writer deck (`8fc9a181…` /
+  59,689 B) and 9,585 B over 238 lines of the SEO paper (`424a44ff…` / 35,380 B),
+  falsifying six board comments across four cards — including a release-authorising
+  gate's PASS rows — in the very commit that published them. Decide explicitly and
+  say which you chose: `git commit --no-verify` preserves the recorded revisions
+  (alphanumeric-run sequences are identical either way, so no word changes), then
+  report each published path's `dprint check` status; accept the reflow only where
+  no recorded hash or byte count keys on the file. Measure the candidate reflow on
+  scratch copies (`dprint fmt --config <repo>/dprint.json <copy>`), never in the
+  shared tree, and never `git stash` or reset the shared checkout to get there.
