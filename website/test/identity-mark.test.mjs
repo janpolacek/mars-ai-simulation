@@ -176,9 +176,16 @@ describe('the homepage hero renders the transparent variant', () => {
             expect(srcOf(header), `the header on /${route} left the approved black-field mark`).toMatch(
                 /\/_astro\/logo-bg-black\..*\.webp$/,
             );
-            expect(srcOf(splash), `the splash on /${route} left the approved black-field mark`).toMatch(
-                /\/_astro\/logo-bg-black\..*\.webp$/,
-            );
+
+            // The splash is homepage-only (card `t_704ceab5`), so its mark is
+            // asserted where the element exists and its absence everywhere else.
+            if (route === 'index.html') {
+                expect(srcOf(splash), `the splash on /${route} left the approved black-field mark`).toMatch(
+                    /\/_astro\/logo-bg-black\..*\.webp$/,
+                );
+            } else {
+                expect(splash, `/${route} still renders the splash element`).toBeUndefined();
+            }
 
             if (route !== 'index.html') {
                 expect(html, `/${route} renders the hero's transparent variant outside the homepage`).not.toContain(

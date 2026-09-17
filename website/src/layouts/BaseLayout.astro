@@ -9,16 +9,26 @@ import { canonicalUrl } from '../lib/seo';
 import { site } from '../lib/site';
 
 /**
- * Site shell: document head, splash, page column, and the chrome a page composes
- * around its own sections. `title` and `description` default to the site strings
- * already in use.
+ * Site shell: document head, optional splash, page column, and the chrome a page
+ * composes around its own sections. `title` and `description` default to the site
+ * strings already in use.
  *
  * `noindex` is the head opt-out the error route needs: it suppresses the
  * canonical link (the pathname an error page is served under is not a URL the
  * document owns) and marks the page `robots: noindex`. `404.astro` is the only
  * page that sets it — no other route may.
+ *
+ * `splash` is the homepage's opt-in for the loading screen: it decides both the
+ * `<SplashScreen />` element and the `is-loading` body class that holds the page
+ * back until the splash retracts. It defaults to `false`, so a route that says
+ * nothing inherits no splash and is revealed by CSS alone (`layout.css`).
+ * `src/pages/index.astro` is the only page that sets it, which is what keeps the
+ * splash on exactly `/` — the gate is a prop, not a pathname comparison, so it
+ * cannot misfire under `trailingSlash: 'always'`, `build.format`, or a differently
+ * normalised `Astro.url.pathname` during the build.
  */
-const { title = site.defaultTitle, description = site.defaultDescription, noindex = false } = Astro.props;
+const { title = site.defaultTitle, description = site.defaultDescription, noindex = false, splash = false } =
+    Astro.props;
 
 const canonical = noindex ? undefined : canonicalUrl(Astro.url.pathname, Astro.site);
 ---
@@ -36,8 +46,8 @@ const canonical = noindex ? undefined : canonicalUrl(Astro.url.pathname, Astro.s
         {noindex && <meta name="robots" content="noindex" />}
         <title>{title}</title>
     </head>
-    <body class="is-loading">
-        <SplashScreen />
+    <body class={splash ? 'is-loading' : undefined}>
+        {splash && <SplashScreen />}
 
         <main id="main-content" class="page">
             <slot name="header">
