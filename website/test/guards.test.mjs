@@ -13,14 +13,22 @@
  * `publication: published` item is listed on both surfaces with a working
  * `/news/<slug>/` link, and every other item yields none of the three.
  *
+ * The two "a draft yields nothing" cases read a build this suite makes itself
+ * out of its own fixture articles (see "The self-contained draft fixture"
+ * below), so whether the guard has anything to check no longer depends on which
+ * articles the repository happens to carry.
+ *
  * It also pins the one retirement: the landing-region name is released for
  * article 001 (2026-09-17) and no longer gated, while every other marker and
  * file rule stays in force.
  */
+import { execFile } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { copyFile, cp, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { basename, join, relative, resolve } from 'node:path';
+import { execPath } from 'node:process';
+import { promisify } from 'node:util';
 import { afterAll, describe, expect, it } from 'vitest';
 
 import {
@@ -80,8 +88,8 @@ function flattenMarkdown(line) {
 }
 
 /** All text the built site would serve, as one normalised string. */
-async function distText() {
-    const files = (await listFiles(distDirectory)).filter((file) =>
+async function distText(directory) {
+    const files = (await listFiles(directory)).filter((file) =>
         /\.(css|html|js|json|svg|txt|webmanifest|xml)$/.test(file)
     );
     const parts = [];
@@ -90,8 +98,8 @@ async function distText() {
 }
 
 /** All HTML the built site would serve, as one string. */
-async function distHtml() {
-    const files = (await listFiles(distDirectory)).filter((file) => file.endsWith('.html'));
+async function distHtml(directory) {
+    const files = (await listFiles(directory)).filter((file) => file.endsWith('.html'));
     const parts = [];
     for (const file of files) parts.push(await readFile(file, 'utf8'));
     return parts.join('\n');
@@ -101,20 +109,20 @@ async function distHtml() {
  * All CSS the built site would apply: the inlined `<style>` blocks (Astro inlines
  * small scoped stylesheets) plus every emitted stylesheet.
  */
-async function distStyles() {
+async function distStyles(directory) {
     const parts = [];
-    for (const file of (await listFiles(distDirectory)).filter((entry) => entry.endsWith('.css'))) {
+    for (const file of (await listFiles(directory)).filter((entry) => entry.endsWith('.css'))) {
         parts.push(await readFile(file, 'utf8'));
     }
-    for (const file of (await listFiles(distDirectory)).filter((entry) => entry.endsWith('.html'))) {
+    for (const file of (await listFiles(directory)).filter((entry) => entry.endsWith('.html'))) {
         const source = await readFile(file, 'utf8');
         for (const match of source.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) parts.push(match[1]);
     }
     return parts.join('\n');
 }
 
-async function newsFiles() {
-    return (await listFiles(newsDirectory)).filter((file) => file.endsWith('.mdx'));
+async function newsFiles(directory = newsDirectory) {
+    return (await listFiles(directory)).filter((file) => file.endsWith('.mdx'));
 }
 
 /** Read one frontmatter value without pulling in a YAML parser. */
@@ -140,18 +148,18 @@ async function publicationState(file) {
 }
 
 /** Slugs the site must both list and route: `publication: published`. */
-async function publishedSlugs() {
+async function publishedSlugs(directory = newsDirectory) {
     const slugs = [];
-    for (const file of await newsFiles()) {
+    for (const file of await newsFiles(directory)) {
         if ((await publicationState(file)) === 'published') slugs.push(basename(file, '.mdx'));
     }
     return slugs;
 }
 
 /** Slugs the site must neither list nor route. */
-async function unpublishedSlugs() {
+async function unpublishedSlugs(directory = newsDirectory) {
     const slugs = [];
-    for (const file of await newsFiles()) {
+    for (const file of await newsFiles(directory)) {
         if ((await publicationState(file)) !== 'published') slugs.push(basename(file, '.mdx'));
     }
     return slugs;
@@ -163,6 +171,157 @@ function cardLabelHrefs(html) {
         .map((match) => match[0])
         .filter((tag) => /class="card-label"/.test(tag))
         .map((tag) => tag.match(/href="([^"]+)"/)?.[1]);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * The self-contained draft fixture
+ * ---------------------------------------------------------------------------
+ *
+ * The two cases below that assert "a draft produces nothing in the build" used
+ * to loop over `unpublishedSlugs()` in the repository's own `website/news/`.
+ * That made their input the repository's content state, and once the last draft
+ * article was published (2026-09-17, card `t_b429a50d`) the loop iterated over
+ * nothing but the `toBeGreaterThan(0)` fixture-presence assertion still fired:
+ * a red suite that proved nothing about a leak, which is the opposite of what
+ * those assertions exist for.
+ *
+ * The input is now a fixture this suite owns. A throwaway project root carries
+ * the real site — `src/`, `scripts/`, `astro.config.mjs` — beside its own
+ * `news/` directory holding two draft-shaped articles and one published
+ * control, and the real Astro CLI builds it. The assertions therefore still
+ * read a genuine build output, produced by the real listing and the real route
+ * generator, while what is being checked no longer depends on which articles
+ * the repository happens to hold.
+ *
+ * Why the fixture has to be *built* rather than written into a build that
+ * already exists: `distText()`, `listRoutes()` and `distHtml()` read a build
+ * output, so a draft written after the build was never in the build and the
+ * assertion would pass without checking anything.
+ *
+ * Why it is built outside the repository: `website/` is shared by every profile
+ * (`workspace_kind: dir`), so an article written into `website/news/` for the
+ * length of one test would be picked up by a sibling card's concurrent
+ * `npm run build` and by `test/news-listing.test.mjs`.
+ *
+ * The published control is not decoration — it is the non-vacuity half. A build
+ * that rendered nothing at all would satisfy "the draft's body is not in the
+ * build" and "the draft has no route" trivially, so the control's own route,
+ * its card on both listing surfaces and its body in the same corpus are
+ * asserted beside those claims.
+ */
+
+/** How long the fixture build may take before the case fails. */
+const fixtureBuildTimeout = 180_000;
+
+/** The draft-shaped article that says `publication: draft` outright. */
+const fixtureDraft = {
+    slug: '901-guard-fixture-draft',
+    title: 'Guard fixture: an explicit draft no build may serve',
+    closing: 'The explicit draft closes on this sentence, which no build may serve.',
+    order: 901,
+    publication: 'draft',
+};
+
+/** The draft-shaped article that omits `publication`, which must fail closed. */
+const fixtureWithheldByDefault = {
+    slug: '902-guard-fixture-withheld-by-default',
+    title: 'Guard fixture: no publication field at all, held back by default',
+    closing: 'The defaulted draft closes on this second sentence, which no build may serve.',
+    order: 902,
+    publication: undefined,
+};
+
+/** The published article that proves the fixture build really rendered news. */
+const fixturePublishedControl = {
+    slug: '903-guard-fixture-published-control',
+    title: 'Guard fixture: the published control that proves the build is real',
+    closing: 'The published control closes on this sentence, which the build must serve.',
+    order: 903,
+    publication: 'published',
+};
+
+const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixturePublishedControl];
+
+/** One fixture article, written in the shape the content schema expects. */
+function fixtureArticleSource({ title, closing, order, publication }) {
+    const state = publication ? `publication: ${publication}\n` : '';
+    return `---
+title: '${title}'
+category: Guard fixture
+status: ${publication === 'published' ? 'Published' : 'Draft'}
+${state}summary: 'An article the guard suite writes for itself into a throwaway project root.'
+linkLabel: 'Guard fixture'
+order: ${order}
+---
+
+${closing}
+`;
+}
+
+/** The real site, minus its content directory, copied into the fixture root. */
+const fixtureProjectEntries = ['src', 'public', 'scripts', 'astro.config.mjs', 'tsconfig.json', 'package.json'];
+
+/**
+ * Run the Astro CLI this project installs, in the given project root, and return
+ * everything it printed. The CLI entry point is read from the installed
+ * package's own `bin` field rather than hard-coded, so a packaging change fails
+ * here with the path it could not find instead of a bare module error.
+ */
+async function astroBuild(root) {
+    const manifest = JSON.parse(
+        await readFile(resolve(websiteDirectory, 'node_modules', 'astro', 'package.json'), 'utf8'),
+    );
+    const cli = resolve(websiteDirectory, 'node_modules', 'astro', manifest.bin.astro);
+
+    try {
+        const { stdout, stderr } = await promisify(execFile)(execPath, [cli, 'build'], {
+            cwd: root,
+            maxBuffer: 32 * 1024 * 1024,
+        });
+        return `${stdout}${stderr}`;
+    } catch (error) {
+        const output = `${error.stdout ?? ''}${error.stderr ?? ''}`;
+        throw new Error(`the fixture build failed in ${root}:\n${output || error.message}`);
+    }
+}
+
+/**
+ * A throwaway project root holding the real site and its own `news/` directory,
+ * with the real site build run in it.
+ *
+ * `src/lib/assets.ts` imports the canonical media from `../../../docs/...`, so
+ * the root carries a `docs` symlink beside the copied `website/`; `node_modules`
+ * is symlinked rather than copied. Nothing is written inside the repository, and
+ * `temporaryDirectories` removes the whole root in `afterAll`.
+ */
+async function buildFixtureProject() {
+    const root = await temporaryDirectory('rh-guard-draft-fixture-');
+    const site = join(root, 'website');
+    await mkdir(site, { recursive: true });
+
+    for (const entry of fixtureProjectEntries) {
+        await cp(join(websiteDirectory, entry), join(site, entry), { recursive: true });
+    }
+    await symlink(join(projectDirectory, 'docs'), join(root, 'docs'), 'dir');
+    await symlink(join(websiteDirectory, 'node_modules'), join(site, 'node_modules'), 'dir');
+
+    const news = join(site, 'news');
+    await mkdir(news, { recursive: true });
+    for (const article of fixtureArticles) {
+        await writeFile(join(news, `${article.slug}.mdx`), fixtureArticleSource(article));
+    }
+
+    await astroBuild(site);
+
+    return { root, site, news, dist: join(site, 'dist') };
+}
+
+/** The fixture build, made once per suite run and shared by both cases below. */
+let fixtureProjectBuild;
+function fixtureBuild() {
+    fixtureProjectBuild ??= buildFixtureProject();
+    return fixtureProjectBuild;
 }
 
 describe('gated source references', () => {
@@ -274,18 +433,25 @@ describe('withheld material in the build output', () => {
     });
 
     it.runIf(hasBuild)('keeps every unpublished article body out of the build', async () => {
-        const corpus = await distText();
+        const fixture = await fixtureBuild();
+        const corpus = await distText(fixture.dist);
         const checked = [];
 
-        for (const slug of await unpublishedSlugs()) {
-            const closing = await closingBodySentence(join(newsDirectory, `${slug}.mdx`));
+        for (const slug of await unpublishedSlugs(fixture.news)) {
+            const closing = await closingBodySentence(join(fixture.news, `${slug}.mdx`));
             expect(closing.length).toBeGreaterThan(20);
             expect(corpus, `${slug} is unpublished but its closing sentence reached the build`).not.toContain(closing);
             checked.push(slug);
         }
 
         expect(checked.length).toBeGreaterThan(0);
-    });
+
+        // Non-vacuity: a fixture build that served no article body at all would
+        // satisfy every assertion above without the guard having checked
+        // anything, so the published control's body must be in that same corpus.
+        const control = await closingBodySentence(join(fixture.news, `${fixturePublishedControl.slug}.mdx`));
+        expect(corpus, 'the fixture build served no article body at all').toContain(control);
+    }, fixtureBuildTimeout);
 
     it.runIf(hasBuild)('links every listed card to its own generated route', async () => {
         const routes = new Set(await listRoutes());
@@ -310,7 +476,7 @@ describe('withheld material in the build output', () => {
     });
 
     it.runIf(hasBuild)('keeps a hidden carousel slide out of the layout and the tab order', async () => {
-        const styles = await distStyles();
+        const styles = await distStyles(distDirectory);
 
         // `hidden` is the carousel's only hiding mechanism, and this component's
         // own `display: grid` beats the UA's `[hidden]` rule on its own. Without
@@ -322,13 +488,14 @@ describe('withheld material in the build output', () => {
     });
 
     it.runIf(hasBuild)('renders no page, no listing entry, and no card for an unpublished article', async () => {
-        const corpus = await distText();
-        const routes = await listRoutes();
-        const html = await distHtml();
+        const fixture = await fixtureBuild();
+        const corpus = await distText(fixture.dist);
+        const routes = await listRoutes(fixture.dist);
+        const html = await distHtml(fixture.dist);
         const unpublished = [];
 
-        for (const slug of await unpublishedSlugs()) {
-            const file = join(newsDirectory, `${slug}.mdx`);
+        for (const slug of await unpublishedSlugs(fixture.news)) {
+            const file = join(fixture.news, `${slug}.mdx`);
             unpublished.push({
                 slug,
                 state: await publicationState(file),
@@ -344,7 +511,24 @@ describe('withheld material in the build output', () => {
             expect(routes).not.toContain(`/news/${entry.slug}/index.html`);
             expect(html).not.toContain(`/news/${entry.slug}/`);
         }
-    });
+
+        // Non-vacuity: the same build routes and lists the published control, so
+        // the three assertions above are a withholding rather than a build that
+        // emitted no newsroom at all.
+        const published = await publishedSlugs(fixture.news);
+        expect(published).toContain(fixturePublishedControl.slug);
+        for (const slug of published) {
+            expect(routes, `${slug} is published but the fixture build has no route for it`).toContain(
+                `/news/${slug}/index.html`,
+            );
+        }
+        for (const surface of ['index.html', 'news/index.html']) {
+            const hrefs = cardLabelHrefs(await readFile(join(fixture.dist, surface), 'utf8'));
+            expect(hrefs, `${surface} does not list the published fixture`).toContain(
+                `/news/${fixturePublishedControl.slug}/`,
+            );
+        }
+    }, fixtureBuildTimeout);
 });
 
 describe('route identity', () => {
