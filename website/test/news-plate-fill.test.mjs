@@ -70,17 +70,27 @@ async function publishedSlugs() {
 /**
  * The cells one built page renders, in document order: the image cell with the
  * asset it shows and the fill it carries, or the placeholder.
+ *
+ * The class attribute is read as a class *list*: `NewsCard` emits the cell's
+ * class through `class:list`, so the placeholder of an item whose `accent` is
+ * `amber` carries a second class — `class="news-placeholder placeholder-amber"`,
+ * which is the cell article 004 renders, the first published item with no
+ * `media` key (measured on the built homepage 2026-09-17). A matcher that
+ * required the attribute to close after the cell's own class recognised 3 cells
+ * on a page that rendered 4, and the count assertions below then compared a
+ * number that no longer described the page.
  */
 function cellsIn(html) {
     const cells = [];
-    for (const match of html.matchAll(/<div class="(news-image|news-placeholder)"([^>]*)>/g)) {
+    for (const match of html.matchAll(/<div class="((?:news-image|news-placeholder)[^"]*)"([^>]*)>/g)) {
+        const kind = match[1].split(/\s+/)[0];
         const attributes = match[2];
         const end = html.indexOf('</div>', match.index);
         const body = html.slice(match.index, end === -1 ? html.length : end);
         const style = attributes.match(/style="([^"]*)"/)?.[1] ?? '';
         const src = body.match(/<img[^>]*\ssrc="([^"]+)"/)?.[1] ?? null;
         cells.push({
-            kind: match[1],
+            kind,
             fill: style.match(/--plate-fill:\s*url\('([^']+)'\)/)?.[1] ?? null,
             src,
         });
@@ -152,6 +162,31 @@ describe('an image cell fills its box with the plate, never with the pale plate 
                 expect(cell.src, `${name}: an image cell renders no <img>`).not.toBe(null);
             }
         }
+    });
+
+    /*
+     * The cell matcher itself, on the exact markup the component emits, so its
+     * placeholder branch is exercised whether or not the published set happens
+     * to hold an item without `media`. `NewsCard` renders a cell's class
+     * through `class:list`, so the placeholder of an `amber` item reaches the
+     * document as `news-placeholder placeholder-amber`; only a matcher that
+     * reads a class list sees that cell. Fixture text, not a page — this case
+     * needs no build, so it still runs where the build-output cases skip.
+     */
+    it('reads a cell whose class attribute carries its accent class beside it', () => {
+        const placeholder = cellsIn(
+            '<div class="news-placeholder placeholder-amber" aria-hidden="true">'
+                + '<span class="placeholder-number">04</span></div>',
+        );
+        expect(placeholder).toEqual([{ kind: 'news-placeholder', fill: null, src: null }]);
+
+        const image = cellsIn(
+            '<div class="news-image" style="--plate-fill: url(\'/_astro/plate.ABC123.webp\')">'
+                + '<img src="/_astro/plate.ABC123.webp" alt=""></div>',
+        );
+        expect(image).toEqual([
+            { kind: 'news-image', fill: '/_astro/plate.ABC123.webp', src: '/_astro/plate.ABC123.webp' },
+        ]);
     });
 
     it.runIf(hasBuild)("never paints the pale plate tone as the image cell's own fill", () => {
