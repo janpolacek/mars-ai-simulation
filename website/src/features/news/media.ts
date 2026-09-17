@@ -1,4 +1,10 @@
-import { asteriaPlate01, asteriaPlate02, asteriaPlate03, identityMark } from '../../lib/assets';
+import {
+    asteriaPlate01,
+    asteriaPlate02,
+    asteriaPlate03,
+    identityMark,
+    payloadSensorIllustration,
+} from '../../lib/assets';
 import type { NewsMediaKey } from '../../lib/media';
 
 import type { NewsMediaSet } from './plates';
@@ -33,6 +39,18 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
                 captionNote: 'The local-operations frame is fictional scenario planning, not a confirmed operational plan.',
             },
         ],
+    },
+    /**
+     * One illustration for the 002 payload article (card `t_4b49346b`).
+     *
+     * The asset is the editor-approved candidate (`t_327899d5`); the label is
+     * the one approved with it. No `provenance` line: the registry prints it
+     * only through `plateCaptionText()`, which runs for plate sets, and this key
+     * renders no caption — the "illustrative artwork" statement reaches the
+     * reader through the article's approved `mediaAlt` instead.
+     */
+    'payload-sensor-illustration': {
+        plates: [{ src: payloadSensorIllustration, label: 'Red Horizon // payload sensor illustration' }],
     },
 };
 

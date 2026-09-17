@@ -14,7 +14,7 @@
  */
 
 /** Media keys a news item may declare. */
-export const newsMediaKeys = ['programme-identity', 'asteria-plates'] as const;
+export const newsMediaKeys = ['programme-identity', 'asteria-plates', 'payload-sensor-illustration'] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
 
@@ -33,6 +33,15 @@ export interface NewsMediaRequirement {
 export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> = {
     'programme-identity': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
     'asteria-plates': { plateCount: 3, altCount: 3, captionCount: 3, requiresLabel: true },
+    /**
+     * One illustration, one alt text, no caption (card `t_4b49346b`).
+     *
+     * The plate count is the binding half: `src/features/news/media.ts` must
+     * resolve the key to one plate or the build fails, so a key whose asset was
+     * never placed cannot reach the site. `requiresLabel` stays `false` as the
+     * card specifies — the label is optional here, not required.
+     */
+    'payload-sensor-illustration': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {

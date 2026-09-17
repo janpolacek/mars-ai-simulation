@@ -5,6 +5,7 @@ import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import asteriaMarsLocatorSource from '../../../docs/area/asteria-field-01-mars-locator.png';
 import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-regional-context.png';
+import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
 
 /**
  * The approved identity mark, and the only import of it in the site.
@@ -64,3 +65,22 @@ export const identityMarkTransparent: ImageMetadata = identityMarkTransparentSou
 export const asteriaPlate01: ImageMetadata = asteriaMarsLocatorSource;
 export const asteriaPlate02: ImageMetadata = asteriaRegionalContextSource;
 export const asteriaPlate03: ImageMetadata = asteriaLocalOperationsSource;
+
+/**
+ * The 002 sensor illustration, imported from its canonical `docs/payload/`
+ * copy.
+ *
+ * Chosen and signed off by the editor (card `t_327899d5`, 2026-09-17) under the
+ * human story owner's Gate 1 delegation recorded on `t_5a62fb28`, from the three
+ * candidates the visuals card produced (`t_a9964b8d`). The approved candidate is
+ * `01-spectral-sampling`, SHA-256 `8839f66a…`; card `t_4b49346b` copied that
+ * file to the canonical path unchanged — no re-encode, crop or redraw — and the
+ * export re-hashes to the same digest.
+ *
+ * It is illustrative artwork, not mission imagery: no payload hardware is
+ * depicted or named, and the approved alt text carries that statement to the
+ * reader (a one-plate key renders no per-plate caption, so the registry cannot
+ * print it). Only the `payload-sensor-illustration` media key renders this
+ * asset, and only the article the release card wires that key into.
+ */
+export const payloadSensorIllustration: ImageMetadata = payloadSensorIllustrationSource;

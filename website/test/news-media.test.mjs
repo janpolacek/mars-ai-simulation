@@ -23,13 +23,23 @@ const asteriaFrontmatter = {
     mediaCaption: ['AF-01 caption', 'AF-02 caption', 'AF-03 caption'],
 };
 
+/**
+ * The one-plate key the 002 payload illustration resolves through (card
+ * `t_4b49346b`): one alt entry, no caption, label optional.
+ */
+const payloadFrontmatter = {
+    media: 'payload-sensor-illustration',
+    mediaAlt: 'Illustrative artwork, not mission photography: coloured beams fall on a rough dark rock.',
+};
+
 const fieldsOf = (issues) => issues.map((issue) => issue.field);
 
 describe('media keys and their requirements', () => {
-    it('keeps programme-identity, and adds asteria-plates', () => {
-        expect(newsMediaKeys).toEqual(['programme-identity', 'asteria-plates']);
+    it('declares every key it resolves: programme-identity, asteria-plates, payload-sensor-illustration', () => {
+        expect(newsMediaKeys).toEqual(['programme-identity', 'asteria-plates', 'payload-sensor-illustration']);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
+        expect(isNewsMediaKey('payload-sensor-illustration')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -41,6 +51,15 @@ describe('media keys and their requirements', () => {
             requiresLabel: true,
         });
         expect(newsMediaRequirements['programme-identity']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for payload-sensor-illustration', () => {
+        expect(newsMediaRequirements['payload-sensor-illustration']).toEqual({
             plateCount: 1,
             altCount: 1,
             captionCount: 0,
@@ -60,7 +79,27 @@ describe('media keys and their requirements', () => {
         const issues = newsMediaIssues({ ...asteriaFrontmatter, media: 'asteria-field' });
 
         expect(fieldsOf(issues)).toEqual(['media']);
-        expect(issues[0].message).toContain('media must be one of: programme-identity, asteria-plates');
+        expect(issues[0].message).toContain(
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration',
+        );
+    });
+
+    it('accepts the one-plate payload frontmatter', () => {
+        expect(newsMediaIssues(payloadFrontmatter)).toEqual([]);
+    });
+
+    it('fails the payload key with no alt or one blank alt, and keeps its label optional', () => {
+        expect(fieldsOf(newsMediaIssues({ media: 'payload-sensor-illustration' }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...payloadFrontmatter, mediaAlt: ['  '] }))).toEqual(['mediaAlt']);
+        // `requiresLabel: false` for this key, so an absent label is not an issue.
+        expect(newsMediaIssues({ ...payloadFrontmatter, mediaLabel: undefined })).toEqual([]);
+    });
+
+    it('fails a caption on the payload key rather than ignoring it', () => {
+        const issues = newsMediaIssues({ ...payloadFrontmatter, mediaCaption: 'A caption nobody renders' });
+
+        expect(fieldsOf(issues)).toEqual(['mediaCaption']);
+        expect(issues[0].message).toContain('remove mediaCaption');
     });
 
     it('fails a three-plate key that lists two alts instead of three', () => {
@@ -120,9 +159,21 @@ describe('plate registry', () => {
         expect(isPlateSet(newsMedia['programme-identity'])).toBe(false);
     });
 
-    it('resolves the two keys and nothing else', () => {
+    it('resolves payload-sensor-illustration to exactly one plate with the approved label', () => {
+        const set = newsMedia['payload-sensor-illustration'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon // payload sensor illustration');
+        expect(isPlateSet(set)).toBe(false);
+        // The plate points at the canonical docs/ export, not a copy under
+        // website/public.
+        expect(String(set.plates[0].src)).toContain('payload-sensor-illustration');
+    });
+
+    it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
+        expect(resolveNewsMedia('payload-sensor-illustration')).toBe(newsMedia['payload-sensor-illustration']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });
