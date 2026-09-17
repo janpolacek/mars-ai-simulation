@@ -100,6 +100,7 @@ This task-tracking guidance is not permission to override repository, user, or
 orchestrator instructions.
 
 - **Conservative (default)**: Use the Hermes kanban board for task tracking. Do not run git commits or git pushes unless explicitly asked. At handoff, report changed files, validation, suggested next commands, and the proposed card status.
+- **Developer role (`mars-ai-simulator-dev`) — explicit current human instruction, 2026-09-17**: the developer commits and pushes its own card's scoped change as part of finishing the card; a card dispatched to that role is the clear authority to commit and push, with no further approval step. Stage only the paths the card touched, put the card id in the commit message, rebase before pushing, and report the commit SHA and push result on the card. Every other role keeps the conservative default above. A push is never a deploy.
 - **Minimal**: Keep tool instruction files as pointers to `docs/INSTRUCTIONS.md`; use the same conservative git policy unless active instructions say otherwise.
 - **Team-maintainer**: Only when the repository explicitly opts in, agents may complete cards, run quality gates, commit, and push as part of session close. A current "do not commit" or "do not push" instruction still wins.
 
@@ -116,12 +117,21 @@ subordinate to explicit user, repository, and orchestrator instructions.
    # Conservative/minimal/default: report status and proposed commands; wait for approval.
    git status
 
+   # Developer role (mars-ai-simulator-dev), once the card's acceptance criteria pass
+   # — explicit current human instruction, 2026-09-17:
+   git status --short        # stage only the paths this card touched
+   git add <paths>
+   git commit -m "<card id>: <change>"
+   git pull --rebase
+   git push
+   git status
+
    # Team-maintainer opt-in only, unless current instructions forbid it:
    git pull --rebase
    git push
    git status
    ```
-5. **Hand off** - Summarize changes, validation, card status, and any blocked commit/push step
+5. **Hand off** - Summarize changes, validation, commit id, push result, card status, and any blocked commit/push step
 
 **Critical rules:**
 
