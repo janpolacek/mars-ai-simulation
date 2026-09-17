@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 
 import { routes } from '../../lib/navigation';
 import { resolveNewsMedia } from './media';
@@ -24,6 +24,19 @@ const media = resolveNewsMedia(item.data.media);
 const leadPlate = media?.plates[0];
 const cardLabel = media && media.plates.length > 1 ? leadPlate?.label : item.data.mediaLabel;
 /**
+ * The cell's fill: the same plate at the same transform the `<Image>` below
+ * renders, so the leftover area is the plate's own colours and the extension
+ * costs no second file (the built page points both at one emitted asset).
+ *
+ * `getImage` is used instead of a second `<Image>` because the fill is a CSS
+ * background on the cell, not a second rendered element: nothing has to be
+ * lazy-loaded or promoted for it, and the cell's own markup stays one image.
+ */
+const plateFill = leadPlate
+    ? (await getImage({ src: leadPlate.src, width: 1024, format: 'webp' })).src
+    : undefined;
+const plateFillStyle = plateFill ? `--plate-fill: url('${plateFill}')` : undefined;
+/**
  * Every item this component renders comes from the published query (`./query.ts`),
  * which is the same predicate the detail route is generated from, so the label can
  * always be a real link: `/news/<slug>/` exists for every listed card. The
@@ -39,7 +52,7 @@ const articleHref = routes.newsArticle(item.id);
     hidden={active ? undefined : true}
 >
     {media && leadPlate ? (
-        <div class="news-image">
+        <div class="news-image" style={plateFillStyle}>
             <Image
                 src={leadPlate.src}
                 alt={plateAltText({ value: item.data.mediaAlt, plates: media.plates, index: 0 })}
@@ -117,15 +130,59 @@ const articleHref = routes.newsArticle(item.id);
     visibility: hidden;
 }
 
+/*
+ * One cell for an image and for a placeholder without one, so the carousel's
+ * height (card `t_89b325e5`) does not depend on which of the two it holds.
+ *
+ * The cell's own fill is never `--rh-surface-plate`: that pale paper tone
+ * (#eeebe5) showed as a band above and below every plate whose ratio was not
+ * the cell's — 215px of a 645x645 cell at 1280x800, which a reader sees as a
+ * white background (card `t_f97d6184`). The image cell takes the section's own
+ * field as its fallback instead, and paints the plate over it below; the
+ * placeholder keeps the field it has had (its own rule, `--rh-relief-shadow`).
+ */
 .news-image,
 .news-placeholder {
     position: relative;
     min-height: 22rem;
     overflow: hidden;
-    background: var(--rh-surface-plate);
+}
+
+.news-image {
+    background: var(--rh-surface-field);
+}
+
+/*
+ * The image cell's ground: the plate itself, cropped to cover the cell and
+ * blurred, painted behind the plate (which `object-fit: contain` still fits
+ * whole, so no label, caption, annotation or arrow is ever cropped).
+ *
+ * The fill is derived from the plate rather than from a cell size or a
+ * per-slide ratio, so it holds at any ratio and at both breakpoints. Cropping
+ * the plate to the cell — `object-fit: cover` — was measured and rejected: in
+ * this cell it removes the outer 256px of the 1536px plate on each side, which
+ * drops the north arrow entirely and truncates the plate's own title bar and
+ * target callout box mid-word.
+ *
+ * `inset: -12%` bleeds the layer past the cell so the blur's soft edge, which
+ * fades toward transparent, is clipped by `overflow: hidden` here instead of
+ * showing inside the cell.
+ */
+.news-image::before {
+    content: '';
+    position: absolute;
+    inset: -12%;
+    z-index: 0;
+    background-image: var(--plate-fill);
+    background-position: center;
+    background-size: cover;
+    filter: blur(28px) brightness(0.6);
 }
 
 .news-image img {
+    /* Above the fill layer: the plate stays the subject, the fill its ground. */
+    position: relative;
+    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
@@ -134,6 +191,7 @@ const articleHref = routes.newsArticle(item.id);
 
 .image-label {
     position: absolute;
+    z-index: 2;
     right: 1.25rem;
     bottom: 1.15rem;
     max-width: calc(100% - 2.5rem);
