@@ -10,6 +10,10 @@ website/public/assets/*
 media-work/
 comfyui-runs/
 
+# In-flight agent worktrees (one checkout per running kanban card, up to a few GB:
+# never staged, never committed, and kept out of `git stash -u`/`git add -A`)
+.worktrees/
+
 # Editor and OS files
 .DS_Store
 
