@@ -105,7 +105,15 @@ stage's prescribed artifact is the deployment record on the card itself.
   your build is newer than every source edit, not merely that it succeeded.
 - Re-verify anything you measured before completing the card if the evidence came
   from a shared checkout: other profiles edit `website/`, `docs/`, and the working
-  tree in place during a run.
+  tree in place during a run. A sibling card can also move `origin/main` with a
+  **content** change mid-card, and then part of your before/after table is measured
+  against a tree that no longer exists: the simulated-record-date line published
+  under card `t_e4cc3b9f` lengthened every news card's copy column and moved the
+  copy-driven numbers (900x800 carousel 457.7 -> 516.1, 390x844 707.8 -> 747) while
+  the plate-driven ones (1600-1024) did not move at all. Rebase, then keep **two**
+  private worktrees — one at the new `origin/main` for the before column, one with
+  your commit — build both with the same command, and sweep both in a single
+  browser session, so both columns come from one harness and one browser state.
 - Before building, confirm no sibling card is live on this checkout. In an
   unattended single-query session `hermes kanban list` is refused and `sqlite3` is
   not installed, so read the board with a small script file (`python3
