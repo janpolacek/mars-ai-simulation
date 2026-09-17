@@ -71,21 +71,50 @@ const articleHref = routes.newsArticle(item.id);
 .news-card {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+    /*
+     * Every slide is placed in the carousel's single cell (`NewsCarousel.astro`
+     * makes the container a grid), so the section is exactly as tall as the
+     * tallest published slide and its box does not change when the reader
+     * switches slides. A published set of one is the same shape with one item.
+     */
+    grid-area: 1 / 1;
     min-height: 27rem;
     background: var(--rh-surface-field);
 }
 
 /*
- * The carousel marks every non-active slide `hidden`, and this component's own
- * `display: grid` beats the UA's `[hidden]` rule — a class selector outranks an
- * attribute selector — so a hidden slide stayed rendered and its article link
- * stayed in the tab order. Measured on the built homepage with two published
- * items: both cards had a layout box and Tab reached the hidden slide's
- * `/news/<slug>/` link. The attribute wins here instead, for the server-rendered
- * state and for the client toggle alike.
+ * An inactive slide must not change the carousel's height, so it stays in the
+ * flow: `display: grid` is restated here rather than leaning on this component's
+ * class rule beating the UA's `[hidden] { display: none }`, and the box is made
+ * invisible with `visibility` instead. Measured on the built homepage before this
+ * rule (two published items, 1280px): `display: none` handed the height back to
+ * whichever card was active — 461px for slide 0 against 645px for slide 1, a
+ * 184px jump of the whole document per switch (card `t_89b325e5`).
+ *
+ * This keeps the accessibility fix the rule it replaces carried. `display: grid`
+ * beats the UA's `[hidden]` rule (an author rule outranks the user-agent sheet),
+ * so the attribute alone never removed the slide: it stayed rendered and its
+ * `/news/<slug>/` link stayed in the tab order. `visibility: hidden` takes the
+ * slide out of the paint, the tab order and the accessibility tree, while
+ * `hidden` and `aria-hidden="true"` stay on the element too. Verified on the
+ * built page: Tab skips the inactive slide's link, and it is absent from the
+ * accessibility tree.
+ *
+ * The cost, measured, and what it needs: the hidden slide keeps its box, so its
+ * `loading="lazy"` image sits inside the viewport once the section is on screen
+ * — but Chromium does not fetch an image inside a `visibility: hidden` subtree
+ * (measured on the built page with a 1280x3200 viewport covering the whole
+ * section: the hidden slide's illustration was never requested), and showing the
+ * slide changes no geometry, so nothing re-triggers the decision either
+ * (measured: the picture stayed blank after the switch). `carousel.client.ts`
+ * therefore promotes the image of the slide it shows to `loading="eager"`, which
+ * does start the fetch (measured). The section keeps one height without a
+ * literal value, and an illustration is fetched when the reader asks for its
+ * slide.
  */
 .news-card[hidden] {
-    display: none;
+    display: grid;
+    visibility: hidden;
 }
 
 .news-image,

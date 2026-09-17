@@ -539,16 +539,23 @@ describe('withheld material in the build output', () => {
         }
     });
 
-    it.runIf(hasBuild)('keeps a hidden carousel slide out of the layout and the tab order', async () => {
+    it.runIf(hasBuild)('keeps an inactive carousel slide invisible, unfocusable, and in the flow', async () => {
         const styles = await distStyles(distDirectory);
 
         // `hidden` is the carousel's only hiding mechanism, and this component's
         // own `display: grid` beats the UA's `[hidden]` rule on its own. Without
-        // this rule a non-active slide stays rendered and its article link stays
-        // tabbable (measured in the browser on the built homepage). Astro scopes
-        // the selector, so the `[hidden]` part is matched with the scope
-        // attribute in between.
-        expect(styles).toMatch(/\.news-card[^{]*\[hidden\][^{]*\{[^}]*display:\s*none/);
+        // the rule below a non-active slide stays rendered and its article link
+        // stays tabbable (measured in the browser on the built homepage). It is
+        // hidden with `visibility` rather than `display: none` because the slide
+        // must keep its box: the carousel's height is the tallest slide of the
+        // published set, so a hidden slide that leaves the flow resizes the
+        // section and the page jumps on every switch (card `t_89b325e5`,
+        // `test/news-carousel-height.test.mjs`). Astro scopes the selector, so
+        // the `[hidden]` part is matched with the scope attribute in between.
+        expect(styles).toMatch(/\.news-card[^{]*\[hidden\][^{]*\{[^}]*visibility:\s*hidden/);
+        expect(styles, 'an inactive slide is taken out of the flow, which resizes the carousel').not.toMatch(
+            /\.news-card[^{]*\[hidden\][^{]*\{[^}]*display:\s*none/,
+        );
     });
 
     it.runIf(hasBuild)('renders no page, no listing entry, and no card for an unpublished article', async () => {

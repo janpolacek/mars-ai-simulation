@@ -38,6 +38,19 @@ initNewsCarousel();
     margin-bottom: 2.75rem;
 }
 
+/*
+ * The carousel is a grid so that every slide can occupy the same cell
+ * (`grid-area: 1 / 1` on `.news-card`): the row is then as tall as the tallest
+ * published slide, and the section keeps one height whichever slide is active
+ * instead of resizing to the active card on every switch (card `t_89b325e5`).
+ * No literal height is involved, so a longer summary or a third article needs no
+ * change here, at either breakpoint.
+ */
+.news-carousel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+}
+
 @media (max-width: 760px) {
     .news-section {
         padding: 4.5rem 0;
