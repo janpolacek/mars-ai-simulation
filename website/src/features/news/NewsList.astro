@@ -17,9 +17,7 @@ const items = await getPublishedNews();
         />
     </div>
     <div class="news-index-list">
-        {
-            /* Page-level `h1` above, so card titles are `h2` here; `h3` only inside a section, as on the homepage. */
-        }
+        {/* Page-level `h1` above, so card titles are `h2` here; `h3` only inside a section, as on the homepage. */}
         {items.map((item, index) => <NewsCard item={item} index={index} headingLevel={2} />)}
     </div>
 </section>

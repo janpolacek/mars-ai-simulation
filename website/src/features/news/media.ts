@@ -36,7 +36,8 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
             {
                 src: asteriaPlate03,
                 label: 'AF-03 · Local operations frame',
-                captionNote: 'The local-operations frame is fictional scenario planning, not a confirmed operational plan.',
+                captionNote:
+                    'The local-operations frame is fictional scenario planning, not a confirmed operational plan.',
             },
         ],
     },

@@ -2,14 +2,14 @@
 
 ## Status and authorisation
 
-| Field                    | Value                                                                                                                                                    |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Card                     | `t_16ec6ba2` (`mars-ai-simulator-writer`), child of `t_774e7298` (site-foundation, done)                                                                  |
-| Route authorisation      | `site-foundation` — `docs/PLAN.md` Phase 1 item 2: "Build the Preparing landing page, logo treatment, site metadata, and About / Method disclosure page with a persistent footer link." |
-| Factual bound            | The step-001 public release only: `website/news/001-project-announcement.mdx` (published) and `docs/timeline/001-project-announcement.md` ("Allowed public angle"). |
-| Method bound             | `docs/GENERAL.md` ("Purpose", "Audience and public experience"), `docs/INSTRUCTIONS.md` (source-of-truth order, canon and information safety), `docs/SCENARIO.md` "Continuity and release controls", `docs/brand/BRAND.md` (voice/identity). |
-| Human release reference  | **None exists.** No public route may be deployed from this package without a current human release reference (see "Release gate" below).                  |
-| Human canon decision     | **None required and none taken.** This page introduces no new canon; it states method and re-states facts already public at step 001.                      |
+| Field                   | Value                                                                                                                                                                                                                                        |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Card                    | `t_16ec6ba2` (`mars-ai-simulator-writer`), child of `t_774e7298` (site-foundation, done)                                                                                                                                                     |
+| Route authorisation     | `site-foundation` — `docs/PLAN.md` Phase 1 item 2: "Build the Preparing landing page, logo treatment, site metadata, and About / Method disclosure page with a persistent footer link."                                                      |
+| Factual bound           | The step-001 public release only: `website/news/001-project-announcement.mdx` (published) and `docs/timeline/001-project-announcement.md` ("Allowed public angle").                                                                          |
+| Method bound            | `docs/GENERAL.md` ("Purpose", "Audience and public experience"), `docs/INSTRUCTIONS.md` (source-of-truth order, canon and information safety), `docs/SCENARIO.md` "Continuity and release controls", `docs/brand/BRAND.md` (voice/identity). |
+| Human release reference | **None exists.** No public route may be deployed from this package without a current human release reference (see "Release gate" below).                                                                                                     |
+| Human canon decision    | **None required and none taken.** This page introduces no new canon; it states method and re-states facts already public at step 001.                                                                                                        |
 
 **Which timeline step authorises the page.** The page itself is not a timeline step: it exists
 because `site-foundation` (Phase 1 item 2) requires it, and everything it says about the mission is
@@ -52,18 +52,18 @@ them; it transcribes them.
 
 Allowed, with the source for each material claim:
 
-| Claim the page may make                                                          | Source                                                             |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Red Horizon is a fictional, AI-assisted Mars exploration programme                | `website/news/001-project-announcement.mdx` ¶1; `docs/GENERAL.md`   |
-| Mars AI Simulation is a real-world testbed for multi-agent creative/technical work | `docs/GENERAL.md` "Purpose"                                        |
-| Agents draft, check sources, review metadata/continuity, then an editorial pass; a human alone approves canon and publication | `docs/INSTRUCTIONS.md`; `docs/GENERAL.md` "Canon, drafts, and publication" |
-| Pages are released in the mission's own order and never ahead of it               | `docs/PLAN.md` Phase 4 ("never spoil a later one"); `docs/timeline/README.md` (release order) — stated as policy, no step content |
-| Corrections are explicit and dated, not silent rewrites                          | `docs/INSTRUCTIONS.md` "Canon and information safety"              |
-| Generated visuals are illustrations of the fiction, never mission imagery        | `docs/SCENARIO.md` "Continuity and release controls"; `docs/area/AREA.md` plate provenance |
-| Ten national programme teams; one uncrewed lander and rover                      | published 001 announcement                                         |
-| Mineralogy mission: whether an ancient equatorial landscape once held water and the chemistry to support habitable conditions; does not search for life | published 001 announcement                                         |
-| Equal voting among partners; schedule and budget frames set; technical selections still ahead (what the rover carries, who builds what, how the mission reaches Mars) | published 001 announcement |
-| No affiliation with or endorsement by any real space organisation                | site disclosure string (`website/src/lib/site.ts`); `docs/INSTRUCTIONS.md` |
+| Claim the page may make                                                                                                                                               | Source                                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Red Horizon is a fictional, AI-assisted Mars exploration programme                                                                                                    | `website/news/001-project-announcement.mdx` ¶1; `docs/GENERAL.md`                                                                 |
+| Mars AI Simulation is a real-world testbed for multi-agent creative/technical work                                                                                    | `docs/GENERAL.md` "Purpose"                                                                                                       |
+| Agents draft, check sources, review metadata/continuity, then an editorial pass; a human alone approves canon and publication                                         | `docs/INSTRUCTIONS.md`; `docs/GENERAL.md` "Canon, drafts, and publication"                                                        |
+| Pages are released in the mission's own order and never ahead of it                                                                                                   | `docs/PLAN.md` Phase 4 ("never spoil a later one"); `docs/timeline/README.md` (release order) — stated as policy, no step content |
+| Corrections are explicit and dated, not silent rewrites                                                                                                               | `docs/INSTRUCTIONS.md` "Canon and information safety"                                                                             |
+| Generated visuals are illustrations of the fiction, never mission imagery                                                                                             | `docs/SCENARIO.md` "Continuity and release controls"; `docs/area/AREA.md` plate provenance                                        |
+| Ten national programme teams; one uncrewed lander and rover                                                                                                           | published 001 announcement                                                                                                        |
+| Mineralogy mission: whether an ancient equatorial landscape once held water and the chemistry to support habitable conditions; does not search for life               | published 001 announcement                                                                                                        |
+| Equal voting among partners; schedule and budget frames set; technical selections still ahead (what the rover carries, who builds what, how the mission reaches Mars) | published 001 announcement                                                                                                        |
+| No affiliation with or endorsement by any real space organisation                                                                                                     | site disclosure string (`website/src/lib/site.ts`); `docs/INSTRUCTIONS.md`                                                        |
 
 Forbidden on this page (withheld; referenced by location, values deliberately not copied here):
 

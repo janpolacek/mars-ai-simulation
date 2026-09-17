@@ -45,7 +45,7 @@ stage's prescribed artifact is the deployment record on the card itself.
   2026-09-17, recorded in `AGENTS.md`; `main` is wired to the Cloudflare Workers
   Build), so a dev card's commit/push publishes the build output. Anything Astro
   emits into `dist/` goes public with it — including a statically imported asset
-  that no route references — and the deploy *action* stays out of reach (no
+  that no route references — and the deploy _action_ stays out of reach (no
   `wrangler`, no credentials, no DNS). After every push, verify the live origin
   rather than assuming: fetch the emitted asset path and a route, and compare a
   hashed asset's byte size against your own build to prove the deployed bundle is
@@ -109,13 +109,13 @@ stage's prescribed artifact is the deployment record on the card itself.
   the site, and a grep for it returns 0 on a page that does render the card image.
   Check the prescribed selector against the component before reading 0 as "no
   image", then assert on the emitted `<img src>`/alt/label instead.
-- `grep -c` counts matching *lines*, and Astro minifies built HTML onto one line,
+- `grep -c` counts matching _lines_, and Astro minifies built HTML onto one line,
   so an element count needs `grep -o '<a class="card-label"' dist/index.html |
   wc -l`. With one element the line-based form looks correct and cannot tell two
   from one: exercise the multi-item case (a temporary second article with
   `publication: published`) before trusting any "equals the expected count" check.
 - An element's own `display` beats the UA's `[hidden]` rule, so a component styled
-  `display: grid` stays rendered *and tabbable* while carrying `hidden` and
+  `display: grid` stays rendered _and tabbable_ while carrying `hidden` and
   `aria-hidden="true"` — a carousel can put every slide in the tab order and the
   layout at once. Never take those attributes as proof a slide is out of the tab
   order: drive a real Tab trace
@@ -137,7 +137,7 @@ stage's prescribed artifact is the deployment record on the card itself.
 - Prove a derived asset round-trips, and prove the proof has teeth: recomposite
   the variant over the field colour its source was flattened onto and compare per
   channel (`alpha = max(R,G,B)/255`, `colour = (P − field × (1 − alpha))/alpha`
-  for a source that is the mark over `#010000`), then run the *same* function
+  for a source that is the mark over `#010000`), then run the _same_ function
   against a known-bad file (the rejected RGBA derivative: 190 LSB) and require it
   to fail. A green assertion that was never shown red is not evidence.
 - In unattended single-query (`-q`) sessions the terminal scanner refuses the
@@ -175,7 +175,7 @@ stage's prescribed artifact is the deployment record on the card itself.
   roles' uncommitted files on this shared checkout. While a sibling card is live,
   also check the board right before your close-out — if it is still `running`,
   commit only your own paths and record the leftovers you held.
-- Adding a `media:` key breaks three *existing* assertions in
+- Adding a `media:` key breaks three _existing_ assertions in
   `website/test/news-media.test.mjs`, not just a new case, and card bodies omit
   this: the `newsMediaKeys` deep-equal, the unknown-key message
   (`media must be one of: …`, which joins the whole key list), and the
@@ -189,9 +189,9 @@ stage's prescribed artifact is the deployment record on the card itself.
   is: build, then assert `find dist -type f` lists no unreferenced `_astro` file,
   and that the asset appears — referenced — once the article's `publication` is
   `published`. The predicate is the build output, not the frontmatter, because an
-  unreferenced emitted asset *is* the asset of an item the publication gate holds
+  unreferenced emitted asset _is_ the asset of an item the publication gate holds
   back: a published item's page names its own file, so nothing renders the other
-  one's. When an asset *is* served, still hash it against its canonical `docs/`
+  one's. When an asset _is_ served, still hash it against its canonical `docs/`
   source to show it is not a re-encode.
 - A card body can contradict itself: one section commissions an import of the
   selected asset from the canonical `docs/` export while the acceptance list says
@@ -224,7 +224,7 @@ stage's prescribed artifact is the deployment record on the card itself.
   not a scope violation.
 - A gate can record a hash over a string payload whose encoding is not
   reconstructible ("15 literals, newline-joined, 710 bytes"): verify the card's
-  *stated* acceptance instead — extract the deck's fenced block and assert the
+  _stated_ acceptance instead — extract the deck's fenced block and assert the
   file equals `import line + block` byte-for-byte, and re-derive the length claims
   from the built DOM — then report the unreproducible payload hash as an open
   question rather than a failure.

@@ -13,9 +13,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--server", default="http://127.0.0.1:8188")
     p.add_argument("--spec", type=Path, help="Job spec JSON (default: <root>/spec.json)")
-    p.add_argument(
-        "--vehicle", help="Populate the shared templates from this vehicle entry in the spec"
-    )
+    p.add_argument("--vehicle", help="Populate the shared templates from this vehicle entry in the spec")
     args = p.parse_args()
     schema = request(args.server.rstrip("/") + "/object_info")
     root = Path(__file__).resolve().parents[1]

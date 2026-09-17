@@ -101,11 +101,11 @@ orchestrator instructions.
 
 - **Conservative (default)**: Use the Hermes kanban board for task tracking. Do not run git commits or git pushes unless explicitly asked. At handoff, report changed files, validation, suggested next commands, and the proposed card status.
 - **Developer role (`mars-ai-simulator-dev`) — explicit current human instruction, 2026-09-17**: the developer commits and pushes its own card's scoped change as part of finishing the card; a card dispatched to that role is the clear authority to commit and push, with no further approval step. Stage only the paths the card touched, put the card id in the commit message, rebase before pushing, and report the commit SHA and push result on the card. Every other role keeps the conservative default above. A push is not inert: `main` is wired to the
-connected Cloudflare Workers Build, so **every push to `main` is the automatic production deploy**
-(human instruction, 2026-09-17: "deployment is made automatically by commit/push"). What stays out
-of reach for every agent is the deploy *action* itself — no `wrangler deploy`, no hosting account,
-DNS or provider configuration, no credential — and a push that carries content into the public site
-is a publication: the human gate recorded on the release card must exist before the flip is pushed.
+  connected Cloudflare Workers Build, so **every push to `main` is the automatic production deploy**
+  (human instruction, 2026-09-17: "deployment is made automatically by commit/push"). What stays out
+  of reach for every agent is the deploy _action_ itself — no `wrangler deploy`, no hosting account,
+  DNS or provider configuration, no credential — and a push that carries content into the public site
+  is a publication: the human gate recorded on the release card must exist before the flip is pushed.
 - **Minimal**: Keep tool instruction files as pointers to `docs/INSTRUCTIONS.md`; use the same conservative git policy unless active instructions say otherwise.
 - **Team-maintainer**: Only when the repository explicitly opts in, agents may complete cards, run quality gates, commit, and push as part of session close. A current "do not commit" or "do not push" instruction still wins.
 

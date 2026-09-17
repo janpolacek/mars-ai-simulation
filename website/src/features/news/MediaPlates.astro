@@ -28,14 +28,12 @@ const figures = plateFigures({ set, mediaAlt, mediaCaption });
 
 <div class="article-plates">
     {mediaLabel && <p class="article-plates-label">{mediaLabel}</p>}
-    {
-        figures.map((figure) => (
-            <figure class="article-plate">
-                <Image src={figure.src} alt={figure.alt} width={1152} format="webp" loading="lazy" />
-                <figcaption>{figure.caption}</figcaption>
-            </figure>
-        ))
-    }
+    {figures.map((figure) => (
+        <figure class="article-plate">
+            <Image src={figure.src} alt={figure.alt} width={1152} format="webp" loading="lazy" />
+            <figcaption>{figure.caption}</figcaption>
+        </figure>
+    ))}
 </div>
 
 <style>

@@ -20,9 +20,7 @@ import { progressHeading, progressSteps } from './steps';
                     <p class="timeline-state">{step.state}</p>
                     <h3>{step.title}</h3>
                     <p class="timeline-detail">{step.detail}</p>
-                    {step.link && (
-                        <p class="timeline-link"><a href={step.link.href}>{step.link.label}</a></p>
-                    )}
+                    {step.link && <p class="timeline-link"><a href={step.link.href}>{step.link.label}</a></p>}
                 </div>
             </li>
         ))}

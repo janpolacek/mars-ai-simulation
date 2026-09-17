@@ -6,6 +6,7 @@
 **Source:** Human story owner, relayed by operator (this is the "explicit current human instruction" per `docs/INSTRUCTIONS.md` Source-of-truth order)
 
 **Verbatim answers:**
+
 1. **Yes** — the article may state the designed surface mission lifetime: two Mars years.
 2. **Yes** — the article may state the target **name and its coordinates** (source: `docs/area/AREA.md`) and should be "a little descriptive".
 3. **No new imagery is needed** — three map plates already exist in `docs/area/` and are to be used: AF-01 planet view with arrow, AF-02 region, AF-03 zoomed-in locality.
@@ -53,6 +54,7 @@ highland-basin transition region with layered aqueous minerals as a test of anci
 habitability, without naming a specific landing site, coordinates, or unit.
 
 Allowed facts (all real Mars grounding, not Red Horizon programme facts):
+
 - Margaritifer Terra is an equatorial-to-mid-latitude highland region with a documented
   record of valley networks, basin deposits, and aqueous mineral signatures (clays,
   sulfates) identified from orbit.
@@ -68,6 +70,7 @@ Sources: USGS SIM 3041, SIM 3209, SIM 3489; NASA orbital spectroscopy context
 (`docs/SCENARIO.md` lines 289-294).
 
 Forbidden from this paragraph:
+
 - Any coordinates, landing site name, or site-specific unit (Asteria Field is now RELEASED — see below).
 - Any mention of a specific rover, vehicle design detail, or instrument.
 
@@ -81,6 +84,7 @@ at regional scale, and what honest framing is possible before any landing-site r
 gate keeps private.
 
 Allowed facts (all from released step-001 canon or real Mars grounding):
+
 - Margaritifer Terra is an equatorial Martian region (roughly 10°S to 25°S, 320°E
   to 355°E) in the ancient southern highlands, named after a classical river feature
   on Earth (Margaritifer Terra = "Pearl-bearing land").
@@ -98,6 +102,7 @@ Sources: USGS Gazetteer of Planetary Nomenclature (Margaritifer Terra, Feature 3
 USGS SIM 3041, SIM 3209, SIM 3489; `docs/SCENARIO.md` lines 289-294; `docs/area/AREA.md` §Control record.
 
 Forbidden:
+
 - The landing-design material inside `docs/area/AREA.md`: landing ellipse geometry,
   P0 touchdown zone, science-zone plan, hazard inventory, traverse logic, and the
   AF-H0/AF-B1/AF-C2/AF-L3/AF-E4 unit identifiers. That is landing-preparation material
@@ -115,6 +120,7 @@ operations rather than a brief flyby, and — now approved — the specific dura
 Mars years that the scenario uses as its design anchor.
 
 Allowed facts (from step-001 canon and SCENARIO.md):
+
 - The lifecycle budget covers "concept work through the final science archive" —
   implying a programme that begins before launch and continues after the surface
   mission ends.
@@ -133,19 +139,20 @@ Sources: `docs/SCENARIO.md` lines 20, 25, 209, 216-217; NASA Mars-year explanati
 (`docs/SCENARIO.md` line 293).
 
 Forbidden:
+
 - "21 June 2035" — the absolute end date is gated. Item 1 releases the duration only,
   not the calendar.
 - Any specific surface mission end date.
 
 ## Released facts (with canon sources — approved 2026-09-17)
 
-| Fact | Canon source |
-| ---- | ------------ |
-| Surface mission designed for two Mars years = **1,374 Earth days** | `docs/SCENARIO.md` lines 25, 209 |
-| Target name: **Asteria Field** (fictional) | `docs/area/AREA.md` §Control record |
-| Planning centre: **17.80°S, 332.20°E (27.80°W)** | `docs/area/AREA.md` §Control record |
-| Planning envelope: **12.5–24.0°S, 327.0–338.0°E** | `docs/area/AREA.md` §Control record |
-| Local operations frame: **8 × 6 km**, centred on planning centre | `docs/area/AREA.md` §Control record |
+| Fact                                                               | Canon source                        |
+| ------------------------------------------------------------------ | ----------------------------------- |
+| Surface mission designed for two Mars years = **1,374 Earth days** | `docs/SCENARIO.md` lines 25, 209    |
+| Target name: **Asteria Field** (fictional)                         | `docs/area/AREA.md` §Control record |
+| Planning centre: **17.80°S, 332.20°E (27.80°W)**                   | `docs/area/AREA.md` §Control record |
+| Planning envelope: **12.5–24.0°S, 327.0–338.0°E**                  | `docs/area/AREA.md` §Control record |
+| Local operations frame: **8 × 6 km**, centred on planning centre   | `docs/area/AREA.md` §Control record |
 
 ## Three map plates — RELEASED (reuse, no generation)
 
@@ -157,11 +164,11 @@ reproduce NASA, ESA, USGS, HiRISE, CTX, MOLA, or other orbital imagery."
 Any caption, alt text, label, or credit must carry that provenance and must not claim
 orbital imagery.
 
-| Plate | Stable filename | Description | Scale / frame | Placement in article |
-| ----- | --------------- | ----------- | ------------- | -------------------- |
-| AF-01 | `asteria-field-01-mars-locator.png` | Whole-planet Mars view with arrow targeting the fictional Asteria Field | Planet-scale; ~1,000 km scale bar | Introduction / orientation |
-| AF-02 | `asteria-field-02-regional-context.png` | Regional view of the 12.5–24°S / 327–338°E envelope with terrain units and centre marker | ~200 km scale bar | Geographic-setting paragraph |
-| AF-03 | `asteria-field-03-local-operations.png` | 8 × 6 km local view: landing ellipse, P0 touchdown zone, science zones, hazards, traverses, comms shoulder | 1 km scale bar | Mission-design paragraph |
+| Plate | Stable filename                         | Description                                                                                                | Scale / frame                     | Placement in article         |
+| ----- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------- |
+| AF-01 | `asteria-field-01-mars-locator.png`     | Whole-planet Mars view with arrow targeting the fictional Asteria Field                                    | Planet-scale; ~1,000 km scale bar | Introduction / orientation   |
+| AF-02 | `asteria-field-02-regional-context.png` | Regional view of the 12.5–24°S / 327–338°E envelope with terrain units and centre marker                   | ~200 km scale bar                 | Geographic-setting paragraph |
+| AF-03 | `asteria-field-03-local-operations.png` | 8 × 6 km local view: landing ellipse, P0 touchdown zone, science zones, hazards, traverses, comms shoulder | 1 km scale bar                    | Mission-design paragraph     |
 
 Paths: `docs/area/asteria-field-01-mars-locator.png`, `docs/area/asteria-field-02-regional-context.png`, `docs/area/asteria-field-03-local-operations.png`
 
@@ -196,6 +203,7 @@ Note: `asteria|Asteria` is REMOVED from this list — it is now released for art
 `17.80|332.20|27.80|12.5|24.0|327|338|8 × 6` are RELEASED.
 
 Grep command:
+
 ```
 grep -iE "17 february|16 september|21 june|2035|ariane 64|kourou|rh-01|pathfinder|fei stu|sample.return|crewed|spectrometer|raman|isotope.power|americium|radioisotope" website/news/001-project-announcement.mdx
 ```

@@ -17,7 +17,7 @@ export interface ProgressStep {
     /** Marks the milestone the programme is working on now. */
     current?: boolean;
     /** The published article that carries this step, if one is published. */
-    link?: { href: string; label: string };
+    link?: { href: string; label: string; };
 }
 
 export const progressHeading = {
@@ -31,13 +31,15 @@ export const progressSteps: readonly ProgressStep[] = [
     {
         state: 'Announced',
         title: 'Coalition and purpose',
-        detail: 'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape.',
+        detail:
+            'Ten national programme teams, one uncrewed lander and rover, and a mission to work out how water changed an ancient equatorial landscape.',
         link: { href: routes.newsArticle('001-project-announcement'), label: 'Read the announcement' },
     },
     {
         state: 'Current progress',
         title: 'Mission architecture',
-        detail: 'Turning the announced objective into a mission: what the rover carries, who builds what, and how the mission reaches Mars.',
+        detail:
+            'Turning the announced objective into a mission: what the rover carries, who builds what, and how the mission reaches Mars.',
         current: true,
     },
     {

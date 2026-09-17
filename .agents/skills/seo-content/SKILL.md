@@ -106,7 +106,7 @@ workflow.
   record any concurrent edit you find next to your own diff.
 - **A scoped rule can compile into the built CSS and still never match.** Astro stamps
   `data-astro-cid-<scope>` on the elements written in the file that owns the `<style>` block, and on the
-  root element of a child component *used* there — never on elements that child renders inside itself. So a
+  root element of a child component _used_ there — never on elements that child renders inside itself. So a
   `.parent-class h1 { font-size: … }` aimed at `SectionHeading`'s output is dead while the wrapper rule next
   to it is live, and the route `h1` ships at the base tier with no test or guard covering it. Audit by
   counting matches for every compiled selector that carries two scope attributes

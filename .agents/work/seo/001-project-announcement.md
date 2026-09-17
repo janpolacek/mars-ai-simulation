@@ -2,18 +2,18 @@
 
 ## Package metadata
 
-| Field              | Value                                                                                                                                                                                                    |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Article            | `website/news/001-project-announcement.mdx` (frontmatter `publication: published`)                                                                                                                       |
-| Timeline step      | `001-project-announcement` (retro: the article went public before the pipeline existed)                                                                                                                    |
-| Card               | `t_16c7ba1c` (`mars-ai-simulator-seo`)                                                                                                                                                                    |
-| Owner              | `mars-ai-simulator-seo`                                                                                                                                                                                   |
-| Skill              | `seo-content`                                                                                                                                                                                             |
-| Inputs read        | `website/news/001-project-announcement.mdx`; `.agents/work/reviews/001-project-announcement.md`; `docs/timeline/001-project-announcement.md`; `docs/SCENARIO.md`; `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/README.md`; `docs/brand/BRAND.md`; `website/src/pages/index.astro`; `website/src/content.config.ts`; `website/src/lib/*.ts`; `website/src/components/*.astro`; `website/src/features/**`; `website/astro.config.mjs`; `website/scripts/assets.mjs`; `website/README.md`; card `t_fc952c7d` and its comments |
-| Conventions read   | `.agents/skills/seo-content/SKILL.md`, `.agents/skills/brand-voice/SKILL.md`                                                                                                                               |
-| Artifact           | `.agents/work/seo/001-project-announcement.md` (this file)                                                                                                                                                |
-| Applied to the page | one frontmatter value: `mediaAlt` (section 8). Nothing else in the page was changed.                                                                                                                      |
-| Status             | recommendations issued; **no release, no deploy, no canon change**                                                                                                                                        |
+| Field               | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Article             | `website/news/001-project-announcement.mdx` (frontmatter `publication: published`)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Timeline step       | `001-project-announcement` (retro: the article went public before the pipeline existed)                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Card                | `t_16c7ba1c` (`mars-ai-simulator-seo`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Owner               | `mars-ai-simulator-seo`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Skill               | `seo-content`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Inputs read         | `website/news/001-project-announcement.mdx`; `.agents/work/reviews/001-project-announcement.md`; `docs/timeline/001-project-announcement.md`; `docs/SCENARIO.md`; `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/README.md`; `docs/brand/BRAND.md`; `website/src/pages/index.astro`; `website/src/content.config.ts`; `website/src/lib/*.ts`; `website/src/components/*.astro`; `website/src/features/**`; `website/astro.config.mjs`; `website/scripts/assets.mjs`; `website/README.md`; card `t_fc952c7d` and its comments |
+| Conventions read    | `.agents/skills/seo-content/SKILL.md`, `.agents/skills/brand-voice/SKILL.md`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Artifact            | `.agents/work/seo/001-project-announcement.md` (this file)                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Applied to the page | one frontmatter value: `mediaAlt` (section 8). Nothing else in the page was changed.                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Status              | recommendations issued; **no release, no deploy, no canon change**                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 Assumptions recorded (nothing here was inferred as approved):
 
@@ -26,11 +26,11 @@ Assumptions recorded (nothing here was inferred as approved):
 
 ## 1. Reader intent (one)
 
-**Primary intent — brand informational.** A reader who has just met the name *Red Horizon* asks: **"What is Red Horizon — who is behind it, and is it real?"** The honest answer this page can satisfy is: a fictional, AI-assisted Mars exploration programme, announced with ten national partner teams, one shared uncrewed lander-and-rover mission, a mineralogy objective, a 2031 launch window and a €2.10 billion lifecycle frame, with the technical decisions still ahead.
+**Primary intent — brand informational.** A reader who has just met the name _Red Horizon_ asks: **"What is Red Horizon — who is behind it, and is it real?"** The honest answer this page can satisfy is: a fictional, AI-assisted Mars exploration programme, announced with ten national partner teams, one shared uncrewed lander-and-rover mission, a mineralogy objective, a 2031 launch window and a €2.10 billion lifecycle frame, with the technical decisions still ahead.
 
 **Secondary intent — creative process.** Readers searching the AI/agent angle ("AI-generated fiction project", "multi-agent writing experiment"). The mandatory fiction disclosure already serves this intent honestly, so it is a target rather than a cost.
 
-**One-sentence promise of the page:** *"This states that a fictional Mars programme called Red Horizon has been announced, who its partner teams are, what its first mission will study, and what is still undecided."*
+**One-sentence promise of the page:** _"This states that a fictional Mars programme called Red Horizon has been announced, who its partner teams are, what its first mission will study, and what is still undecided."_
 
 **Deliberate non-targets** (do not optimise for, and why):
 
@@ -38,22 +38,22 @@ Assumptions recorded (nothing here was inferred as approved):
 - **"Mars launch 2031" / landing-site / vehicle queries.** The 2031 window is a fictional programme frame; the launch provider, the vehicle, and the landing region's details are gated at later steps.
 - **Any query the article cannot answer** (dates, instruments, launch site, landing site name). Metadata must not promise what the body withholds.
 
-Theme (one phrase, used consistently): *a fictional, AI-assisted Mars mission, announced.*
+Theme (one phrase, used consistently): _a fictional, AI-assisted Mars mission, announced._
 
 ---
 
 ## 2. Surface inventory (what is actually indexable today)
 
-| Surface                                      | State (measured)                                                                                                                       | Consequence                                                                                                     |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Public pages                                 | one: `/` (`website/src/pages/index.astro`); `probe-temp.astro` is an untracked local probe, not a page                                   | the whole programme is one URL today                                                                            |
-| Article body                                 | 249 words, 0 markdown headings, 0 links; **rendered nowhere** — no detail route exists and `src/lib/releases.ts` gates `/news/<slug>/` behind a human release reference (`releasedNewsSlugs = []`) | article 001's only search surface is the homepage `<title>`, the homepage `<meta name="description">`, and its card |
-| Homepage `<title>`                           | `Red Horizon \| A Mars mission in progress`                                                                                            | brand-first, no topic noun; acceptable for the only page                                                        |
-| Homepage description                         | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.`                          | honest, no later-step fact; no per-page override exists                                                         |
-| Open Graph / Twitter card / canonical        | absent (no `og:`, no `twitter:`, no `rel="canonical"`, no `ld+json`, no `robots.txt`, no sitemap anywhere in the repository)             | nothing leaks, and nothing is claimed either; `src/lib/seo.ts` correctly emits no canonical while `SITE_URL` is unset |
-| `astro.config.mjs`                           | no `site:` value                                                                                                                       | canonical/sitemap work is blocked on the domain decision, not on code                                           |
-| News listing                                 | `#updates` carousel inside `/`; nav "News" still points at `#updates` on disk, while `src/lib/navigation.ts` already defines `routes.news = '/news/'` | the listing URL is in flight; the anchor remains the live target today                                          |
-| Media contract                               | `src/lib/media.ts` restricts `media:` to the key `programme-identity`; `src/lib/assets.ts` imports `docs/brand/logo.png`; `scripts/assets.mjs` withholds `docs/vehicle/` | the frontmatter `media:` value on disk already reads `programme-identity` (changed concurrently by that refactor); the alt text (`mediaAlt`) stays a frontmatter string either way |
+| Surface                               | State (measured)                                                                                                                                                                                   | Consequence                                                                                                                                                                        |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public pages                          | one: `/` (`website/src/pages/index.astro`); `probe-temp.astro` is an untracked local probe, not a page                                                                                             | the whole programme is one URL today                                                                                                                                               |
+| Article body                          | 249 words, 0 markdown headings, 0 links; **rendered nowhere** — no detail route exists and `src/lib/releases.ts` gates `/news/<slug>/` behind a human release reference (`releasedNewsSlugs = []`) | article 001's only search surface is the homepage `<title>`, the homepage `<meta name="description">`, and its card                                                                |
+| Homepage `<title>`                    | `Red Horizon \| A Mars mission in progress`                                                                                                                                                        | brand-first, no topic noun; acceptable for the only page                                                                                                                           |
+| Homepage description                  | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.`                                                                                     | honest, no later-step fact; no per-page override exists                                                                                                                            |
+| Open Graph / Twitter card / canonical | absent (no `og:`, no `twitter:`, no `rel="canonical"`, no `ld+json`, no `robots.txt`, no sitemap anywhere in the repository)                                                                       | nothing leaks, and nothing is claimed either; `src/lib/seo.ts` correctly emits no canonical while `SITE_URL` is unset                                                              |
+| `astro.config.mjs`                    | no `site:` value                                                                                                                                                                                   | canonical/sitemap work is blocked on the domain decision, not on code                                                                                                              |
+| News listing                          | `#updates` carousel inside `/`; nav "News" still points at `#updates` on disk, while `src/lib/navigation.ts` already defines `routes.news = '/news/'`                                              | the listing URL is in flight; the anchor remains the live target today                                                                                                             |
+| Media contract                        | `src/lib/media.ts` restricts `media:` to the key `programme-identity`; `src/lib/assets.ts` imports `docs/brand/logo.png`; `scripts/assets.mjs` withholds `docs/vehicle/`                           | the frontmatter `media:` value on disk already reads `programme-identity` (changed concurrently by that refactor); the alt text (`mediaAlt`) stays a frontmatter string either way |
 
 **Highest-value SEO change for the project:** the `/news/` index plus release-gated `/news/<slug>/` detail routes, with a per-page `<title>` and description. That work is **already in flight in the working tree** (`src/lib/navigation.ts`, `src/lib/releases.ts`, `src/lib/seo.ts`, and a `SectionHeading` that documents a page-level `h1` on the news index). This package therefore specifies the **metadata contract** for that route rather than requesting new structure, and it does not create a duplicate card for work that is already being built.
 
@@ -69,11 +69,11 @@ Theme (one phrase, used consistently): *a fictional, AI-assisted Mars mission, a
 
 **Recommended `<title>` for the detail route** (if and when the human records a release reference):
 
-| Option                                        | Length | Text                                                              | Use when                                                             |
-| --------------------------------------------- | -----: | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
-| A (recommended primary)                       |     54 | `Red Horizon: a fictional Mars lander and rover mission`          | default; answers "what is this" and marks it fictional up front      |
-| B2 (alternative)                              |     52 | `Red Horizon: ten partners, one Mars mission for 2031`            | if the coalition and the window are the point of the page            |
-| A + site suffix                               |     75 | `Red Horizon: a fictional Mars lander and rover mission \| Mars AI Simulation` | acceptable, but the suffix will usually be trimmed by the search engine; prefer A alone |
+| Option                  | Length | Text                                                                           | Use when                                                                                |
+| ----------------------- | -----: | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| A (recommended primary) |     54 | `Red Horizon: a fictional Mars lander and rover mission`                       | default; answers "what is this" and marks it fictional up front                         |
+| B2 (alternative)        |     52 | `Red Horizon: ten partners, one Mars mission for 2031`                         | if the coalition and the window are the point of the page                               |
+| A + site suffix         |     75 | `Red Horizon: a fictional Mars lander and rover mission \| Mars AI Simulation` | acceptable, but the suffix will usually be trimmed by the search engine; prefer A alone |
 
 Rules attached: exactly one `<title>` per route; brand name first; no date, no number that a later step changes (no launch date, no landing date, no budget figure in the title); the visible `h1` may stay the house sentence (option: "A mission takes shape in public.") as long as `h1` and `<title>` describe the same event — the gap between them must never promise more than the body says.
 
@@ -91,11 +91,11 @@ Rules attached: exactly one `<title>` per route; brand name first; no date, no n
 
 **Recommended description strings** (measured):
 
-| Option                     | Length | Text                                                                                                                                                        |
-| -------------------------- | -----: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| D1 (recommended)           |    136 | `Fictional, AI-assisted Mars programme: ten national teams, one uncrewed lander and rover, a mineralogy mission and a 2031 launch window.`                    |
-| D2                         |    132 | `What Red Horizon is: a fictional, AI-assisted Mars mission with ten partner teams, a mineralogy objective, and a 2031 launch window.`                        |
-| D4 (shortest)              |    112 | `A fictional, AI-assisted Mars programme: ten partner teams, one uncrewed lander and rover, a 2031 launch window.`                                            |
+| Option           | Length | Text                                                                                                                                       |
+| ---------------- | -----: | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| D1 (recommended) |    136 | `Fictional, AI-assisted Mars programme: ten national teams, one uncrewed lander and rover, a mineralogy mission and a 2031 launch window.` |
+| D2               |    132 | `What Red Horizon is: a fictional, AI-assisted Mars mission with ten partner teams, a mineralogy objective, and a 2031 launch window.`     |
+| D4 (shortest)    |    112 | `A fictional, AI-assisted Mars programme: ten partner teams, one uncrewed lander and rover, a 2031 launch window.`                         |
 
 All three keep the fiction disclosure in the opening clause (required by `docs/INSTRUCTIONS.md`) and stay inside the step-001 allowed frame: coalition, mission type, science purpose, 2031 window. None carries the budget figure — the frame is in the body and on the card, and the snippet's job is the identity question.
 
@@ -145,12 +145,12 @@ Reasons: it is lowercase, hyphenated and human-readable; the numeric prefix is h
 
 **Recommendation set for the released detail route** (four links, in priority order; anchor text → destination):
 
-| # | Anchor text (proposed)          | Destination                          | Why it is honest                                                                 |
-| - | ------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------- |
-| 1 | the programme at a glance       | `/#mission`                          | the mission brief panel with the fact table; exists today                        |
-| 2 | the public progress log         | `/#timeline`                         | the progress log; exists today                                                    |
-| 3 | all announcements               | `/news/`                            | the newsroom listing; exists once the in-flight index lands                       |
-| 4 | what the mission will measure   | `/news/002-payload-selection/`       | **only** after 002 is published *and* released; not before its editorial gate     |
+| # | Anchor text (proposed)        | Destination                    | Why it is honest                                                              |
+| - | ----------------------------- | ------------------------------ | ----------------------------------------------------------------------------- |
+| 1 | the programme at a glance     | `/#mission`                    | the mission brief panel with the fact table; exists today                     |
+| 2 | the public progress log       | `/#timeline`                   | the progress log; exists today                                                |
+| 3 | all announcements             | `/news/`                       | the newsroom listing; exists once the in-flight index lands                   |
+| 4 | what the mission will measure | `/news/002-payload-selection/` | **only** after 002 is published _and_ released; not before its editorial gate |
 
 **Why none of these are applied in the MDX today:** the body renders nowhere (no route; `releasedNewsSlugs` is empty). Adding links to a body no reader can open would repeat exactly the dishonesty that corrective card `t_fc952c7d` removed from the "First public briefing" label. Also, the body is the writer's artifact; link edits belong to the writer, with the editor's review.
 
@@ -166,10 +166,10 @@ Reasons: it is lowercase, hyphenated and human-readable; the numeric prefix is h
 
 **Applied** (`website/news/001-project-announcement.mdx`, frontmatter `mediaAlt`):
 
-| | Length | Value |
-| --- | ---: | --- |
-| Before | 138 | `The Red Horizon programme mark: a rust-red Mars disc crossed by low highlighted hills, with a small Sun rising behind its upper-left edge.` |
-| After | 187 | `The Red Horizon programme mark: a rust-red Mars disc crossed by low highlighted hills, a small Sun rising behind its upper-left edge, and blue Earth with a dimmer Moon at the upper right.` |
+|        | Length | Value                                                                                                                                                                                         |
+| ------ | -----: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Before |    138 | `The Red Horizon programme mark: a rust-red Mars disc crossed by low highlighted hills, with a small Sun rising behind its upper-left edge.`                                                  |
+| After  |    187 | `The Red Horizon programme mark: a rust-red Mars disc crossed by low highlighted hills, a small Sun rising behind its upper-left edge, and blue Earth with a dimmer Moon at the upper right.` |
 
 **Why this is mine to apply and why it is safe:**
 
@@ -200,14 +200,14 @@ Reasons: it is lowercase, hyphenated and human-readable; the numeric prefix is h
 
 ## 10. Site-level technical recommendations (routed, not done here)
 
-| Item | Recommendation | Owner | Blocker |
-| --- | --- | --- | --- |
-| Canonical | keep `canonicalUrl` emitting nothing while `SITE_URL` is unset; set the origin only from the real domain | dev | domain/DNS decision (human) |
-| Open Graph / Twitter card | add only with the route: `og:title` = page title, `og:description` = section 4 string, `og:image` **from the released media registry only** (never `docs/vehicle/`, never a gated asset), `og:image:alt` = the section 8 alt text | dev | release reference + variant decision |
-| `robots.txt` / sitemap | defer; when added, the sitemap must list only `published` **and released** URLs — today that is one | dev | origin decision |
-| Link integrity | add a test that no rendered page links to a non-generated route (the `releasedNewsSlugs` gate already gives it something to assert) | dev | none (can be done with the route work) |
-| Keyword stuffing | no `keywords` meta, no hidden text, no repeated brand strings; the brand appears once in the 249-word body and that is enough | writer/seo | none |
-| Crawl access | the article's discoverability ceiling is structural (one page, no article route), not linguistic; the `/news/` index is the fix | dev (in flight) | human release reference for detail routes |
+| Item                      | Recommendation                                                                                                                                                                                                                    | Owner           | Blocker                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ----------------------------------------- |
+| Canonical                 | keep `canonicalUrl` emitting nothing while `SITE_URL` is unset; set the origin only from the real domain                                                                                                                          | dev             | domain/DNS decision (human)               |
+| Open Graph / Twitter card | add only with the route: `og:title` = page title, `og:description` = section 4 string, `og:image` **from the released media registry only** (never `docs/vehicle/`, never a gated asset), `og:image:alt` = the section 8 alt text | dev             | release reference + variant decision      |
+| `robots.txt` / sitemap    | defer; when added, the sitemap must list only `published` **and released** URLs — today that is one                                                                                                                               | dev             | origin decision                           |
+| Link integrity            | add a test that no rendered page links to a non-generated route (the `releasedNewsSlugs` gate already gives it something to assert)                                                                                               | dev             | none (can be done with the route work)    |
+| Keyword stuffing          | no `keywords` meta, no hidden text, no repeated brand strings; the brand appears once in the 249-word body and that is enough                                                                                                     | writer/seo      | none                                      |
+| Crawl access              | the article's discoverability ceiling is structural (one page, no article route), not linguistic; the `/news/` index is the fix                                                                                                   | dev (in flight) | human release reference for detail routes |
 
 ---
 
@@ -231,13 +231,13 @@ Honesty checks:
 
 ## 12. Brand-voice and continuity conflicts (reported, not settled)
 
-| # | Conflict | Recommended resolution | Owner |
-| - | --- | --- | --- |
-| 1 | House heading style is period-terminated sentences; search `<title>`/descriptions work better as plain noun phrases | keep the visible heading in house style and let the `<title>` differ, both describing the same event — no style change is asked of the writer | writer/editor (acknowledge), dev (implement) |
-| 2 | `linkLabel: "First public briefing"` (21) reads like a link to a briefing page that does not exist | change to a plain label: `Announcement summary` (20) or `Programme announcement` (22); it is the same honesty problem the corrective card fixed visually | editor (holds it as an open copy call) — **not applied** |
-| 3 | `status: "Now opening"` renders as "Announcement 01 · Now opening", which is not plain search language | consider `Programme announced` (19); meaning-preserving, no new fact | writer/editor — **not applied** |
-| 4 | `summary` is doing two jobs (card paragraph, and the only description surface) and is 95 chars over a snippet budget | separate `description` field (section 4, option A) | dev, with writer sign-off |
-| 5 | Continuity | **no conflict found.** Every string this package recommends uses only step-001 allowed facts, and the body's claims are unchanged by this pass | continuity card `t_0b3434e8` |
+| # | Conflict                                                                                                             | Recommended resolution                                                                                                                                   | Owner                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 1 | House heading style is period-terminated sentences; search `<title>`/descriptions work better as plain noun phrases  | keep the visible heading in house style and let the `<title>` differ, both describing the same event — no style change is asked of the writer            | writer/editor (acknowledge), dev (implement)             |
+| 2 | `linkLabel: "First public briefing"` (21) reads like a link to a briefing page that does not exist                   | change to a plain label: `Announcement summary` (20) or `Programme announcement` (22); it is the same honesty problem the corrective card fixed visually | editor (holds it as an open copy call) — **not applied** |
+| 3 | `status: "Now opening"` renders as "Announcement 01 · Now opening", which is not plain search language               | consider `Programme announced` (19); meaning-preserving, no new fact                                                                                     | writer/editor — **not applied**                          |
+| 4 | `summary` is doing two jobs (card paragraph, and the only description surface) and is 95 chars over a snippet budget | separate `description` field (section 4, option A)                                                                                                       | dev, with writer sign-off                                |
+| 5 | Continuity                                                                                                           | **no conflict found.** Every string this package recommends uses only step-001 allowed facts, and the body's claims are unchanged by this pass           | continuity card `t_0b3434e8`                             |
 
 ---
 
@@ -316,25 +316,25 @@ Nothing else in the page changed by this pass: no body text, no `title`, no `sum
 
 ## Revision: 2026-09-17 (card t_3bd87425) — SEO re-pass on the revised article
 
-| Field | Value |
-| --- | --- |
-| Card | `t_3bd87425` (`mars-ai-simulator-seo`), child of `t_855de80a`; parent `t_30760665` (writer, revision draft) |
-| Timeline step | `site-foundation` / step 001 (project announcement) |
-| Inputs read | the revised draft `website/news/001-project-announcement.mdx` (SHA-256 `f5d00e03a38960b7ab95a79d436ed6d16c8418856eb15033b6f0d902ebeb1655`, 76 lines); `.agents/work/briefs/001-project-announcement.md` (incl. the "Human release approval reference" and "Forbidden token set"); `.agents/work/reviews/001-project-announcement.md` (§10 retro gate, incl. §10.7 routed observations); the planner's superseding comment on this card (2026-09-17) and on `t_6498855e`; `docs/area/AREA.md` §Control record + §Map package; `docs/SCENARIO.md` (release controls); the current site tree `website/src/**` (pages, layout, features/news, lib) and `website/dist/` |
-| Artifact | this file (appended; retro sections 1–16 are untouched, and the planner's placeholder at the old line 299 is replaced by a pointer to this section) |
-| Applied to the page | two frontmatter values: `title` and `summary` (§R12). Nothing else in the article changed. |
-| Status | recommendations issued; **no release, no deploy, no canon change, no commit** |
+| Field               | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Card                | `t_3bd87425` (`mars-ai-simulator-seo`), child of `t_855de80a`; parent `t_30760665` (writer, revision draft)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Timeline step       | `site-foundation` / step 001 (project announcement)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Inputs read         | the revised draft `website/news/001-project-announcement.mdx` (SHA-256 `f5d00e03a38960b7ab95a79d436ed6d16c8418856eb15033b6f0d902ebeb1655`, 76 lines); `.agents/work/briefs/001-project-announcement.md` (incl. the "Human release approval reference" and "Forbidden token set"); `.agents/work/reviews/001-project-announcement.md` (§10 retro gate, incl. §10.7 routed observations); the planner's superseding comment on this card (2026-09-17) and on `t_6498855e`; `docs/area/AREA.md` §Control record + §Map package; `docs/SCENARIO.md` (release controls); the current site tree `website/src/**` (pages, layout, features/news, lib) and `website/dist/` |
+| Artifact            | this file (appended; retro sections 1–16 are untouched, and the planner's placeholder at the old line 299 is replaced by a pointer to this section)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Applied to the page | two frontmatter values: `title` and `summary` (§R12). Nothing else in the article changed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Status              | recommendations issued; **no release, no deploy, no canon change, no commit**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 **Supersession map (what this revision overrides in the retro record, and what it does not).** The retro
 record was written against a 249-word, five-paragraph article with one identity-mark image and no
 article route. Three of its conclusions no longer describe the file:
 
-| Retro section | Status after this revision |
-| --- | --- |
-| §3 Title ("keep it … it is **not** search language, so it must never be the whole `<title>`") | **superseded in part** — the visible sentence is kept as the frame, but the searched token is now added (§R4). The retro rule stands: no date, no number a later step changes, brand in the document title. |
-| §4 Meta description (recommend a separate `description` field; do not shorten `summary`) | **superseded in part** — `summary` is now ≤155 and serves both jobs (§R5); the separate field is deferred, not rejected, with a trigger. |
-| §8 Alt text (the programme-mark wording, `mediaAlt` as a single string) | **superseded** — the article now carries `media: asteria-plates` with three per-plate entries; the identity-mark strings survive only as history (§R9). |
-| §1 intent, §5 slug, §6 heading policy, §7 link set, §9 no structured data, §10 site-level items, §11 checks, §12 conflicts, §15 handoff | **still current**, with the updates recorded in §R3–§R10, §R11–§R12 below. |
+| Retro section                                                                                                                           | Status after this revision                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| §3 Title ("keep it … it is **not** search language, so it must never be the whole `<title>`")                                           | **superseded in part** — the visible sentence is kept as the frame, but the searched token is now added (§R4). The retro rule stands: no date, no number a later step changes, brand in the document title. |
+| §4 Meta description (recommend a separate `description` field; do not shorten `summary`)                                                | **superseded in part** — `summary` is now ≤155 and serves both jobs (§R5); the separate field is deferred, not rejected, with a trigger.                                                                    |
+| §8 Alt text (the programme-mark wording, `mediaAlt` as a single string)                                                                 | **superseded** — the article now carries `media: asteria-plates` with three per-plate entries; the identity-mark strings survive only as history (§R9).                                                     |
+| §1 intent, §5 slug, §6 heading policy, §7 link set, §9 no structured data, §10 site-level items, §11 checks, §12 conflicts, §15 handoff | **still current**, with the updates recorded in §R3–§R10, §R11–§R12 below.                                                                                                                                  |
 
 ### R1. State read, and the measurement of the revised article
 
@@ -342,33 +342,33 @@ Read at **2026-09-17 01:53–01:56 CEST**. The article's mtime (01:49:37) predat
 pass, so the file did not move under the pass; the site files it depends on were re-read immediately
 before use (`src/pages/news/[slug].astro` 01:39, `src/features/news/plate*.ts` 01:49, `src/lib/site.ts` 01:38).
 
-| Measurement | Retro record | Revised article (this pass) |
-| --- | --- | --- |
-| Body | 249 words, 5 paragraphs | **10 paragraphs, 553 word tokens** measured by the pass's tokeniser (the writer's counter reports 541; the difference is the counting rule, not the text — both are recorded so the two records do not look like drift) |
-| Body headings | 0 | 0 |
-| Body links | 0 | **4**: 1 internal (`/#mission`) + 3 external citations (USGS planetary nomenclature, USGS geologic map, NASA clay/hydrated-mineral map) — all three re-checked this pass, HTTP 200 |
-| Frontmatter keys | 11 | 12 (`media`, `mediaAlt`, `mediaLabel` and the new `mediaCaption`, which is now a per-plate list) |
-| `title` | 32 chars | 37 chars (**applied here**) |
-| `summary` | 250 (retro's count of the pre-revision string) | 255 (writer's revision) → **147 (applied here)** |
-| `media` | `/assets/logo.png` → key `programme-identity` | key `asteria-plates` (three plates) |
-| Publication state | `published`, rendered nowhere | unchanged: `publication: published`, and still **rendered nowhere as a body** — `src/lib/releases.ts` ships an empty release list (§R2) |
+| Measurement       | Retro record                                   | Revised article (this pass)                                                                                                                                                                                             |
+| ----------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Body              | 249 words, 5 paragraphs                        | **10 paragraphs, 553 word tokens** measured by the pass's tokeniser (the writer's counter reports 541; the difference is the counting rule, not the text — both are recorded so the two records do not look like drift) |
+| Body headings     | 0                                              | 0                                                                                                                                                                                                                       |
+| Body links        | 0                                              | **4**: 1 internal (`/#mission`) + 3 external citations (USGS planetary nomenclature, USGS geologic map, NASA clay/hydrated-mineral map) — all three re-checked this pass, HTTP 200                                      |
+| Frontmatter keys  | 11                                             | 12 (`media`, `mediaAlt`, `mediaLabel` and the new `mediaCaption`, which is now a per-plate list)                                                                                                                        |
+| `title`           | 32 chars                                       | 37 chars (**applied here**)                                                                                                                                                                                             |
+| `summary`         | 250 (retro's count of the pre-revision string) | 255 (writer's revision) → **147 (applied here)**                                                                                                                                                                        |
+| `media`           | `/assets/logo.png` → key `programme-identity`  | key `asteria-plates` (three plates)                                                                                                                                                                                     |
+| Publication state | `published`, rendered nowhere                  | unchanged: `publication: published`, and still **rendered nowhere as a body** — `src/lib/releases.ts` ships an empty release list (§R2)                                                                                 |
 
 ### R2. Surface inventory, re-measured (what is indexable today)
 
-| Surface | State (measured this pass) | Consequence for this revision |
-| --- | --- | --- |
-| Built routes | **2**: `/` (`dist/index.html`) and `/news/` (`dist/news/index.html`); `npm run build` → exit 0, postbuild `check:dist` exit 0 | the article's body still has **no URL**; its only public surface is the homepage card |
-| Article detail route | `src/pages/news/[slug].astro` exists and is gated by `releasedNewsSlugs = []`; no `/news/001-project-announcement/` is generated | every recommendation here is for a route that does not exist yet; nothing is crawlable from this revision |
-| Detail-route metadata contract | `<BaseLayout title={`${item.data.title} | ${site.name}`} description={item.data.summary}>` (`src/pages/news/[slug].astro:20`) | the frontmatter `title` **is** the document title (plus the brand) and `summary` **is** the meta description — which is why §R4/§R5 are metadata fixes, not copy preferences |
-| `/news/` index metadata | distinct from the homepage since `t_2bf95f76` applied a title (50) and description (102) to `src/pages/news/index.astro`; the earlier `News | Red Horizon` convention on card `t_1828a6d4` was superseded — settled in §R11.1 | two routes no longer share one identity |
-| Canonical / Open Graph / Twitter / `ld+json` / robots.txt / sitemap | unchanged: none anywhere; no `SITE_URL` in `astro.config.mjs` | correct state while no origin is authorised (§R10) |
-| Media contract | `src/lib/media.ts` now holds two keys — `programme-identity` (1 plate, 1 alt, no caption) and `asteria-plates` (3 plates, 3 alts, 3 captions, label required); `src/features/news/media.ts` resolves `asteria-plates` from `docs/area/`, and its provenance sentence is printed by the component, not by frontmatter | the article's three alt entries are the only alt text this role can complete; the captions and the safety note are component-guaranteed (dev card `t_3922071d`) |
-| Homepage card image for 001 | now **AF-01** (was the programme mark) with the label `AF-01 · Mars locator` and the frontmatter's first alt entry | a visible surface change owned by `t_3922071d`, flagged for sign-off on `t_8274703e`; recorded here because it changes what the card's alt text must describe |
-| Guard | `gatedTextMarkers` now holds four markers; the released field name was retired with negative evidence (`t_3922071d`) | the released name may appear in the article and in built text; the other four markers and both withheld directories still fail a build |
+| Surface                                                             | State (measured this pass)                                                                                                                                                                                                                                                                                           | Consequence for this revision                                                                                                                                   |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Built routes                                                        | **2**: `/` (`dist/index.html`) and `/news/` (`dist/news/index.html`); `npm run build` → exit 0, postbuild `check:dist` exit 0                                                                                                                                                                                        | the article's body still has **no URL**; its only public surface is the homepage card                                                                           |
+| Article detail route                                                | `src/pages/news/[slug].astro` exists and is gated by `releasedNewsSlugs = []`; no `/news/001-project-announcement/` is generated                                                                                                                                                                                     | every recommendation here is for a route that does not exist yet; nothing is crawlable from this revision                                                       |
+| Detail-route metadata contract                                      | `<BaseLayout title={`${item.data.title}                                                                                                                                                                                                                                                                              | ${site.name}`} description={item.data.summary}>` (`src/pages/news/[slug].astro:20`)                                                                             | the frontmatter `title` **is** the document title (plus the brand) and `summary` **is** the meta description — which is why §R4/§R5 are metadata fixes, not copy preferences |
+| `/news/` index metadata                                             | distinct from the homepage since ``t_2bf95f76`` applied a title (50) and description (102) to ``src/pages/news/index.astro``; the earlier `News                                                                                                                                                                      | Red Horizon``convention on card``t_1828a6d4` was superseded — settled in §R11.1                                                                                 | two routes no longer share one identity |
+| Canonical / Open Graph / Twitter / `ld+json` / robots.txt / sitemap | unchanged: none anywhere; no `SITE_URL` in `astro.config.mjs`                                                                                                                                                                                                                                                        | correct state while no origin is authorised (§R10)                                                                                                              |
+| Media contract                                                      | `src/lib/media.ts` now holds two keys — `programme-identity` (1 plate, 1 alt, no caption) and `asteria-plates` (3 plates, 3 alts, 3 captions, label required); `src/features/news/media.ts` resolves `asteria-plates` from `docs/area/`, and its provenance sentence is printed by the component, not by frontmatter | the article's three alt entries are the only alt text this role can complete; the captions and the safety note are component-guaranteed (dev card `t_3922071d`) |
+| Homepage card image for 001                                         | now **AF-01** (was the programme mark) with the label `AF-01 · Mars locator` and the frontmatter's first alt entry                                                                                                                                                                                                   | a visible surface change owned by `t_3922071d`, flagged for sign-off on `t_8274703e`; recorded here because it changes what the card's alt text must describe   |
+| Guard                                                               | `gatedTextMarkers` now holds four markers; the released field name was retired with negative evidence (`t_3922071d`)                                                                                                                                                                                                 | the released name may appear in the article and in built text; the other four markers and both withheld directories still fail a build                          |
 
 ### R3. Reader intent (one, updated — not broadened)
 
-**Primary intent — brand informational.** A reader who has met the name *Red Horizon* asks: **"What is
+**Primary intent — brand informational.** A reader who has met the name _Red Horizon_ asks: **"What is
 Red Horizon — who is behind it, and is it real?"** The revised article answers more of that question than
 the retro text did, all of it released: a fictional, AI-assisted Mars programme; ten national programme
 teams; one shared uncrewed lander-and-rover mission; mineralogy and ancient aqueous conditions as the
@@ -376,9 +376,9 @@ purpose; a named **fictional** operational region with scenario coordinates; a 2
 €2.10 billion lifecycle frame and a surface mission designed for two Mars years (1,374 Earth days);
 technical selections still ahead.
 
-**One-sentence promise of the page:** *"This states that a fictional Mars programme called Red Horizon
+**One-sentence promise of the page:** _"This states that a fictional Mars programme called Red Horizon
 has been announced, who its partner teams are, what its first mission will study and where it aims,
-how long it is designed to operate, and what is still undecided."*
+how long it is designed to operate, and what is still undecided."_
 
 **Secondary intent — creative process.** Readers searching the AI/agent angle. Unchanged; the mandatory
 fiction disclosure serves it honestly.
@@ -400,11 +400,11 @@ fiction disclosure serves it honestly.
 
 ### R4. Title — applied
 
-| | Length | Route document title (`${title} \| Red Horizon`) |
-| --- | ---: | --- |
-| **Applied** — `A Mars mission takes shape in public.` | 37 | `A Mars mission takes shape in public. \| Red Horizon` (51) |
-| Revert string (the writer's revision value) | 32 | `A mission takes shape in public. \| Red Horizon` (46) |
-| Alternative recorded, not applied — `A fictional Mars mission takes shape in public.` | 47 | 61 — pick this instead if the editor wants the fiction marker inside the document title itself |
+|                                                                                       | Length | Route document title (`${title} \| Red Horizon`)                                               |
+| ------------------------------------------------------------------------------------- | -----: | ---------------------------------------------------------------------------------------------- |
+| **Applied** — `A Mars mission takes shape in public.`                                 |     37 | `A Mars mission takes shape in public. \| Red Horizon` (51)                                    |
+| Revert string (the writer's revision value)                                           |     32 | `A mission takes shape in public. \| Red Horizon` (46)                                         |
+| Alternative recorded, not applied — `A fictional Mars mission takes shape in public.` |     47 | 61 — pick this instead if the editor wants the fiction marker inside the document title itself |
 
 **Why it is mine and why it is needed.** The card grants the title review for this revision, the article's
 frontmatter `title` is literally the document title of the detail route, and the sentence carried **no
@@ -415,7 +415,7 @@ token the page lacked, and matches the site's own published wording for the same
 (`site.defaultTitle`: "Red Horizon | A Mars mission in progress"). It is also the convention the 002 pass
 set for the series ("keep the writer's frame, add the searched token pair", `.agents/work/seo/002-payload-selection.md` §2).
 
-**Recorded, not applied:** the retro §3/§4 option of a *separate* route-title field (`seoTitle`) so the
+**Recorded, not applied:** the retro §3/§4 option of a _separate_ route-title field (`seoTitle`) so the
 document title can differ from the visible heading. Both live article titles now read well inside the
 existing `${title} | ${site.name}` template (001 = 51, 002 = 49), so the field is not needed yet; the
 trigger to add it is a title that must be search-led and display-led at once (§R11.4).
@@ -423,7 +423,7 @@ trigger to add it is a title that must be search-led and display-led at once (§
 **Effect on visible copy:** the homepage card `h3`, the newsroom listing and (when released) the article
 `h1` all render the frontmatter title, so this one word is visible on those surfaces. Verified in the
 built page: `dist/index.html` contains `<h3 …>A Mars mission takes shape in public.</h3>`, and the
-previous string occurs 0 times. The human's open question about the *public title* (review §10.6.2) is
+previous string occurs 0 times. The human's open question about the _public title_ (review §10.6.2) is
 unchanged in kind — the applied string is meaning-neutral, recorded with its revert string, and one line
 to undo if the human settles a different title.
 
@@ -435,13 +435,13 @@ around "…with a 2031 launch window and a surface mission designed for two Mars
 point where the sentence stops making sense. That is the exact failure the retro §4 predicted and left to
 the owner; the writer's handoff handed the call to this stage.
 
-| | Length | Value |
-| --- | ---: | --- |
-| **Applied** | **147** | `Red Horizon is a fictional, AI-assisted Mars programme. Ten national teams have announced one uncrewed lander and rover, with a 2031 launch window.` |
-| Revert string (writer's revision value, verbatim) | 255 | `Red Horizon is a fictional, AI-assisted Mars exploration programme. Ten partner groups have announced one uncrewed mission to study ancient aqueous terrain in Margaritifer Terra, with a 2031 launch window and a surface mission designed for two Mars years.` |
-| Rejected, over budget | 158 | `…one uncrewed lander and rover to study an ancient aqueous landscape.` (keeps the science clause, loses the window — 3 chars over) |
-| Rejected, over budget | 156 | the same objective clause with a leading "A fictional, AI-assisted Mars programme:" |
-| Recorded alternative if the editor prefers the newer fact | 153 | `Red Horizon is a fictional, AI-assisted Mars programme. Ten national teams have announced one uncrewed lander and rover, designed to work two Mars years.` |
+|                                                           |  Length | Value                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------- | ------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Applied**                                               | **147** | `Red Horizon is a fictional, AI-assisted Mars programme. Ten national teams have announced one uncrewed lander and rover, with a 2031 launch window.`                                                                                                             |
+| Revert string (writer's revision value, verbatim)         |     255 | `Red Horizon is a fictional, AI-assisted Mars exploration programme. Ten partner groups have announced one uncrewed mission to study ancient aqueous terrain in Margaritifer Terra, with a 2031 launch window and a surface mission designed for two Mars years.` |
+| Rejected, over budget                                     |     158 | `…one uncrewed lander and rover to study an ancient aqueous landscape.` (keeps the science clause, loses the window — 3 chars over)                                                                                                                               |
+| Rejected, over budget                                     |     156 | the same objective clause with a leading "A fictional, AI-assisted Mars programme:"                                                                                                                                                                               |
+| Recorded alternative if the editor prefers the newer fact |     153 | `Red Horizon is a fictional, AI-assisted Mars programme. Ten national teams have announced one uncrewed lander and rover, designed to work two Mars years.`                                                                                                       |
 
 **Why these facts and not others.** The snippet's job is the identity question: fictional + AI-assisted
 (disclosure first, never a footnote), who (ten national teams — the canon and body wording, which also
@@ -453,7 +453,7 @@ above), the fictional field name, the coordinates, and the budget frame.
 
 **Series convention recorded:** a `summary` that doubles as a meta description stays ≤155 characters
 (001 = 147, 002 = 152). The retro §4 option A (a separate `description` field) is therefore **deferred,
-not rejected**: the trigger for adding it is a page that needs a long card paragraph *and* a short
+not rejected**: the trigger for adding it is a page that needs a long card paragraph _and_ a short
 snippet at the same time. No card is filed for it now, because nothing today needs one.
 
 ### R6. Slug — re-affirmed, no change
@@ -469,7 +469,7 @@ exists in `src/content.config.ts`; nothing in this pass touches the file name.
 
 **Measured:** 10 paragraphs, 553 word tokens, **0 markdown headings**, three figures inserted after the
 header. The retro §6 trigger ("if the body ever grows past roughly 600 words") was set for a
-five-paragraph announcement; the honest reading now is that the *paragraph count* has met the case the
+five-paragraph announcement; the honest reading now is that the _paragraph count_ has met the case the
 trigger was written for (ten undifferentiated blocks around three images), even though the token count
 sits just under it.
 
@@ -493,12 +493,12 @@ is why 2 names the target as fictional rather than as a place.
 The body now carries one internal link (`fictional, AI-assisted Mars exploration programme` → `/#mission`),
 which is the retro §7 row 1 and still resolves (`#mission` exists in `src/features/mission/MissionPanel.astro`).
 
-| # | Anchor text (proposed) | Destination | State today | Why it is honest |
-| - | --- | --- | --- | --- |
-| 1 | the programme at a glance | `/#mission` | applied in the body, resolves | the mission panel with the fact table; exists |
-| 2 | the public progress log | `/#timeline` | **not applied** — proposed | `src/features/progress/ProgressLog.astro` carries the anchor; it is where "what happens next" is recorded |
-| 3 | all announcements | `/news/` | **not applied** — proposed | the newsroom index is a built route today (`dist/news/index.html`) |
-| 4 | what the mission will measure | `/news/002-payload-selection/` | **not applied, conditional** | only after 002 is published **and** released; the release list is still empty |
+| # | Anchor text (proposed)        | Destination                    | State today                   | Why it is honest                                                                                          |
+| - | ----------------------------- | ------------------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 1 | the programme at a glance     | `/#mission`                    | applied in the body, resolves | the mission panel with the fact table; exists                                                             |
+| 2 | the public progress log       | `/#timeline`                   | **not applied** — proposed    | `src/features/progress/ProgressLog.astro` carries the anchor; it is where "what happens next" is recorded |
+| 3 | all announcements             | `/news/`                       | **not applied** — proposed    | the newsroom index is a built route today (`dist/news/index.html`)                                        |
+| 4 | what the mission will measure | `/news/002-payload-selection/` | **not applied, conditional**  | only after 002 is published **and** released; the release list is still empty                             |
 
 **Why nothing is applied here:** the card limits this pass to frontmatter metadata, and the body is the
 writer's artifact. (The 002 pass did apply body links; that divergence is recorded as §R15 row 10 rather
@@ -520,11 +520,11 @@ than copied silently.) If the editor wants rows 2–3, they are a two-line write
 **The three frontmatter alts were reviewed, not changed.** They are this role's surface, and they are
 already accurate, in plate order, and each ends with the required provenance sentence.
 
-| Plate | Alt (frontmatter) | Length | Verified against |
-| --- | --- | ---: | --- |
-| AF-01 | whole-planet view, arrow marking the fictional target region, generated visualization not orbital imagery | 140 | `docs/area/AREA.md` §Map package (canonical plate description: whole-planet Mars view with an arrow targeting the fictional field); asset `docs/area/asteria-field-01-mars-locator.png` 1536 × 1024 |
-| AF-02 | regional map of the fictional planning envelope, working terrain units, centre marker | 150 | same record: regional view of the scenario envelope with working terrain units and centre marker; asset 1536 × 1024 |
-| AF-03 | local operations frame, scenario planning overlays | 142 | same record: local operations view; asset 1448 × 1086 |
+| Plate | Alt (frontmatter)                                                                                         | Length | Verified against                                                                                                                                                                                    |
+| ----- | --------------------------------------------------------------------------------------------------------- | -----: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AF-01 | whole-planet view, arrow marking the fictional target region, generated visualization not orbital imagery |    140 | `docs/area/AREA.md` §Map package (canonical plate description: whole-planet Mars view with an arrow targeting the fictional field); asset `docs/area/asteria-field-01-mars-locator.png` 1536 × 1024 |
+| AF-02 | regional map of the fictional planning envelope, working terrain units, centre marker                     |    150 | same record: regional view of the scenario envelope with working terrain units and centre marker; asset 1536 × 1024                                                                                 |
+| AF-03 | local operations frame, scenario planning overlays                                                        |    142 | same record: local operations view; asset 1448 × 1086                                                                                                                                               |
 
 **AF-03 wording — deliberate, and recorded as a residual.** The asset visibly contains landing- and
 science-planning overlays; the brief's gated list keeps that inventory out of the announcement text, so
@@ -540,7 +540,7 @@ continuity/editorial gates rather than settled here.
 against the plates' own canonical record (`docs/area/AREA.md` §Map package) and the assets' measured
 dimensions and formats. A map plate has no colour cue to measure, so no pixel-level proof that the arrow,
 the centre marker or the overlays are drawn as described was possible for this pass, and none is claimed.
-What *is* verified from the pipeline: the same alt string is what the component prints
+What _is_ verified from the pipeline: the same alt string is what the component prints
 (`plateFigures()` → `MediaPlates.astro` → `<Image alt=…>`), and the homepage card prints entry 0 for its
 single lead image.
 
@@ -601,10 +601,10 @@ One file, two frontmatter values. Nothing else in the page changed by this pass.
 +summary: Red Horizon is a fictional, AI-assisted Mars programme. Ten national teams have announced one uncrewed lander and rover, with a 2031 launch window.
 ```
 
-| # | Value | Where | Was (revert string) | Why it is mine |
-| - | --- | --- | --- | --- |
-| 1 | `A Mars mission takes shape in public.` | frontmatter `title` → card `h3`, newsroom listing, article `h1`, document title | `A mission takes shape in public.` | document-title wording; adds the missing topic noun; meaning-neutral (§R4) |
-| 2 | 147-character `summary` | frontmatter `summary` → homepage card paragraph, meta description, article standfirst | the 255-character string quoted in §R5 | meta description; the 255-character string truncates mid-fact (§R5) |
+| # | Value                                   | Where                                                                                 | Was (revert string)                    | Why it is mine                                                             |
+| - | --------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------- |
+| 1 | `A Mars mission takes shape in public.` | frontmatter `title` → card `h3`, newsroom listing, article `h1`, document title       | `A mission takes shape in public.`     | document-title wording; adds the missing topic noun; meaning-neutral (§R4) |
+| 2 | 147-character `summary`                 | frontmatter `summary` → homepage card paragraph, meta description, article standfirst | the 255-character string quoted in §R5 | meta description; the 255-character string truncates mid-fact (§R5)        |
 
 **Not changed, deliberately:** `category`, `status`, `publication`, `linkLabel`, `order`, `accent`, `media`
 and the media text, the body (including its links), every heading, every schema/component/script file, the
@@ -619,18 +619,18 @@ reference and the canon decisions are the human's. Recommendation first, impleme
 **Completed** (commands run from the repository root or `website/`, 2026-09-17 01:53–01:57 CEST; scratch
 checkers live under `/tmp/seo-rev-001/`, outside the repository):
 
-| Check | Result (real output) |
-| --- | --- |
-| Frontmatter parse + per-field lengths | 15 keys; `title` 37, `summary` 147, `linkLabel` 21, `mediaLabel` 44, three `mediaAlt` 140/150/142, three `mediaCaption` 69/65/67 |
-| Body measurement | 10 paragraphs, 553 tokens, 0 headings, 4 links (1 internal + 3 external) |
-| Gated-marker scan (frontmatter + body) | **0 hits**, word-boundary, against the brief's forbidden token set and the four live guard markers, both read from their own files at run time; the only substring-class matches are inside the already-public word "uncrewed" (§R14) |
-| Candidate strings | every title/description/alt string considered measured and scanned by script before use; the applied pair is 37 and 147, both inside budget, both clean |
-| External citations | the article's three source URLs re-checked: HTTP 200, 200, 200 |
-| Build | `npm run build` (website) → **exit 0**; `astro build Complete`; postbuild `check-dist` → "no reference into a withheld directory, and no withheld file or marker in dist/"; routes `/index.html`, `/news/index.html` |
-| Applied metadata in the build | `dist/index.html` contains the new summary once and `<h3>A Mars mission takes shape in public.</h3>`; the previous title and the previous summary each occur 0 times; `Asteria` occurs 0 times in either built page (the body is not public) |
-| Route metadata (read-only) | `dist/index.html` and `dist/news/index.html` carry distinct titles and descriptions; no canonical, no `og:*`, no `twitter:*`, no `ld+json`, no `robots.txt`, no sitemap |
-| Heading order (read-only) | homepage `h1 → h2 → h3` correct; newsroom index `h1 → h3` (defect filed, §R11.3) |
-| Tests / typecheck / lint | `npm run test` → 2 files, **37/37 pass**; `npm run typecheck` → **0 errors**; lint not re-run by this pass (the tree's lint was green on `t_3922071d` and nothing this pass touched is `.ts`/`.astro`) |
+| Check                                  | Result (real output)                                                                                                                                                                                                                         |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontmatter parse + per-field lengths  | 15 keys; `title` 37, `summary` 147, `linkLabel` 21, `mediaLabel` 44, three `mediaAlt` 140/150/142, three `mediaCaption` 69/65/67                                                                                                             |
+| Body measurement                       | 10 paragraphs, 553 tokens, 0 headings, 4 links (1 internal + 3 external)                                                                                                                                                                     |
+| Gated-marker scan (frontmatter + body) | **0 hits**, word-boundary, against the brief's forbidden token set and the four live guard markers, both read from their own files at run time; the only substring-class matches are inside the already-public word "uncrewed" (§R14)        |
+| Candidate strings                      | every title/description/alt string considered measured and scanned by script before use; the applied pair is 37 and 147, both inside budget, both clean                                                                                      |
+| External citations                     | the article's three source URLs re-checked: HTTP 200, 200, 200                                                                                                                                                                               |
+| Build                                  | `npm run build` (website) → **exit 0**; `astro build Complete`; postbuild `check-dist` → "no reference into a withheld directory, and no withheld file or marker in dist/"; routes `/index.html`, `/news/index.html`                         |
+| Applied metadata in the build          | `dist/index.html` contains the new summary once and `<h3>A Mars mission takes shape in public.</h3>`; the previous title and the previous summary each occur 0 times; `Asteria` occurs 0 times in either built page (the body is not public) |
+| Route metadata (read-only)             | `dist/index.html` and `dist/news/index.html` carry distinct titles and descriptions; no canonical, no `og:*`, no `twitter:*`, no `ld+json`, no `robots.txt`, no sitemap                                                                      |
+| Heading order (read-only)              | homepage `h1 → h2 → h3` correct; newsroom index `h1 → h3` (defect filed, §R11.3)                                                                                                                                                             |
+| Tests / typecheck / lint               | `npm run test` → 2 files, **37/37 pass**; `npm run typecheck` → **0 errors**; lint not re-run by this pass (the tree's lint was green on `t_3922071d` and nothing this pass touched is `.ts`/`.astro`)                                       |
 
 **Outstanding — not this card's to close:**
 
@@ -678,18 +678,18 @@ checkers live under `/tmp/seo-rev-001/`, outside the repository):
 
 ### R15. Conflicts with brand voice, continuity, or other cards
 
-| # | Conflict | Recommended resolution | Owner |
-| - | --- | --- | --- |
-| 1 | House voice is a period-terminated sentence; search language is a noun phrase | §R4 keeps the sentence and adds one token; §R5 keeps the writer's two-sentence card cadence in the description | editor (acknowledge), writer (accept) |
-| 2 | One `summary` does two jobs (card paragraph, meta description) and the writer's version was 100 characters over the snippet budget | the ≤155 convention is now applied (001 = 147, 002 = 152); a separate field is deferred with its trigger (§R11.2) | this pass (applied), dev if the trigger fires |
-| 3 | Cross-surface wording: the old summary said "Ten partner groups", the body and canon say national programme teams | the applied description uses the canon wording ("ten national teams"); the body's phrase is unchanged | resolved in the applied string |
-| 4 | `linkLabel: "First public briefing"` still reads like a link to a briefing page; `status: "Now opening"` is not plain search language | unchanged recommendation from retro §12: a plain label that promises nothing ("Announcement summary" / "Programme announcement") and a plainer status; **not applied** (editor's visible-copy call) | editor (open), writer to apply |
-| 5 | The newsroom index duplicates the homepage section sentence as its `h1` and skips `h2` for card titles | heading level filed as a card (§R11.3); the duplicated sentence is an editor/writer call | dev (card), editor (sentence) |
-| 6 | AF-03 alt text describes less than the plate shows | deliberate: the fuller description would republish landing-preparation inventory; the caption note qualifies the frame | continuity/editorial (residual, §R9) |
-| 7 | Two SEO packages settled two different `/news/` titles within the hour | settled once, with rationale and fallback (§R11.1); the implementer card is redirected by comment | this pass (settled), `t_1828a6d4` (verify and keep) |
-| 8 | Homepage card image for 001 is now AF-01 with the plates' first alt entry, replacing the identity-mark presentation the retro gate verified | recorded, not re-decided: it is a planner/editorial sign-off item already on `t_8274703e`; the alt text it prints is accurate for the plate | planner/editorial |
-| 9 | Continuity | no conflict found in the metadata: every applied string restates released step-001 facts, and the body is unchanged by this pass | continuity `t_23c10313` |
-| 10 | Two passes of this role treat body links differently: the 002 pass applied them in the body, this one recommends them and applies nothing | record the divergence, do not paper over it: on this card the body edits are outside the grant. If the project wants one rule, settle it as "the SEO stage may apply meaning-neutral links into existing routes" — an editor/writer decision, not a silent precedent | editor/writer (rule), writer (apply rows 2–3) |
+| #  | Conflict                                                                                                                                    | Recommended resolution                                                                                                                                                                                                                                               | Owner                                               |
+| -- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| 1  | House voice is a period-terminated sentence; search language is a noun phrase                                                               | §R4 keeps the sentence and adds one token; §R5 keeps the writer's two-sentence card cadence in the description                                                                                                                                                       | editor (acknowledge), writer (accept)               |
+| 2  | One `summary` does two jobs (card paragraph, meta description) and the writer's version was 100 characters over the snippet budget          | the ≤155 convention is now applied (001 = 147, 002 = 152); a separate field is deferred with its trigger (§R11.2)                                                                                                                                                    | this pass (applied), dev if the trigger fires       |
+| 3  | Cross-surface wording: the old summary said "Ten partner groups", the body and canon say national programme teams                           | the applied description uses the canon wording ("ten national teams"); the body's phrase is unchanged                                                                                                                                                                | resolved in the applied string                      |
+| 4  | `linkLabel: "First public briefing"` still reads like a link to a briefing page; `status: "Now opening"` is not plain search language       | unchanged recommendation from retro §12: a plain label that promises nothing ("Announcement summary" / "Programme announcement") and a plainer status; **not applied** (editor's visible-copy call)                                                                  | editor (open), writer to apply                      |
+| 5  | The newsroom index duplicates the homepage section sentence as its `h1` and skips `h2` for card titles                                      | heading level filed as a card (§R11.3); the duplicated sentence is an editor/writer call                                                                                                                                                                             | dev (card), editor (sentence)                       |
+| 6  | AF-03 alt text describes less than the plate shows                                                                                          | deliberate: the fuller description would republish landing-preparation inventory; the caption note qualifies the frame                                                                                                                                               | continuity/editorial (residual, §R9)                |
+| 7  | Two SEO packages settled two different `/news/` titles within the hour                                                                      | settled once, with rationale and fallback (§R11.1); the implementer card is redirected by comment                                                                                                                                                                    | this pass (settled), `t_1828a6d4` (verify and keep) |
+| 8  | Homepage card image for 001 is now AF-01 with the plates' first alt entry, replacing the identity-mark presentation the retro gate verified | recorded, not re-decided: it is a planner/editorial sign-off item already on `t_8274703e`; the alt text it prints is accurate for the plate                                                                                                                          | planner/editorial                                   |
+| 9  | Continuity                                                                                                                                  | no conflict found in the metadata: every applied string restates released step-001 facts, and the body is unchanged by this pass                                                                                                                                     | continuity `t_23c10313`                             |
+| 10 | Two passes of this role treat body links differently: the 002 pass applied them in the body, this one recommends them and applies nothing   | record the divergence, do not paper over it: on this card the body edits are outside the grant. If the project wants one rule, settle it as "the SEO stage may apply meaning-neutral links into existing routes" — an editor/writer decision, not a silent precedent | editor/writer (rule), writer (apply rows 2–3)       |
 
 **Hotspot (repeat, for the orchestrator):** `website/dist/` — shared build output in a `dir:` workspace;
 concurrent builds and a dev server from another profile rewrite it, so any build evidence must be captured
@@ -726,55 +726,55 @@ in the same shell call as the build (flagged by `t_3922071d`, confirmed by this 
 
 ### R17. Follow-up resolved: the news heading scale and the scoped-style trap (card `t_5a6fe8da`)
 
-**Where this came from.** §R11.3 filed the newsroom index heading *level* (implemented on `t_b4dc6b94`), and
+**Where this came from.** §R11.3 filed the newsroom index heading _level_ (implemented on `t_b4dc6b94`), and
 that card measured a second, separate defect while working it: two scoped rules in
 `website/src/features/news/` never match anything, so the newsroom index `h1` renders at the base `h1` tier.
-`t_5a6fe8da` routed the *decision* — a heading-scale convention call — to this role. Nothing in this section
+`t_5a6fe8da` routed the _decision_ — a heading-scale convention call — to this role. Nothing in this section
 changes the article, its metadata, its route, its copy or its release state.
 
 **Root cause (re-verified on the built site, not inferred).** Astro stamps `data-astro-cid-<scope>` on the
-elements written in the file that owns the `<style>` block, and on the root element of a child component *used*
-in that file — but not on elements a child component renders *inside* itself. `SectionHeading.astro` has no
+elements written in the file that owns the `<style>` block, and on the root element of a child component _used_
+in that file — but not on elements a child component renders _inside_ itself. `SectionHeading.astro` has no
 `<style>` block and renders the title, so `.section-heading h1` / `.section-heading h2` compile to
 `.section-heading[cid] h1[cid]` / `… h2[cid]`, and the `h1`/`h2` carry no cid at all.
 
 **Measured (this pass, 02:05–02:08 CEST, on the build this card's parent produced; `npm run build` exit 0,
 postbuild `check:dist` green, two routes; Chromium over `python3 -m http.server` on `dist/`):**
 
-| Surface / element | Rendered today | The file's own rule asks for |
-| --- | --- | --- |
-| `/news/` `h1#news-index-title` @1280 | `font-size 102.4px`, `max-width 100%`, 2 lines, 1121 px wide, attributes `[id]` — **no cid** | 61.44 px, `max-width: 35rem` (560 px) |
-| `/news/` `h1#news-index-title` @375 | 57.6 px, 4 lines, 221 px tall | 36 px, 2 lines, 69 px tall (verified by injecting the rule) |
-| `/` `h2#updates-title` @1280 | `max-width 100%`, 835 px wide, 1 line | `max-width: 35rem` (560 px), i.e. 2 lines |
-| `/` `h1#hero-title` (control) | 102.4 px, `max-width 624px` — Hero's own rule, live | — |
-| `/` `h2#mission-title`, `h2#timeline-title` (controls) | 370 px wide, 3 / 2 lines | unchanged under a 35 rem cap (measured with the cap injected) |
+| Surface / element                                      | Rendered today                                                                               | The file's own rule asks for                                  |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `/news/` `h1#news-index-title` @1280                   | `font-size 102.4px`, `max-width 100%`, 2 lines, 1121 px wide, attributes `[id]` — **no cid** | 61.44 px, `max-width: 35rem` (560 px)                         |
+| `/news/` `h1#news-index-title` @375                    | 57.6 px, 4 lines, 221 px tall                                                                | 36 px, 2 lines, 69 px tall (verified by injecting the rule)   |
+| `/` `h2#updates-title` @1280                           | `max-width 100%`, 835 px wide, 1 line                                                        | `max-width: 35rem` (560 px), i.e. 2 lines                     |
+| `/` `h1#hero-title` (control)                          | 102.4 px, `max-width 624px` — Hero's own rule, live                                          | —                                                             |
+| `/` `h2#mission-title`, `h2#timeline-title` (controls) | 370 px wide, 3 / 2 lines                                                                     | unchanged under a 35 rem cap (measured with the cap injected) |
 
 **Audit of the trap across `website/src/**` (the card asked for more than these two).** Reading every
 stylesheet of both built pages and running `document.querySelectorAll` on every compiled selector that carries
 two scope attributes, the only dead rules are the two above. Live and correctly scoped: `.news-copy h2` /
 `.news-copy h3` (the card renders its own title), `.timeline-list h3`, `.article-header h1`, `.about-section h2`,
-and the child-component *roots* (`.news-image img`, `.hero-mark img`, `.splash img`, `.wordmark img`), which do
+and the child-component _roots_ (`.news-image img`, `.hero-mark img`, `.splash img`, `.wordmark img`), which do
 receive the cid. `:hover` / `:focus-visible` / `::after` variants report 0 matches only because they are state
 or pseudo-element rules, not because of scoping.
 
 **Decision — the file's sizing stands: 61.44 px / `max-width: 35rem` for the level-1 title, `max-width: 35rem`
 for the level-2 title.** Reasons, in order:
 
-1. The rule is explicit and deliberate: it *overrides* the base `h1` tier downward with a chosen value and caps
+1. The rule is explicit and deliberate: it _overrides_ the base `h1` tier downward with a chosen value and caps
    the measure. Dead-on-arrival stylesheet intent is a defect, not a design decision, and nothing anywhere
    records the base `h1` tier as the newsroom index's intended scale.
 2. `website/README.md` states the house rule this defect breaks — "a component owns the styles for the markup
-   it renders". The parent rules are dead *because* they place the parent's scope on a child's element.
+   it renders". The parent rules are dead _because_ they place the parent's scope on a child's element.
 3. The site already gives each route's `h1` its own local scale rather than the base tier: `Hero.astro`
    (`max-width: 39rem`), `ArticleView.astro` (`clamp(2.5rem, 5.5vw, 5rem)` with `40rem`). The base `h1` tier
    (`clamp(3.6rem, 8vw, 7.8rem)`) is used by exactly one element on the site, the homepage hero.
 4. Hierarchy: as rendered today the newsroom listing's title is the joint-largest type on the site — the hero's
-   own tier, 102.4 px at 1280 — and sits *above* an article `h1` (70.4 px), with no measure cap. The intended
+   own tier, 102.4 px at 1280 — and sits _above_ an article `h1` (70.4 px), with no measure cap. The intended
    ladder is hero 102.4 → article 70.4 → listing/section 61.44 at that viewport.
 
-**Rejected alternatives, with the reason.** (a) *Keep the base `h1` tier as it renders today* — enshrines an
-accident, discards a reviewed intent, and leaves a listing title above the articles it lists. (b) *Keep the
-tier and apply only the 35 rem cap* — the same inversion, and it would invent a third value the file never asks
+**Rejected alternatives, with the reason.** (a) _Keep the base `h1` tier as it renders today_ — enshrines an
+accident, discards a reviewed intent, and leaves a listing title above the articles it lists. (b) _Keep the
+tier and apply only the 35 rem cap_ — the same inversion, and it would invent a third value the file never asks
 for; this role does not invent type scales. (c) `:global(h1)` in the parents — works, but keeps parents styling
 a child's markup against the README rule; it is the right tool for MDX prose (`ArticleView.astro`), not for a
 component that can own its own type.
@@ -782,7 +782,7 @@ component that can own its own type.
 **Fix shape — handed to `mars-ai-simulator-dev` as card `t_915550f4`, chained behind this card.** Give
 `SectionHeading.astro` its own scoped `<style>` block (the component that renders the element) with the level-1
 title rule and the level-2 `max-width: 35rem`, and delete the two dead parent rules from `NewsList.astro` and
-`NewsCarousel.astro`. The wrapper rules that *are* live stay in the features, because that wrapper `div` is
+`NewsCarousel.astro`. The wrapper rules that _are_ live stay in the features, because that wrapper `div` is
 written in the parent.
 
 **Consequence recorded, not hidden.** Applying the level-2 cap makes `/` `h2#updates-title` a two-line heading
@@ -797,7 +797,7 @@ index `h1` wording question from §R11.3 stays open (editor/writer). (3) The mea
 routes; the article detail route is unbuilt (`releasedNewsSlugs` empty), so its `h1` rule was checked by source
 review only, and the audit's source-side heuristic was cross-checked against the compiled CSS of both built pages.
 
-**SEO statement.** No heading *level* changes: `/` keeps one `h1`, `/news/` keeps one `h1` with `h2` card
+**SEO statement.** No heading _level_ changes: `/` keeps one `h1`, `/news/` keeps one `h1` with `h2` card
 titles, document order unchanged. Rendered type scale does not affect crawling, indexing or ranking; no title,
 description, slug, route, canonical, structured-data or guard value is touched by the decision or the fix.
 
@@ -812,4 +812,3 @@ this section is additive to a package it may review; human canon and release app
 release, no deploy, no commit on this card's strength. **Next owner and action:** `mars-ai-simulator-dev` on
 `t_915550f4` — move the level-1/level-2 title rules into `SectionHeading.astro`, delete the two dead parent
 rules, and re-measure.
-

@@ -31,7 +31,7 @@ export interface NewsMediaSet {
 
 /** Alt text for one plate: its own frontmatter entry, or a shared entry led by the plate label. */
 export function plateAltText(
-    { value, plates, index }: { value: NewsMediaText | undefined; plates: readonly NewsMediaPlate[]; index: number },
+    { value, plates, index }: { value: NewsMediaText | undefined; plates: readonly NewsMediaPlate[]; index: number; },
 ): string {
     const entries = newsMediaTextList(value);
     if (entries.length === plates.length) return entries[index] ?? '';

@@ -97,7 +97,8 @@ describe('splash scope guard', () => {
     it('rejects a non-home route that defers its page reveal with the loading class', async () => {
         const directory = await distWith({
             'index.html': homeDocument,
-            '/about/index.html': `<html><body class="${loadingBodyClass}"><main class="page">About</main></body></html>`,
+            '/about/index.html':
+                `<html><body class="${loadingBodyClass}"><main class="page">About</main></body></html>`,
         });
 
         const offences = await checkSplashScope({ directory });
@@ -198,7 +199,9 @@ describe('splash scope in the real build', () => {
 
             // No timer to wait on: the document's own `<body>` is not held back.
             const bodyClass = html.match(/<body\b[^>]*\bclass="([^"]*)"/)?.[1] ?? '';
-            expect(bodyClass.split(/\s+/), `${route.route} carries ${loadingBodyClass}`).not.toContain(loadingBodyClass);
+            expect(bodyClass.split(/\s+/), `${route.route} carries ${loadingBodyClass}`).not.toContain(
+                loadingBodyClass,
+            );
             expect(html, `${route.route} still loads the splash script`).not.toContain('#splash');
 
             // A passthrough file with no page column (the Google verification

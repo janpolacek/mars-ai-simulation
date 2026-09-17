@@ -276,8 +276,8 @@ async function main() {
     const variant = await sharp(variantBytes).raw().toBuffer({ resolveWithObject: true });
     console.log(`[derive] variant ${variantPath}`);
     console.log(
-        `[derive] variant size ${variant.info.width} x ${variant.info.height}, channels ` +
-            `${variant.info.channels}, sha256 ${sha256(variantBytes)}`,
+        `[derive] variant size ${variant.info.width} x ${variant.info.height}, channels `
+            + `${variant.info.channels}, sha256 ${sha256(variantBytes)}`,
     );
 
     const composite = compositeOver(variant.data, width, height);
@@ -285,55 +285,61 @@ async function main() {
     console.log('[derive] fidelity, variant recomposited over #010000 vs the approved source:');
     console.log(`[derive]   max delta overall ${fidelity.maxDelta} LSB ` + JSON.stringify(fidelity.maxChannelDelta));
     console.log(
-        `[derive]   pixels differing at all ${fidelity.pixelsDiffering} (${percent(fidelity.pixelsDifferingShare)}), ` +
-            `>1 LSB ${fidelity.pixelsOverOneLsb}, >2 LSB ${fidelity.pixelsOverTwoLsb} (${percent(
-                fidelity.pixelsOverTwoLsbShare,
-            )})`,
+        `[derive]   pixels differing at all ${fidelity.pixelsDiffering} (${percent(fidelity.pixelsDifferingShare)}), `
+            + `>1 LSB ${fidelity.pixelsOverOneLsb}, >2 LSB ${fidelity.pixelsOverTwoLsb} (${
+                percent(
+                    fidelity.pixelsOverTwoLsbShare,
+                )
+            })`,
     );
 
     const oneLsb = oneLsbDiagnostic(source.data, composite, variant.data, width, height);
     console.log(
-        `[derive]   the ${oneLsb.count} one-LSB pixels: alpha ${oneLsb.lowestAlpha}-${oneLsb.highestAlpha} ` +
-            `(mean ${oneLsb.meanAlpha.toFixed(1)}), channels ${JSON.stringify(oneLsb.channelCounts)}`,
+        `[derive]   the ${oneLsb.count} one-LSB pixels: alpha ${oneLsb.lowestAlpha}-${oneLsb.highestAlpha} `
+            + `(mean ${oneLsb.meanAlpha.toFixed(1)}), channels ${JSON.stringify(oneLsb.channelCounts)}`,
     );
 
     const plainComposite = compositeOver(derivePlain(source.data, width, height), width, height);
     const plainFidelity = compareRgb(source.data, plainComposite, width, height);
     console.log(
-        `[derive] fidelity, card's literal colour = RGB / alpha form: max delta ${plainFidelity.maxDelta} LSB ` +
-            JSON.stringify(plainFidelity.maxChannelDelta) +
-            `, >2 LSB ${plainFidelity.pixelsOverTwoLsb}`,
+        `[derive] fidelity, card's literal colour = RGB / alpha form: max delta ${plainFidelity.maxDelta} LSB `
+            + JSON.stringify(plainFidelity.maxChannelDelta)
+            + `, >2 LSB ${plainFidelity.pixelsOverTwoLsb}`,
     );
 
     const census = alphaCensus(variant.data, width, height);
     console.log(
-        `[derive] alpha: fully transparent ${census.transparent} (${percent(census.transparentShare)}), ` +
-            `partial ${census.partial} (${percent(census.partialShare)}), opaque ${census.opaque} (${percent(
-                census.opaqueShare,
-            )}), distinct levels ${census.distinctAlphaLevels}, darkest partial alpha ${census.darkestPartialAlpha}`,
+        `[derive] alpha: fully transparent ${census.transparent} (${percent(census.transparentShare)}), `
+            + `partial ${census.partial} (${percent(census.partialShare)}), opaque ${census.opaque} (${
+                percent(
+                    census.opaqueShare,
+                )
+            }), distinct levels ${census.distinctAlphaLevels}, darkest partial alpha ${census.darkestPartialAlpha}`,
     );
     console.log(
-        `[derive] fringe check: partial-alpha pixels with a near-black colour (max channel < 32): ` +
-            `${census.nearBlackPartialPixels} (worst alpha ${census.nearBlackPartialWorstAlpha}), of which with ` +
-            `visible coverage (alpha > 8): ${census.nearBlackVisiblePartialPixels}`,
+        `[derive] fringe check: partial-alpha pixels with a near-black colour (max channel < 32): `
+            + `${census.nearBlackPartialPixels} (worst alpha ${census.nearBlackPartialWorstAlpha}), of which with `
+            + `visible coverage (alpha > 8): ${census.nearBlackVisiblePartialPixels}`,
     );
 
     console.log(`[derive] cue check:`);
     console.log(
-        `[derive]   blue-led pixels (B > R + 8): source ${blueCueCount(source.data, width, height)}, ` +
-            `recomposited ${blueCueCount(composite, width, height)}`,
+        `[derive]   blue-led pixels (B > R + 8): source ${blueCueCount(source.data, width, height)}, `
+            + `recomposited ${blueCueCount(composite, width, height)}`,
     );
-    for (const [name, reference] of [
-        ['Earth blue #7BA7FA', [0x7b, 0xa7, 0xfa]],
-        ['Moon blue-gray #94A3B0', [0x94, 0xa3, 0xb0]],
-        ['Sun core #FCA042', [0xfc, 0xa0, 0x42]],
-        ['Rim light #FCC78B', [0xfc, 0xc7, 0x8b]],
-    ]) {
+    for (
+        const [name, reference] of [
+            ['Earth blue #7BA7FA', [0x7b, 0xa7, 0xfa]],
+            ['Moon blue-gray #94A3B0', [0x94, 0xa3, 0xb0]],
+            ['Sun core #FCA042', [0xfc, 0xa0, 0x42]],
+            ['Rim light #FCC78B', [0xfc, 0xc7, 0x8b]],
+        ]
+    ) {
         const inSource = nearestColour(source.data, width, height, reference);
         const inComposite = nearestColour(composite, width, height, reference);
         console.log(
-            `[derive]   ${name}: source nearest ${inSource.hex} (exact ${inSource.exactCount}), recomposited nearest ` +
-                `${inComposite.hex} (exact ${inComposite.exactCount})`,
+            `[derive]   ${name}: source nearest ${inSource.hex} (exact ${inSource.exactCount}), recomposited nearest `
+                + `${inComposite.hex} (exact ${inComposite.exactCount})`,
         );
     }
 
@@ -346,10 +352,10 @@ async function main() {
         height,
     );
     console.log(
-        `[derive] contrast, the rejected derivative docs/brand/logo.png recomposited: ` +
-            `max delta ${rejectedFidelity.maxDelta} LSB ` +
-            JSON.stringify(rejectedFidelity.maxChannelDelta) +
-            `, >2 LSB ${rejectedFidelity.pixelsOverTwoLsb} (${percent(rejectedFidelity.pixelsOverTwoLsbShare)})`,
+        `[derive] contrast, the rejected derivative docs/brand/logo.png recomposited: `
+            + `max delta ${rejectedFidelity.maxDelta} LSB `
+            + JSON.stringify(rejectedFidelity.maxChannelDelta)
+            + `, >2 LSB ${rejectedFidelity.pixelsOverTwoLsb} (${percent(rejectedFidelity.pixelsOverTwoLsbShare)})`,
     );
 }
 

@@ -2,20 +2,20 @@
 
 ## Package metadata
 
-| Field          | Value                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------- |
-| Slug           | `002-payload-selection`                                                                                 |
-| Timeline step  | `002-payload-selection` (public-safe step; nothing from steps 003–011)                                  |
-| Article        | `website/news/002-payload-selection.mdx`                                                                |
-| Brief          | `.agents/work/briefs/002-payload-selection.md`                                                          |
-| Source pack    | `.agents/work/sources/002-payload-selection.md`                                                         |
-| Asset manifest | `.agents/work/assets/002-payload-selection/assets.md`                                                   |
-| Draft card     | `t_134399ab` (done)                                                                                     |
-| SEO card (first pass) | `t_27ad4d74`                                                                                      |
-| SEO card (re-validation) | `t_2b1bdd6b` — 2026-09-17 01:45 CEST; re-verified against the current tree, **no metadata changed** (§14) |
-| Prepared by    | `mars-ai-simulator-seo`                                                                                 |
-| Status         | metadata applied 01:19 CEST, re-validated 01:45 CEST; editorial gate `approved` (`.agents/work/reviews/002-payload-selection.md`) on the earlier revision of this package; §14 records the re-run and the corrections |
-| Public impact  | none — `publication: draft` is untouched, so nothing here is a public route, a crawlable page, or canon |
+| Field                    | Value                                                                                                                                                                                                                 |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Slug                     | `002-payload-selection`                                                                                                                                                                                               |
+| Timeline step            | `002-payload-selection` (public-safe step; nothing from steps 003–011)                                                                                                                                                |
+| Article                  | `website/news/002-payload-selection.mdx`                                                                                                                                                                              |
+| Brief                    | `.agents/work/briefs/002-payload-selection.md`                                                                                                                                                                        |
+| Source pack              | `.agents/work/sources/002-payload-selection.md`                                                                                                                                                                       |
+| Asset manifest           | `.agents/work/assets/002-payload-selection/assets.md`                                                                                                                                                                 |
+| Draft card               | `t_134399ab` (done)                                                                                                                                                                                                   |
+| SEO card (first pass)    | `t_27ad4d74`                                                                                                                                                                                                          |
+| SEO card (re-validation) | `t_2b1bdd6b` — 2026-09-17 01:45 CEST; re-verified against the current tree, **no metadata changed** (§14)                                                                                                             |
+| Prepared by              | `mars-ai-simulator-seo`                                                                                                                                                                                               |
+| Status                   | metadata applied 01:19 CEST, re-validated 01:45 CEST; editorial gate `approved` (`.agents/work/reviews/002-payload-selection.md`) on the earlier revision of this package; §14 records the re-run and the corrections |
+| Public impact            | none — `publication: draft` is untouched, so nothing here is a public route, a crawlable page, or canon                                                                                                               |
 
 ## 1. Reader intent
 
@@ -94,19 +94,19 @@ pre-launch mission page needs.
 Current outline, after this pass. Every body heading is an `h2`; the frontmatter `title` is the
 intended single `h1` on the article route. Hierarchy is correct — no skipped levels, no second `h1`.
 
-| Level | Heading                                    | Note                                                        |
-| ----- | ------------------------------------------ | ----------------------------------------------------------- |
-| h1    | Choosing what a Mars rover carries.        | from frontmatter `title`; rendered by `ArticleView` as `#article-title`, no route while unreleased |
-| h2    | Why several instruments instead of one     | answers the "why more than one" question first               |
-| h2    | Looking at the landscape                   | panoramic and navigation imaging                             |
-| h2    | Reading what rocks are made of             | mineral and rock sensing / spectroscopy                      |
-| h2    | Watching the weather                       | environmental monitoring                                     |
-| h2    | Getting close enough to inspect            | contact inspection                                           |
-| h2    | A European-led contribution                | programme structure inside the payload scope                 |
-| h2    | Every instrument needs a home              | the accommodation constraint that shapes selection           |
-| h2    | What is not settled                        | disclosure list; the article's honesty anchor                |
-| h2    | What this mission is not                   | life-detection boundary                                      |
-| h2    | Sources and further reading                | citations and the no-endorsement disclaimer                  |
+| Level | Heading                                | Note                                                                                               |
+| ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| h1    | Choosing what a Mars rover carries.    | from frontmatter `title`; rendered by `ArticleView` as `#article-title`, no route while unreleased |
+| h2    | Why several instruments instead of one | answers the "why more than one" question first                                                     |
+| h2    | Looking at the landscape               | panoramic and navigation imaging                                                                   |
+| h2    | Reading what rocks are made of         | mineral and rock sensing / spectroscopy                                                            |
+| h2    | Watching the weather                   | environmental monitoring                                                                           |
+| h2    | Getting close enough to inspect        | contact inspection                                                                                 |
+| h2    | A European-led contribution            | programme structure inside the payload scope                                                       |
+| h2    | Every instrument needs a home          | the accommodation constraint that shapes selection                                                 |
+| h2    | What is not settled                    | disclosure list; the article's honesty anchor                                                      |
+| h2    | What this mission is not               | life-detection boundary                                                                            |
+| h2    | Sources and further reading            | citations and the no-endorsement disclaimer                                                        |
 
 **Order: kept as written, no change applied.** The sequence already follows the reader's questions —
 why several capabilities, what each one does, who contributes, what constrains the choice, what is
@@ -143,11 +143,11 @@ Two smaller recommendations:
 against the current site source. All three are root-relative with a fragment, so they keep working
 when the article moves to `/news/002-payload-selection/`.
 
-| # | Anchor text                                             | Target      | Placement                                  | Why                                                                                                                        |
-| - | ------------------------------------------------------- | ----------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| 1 | fictional, AI-assisted Mars exploration programme        | `/#mission` | intro, paragraph 1                         | puts the programme-defining sentence on the mission brief that states what Red Horizon is, and puts the fiction disclosure one hop from the claim |
-| 2 | first public step                                       | `/#updates` | intro, paragraph 2                         | the first public step is the announcement card in the newsroom; this is the article's only in-site pointer to its predecessor |
-| 3 | the programme announcement                              | `/#updates` | "What is not settled", the 2031 bullet     | cites where the 2031 launch window is actually published instead of asserting it bare                                               |
+| # | Anchor text                                       | Target      | Placement                              | Why                                                                                                                                               |
+| - | ------------------------------------------------- | ----------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | fictional, AI-assisted Mars exploration programme | `/#mission` | intro, paragraph 1                     | puts the programme-defining sentence on the mission brief that states what Red Horizon is, and puts the fiction disclosure one hop from the claim |
+| 2 | first public step                                 | `/#updates` | intro, paragraph 2                     | the first public step is the announcement card in the newsroom; this is the article's only in-site pointer to its predecessor                     |
+| 3 | the programme announcement                        | `/#updates` | "What is not settled", the 2031 bullet | cites where the 2031 launch window is actually published instead of asserting it bare                                                             |
 
 No link points at a route that does not exist. In particular, nothing links to
 `/news/001-project-announcement/` or `/news/002-payload-selection/`: article detail routes are
@@ -199,7 +199,7 @@ pass.
   the project has no author record for this article, and a fabricated byline is a fabricated
   real-world claim.
 - `citation` for the five real sources (ESA Rosalind Franklin suite; ESA Exploration Science PanCam;
-  NASA Mars 2020 instruments; CNES SuperCam; Mustard et al., *Space Science Reviews*, 2020) is
+  NASA Mars 2020 instruments; CNES SuperCam; Mustard et al., _Space Science Reviews_, 2020) is
   optional. If it is added, the page's own disclaimer paragraph ("They are not partners in Red
   Horizon…") must stay visible on the same page.
 - The "This is AI-generated fiction" disclosure stays visible page copy. It must not be replaced by,
@@ -218,10 +218,10 @@ article, and the `media` field is correctly omitted — which the current schema
 way to render nothing. `media:` is a **key**, not a URL: `src/lib/media.ts` fixes the two keys a news
 item may name and the frontmatter each one owes.
 
-| Key                  | Plates | `mediaAlt`             | `mediaCaption`            | `mediaLabel` |
-| -------------------- | ------ | ---------------------- | ------------------------- | ------------ |
-| `programme-identity` | 1      | 1 entry                | must be absent (renders none) | optional |
-| `asteria-plates`     | 3      | 3 entries, plate order | 3 entries, plate order    | required     |
+| Key                  | Plates | `mediaAlt`             | `mediaCaption`                | `mediaLabel` |
+| -------------------- | ------ | ---------------------- | ----------------------------- | ------------ |
+| `programme-identity` | 1      | 1 entry                | must be absent (renders none) | optional     |
+| `asteria-plates`     | 3      | 3 entries, plate order | 3 entries, plate order        | required     |
 
 An unknown or under-specified key fails the content schema (`src/content.config.ts` →
 `newsMediaIssues`), so an illustration cannot be half-declared or silently dropped.
@@ -363,22 +363,22 @@ An unknown or under-specified key fails the content schema (`src/content.config.
 
 ## 12. Validation
 
-| Check                                       | Result                                                                                                                         |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Validation snapshot (first revision)         | 2026-09-17 01:21 CEST, against a working tree another card was actively refactoring. Every row below is that snapshot and is **superseded by §14** (re-run 2026-09-17 01:45 CEST) |
-| `astro build` (run from `website/`)          | Complete — 2 pages: `/index.html`, `/news/index.html`                                                                          |
-| `postbuild` dist guard (`check-dist.mjs`)    | **fails** — three `gated-path` findings in `src/lib/assets.ts` and `src/lib/releases.ts`; none in `website/news/` or this pass's files (§10) |
-| Draft filtered out of the built site         | verified — the new title and the new summary each appear **0** times in `dist/index.html` and `dist/news/index.html`, while the published 001 title and summary each appear once |
-| No article detail route generated            | verified — no `/news/<slug>/index.html` exists; `releasedNewsSlugs` is empty                                                    |
-| `npm test` (vitest)                          | 14 of 15 pass; the single failure is the same `gated-path` assertion, not this pass                                            |
-| `npm run lint` (eslint)                      | 9 errors, all parse/`no-undef` errors in `.astro` files and `astro.config.mjs` from the in-flight refactor; no finding in `website/news/` |
-| Forbidden-term scan                          | clean (§11) — the build guard's markers (`RH-01`, `Pathfinder`, `Asteria`, `18° 42`, `226° 14`) each occur 0 times in the article and 0 times in the built pages |
-| Internal link targets exist                  | `#mission` in `src/features/mission/MissionPanel.astro`, `#updates` in `src/features/news/NewsCarousel.astro`, `#top` in `Hero.astro` |
-| Metadata field constraints respected         | `title` and `summary` set on existing schema fields only; no field invented and no schema change                                |
-| Description length                           | 152 characters                                                                                                                  |
-| Prettier / `npm run format`                  | not run — `prettier-plugin-astro` is missing from `website/node_modules`, as the draft card already noted                        |
-| External link HTTP status                    | not re-checked in this pass; the draft card recorded 5/5 returning 200                                                          |
-| Effect on published pages                    | none — the entry stays `publication: draft`, so no card, listing entry, or route is generated for it                            |
+| Check                                     | Result                                                                                                                                                                            |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Validation snapshot (first revision)      | 2026-09-17 01:21 CEST, against a working tree another card was actively refactoring. Every row below is that snapshot and is **superseded by §14** (re-run 2026-09-17 01:45 CEST) |
+| `astro build` (run from `website/`)       | Complete — 2 pages: `/index.html`, `/news/index.html`                                                                                                                             |
+| `postbuild` dist guard (`check-dist.mjs`) | **fails** — three `gated-path` findings in `src/lib/assets.ts` and `src/lib/releases.ts`; none in `website/news/` or this pass's files (§10)                                      |
+| Draft filtered out of the built site      | verified — the new title and the new summary each appear **0** times in `dist/index.html` and `dist/news/index.html`, while the published 001 title and summary each appear once  |
+| No article detail route generated         | verified — no `/news/<slug>/index.html` exists; `releasedNewsSlugs` is empty                                                                                                      |
+| `npm test` (vitest)                       | 14 of 15 pass; the single failure is the same `gated-path` assertion, not this pass                                                                                               |
+| `npm run lint` (eslint)                   | 9 errors, all parse/`no-undef` errors in `.astro` files and `astro.config.mjs` from the in-flight refactor; no finding in `website/news/`                                         |
+| Forbidden-term scan                       | clean (§11) — the build guard's markers (`RH-01`, `Pathfinder`, `Asteria`, `18° 42`, `226° 14`) each occur 0 times in the article and 0 times in the built pages                  |
+| Internal link targets exist               | `#mission` in `src/features/mission/MissionPanel.astro`, `#updates` in `src/features/news/NewsCarousel.astro`, `#top` in `Hero.astro`                                             |
+| Metadata field constraints respected      | `title` and `summary` set on existing schema fields only; no field invented and no schema change                                                                                  |
+| Description length                        | 152 characters                                                                                                                                                                    |
+| Prettier / `npm run format`               | not run — `prettier-plugin-astro` is missing from `website/node_modules`, as the draft card already noted                                                                         |
+| External link HTTP status                 | not re-checked in this pass; the draft card recorded 5/5 returning 200                                                                                                            |
+| Effect on published pages                 | none — the entry stays `publication: draft`, so no card, listing entry, or route is generated for it                                                                              |
 
 ## 13. Handoff
 
@@ -411,27 +411,27 @@ moved after the first pass, the corrections that re-run made necessary, and the 
 
 ### 14.1 Corrected in this package (previously stale or wrong)
 
-| Item | Was | Is |
-| ---- | --- | -- |
-| Document title length (§2) | "… 56 characters" | **49 characters** — `printf '%s' "Choosing what a Mars rover carries. \| Red Horizon" \| wc -c`; article title 35 + `" \| Red Horizon"` 14 |
-| Build guard (§10, §12) | failing with three `gated-path` findings | **exit 0** — `[check-dist] no reference into a withheld directory, and no withheld file or marker in dist/.` |
-| Test suite (§12) | 14 of 15 pass | **36 of 36 pass** (2 files) |
-| Lint (§12) | 9 errors | **1 error** — `MediaPlates.astro:4:13 Parsing error: Unexpected token {` from another card's in-flight refactor; still nothing in `website/news/` |
-| Gated marker list (§11, §12) | included `Asteria` | current `gatedTextMarkers` = `RH-01`, `Pathfinder`, `18° 42`, `226° 14`; the field name was retired when the human story owner released it for article 001. It stays step-007 material for 002 (brief, "Forbidden angle") |
-| Media model (§8) | `media` as a copied asset with `mediaAlt`/`mediaLabel` | rewritten: `media` is a schema-validated **key** (`src/lib/media.ts`), with per-plate alt/caption requirements and no key available for a 002 illustration yet |
+| Item                         | Was                                                    | Is                                                                                                                                                                                                                        |
+| ---------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document title length (§2)   | "… 56 characters"                                      | **49 characters** — `printf '%s' "Choosing what a Mars rover carries. \| Red Horizon" \| wc -c`; article title 35 + `" \| Red Horizon"` 14                                                                                |
+| Build guard (§10, §12)       | failing with three `gated-path` findings               | **exit 0** — `[check-dist] no reference into a withheld directory, and no withheld file or marker in dist/.`                                                                                                              |
+| Test suite (§12)             | 14 of 15 pass                                          | **36 of 36 pass** (2 files)                                                                                                                                                                                               |
+| Lint (§12)                   | 9 errors                                               | **1 error** — `MediaPlates.astro:4:13 Parsing error: Unexpected token {` from another card's in-flight refactor; still nothing in `website/news/`                                                                         |
+| Gated marker list (§11, §12) | included `Asteria`                                     | current `gatedTextMarkers` = `RH-01`, `Pathfinder`, `18° 42`, `226° 14`; the field name was retired when the human story owner released it for article 001. It stays step-007 material for 002 (brief, "Forbidden angle") |
+| Media model (§8)             | `media` as a copied asset with `mediaAlt`/`mediaLabel` | rewritten: `media` is a schema-validated **key** (`src/lib/media.ts`), with per-plate alt/caption requirements and no key available for a 002 illustration yet                                                            |
 
 ### 14.2 Re-verified (no change needed)
 
-| Check | Result (run 2026-09-17 01:46 CEST from `website/`) |
-| ----- | --------------------------------------------------- |
-| Draft hash | `6437379171bdcc1a3929821ab14715ccfa15f9805b0f87ff9ef78ad0c7fd1b5b` — identical to the editorial review's and the deploy card's record, so the approved revision has not moved |
-| Applied metadata | frontmatter read back: `title: Choosing what a Mars rover carries.`, the 152-character `summary`, and the three links to `/#mission` and `/#updates` all present and unchanged |
-| Internal anchors | `#mission` (`MissionPanel.astro:6`) and `#updates` (`NewsCarousel.astro:11`) each present exactly once in the built homepage; applied links resolve |
-| Route gate | `releasedNewsSlugs` still `[]`; `publication: draft` still fails `isPublishedEntry`; `[slug].astro` generates no article page |
-| Draft filtered from the build | the 002 title and the 002 summary each occur **0** times across `dist/` |
-| Gated markers | 0 occurrences in `dist/`, 0 in `website/src/`, 0 in the 002 article (§11) |
-| Canonical / crawl surface | no `SITE_URL` → no `<link rel="canonical">`; 0 files in `dist/` or `src/` carry `og:*`, `twitter:*`, or `application/ld+json`; `dist/` has no `robots.txt` and no sitemap, and `public/` holds only the two tracked favicons |
-| Public/canon impact | none — the article stays `publication: draft`; nothing published, deployed, or committed by this pass |
+| Check                         | Result (run 2026-09-17 01:46 CEST from `website/`)                                                                                                                                                                           |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Draft hash                    | `6437379171bdcc1a3929821ab14715ccfa15f9805b0f87ff9ef78ad0c7fd1b5b` — identical to the editorial review's and the deploy card's record, so the approved revision has not moved                                                |
+| Applied metadata              | frontmatter read back: `title: Choosing what a Mars rover carries.`, the 152-character `summary`, and the three links to `/#mission` and `/#updates` all present and unchanged                                               |
+| Internal anchors              | `#mission` (`MissionPanel.astro:6`) and `#updates` (`NewsCarousel.astro:11`) each present exactly once in the built homepage; applied links resolve                                                                          |
+| Route gate                    | `releasedNewsSlugs` still `[]`; `publication: draft` still fails `isPublishedEntry`; `[slug].astro` generates no article page                                                                                                |
+| Draft filtered from the build | the 002 title and the 002 summary each occur **0** times across `dist/`                                                                                                                                                      |
+| Gated markers                 | 0 occurrences in `dist/`, 0 in `website/src/`, 0 in the 002 article (§11)                                                                                                                                                    |
+| Canonical / crawl surface     | no `SITE_URL` → no `<link rel="canonical">`; 0 files in `dist/` or `src/` carry `og:*`, `twitter:*`, or `application/ld+json`; `dist/` has no `robots.txt` and no sitemap, and `public/` holds only the two tracked favicons |
+| Public/canon impact           | none — the article stays `publication: draft`; nothing published, deployed, or committed by this pass                                                                                                                        |
 
 ### 14.3 New observations found in this pass
 

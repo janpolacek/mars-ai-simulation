@@ -52,7 +52,7 @@ card comment (`hermes kanban comment <id> "..."`) and in
 
 - **The card body's frontmatter instructions can be stale — the site's code is the
   authority.** A card may say "keep `media: /assets/logo.png`" long after the schema moved
-  to media *keys* (`src/lib/media.ts` + `src/features/news/media.ts`). When released media
+  to media _keys_ (`src/lib/media.ts` + `src/features/news/media.ts`). When released media
   exists, read both modules: they state the key, the plate count, and how many `mediaAlt`
   / `mediaCaption` / `mediaLabel` entries the key demands. A key mismatch fails the build;
   a value that predates the schema cannot be honoured at all, so record the switch on the

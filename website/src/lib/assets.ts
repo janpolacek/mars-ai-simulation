@@ -1,10 +1,10 @@
 import type { ImageMetadata } from 'astro';
 
-import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
-import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
-import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import asteriaMarsLocatorSource from '../../../docs/area/asteria-field-01-mars-locator.png';
 import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-regional-context.png';
+import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
+import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
+import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
 
 /**

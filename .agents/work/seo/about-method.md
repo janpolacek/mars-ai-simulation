@@ -2,16 +2,16 @@
 
 ## Package metadata
 
-| Field              | Value                                                                                                                                                     |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Route              | `/about/` (optional second item: `/404`)                                                                                                                  |
-| Stage / step       | `seo`; timeline step `site-foundation` (`docs/PLAN.md` Phase 1 item 2). Factual bound: the published step-001 release.                                     |
-| Card               | `t_2bf95f76` (`mars-ai-simulator-seo`), parent `t_16ec6ba2` (writer)                                                                                        |
-| Inputs read        | `.agents/work/briefs/about-method.md`; `.agents/work/drafts/about-method.md`; `website/news/001-project-announcement.mdx` (published); `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/PLAN.md` (Phase 1–2, Phase 4); `website/src/{lib,components,features,layouts,pages}/**`; `website/scripts/{guards,check-dist}.mjs`; `website/test/guards.test.mjs`; `website/.prettierrc`; `.agents/work/seo/{001-project-announcement,002-payload-selection}.md` |
-| Conventions read   | `.agents/skills/seo-content/SKILL.md` (including "Verified practice"); `.agents/skills/brand-voice/SKILL.md`                                                |
-| Artifact           | this file (`.agents/work/seo/about-method.md`)                                                                                                             |
-| Applied this pass  | one file, two strings: `website/src/pages/news/index.astro` (§11). The `/about/` metadata below is recommended to the build card, not applied to `website/src/`. |
-| Status             | recommendations issued; **no approval, no release, no deploy, no canon decision**                                                                          |
+| Field             | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Route             | `/about/` (optional second item: `/404`)                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Stage / step      | `seo`; timeline step `site-foundation` (`docs/PLAN.md` Phase 1 item 2). Factual bound: the published step-001 release.                                                                                                                                                                                                                                                                                                                                    |
+| Card              | `t_2bf95f76` (`mars-ai-simulator-seo`), parent `t_16ec6ba2` (writer)                                                                                                                                                                                                                                                                                                                                                                                      |
+| Inputs read       | `.agents/work/briefs/about-method.md`; `.agents/work/drafts/about-method.md`; `website/news/001-project-announcement.mdx` (published); `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/PLAN.md` (Phase 1–2, Phase 4); `website/src/{lib,components,features,layouts,pages}/**`; `website/scripts/{guards,check-dist}.mjs`; `website/test/guards.test.mjs`; `website/.prettierrc`; `.agents/work/seo/{001-project-announcement,002-payload-selection}.md` |
+| Conventions read  | `.agents/skills/seo-content/SKILL.md` (including "Verified practice"); `.agents/skills/brand-voice/SKILL.md`                                                                                                                                                                                                                                                                                                                                              |
+| Artifact          | this file (`.agents/work/seo/about-method.md`)                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Applied this pass | one file, two strings: `website/src/pages/news/index.astro` (§11). The `/about/` metadata below is recommended to the build card, not applied to `website/src/`.                                                                                                                                                                                                                                                                                          |
+| Status            | recommendations issued; **no approval, no release, no deploy, no canon decision**                                                                                                                                                                                                                                                                                                                                                                         |
 
 Assumptions recorded (nothing here is treated as approved):
 
@@ -47,11 +47,11 @@ two honest next steps, which is exactly what an about page on a fictional progra
 
 **How `/about/` differs from `/` and `/news/`** (the three must not present one identity):
 
-| Route    | Reader question it answers                            | Document title (after this pass)                                 | Must not answer                                        |
-| -------- | ----------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
-| `/`      | "What is the state of the mission right now?"          | `Red Horizon \| A Mars mission in progress` (site default, unchanged) | the fiction/method question — it links to `/about/` via nav |
-| `/news/` | "What has the programme published so far?"             | `Red Horizon newsroom \| Every published step so far` (applied, §11) | the mission's current state — that lives on `/`          |
-| `/about/` | "Is this real, and how is it made?"                   | `About Red Horizon \| How a fictional Mars mission is made` (§2)  | the publication list — it links to `/news/`              |
+| Route     | Reader question it answers                    | Document title (after this pass)                                      | Must not answer                                             |
+| --------- | --------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `/`       | "What is the state of the mission right now?" | `Red Horizon \| A Mars mission in progress` (site default, unchanged) | the fiction/method question — it links to `/about/` via nav |
+| `/news/`  | "What has the programme published so far?"    | `Red Horizon newsroom \| Every published step so far` (applied, §11)  | the mission's current state — that lives on `/`             |
+| `/about/` | "Is this real, and how is it made?"           | `About Red Horizon \| How a fictional Mars mission is made` (§2)      | the publication list — it links to `/news/`                 |
 
 Three pages, three question families: current state / published record / identity and method. The word
 "fiction" belongs to `/about/` (and the site-wide footer disclosure); `/` and `/news/` keep the mission's
@@ -73,7 +73,7 @@ instrument, a vehicle, or a provider.
   keeps the same sentence frame and adds the reader's own two tokens, "fictional" and "Mars mission", which
   are also the page's own first sentence. It is not a keyword list: one brand, one noun phrase, one method
   clause, one pipe.
-- **Route rendering:** `BaseLayout` (`.astro` line 31) sets `<title>` from the prop *without* a site suffix,
+- **Route rendering:** `BaseLayout` (`.astro` line 31) sets `<title>` from the prop _without_ a site suffix,
   and the default it replaces is itself brand-first (`Red Horizon | A Mars mission in progress`, 40). So this
   string must be self-contained, and it is: brand, then the page's job.
 - **Rejected variants (measured):** `About Red Horizon | A fictional Mars mission, and how it is made`
@@ -135,18 +135,18 @@ reviews, and releases it, and what is public today.`
 
 ## 5. Heading outline
 
-**Order: kept as the writer wrote it. No reorder applied** (heading *order* is this pass's call; heading
-*wording* remains the writer's).
+**Order: kept as the writer wrote it. No reorder applied** (heading _order_ is this pass's call; heading
+_wording_ remains the writer's).
 
-| Level | Heading (frozen copy)      | The reader question it answers                        | Promise check                                                        |
-| ----- | -------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------- |
-| h1    | About Red Horizon and how it is made. | "What is this page?"                        | matches the whole page; no figure, no date                            |
-| h2    | What this is               | "Is it real, and who is behind it?"                   | body answers both in its two paragraphs — satisfied                   |
-| h2    | How a page is made         | "How does something like this get written?"           | body states the chain and the human gate — satisfied                  |
-| h2    | How the record moves       | "In what order do you publish, and what if you err?"  | body states order, no spoilers, dated corrections — satisfied         |
-| h2    | What is public today       | "What do I already know?"                             | body restates only step-001 published facts — satisfied, adds nothing |
-| h2    | What this is not           | "Is this a real agency / real mission?"               | body states non-affiliation — satisfied                               |
-| h2    | Where to start             | "Where do I go next?"                                 | body's two links are the two live routes — satisfied                  |
+| Level | Heading (frozen copy)                 | The reader question it answers                       | Promise check                                                         |
+| ----- | ------------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------------- |
+| h1    | About Red Horizon and how it is made. | "What is this page?"                                 | matches the whole page; no figure, no date                            |
+| h2    | What this is                          | "Is it real, and who is behind it?"                  | body answers both in its two paragraphs — satisfied                   |
+| h2    | How a page is made                    | "How does something like this get written?"          | body states the chain and the human gate — satisfied                  |
+| h2    | How the record moves                  | "In what order do you publish, and what if you err?" | body states order, no spoilers, dated corrections — satisfied         |
+| h2    | What is public today                  | "What do I already know?"                            | body restates only step-001 published facts — satisfied, adds nothing |
+| h2    | What this is not                      | "Is this a real agency / real mission?"              | body states non-affiliation — satisfied                               |
+| h2    | Where to start                        | "Where do I go next?"                                | body's two links are the two live routes — satisfied                  |
 
 Outline verdict: one `h1`, six `h2`, no skipped level, no heading that promises what the body withholds, and
 no heading carrying a date, a figure, or a later-step noun. The reader's first question ("is it real?") is
@@ -172,10 +172,10 @@ change into a keyword.
 **Set: two links, both targets verified live in the current tree. This is the set the draft already
 contains; no anchor change is recommended.**
 
-| # | Anchor text | Target   | Placement          | Verified today                                                                                          |
-| - | ----------- | -------- | ------------------ | ------------------------------------------------------------------------------------------------------- |
-| 1 | home page   | `/`      | §"Where to start"  | `website/src/pages/index.astro` exists and built `/index.html` in the last build (`website/dist/index.html`)      |
-| 2 | newsroom    | `/news/` | §"Where to start"  | `website/src/pages/news/index.astro` exists (re-read at decision time), built `/news/index.html` in the last build |
+| # | Anchor text | Target   | Placement         | Verified today                                                                                                     |
+| - | ----------- | -------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 1 | home page   | `/`      | §"Where to start" | `website/src/pages/index.astro` exists and built `/index.html` in the last build (`website/dist/index.html`)       |
+| 2 | newsroom    | `/news/` | §"Where to start" | `website/src/pages/news/index.astro` exists (re-read at decision time), built `/news/index.html` in the last build |
 
 **Resolved: the writer's open item 4 — keep `/news/`, do not substitute `/#updates`.**
 
@@ -188,7 +188,7 @@ contains; no anchor change is recommended.**
   reason to publish a weaker link: if the newsroom were reworked away, the nav — not this anchor — would be
   the first thing to break, and the link-integrity test recommended in `.agents/work/seo/001-project-announcement.md`
   §10 is the guard for it.
-- `/#updates` remains the correct target for *newsroom content on the homepage*, and it is what article 002
+- `/#updates` remains the correct target for _newsroom content on the homepage_, and it is what article 002
   uses today. It is not the right target for a sentence that says "The newsroom collects everything published
   so far": that sentence describes the index, and the anchor text names it.
 
@@ -227,14 +227,14 @@ frozen, so any such link is a writer/editor change to the last paragraph, not an
 `<meta name="description">`.** Verified in this pass: no JSON-LD, no `schema.org` reference, no Open Graph
 or Twitter card anywhere in `website/src/`.
 
-| Candidate                | Verdict  | Reason                                                                                                                       |
-| ------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `Organization` ("Red Horizon") | **never** | It asserts a real entity for a fictional programme — the same finding as the 001 and 002 passes. schema.org has no fictional-entity type, and `disambiguatingDescription` does not fix an assertion. |
-| `Organization` (Mars AI Simulation) | not now | The project is real, but there is no approved origin, no logo policy for markup, and no contact point; `website/src/lib/seo.ts` suppresses the canonical for exactly this reason. |
-| `AboutPage` / `WebPage`  | not now  | Both require a `url` and belong to a `WebSite`; with `SITE_URL` unrecorded, any URL would be invented. The type also adds nothing a reader sees. |
-| `WebSite`                | deferred | Honest the moment a production origin exists (name + url only). Hold it to the canonical rule: no markup before a real origin. |
-| `BreadcrumbList`         | not now  | One extra level (`/` → `/about/`) buys no rich result and would describe a hierarchy the visible design does not show.          |
-| `FAQPage`                | **no**   | The page publishes no question-and-answer block; marking up questions the body does not contain would be inventing content.    |
+| Candidate                           | Verdict   | Reason                                                                                                                                                                                               |
+| ----------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Organization` ("Red Horizon")      | **never** | It asserts a real entity for a fictional programme — the same finding as the 001 and 002 passes. schema.org has no fictional-entity type, and `disambiguatingDescription` does not fix an assertion. |
+| `Organization` (Mars AI Simulation) | not now   | The project is real, but there is no approved origin, no logo policy for markup, and no contact point; `website/src/lib/seo.ts` suppresses the canonical for exactly this reason.                    |
+| `AboutPage` / `WebPage`             | not now   | Both require a `url` and belong to a `WebSite`; with `SITE_URL` unrecorded, any URL would be invented. The type also adds nothing a reader sees.                                                     |
+| `WebSite`                           | deferred  | Honest the moment a production origin exists (name + url only). Hold it to the canonical rule: no markup before a real origin.                                                                       |
+| `BreadcrumbList`                    | not now   | One extra level (`/` → `/about/`) buys no rich result and would describe a hierarchy the visible design does not show.                                                                               |
+| `FAQPage`                           | **no**    | The page publishes no question-and-answer block; marking up questions the body does not contain would be inventing content.                                                                          |
 
 **Preconditions before any page-level structured data is reconsidered** (all of them): a recorded origin
 (`SITE_URL`), a byline/credit policy, and a machine-readable fiction disclosure that travels with the markup.
@@ -247,14 +247,14 @@ fiction disclosure itself stays visible page copy and must never be replaced by,
 
 **Verdict: the 404 copy is acceptable as written, with one metadata condition.**
 
-| Item                 | Value                                                                                              | Measured / verified                                                                                  |
-| -------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Document title       | `Page not found \| Red Horizon` (writer's string — confirmed, no change)                              | 28 characters ≤ 60                                                                                    |
-| Meta description     | **leave the site default.** The page is recommended `noindex`, so its description is not a search surface, and a bespoke string would only add an unused copy string to the site. | site default 108 characters                                                                            |
-| Heading              | `This page isn't here.` (writer's string)                                                              | no mission fact                                                                                        |
-| Links                | `Home page` → `/`, `Newsroom` → `/news/`                                                               | both routes exist (same verification as §6)                                                            |
-| Mission facts        | none — the page cannot outrun any release step                                                         | verified against the copy strings                                                                      |
-| Indexability         | **recommend `noindex`** for this route                                                                 | see below                                                                                              |
+| Item             | Value                                                                                                                                                                             | Measured / verified                         |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Document title   | `Page not found \| Red Horizon` (writer's string — confirmed, no change)                                                                                                          | 28 characters ≤ 60                          |
+| Meta description | **leave the site default.** The page is recommended `noindex`, so its description is not a search surface, and a bespoke string would only add an unused copy string to the site. | site default 108 characters                 |
+| Heading          | `This page isn't here.` (writer's string)                                                                                                                                         | no mission fact                             |
+| Links            | `Home page` → `/`, `Newsroom` → `/news/`                                                                                                                                          | both routes exist (same verification as §6) |
+| Mission facts    | none — the page cannot outrun any release step                                                                                                                                    | verified against the copy strings           |
+| Indexability     | **recommend `noindex`** for this route                                                                                                                                            | see below                                   |
 
 **Condition (recommendation to `mars-ai-simulator-dev`).** `BaseLayout` (`.astro` line 18) derives a
 canonical for **every** route from `Astro.url.pathname` and emits it whenever `SITE_URL` is set. A 404 route
@@ -280,8 +280,8 @@ wording. Do not restate the year or the figure, in the body or in any metadata s
   bound — this is a coherence call, and the frame-only version is the better one.
 - The About page is not the mission-facts page. `website/src/features/mission/facts.ts` publishes the
   homepage fact panel, and its launch/landing rows read `To be announced`. A fictional year restated on the
-  about page would sit beside that panel without explaining the difference between an announced *window
-  frame* and a *date*, and the About page's own method section promises that the record does not run ahead
+  about page would sit beside that panel without explaining the difference between an announced _window
+  frame_ and a _date_, and the About page's own method section promises that the record does not run ahead
   of the mission.
 - No metadata string this pass recommends carries a year or a figure, for the same reason the 001 pass kept
   them out of its titles and descriptions: a snippet with a number in it dates the page and competes with
@@ -355,19 +355,19 @@ exports.
 within ten minutes. `.agents/work/seo/002-payload-selection.md` §10/§14.3 settled `News | Red Horizon` and
 card `t_1828a6d4` implemented it at 01:56; the 001 revision re-pass **§R11.1** (card `t_3bd87425`, 01:58
 CEST) then settled the other way — **keep the applied `Red Horizon newsroom | Every published step so
-far`**, with `News | Red Horizon` as the *recorded fallback*. This card, the corrective raised on
+far`**, with `News | Red Horizon` as the _recorded fallback_. This card, the corrective raised on
 `t_1828a6d4`, **confirms §R11.1** rather than re-opening it, and applies nothing to the site. §11's title
 row is therefore accurate again as written; what changed is where the string lives and which string is the
 fallback.
 
 Verified on disk and in the build at 02:00 CEST:
 
-| Surface | Value and hash |
-| ------- | -------------- |
-| `website/src/lib/site.ts` | `newsTitle: 'Red Horizon newsroom \| Every published step so far'` (50) — the applied string now lives here, not in the page (`sha256 86991815…`) |
+| Surface                              | Value and hash                                                                                                                                            |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `website/src/lib/site.ts`            | `newsTitle: 'Red Horizon newsroom \| Every published step so far'` (50) — the applied string now lives here, not in the page (`sha256 86991815…`)         |
 | `website/src/pages/news/index.astro` | `title={site.newsTitle}`; §11's applied **description byte-identical**; the page-local `const title` that §12's diff records is gone (`sha256 14104321…`) |
-| `website/dist/news/index.html` | `<title>Red Horizon newsroom \| Every published step so far</title>` |
-| `website/dist/index.html` | `<title>Red Horizon \| A Mars mission in progress</title>` — unchanged, still the site default |
+| `website/dist/news/index.html`       | `<title>Red Horizon newsroom \| Every published step so far</title>`                                                                                      |
+| `website/dist/index.html`            | `<title>Red Horizon \| A Mars mission in progress</title>` — unchanged, still the site default                                                            |
 
 **The title's revert path, updated for its new home (string kept, path corrected):** set `site.newsTitle`
 to the recorded fallback `News | Red Horizon` (18), or drop the `title` prop so the page inherits
@@ -441,10 +441,10 @@ the dev card owns that transcription).
  </BaseLayout>
 ```
 
-| # | String / value                                             | Where              | Was (revert string)                                                                                       | Why it is mine                                     |
-| - | ---------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| 1 | `Red Horizon newsroom \| Every published step so far`        | page `<title>`     | `Red Horizon \| A Mars mission in progress`                                                               | document title; meaning-neutral; no visible copy     |
-| 2 | `Red Horizon is a fictional Mars mission. Every step the programme has published so far is listed here.` | `<meta name="description">` | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.` | meta description; meaning-neutral; fiction kept      |
+| # | String / value                                                                                           | Where                       | Was (revert string)                                                                                            | Why it is mine                                   |
+| - | -------------------------------------------------------------------------------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| 1 | `Red Horizon newsroom \| Every published step so far`                                                    | page `<title>`              | `Red Horizon \| A Mars mission in progress`                                                                    | document title; meaning-neutral; no visible copy |
+| 2 | `Red Horizon is a fictional Mars mission. Every step the programme has published so far is listed here.` | `<meta name="description">` | `Red Horizon is a fictional, AI-assisted Mars exploration project tracked from first planning to the surface.` | meta description; meaning-neutral; fiction kept  |
 
 **Concurrent edits found in the shared checkout while this pass ran** (recorded so the record is exact; none
 of them mine, none of them on a file this pass touched):
@@ -476,7 +476,7 @@ of them mine, none of them on a file this pass touched):
 - **Whole-file scan, including this package:** `.agents/work/briefs/about-method.md`,
   `.agents/work/drafts/about-method.md` and `.agents/work/seo/about-method.md` each produce three pattern
   matches, and all of them are the same two false-positive classes: (a) the substring inside the already
-  public word "uncrewed", and (b) the pipeline slug of a *different* working paper that the files cite by
+  public word "uncrewed", and (b) the pipeline slug of a _different_ working paper that the files cite by
   path (`…/002-payload-…`, which is a repository filename, not a mission fact). No withheld value is present.
   This is the same class of substring false positive the 001 and 002 passes recorded; it is a scanner
   artefact, not a finding, and no corrective card is needed. The hits are reported by count and class here,
@@ -493,21 +493,21 @@ of them mine, none of them on a file this pass touched):
 
 ## 14. Validation
 
-| Check                                          | Result                                                                                                                              |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| All proposed strings measured by script         | Yes — `/tmp/seo-about-measure.py`, `/tmp/seo-about-final.py` (outside the repository), not by eye. Titles ≤ 60, descriptions ≤ 155: all ok (§2, §3, §9, §11) |
-| Writer's own measurements re-checked            | Confirmed: title 44, description 127, 404 title 28, `h1` 37, body 404 words — the draft's numbers reproduce exactly                   |
-| String lengths proposed this pass               | about title 56; about description 145; newsroom title 50; newsroom description 102; 404 title 28 (confirmed) — all inside limits with margin |
-| Non-ASCII in any proposed string                | none — no em dash, no curly quote, no non-breaking space; nothing for a snippet to mangle                                             |
-| Routes the internal links target exist today     | `/` → `src/pages/index.astro`; `/news/` → `src/pages/news/index.astro` (re-read at decision time); both built in the existing `dist/` |
-| Homepage anchors exist today                     | `#top` in `Hero.astro` line 7, `#mission` in `MissionPanel.astro` line 6, `#updates` in `NewsCarousel.astro` line 11, `#timeline` in `ProgressLog.astro` line 6 — grep-verified in the features, not in an old single-file `index.astro` |
-| Routes that do **not** exist and are not linked  | `/news/<slug>/` (no route; `releasedNewsSlugs` empty), wiki/media/mission-update collections, `/404` is not linked from anywhere and must not be |
-| Duplicate-title finding reproduced                | `website/dist/index.html` and `website/dist/news/index.html` both carry the site default `<title>` — measured in the existing build output, read-only |
-| Page build run by this pass                      | **No.** The card forbids it. All route evidence above is source inspection plus the existing `dist/` from the last build by another card      |
-| Formatting of the applied file                   | `npx prettier --check src/pages/news/index.astro` could not run — `prettier-plugin-astro` is not installed in `website/node_modules` (the same blocker the 001 and 002 passes recorded). The edit follows the surrounding style manually: 4-space indent, single quotes, semicolons, longest line 109 ≤ 120 |
-| Type/prop correctness of the applied edit        | `BaseLayout.astro` line 16 destructures `{ title = …, description = … }` from `Astro.props`, and both applied values are plain strings with no brace or quote characters — checked in source |
-| Guard suite / `npm test` / `npm run lint`        | Not run: they are the dev card's validation, and the tree currently carries known parse errors from another card's refactor (`lint`) plus a `gated-path` postbuild finding. Nothing in this pass's one-file change affects either |
-| Effect on what is published today                | none — `/about/` and `/404` do not exist as routes; the newsroom title/description change is document-head only, meaning-neutral, and reversible per §12 |
+| Check                                           | Result                                                                                                                                                                                                                                                                                                      |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| All proposed strings measured by script         | Yes — `/tmp/seo-about-measure.py`, `/tmp/seo-about-final.py` (outside the repository), not by eye. Titles ≤ 60, descriptions ≤ 155: all ok (§2, §3, §9, §11)                                                                                                                                                |
+| Writer's own measurements re-checked            | Confirmed: title 44, description 127, 404 title 28, `h1` 37, body 404 words — the draft's numbers reproduce exactly                                                                                                                                                                                         |
+| String lengths proposed this pass               | about title 56; about description 145; newsroom title 50; newsroom description 102; 404 title 28 (confirmed) — all inside limits with margin                                                                                                                                                                |
+| Non-ASCII in any proposed string                | none — no em dash, no curly quote, no non-breaking space; nothing for a snippet to mangle                                                                                                                                                                                                                   |
+| Routes the internal links target exist today    | `/` → `src/pages/index.astro`; `/news/` → `src/pages/news/index.astro` (re-read at decision time); both built in the existing `dist/`                                                                                                                                                                       |
+| Homepage anchors exist today                    | `#top` in `Hero.astro` line 7, `#mission` in `MissionPanel.astro` line 6, `#updates` in `NewsCarousel.astro` line 11, `#timeline` in `ProgressLog.astro` line 6 — grep-verified in the features, not in an old single-file `index.astro`                                                                    |
+| Routes that do **not** exist and are not linked | `/news/<slug>/` (no route; `releasedNewsSlugs` empty), wiki/media/mission-update collections, `/404` is not linked from anywhere and must not be                                                                                                                                                            |
+| Duplicate-title finding reproduced              | `website/dist/index.html` and `website/dist/news/index.html` both carry the site default `<title>` — measured in the existing build output, read-only                                                                                                                                                       |
+| Page build run by this pass                     | **No.** The card forbids it. All route evidence above is source inspection plus the existing `dist/` from the last build by another card                                                                                                                                                                    |
+| Formatting of the applied file                  | `npx prettier --check src/pages/news/index.astro` could not run — `prettier-plugin-astro` is not installed in `website/node_modules` (the same blocker the 001 and 002 passes recorded). The edit follows the surrounding style manually: 4-space indent, single quotes, semicolons, longest line 109 ≤ 120 |
+| Type/prop correctness of the applied edit       | `BaseLayout.astro` line 16 destructures `{ title = …, description = … }` from `Astro.props`, and both applied values are plain strings with no brace or quote characters — checked in source                                                                                                                |
+| Guard suite / `npm test` / `npm run lint`       | Not run: they are the dev card's validation, and the tree currently carries known parse errors from another card's refactor (`lint`) plus a `gated-path` postbuild finding. Nothing in this pass's one-file change affects either                                                                           |
+| Effect on what is published today               | none — `/about/` and `/404` do not exist as routes; the newsroom title/description change is document-head only, meaning-neutral, and reversible per §12                                                                                                                                                    |
 
 **Outstanding, not this card's to close:**
 
@@ -521,15 +521,15 @@ of them mine, none of them on a file this pass touched):
 
 ## 15. Conflicts with brand voice or continuity
 
-| # | Conflict                                                                                     | Recommended resolution                                                                                                    | Owner                                |
-| - | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| 1 | House voice is figurative (`How this fiction is made`); search language is plain (`fictional Mars mission`) | §2 keeps the sentence frame and swaps only the half that carries no query language. No style change is asked of the writer. | editor (acknowledge), dev (implement) |
-| 2 | The page's own words "fiction" and "fictional" sit beside a site whose other pages never use them | Intended: the disclosure vocabulary belongs to `/about/` and the footer note; `/` and `/news/` keep the mission voice (§1)   | editor                                |
-| 3 | One heading (`How the record moves`) is figurative enough to hide its content for a scanner    | §5 proposes a colon half. Body wording is the writer's; nothing is applied here.                                             | writer (optional)                     |
-| 4 | Project jargon on the page: "brief", "editorial pass", "continuity" are process words a reader may not share | §5 note + this row route one optional gloss to the writer: `continuity` → "the facts the record has already established". Technical terms should be explained before they are relied on. | writer (optional)                     |
-| 5 | The published 2031 window frame (article 001) coexists with the homepage panel's `To be announced` rows | Pre-existing site coherence question, not created by About and not decided here. §10 keeps the About page frame-only and routes the question. | continuity `t_a0ee9abf` → human story owner if it escalates |
-| 6 | Nav says `News`, the page eyebrow says `Newsroom`, this pass titles the document "newsroom" | Keep both in the document title until an editor aligns the vocabulary; the alternative plain title is recorded in §11. One name per thing is the goal, and it is an editorial call. | editor + dev                          |
-| 7 | Continuous quality: two routes previously shared one title                                    | Fixed and recorded with its revert string (§11, §12). No continuity impact — nothing visible changed.                        | this pass (done)                      |
+| # | Conflict                                                                                                     | Recommended resolution                                                                                                                                                                   | Owner                                                       |
+| - | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| 1 | House voice is figurative (`How this fiction is made`); search language is plain (`fictional Mars mission`)  | §2 keeps the sentence frame and swaps only the half that carries no query language. No style change is asked of the writer.                                                              | editor (acknowledge), dev (implement)                       |
+| 2 | The page's own words "fiction" and "fictional" sit beside a site whose other pages never use them            | Intended: the disclosure vocabulary belongs to `/about/` and the footer note; `/` and `/news/` keep the mission voice (§1)                                                               | editor                                                      |
+| 3 | One heading (`How the record moves`) is figurative enough to hide its content for a scanner                  | §5 proposes a colon half. Body wording is the writer's; nothing is applied here.                                                                                                         | writer (optional)                                           |
+| 4 | Project jargon on the page: "brief", "editorial pass", "continuity" are process words a reader may not share | §5 note + this row route one optional gloss to the writer: `continuity` → "the facts the record has already established". Technical terms should be explained before they are relied on. | writer (optional)                                           |
+| 5 | The published 2031 window frame (article 001) coexists with the homepage panel's `To be announced` rows      | Pre-existing site coherence question, not created by About and not decided here. §10 keeps the About page frame-only and routes the question.                                            | continuity `t_a0ee9abf` → human story owner if it escalates |
+| 6 | Nav says `News`, the page eyebrow says `Newsroom`, this pass titles the document "newsroom"                  | Keep both in the document title until an editor aligns the vocabulary; the alternative plain title is recorded in §11. One name per thing is the goal, and it is an editorial call.      | editor + dev                                                |
+| 7 | Continuous quality: two routes previously shared one title                                                   | Fixed and recorded with its revert string (§11, §12). No continuity impact — nothing visible changed.                                                                                    | this pass (done)                                            |
 
 ---
 

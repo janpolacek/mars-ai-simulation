@@ -101,14 +101,20 @@ export function newsMediaIssues(data: {
     }
 
     if (requirement.requiresLabel && isBlank(data.mediaLabel ?? '')) {
-        issues.push({ field: 'mediaLabel', message: `mediaLabel is required, and must not be empty, when media is ${media}` });
+        issues.push({
+            field: 'mediaLabel',
+            message: `mediaLabel is required, and must not be empty, when media is ${media}`,
+        });
     }
 
     const captions = newsMediaTextList(data.mediaCaption);
     if (captions.length !== requirement.captionCount || captions.some(isBlank)) {
         issues.push(
             requirement.captionCount === 0
-                ? { field: 'mediaCaption', message: `media renders no per-plate caption when media is ${media}; remove mediaCaption` }
+                ? {
+                    field: 'mediaCaption',
+                    message: `media renders no per-plate caption when media is ${media}; remove mediaCaption`,
+                }
                 : textIssue('mediaCaption', media, requirement.captionCount),
         );
     }

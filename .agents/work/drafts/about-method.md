@@ -2,17 +2,17 @@
 
 ## Draft metadata
 
-| Field                | Value                                                                                                                                                                             |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Slug / route         | `about-method` / `/about/` (optional second item: `/404`)                                                                                                                         |
-| Content type         | Site page copy (static page strings), **not** a news article — decided in `.agents/work/briefs/about-method.md` §"Deliverable decision"                                            |
-| Timeline step        | `site-foundation` (route authority: `docs/PLAN.md` Phase 1 item 2). Factual bound: the step-001 public release only.                                                              |
-| Card                 | `t_16ec6ba2` (`mars-ai-simulator-writer`), child of `t_774e7298`                                                                                                                  |
-| Brief                | `.agents/work/briefs/about-method.md`                                                                                                                                             |
-| Sources read         | `website/news/001-project-announcement.mdx`; `docs/timeline/001-project-announcement.md`; `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/SCENARIO.md`; `docs/PLAN.md`; `docs/brand/BRAND.md`; `website/src/{lib/site.ts,lib/navigation.ts,lib/releases.ts,content.config.ts}`; `website/src/components/*`; `website/src/features/**`; `.agents/work/reviews/001-project-announcement.md` |
-| Status               | `draft` — not approved, not published, no route built. Awaiting SEO → continuity → editorial.                                                                                     |
-| Public/canon impact  | No new canon. Re-states step-001 public facts and the project's own method.                                                                                                        |
-| Human release reference | **None.** An editorial `approved` review is not a release (`.agents/skills/create-article-workflow/SKILL.md` "Approval boundary").                                              |
+| Field                   | Value                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Slug / route            | `about-method` / `/about/` (optional second item: `/404`)                                                                                                                                                                                                                                                                                                                                  |
+| Content type            | Site page copy (static page strings), **not** a news article — decided in `.agents/work/briefs/about-method.md` §"Deliverable decision"                                                                                                                                                                                                                                                    |
+| Timeline step           | `site-foundation` (route authority: `docs/PLAN.md` Phase 1 item 2). Factual bound: the step-001 public release only.                                                                                                                                                                                                                                                                       |
+| Card                    | `t_16ec6ba2` (`mars-ai-simulator-writer`), child of `t_774e7298`                                                                                                                                                                                                                                                                                                                           |
+| Brief                   | `.agents/work/briefs/about-method.md`                                                                                                                                                                                                                                                                                                                                                      |
+| Sources read            | `website/news/001-project-announcement.mdx`; `docs/timeline/001-project-announcement.md`; `docs/GENERAL.md`; `docs/INSTRUCTIONS.md`; `docs/SCENARIO.md`; `docs/PLAN.md`; `docs/brand/BRAND.md`; `website/src/{lib/site.ts,lib/navigation.ts,lib/releases.ts,content.config.ts}`; `website/src/components/*`; `website/src/features/**`; `.agents/work/reviews/001-project-announcement.md` |
+| Status                  | `draft` — not approved, not published, no route built. Awaiting SEO → continuity → editorial.                                                                                                                                                                                                                                                                                              |
+| Public/canon impact     | No new canon. Re-states step-001 public facts and the project's own method.                                                                                                                                                                                                                                                                                                                |
+| Human release reference | **None.** An editorial `approved` review is not a release (`.agents/skills/create-article-workflow/SKILL.md` "Approval boundary").                                                                                                                                                                                                                                                         |
 
 Word counts and metadata lengths below were produced by a scratch script outside the repository
 (`/tmp/about-method-measure.py`); the numbers are measured, not estimated.
@@ -20,8 +20,10 @@ Word counts and metadata lengths below were produced by a scratch script outside
 ## The page as a reader sees it
 
 **About**
+
 # About Red Horizon and how it is made.
-*A fictional Mars mission, published one step at a time, in the order it happens.*
+
+_A fictional Mars mission, published one step at a time, in the order it happens._
 
 ### What this is
 
@@ -137,21 +139,21 @@ export const about = {
 
 ## Proposed metadata (SEO owns the final wording)
 
-| Field             | Proposed value                                                                                                     | Measured |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------ | -------- |
-| Route             | `/about/`                                                                                                            | —        |
-| Nav label         | `About`                                                                                                              | —        |
-| `<title>`         | `About Red Horizon \| How this fiction is made`                                                                       | 44 chars (limit 60) |
-| Meta description  | `Red Horizon is a fictional Mars mission. How an AI-assisted project writes, reviews, and releases it, and what is public today.` | 127 chars (limit 155) |
-| H1                | `About Red Horizon and how it is made.`                                                                              | 37 chars |
-| Heading order     | H1 → six H2 sections in the order above                                                                              | —        |
+| Field            | Proposed value                                                                                                                    | Measured              |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| Route            | `/about/`                                                                                                                         | —                     |
+| Nav label        | `About`                                                                                                                           | —                     |
+| `<title>`        | `About Red Horizon \| How this fiction is made`                                                                                   | 44 chars (limit 60)   |
+| Meta description | `Red Horizon is a fictional Mars mission. How an AI-assisted project writes, reviews, and releases it, and what is public today.` | 127 chars (limit 155) |
+| H1               | `About Red Horizon and how it is made.`                                                                                           | 37 chars              |
+| Heading order    | H1 → six H2 sections in the order above                                                                                           | —                     |
 
 ## Proposed internal links (must resolve today)
 
-| Anchor text  | Target   | Where                | Why it is safe                                                                 |
-| ------------ | -------- | -------------------- | ------------------------------------------------------------------------------ |
-| home page    | `/`      | "Where to start"     | generated route; the wordmark and nav already point here                        |
-| newsroom     | `/news/` | "Where to start"     | route exists in the working tree and builds to `/news/index.html`                |
+| Anchor text | Target   | Where            | Why it is safe                                                    |
+| ----------- | -------- | ---------------- | ----------------------------------------------------------------- |
+| home page   | `/`      | "Where to start" | generated route; the wordmark and nav already point here          |
+| newsroom    | `/news/` | "Where to start" | route exists in the working tree and builds to `/news/index.html` |
 
 **Deliberately absent:** no link to `/news/001-project-announcement/` or any other
 `/news/<slug>/` route — `website/src/lib/releases.ts` ships `releasedNewsSlugs = []`, so no detail
@@ -161,7 +163,7 @@ must keep the nav entry honest in the same way the news card label is.
 
 ## Optional `/404` copy
 
-Reads: **Page not found | Red Horizon** / *This page isn’t here.* / one paragraph / two links.
+Reads: **Page not found | Red Horizon** / _This page isn’t here._ / one paragraph / two links.
 
 ```ts
 export const notFound = {
@@ -183,23 +185,23 @@ About link persist. Approved or dropped independently of the About page.
 
 ## Claim-by-claim trace
 
-| # | Claim in the copy                                                                                     | Source                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| 1 | Red Horizon is a fictional Mars exploration programme                                                  | published 001 announcement ¶1; `docs/GENERAL.md` "Purpose"                                        |
-| 2 | Its partners, mission, and findings are invented; the Mars it describes is real                        | `docs/SCENARIO.md` header note; `docs/GENERAL.md` "Story world"                                   |
-| 3 | Mars AI Simulation is a real project and an experiment in AI agents doing research/writing/design/development/checking as a team, with people holding decisions | `docs/GENERAL.md` "Purpose"; `docs/INSTRUCTIONS.md` ("A human alone approves public canon, content publication…") |
-| 4 | Pages start from an approved brief; claims are checked; titles/descriptions are reviewed; continuity is tested; an editorial pass follows; a person decides publication | `docs/INSTRUCTIONS.md` "Mandatory working sequence"; `.agents/skills/create-article-workflow/SKILL.md` (stages); `docs/GENERAL.md` "Canon, drafts, and publication" |
-| 5 | Agents do not approve canon and do not publish                                                        | `docs/INSTRUCTIONS.md` "External actions and secrets"; `AGENTS.md`                                |
-| 6 | The record follows the mission's own order; nothing runs ahead of it                                    | `docs/timeline/README.md`; `docs/PLAN.md` Phase 4 ("never spoil a later one"); existing public wording in `website/src/features/progress/steps.ts` |
-| 7 | Corrections are explicit and dated, not silent rewrites                                                 | `docs/INSTRUCTIONS.md` "Canon and information safety"                                             |
-| 8 | Project images and video are illustrations, never mission photography                                   | `docs/SCENARIO.md` "Continuity and release controls"                                              |
-| 9 | Ten national programme teams agreed to build one uncrewed lander and rover together                     | published 001 announcement ¶1                                                                     |
-| 10 | Mineralogy mission: whether an ancient equatorial landscape once held water and could once have supported life as science understands it | published 001 announcement ¶2                                          |
-| 11 | The mission does not search for life and does not claim to have found any                               | published 001 announcement ¶2                                                                     |
-| 12 | Schedule and budget frames were set at the announcement; partners vote equally whatever each contributes | published 001 announcement ¶3–4                                                                   |
-| 13 | What the rover carries, who builds what, and how the mission reaches Mars are not settled                | published 001 announcement ¶5                                                                     |
-| 14 | Not a real programme/agency/launch; not affiliated with or endorsed by any real space agency; partner teams are fictional | site disclosure string in `website/src/lib/site.ts` (echoed, not replaced); `docs/GENERAL.md` "Story world" |
-| 15 | Real places and published science keep the fiction grounded and imply no participation or approval      | `docs/SCENARIO.md` header note                                                                     |
+| #  | Claim in the copy                                                                                                                                                       | Source                                                                                                                                                              |
+| -- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | Red Horizon is a fictional Mars exploration programme                                                                                                                   | published 001 announcement ¶1; `docs/GENERAL.md` "Purpose"                                                                                                          |
+| 2  | Its partners, mission, and findings are invented; the Mars it describes is real                                                                                         | `docs/SCENARIO.md` header note; `docs/GENERAL.md` "Story world"                                                                                                     |
+| 3  | Mars AI Simulation is a real project and an experiment in AI agents doing research/writing/design/development/checking as a team, with people holding decisions         | `docs/GENERAL.md` "Purpose"; `docs/INSTRUCTIONS.md` ("A human alone approves public canon, content publication…")                                                   |
+| 4  | Pages start from an approved brief; claims are checked; titles/descriptions are reviewed; continuity is tested; an editorial pass follows; a person decides publication | `docs/INSTRUCTIONS.md` "Mandatory working sequence"; `.agents/skills/create-article-workflow/SKILL.md` (stages); `docs/GENERAL.md` "Canon, drafts, and publication" |
+| 5  | Agents do not approve canon and do not publish                                                                                                                          | `docs/INSTRUCTIONS.md` "External actions and secrets"; `AGENTS.md`                                                                                                  |
+| 6  | The record follows the mission's own order; nothing runs ahead of it                                                                                                    | `docs/timeline/README.md`; `docs/PLAN.md` Phase 4 ("never spoil a later one"); existing public wording in `website/src/features/progress/steps.ts`                  |
+| 7  | Corrections are explicit and dated, not silent rewrites                                                                                                                 | `docs/INSTRUCTIONS.md` "Canon and information safety"                                                                                                               |
+| 8  | Project images and video are illustrations, never mission photography                                                                                                   | `docs/SCENARIO.md` "Continuity and release controls"                                                                                                                |
+| 9  | Ten national programme teams agreed to build one uncrewed lander and rover together                                                                                     | published 001 announcement ¶1                                                                                                                                       |
+| 10 | Mineralogy mission: whether an ancient equatorial landscape once held water and could once have supported life as science understands it                                | published 001 announcement ¶2                                                                                                                                       |
+| 11 | The mission does not search for life and does not claim to have found any                                                                                               | published 001 announcement ¶2                                                                                                                                       |
+| 12 | Schedule and budget frames were set at the announcement; partners vote equally whatever each contributes                                                                | published 001 announcement ¶3–4                                                                                                                                     |
+| 13 | What the rover carries, who builds what, and how the mission reaches Mars are not settled                                                                               | published 001 announcement ¶5                                                                                                                                       |
+| 14 | Not a real programme/agency/launch; not affiliated with or endorsed by any real space agency; partner teams are fictional                                               | site disclosure string in `website/src/lib/site.ts` (echoed, not replaced); `docs/GENERAL.md` "Story world"                                                         |
+| 15 | Real places and published science keep the fiction grounded and imply no participation or approval                                                                      | `docs/SCENARIO.md` header note                                                                                                                                      |
 
 Every claim is either (a) already published in `website/news/001-project-announcement.mdx`
 (`publication: published`), or (b) a statement about the project's own method, owned by
@@ -238,7 +240,7 @@ hit was the substring inside the already-public word "uncrewed"). The scanner li
    while the route was uncommitted, and used homepage anchors instead. By the time `/about/` is built
    the route is committed and builds; if SEO prefers, substitute `/#updates` for the "newsroom" link
    and keep the same label wording.
-5. **Nav placement.** Adding `About` to `website/src/lib/navigation.ts` puts it in the header *and*
+5. **Nav placement.** Adding `About` to `website/src/lib/navigation.ts` puts it in the header _and_
    footer (one source, both consumers) and therefore adds an `ABOUT` label to every page's
    `innerText`. The editorial gate `t_3302ef7e` is reviewing that surface — the dev card must record
    the delta. If four header items overflow at 320 px, the fallback is the footer-only link, which is
@@ -257,7 +259,7 @@ addition here.
 
 - Every material claim traced to a source (table above); no unsourced claim.
 - Withheld-material scan over both working papers: 0 withheld values. The two benign matches are
-  category words in the sentence that *describes* what is withheld ("payload"/"instrument"), plus one
+  category words in the sentence that _describes_ what is withheld ("payload"/"instrument"), plus one
   already-public figure ("2031") cited in open question 1 — neither is a withheld name, coordinate,
   date, or provider. Scanner: `/tmp/about-method-measure.py`, `/tmp/about-method-verify.py`, outside
   the repository, so no withheld value enters the tree.

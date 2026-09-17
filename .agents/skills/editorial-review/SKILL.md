@@ -55,8 +55,8 @@ remaining approval as a card comment (`hermes kanban comment <id> "..."`) and in
   deleted. Resolve a missing input to its current equivalent and state the
   substitution in the verdict (article 001: `website/scripts/sync-assets.mjs` is
   gone; the surface work now lives in `scripts/guards.mjs` + `scripts/check-dist.mjs`
-  + `src/lib/assets.ts`). Never report a superseded path as a broken reference or
-  gate on it.
+  - `src/lib/assets.ts`). Never report a superseded path as a broken reference or
+    gate on it.
 - Prove whether the article body is public at all before reviewing its surface: the
   frontmatter `publication` predicate (`src/lib/publication.ts` +
   `src/features/news/query.ts`) plus the route list printed by

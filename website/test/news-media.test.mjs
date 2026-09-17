@@ -9,9 +9,15 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { isNewsMediaKey, newsMediaIssues, newsMediaKeys, newsMediaRequirements, newsMediaTextList } from '../src/lib/media';
 import { newsMedia, resolveNewsMedia } from '../src/features/news/media';
 import { isPlateSet, plateAltText, plateCaptionText, plateFigures } from '../src/features/news/plates';
+import {
+    isNewsMediaKey,
+    newsMediaIssues,
+    newsMediaKeys,
+    newsMediaRequirements,
+    newsMediaTextList,
+} from '../src/lib/media';
 
 /** The provenance sentence every `asteria-plates` caption must carry. */
 const provenance = 'Generated visualization for Red Horizon scenario planning, 2026-09-16. Not orbital imagery.';
@@ -68,7 +74,9 @@ describe('media keys and their requirements', () => {
     });
 
     it('accepts the existing programme-identity frontmatter', () => {
-        expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual([]);
+        expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
+            [],
+        );
     });
 
     it('accepts the three-plate frontmatter', () => {
@@ -117,7 +125,9 @@ describe('media keys and their requirements', () => {
     it('fails a plate set with no label and with missing or blank captions', () => {
         expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaLabel: '  ' }))).toEqual(['mediaLabel']);
         expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaCaption: undefined }))).toEqual(['mediaCaption']);
-        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaCaption: ['a', 'b', ' '] }))).toEqual(['mediaCaption']);
+        expect(fieldsOf(newsMediaIssues({ ...asteriaFrontmatter, mediaCaption: ['a', 'b', ' '] }))).toEqual([
+            'mediaCaption',
+        ]);
     });
 
     it('fails a caption the declared key does not render, rather than ignoring it', () => {
