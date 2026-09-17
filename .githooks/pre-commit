@@ -1,0 +1,111 @@
+#!/bin/sh
+# Red Horizon pre-commit hook: format the staged set with dprint and re-stage it.
+#
+# Install once per clone:  npm --prefix website run hooks:install
+#   (that runs `git config core.hooksPath .githooks`; the setting is repo-local, so
+#    every linked worktree resolves the hook out of its own checkout)
+# Bypass one commit:       git commit --no-verify
+#
+# Rules this hook keeps (card t_c8d5d167):
+#   * staged paths only: never the whole tree, never `git add -A`, never a path the
+#     committer did not stage. A path that also carries unstaged edits is left
+#     completely alone, so "stage only the paths this card touched" survives.
+#   * a staged deletion, or the old side of a rename, is simply not formatted.
+#   * offline, prompt-free and bounded: the local devDependency binary first, then
+#     PATH, then dprint's own install dir -- never `npx` (that fetches) -- under
+#     `timeout` so a wedged formatter cannot hold a commit.
+#   * no dprint, or nothing staged it can format, warns on stderr and exits 0; only a
+#     genuine dprint failure on staged files fails the commit.
+#   * stdout stays clean (git may use it); every message goes to stderr.
+
+set -u
+
+timeout_seconds=${DPRINT_PRECOMMIT_TIMEOUT:-120}
+warn() { printf 'pre-commit: %s\n' "$*" >&2; }
+
+root=$(git rev-parse --show-toplevel 2>/dev/null) || root=''
+if [ -z "$root" ]; then
+    warn 'no git working tree here; skipping dprint'
+    exit 0
+fi
+cd "$root" || exit 0
+
+# Resolve the formatter: the website devDependency first, then PATH, then the
+# location dprint's own installer uses. Never `npx` -- the hook must not reach the
+# network. dprint serves its pinned plugins from its local cache.
+dprint=''
+if [ -x website/node_modules/.bin/dprint ]; then
+    dprint=website/node_modules/.bin/dprint
+elif command -v dprint >/dev/null 2>&1; then
+    dprint=$(command -v dprint)
+elif [ -n "${HOME:-}" ] && [ -x "$HOME/.dprint/bin/dprint" ]; then
+    dprint="$HOME/.dprint/bin/dprint"
+fi
+if [ -z "$dprint" ]; then
+    warn 'dprint not found (website/node_modules/.bin/dprint, PATH, ~/.dprint/bin/dprint); skipping format'
+    exit 0
+fi
+
+staged=$(git -c core.quotePath=false diff --cached --name-only --diff-filter=ACMR 2>/dev/null) || staged=''
+if [ -z "$staged" ]; then
+    warn 'no staged file to format; skipping'
+    exit 0
+fi
+# Paths with unstaged edits must not be reformatted: the re-stage below would fold
+# those hunks into this commit.
+unstaged=$(git -c core.quotePath=false diff --name-only 2>/dev/null) || unstaged=''
+
+set --
+while IFS= read -r path; do
+    [ -n "$path" ] || continue
+    if [ ! -e "$path" ] && [ ! -L "$path" ]; then
+        continue # staged deletion, or the old side of a rename
+    fi
+    if [ -n "$unstaged" ] && printf '%s\n' "$unstaged" | grep -qxF -- "$path"; then
+        warn "unstaged edits present, left untouched: $path"
+        continue
+    fi
+    set -- "$@" "$path"
+done <<EOF
+$staged
+EOF
+
+if [ "$#" -eq 0 ]; then
+    warn 'nothing staged that this hook may format; skipping'
+    exit 0
+fi
+
+status=0
+if command -v timeout >/dev/null 2>&1; then
+    timeout "$timeout_seconds" "$dprint" fmt -- "$@" 1>&2 || status=$?
+else
+    "$dprint" fmt -- "$@" 1>&2 || status=$?
+fi
+
+case $status in
+0) ;;
+14)
+    warn 'no staged file is one dprint formats; skipping'
+    exit 0
+    ;;
+124)
+    # `timeout` killed a wedged run (a plugin fetch that cannot finish, a hung
+    # formatter): an environment problem, not an unformatted staged file. Never
+    # block the fleet on it.
+    warn "dprint did not finish within ${timeout_seconds}s; skipping format"
+    exit 0
+    ;;
+*)
+    warn "dprint failed on the staged files (exit $status); nothing was committed"
+    warn 'fix the failure, or bypass this hook for one commit: git commit --no-verify'
+    exit "$status"
+    ;;
+esac
+
+# Re-stage exactly the paths the committer staged -- the formatted bytes are what
+# the commit records, and nothing else enters the index.
+if ! git add -- "$@" 2>/dev/null; then
+    warn 'could not re-stage the formatted paths; the commit keeps the bytes you staged'
+fi
+
+exit 0

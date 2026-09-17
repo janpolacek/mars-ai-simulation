@@ -20,6 +20,13 @@ card; it does not create or reassign cards. Do not create a provider project,
 deploy, configure DNS, use credentials, or change editorial meaning without a
 corrective card.
 
+**Commits pass through a dprint hook.** The repository commits `.githooks/pre-commit`
+(install once per clone: `npm --prefix website run hooks:install`, i.e.
+`git config core.hooksPath .githooks`). It formats the staged files with dprint and
+re-stages only those paths, so the bytes you staged can change before they are committed;
+a path that also has unstaged edits is left untouched, and a missing dprint skips with a
+one-line warning rather than blocking. Bypass it for one commit with `git commit --no-verify`.
+
 Write validation evidence as a card comment (`hermes kanban comment <id> "..."`)
 and in the repository artifact: schema/front-matter result, build
 command/result, preview verification of title/body/images/alt text, source

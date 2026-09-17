@@ -15,6 +15,7 @@
         "lint": "eslint .",
         "format": "dprint fmt ../",
         "format:check": "dprint check ../",
+        "hooks:install": "git -C .. config core.hooksPath .githooks && git -C .. config --get core.hooksPath",
         "typecheck": "astro check",
         "test": "vitest run"
     },
