@@ -13,6 +13,10 @@ import { site } from '../../lib/site';
  *
  * The description is the string that pass applied; editorial adopt-or-revert is
  * still open, and the homepage default is its revert.
+ *
+ * The list below is the published set (`NewsList` → `getPublishedNews`), the same
+ * predicate the `/news/<slug>/` routes are generated from, so the index and the
+ * detail routes cannot disagree about what is public.
  */
 const description =
     'Red Horizon is a fictional Mars mission. Every step the programme has published so far is listed here.';

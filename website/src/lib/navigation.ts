@@ -9,7 +9,7 @@ export const routes = {
     home: '/',
     news: '/news/',
     about: '/about/',
-    /** Detail route for a released article. Gated — see `./releases.ts`. */
+    /** Detail route for a published article — one per published item, see `./publication.ts`. */
     newsArticle: (slug: string) => `/news/${slug}/`,
 } as const;
 

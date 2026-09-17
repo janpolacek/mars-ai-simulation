@@ -1,16 +1,18 @@
 ---
 import ArticleView from '../../features/news/ArticleView.astro';
-import { getReleasedNews } from '../../features/news/query';
+import { getPublishedNews } from '../../features/news/query';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../lib/site';
 
 /**
- * Article detail pages exist only for slugs a human release reference
- * authorises (`src/lib/releases.ts`). The list is empty by default, so an
- * approved editorial review alone cannot put an article body on the site.
+ * One detail route per published item — the same selection the homepage carousel
+ * and the newsroom index list, so every card's link resolves. Publication stays
+ * fail-closed in the content schema (`src/content.config.ts` defaults a missing
+ * `publication` field to `draft`), and the filter here *is* the listing
+ * predicate (`getPublishedNews`) rather than a second, hand-edited slug list.
  */
 export async function getStaticPaths() {
-    const items = await getReleasedNews();
+    const items = await getPublishedNews();
     return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
 }
 

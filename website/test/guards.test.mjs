@@ -5,9 +5,13 @@
  * withheld the gated renders and pruned stale copies; the copy step is gone, so
  * the suite now asserts the stronger property directly: a reference into a
  * withheld directory fails, a withheld file in the build output fails (by name,
- * by leading name token, or by content hash), a withheld marker in built text
- * fails, and a `publication: draft` item produces no card, no listing entry, and
- * no route.
+ * by name, by leading name token, or by content hash), a withheld marker in built
+ * text fails, and an item the content schema holds back produces no card, no
+ * listing entry, and no route.
+ *
+ * The listing set and the routable set are asserted to be the same set: every
+ * `publication: published` item is listed on both surfaces with a working
+ * `/news/<slug>/` link, and every other item yields none of the three.
  *
  * It also pins the one retirement: the landing-region name is released for
  * article 001 (2026-09-17) and no longer gated, while every other marker and
@@ -30,8 +34,7 @@ import {
     scanSourceForGatedReferences,
     websiteDirectory,
 } from '../scripts/guards.mjs';
-import { selectPublicNews, selectReleasedNews } from '../src/lib/publication';
-import { releasedNewsSlugs } from '../src/lib/releases';
+import { selectPublicNews } from '../src/lib/publication';
 
 const temporaryDirectories = [];
 
@@ -92,6 +95,22 @@ async function distHtml() {
     return parts.join('\n');
 }
 
+/**
+ * All CSS the built site would apply: the inlined `<style>` blocks (Astro inlines
+ * small scoped stylesheets) plus every emitted stylesheet.
+ */
+async function distStyles() {
+    const parts = [];
+    for (const file of (await listFiles(distDirectory)).filter((entry) => entry.endsWith('.css'))) {
+        parts.push(await readFile(file, 'utf8'));
+    }
+    for (const file of (await listFiles(distDirectory)).filter((entry) => entry.endsWith('.html'))) {
+        const source = await readFile(file, 'utf8');
+        for (const match of source.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) parts.push(match[1]);
+    }
+    return parts.join('\n');
+}
+
 async function newsFiles() {
     return (await listFiles(newsDirectory)).filter((file) => file.endsWith('.mdx'));
 }
@@ -111,6 +130,37 @@ async function closingBodySentence(file) {
     const body = source.replace(/^---\n[\s\S]*?\n---\n?/, '');
     const lines = body.split('\n').map((line) => line.trim()).filter((line) => line.length > 0);
     return collapse(flattenMarkdown(lines.at(-1) ?? ''));
+}
+
+/** The publication state the content schema would apply: a missing field is `draft`. */
+async function publicationState(file) {
+    return (await frontmatterValue(file, 'publication')) ?? 'draft';
+}
+
+/** Slugs the site must both list and route: `publication: published`. */
+async function publishedSlugs() {
+    const slugs = [];
+    for (const file of await newsFiles()) {
+        if ((await publicationState(file)) === 'published') slugs.push(basename(file, '.mdx'));
+    }
+    return slugs;
+}
+
+/** Slugs the site must neither list nor route. */
+async function unpublishedSlugs() {
+    const slugs = [];
+    for (const file of await newsFiles()) {
+        if ((await publicationState(file)) !== 'published') slugs.push(basename(file, '.mdx'));
+    }
+    return slugs;
+}
+
+/** The `href` of every `<a class="card-label">` on a page, whatever the attribute order. */
+function cardLabelHrefs(html) {
+    return [...html.matchAll(/<a\b[^>]*>/g)]
+        .map((match) => match[0])
+        .filter((tag) => /class="card-label"/.test(tag))
+        .map((tag) => tag.match(/href="([^"]+)"/)?.[1]);
 }
 
 describe('gated source references', () => {
@@ -203,52 +253,94 @@ describe('withheld material in the build output', () => {
         expect(await checkDist()).toEqual([]);
     });
 
-    it.runIf(hasBuild)('generates the home and news index routes and no article detail route', async () => {
+    it.runIf(hasBuild)('generates the home and news index routes and a detail route per published item', async () => {
         const routes = await listRoutes();
+        const published = await publishedSlugs();
 
         expect(routes).toContain('/index.html');
         expect(routes).toContain('/news/index.html');
+        expect(published.length).toBeGreaterThan(0);
 
-        if (releasedNewsSlugs.length === 0) {
-            expect(routes.filter((route) => /^\/news\/.+\/index\.html$/.test(route))).toEqual([]);
+        for (const slug of published) {
+            expect(routes, `${slug} is published but has no detail route`).toContain(`/news/${slug}/index.html`);
         }
+
+        // The route set and the published set are the same set — no listed item
+        // without a page, and no page for an item the newsroom does not list.
+        const detailRoutes = routes.filter((route) => /^\/news\/.+\/index\.html$/.test(route));
+        expect(detailRoutes.sort()).toEqual(published.map((slug) => `/news/${slug}/index.html`).sort());
     });
 
-    it.runIf(hasBuild)('keeps every unreleased article body out of the build', async () => {
+    it.runIf(hasBuild)('keeps every unpublished article body out of the build', async () => {
         const corpus = await distText();
         const checked = [];
 
-        for (const file of await newsFiles()) {
-            const slug = basename(file, '.mdx');
-            if (releasedNewsSlugs.includes(slug)) continue;
-            const closing = await closingBodySentence(file);
+        for (const slug of await unpublishedSlugs()) {
+            const closing = await closingBodySentence(join(newsDirectory, `${slug}.mdx`));
             expect(closing.length).toBeGreaterThan(20);
-            expect(corpus).not.toContain(closing);
+            expect(corpus, `${slug} is unpublished but its closing sentence reached the build`).not.toContain(closing);
             checked.push(slug);
         }
 
         expect(checked.length).toBeGreaterThan(0);
     });
 
-    it.runIf(hasBuild)('offers no article link while no slug is released', async () => {
-        if (releasedNewsSlugs.length > 0) return;
-        // A card label that advertises an article must not look like a link
-        // while there is no route behind it.
-        expect(await distHtml()).not.toMatch(/href="\/news\/[^"]+\/"/);
+    it.runIf(hasBuild)('links every listed card to its own generated route', async () => {
+        const routes = new Set(await listRoutes());
+        const published = await publishedSlugs();
+
+        for (const surface of ['index.html', 'news/index.html']) {
+            const html = await readFile(join(distDirectory, surface), 'utf8');
+            const hrefs = cardLabelHrefs(html);
+
+            // One article link per listed card, and no inert label left behind.
+            expect(hrefs.length, `${surface} article link count`).toBe(published.length);
+            expect(html, `${surface} still renders an inert card label`).not.toMatch(/<span class="card-label"/);
+
+            for (const slug of published) {
+                expect(hrefs, `${surface} does not link ${slug}`).toContain(`/news/${slug}/`);
+            }
+            for (const href of hrefs) {
+                expect(href, `${surface} carries a card label with no href`).toBeTruthy();
+                expect(routes.has(`${href}index.html`), `${surface} links ${href}, which has no route`).toBe(true);
+            }
+        }
     });
 
-    it.runIf(hasBuild)('renders no page, no listing entry, and no card for a draft article', async () => {
-        const corpus = await distText();
-        const drafts = [];
+    it.runIf(hasBuild)('keeps a hidden carousel slide out of the layout and the tab order', async () => {
+        const styles = await distStyles();
 
-        for (const file of await newsFiles()) {
-            if ((await frontmatterValue(file, 'publication')) !== 'draft') continue;
-            drafts.push({ file, title: await frontmatterValue(file, 'title') });
+        // `hidden` is the carousel's only hiding mechanism, and this component's
+        // own `display: grid` beats the UA's `[hidden]` rule on its own. Without
+        // this rule a non-active slide stays rendered and its article link stays
+        // tabbable (measured in the browser on the built homepage). Astro scopes
+        // the selector, so the `[hidden]` part is matched with the scope
+        // attribute in between.
+        expect(styles).toMatch(/\.news-card[^{]*\[hidden\][^{]*\{[^}]*display:\s*none/);
+    });
+
+    it.runIf(hasBuild)('renders no page, no listing entry, and no card for an unpublished article', async () => {
+        const corpus = await distText();
+        const routes = await listRoutes();
+        const html = await distHtml();
+        const unpublished = [];
+
+        for (const slug of await unpublishedSlugs()) {
+            const file = join(newsDirectory, `${slug}.mdx`);
+            unpublished.push({
+                slug,
+                state: await publicationState(file),
+                title: await frontmatterValue(file, 'title'),
+            });
         }
 
-        expect(drafts.length).toBeGreaterThan(0);
-        for (const draft of drafts) {
-            expect(corpus).not.toContain(collapse(draft.title));
+        expect(unpublished.length).toBeGreaterThan(0);
+        expect(unpublished.some((entry) => entry.state === 'draft')).toBe(true);
+
+        for (const entry of unpublished) {
+            expect(corpus, `${entry.slug} title reached the build`).not.toContain(collapse(entry.title));
+            expect(routes).not.toContain(`/news/${entry.slug}/index.html`);
+            expect(html).not.toContain(`/news/${entry.slug}/`);
         }
     });
 });
@@ -319,7 +411,7 @@ describe('guard retirement: the released landing-region name', () => {
     });
 });
 
-describe('publication and release gate', () => {
+describe('publication gate', () => {
     const draft = { id: 'fixture-draft-article', data: { publication: 'draft', order: 1 } };
     const published = { id: 'fixture-published-article', data: { publication: 'published', order: 2 } };
     const alsoPublished = { id: 'fixture-second-article', data: { publication: 'published', order: 3 } };
@@ -335,19 +427,24 @@ describe('publication and release gate', () => {
         ]);
     });
 
-    it('authorises a detail route only for a released slug', () => {
-        const selected = selectReleasedNews([draft, published, alsoPublished], ['fixture-draft-article']);
+    it('is the one selection behind listing and routing, so a draft yields neither', () => {
+        const selection = selectPublicNews([draft, published, alsoPublished]);
 
-        expect(selected).toEqual([]);
-        expect(
-            selectReleasedNews([draft, published, alsoPublished], ['fixture-published-article']).map((entry) =>
-                entry.id
-            ),
-        ).toEqual(['fixture-published-article']);
+        // `NewsCarousel`/`NewsList` render this array as cards, and
+        // `src/pages/news/[slug].astro` maps the same query to routes, so a draft
+        // is absent from both surfaces at once instead of being listed without a
+        // page or routed without a card.
+        expect(selection.map((entry) => entry.id)).toEqual(['fixture-published-article', 'fixture-second-article']);
+        expect(selection.map((entry) => `/news/${entry.id}/`)).toEqual([
+            '/news/fixture-published-article/',
+            '/news/fixture-second-article/',
+        ]);
+        expect(selectPublicNews([draft])).toEqual([]);
     });
 
-    it('keeps the repository release list empty until a human records a release reference', () => {
-        expect(releasedNewsSlugs).toEqual([]);
-        expect(selectReleasedNews([draft, published], releasedNewsSlugs)).toEqual([]);
+    it('keeps the content schema fail-closed for a missing publication field', async () => {
+        const schema = await readFile(resolve(websiteDirectory, 'src', 'content.config.ts'), 'utf8');
+
+        expect(schema).toMatch(/publication:\s*z\s*\.enum\(\['draft', 'published'\]\)\s*\.default\('draft'\)/);
     });
 });
