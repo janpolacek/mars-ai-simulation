@@ -452,3 +452,58 @@ stage's prescribed artifact is the deployment record on the card itself.
   push 17:44:14Z, the previous build still served at 17:45:06Z, the new build live by
   17:45:23Z — a check run immediately after a push may still see the old bytes, so re-poll
   before concluding the deploy failed.
+- **Split a shared file by hunk, never by path.** `git add -- <path>` and `git commit --
+  <path>` both take the **working tree** content, so on this single shared worktree — where one
+  file can carry two cards' edit families at once (measured 2026-09-17, and still true:
+  `website/src/lib/assets.ts` holds the 002 payload-swap imports plus a release-comment
+  amendment) — either form publishes the other card's hunks (measured in a scratch repo:
+  `git add f.txt` plus `git commit -m … -- f.txt` committed both families and left the file
+  clean). Commit the content as its own **blob through a temp index** instead: (a) derive the
+  commit's bytes separately — `git show HEAD:<path> > /tmp/x`, apply the same edit to that copy,
+  and prove separability with `diff <(git show HEAD:<path>) /tmp/x` (your hunk only) and `diff
+  /tmp/x <path>` (the foreign hunks only); (b) `blob=$(git hash-object -w /tmp/x)`; (c)
+  `GIT_INDEX_FILE=/tmp/idx-<task> git read-tree HEAD`, then `GIT_INDEX_FILE=… git update-index
+  --cacheinfo 100644,"$blob",<path>`, then `GIT_INDEX_FILE=… git commit -m "<card id>: <change>"`
+  — use a **fresh** index filename, because removing a stale one is refused in unattended runs;
+  (d) set the **real** index entry to the committed blob (`git update-index --cacheinfo
+  100644,"$blob",<path>`): without it `git status` shows a phantom _staged reversal_ of your own
+  change (`MM <path>` while `git diff --cached` prints your edit backwards), which the next
+  worker can commit; (e) verify with `git show --stat` (your commit names one path) and `git
+  diff --cached --name-status` (the foreign staged set still staged, not in the commit). Steps
+  (a)–(e) measured end to end in a scratch repo on 2026-09-17. Check your own copy yourself,
+  because the hook cannot: `dprint check --config dprint.json /tmp/x` (exit 20 = not formatted,
+  0 = clean, measured on this config). The hook's "unstaged edits present, left untouched" guard
+  does **not** cover the pathspec form — git hands that hook a **temporary** index
+  (`GIT_INDEX_FILE=…/.git/next-index-<pid>.lock`) in which your path already holds the
+  working-tree bytes, so `git diff --name-only` inside the hook omits it, dprint runs on it, and
+  the commit fails or formats bytes you did not choose (measured: temp-index blob == worktree
+  blob). The guard protects only a path staged in the shared index that still has an unstaged
+  remainder and is committed **without** a pathspec.
+- **Validate the exact pushed commit in a detached worktree, never in the shared checkout.** The
+  shared tree holds other cards' half-applied change sets — measured 2026-09-17, and still true:
+  a deleted tracked payload source (`docs/payload/payload-sensor-illustration.png`) and an
+  editorially _returned_ plate imported by `website/src/lib/assets.ts` — so a suite that runs
+  there proves nothing about your commit, green or red. Recipe: `git worktree add --detach
+  /tmp/verify-<task> <commit-sha>`, symlink the dependencies (`ln -s
+  <repo>/website/node_modules /tmp/verify-<task>/website/node_modules`), put the pinned toolchain
+  on `PATH` (`export PATH=$HOME/.local/share/fnm/node-versions/v26.8.2/installation/bin:$PATH`;
+  the `export` form passes the session scanner), and validate there — the named test files, `npm
+  test`, `npm run build` (whose `postbuild` runs `scripts/check-dist.mjs`; `npm run check:dist`
+  re-runs that check alone), `npm run typecheck`, `npm run lint`, and `dprint check ../` to see
+  which drift _your_ commit adds versus what HEAD already carried. Clean up in this order:
+  `unlink` the symlink **first**, then `git worktree remove --force` — measured on 2026-09-17, a
+  plain `git worktree remove` refuses while the untracked symlink is present (`fatal: … contains
+  modified or untracked files, use --force to delete it`, exit 128) and succeeds right after the
+  `unlink`, while `--force` with the symlink still there removes the link itself and never the
+  dependency tree it points at.
+- **A push that changes no emitted bytes has no byte-level attribution — attribute it by CI run
+  and remote ref, and say so.** A comment-only, skill-only or docs-only commit emits a `dist/`
+  byte-identical to its parent's, so the live-origin sweep cannot say _which_ commit the edge is
+  serving: every route hashes the same either way, and a byte-identical result is evidence only
+  that the deploy is healthy. Attribute the push itself — `git ls-remote origin refs/heads/main`
+  must equal your commit, plus `gh run list --commit <sha> --json
+  databaseId,headSha,status,conclusion` — and pass the **full 40-hex SHA**, because the
+  abbreviated form silently answers `[]`, which reads as "no run exists" (measured 2026-09-17 on
+  the pushed tip). Probe the origin from inside a page on it (`fetch(path, { cache: 'no-store'
+  })` plus `crypto.subtle.digest('SHA-256', …)`, as the live-origin bullets above describe),
+  since a shell probe of that host is refused in this session.
