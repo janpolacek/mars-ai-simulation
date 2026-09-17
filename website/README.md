@@ -1,8 +1,9 @@
 # Red Horizon website
 
-The static Astro application for Mars AI Simulation. It serves the Red Horizon
-Preparing site today and is structured to carry the news, wiki, mission-update,
-and media surface described in `docs/PLAN.md` Phase 2.
+The static Astro application for Mars AI Simulation. It serves the live Red
+Horizon site today — the homepage and its mission panel, the About/Method page,
+and the newsroom with its published articles — and is structured to carry the
+wiki, mission-update, and media surface described in `docs/PLAN.md` Phase 2.
 
 ## Structure
 
@@ -15,7 +16,7 @@ src/
     mission/                    hero, at-a-glance panel, its fact list
     progress/                   public progress log and its steps
   styles/                       tokens, base/reset, layout utilities (page-wide only)
-  lib/                          site strings, navigation map, route paths, release gate, helpers
+  lib/                          site strings, navigation map, route paths, publication gate, helpers
   pages/                        file-based routes
 ```
 
@@ -44,7 +45,7 @@ Rules that keep it that way:
 
 `npm run typecheck` checks `.astro` frontmatter, `src/**/*.ts`, and
 `astro.config.mjs`. Type the boundaries that carry real logic — the collection
-query, the release gate, the media registry, and `getStaticPaths` — in `.ts`
+query, the publication gate, the media registry, and `getStaticPaths` — in `.ts`
 files, where the types actually flow into the pages.
 
 `.astro` frontmatter stays plain JavaScript. ESLint parses it with `espree`, and
@@ -60,11 +61,11 @@ Adding `@typescript-eslint/parser` as a dev dependency and setting it as the
 
 ## Routing
 
-| Route           | Page                          | Notes                                                 |
-| --------------- | ----------------------------- | ----------------------------------------------------- |
-| `/`             | `src/pages/index.astro`       | Hero, mission panel, news carousel, progress log.     |
-| `/news/`        | `src/pages/news/index.astro`  | Published items only, every card visible.             |
-| `/news/<slug>/` | `src/pages/news/[slug].astro` | **Release-gated.** Generated only for released slugs. |
+| Route           | Page                          | Notes                                             |
+| --------------- | ----------------------------- | ------------------------------------------------- |
+| `/`             | `src/pages/index.astro`       | Hero, mission panel, news carousel, progress log. |
+| `/news/`        | `src/pages/news/index.astro`  | Published items only, every card visible.         |
+| `/news/<slug>/` | `src/pages/news/[slug].astro` | **Publication-gated** (see below).                |
 
 `astro.config.mjs` sets `output: 'static'` and `trailingSlash: 'always'`, so
 every route is a directory with a trailing slash.
@@ -74,21 +75,22 @@ and are still linked (`/#mission`, `/#timeline`); the nav's "News" entry points
 at the real `/news/` index. There is no client-side router: "route" here means a
 file under `src/pages/` plus one entry in the navigation map.
 
-### Release gate
+### Publication gate
 
-`src/lib/releases.ts` holds `releasedNewsSlugs`, the list of article slugs a
-render may generate a detail page for. It is **empty by default**.
+The gate is the `publication` frontmatter field, and the code that owns it is
+`src/lib/publication.ts` (`isPublishedEntry`, `selectPublicNews`), exposed to
+the pages by `src/features/news/query.ts` (`getPublishedNews()`). The hand-edited
+slug list this section used to describe — `src/lib/releases.ts` and its
+`releasedNewsSlugs` array — no longer exists: card `t_0f0ce5f2` moved the
+decision onto the field.
 
-- An editor's `approved` review is not a release. A slug goes on the list only
-  when a human has recorded a release reference on the task card.
-- With the list empty, `getStaticPaths` returns nothing, so the build emits no
-  `/news/<slug>/` page and no article body text anywhere in `dist/`. The news
-  card's label then renders as a plain `<span>`: no dead href, no false link.
-- When a slug is on the list, the card label becomes a link to the generated
-  page and the article body renders from the MDX file.
+- An editor's `approved` review is not a publication. The field moves to
+  `published` only when a human decides the item is public.
 
-`/about/` and `/404` are **not** built: both need approved prose that does not
-exist yet. A follow-up card covers them.
+`/about/` and `/404` are both built (`src/pages/about.astro`,
+`src/pages/404.astro`), from the approved prose in `src/lib/about.ts` and
+`src/lib/not-found.ts`. `/about/` was built by card `t_e89fb389`; `/404`
+carries the `noindex` head opt-out.
 
 ### Canonical URLs
 
@@ -115,7 +117,7 @@ Frontmatter fields:
 | `status`      | yes      | Shown next to the category.                                                                                             |
 | `publication` | no       | `draft` \| `published`. **Defaults to `draft`**: an item that forgets to declare its state is held back, not published. |
 | `summary`     | yes      |                                                                                                                         |
-| `linkLabel`   | yes      | Rendered as text, and as a link once a release authorises a route.                                                      |
+| `linkLabel`   | yes      | Rendered as text, and as a link to the item's own route once it is published.                                           |
 | `order`       | yes      | Sort key within the published set.                                                                                      |
 | `media`       | no       | A media **key**, not a URL. See below.                                                                                  |
 | `mediaAlt`    | no       | Required, and non-empty, whenever `media` is set.                                                                       |
@@ -190,10 +192,10 @@ What is enforced:
 `npm run check:dist` runs the same check without building.
 
 The suite in `test/guards.test.mjs` exercises the rules against temporary
-fixtures and, when `dist/` exists, against the real build. It asserts the draft
-gate (no page, no listing entry, no card), that no unreleased article body text
-reaches `dist/`, that the news card offers no link while no slug is released, and
-that the release list is empty until a human records a release reference.
+fixtures and, when `dist/` exists, against the real build. It asserts the
+publication gate (no page, no listing entry, no card for an unpublished item),
+that no unpublished article body text reaches `dist/`, and that every published
+item is both listed and linked to its own generated route.
 
 ## Commands
 
