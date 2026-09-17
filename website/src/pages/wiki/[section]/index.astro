@@ -1,0 +1,120 @@
+---
+import SectionHeading from '../../../components/SectionHeading.astro';
+import { getPublishedWiki } from '../../../features/wiki/query';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { routes } from '../../../lib/navigation';
+import { site } from '../../../lib/site';
+import { groupWikiBySection, wikiSectionLabel } from '../../../lib/wiki-query';
+
+/**
+ * One section index: the published pages of that section only.
+ *
+ * The route set is the sections that actually have a published page
+ * (`wikiSectionsWithPages`, read off the same selection the pages come from), so
+ * a section with nothing published has no page here — the reader gets the
+ * error route instead of an empty page carrying a heading over no content. The
+ * sibling leaf routes are generated from the same array, so this index cannot
+ * list a page that has no route, or omit one that has.
+ */
+export async function getStaticPaths() {
+    const groups = groupWikiBySection(await getPublishedWiki());
+    return groups.map((group) => ({ params: { section: group.section }, props: { section: group.section } }));
+}
+
+const { section } = Astro.props;
+const groups = groupWikiBySection(await getPublishedWiki());
+const group = groups.find((candidate) => candidate.section === section);
+const entries = group?.entries ?? [];
+---
+
+<BaseLayout title={`${wikiSectionLabel(section)} wiki | ${site.name}`}>
+    <section class="wiki-section" aria-labelledby="wiki-section-title">
+        <p class="wiki-breadcrumb">
+            <a href={routes.wiki}>{site.name} wiki</a>
+        </p>
+        <div class="section-heading">
+            <SectionHeading
+                eyebrow={site.name}
+                title={wikiSectionLabel(section)}
+                titleId="wiki-section-title"
+                level={1}
+            />
+        </div>
+        <ul class="wiki-list">
+            {entries.map((entry) => (
+                <li>
+                    <a class="wiki-title" href={routes.wikiPage(entry.data.section, entry.id)}>
+                        {entry.data.title}
+                    </a>
+                    <p class="wiki-summary">{entry.data.summary}</p>
+                </li>
+            ))}
+        </ul>
+    </section>
+</BaseLayout>
+
+<style>
+.wiki-section {
+    padding: 5rem 0 7rem;
+}
+
+.wiki-breadcrumb {
+    margin: 0 0 1.5rem;
+    color: var(--rh-text-faint);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.wiki-breadcrumb a {
+    color: var(--rh-text-muted);
+    text-decoration: none;
+}
+
+.wiki-breadcrumb a:hover,
+.wiki-breadcrumb a:focus-visible {
+    color: var(--rh-sun-core);
+}
+
+.section-heading {
+    margin-bottom: 2.75rem;
+}
+
+.wiki-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wiki-list li + li {
+    margin-top: 2rem;
+}
+
+.wiki-title {
+    border-bottom: 1px solid rgba(252, 160, 66, 0.5);
+    padding-bottom: 0.2rem;
+    color: var(--rh-sun-core);
+    font-size: 1rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.wiki-title:hover,
+.wiki-title:focus-visible {
+    color: var(--rh-text-primary);
+}
+
+.wiki-summary {
+    max-width: 38rem;
+    margin: 0.85rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+    .wiki-section {
+        padding: 3.5rem 0 4.5rem;
+    }
+}
+</style>

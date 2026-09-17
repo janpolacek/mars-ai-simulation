@@ -3,6 +3,7 @@ import { z } from 'astro/zod';
 import { defineCollection } from 'astro:content';
 
 import { newsMediaIssues } from './lib/media';
+import { wikiSections } from './lib/wiki-query';
 
 const news = defineCollection({
     loader: glob({
@@ -46,4 +47,50 @@ const news = defineCollection({
         }),
 });
 
-export const collections = { news };
+const wiki = defineCollection({
+    loader: glob({
+        base: './wiki',
+        pattern: '**/*.mdx',
+    }),
+    schema: z
+        .object({
+            title: z.string(),
+            /**
+             * The top-level tree node, and the URL segment under it. Required:
+             * a page that does not name a section has no place in the tree, so
+             * the build fails rather than routing it somewhere unlisted.
+             */
+            section: z.enum(wikiSections),
+            /**
+             * Defaults to `draft`, the same fail-closed default as news: a page
+             * that forgets to declare its state is held back rather than
+             * published.
+             */
+            publication: z.enum(['draft', 'published']).default('draft'),
+            /** Sort position inside its section index. */
+            order: z.number().int().nonnegative(),
+            /** Public page summary, and the page's meta description. */
+            summary: z.string(),
+            /** Ids of related wiki pages; `selectRelatedWiki` resolves them against the published set. */
+            related: z.array(z.string()).optional(),
+            /** Path in `docs/` this page is derived from, when it has one. */
+            canonicalDocs: z.string().optional(),
+            /**
+             * Media key, validated and resolved by the same modules a news item
+             * uses (`src/lib/media.ts` for the key and its requirements,
+             * `src/features/news/media.ts` for the assets), so the wiki tree
+             * cannot invent a second, unchecked media vocabulary.
+             */
+            media: z.string().optional(),
+            mediaAlt: z.union([z.string(), z.array(z.string())]).optional(),
+            mediaLabel: z.string().optional(),
+            mediaCaption: z.union([z.string(), z.array(z.string())]).optional(),
+        })
+        .superRefine((data, context) => {
+            for (const issue of newsMediaIssues(data)) {
+                context.addIssue({ code: 'custom', path: [issue.field], message: issue.message });
+            }
+        }),
+});
+
+export const collections = { news, wiki };

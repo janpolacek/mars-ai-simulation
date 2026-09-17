@@ -1,0 +1,115 @@
+---
+import SectionHeading from '../../components/SectionHeading.astro';
+import { getPublishedWiki } from '../../features/wiki/query';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { routes } from '../../lib/navigation';
+import { site } from '../../lib/site';
+import { groupWikiBySection, wikiSectionLabel } from '../../lib/wiki-query';
+
+/**
+ * The wiki tree's root index: every published page, grouped by section.
+ *
+ * The groups come from `getPublishedWiki()` — the same selection the section
+ * indexes and the leaf routes are generated from — so a published page is
+ * listed here and openable there with no second edit, and a draft appears in
+ * neither place. A section with no published page renders no group at all
+ * rather than an empty heading over an empty list.
+ *
+ * Copy: the heading is the tree's own name and the eyebrow is the programme
+ * name, both of which already exist; the wiki's authoring voice belongs to the
+ * wiki content cards, not to this route.
+ */
+const groups = groupWikiBySection(await getPublishedWiki());
+---
+
+<BaseLayout title={`Wiki | ${site.name}`}>
+    <section class="wiki-index" aria-labelledby="wiki-index-title">
+        <div class="section-heading">
+            <SectionHeading eyebrow={site.name} title="Wiki" titleId="wiki-index-title" level={1} />
+        </div>
+        {groups.map((group) => (
+            <div class="wiki-group">
+                <h2>
+                    <a href={routes.wikiSection(group.section)}>{wikiSectionLabel(group.section)}</a>
+                </h2>
+                <ul class="wiki-list">
+                    {group.entries.map((entry) => (
+                        <li>
+                            <a class="wiki-title" href={routes.wikiPage(entry.data.section, entry.id)}>
+                                {entry.data.title}
+                            </a>
+                            <p class="wiki-summary">{entry.data.summary}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))}
+    </section>
+</BaseLayout>
+
+<style>
+.wiki-index {
+    padding: 5rem 0 7rem;
+}
+
+.section-heading {
+    margin-bottom: 2.75rem;
+}
+
+.wiki-group + .wiki-group {
+    margin-top: 3.5rem;
+}
+
+.wiki-group h2 {
+    border-bottom: 1px solid var(--rh-hairline);
+    padding-bottom: 1rem;
+}
+
+.wiki-group h2 a {
+    color: var(--rh-text-primary);
+    text-decoration: none;
+}
+
+.wiki-group h2 a:hover,
+.wiki-group h2 a:focus-visible {
+    color: var(--rh-sun-core);
+}
+
+.wiki-list {
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wiki-list li + li {
+    margin-top: 2rem;
+}
+
+.wiki-title {
+    border-bottom: 1px solid rgba(252, 160, 66, 0.5);
+    padding-bottom: 0.2rem;
+    color: var(--rh-sun-core);
+    font-size: 1rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.wiki-title:hover,
+.wiki-title:focus-visible {
+    color: var(--rh-text-primary);
+}
+
+.wiki-summary {
+    max-width: 38rem;
+    margin: 0.85rem 0 0;
+    color: var(--rh-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+    .wiki-index {
+        padding: 3.5rem 0 4.5rem;
+    }
+}
+</style>
