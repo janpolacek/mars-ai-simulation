@@ -59,6 +59,21 @@ stage's prescribed artifact is the deployment record on the card itself.
   hashed asset's byte size against your own build to prove the deployed bundle is
   yours. Report a push as a deploy when it deploys, and say plainly when
   approved-but-unreleased media reaches `dist/` before you push it.
+- Attribute the live origin by **hashing the served bytes against a known local
+  build**, never by byte count: inside a page on the origin, `fetch(path, { cache:
+  'no-store' })` each path and digest it (`crypto.subtle.digest('SHA-256', …)`) — the
+  document _and_ every `<link rel=stylesheet>` it names — then compare those hashes
+  with your own `website/dist/` files and poll until the deployed bytes match. A
+  shared-machine rebuild window can serve a _running card's uncommitted worktree
+  build_ byte-for-byte while `origin/main` stands still, so count or content alone
+  proves nothing about which commit is live. Measured 2026-09-17: the hostname served
+  17,397 B / `eed47af2…` (card `t_e4cc3b9f`'s worktree build, in no commit, with
+  `origin/main` at `e67b970`), and only after card `t_cc2dfd29`'s push did the origin
+  serve 17,792 B /
+  `ef1466f4aa9789ef2095da9100a4c47a5ae0c2a2078924e25ecf90bcf903e032` — byte-identical
+  to that card's own build, both stylesheets matching too (`_astro/index.BWVFYATM.css`
+  `1ca71364…` 6,489 B, `_astro/BaseLayout.BGZGfQ2B.css` `3edd31f4…` 5,280 B). Say
+  which build your numbers belong to.
 - Confirm which server produced your preview evidence. `npm run preview` falls
   back to another port when the requested one is busy (a long-running
   `astro dev --host 0.0.0.0` server usually holds 4321 in this project), and it
@@ -76,6 +91,19 @@ stage's prescribed artifact is the deployment record on the card itself.
   hash the served bundle against your own — read the page's stylesheet link and
   compare that file's sha256 and byte length with `website/dist/` — and confirm
   that `ss -ltnp` names your own PID on the port you chose.
+- A card, deck or gate that argues from **character count** about layout ("one
+  character shorter, so it cannot overflow") is stating a hypothesis: measure it by
+  swapping the string in the live DOM at the width the claim is about
+  (`link.textContent = '<other label>'`, then read the nav's and the label's
+  `getBoundingClientRect().right` and `documentElement.scrollWidth` against
+  `innerWidth`), and report the measured delta and the margin that remains even when
+  the outcome still holds. Measured 2026-09-17 on the built homepage at 320 px, with
+  nothing edited in the source: the 7-character `Roadmap` renders **4.5 px wider**
+  than the 8-character `Progress` — 191.77 px against 187.27 px, right edges 315.91 px
+  against 311.41 px, because uppercase `M`/`A` beat `E`/`S` — still inside the page's
+  20 px gutter with 4.09 px to spare, and `documentElement.scrollWidth` stayed 320 =
+  the viewport either way. The count-based reasoning was wrong; only the measurement
+  settled the outcome.
 - Gate the build output, not the build script's intent: after `npm run build` list
   `website/dist` and grep it for gated names, then prove the guard end to end by
   planting a single withheld marker under `website/public/assets/` and rebuilding
