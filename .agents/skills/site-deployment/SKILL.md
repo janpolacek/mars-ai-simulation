@@ -60,7 +60,14 @@ stage's prescribed artifact is the deployment record on the card itself.
   the bound port, and when the lock is held by another worker's server, serve the
   built `dist/` yourself on a free port with a plain static file server instead of
   forcing theirs down. A dev server serves the source and `public/`, which is
-  useful, but it is not the built `dist/`; say which one you measured.
+  useful, but it is not the built `dist/`; say which one you measured. A static
+  server you start yourself can also fail to bind silently: when a sibling
+  worker's node static server already holds the port, `python3 -m http.server
+  <port>` exits with "Address already in use" and the port keeps serving *their*
+  build, so every number you read is another checkout's. Hash the served bundle
+  against your own before trusting anything — read `<link rel="stylesheet">` off
+  the page and compare that file's sha256 and byte length with `website/dist/` —
+  and confirm `ss -ltnp | grep <port>` names your own PID.
 - Gate the build output, not the build script's intent: after `npm run build` list
   `website/dist` and grep it for gated names, then prove the guard end to end by
   planting a single withheld marker under `website/public/assets/` and rebuilding
@@ -199,10 +206,14 @@ stage's prescribed artifact is the deployment record on the card itself.
   `docs/`, read it as "do not author `docs/` prose or frontmatter", make the
   mechanical copy, commit the asset (a clean clone cannot build without it), and
   record the reading on the card.
-- `npm run format` cannot gate anything in this checkout: there is no `print`/
-  dprint CLI on the machine and `prettier-plugin-astro` is not installed, so
-  neither formatter runs. Keep new lines within the configured 120 columns by
-  hand and check them with a throwaway script before committing.
+- `npm run format` / `format:check` sweep the whole repository root (`dprint fmt
+  ../`), but the formatter itself does work: `dprint` is a pinned dev dependency
+  whose postinstall installs the binary (`website/node_modules/.bin/dprint`), so
+  gate only your own paths from `website/` with
+  `./node_modules/.bin/dprint check <path> <path>` instead of reformatting a
+  shared tree. Run `dprint fmt` on any file you create — an unformatted new test
+  file fails `check` (exit 20) and the diff it prints is the exact fix. Keep lines
+  within the configured 120 columns.
 - Attribute a failing shared-checkout suite with a scratch copy of `website/`
   outside the repository: copy `website/` (skip `node_modules`, `dist`, `.astro`),
   symlink `node_modules` back, and symlink the repository root's other entries
