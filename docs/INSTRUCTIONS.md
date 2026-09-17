@@ -47,10 +47,10 @@ are the project skills under `.agents/skills/`.
 
 Approved media stays with its subject: the identity mark under `docs/brand/`, the
 vehicle renders under `docs/vehicle/`, and the Asteria Field map plates under
-`docs/area/`. The website copies the release-cleared PNGs into its generated public
-asset directory at build time. Article copy is authored as MDX directly in
-`website/news/` for publication. Do not create a parallel repository-root `assets/`
-directory.
+`docs/area/`. The website imports it from there at build time and emits its own
+hashed copies under `/_astro/`; nothing is copied into `website/public/`. Article
+copy is authored as MDX directly in `website/news/` for publication. Do not create
+a parallel repository-root `assets/` directory.
 
 `tools/visual-generator/` is a processor, not a store: its `spec.json`, `assets/` and `stories/`
 paths are disposable scratch, git-ignored, with approved inputs copied out of `docs/` before a run

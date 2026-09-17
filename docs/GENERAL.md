@@ -19,6 +19,10 @@ and video generation, continuity review, web development, operations, and
 deployment. This purpose is stated plainly on the site's About/Method page and
 linked in every public-page footer.
 
+The harness that runs it — the role roster, the tools and models, how work is
+tracked, and where the human gates are — is described in
+[The agent harness](HARNESS.md).
+
 ## Audience and public experience
 
 The site serves curious space readers and people interested in the creative
@@ -63,7 +67,7 @@ is only the shared vocabulary.
 | Dossier           | A reference document about one subject, not per-article work                          | [docs map](README.md)                  |
 | Working paper     | A per-article artifact under `.agents/work/`: brief, source pack, manifest, or review | [docs map](README.md)                  |
 | Publication state | Where a fact or page sits between private scenario and published content              | [below](#canon-drafts-and-publication) |
-| Preparing         | The current public site state: identity, promise, and disclosure only                 | [repository README](../README.md)      |
+| Preparing         | The site's opening public state: identity, promise, and disclosure only               | [Delivery plan](PLAN.md) Phase 1       |
 
 ## Canon, drafts, and publication
 
