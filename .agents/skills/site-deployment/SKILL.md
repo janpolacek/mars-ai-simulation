@@ -41,6 +41,16 @@ stage's prescribed artifact is the deployment record on the card itself.
 
 ## Verified practice
 
+- **A push to `main` is the automatic production deploy** (human instruction
+  2026-09-17, recorded in `AGENTS.md`; `main` is wired to the Cloudflare Workers
+  Build), so a dev card's commit/push publishes the build output. Anything Astro
+  emits into `dist/` goes public with it — including a statically imported asset
+  that no route references — and the deploy *action* stays out of reach (no
+  `wrangler`, no credentials, no DNS). After every push, verify the live origin
+  rather than assuming: fetch the emitted asset path and a route, and compare a
+  hashed asset's byte size against your own build to prove the deployed bundle is
+  yours. Report a push as a deploy when it deploys, and say plainly when
+  approved-but-unreleased media reaches `dist/` before you push it.
 - Confirm which server produced your preview evidence. `npm run preview` falls
   back to another port when the requested one is busy (a long-running
   `astro dev --host 0.0.0.0` server usually holds 4321 in this project), and it
