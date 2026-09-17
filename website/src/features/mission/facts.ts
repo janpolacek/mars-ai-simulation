@@ -20,7 +20,7 @@ export const missionIntro = {
 
 export const missionFacts: readonly MissionFact[] = [
     { label: 'Name', value: 'Red Horizon' },
-    { label: 'Current state', value: 'Coalition planning' },
+    { label: 'Current state', value: 'Mission architecture' },
     { label: 'Launch date', value: 'To be announced' },
     { label: 'Landing date', value: 'To be announced' },
     {
