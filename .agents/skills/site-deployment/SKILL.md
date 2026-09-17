@@ -78,3 +78,16 @@ stage's prescribed artifact is the deployment record on the card itself.
 - Re-verify anything you measured before completing the card if the evidence came
   from a shared checkout: other profiles edit `website/`, `docs/`, and the working
   tree in place during a run.
+- Before building, confirm no sibling card is live on this checkout. In an
+  unattended single-query session `hermes kanban list` is refused and `sqlite3` is
+  not installed, so read the board with a small script file (`python3
+  /tmp/<name>-board-peek.py`, opening `file:.../kanban.db?mode=ro`) selecting
+  `status in ('running','ready','review','blocked')`. Exactly one `running` row
+  means your build raced nobody; more means capture output in the same shell call
+  as the build.
+- An empty grep over built HTML is not proof of absence: Astro injects scope
+  attributes, so `class="card-label">` matches nothing on a page that does carry
+  the element — the real markup is `class="card-label" data-astro-cid-…>`. Grep
+  `class="card-label[^"]*"[^>]*>` (or `card-kicker[^>]*>`), and count the elements
+  (`grep -c '<a class="card-label"'`) so a pattern that silently matches nothing
+  cannot be read as a pass.
