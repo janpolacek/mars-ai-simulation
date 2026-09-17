@@ -11,14 +11,18 @@
  * linked step's detail once a link paragraph followed it).
  *
  * Round 2 (card `t_cc2dfd29`) added the second roadmap link — step 2,
- * `Mission architecture`, now points at `/news/003-vehicle-design/` — so the
- * published side of the contract is asserted through the site's own predicate
+ * `Mission architecture`, now points at `/news/003-vehicle-design/` — and the
+ * 004 round re-chose it: the step's newest carrier is `/news/004-launch-provider/`.
+ * The published side of the contract is asserted through the site's own predicate
  * rather than against a hand-kept slug list: `publishedSlugs()` reads the real
  * `website/news/` frontmatter and runs it through `selectPublicNews()`, the same
  * selection that feeds the carousel, the newsroom index and the `/news/<slug>/`
  * generator. A step may therefore link only to an article those three surfaces
  * already publish and route, and the step the record has not reached renders no
  * anchor at all.
+ * Round 3 (card `t_9f4bbea2`) added a third step, `Integration and readiness`,
+ * for the body of work 004 names between the architecture decision and the
+ * flight, and renamed step 1 to `Programme and purpose`.
  *
  * What this file cannot prove is that the strings are the approved ones: that is
  * the deck-hash comparison recorded on the card, because the deck lives outside
