@@ -17,7 +17,9 @@
  * What is asserted: no stylesheet the `/news/` page loads places a news card in
  * a fixed grid cell unless that placement is scoped to the carousel — and the
  * carousel is not on the page — so the index's cards stay auto-placed, the list
- * keeps the section's own `2rem` gap, and each card takes its own row. The
+ * keeps the section's own `2rem` gap, and each card takes its own row. The same
+ * scoping rule covers the cell's *shape* (card `t_e4cc3b9f`): a bounded cell
+ * here would band the cards whose plate fills its box exactly today. The
  * carousel's one-height contract (every slide in one cell, an inactive slide
  * invisible but measured) is asserted by `news-carousel-height.test.mjs` and is
  * deliberately neither restated nor weakened here.
@@ -115,6 +117,21 @@ function placesNewsCard(rule) {
     return [...rule.declarations.keys()].some((property) => placementProperties.has(property));
 }
 
+/** A rule that targets a news media cell itself, not something inside it. */
+const cellSelector = /\.news-(image|placeholder)\b(\[[^\]]*\])?$/;
+
+/**
+ * Whether a rule bounds a news media cell's shape — the property that decides
+ * how tall the box is (card `t_e4cc3b9f` gave the carousel's cell an
+ * `aspect-ratio`). `min-height` is deliberately not part of it: it is the floor
+ * both surfaces have had all along and it is what keeps the cell from collapsing,
+ * not what let a square plate set the section's height.
+ */
+function boundsNewsCell(rule) {
+    if (!cellSelector.test(rule.selector.trim())) return false;
+    return [...rule.declarations.keys()].some((property) => property === 'aspect-ratio' || property === 'max-height');
+}
+
 /** The index list's own card elements, in document order, as their opening tags. */
 function indexCards(html) {
     const start = html.search(/class="[^"]*\bnews-index-list\b/);
@@ -125,13 +142,27 @@ function indexCards(html) {
         .filter((tag) => /\bclass="[^"]*\bnews-card\b/.test(tag));
 }
 
+/** The index's own media cells, in document order, as their opening tags. */
+function indexCells(html) {
+    const start = html.search(/class="[^"]*\bnews-index-list\b/);
+    if (start === -1) return [];
+    const sectionEnd = html.indexOf('</section>', start);
+    const scope = html.slice(start, sectionEnd === -1 ? html.length : sectionEnd);
+    return [...scope.matchAll(/<div class="[^"]*\bnews-(?:image|placeholder)\b[^"]*"/g)].map((match) => match[0]);
+}
+
 const page = hasBuild ? await readFile(indexPage, 'utf8') : '';
 const indexRules = hasBuild ? builtRules(await pageStyles(indexPage)) : [];
 const homeRules = hasBuild ? builtRules(await pageStyles(homePage)) : [];
 const cards = hasBuild ? indexCards(page) : [];
+const cells = hasBuild ? indexCells(page) : [];
 const cardRules = indexRules.filter((rule) => /\.news-card\b/.test(rule.selector));
 const listRules = indexRules.filter((rule) => /\.news-index-list\b/.test(rule.selector));
 const placements = indexRules.filter(placesNewsCard);
+/** Bounded media cells in this page's corpus, and the ones bounded off the carousel. */
+const shapedCells = indexRules.filter(boundsNewsCell);
+const unscopedShapes = shapedCells.filter((rule) => !/\bnews-carousel\b/.test(rule.selector));
+const carouselShapes = homeRules.filter((rule) => boundsNewsCell(rule) && /\bnews-carousel\b/.test(rule.selector));
 
 describe('the newsroom index stacks one card per row', () => {
     it.runIf(hasBuild)('renders a comparable set of cards and the rules that decide the question', async () => {
@@ -195,5 +226,34 @@ describe('the newsroom index stacks one card per row', () => {
         expect(gaps.length, 'the index list declares no gap between its cards').toBeGreaterThan(0);
         expect(gaps.every((value) => /(^|\s)2rem(\s|$)/.test(value)), `the list lost its 2rem gap: ${gaps.join(', ')}`)
             .toBe(true);
+    });
+
+    it.runIf(hasBuild)("leaves the index's media cells unbounded, so no card gains a fill band", () => {
+        // The index is the other surface `NewsCard` renders on, and each of its
+        // cells is sized by its own plate: measured on this build at 1280x800 the
+        // three cells are 586.1 / 644.6 / 527.1 tall, and the square one is filled
+        // by its plate to 0px of band. A bounded shape here would hand the square
+        // and 4:3 cards the very plate-fill band `t_f97d6184` removed, so the
+        // shape `t_e4cc3b9f` added for the carousel has to stay scoped to it.
+        expect(cells.length, 'the index renders no media cell, so there is no box to compare').toBeGreaterThan(0);
+        for (const rule of unscopedShapes) {
+            expect.fail(
+                `the page bounds a media cell outside the carousel: ${rule.selector} { ${
+                    [...rule.declarations].map(([property, value]) => `${property}: ${value}`).join('; ')
+                } }`,
+            );
+        }
+
+        // Non-vacuity, both ways: this page's corpus really does carry rules for
+        // the cell itself, and the detector finds a cell shape where one is
+        // wanted — on the homepage's carousel, which this page does not render.
+        expect(
+            indexRules.filter((rule) => cellSelector.test(rule.selector.trim())).length,
+            'the page loads no rule for the media cell, so nothing could have been compared',
+        ).toBeGreaterThan(0);
+        expect(
+            carouselShapes.length,
+            'no rule bounds a media cell inside the carousel, so a scoped shape cannot be told from a missing one',
+        ).toBeGreaterThan(0);
     });
 });

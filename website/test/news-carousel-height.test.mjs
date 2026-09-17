@@ -29,6 +29,12 @@
  * snapshot of what the boxes measured today; the pixel before/after numbers live
  * in the card's handoff.
  *
+ * The cell's own shape is part of the same contract (card `t_e4cc3b9f`): a cell
+ * with no shape of its own is as tall as whatever plate it holds, so the tallest
+ * published plate — today's square payload illustration — set the box and
+ * therefore the section. One declared landscape ratio bounds it for every slide,
+ * and the phone breakpoint keeps the floor it has had.
+ *
  * Every case is non-vacuous in the way `t_b66ef5f9` demands: the slide set is
  * read from the real build output and compared with the published frontmatter,
  * the rule that decides the question must be found in the built stylesheets, and
@@ -60,6 +66,7 @@ const flowProperties = new Set([
     'grid-row-start',
     'grid-column',
     'grid-column-start',
+    'aspect-ratio',
 ]);
 
 /** Regenerate a slide in the state a carousel switch would put it in. */
@@ -374,11 +381,24 @@ function specificity(selector) {
     return [ids, classes, types];
 }
 
+/**
+ * A media prelude in one comparable form. The built stylesheet is minified, and
+ * the minifier rewrites `(max-width: 760px)` to its range spelling
+ * `(width<=760px)`; without this the component's mobile rules are skipped and a
+ * breakpoint case passes on the desktop cascade alone.
+ */
+function normalizeMedia(value) {
+    return value
+        .replace(/[()\s]/g, '')
+        .toLowerCase()
+        .replace(/^width<=/, 'max-width:')
+        .replace(/^width>=/, 'min-width:');
+}
+
 /** Whether a rule's at-rule prelude applies to the viewport being evaluated. */
 function mediaApplies(media, query) {
-    const normalize = (value) => value.replace(/[\s()]/g, '').toLowerCase();
     if (media === null) return true;
-    return query !== null && normalize(media) === normalize(query);
+    return query !== null && normalizeMedia(media) === normalizeMedia(query);
 }
 
 /**
@@ -507,6 +527,25 @@ const carouselScript = [...homepage.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/
     .map((match) => match[1])
     .find((source) => source.includes('data-news-carousel')) ?? '';
 
+/** The one media cell a slide renders: the image path, or the placeholder. */
+function cellOf(slide) {
+    return findAll(
+        slide,
+        (element) => element.classes.includes('news-image') || element.classes.includes('news-placeholder'),
+    )[0];
+}
+
+/**
+ * A declared `aspect-ratio` as `[width, height]`, or `null` when the value is
+ * not a ratio this suite can compare (`undefined`, `auto`, `unset`).
+ */
+function ratioOf(value) {
+    if (value === undefined) return null;
+    const parts = value.split('/').map((part) => Number.parseFloat(part.trim()));
+    if (parts.length !== 2 || !parts.every(Number.isFinite) || parts[1] === 0) return null;
+    return parts;
+}
+
 describe('the homepage carousel keeps one height across slides', () => {
     it.runIf(hasBuild)('renders one slide per published item, so the property has a real set to measure', async () => {
         const published = await publishedSlugs();
@@ -594,6 +633,54 @@ describe('the homepage carousel keeps one height across slides', () => {
                 .not.toBe('none');
             expect(inactive.get('visibility'), 'the mobile breakpoint stops hiding an inactive slide').toBe('hidden');
         }
+
+        // The designed cell shape above is a desktop decision. On a phone the
+        // card is stacked and its copy column (`min-height: 23rem`) is what sets
+        // the section's height, so the cell keeps the `min-height: 15rem` floor
+        // it has had — a ratio here would take box away from that column.
+        for (const slide of slides) {
+            const declared = computedStyle(cellOf(slide), rules, mobileQuery).get('aspect-ratio');
+            expect(
+                ratioOf(declared),
+                `the phone breakpoint bounds the media cell to "${declared}", which resizes the stacked card`,
+            ).toBe(null);
+        }
+    });
+
+    it.runIf(hasBuild)("bounds every slide's media cell to one designed landscape shape", () => {
+        // The defect (card `t_e4cc3b9f`): the cell declared no shape of its own,
+        // so its height was whatever ratio the plate it held had, at the media
+        // column's full width. A square plate made a square cell, and the shared
+        // cell above handed that 745.2px to the whole section at 1600x900 —
+        // measured: the carousel 745.2px tall against a 900px screen, the 3:2
+        // area plate drawn 497px inside it, so 33% of the visible box was
+        // plate-derived fill instead of artwork, and the section 1185px.
+        const shapes = [];
+        for (const slide of slides) {
+            const cell = cellOf(slide);
+            expect(cell, 'a slide renders no media cell, so there is no box to measure').toBeDefined();
+
+            const declared = computedStyle(cell, rules, null).get('aspect-ratio');
+            const ratio = ratioOf(declared);
+            expect(
+                declared,
+                "a slide's media cell declares no shape, so its height is its plate's own ratio at the column's full width",
+            ).toBeDefined();
+            expect(ratio, `the cell's declared shape "${declared}" is not a ratio this suite can compare`).not.toBe(
+                null,
+            );
+            expect(ratio[0] / ratio[1], `the cell's shape "${declared}" is not a landscape box`).toBeGreaterThan(1);
+            shapes.push(declared);
+        }
+
+        // One shape for every slide: the box must not be keyed to a slide index,
+        // a per-slide ratio, or today's published count.
+        expect(new Set(shapes).size, `slides get different cell shapes: ${shapes.join(', ')}`).toBe(1);
+
+        // Non-vacuity: the shape has to come from a rule of the built page that
+        // this suite can read, not from a value the cascade above cannot see.
+        const shapeRules = carouselRules.filter((rule) => rule.declarations.has('aspect-ratio'));
+        expect(shapeRules.length, 'no built rule gives the carousel media cell a shape').toBeGreaterThan(0);
     });
 
     it.runIf(hasBuild)('switches slides on the attribute the stylesheet keys on, never an inline display', () => {

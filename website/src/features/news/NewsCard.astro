@@ -176,6 +176,60 @@ const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simu
     overflow: hidden;
 }
 
+/*
+ * A designed landscape cell for the carousel, one shape for every slide above
+ * the phone breakpoint (card `t_e4cc3b9f`).
+ *
+ * Without it the cell is sized by the ratio of whatever plate it holds: the
+ * `min-height` above is a floor, the image is `width: 100%; height: 100%` and
+ * nothing bounds the box, so a square plate at the media column's full width
+ * makes the cell square — and the one-height contract above (`grid-area: 1 / 1`)
+ * hands that height to the whole section. Measured on the built homepage,
+ * 1600x900: `.news-carousel` 745.2px tall (a 745.2px box drawing the 3:2 area
+ * plate 497px tall, so 248px — 33% — of the visible box was `--plate-fill`, not
+ * artwork), section 1185px against a 900px screen.
+ *
+ * 3:2 is the shape of the widest plate the newsroom publishes (the
+ * `asteria-field` area plates are 1024x683 = 1.499): the cell takes that ratio,
+ * contains every other plate inside it (`object-fit: contain`, so nothing the
+ * image's own `alt` names is cropped) and lets `--plate-fill` cover the
+ * remainder. Any plate wider than 3:2 would still force the box taller, which is
+ * why the shape is the *widest* plate family's ratio rather than a height fitted
+ * to today's three cards.
+ *
+ * It is a ratio, not a height: the box still grows with a longer summary or a
+ * third article, because the card's copy column is the taller half at every
+ * width measured (1280x800: copy 460.8px against a 429.9px cell; 1024x800:
+ * 453.8 against 331.6). Above the breakpoint the section's height is therefore
+ * set by the copy, not by the plate ratio.
+ *
+ * Scoped to the carousel on purpose. On the newsroom index the card is a grid
+ * item of `.news-index-list` and each of its cells is sized by its own plate, so
+ * a bounded shape there would give the square and 4:3 cards the very band
+ * `t_f97d6184` removed (measured on `/news/` at 1280x800: cells 586.1 / 644.6 /
+ * 527.1 tall, the square one filled by its plate to 0px of band, while their
+ * rule is shared). `:global()` is the same shape this file already uses for the
+ * shared cell below: the element is this file's own, only the ancestor is
+ * reached.
+ */
+:global(.news-carousel) .news-image,
+:global(.news-carousel) .news-placeholder {
+    aspect-ratio: 3 / 2;
+    /*
+     * A definite width, so the ratio decides the cell's *height* and nothing
+     * else. With the width left `auto` the ratio resolves it from the definite
+     * `min-height` above instead (352px x 3/2 = 528px when the floor binds), and
+     * the cell then paints past its column: measured at 1024x800, 528px wide in
+     * a 497.4px column, 30.6px over the copy's padding, and 101.9px over it at
+     * 900x800 (528 in 426.1). `min-width: 0` keeps the item's automatic minimum
+     * size from re-imposing the same width on top of it. The plate is
+     * `object-fit: contain` inside a clipping cell, so nothing depends on the
+     * cell being wider than its column.
+     */
+    width: 100%;
+    min-width: 0;
+}
+
 .news-image {
     background: var(--rh-surface-field);
 }
@@ -340,6 +394,19 @@ a.card-label:focus-visible {
     .news-image,
     .news-placeholder {
         min-height: 15rem;
+    }
+
+    /*
+     * The phone breakpoint keeps the cell at the floor it has had, so the
+     * stacked card measures exactly as it did before the landscape shape was
+     * added (card `t_e4cc3b9f`: 430x844 — carousel 743px, section 1093.6px, the
+     * same numbers as the build without the rule). The copy column below
+     * (`min-height: 23rem`) is the taller half here, and its height is what the
+     * card reads; a ratio on the cell would only take box away from it.
+     */
+    :global(.news-carousel) .news-image,
+    :global(.news-carousel) .news-placeholder {
+        aspect-ratio: auto;
     }
 
     .news-copy {
