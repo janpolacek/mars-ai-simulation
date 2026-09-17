@@ -15,8 +15,8 @@
 | Planning envelope      | 12.5–24.0°S, 327.0–338.0°E                                 |
 | Local operations frame | 8 × 6 km, centred on the planning centre                   |
 | Revision               | AF-0.2 · 2026-09-17                                            |
-| Canon status           | Partial release approved 2026-09-17 — name, centre coordinates, and plates AF-01/AF-02/AF-03 released for article 001 only; dossier as a whole remains draft pending full human approval |
-| Public status          | Partially released (article 001 only) — name, centre coordinates, and three plates; all other material requires separate human approval |
+| Canon status           | Partial release approved 2026-09-17 — name, centre coordinates, and plates AF-01/AF-02/AF-03 released for article 001 only; H1 decision 2026-09-17 (option i): the depiction shown in those plates is public with the released plates; no landing-design fact (ellipse geometry, P0 touchdown zone, science-zone plan, hazard inventory, traverse logic, AF-* unit identifiers) may be written into article prose, alt text, or captions; dossier as a whole remains draft pending full human approval |
+| Public status          | Partially released (article 001 only) — name, centre coordinates, and three plates; the plate images carry the landing-design depiction; no landing-design fact may appear in article prose, alt text, or captions; all other material requires separate human approval |
 
 The centre and boundaries above are scenario coordinates chosen for mission
 planning. They are not a claim that a real Mars feature exists at that point.

@@ -510,3 +510,248 @@ material that is not imported into the site.
 ### R9. Final label
 
 human decision required
+
+---
+
+## Corrective re-check: 2026-09-17 (card `t_38d86b7a`) — post-corrective article 001
+
+| Field | Value |
+| ----- | ----- |
+| Card | `t_38d86b7a` (`mars-ai-simulator-continuity`), child of the corrective card `t_50fea526` (writer); parent of the revision editorial gate `t_ff937d33` |
+| Reviewer role | continuity redactor — editorial continuity gate only, not a release approval |
+| Mission-timeline step | `site-foundation` / step 001 (project announcement) |
+| **Verdict** | **`continuity clear`** — every acceptance criterion of the card is met and no conflict remains between the package and canon. Human canon and release approval are still outstanding and are in no way implied (§P8). |
+| Article under check | `website/news/001-project-announcement.mdx` — SHA-256 `73c2d04734b466a8f642f342bf1ce01c5fb3b0d343f17f6b6c8e9ee8007ab5ec`, 4,806 B, mtime 2026-09-17 08:44:20 CEST (unchanged before and after this check) |
+| Check written | 2026-09-17 08:50 CEST (host date) |
+
+> **This file now carries three check sections and three labels by design.** The retro
+> record (§1–9, label `continuity clear`) and the revision record (§R1–R9, label
+> `human decision required`) are preserved unchanged as point-in-time records; **only
+> the last line of the file states the current verdict**. Their article-state hashes
+> (`e7652bd6…`, `5755f92e…`) are snapshots of the file at those check times and do not
+> describe the article today; the current hash is in §P2.
+
+### P1. Instruction state — what governs this check
+
+1. **The human answer to H1, recorded in canon.** Relayed by the planner on `t_50fea526`
+   (verbatim: keep all three plates, reword only the sentence that said landing-site
+   design work stays out of the public record, add no landing-design detail to prose,
+   alts or captions). Written into `docs/area/AREA.md` §Control record lines 18–19 and
+   `docs/SCENARIO.md` §Continuity and release controls line 279; both re-read in this
+   pass and both carry the decision as option (i).
+2. **H3 resolved by the operator** (comment on `t_50fea526`): the earlier "no numeric
+   coordinate" instruction is superseded and is not a live prohibition, so the released
+   centre and envelope stand as written. Nothing in this verdict rests on an agent's
+   reading of which human message wins — the operator settled it.
+3. **The corrective card `t_50fea526`** — its C1–C5 requirements and its acceptance
+   list are the scope of this check.
+4. **The revision editorial gate** (`.agents/work/reviews/001-project-announcement.md`
+   §R5) — where C1–C5 came from; read for scope. One statement of its own is flagged in
+   §P7 (F1) because it reads against the recorded H1 answer.
+
+### P2. Gate inputs (read in this session, 2026-09-17 08:47–08:50 CEST)
+
+| Input | SHA-256 | State |
+| ----- | ------- | ----- |
+| Article under check | `73c2d047…` (`…5ec`), 4,806 B, 08:44:20 | current; unchanged by this check |
+| Same article at `HEAD` (`git show HEAD:…`) | `5755f92e…` (`…770e`), 4,778 B | the committed baseline is exactly the pre-corrective revision, so `git diff HEAD -- <article>` **is** the corrective delta |
+| Released timeline step `docs/timeline/001-project-announcement.md` | `3aa1bca7…` | unmodified |
+| Locked canon `docs/SCENARIO.md` | `4cc0438b…` | modified by the planner's H1/O4 record update (line 279) |
+| Asteria Field dossier `docs/area/AREA.md` | `3bb1201c…` | modified by the same update (lines 18–19, revision AF-0.2) |
+| Brief `.agents/work/briefs/001-project-announcement.md` | `73f850ed…` | unmodified |
+| Asset manifest `.agents/work/assets/001-project-announcement/assets.md` | `5e33d451…` | unmodified (its article-hash citation is now stale — §P7 F2) |
+| SEO package `.agents/work/seo/001-project-announcement.md` | `e0cc702b…` | unmodified |
+| Editorial review `.agents/work/reviews/001-project-announcement.md` | `23072d02…` | unmodified |
+| Build guards `website/scripts/guards.mjs` | `65d31b91…` | unmodified (four markers) |
+| Release gate `website/src/lib/releases.ts` | `9173aa3a…` | unmodified; `releasedNewsSlugs` empty |
+| This record, before the append | `f3072da9…` | 512 lines |
+
+### P3. Method and evidence (this pass)
+
+Read-only inspection, scans and one test run. **No build of my own, no preview, no
+deploy, no canon edit, no edit to the article, `website/src/`, `website/scripts/`,
+`docs/` or `docs/timeline/`** — the only file this card writes is this record. Scratch
+checkers live under `/tmp/rh-continuity-38d86b7a/`, outside the repository, so no gated
+term is added to the tree; gated material is cited by class or by location, never copied.
+
+| Check | Command / source | Result |
+| ----- | ---------------- | ------ |
+| File identity | `sha256sum` | `73c2d04734b466a8f642f342bf1ce01c5fb3b0d343f17f6b6c8e9ee8007ab5ec`, 4,806 B, 77 lines by `wc -l` (a `split("\n")` parse reports 78 because of the trailing newline) |
+| Corrective delta | `git diff HEAD -- website/news/001-project-announcement.mdx` | **7 insertions / 6 deletions**, exactly the six change sites the writer reported (`status`, `linkLabel`, `mediaCaption[0]`, `mediaLabel`, the reworded sentence, the dropped tail). Nothing else moved and **no new gated material was added** |
+| Repository hygiene | `git status --porcelain` | three modified paths: the article, plus `docs/SCENARIO.md` and `docs/area/AREA.md` (the planner's recorded H1/O4 update). Nothing else changed; nothing committed |
+| Forbidden-token scan | `python3 /tmp/rh-continuity-38d86b7a/check_001.py` — the brief's "Forbidden token set" and the live `gatedTextMarkers` in `website/scripts/guards.mjs`, both read from their own files at run time (23 + 4 patterns), word-boundary, case-insensitive, and every frontmatter value scanned separately from the body | **0 hits** on every surface. Substring class only: 2 occurrences inside the already-public word `uncrewed` (frontmatter `summary`; body paragraph 1) — the artefact every earlier pass recorded |
+| Landing-design class scan | same script — the class enrolled in the recorded H1 answer, plus the words `landing`, `withheld`, `gated` | **0 hits**; the article no longer contains the word `landing` at all |
+| Released values | same script, exact-string counts | planning centre `17.80°S, 332.20°E (27.80°W)`, envelope `12.5–24.0°S` / `327.0–338.0°E`, frame `8 by 6 kilometres`, `two Mars years`, `1,374 Earth days`, `2031`, `€2.10` + `constant 2026 euros`, Mars year `687 Earth days` — each ×1 in the body, exact |
+| Near-miss scan | same script | no rounded-up lifetime (`1,375`), no absolute-date year token (checked by pattern; the value is gated and is not quoted here), no `1,000 km`, no `4,000 km`, no `two complete … cycles` |
+| Year tokens in the file | regex `\b(19|20)\d{2}\b` | `2026` (released constant-euro year) and `2031` (released window) only; no other year anywhere in the file |
+| Media contract vs site schema | `website/src/lib/media.ts`, `website/src/features/news/media.ts` | `asteria-plates` requires 3 plates / 3 alts / 3 captions / label; the article carries exactly that, in plate order |
+| Caption composition | `website/src/features/news/plates.ts` (`plateCaptionText`) | the component prepends the plate label and appends the registry provenance (and the AF-03 note); the frontmatter captions contain neither, so nothing prints twice |
+| Composition test | `node ./node_modules/vitest/vitest.mjs run test/news-media.test.mjs` | **18/18 pass** — re-run by this check, not accepted from the parent's narrative. (`npx vitest` is refused by this session's command scanner; the local binary was used instead.) |
+| Built output, independently scanned | `python3 /tmp/rh-continuity-38d86b7a/check_dist.py` over the writer's build of 08:44:28 | 6 text files in `website/dist/`; **no guard marker, no landing-design class term, no released coordinate** in any of them. The only `asteria` hits are the AF-01 asset path on `/` and `/news/`. Corrected card copy is live on both: `Programme announced` ×1 and `Announcement summary` ×1 each; `Now opening` and `First public briefing` occur 0 times |
+| Detail route | `website/src/lib/releases.ts`; grep of `dist` for the body, `mediaLabel` and the captions | `releasedNewsSlugs` is still empty; no detail route is generated, so the body, the label and the captions render on no route — the article body is not public |
+| External citations | `curl -s -o /dev/null -w %{http_code} -L` on the three source URLs | **200, 200, 200** |
+| Canon H1/O4 record | grep of `docs/area/AREA.md` and `docs/SCENARIO.md` | both carry the option (i) decision and the released lifetime |
+| Ten-team order | canon partner record vs the article's list | same ten countries, same order (the comparison's only difference is the article's serial "and Canada" — a tokeniser artefact, not an order difference) |
+| Plate content claims | `docs/area/AREA.md` §Map package; asset manifest pixel read | read as the statement of what the plates show; see the pixel-read limitation in §P7 |
+
+### P4. The five corrective items, verified
+
+| Item | Required (from `t_50fea526` / review §R5) | Verified | Evidence |
+| ---- | ------------------------------------------ | -------- | -------- |
+| C1 | option (i): keep the plates; reword the sentence that said landing-site design work stays out of the public record; add no landing-design fact to prose, alts or captions | **PASS** — the old sentence is gone; it is replaced by a statement about the released artifacts ("The planning plates released with this announcement show that region as it is currently drawn for mission planning"). Plates, plate count and alts are untouched; 0 landing-design-class hits in prose, alts, captions or label | diff hunk 5; §P3 scans; canon record §P2 |
+| C2 | drop the unverifiable scale number from the AF-01 caption; invent no replacement | **PASS** — `mediaCaption[0]` is exactly "The fictional target region on the planet, at planet scale."; `1,000 km` occurs 0 times | check_001 §B; check_norm |
+| C3 | qualify the released name in `mediaLabel` | **PASS** — `Red Horizon // fictional Asteria Field planning plates`, exactly | check_001 §B / §I |
+| C4 | apply the two decided copy calls | **PASS** — `status: Programme announced`; `linkLabel: Announcement summary`. Both render on the built homepage and newsroom cards; the superseded strings are gone | check_001; dist scan |
+| C5 | drop the rhetorical tail | **PASS** — the lifetime sentence now ends "…designed to keep working past its first year."; the tail occurs 0 times | check_norm |
+
+### P5. Acceptance criteria (the card's own list, one row each)
+
+| # | Criterion | Result |
+| - | --------- | ------ |
+| 1 | C1 wording outcome matches the recorded H1 answer: plates stay, the sentence is reworded, no landing-design fact in prose, alt text or captions | **PASS** — §P4 C1; `media: asteria-plates` still resolves to 3 plates / 3 alts / 3 captions / label |
+| 2 | C2–C5 present | **PASS** — §P4 |
+| 3 | No forbidden token; the grep returns 0 hits | **PASS** — 0 hits, word-boundary, over 27 patterns read from the brief and the live guard at run time (§P3) |
+| 4 | Released values still exact: planning centre, envelope, 8 × 6 km frame, `two Mars years`, `1,374 Earth days`, `2031`, `€2.10 billion` | **PASS** — all present and exact (§P3); the fiction qualification is intact in the body, `summary`, all three alts, the AF-01 caption and `mediaLabel` |
+| 5 | No new gated material added | **PASS** — the delta is 7 insertions / 6 deletions, every one a rewording, a qualification or a deletion; no new fact, coordinate, date, provider, vehicle, unit identifier, zone or hazard item |
+
+### P6. Claim traceability — what this pass re-verified
+
+The 23 rows of §R3 remain valid for every claim the corrective pass did not touch:
+`git diff HEAD` shows that only the six sites named in §P4 moved, and the manual
+comparison of the article against the §R3 row list found no other difference.
+Re-verified independently in this pass:
+
+| # | Claim (article) | Canonical source | Result |
+| - | --------------- | ---------------- | ------ |
+| 1 | Ten national programme teams, in canon order (paragraph 1) | `docs/SCENARIO.md` partner record | PASS — same ten, same order |
+| 2 | The C1 replacement sentence (paragraph 6) | `docs/area/AREA.md` §Control record lines 18–19 (H1 option (i): the depiction is public with the released plates) and §Map package (the plates' own description) | PASS — it describes the released artifact set and claims nothing about content, geometry or place; it is strictly weaker than the release it cites, so it cannot over-claim |
+| 3 | Released centre, envelope and frame (paragraph 6) | `docs/area/AREA.md` lines 14–16; recorded release | PASS — exact, with the scenario framing intact |
+| 4 | Lifetime, budget frame and window (paragraph 8) | `docs/SCENARIO.md` lines 25, 209, 216–217 | PASS — exact; the 687-day Mars year is canon's planning figure and its cited NASA source |
+| 5 | Three external citations (paragraph 5) | USGS Gazetteer Feature 3701; USGS SIM 3041; NASA clay/hydrated-mineral resource | PASS — HTTP 200 each, and they are exactly the URLs canon cites |
+| 6 | "Red Horizon One" is the mission, not the vehicle (paragraphs 2, 6) | `docs/SCENARIO.md` line 17 (mission) vs line 18 (surface vehicle) | PASS — unchanged, and the withheld vehicle designation appears nowhere (0 hits) |
+
+### P7. Observations routed elsewhere (recorded, not fixed)
+
+**F1 (new — flagged for the editorial gate).** §R5 of
+`.agents/work/reviews/001-project-announcement.md` folds the AF-03 alt-text asymmetry
+into C1 and says it resolves "either [as] the full description becomes publishable
+(option i) or the plate does not ship (option ii)". The H1 answer **as recorded** says
+the opposite for text: option (i) keeps the depiction public *with the plates*, while
+the gated class is explicitly barred from "article prose, alt text, or captions"
+(`docs/area/AREA.md` lines 18–19; `docs/SCENARIO.md` line 279) — and the human's
+verbatim wording the planner relays says the same. **The article is correct as it
+stands** and must not be changed on the strength of the review's parenthetical: a fuller
+description would put the gated class into a metadata surface, which the recorded answer
+forbids. If the gate or the human reads option (i) as licensing that description, it is
+a change to the **recorded H1 wording** — a human edit to canon — not a writer edit to
+the article. Owner: editorial gate `t_ff937d33`; human story owner if the gate
+disagrees. Recorded so that no card re-edits an accepted alt without that step.
+
+**F2 (new).** The corrective pass moved the article from `5755f92e…` to `73c2d047…`.
+Two other working records still cite the old hash as a gate input:
+`.agents/work/assets/001-project-announcement/assets.md` lines 9 and 169, and
+`.agents/work/reviews/about-method.md` lines 46, 177, 451 and 474. Both are
+point-in-time snapshots and neither verdict is invalidated by the move (the manifest's
+asset facts and the about-method claims are unchanged), but the citation is now
+misleading. Owner: whoever next touches those records — under `AGENTS.md` another
+worker's artifact needs a kanban-linked corrective card, so this check reports rather
+than edits. This file's own §R1/§R2 hash lines are snapshots for the same reason and are
+deliberately left as written.
+
+**Closed or already-accepted in this pass (not re-litigated):**
+
+- **O1** (§R6) — the AF-01 caption scale number: closed by C2; the figure now appears in
+  no public string. Residual, internal only: canon's plate record and the asset
+  manifest's pixel read still disagree about that plate's printed bar, and the planner
+  recorded "no canon change needed" on `t_50fea526`. No reader can be misled while the
+  caption carries no number. Owner if it is ever reconciled: planner /
+  `project-documentation`.
+- **O2** (§R6, the earlier H2) — unreferenced AF-02/AF-03 source files in the build
+  output: the planner ruled it accepted as-is and non-blocking (review §R6 row 2),
+  conditional on H1; H1 landed as option (i), so the material involved is released
+  content and only build hygiene remains. Re-confirmed still true today: both PNGs sit
+  in `website/dist/_astro/` at the same byte sizes as the `docs/area/` originals,
+  referenced by no built page, and `check:dist` does not cover them. Owner: BUILD
+  `t_f63be155` / the planner ruling.
+- **O3** (§R6) label qualification — closed by C3.
+- **O4** (§R6) the canon control records did not name the released lifetime — closed:
+  both records now carry it (§P2).
+- **O5** (§R6) the rhetorical tail — closed by C5.
+- **O6** (§R6) the homepage and newsroom cards lead with AF-01 and print the frontmatter
+  copy — verified live in the built pages, which now carry `Announcement summary` and
+  `Programme announced`; accepted by the planner ruling, unchanged in kind.
+
+**Deliberately not raised.** The three plate alts' neutral wording, the AF-03 note and
+the plate set itself were accepted by the editorial gate (review §R6) and are unchanged
+here; the alts match canon's own plate descriptions, so this pass verifies them and does
+not re-open them. The AF-02 caption's scale phrase is consistent with **both** records
+this time (canon's plate record and the asset manifest's pixel read agree on that
+plate), unlike the AF-01 figure C2 removed — recorded so it is not re-flagged later.
+
+**Pixel-read limitation, stated rather than implied.** This pass could not re-read the
+text drawn inside the three PNGs: this environment has no OCR tool, and the vision
+channel returned the plates for inspection without a transcribable text result, before
+and after downscaling them. Every statement here about what a plate *shows* therefore
+comes from `docs/area/AREA.md` §Map package (the plates' canonical description) and the
+asset manifest's recorded pixel read of 2026-09-17. **No pixel-level claim is made that
+is not backed by one of those two sources**, and none of the acceptance criteria in §P5
+depends on one: they are text, metadata and diff criteria.
+
+### P8. What this verdict means, and what happens next
+
+`continuity clear` means: the post-corrective package is internally coherent, and its
+text, frontmatter, metadata, captions, alt text, labels and asset names agree with the
+released step-001 canon and with the recorded human release. The five corrective items
+are present as required, no forbidden or gated class appears in any public string, and
+no conflict remains between the package and canon.
+
+It does **not** mean, and confers none of:
+
+- **release approval** — a human action, still outstanding; `releasedNewsSlugs` is empty,
+  so the article body has no route and nothing in this pass is public;
+- **canon approval** — the Asteria Field dossier remains draft pending full human
+  approval (`docs/area/AREA.md` line 18, "dossier as a whole remains draft");
+- **publication approval** — an editorial continuity gate is not an approval to publish,
+  and no deployment is authorised or implied;
+- a settlement of F1 or F2, which are routed exactly as written.
+
+Next owners and actions:
+
+1. **`mars-ai-simulator-editor`** (`t_ff937d33`) — resumes as the parent of this card:
+   read this verdict, treat C1–C5 as satisfied, and do not push a fuller AF-03
+   description without the human step set out in F1.
+2. **`mars-ai-simulator-dev`** (`t_f63be155`) — the build/verify card; it owns any
+   commit or push (no other role made one) and the build-hygiene item O2. The article
+   hash it must pin is `73c2d047…`.
+3. **Human story owner** — canon approval and release approval for article 001 and for
+   any detail route; a recorded release reference is required before
+   `releasedNewsSlugs` is populated, and it must be recorded on the card, not inferred
+   from this gate.
+4. **Planner / `project-documentation`** — F2's stale citations if the records are to
+   agree, and the internal canon-vs-manifest scale residual (O1) if it is ever
+   reconciled.
+
+**Hotspot (repeat, for the orchestrator):** `website/news/001-project-announcement.mdx`
+— the corrective card, this re-check, the build card and the editorial gate all key on
+this file's hash; any further edit invalidates this verdict and the downstream build
+evidence.
+
+### P9. Confidentiality check on this record
+
+Passed. This record names no withheld value: no vehicle designation, no provider or
+spaceport, no launch or landing date, no absolute end date, no payload or instrument
+item, and no landing-design figure, unit identifier, science-point label, zone, hazard or
+traverse inventory. The gated material is cited **by class or by location** (the recorded
+H1 answer in `docs/area/AREA.md` §Control record and `docs/SCENARIO.md` §Continuity and
+release controls; the brief's gated items; `docs/area/AREA.md` §Map package) so a human
+can act on it without this file becoming a second copy of what is withheld. The released
+values quoted here — the planning centre, the envelope, the local frame, the released
+lifetime, the budget frame and the window — are already public in the article under the
+recorded release, and quoting them is what makes §P4 and §P5 checkable. Scan results are
+reported by count and by class, never as a term inventory. Scratch work lives under
+`/tmp/rh-continuity-38d86b7a/`, outside the repository; this record is private working
+material under `.agents/work/`, imported by no route and creating no public surface.
+
+### P10. Final label
+
+continuity clear
