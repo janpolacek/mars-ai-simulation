@@ -62,12 +62,12 @@ stage's prescribed artifact is the deployment record on the card itself.
   forcing theirs down. A dev server serves the source and `public/`, which is
   useful, but it is not the built `dist/`; say which one you measured. A static
   server you start yourself can also fail to bind silently: when a sibling
-  worker's node static server already holds the port, `python3 -m http.server
-  <port>` exits with "Address already in use" and the port keeps serving *their*
-  build, so every number you read is another checkout's. Hash the served bundle
-  against your own before trusting anything — read `<link rel="stylesheet">` off
-  the page and compare that file's sha256 and byte length with `website/dist/` —
-  and confirm `ss -ltnp | grep <port>` names your own PID.
+  worker's node static server already holds the port, your own server exits with
+  "Address already in use" and that port keeps serving their build, so every
+  number you read belongs to another checkout. Before trusting a measurement,
+  hash the served bundle against your own — read the page's stylesheet link and
+  compare that file's sha256 and byte length with `website/dist/` — and confirm
+  that `ss -ltnp` names your own PID on the port you chose.
 - Gate the build output, not the build script's intent: after `npm run build` list
   `website/dist` and grep it for gated names, then prove the guard end to end by
   planting a single withheld marker under `website/public/assets/` and rebuilding
