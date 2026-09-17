@@ -197,6 +197,13 @@ publication gate (no page, no listing entry, no card for an unpublished item),
 that no unpublished article body text reaches `dist/`, and that every published
 item is both listed and linked to its own generated route.
 
+`test/news-listing.test.mjs` is the listing contract's own suite: from `dist/` it
+asserts that the homepage carousel renders one slide and one `01 / 0N` counter
+unit per published item, and that the newsroom index lists each of them with a
+link that resolves to a generated route. Its unit half covers the count > 1 case
+with fixtures, so the carousel's multi-item behaviour is tested without publishing
+a second article.
+
 ## Commands
 
 | Command              | Result                                                         |
@@ -239,5 +246,16 @@ settings, or other credentials. Preview deployments are disabled so branches
 cannot create public URLs for unapproved content.
 
 A release build additionally needs `SITE_URL` set to the approved origin (see
-"Canonical URLs"). Deployment itself requires a current human instruction: no
-agent profile holds release authority.
+"Canonical URLs"). Deployment is the host integration's job, not an agent's: the
+Workers Build above is connected to `main`, so a push to `main` deploys the build
+automatically (human instruction 2026-09-17), and a push that carries a release
+into the public site is a publication that needs the human approval recorded on
+its release card. No agent runs `wrangler deploy`, and no provider token, project
+ID, or custom-domain setting is committed.
+
+`.github/workflows/ci.yml` runs the gates on every push to `main` and every pull
+request, with no provider secret: it installs fnm, selects the Node.js pinned in
+`.node-version`, then runs `npm ci`, `npm run typecheck`, `npm run lint`,
+`npm run build` (whose `postbuild` guard fails the job on withheld material) and
+`npm test`. There is deliberately no deploy job — the Workers Build already
+deploys on push.

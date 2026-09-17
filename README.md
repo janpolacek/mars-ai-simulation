@@ -31,9 +31,13 @@ ComfyUI installation, the implementation of the site, and its local validation. 
 not write the pages.
 
 What a human holds is every decision that makes something public: approving canon,
-deciding that a page is published, releasing a build, and everything outside the repository
-— deployment, hosting, domain and DNS, provider accounts, and credentials. Agents never
-approve canon, publish, or deploy.
+deciding that a page is published, and releasing it. Agents never approve canon or
+publish, and no agent runs a deploy command. The public site is connected to a
+Cloudflare Workers Build, so pushing to `main` deploys the build automatically — which
+is why a push that carries content into the public site is a release, and waits for the
+human approval recorded on its release card. Everything outside the repository —
+hosting configuration, domain and DNS, provider accounts, and credentials — is a human
+action.
 
 The site states this in its own words, on every page and on
 [About Red Horizon and how it is made](https://mars-ai-simulation.janpolacek.workers.dev/about/):
@@ -85,8 +89,10 @@ The public origin is a build input, not a constant. `website/astro.config.mjs` r
 SITE_URL=https://mars-ai-simulation.janpolacek.workers.dev npm run build
 ```
 
-No domain or origin is hard-coded in the repository, and deployment is not part of any
-agent's work: it needs a current human instruction.
+No domain or origin is hard-coded in the repository. No agent runs a deploy command, and
+none is needed: `main` is connected to the Cloudflare Workers Build, so a push to `main`
+deploys the build automatically. A push that carries a release into the public site is
+therefore a publication, and needs the human approval recorded on its release card.
 
 ## Repository layout
 

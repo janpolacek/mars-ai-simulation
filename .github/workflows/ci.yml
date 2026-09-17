@@ -1,0 +1,74 @@
+# Continuous integration: the repository's own quality gates.
+#
+# Runs on every push to `main` and on every pull request. It runs the gates and
+# nothing else: no deploy step, no provider secret, no DNS or credential surface.
+# `main` is wired to the connected Cloudflare Workers Build, which builds and
+# deploys the site on every push (human instruction 2026-09-17, recorded in
+# AGENTS.md), so a deploy job here would duplicate the host integration and put a
+# credential in CI. The provider-side settings a human owns are listed in
+# website/README.md, "Cloudflare Workers static assets".
+#
+# Gate order is deliberate: the build runs before the tests so the build-output
+# assertions (`test/guards.test.mjs`, `test/news-listing.test.mjs`) execute
+# against a fresh `dist/` instead of skipping on a missing one.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: repository gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # Node is managed by fnm and pinned in website/.node-version, the same way
+      # a local checkout selects it.
+      - name: Install fnm
+        run: |
+          curl -fsSL https://fnm.vercel.app/install | bash -s -- \
+            --install-dir "$HOME/.fnm" --skip-shell
+          echo "$HOME/.fnm" >> "$GITHUB_PATH"
+
+      - name: Select the Node.js pinned in website/.node-version
+        working-directory: website
+        run: |
+          eval "$(fnm env --shell bash)"
+          fnm install --use
+          node --version
+          echo "$(dirname "$(command -v node)")" >> "$GITHUB_PATH"
+
+      - name: Install dependencies (npm ci)
+        working-directory: website
+        run: npm ci
+
+      - name: Typecheck (astro check)
+        working-directory: website
+        run: npm run typecheck
+
+      - name: Lint (eslint)
+        working-directory: website
+        run: npm run lint
+
+      # `npm run build` ends in the postbuild guard (`scripts/check-dist.mjs`),
+      # which exits non-zero and prunes the offending files when withheld material
+      # reaches `dist/`, so this step fails the job on a guard trip.
+      - name: Build (astro build + check-dist guard)
+        working-directory: website
+        run: npm run build
+
+      - name: Tests (vitest)
+        working-directory: website
+        run: npm test
