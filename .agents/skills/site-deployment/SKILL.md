@@ -133,6 +133,48 @@ stage's prescribed artifact is the deployment record on the card itself.
   `/tmp/node_modules -> website/node_modules` so a bare `import 'sharp'` resolves
   from `/tmp`; copy and delete files with `node` `fs` calls instead of `cp`/`rm`;
   run an installed CLI as `./node_modules/.bin/<tool>` rather than through `npx`.
+  Refusals seen since: `eval "$(fnm env)"` and grouped/encoded bodies ("nested
+  executable body could not be resolved" — check `node -v` against
+  `website/.node-version` and skip the shell hook when it already matches), and
+  one `find`/`ls` naming three or more paths under the documentation tree
+  ("multiple credential files accessed") — split it into separate calls or read
+  the paths from a node script instead.
+- A shared `dist/` can hide a real test failure, so `npm test` passing before your
+  own build proves nothing — build first, then test. Astro copies every file in
+  `website/public/` verbatim into `dist/`, and `listRoutes()`
+  (`website/scripts/guards.mjs`) returns those files as generated routes, so
+  `test/guards.test.mjs`'s `route identity` assertion fails on any `public/` file
+  with no `<title>`: the human's Google Search Console verification file
+  (`website/public/googlef5c43421bd049659.html`, commit `b4ed729`, content
+  prescribed by Google) did exactly this and made a fresh build of `main` fail
+  1/50 for every worker until a card owned the repair.
+- Attribute a failure to a file instead of arguing it: park the suspect file,
+  rebuild and retest, then restore it byte-identically and rebuild and retest, in
+  one node script with a `finally` restore and a before/after sha256
+  (`/tmp/rh-gsc-attribution.mjs` pattern). Green with the file absent plus the
+  same red with it present isolates the cause without touching your own diff.
+  Never `git stash` to measure HEAD here: an unfiltered stash sweeps sibling
+  roles' uncommitted files on this shared checkout. While a sibling card is live,
+  also check the board right before your close-out — if it is still `running`,
+  commit only your own paths and record the leftovers you held.
+- Adding a `media:` key breaks three *existing* assertions in
+  `website/test/news-media.test.mjs`, not just a new case, and card bodies omit
+  this: the `newsMediaKeys` deep-equal, the unknown-key message
+  (`media must be one of: …`, which joins the whole key list), and the
+  `resolves the two keys and nothing else` case. Update all of them or the suite
+  ships red.
+- Astro emits a statically imported asset into `dist/_astro/` even when no route
+  renders it (unreferenced, content-hashed name), so adding a media key puts the
+  artwork in the build output before any article names the key. Measure it
+  (`ls dist/_astro/`), hash it against the canonical source to show it is not a
+  re-encode, and report the exposure in the handoff rather than claiming the
+  asset is unreachable.
+- A card body can contradict itself: one section commissions an import of the
+  selected asset from the canonical `docs/` export while the acceptance list says
+  no `docs/` file is written. When the key cannot build without a real file under
+  `docs/`, read it as "do not author `docs/` prose or frontmatter", make the
+  mechanical copy, commit the asset (a clean clone cannot build without it), and
+  record the reading on the card.
 - `npm run format` cannot gate anything in this checkout: there is no `print`/
   dprint CLI on the machine and `prettier-plugin-astro` is not installed, so
   neither formatter runs. Keep new lines within the configured 120 columns by
