@@ -18,15 +18,17 @@
  * below), so whether the guard has anything to check no longer depends on which
  * articles the repository happens to carry.
  *
- * It also pins the one retirement: the landing-region name is released for
- * article 001 (2026-09-17) and no longer gated, while every other marker and
- * file rule stays in force.
+ * It also pins both retirements: the landing-region name released for article
+ * 001 and the surface-vehicle dossier released at step 003 (both 2026-09-17)
+ * are no longer gated, while every other marker and every withheld path — the
+ * whole mission timeline, and the vehicle dossier's scene image on its own —
+ * stays in force.
  */
 import { execFile } from 'node:child_process';
 import { existsSync, lstatSync, realpathSync } from 'node:fs';
 import { copyFile, cp, mkdir, mkdtemp, readdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { basename, join, relative, resolve } from 'node:path';
+import { basename, dirname, join, relative, resolve } from 'node:path';
 import { execPath } from 'node:process';
 import { promisify } from 'node:util';
 import { afterAll, describe, expect, it } from 'vitest';
@@ -34,7 +36,9 @@ import { afterAll, describe, expect, it } from 'vitest';
 import {
     checkDist,
     collectGatedSources,
+    gatedDirectoryNames,
     gatedSourceDirectories,
+    gatedSourceFiles,
     gatedTextMarkers,
     listFiles,
     listGeneratedRoutes,
@@ -658,17 +662,119 @@ describe('route identity', () => {
     });
 });
 
-describe('guard retirement: the released landing-region name', () => {
+describe('guard retirement: the released vehicle material and the withheld scene image', () => {
     /*
-     * The human release of 2026-09-17 (`docs/SCENARIO.md` §Continuity and release
-     * controls) makes the landing-region name legal in article 001's built text.
-     * The retirement is conditioned on the rest of the guard set staying intact,
-     * so both halves are asserted here: the withheld markers and files still fail
-     * a build, and the released name passes one.
+     * Two release decisions of 2026-09-17 are pinned here, each conditioned on
+     * the rest of the guard set staying intact, so both halves of each are
+     * asserted: the withheld markers and withheld files still fail a build, and
+     * the released material passes one.
+     *
+     *  - the human story owner released the landing-region name for article 001
+     *    (`docs/SCENARIO.md` §Continuity and release controls);
+     *  - step 003 released the surface-vehicle dossier's prose and its approved
+     *    studio references (`.agents/work/reviews/003-vehicle-design.md` §8.1),
+     *    which is why the dossier's directory name is no longer withheld.
+     *
+     * The scene image is the part step 003 did not release, and it is why this
+     * block is shaped the way it is: retiring the directory name took away the
+     * only rule that protected that file, so it now has a per-file rule that
+     * both scanners enforce. The landing-region coordinate markers are read
+     * through `gatedTextMarkers` rather than written out here.
      */
-    it('gates every marker except the released landing-region name', () => {
+    it('gates the coordinate markers only, and retires both released names', () => {
         expect(gatedTextMarkers).not.toContain('Asteria');
-        expect(gatedTextMarkers).toEqual(expect.arrayContaining(['RH-01', 'Pathfinder', '18° 42', '226° 14']));
+        expect(gatedTextMarkers).not.toContain('RH-01');
+        expect(gatedTextMarkers).not.toContain('Pathfinder');
+        // The count is asserted instead of the values, so this file carries no
+        // withheld coordinate: two markers stay, and no third joins them.
+        expect(gatedTextMarkers).toHaveLength(2);
+    });
+
+    it('retires the vehicle dossier directory and keeps the timeline withheld', () => {
+        expect(gatedDirectoryNames).toContain('timeline');
+        expect(gatedDirectoryNames).not.toContain('vehicle');
+        // Non-vacuity for the per-file rule below: exactly one file is withheld
+        // individually, and it is the dossier's scene image.
+        expect(gatedSourceFiles.map((file) => basename(file))).toEqual(['contact-arm-scene.png']);
+    });
+
+    it('passes a build output that carries the released vehicle strings', async () => {
+        const sources = await collectGatedSources();
+        const dist = await temporaryDirectory('rh-guard-vehicle-released-');
+        await mkdir(join(dist, 'news'), { recursive: true });
+        await writeFile(
+            join(dist, 'news', 'index.html'),
+            '<p>RH-01 Pathfinder is a fictional surface vehicle, shown here in its studio baseline configuration.</p>',
+        );
+
+        expect(await checkDist({ directory: dist, sources })).toEqual([]);
+    });
+
+    it('passes a source reference into the released vehicle dossier', async () => {
+        const root = await temporaryDirectory('rh-guard-vehicle-reference-');
+        const file = join(root, 'src', 'lib', 'planted.ts');
+        await mkdir(join(root, 'src', 'lib'), { recursive: true });
+        await writeFile(file, `import plate from '../../../docs/vehicle/canonical.png';\n`);
+
+        expect(await scanSourceForGatedReferences({ directory: root })).toEqual([]);
+    });
+
+    it('still fails a source reference that resolves to the withheld scene image', async () => {
+        const root = await temporaryDirectory('rh-guard-scene-reference-');
+        const file = join(root, 'src', 'lib', 'planted.ts');
+        await mkdir(join(root, 'src', 'lib'), { recursive: true });
+        /*
+         * Written so this file holds no literal path into the withheld file: the
+         * `./` segment is normalised away by the resolution, which is then the
+         * only reason the offence fires. The literal half of the rule is pinned
+         * by the case after this one.
+         */
+        const withheld = gatedSourceFiles[0];
+        const reference = `${relative(dirname(file), dirname(withheld))}/./${basename(withheld)}`;
+        await writeFile(file, `import scene from '${reference}';\n`);
+
+        const offences = await scanSourceForGatedReferences({ directory: root });
+
+        expect(offences.map((offence) => offence.kind)).toEqual(['gated-file-reference']);
+        expect(offences[0].file).toBe(file);
+        expect(offences[0].detail).toBe(reference);
+    });
+
+    it('still fails a source file that names the withheld scene image outright', async () => {
+        const root = await temporaryDirectory('rh-guard-scene-literal-');
+        const file = join(root, 'src', 'pages', 'planted.astro');
+        await mkdir(join(root, 'src', 'pages'), { recursive: true });
+        const withheld = relative(projectDirectory, gatedSourceFiles[0]).split('/').join('/');
+        await writeFile(file, `<img src="/${withheld}" alt="" />\n`);
+
+        const offences = await scanSourceForGatedReferences({ directory: root });
+
+        expect(offences.map((offence) => offence.kind)).toContain('gated-file');
+        expect(offences[0].file).toBe(file);
+    });
+
+    it('still fails a build output that carries the withheld scene image', async () => {
+        const sources = await collectGatedSources();
+        const source = sources.find((entry) => basename(entry.path) === basename(gatedSourceFiles[0]));
+        expect(source, 'the withheld scene image is not in the withheld-source set').toBeDefined();
+
+        // A copied file fails by name and by content hash...
+        const copied = await temporaryDirectory('rh-guard-scene-copied-');
+        await mkdir(join(copied, 'assets'), { recursive: true });
+        await copyFile(source.path, join(copied, 'assets', source.name));
+        const copiedKinds = (await checkDist({ directory: copied, sources })).map((offence) => offence.kind);
+
+        expect(copiedKinds).toContain('gated-name');
+        expect(copiedKinds).toContain('gated-content');
+
+        // ...and a re-encoded derivative fails by leading name token, which is
+        // the name an emitted copy of it would carry.
+        const emitted = await temporaryDirectory('rh-guard-scene-emitted-');
+        await mkdir(join(emitted, '_astro'), { recursive: true });
+        await writeFile(join(emitted, '_astro', `${source.stem}.ABCD1234.webp`), 're-encoded placeholder bytes');
+        const emittedKinds = (await checkDist({ directory: emitted, sources })).map((offence) => offence.kind);
+
+        expect(emittedKinds).toContain('gated-name-stem');
     });
 
     it('passes a build output that carries the released name', async () => {

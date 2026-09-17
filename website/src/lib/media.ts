@@ -14,7 +14,12 @@
  */
 
 /** Media keys a news item may declare. */
-export const newsMediaKeys = ['programme-identity', 'asteria-plates', 'payload-sensor-illustration'] as const;
+export const newsMediaKeys = [
+    'programme-identity',
+    'asteria-plates',
+    'payload-sensor-illustration',
+    'vehicle-references',
+] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
 
@@ -42,6 +47,17 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * card specifies — the label is optional here, not required.
      */
     'payload-sensor-illustration': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved studio reference of the surface vehicle (card `t_accf6f7a`,
+     * step `003-vehicle-design`).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts` must
+     * resolve the key to exactly one plate or the build fails, so the key cannot
+     * be declared without the released artwork behind it. The label stays
+     * optional as the editorial gate decided, and the dossier's other studio
+     * renders are deliberately not placed, so only one plate resolves.
+     */
+    'vehicle-references': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {

@@ -1,15 +1,18 @@
 /*
  * Fail-closed guards for the public build.
  *
- * The release controls in `docs/SCENARIO.md` withhold the surface-vehicle
- * dossier until the vehicle-design step and keep the mission timeline private.
- * Those directories used to be protected by a copy step that simply did not
- * copy their files: a reference that bypassed the copy would have shipped
- * silently, and a stale generated copy was invisible to `git status`. These
- * guards fail the build instead of relying on a reviewer to notice.
+ * The release controls in `docs/SCENARIO.md` keep the mission timeline private.
+ * Step 003 (2026-09-17) released the surface-vehicle dossier's prose and its
+ * approved studio references and held its scene image back, so the withheld set
+ * is one directory plus one file of the released dossier:
+ * `gatedDirectoryNames` and `gatedFilePathSegments` below. Those paths used to
+ * be protected by a copy step that simply did not copy their files: a reference
+ * that bypassed the copy would have shipped silently, and a stale generated
+ * copy was invisible to `git status`. These guards fail the build instead of
+ * relying on a reviewer to notice.
  *
- * The withheld directory names are written as separate path segments so that
- * this file does not itself contain a reference into a gated directory.
+ * Every withheld path is written as separate path segments so that this file
+ * does not itself contain a reference into a gated path.
  */
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
@@ -27,8 +30,15 @@ export const projectDirectory = resolve(websiteDirectory, '..');
 /** Name of the documentation directory that holds every dossier. */
 export const gatedTreeDirectory = 'docs';
 
-/** Dossier directory names whose material must never reach the public build. */
-export const gatedDirectoryNames = ['vehicle', 'timeline'];
+/**
+ * Dossier directory names whose material must never reach the public build.
+ *
+ * `vehicle` stood here until 2026-09-17, when step 003 released the dossier's
+ * prose and its approved studio references (`.agents/work/reviews/003-vehicle-design.md`
+ * §8.1); the one file of it that stays withheld is in `gatedFilePathSegments`
+ * below. `timeline` is unchanged.
+ */
+export const gatedDirectoryNames = ['timeline'];
 
 /** Absolute paths of the withheld directories. */
 export const gatedSourceDirectories = gatedDirectoryNames.map((name) =>
@@ -36,20 +46,41 @@ export const gatedSourceDirectories = gatedDirectoryNames.map((name) =>
 );
 
 /**
- * Text that must never appear in a public build: the vehicle designation, the
- * withheld dossier's name, and the landing-region coordinates are gated by the
- * release controls in `docs/SCENARIO.md`.
+ * Files that stay withheld inside a released dossier, as path segments (see the
+ * header). Step 003 released the surface-vehicle dossier but not its scene
+ * image: a scene image is artwork about an event rather than a reference render
+ * of the vehicle, and the step's release control holds editorial scene images
+ * behind the canonical-reference gate.
  *
- * The landing-region name is deliberately **not** in this list. The human story
- * owner released the name, the planning-centre coordinates and the three
- * `docs/area/` map plates for article 001 on 2026-09-17, and
- * `docs/SCENARIO.md` §Continuity and release controls records that partial
- * release. Everything else about the field stays withheld: the gated directory
- * names, the path-reference scan, and the markers below are unchanged, and
- * `test/guards.test.mjs` proves both halves of the retirement — a withheld
- * marker still fails a build, the released name passes.
+ * This is a per-file rule, not a directory one, and it has to be enforced by
+ * both scanners: the directory name above used to be the only thing protecting
+ * this file, so retiring that name without this rule would leave it protected
+ * by nothing — which is exactly what `website/test/guards.test.mjs` measures.
  */
-export const gatedTextMarkers = ['RH-01', 'Pathfinder', '18° 42', '226° 14'];
+export const gatedFilePathSegments = [
+    [gatedTreeDirectory, 'vehicle', 'contact-arm-scene.png'],
+];
+
+/** Absolute paths of the individually withheld files. */
+export const gatedSourceFiles = gatedFilePathSegments.map((segments) => resolve(projectDirectory, ...segments));
+
+/**
+ * Text that must never appear in a public build: the landing-region coordinate
+ * markers reserved by the release controls in `docs/SCENARIO.md`.
+ *
+ * Two names are deliberately **not** in this list, each retired by a recorded
+ * release decision. The human story owner released the landing-region name, the
+ * planning-centre coordinates and the three `docs/area/` map plates for article
+ * 001 on 2026-09-17, and `docs/SCENARIO.md` §Continuity and release controls
+ * records that partial release. Step 003 released the surface vehicle's
+ * designation and name along with the rest of its dossier
+ * (`.agents/work/reviews/003-vehicle-design.md` §8.1). Everything else about
+ * both subjects stays withheld: the withheld directory, the withheld scene
+ * file, the path-reference scans and the markers below are unchanged, and
+ * `test/guards.test.mjs` proves both halves of each retirement — a withheld
+ * marker still fails a build, the released names pass.
+ */
+export const gatedTextMarkers = ['18° 42', '226° 14'];
 
 /**
  * Extensions scanned for gated references. Markdown prose is deliberately not
@@ -116,17 +147,29 @@ function isInsideDirectory(target, directory) {
     return path === '' || (path !== '..' && !path.startsWith(`..${sep}`) && !isAbsolute(path));
 }
 
+/** A literal string, escaped so it can be used inside a regular expression. */
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 /**
- * Find every reference in the site source that resolves into a withheld
- * directory. Two rules: a literal path into the documentation tree, and any
- * relative reference (import, `src=`, markdown link) whose resolved target lies
- * inside a withheld directory.
+ * Find every reference in the site source that resolves into a withheld path.
+ * Four rules: a literal path into a withheld directory, a literal path naming a
+ * withheld file, any relative reference (import, `src=`, markdown link) whose
+ * resolved target lies inside a withheld directory, and any relative reference
+ * whose resolved target *is* a withheld file.
+ *
+ * The fourth rule is the one the directory rule cannot make. While a whole
+ * dossier is withheld, naming its directory catches everything in it; retiring
+ * that name leaves a single withheld file inside the dossier covered by
+ * nothing, so it needs its own rule in both scanners.
  *
  * @returns {Promise<Array<{ kind: string, file: string, detail: string }>>}
  */
 export async function scanSourceForGatedReferences({
     directory = websiteDirectory,
     gatedDirectories = gatedSourceDirectories,
+    gatedFiles = gatedSourceFiles,
 } = {}) {
     const gatedNames = gatedDirectories.map((gatedDirectory) => basename(gatedDirectory));
     const literalPattern = new RegExp(
@@ -134,6 +177,12 @@ export async function scanSourceForGatedReferences({
         'i',
     );
     const literalPatternGlobal = new RegExp(literalPattern.source, 'gi');
+    const gatedFileNames = gatedFiles.map((file) => relative(projectDirectory, file).split(sep).join('/'));
+    const filePatternGlobal = new RegExp(
+        `(?:^|[^A-Za-z0-9_.-])(?:[A-Za-z0-9_$@.~-]+/)*${gatedFileNames.map(escapeRegExp).join('|')}(?![A-Za-z0-9_-])`,
+        'gi',
+    );
+    const withheldFiles = new Set(gatedFiles.map((file) => resolve(file)));
     const quotedPattern = /(['"`])([^'"`\n]{1,300})\1|!?\[[^\]]*\]\(([^)\s]{1,300})\)/g;
 
     const offences = [];
@@ -144,12 +193,19 @@ export async function scanSourceForGatedReferences({
             offences.push({ kind: 'gated-path', file, detail: match[0].trim() });
         }
 
+        for (const match of text.matchAll(filePatternGlobal)) {
+            offences.push({ kind: 'gated-file', file, detail: match[0].trim() });
+        }
+
         for (const match of text.matchAll(quotedPattern)) {
             const reference = match[2] ?? match[3];
             if (!reference || !reference.startsWith('.')) continue;
             const target = resolve(dirname(file), reference);
-            if (!gatedDirectories.some((gatedDirectory) => isInsideDirectory(target, gatedDirectory))) continue;
-            offences.push({ kind: 'gated-reference', file, detail: reference });
+            if (gatedDirectories.some((gatedDirectory) => isInsideDirectory(target, gatedDirectory))) {
+                offences.push({ kind: 'gated-reference', file, detail: reference });
+            } else if (withheldFiles.has(target)) {
+                offences.push({ kind: 'gated-file-reference', file, detail: reference });
+            }
         }
     }
 
@@ -163,14 +219,22 @@ async function sha256(file) {
 /**
  * Every withheld source file with the identities a build output could carry:
  * its file name, its leading name token, and its content hash.
+ *
+ * The withheld directories and the individually withheld files are both
+ * collected, so a copied or re-encoded derivative of either fails `checkDist()`
+ * by name, by leading name token or by content hash.
  */
-export async function collectGatedSources(directories = gatedSourceDirectories) {
-    const sources = [];
+export async function collectGatedSources(directories = gatedSourceDirectories, files = gatedSourceFiles) {
+    const paths = new Set();
     for (const directory of directories) {
-        for (const file of await listFiles(directory)) {
-            const name = basename(file);
-            sources.push({ path: file, name, stem: name.split('.')[0], sha256: await sha256(file) });
-        }
+        for (const file of await listFiles(directory)) paths.add(file);
+    }
+    for (const file of files) paths.add(file);
+
+    const sources = [];
+    for (const path of paths) {
+        const name = basename(path);
+        sources.push({ path, name, stem: name.split('.')[0], sha256: await sha256(path) });
     }
     return sources;
 }

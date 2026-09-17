@@ -38,14 +38,32 @@ const payloadFrontmatter = {
     mediaAlt: 'Illustrative artwork, not mission photography: coloured beams fall on a rough dark rock.',
 };
 
+/**
+ * The one-plate key the 003 surface-vehicle studio reference resolves through
+ * (card `t_accf6f7a`): one alt entry, no caption, and the label the editorial
+ * gate approved for it — which carries a U+00B7 MIDDLE DOT that must not be
+ * normalised.
+ */
+const vehicleFrontmatter = {
+    media: 'vehicle-references',
+    mediaAlt: 'Illustrative artwork of the RH-01 Pathfinder rover in its studio baseline configuration.',
+    mediaLabel: 'RH-01 Pathfinder · studio reference',
+};
+
 const fieldsOf = (issues) => issues.map((issue) => issue.field);
 
 describe('media keys and their requirements', () => {
-    it('declares every key it resolves: programme-identity, asteria-plates, payload-sensor-illustration', () => {
-        expect(newsMediaKeys).toEqual(['programme-identity', 'asteria-plates', 'payload-sensor-illustration']);
+    it('declares every key it resolves, and no key it does not', () => {
+        expect(newsMediaKeys).toEqual([
+            'programme-identity',
+            'asteria-plates',
+            'payload-sensor-illustration',
+            'vehicle-references',
+        ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
         expect(isNewsMediaKey('payload-sensor-illustration')).toBe(true);
+        expect(isNewsMediaKey('vehicle-references')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -73,6 +91,22 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    /*
+     * Step 003's key (card `t_accf6f7a`). The editorial gate decided
+     * `requiresLabel: false` and one placed plate, so this pins the shape the
+     * approved article frontmatter is written against — a key that started
+     * demanding a second plate or a caption would fail the build against an
+     * article nobody changed.
+     */
+    it('requires one plate, one alt, no caption and no label for vehicle-references', () => {
+        expect(newsMediaRequirements['vehicle-references']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -88,7 +122,7 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['media']);
         expect(issues[0].message).toContain(
-            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration',
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references',
         );
     });
 
@@ -108,6 +142,20 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['mediaCaption']);
         expect(issues[0].message).toContain('remove mediaCaption');
+    });
+
+    it('accepts the approved one-plate vehicle frontmatter, label included', () => {
+        expect(newsMediaIssues(vehicleFrontmatter)).toEqual([]);
+    });
+
+    it('fails the vehicle key with no alt, a blank alt, or a caption it never renders', () => {
+        expect(fieldsOf(newsMediaIssues({ media: 'vehicle-references' }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...vehicleFrontmatter, mediaAlt: ['  '] }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...vehicleFrontmatter, mediaCaption: 'A caption nobody renders' }))).toEqual([
+            'mediaCaption',
+        ]);
+        // `requiresLabel: false` for this key, so an absent label is not an issue.
+        expect(newsMediaIssues({ ...vehicleFrontmatter, mediaLabel: undefined })).toEqual([]);
     });
 
     it('fails a three-plate key that lists two alts instead of three', () => {
@@ -180,10 +228,30 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('payload-sensor-illustration');
     });
 
+    /*
+     * The 003 studio reference (card `t_accf6f7a`). The label is the approved
+     * string, and the assertion that matters is the code point: the approved
+     * label separates the vehicle from the view with a U+00B7 MIDDLE DOT, so a
+     * normalised copy (a hyphen, U+2027, U+30FB) is a different, unapproved
+     * string even though it may look alike.
+     */
+    it('resolves vehicle-references to exactly one plate with the approved label', () => {
+        const set = newsMedia['vehicle-references'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('RH-01 Pathfinder · studio reference');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the dossier, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('canonical');
+        expect(String(set.plates[0].src)).toContain('vehicle');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
         expect(resolveNewsMedia('payload-sensor-illustration')).toBe(newsMedia['payload-sensor-illustration']);
+        expect(resolveNewsMedia('vehicle-references')).toBe(newsMedia['vehicle-references']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

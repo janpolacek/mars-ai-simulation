@@ -6,6 +6,7 @@ import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-lo
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
+import vehicleStudioReferenceSource from '../../../docs/vehicle/canonical.png';
 
 /**
  * The approved identity mark, and the only import of it in the site.
@@ -21,9 +22,10 @@ import payloadSensorIllustrationSource from '../../../docs/payload/payload-senso
  * (`SplashScreen`, `SiteHeader`, `Hero`, and the news media registry) import it
  * from here rather than re-importing the source.
  *
- * The surface-vehicle dossier is withheld and the mission timeline is private,
- * so `scripts/guards.mjs` fails the build if a reference into either one appears
- * anywhere in the site source.
+ * The mission timeline stays private and the surface-vehicle dossier's scene
+ * image stays withheld, so `scripts/guards.mjs` fails the build if a reference
+ * to either withheld path appears anywhere in the site source. The dossier's
+ * approved studio reference below is released material and resolves normally.
  */
 export const identityMark: ImageMetadata = identityMarkSource;
 
@@ -84,3 +86,21 @@ export const asteriaPlate03: ImageMetadata = asteriaLocalOperationsSource;
  * asset, and only the article the release card wires that key into.
  */
 export const payloadSensorIllustration: ImageMetadata = payloadSensorIllustrationSource;
+
+/**
+ * The approved studio reference of the surface vehicle, imported from its
+ * canonical `docs/vehicle/` copy.
+ *
+ * Release: step 003 (2026-09-17), recorded by the editorial gate on
+ * `t_1e84c815` (`.agents/work/reviews/003-vehicle-design.md` §2, §8.1). The
+ * placed asset is `canonical.png` — sha256 `8dbb33d5…`, 1,448 × 1,086, 1,889,350
+ * B — and it is the only file of the dossier this site imports: the other four
+ * studio renders are approved canonical references that nothing places, and
+ * `contact-arm-scene.png` stays withheld (`scripts/guards.mjs` fails the build
+ * if any reference resolves to it).
+ *
+ * It is illustrative artwork, not mission imagery: the studio views are renders
+ * of a fictional vehicle for a fictional programme, and only the article the
+ * release card wires the `vehicle-references` media key into renders it.
+ */
+export const vehicleStudioReference: ImageMetadata = vehicleStudioReferenceSource;

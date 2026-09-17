@@ -4,6 +4,7 @@ import {
     asteriaPlate03,
     identityMark,
     payloadSensorIllustration,
+    vehicleStudioReference,
 } from '../../lib/assets';
 import type { NewsMediaKey } from '../../lib/media';
 
@@ -52,6 +53,25 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'payload-sensor-illustration': {
         plates: [{ src: payloadSensorIllustration, label: 'Red Horizon // payload sensor illustration' }],
+    },
+    /**
+     * One approved studio reference of the surface vehicle (card `t_accf6f7a`,
+     * step `003-vehicle-design`).
+     *
+     * The asset is `docs/vehicle/canonical.png`, the primary studio view the
+     * editorial gate confirmed by content hash (`t_1e84c815`,
+     * `.agents/work/reviews/003-vehicle-design.md` §2). The label is the one
+     * approved with it and carries a U+00B7 MIDDLE DOT, which must not be
+     * normalised. No `provenance` line: this key renders no caption, so the
+     * "illustrative artwork" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     *
+     * Only this plate is placed. The dossier's other four studio renders are
+     * canonical references that nothing imports, and its scene image stays
+     * withheld — `scripts/guards.mjs` fails the build on a reference to it.
+     */
+    'vehicle-references': {
+        plates: [{ src: vehicleStudioReference, label: 'RH-01 Pathfinder · studio reference' }],
     },
 };
 

@@ -29,11 +29,20 @@ const { Content } = await render(item);
 
     {media && leadPlate && !plateSet && (
         <figure class="article-media">
+            {/*
+             * `width` only: Astro derives the height from the plate's own
+             * aspect ratio. Passing a square `height` as well made the image
+             * service **crop** the plate to that square (measured on the built
+             * 003 page: the 1448x1086 studio reference came out 1024x1024 at a
+             * mean |delta| of 0.00 against sharp's `cover`, i.e. 25% of its
+             * width gone). A 4:3 approved artwork may not be cropped to fit a
+             * component, so the component takes the ratio the artwork has.
+             * `MediaPlates` and `NewsCard` already pass `width` alone.
+             */}
             <Image
                 src={leadPlate.src}
                 alt={plateAltText({ value: item.data.mediaAlt, plates: media.plates, index: 0 })}
                 width={1024}
-                height={1024}
                 format="webp"
                 loading="eager"
             />
