@@ -181,12 +181,18 @@ stage's prescribed artifact is the deployment record on the card itself.
   (`media must be one of: …`, which joins the whole key list), and the
   `resolves the two keys and nothing else` case. Update all of them or the suite
   ships red.
-- Astro emits a statically imported asset into `dist/_astro/` even when no route
-  renders it (unreferenced, content-hashed name), so adding a media key puts the
-  artwork in the build output before any article names the key. Measure it
-  (`ls dist/_astro/`), hash it against the canonical source to show it is not a
-  re-encode, and report the exposure in the handoff rather than claiming the
-  asset is unreachable.
+- An unreferenced asset does not reach the served output: `website/scripts/media-scope.mjs`,
+  wired as the `mediaScope()` integration in `website/astro.config.mjs`
+  (`astro:build:done`), removes every file under `dist/_astro/` that no built
+  document references, and `website/test/media-scope.test.mjs` pins the rule on
+  fixtures and on the real build output. So the procedure for a new `media:` key
+  is: build, then assert `find dist -type f` lists no unreferenced `_astro` file,
+  and that the asset appears — referenced — once the article's `publication` is
+  `published`. The predicate is the build output, not the frontmatter, because an
+  unreferenced emitted asset *is* the asset of an item the publication gate holds
+  back: a published item's page names its own file, so nothing renders the other
+  one's. When an asset *is* served, still hash it against its canonical `docs/`
+  source to show it is not a re-encode.
 - A card body can contradict itself: one section commissions an import of the
   selected asset from the canonical `docs/` export while the acceptance list says
   no `docs/` file is written. When the key cannot build without a real file under
