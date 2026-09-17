@@ -189,6 +189,36 @@ stage's prescribed artifact is the deployment record on the card itself.
   dprint CLI on the machine and `prettier-plugin-astro` is not installed, so
   neither formatter runs. Keep new lines within the configured 120 columns by
   hand and check them with a throwaway script before committing.
+- Attribute a failing shared-checkout suite with a scratch copy of `website/`
+  outside the repository: copy `website/` (skip `node_modules`, `dist`, `.astro`),
+  symlink `node_modules` back, and symlink the repository root's other entries
+  (`docs`, `tools`, `.agents`, …) **except** `website` and `.git`, because
+  `scripts/guards.mjs` resolves `projectDirectory` as the copy's parent and reads
+  the canonical `docs/` tree from there — symlinking avoids copying the withheld
+  directories out of the repository. Restore the card's own files with
+  `git show HEAD:<path> > <scratch path>`; if the same failures appear with the
+  card's delta removed, they follow from the tree, not from the card. The same
+  scratch tree gives red-first evidence for the card's new test and makes
+  `check-dist`'s generated-route line comparable with and without the change (an
+  unchanged route set, proven under one sibling state).
+- A card body's prescribed render snippet can be defeated by a positional
+  selector: appending `<p class="timeline-link">` after a detail paragraph styled
+  by `… > p:last-child` moves the styled element and silently restyles that one
+  step. When a gate names parity as the constraint, give the element a class and
+  key the rule on it, then measure `getComputedStyle` parity across every sibling
+  (`font-size | color | max-width`) in the browser — the class change is the fix,
+  not a scope violation.
+- A gate can record a hash over a string payload whose encoding is not
+  reconstructible ("15 literals, newline-joined, 710 bytes"): verify the card's
+  *stated* acceptance instead — extract the deck's fenced block and assert the
+  file equals `import line + block` byte-for-byte, and re-derive the length claims
+  from the built DOM — then report the unreproducible payload hash as an open
+  question rather than a failure.
+- A release flip landing in the shared tree can break a guard suite that assumes
+  a draft exists (`unpublishedSlugs()` plus `expect(length).toBeGreaterThan(0)`).
+  Reproduce it against the scratch baseline before reporting, name the flip as the
+  cause, and hand the assertion repair to the release's build card instead of
+  fixing it twice.
 - ESLint's `recommended` set has no Node globals, so `Buffer` in a
   `website/scripts/*.mjs` file fails `no-undef`; use `Uint8Array` (sharp accepts
   it for raw pixel input) instead of adding globals.
