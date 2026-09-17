@@ -38,7 +38,7 @@ workflow.
   of renaming a file that briefs, source packs, reviews and card text all cite.
 - **Apply only meaning-neutral metadata, and record the revert string.** The
   frontmatter `title` and `summary` are the writer's visible copy and the public
-  title may be an open human decision: recommend, do not overwrite. Alt text is
+  title may be an open editorial decision: recommend, do not overwrite. Alt text is
   the one frontmatter value this role can complete safely when the cue is
   verified visible and a prior gate asked for it; keep the wording
   background-neutral so it survives an open asset-variant decision.

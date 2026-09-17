@@ -4,11 +4,11 @@ Mars AI Simulation is a real-world test harness for autonomous multi-agent work.
 operator runs a roster of AI agents that research, draft, review, illustrate, implement, and
 validate a live website end to end. The fiction the team publishes is the workload, not the
 objective: what is being tested is whether a coordinated roster of agents can carry a real
-project from an approved brief to a reviewed, built, and published page while a human keeps
-every decision that makes something public.
+project from an approved brief to a reviewed, built, and published page while a single editorial
+role holds the release decision and the human keeps new canon and every external action.
 
 This file owns the harness itself: what the roles are and what each one owns, the tools and
-models they run on, how work is tracked, where the human gates are, and what the public
+models they run on, how work is tracked, where the release decision sits, and what the public
 release boundary is. It does not own the rules — those are in
 [Project instructions](INSTRUCTIONS.md) — nor what is true inside the fiction, which the
 [locked scenario](SCENARIO.md) owns.
@@ -25,8 +25,7 @@ and what each skill is for, is catalogued in [`.agents/README.md`](../.agents/RE
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | Planner (`mars-ai-simulator-planner`)       | The delivery plan, and the article pipeline: turns one approved article request into the serial card graph, and builds the claim-level source pack a draft must cite | `create-article-workflow`, `research-and-fact-check` |
 | Writer (`mars-ai-simulator-writer`)         | The draft of one article, written from an approved brief in the project's public voice                                                                               | `article-drafting`, `brand-voice`                    |
-| Editor (`mars-ai-simulator-editor`)         | Copy: clarity, structure, and interface wording, and the editorial half of the final gate                                                                            | `copy-editing`, `editorial-review`                   |
-| Continuity (`mars-ai-simulator-continuity`) | Continuity: every material claim against canon, the release order, and what is already public                                                                        | `editorial-review`                                   |
+| Editor-in-chief (`mars-ai-simulator-editor`) | Copy, continuity, and the final word: clarity, structure and interface wording; every material claim against canon and what is already public; the editorial gate and the release decision for a package | `copy-editing`, `editorial-review` |
 | SEO (`mars-ai-simulator-seo`)               | Search intent, the title and description a page carries, and internal linking                                                                                        | `seo-content`                                        |
 | Visuals (`mars-ai-simulator-visuals`)       | Image candidates with their alt text, captions, and asset manifests, and the local ComfyUI renders behind them                                                       | `image-generation`, `mars-story-toolset`             |
 | Developer (`mars-ai-simulator-dev`)         | The Astro application, its content schema and build guards, the repository's documentation, and local build validation                                               | `site-deployment`, `project-documentation`           |
@@ -34,7 +33,7 @@ and what each skill is for, is catalogued in [`.agents/README.md`](../.agents/RE
 `brand-voice` is cross-cutting: the writer and the editor both apply it to public prose.
 
 The human operator is not a profile. The operator commissions work, reads handoffs, and holds
-the approvals in the table below.
+the decisions in the table below.
 
 ## How work is tracked
 
@@ -73,15 +72,16 @@ Commands, the contributor sequence, and the content-workflow policy are in
   before it is handed on. The build guard is also the enforcement point of the public-release
   boundary below.
 
-## Where the human gate is
+## Who decides what
 
 This table is an index of who decides what, and the file that owns each rule. It restates no
-rule.
+rule. Since 2026-09-17 the merged editorial role holds canon confirmation and releasability; the
+human column is what remains human-only.
 
 | Decision                           | Agents                                                        | Only a human                                         | Rule owner                                                                                                              |
 | ---------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Canon and public wording           | research, draft, cite sources, check, propose                 | approve canon and the wording that carries it        | [Scenario](SCENARIO.md), [General information](GENERAL.md) §Canon, drafts, and publication                              |
-| Publication                        | prepare a page, validate it locally, hand it off              | decide that a page is published                      | [General information](GENERAL.md) §Canon, drafts, and publication; [website README](../website/README.md) §News content |
+| Canon confirmation and public wording | research, draft, cite sources, check, propose; `mars-ai-simulator-editor` confirms canon and the wording that carries it | author new canon, and make a later timeline step public | [Scenario](SCENARIO.md), [General information](GENERAL.md) §Canon, drafts, and publication                              |
+| Releasability of a package         | prepare a page, validate it locally, decide releasability, record the release decision on the card | perform any external action (deploy, hosting, DNS)   | [General information](GENERAL.md) §Canon, drafts, and publication; [website README](../website/README.md) §News content |
 | Release order                      | read the current step, use only the facts it allows           | decide when a later step may become public           | [Timeline](timeline/README.md), [Scenario](SCENARIO.md) §Continuity and release controls                                |
 | Deployment, hosting, DNS, domains  | prepare code, configuration, preview instructions, checklists | deploy, connect hosting, attach a domain, change DNS | [Project instructions](INSTRUCTIONS.md) §External actions and secrets                                                   |
 | Credentials and accounts           | never read, store, log, or repeat them                        | create accounts, hold keys and tokens, use them      | [Project instructions](INSTRUCTIONS.md) §External actions and secrets                                                   |
@@ -94,7 +94,7 @@ The repository can be read by anyone; the site is built from it; a passing build
 release. What may become public, and when, is fixed by the numbered steps in
 [the private timeline](timeline/README.md) and by the publication states in
 [General information](GENERAL.md) §Canon, drafts, and publication. A page reaches the public
-site only when its article declares itself published and a human records the release.
+site only when its article declares itself published and the editorial role records the release.
 
 Two mechanical facts enforce that boundary rather than trusting a reviewer:
 

@@ -16,7 +16,7 @@ procedures under `.agents/skills/`.
    deployment plan, or validation result.
 4. Record affected canon, files, validation, open questions, and next owner as a
    card comment (`hermes kanban comment <id> "..."`).
-5. Never mark work as published or complete when a required review, test, or human
+5. Never mark work as published or complete when a required review, test, or release
    decision remains outstanding.
 
 ## Source-of-truth order
@@ -27,8 +27,10 @@ procedures under `.agents/skills/`.
 4. Repository conventions and the agent's own role definition (`SOUL.md`).
 5. A well-marked proposal, never an invented fact presented as established canon.
 
-When sources conflict, stop the affected claim, describe the conflict on the
-kanban card, and ask the human story owner for a decision. Do not silently
+When sources conflict, stop the affected claim and describe the conflict on the
+kanban card. The merged editorial role (`mars-ai-simulator-editor`) confirms the
+claim against released canon and records the decision; a conflict that would need
+canon the human has not released goes to the human story owner. Do not silently
 reconcile it.
 
 ## Project source layout
@@ -88,5 +90,5 @@ repeat secrets.
 
 Every handoff states: **result**, **source/timeline step**, **canon impact**,
 **files or assets**, **validation completed**, **review required**, and **next
-action/owner**. A handoff that is ready for human approval includes a short
-release recommendation and the exact proposed public scope.
+action/owner**. A handoff that carries a release recommendation states the exact
+proposed public scope and the decision the editorial role recorded.

@@ -16,7 +16,8 @@ Allowed tools: `hermes kanban create`, `hermes kanban link`, `hermes kanban show
 `hermes kanban comment`, `hermes kanban complete`, and normal repository
 inspection/editing. This skill owns card creation; other skills do not create or
 reassign cards unless they say so. Do not publish, deploy, alter provider
-configuration, or approve canon.
+configuration, or make a canon or release decision — releasability and canon
+confirmation belong to the `mars-ai-simulator-editor` role.
 
 Reject a missing brief, invalid slug, unspecified timeline step, duplicate slug,
 or any request that would reveal private future material.
@@ -34,7 +35,7 @@ the workspace flag is the only scoping a card needs.
 hermes kanban create "Article: <title>" --priority 1 \
   --assignee mars-ai-simulator-planner \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Public-safe article workflow; brief: .agents/work/briefs/<slug>.md; timeline step: <step>. Acceptance: every child card has evidence; editorial review passes; human approval is recorded before deployment."
+  --body "Public-safe article workflow; brief: .agents/work/briefs/<slug>.md; timeline step: <step>. Acceptance: every child card has evidence; the editorial gate is approved and its release decision is recorded before deployment."
 
 hermes kanban create "Research source pack: <slug>" \
   --assignee mars-ai-simulator-planner \
@@ -56,28 +57,26 @@ hermes kanban create "Create visual assets: <slug>" --parent <SEO> \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: assets. Read the brief and draft; write .agents/work/assets/<slug>/assets.md. Acceptance: the manifest records private provenance, placement, alt text, caption, tool, and rights."
 
-hermes kanban create "Continuity check: <slug>" --parent <IMAGES> \
-  --assignee mars-ai-simulator-continuity \
-  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: continuity. Read the draft, the asset manifest, the SEO package, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, and spoiler safety, and write the verdict to .agents/work/continuity/<slug>.md as `return for revision`, `continuity clear`, or `human decision required`. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, and any canon conflict is escalated instead of settled."
-
-hermes kanban create "Editorial final gate: <slug>" --parent <CONTINUITY> \
+hermes kanban create "Editorial final gate: <slug>" --parent <IMAGES> \
   --assignee mars-ai-simulator-editor \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: review. Review article, source pack, and asset manifest; write .agents/work/reviews/<slug>.md. Acceptance: the review is approved with no unresolved material failure, and .agents/work/continuity/<slug>.md records a `continuity clear` for this package."
+  --body "Stage: review. The merged editorial role runs the continuity check and the editorial gate in one pass: read the draft, the source pack, the SEO package, the asset manifest, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, and spoiler safety, then the copy and the published surface. Write the continuity verdict to .agents/work/continuity/<slug>.md and the review to .agents/work/reviews/<slug>.md, and record the release decision on this card. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, the review is approved with no unresolved material failure, and the release decision names the exact public scope."
 
 hermes kanban create "Build and deploy: <slug>" --parent <REVIEW> \
   --assignee mars-ai-simulator-dev \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: deploy. Validate locally after approved review; record approval or the exact deployment blocker. Acceptance: build and preview pass; production deploy completes only with human approval and a verified URL."
+  --body "Stage: deploy. Validate locally after the recorded editorial release decision; record the build result or the exact deployment blocker. Acceptance: build, guard, and preview pass, the release decision is recorded on the review card, and the flip is pushed with a verified URL."
 
 hermes kanban link <RESEARCH> <DRAFT>
 hermes kanban link <DRAFT> <SEO>
 hermes kanban link <SEO> <IMAGES>
-hermes kanban link <IMAGES> <CONTINUITY>
-hermes kanban link <CONTINUITY> <REVIEW>
+hermes kanban link <IMAGES> <REVIEW>
 hermes kanban link <REVIEW> <DEPLOY>
 ```
+
+The editorial gate is one card because continuity verification, the editorial review, and the
+release decision are one role's work (`mars-ai-simulator-editor`). It is the last gate before the
+build card.
 
 **Card direction:** each stage card's `--parent` is the _previous stage_, and the
 article parent card is linked as the child of the final stage
@@ -108,14 +107,13 @@ record; raw candidate files, prompts, and generation records remain in
 | draft      | Draft article        | `mars-ai-simulator-writer`     | `website/news/<slug>.mdx`              |
 | seo        | SEO pass             | `mars-ai-simulator-seo`        | `.agents/work/seo/<slug>.md`           |
 | assets     | Create visual assets | `mars-ai-simulator-visuals`    | `.agents/work/assets/<slug>/assets.md` |
-| continuity | Continuity check     | `mars-ai-simulator-continuity` | `.agents/work/continuity/<slug>.md`    |
-| review     | Editorial final gate | `mars-ai-simulator-editor`     | `.agents/work/reviews/<slug>.md`       |
+| review     | Editorial final gate | `mars-ai-simulator-editor`     | `.agents/work/reviews/<slug>.md` + `.agents/work/continuity/<slug>.md` |
 | deploy     | Build and deploy     | `mars-ai-simulator-dev`        | deployment record on the card          |
 
 Create the artifact templates from the brief at `.agents/work/briefs/<slug>.md`
-during the claimed workflow card. Acceptance checks: the seven child cards carry
+during the claimed workflow card. Acceptance checks: the six child cards carry
 the required assignee profile and stage name; the chain is RESEARCH -> DRAFT -> SEO
--> IMAGES -> CONTINUITY -> REVIEW -> DEPLOY, with six blocking edges; all artifact
+-> IMAGES -> REVIEW -> DEPLOY, with five blocking edges; all artifact
 templates exist.
 Complete the orchestration card only after those checks pass.
 
@@ -135,9 +133,12 @@ moment:
   spoiler facts, the intended alt-text meaning, and the artifact to write
   (`.agents/work/assets/<slug>/assets.md`).
 - The visuals agent owns how the image is rendered, including the local ComfyUI
-  lifecycle: it starts the server for the card (`~/.hermes/bin/comfyctl start`) and
-  stops it before completing (`comfyctl stop`), then reports `comfyctl status` in
-  its handoff so the GPU is free for the next role. The card body may require that
+  lifecycle: it starts the server for the card and stops it before completing
+  (`comfyctl stop`), then reports `comfyctl status` in its handoff so the GPU is
+  free for the next role. The start must land in the server's own systemd unit
+  (`systemd-run --user --unit=comfyui-server … comfyctl start`), never as a child
+  of the worker shell: a worker cgroup is capped at 4 GiB and a 4–8 GB model load
+  inside it gets the worker OOM-killed mid-card. The card body may require that
   state in the handoff but must not dictate prompts or model choices. See the
   profile skill `mars-visual-studio` for the model inventory and pitfalls.
 - Create exactly one IMAGES card per article, and never two image cards that can
@@ -172,17 +173,20 @@ request a corrective card linked as a blocking dependency
 
 ## Approval boundary
 
-An editor's `approved` review passes the editorial gate. It is not approval of
-Red Horizon canon or a public release. The technical task can build and preview
-locally after that gate, but production deployment requires a current explicit
-human approval reference and a verified public URL. The repository contains no
-automation that creates an external deployment.
+The merged editorial role (`mars-ai-simulator-editor`) decides releasability and confirms canon:
+its recorded release decision on the review card is the approval, and no separate human approval
+sentence is needed before an article goes public. What the editorial gate does **not** grant is
+anything outside the released material — making a later timeline step's facts public is new
+scenario canon and stays with the human story owner. The technical card builds, proves the guard,
+and pushes the flip once the release decision is recorded; external actions (deploy commands,
+hosting, DNS, domains, credentials, external media) remain human-only and are listed in
+`AGENTS.md` and `docs/INSTRUCTIONS.md`.
 
 ## Verification
 
 Before completing a workflow-creation card, inspect the parent card and its
-children with `hermes kanban show <id>` and confirm the seven stage cards with
-their assignee profiles, the six blocking edges, and the seven artifact paths. Use
+children with `hermes kanban show <id>` and confirm the six stage cards with
+their assignee profiles, the five blocking edges, and the artifact paths. Use
 `rg` to check Markdown links in the affected documents. Workers record their
 commands and outcomes as card comments and in the repository artifact. The board
 is local to this machine and has no cross-machine sync, so the durable record for

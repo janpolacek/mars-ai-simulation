@@ -24,7 +24,7 @@ guidance.
 | `brand-voice`             | Cross-cutting                                                        | Keep public prose grounded and candid                            |
 | `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice                      | Polish copy without changing canon                               |
 | `create-article-workflow` | Profile `mars-ai-simulator-planner`                                  | Create the serial article task graph                             |
-| `editorial-review`        | Profiles `mars-ai-simulator-editor` + `mars-ai-simulator-continuity` | Run the final editorial gate                                     |
+| `editorial-review`        | Profile `mars-ai-simulator-editor`                                    | Run the continuity check, the final editorial gate, and the release decision |
 | `image-generation`        | Profile `mars-ai-simulator-visuals`                                  | Prepare reviewable visual candidates and metadata                |
 | `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`                                  | Render vehicle references and scenes with the local ComfyUI tool |
 | `project-documentation`   | Owning profile's `SOUL.md`                                           | Revise project guidance and runbooks                             |

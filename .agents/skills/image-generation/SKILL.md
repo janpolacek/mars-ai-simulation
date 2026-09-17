@@ -25,11 +25,28 @@ stable selections are copied out of the generation workspace afterwards, into th
 subject dossier under `docs/` (`docs/vehicle/`, `docs/area/`, or `docs/brand/`) with
 a manifest entry.
 
-Generation runs on this machine's single local GPU. Start the local ComfyUI server
+Generation runs on this machine's single local GPU. Confirm the local ComfyUI server is up
 before the first generation and stop it before completing the card
 (`~/.hermes/profiles/mars-ai-simulator-visuals/bin/comfyctl start|status|stop`, or
 plain `~/.hermes/bin/comfyctl`), and report the final `status` output in the card
-comment. One generation at a time. If the backend is down or a job fails, report
+comment.
+
+Never start that server as a child of your own worker shell. A kanban worker runs in a
+transient scope capped at 4 GiB (`hermes-worker-kanban-<card>-run-<n>.scope`); a server
+started from inside it inherits the cap, and loading a 4–8 GB model there makes the kernel
+memcg OOM-killer kill the worker mid-card (no terminal kanban call, counted as a protocol
+violation — four runs of `t_a9964b8d` died this way on 2026-09-17). Start it in its own
+unit instead, which returns immediately and leaves the server uncapped:
+
+```bash
+systemd-run --user --unit=comfyui-server --collect --property=MemoryAccounting=yes \
+    ~/.hermes/bin/comfyctl start
+~/.hermes/bin/comfyctl status      # running: yes
+```
+
+Do this before the first `image_generate` call as well: that tool auto-starts the server as
+a child of the worker when it is down, which reproduces the same OOM. One generation at a
+time. If the backend is down or a job fails, report
 the failure and the server log tail on the card — never substitute a locally drawn
 or synthesised image, and never describe an image that was not produced. See the
 profile skill `mars-visual-studio` for the model inventory, commands, and pitfalls.
@@ -58,7 +75,7 @@ with the draft. Record file paths and validation as a card comment
 - **A second dispatch of a completed assets stage is a re-validation, not a redo.**
   The reuse determination and the draft stay untouched; what gets corrected is the
   manifest. Re-run every validation row against the live tree and record a dated
-  was/is table — continuity or SEO records may already have flagged the drift and
+  was/is table — the editorial or SEO records may already have flagged the drift and
   routed it to you. Never re-decide the reuse or regenerate to look busy.
 - **Verify alt text against the asset's pixels, and re-check the precedent article
   before leaning on it.** Read the canonical file with a vision pass and confirm

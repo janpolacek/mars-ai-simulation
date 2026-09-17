@@ -45,11 +45,18 @@ moment out.
 ## Run
 
 ```sh
-comfyctl start                    # ~/.hermes/bin/comfyctl — before the first generation
+# A kanban worker runs in a 4 GiB-capped systemd scope (hermes-worker-kanban-<card>-run-<n>.scope):
+# starting the server as a child of this shell loads a 4–8 GB model inside that cap and the kernel
+# OOM-kills the worker mid-card (four runs of t_a9964b8d died this way, 2026-09-17). Own unit:
+systemd-run --user --unit=comfyui-server --collect --property=MemoryAccounting=yes comfyctl start
+comfyctl status                   # ~/.hermes/bin/comfyctl — confirm running: yes
 cd tools/visual-generator
 python3 -u scripts/generate_story_set_via_api.py --server http://127.0.0.1:8188 --stage scenes
 comfyctl stop                     # before completing the card; releases the GPU
 ```
+
+Never `systemd-run --scope` for this — that form blocks in the foreground until the server dies.
+Keep the alias in mind: `~/.hermes/bin/comfyctl` only resolves when `~/.hermes/bin` is on PATH.
 
 - Stages: `canonical`, `angles`, `references`, `scenes`, `all`. Narrow with `--vehicle <slug>`.
 - Spec: `--spec path/to/spec.json`, default `./spec.json` (scratch). Shape: `README.md > Job spec`.

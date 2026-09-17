@@ -6,11 +6,12 @@ description: Validate a reviewed article in the Astro site and prepare, but neve
 # Site deployment
 
 Required inputs: the claimed kanban card, an editorial review whose final status
-is `approved`, the article, asset manifest, a human canon/release approval
-reference, and the repository deployment configuration. Read `AGENTS.md`,
+is `approved`, the article, asset manifest, the recorded release decision on the
+gate card, and the repository deployment configuration. Read `AGENTS.md`,
 `docs/INSTRUCTIONS.md`, and your own role definition (your agent's `SOUL.md`; the
-`mars-ai-simulator-dev` profile owns site work) first. No agent holds release authority: any deploy needs a
-current, explicit human instruction.
+`mars-ai-simulator-dev` profile owns site work) first. The release authority is the merged
+editorial role (`mars-ai-simulator-editor`); the deploy *action* stays out of every agent's
+reach — no `wrangler deploy`, no hosting account, no DNS, no credentials.
 
 Allowed tools: local schema checks, `fnm use`, local build/preview commands,
 repository inspection, and the `hermes kanban` worker commands (`show`, `claim`,
@@ -22,21 +23,21 @@ corrective card.
 Write validation evidence as a card comment (`hermes kanban comment <id> "..."`)
 and in the repository artifact: schema/front-matter result, build
 command/result, preview verification of title/body/images/alt text, source
-commit, and any proposed deployment inputs. When explicit human deployment
-authority exists, record its reference and the verified URL; otherwise record the
-exact missing approval and never deploy.
+commit, and any proposed deployment inputs. The production deploy is the push to `main`
+once the card carries the editorial release decision: record that decision's card, the
+commit SHA, and the verified URL. Without it, record the exact missing decision and never publish.
 
-Reject an unapproved review, missing human approval, failed build, failed preview,
+Reject an unapproved review, a missing editorial release decision, failed build, failed preview,
 or missing asset/alt-text evidence. Acceptance checks require a successful local
-build and preview plus explicit approval and verified URL for a production deploy.
+build and preview plus the recorded release decision and verified URL for a production deploy.
 Never complete a deployment card with a merely assumed approval.
 
 A deploy-stage card that sits inside an article graph ends with the blocker
 recorded, not with `block`: the article parent card is its child, so blocking
 strands the whole graph while the local acceptance ("build and preview pass;
-production deploy only with human approval and a verified URL") is already met.
-Say plainly that no production deploy ran, list the exact human decisions still
-missing, and name the command a human-authorised release would run. The deploy
+production deploy only with the recorded release decision and a verified URL") is already met.
+Say plainly that no production deploy ran, list the exact decision still missing (a canon
+question only the human story owner can release), and name the command a released card would run. The deploy
 stage's prescribed artifact is the deployment record on the card itself.
 
 ## Verified practice

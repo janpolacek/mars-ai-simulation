@@ -20,7 +20,7 @@ deployment. This purpose is stated plainly on the site's About/Method page and
 linked in every public-page footer.
 
 The harness that runs it — the role roster, the tools and models, how work is
-tracked, and where the human gates are — is described in
+tracked, and where the release decision sits — is described in
 [The agent harness](HARNESS.md).
 
 ## Audience and public experience
@@ -76,12 +76,13 @@ is only the shared vocabulary.
 | `scenario`   | Private possible/approved future event     | No                               |
 | `proposal`   | Agent work awaiting review                 | No                               |
 | `draft`      | Edited candidate, not yet approved         | No                               |
-| `approved`   | Human-selected canon and asset             | Not until scheduled              |
+| `approved`   | Canon confirmed and released by `mars-ai-simulator-editor` | Not until scheduled              |
 | `published`  | Released public content                    | Yes                              |
 | `superseded` | Replaced by a correction or later decision | Keep only with an editorial note |
 
 The private timeline is the authoritative order of events. A public page is
-canonical only after human approval. Never reveal later milestones, prompt text,
+canonical once `mars-ai-simulator-editor` has confirmed it against released canon and
+recorded the release decision. Never reveal later milestones, prompt text,
 unselected images, experimental videos, or hidden decision notes through public
 content, page metadata, GitHub deployment artifacts, filenames, or alt text.
 

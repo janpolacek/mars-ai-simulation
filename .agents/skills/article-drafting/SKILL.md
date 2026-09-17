@@ -61,7 +61,7 @@ card comment (`hermes kanban comment <id> "..."`) and in
   (`plateCaptionText`) already joins the plate label, the registry's provenance sentence
   and any per-plate `captionNote` onto the article's own caption; writing the provenance
   into `mediaCaption` prints it twice. Verify the rendered caption, not the frontmatter
-  text, and say so in the handoff so continuity does not hunt for it.
+  text, and say so in the handoff so the editorial gate does not hunt for it.
 - **An unpublished article body is never compiled.** The detail route is release-gated
   (`src/lib/releases.ts`), so a `publication: published` body is not rendered by
   `astro build` and MDX syntax errors in it stay invisible. To render one, copy `website/`
@@ -81,3 +81,13 @@ card comment (`hermes kanban comment <id> "..."`) and in
   fails on fixture strings that are not your article and a component file's mtime is
   seconds old, re-run, note the mtime, and flag the file as a hotspot on the card rather
   than "fixing" someone else's component.
+- **A stub can arrive declaring a media key the registry does not have yet.** A planning
+  stub may carry `media: <key>` for a plate no site card has wired, and `newsMediaKeys`
+  (`src/lib/media.ts`) fails the content schema, so `astro build` stops with
+  `InvalidContentEntryDataError: … media must be one of: …` before any page renders (and the
+  authoring card owns the red build, not the site card). The fail-closed draft state is **no
+  `media` key at all** — the release record's Gate 1 default, amber `news-placeholder` — with
+  the alt text and label left in the asset manifest for the release card. For a plate under
+  `docs/vehicle/` the site card that registers the key also needs a `guards.mjs` repair:
+  `vehicle` is a gated directory name, so the resolver's import fails `check-dist`'s source
+  scan. Report that dependency on the card instead of registering the key yourself.
