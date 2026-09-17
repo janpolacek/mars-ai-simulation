@@ -33,6 +33,7 @@ import { afterAll, describe, expect, it } from 'vitest';
 
 import { listFiles, listRoutes, projectDirectory, websiteDirectory } from '../scripts/guards.mjs';
 import { headerNavigation, navigation } from '../src/lib/navigation';
+import { site } from '../src/lib/site';
 import {
     groupWikiBySection,
     selectPublicWiki,
@@ -106,9 +107,18 @@ describe('the wiki selection', () => {
         expect(selectPublicWiki([])).toEqual([]);
     });
 
-    it('names the tree sections, and labels each from its own name', () => {
+    it('names the tree sections, and labels each with its approved public label', () => {
         expect([...wikiSections]).toEqual(['area', 'vehicle', 'project']);
-        expect(wikiSections.map((section) => wikiSectionLabel(section))).toEqual(['Area', 'Vehicle', 'Project']);
+        // The approved label set, written out: the section value stays the URL
+        // key, the label is the wording every naming surface renders. The label
+        // set is reviewed copy (`.agents/work/reviews/wiki-index-metadata.md`,
+        // the human story owner's settlement for `area`), so it moves only by
+        // editorial decision — this assertion is what makes such a move visible.
+        expect(wikiSections.map((section) => wikiSectionLabel(section))).toEqual([
+            'Landing Zones',
+            'Vehicles',
+            'Project',
+        ]);
     });
 
     it('groups a published selection by section and drops empty sections', () => {
@@ -338,6 +348,28 @@ function wikiTitleHrefs(html) {
         .map((tag) => tag.match(/href="([^"]+)"/)?.[1]);
 }
 
+/** Read one built route out of a build's `dist/` directory. */
+function readBuiltRoute(dist, route) {
+    return readFile(join(dist, ...route.split('/').filter(Boolean)), 'utf8');
+}
+
+/**
+ * Every `<title>` in a built document. The site renders one per document, in
+ * `<head>` (`BaseLayout.astro`) and no other — there is no inline `<svg><title>`
+ * anywhere in `src/` — so a count over the whole document is the document's own
+ * title count, and a second one is a defect rather than a false alarm.
+ */
+function documentTitles(html) {
+    return [...html.matchAll(/<title>([\s\S]*?)<\/title>/g)].map((match) => match[1]);
+}
+
+/** The `content` of every `<meta name="description">`, whatever the attribute order. */
+function metaDescriptions(html) {
+    return [...html.matchAll(/<meta\b[^>]*>/g)]
+        .filter((match) => /\bname="description"/.test(match[0]))
+        .map((match) => match[0].match(/\bcontent="([^"]*)"/)?.[1] ?? '');
+}
+
 describe('the built wiki tree', () => {
     it('routes the published pages, and no page the publication gate holds back', async () => {
         const fixture = await fixtureBuild();
@@ -435,6 +467,175 @@ describe('the built wiki tree', () => {
         }
     }, fixtureBuildTimeout);
 
+    /*
+     * The reviewed index metadata, asserted on the built output rather than on
+     * the module it comes from: a string that is right in
+     * `src/lib/wiki-query.ts` and wrong in the document a reader receives is
+     * exactly the defect these cases exist to catch. The expectations are
+     * written out byte-for-byte from the review record
+     * (`.agents/work/reviews/wiki-index-metadata.md` §3) so that a label or
+     * description that changes fails here instead of re-deriving itself.
+     */
+    const approvedIndexMetadata = new Map([
+        [
+            '/wiki/',
+            {
+                title: 'Wiki | Red Horizon',
+                description: 'Reference pages for Red Horizon, a fictional Mars exploration project.',
+            },
+        ],
+        [
+            '/wiki/area/',
+            {
+                title: 'Landing Zones | Red Horizon',
+                description:
+                    'Published reference pages about landing zones in the fictional Red Horizon Mars exploration project.',
+            },
+        ],
+        [
+            '/wiki/vehicle/',
+            {
+                title: 'Vehicles | Red Horizon',
+                description:
+                    'Published reference pages about vehicles in the fictional Red Horizon Mars exploration project.',
+            },
+        ],
+        [
+            '/wiki/project/',
+            {
+                title: 'Project | Red Horizon',
+                description: 'Published reference pages about the fictional Red Horizon Mars exploration project.',
+            },
+        ],
+    ]);
+
+    /** The approved public label of each section, from the same review record. */
+    const approvedSectionLabels = { area: 'Landing Zones', vehicle: 'Vehicles', project: 'Project' };
+
+    it('renders the approved root index metadata, title unchanged and description explicit', async () => {
+        const fixture = await fixtureBuild();
+        const html = await readBuiltRoute(fixture.dist, '/wiki/index.html');
+        const approved = approvedIndexMetadata.get('/wiki/');
+
+        expect(documentTitles(html)).toEqual([approved.title]);
+        expect(metaDescriptions(html)).toEqual([approved.description]);
+        expect(html, 'the root index still inherits the site default description').not.toContain(
+            site.defaultDescription,
+        );
+    }, fixtureBuildTimeout);
+
+    it('renders the approved metadata and the approved label on every section index in the build', async () => {
+        const fixture = await fixtureBuild();
+        const sections = [fixtureVehicleControl.section, fixtureProjectControl.section];
+
+        // Non-vacuity: a loop over the sections the fixture publishes is worth
+        // nothing if it publishes none.
+        expect(sections.length, 'the fixture publishes no section page').toBeGreaterThan(0);
+
+        for (const section of sections) {
+            const html = await readBuiltRoute(fixture.dist, `/wiki/${section}/index.html`);
+            const approved = approvedIndexMetadata.get(`/wiki/${section}/`);
+            const label = approvedSectionLabels[section];
+
+            expect(documentTitles(html), `${section} index title`).toEqual([approved.title]);
+            expect(metaDescriptions(html), `${section} index description`).toEqual([approved.description]);
+            expect(html, `${section} index H1`).toContain(`>${label}</h1>`);
+            expect(html, `${section} index still renders the superseded title formula`).not.toContain(
+                ' wiki | Red Horizon',
+            );
+            expect(html, `${section} index still inherits the site default description`).not.toContain(
+                site.defaultDescription,
+            );
+        }
+    }, fixtureBuildTimeout);
+
+    it('names every section with its approved label on the root index', async () => {
+        const indexHtml = await readBuiltRoute((await fixtureBuild()).dist, '/wiki/index.html');
+
+        for (const section of ['vehicle', 'project']) {
+            const label = approvedSectionLabels[section];
+
+            expect(indexHtml, `the root index does not name ${section} "${label}"`).toContain(`>${label}</a>`);
+            expect(indexHtml, `the root index names ${section} by its URL segment`).not.toContain(`>${section}</a>`);
+        }
+    }, fixtureBuildTimeout);
+
+    it("names a leaf page's section with the approved label, not the URL segment", async () => {
+        const fixture = await fixtureBuild();
+        const html = await readBuiltRoute(
+            fixture.dist,
+            `/wiki/${fixtureVehicleControl.section}/${fixtureVehicleControl.slug}/index.html`,
+        );
+        const breadcrumb = html.match(/<p\b[^>]*class="wiki-breadcrumb"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
+        const breadcrumbText = collapse(stripMarkup(breadcrumb));
+
+        expect(breadcrumbText, 'the leaf page has no breadcrumb').not.toBe('');
+        expect(breadcrumbText).toContain(approvedSectionLabels[fixtureVehicleControl.section]);
+        expect(breadcrumbText, 'the breadcrumb still prints the URL segment').not.toContain(
+            fixtureVehicleControl.section,
+        );
+    }, fixtureBuildTimeout);
+
+    it("serves a writer's summary byte-for-byte as the leaf description, never truncated", async () => {
+        const fixture = await fixtureBuild();
+        const html = await readBuiltRoute(
+            fixture.dist,
+            `/wiki/${fixtureVehicleControl.section}/${fixtureVehicleControl.slug}/index.html`,
+        );
+
+        // The summary is read out of the fixture page's own frontmatter, so the
+        // comparison runs file -> built document and would catch a build step
+        // that reflowed or shortened the writer's text on the way through. A
+        // summary past the 155-char description target is a copy question for
+        // the page's owner: it is reported on the card, never shortened here.
+        const source = await readFile(join(fixture.wiki, `${fixtureVehicleControl.slug}.mdx`), 'utf8');
+        const summary = source.match(/^summary: '(.*)'$/m)?.[1] ?? '';
+
+        expect(summary, 'the fixture page carries no summary to compare').not.toBe('');
+        expect(summary.length, `${fixtureVehicleControl.slug} is over the description target`).toBeLessThanOrEqual(
+            155,
+        );
+        expect(metaDescriptions(html)).toEqual([summary]);
+        expect(collapse(stripMarkup(html))).toContain(summary);
+    }, fixtureBuildTimeout);
+
+    it('gives every wiki document exactly one non-empty title and description, all distinct', async () => {
+        const fixture = await fixtureBuild();
+        const { routes } = await fixtureOutput(fixture.dist);
+        const wikiRoutes = routes.filter((route) => route.startsWith('/wiki/'));
+        const titles = [];
+        const descriptions = [];
+
+        // Non-vacuity: a uniqueness check over an empty route list passes for
+        // the wrong reason.
+        expect(wikiRoutes.length, 'the fixture build emitted no wiki document').toBeGreaterThan(1);
+
+        for (const route of wikiRoutes) {
+            const html = await readBuiltRoute(fixture.dist, route);
+            const documentTitle = documentTitles(html);
+            const documentDescription = metaDescriptions(html);
+
+            expect(documentTitle, `${route} does not carry exactly one <title>`).toHaveLength(1);
+            expect(documentDescription, `${route} does not carry exactly one meta description`).toHaveLength(1);
+            expect(documentTitle[0].trim(), `${route} has a blank <title>`).not.toBe('');
+            expect(documentDescription[0].trim(), `${route} has a blank description`).not.toBe('');
+            expect(documentTitle[0], `${route} title is missing the site suffix`).toMatch(/ \| Red Horizon$/);
+
+            titles.push(documentTitle[0]);
+            descriptions.push(documentDescription[0]);
+        }
+
+        // The schema accepts blank and duplicate strings (`content.config.ts`),
+        // so the built output is where they become visible: two indexes sharing
+        // a title are indistinguishable in a result list, and a blank one is
+        // nothing at all.
+        expect(new Set(titles).size, `duplicate built titles among ${titles.join(' / ')}`).toBe(titles.length);
+        expect(
+            new Set(descriptions).size,
+            `duplicate built descriptions among ${descriptions.join(' / ')}`,
+        ).toBe(descriptions.length);
+    }, fixtureBuildTimeout);
+
     it('renders the wiki entry in the header and the footer of every wiki route', async () => {
         const fixture = await fixtureBuild();
         const { routes } = await fixtureOutput(fixture.dist);
@@ -475,6 +676,16 @@ describe('the built wiki tree', () => {
         expect(indexAfter, 'the new section did not appear').toContain('href="/wiki/area/"');
         expect(routes).toContain('/wiki/area/index.html');
         expect(routes).toContain(`/wiki/area/${fixtureAddedPage.slug}/index.html`);
+
+        // The `area` label is the row the human story owner settled after this
+        // suite was written, so the section index its first page builds is
+        // asserted for it too: title, H1 and description.
+        const areaHtml = await readBuiltRoute(fixture.dist, '/wiki/area/index.html');
+        const approvedArea = approvedIndexMetadata.get('/wiki/area/');
+
+        expect(documentTitles(areaHtml)).toEqual([approvedArea.title]);
+        expect(metaDescriptions(areaHtml)).toEqual([approvedArea.description]);
+        expect(areaHtml).toContain(`>${approvedSectionLabels.area}</h1>`);
 
         // Additive: the pages the first build listed are still listed, so the
         // difference really is the one new entry.

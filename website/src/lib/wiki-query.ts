@@ -1,6 +1,7 @@
 /**
- * The wiki tree: its sections, its publication rule, and the grouping and
- * cross-link helpers every surface renders.
+ * The wiki tree: its sections, the labels and descriptions its surfaces render,
+ * its publication rule, and the grouping and cross-link helpers every surface
+ * consumes.
  *
  * Kept free of `astro:content` imports so the rules can be unit-tested against
  * fixtures, exactly as `src/lib/publication.ts` is: a `publication: draft` page
@@ -51,14 +52,48 @@ export function isWikiSection(value: string): value is WikiSection {
 }
 
 /**
- * The public label for a section, derived from the section name itself rather
- * than from a second, hand-written string list: the section value is already
- * the settled vocabulary (`area`, `vehicle`, `project`), and a label that could
- * drift from it is a page that could disagree with its own URL.
+ * The public label for each section: the reviewed wording the tree renders
+ * wherever it *names* a section — the root index's group heading, a section
+ * index's title and `H1`, and a leaf page's breadcrumb — while the section
+ * value stays the URL key (`area`, `vehicle`, `project`). One definition, so
+ * those surfaces cannot disagree about what a section is called, and a label
+ * cannot drift from the section it labels without changing this map.
+ *
+ * Reviewed wording. `Landing Zones` is the human story owner's settled term for
+ * `area` (2026-09-17); `Vehicles` and `Project` are the editorial gate's
+ * approved labels. Do not paraphrase or re-punctuate.
  */
+export const wikiSectionLabels: Record<WikiSection, string> = {
+    area: 'Landing Zones',
+    vehicle: 'Vehicles',
+    project: 'Project',
+};
+
+/** The public label for a section, wherever the tree names one. */
 export function wikiSectionLabel(section: WikiSection): string {
-    return `${section.charAt(0).toUpperCase()}${section.slice(1)}`;
+    return wikiSectionLabels[section];
 }
+
+/**
+ * The document description of each section index, and of the tree's root index
+ * — reviewed and approved as one set, one definition per string, so a built
+ * `<meta name="description">` is byte-for-byte the reviewed wording and no page
+ * composes its own fallback.
+ *
+ * The three section descriptions share one frame deliberately: a section index
+ * exists only when it lists at least one published page
+ * (`wikiSectionsWithPages`), so `Published …` is true there, whereas the root
+ * index is live with an empty listing and must not claim one — it states the
+ * collection's purpose instead.
+ */
+export const wikiSectionDescriptions: Record<WikiSection, string> = {
+    area: 'Published reference pages about landing zones in the fictional Red Horizon Mars exploration project.',
+    vehicle: 'Published reference pages about vehicles in the fictional Red Horizon Mars exploration project.',
+    project: 'Published reference pages about the fictional Red Horizon Mars exploration project.',
+};
+
+/** The root index's document description, which promises no inventory. */
+export const wikiIndexDescription = 'Reference pages for Red Horizon, a fictional Mars exploration project.';
 
 /** One section and the published pages it holds, empty sections removed. */
 export interface WikiSectionGroup<T> {

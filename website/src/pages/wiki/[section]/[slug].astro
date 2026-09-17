@@ -10,7 +10,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isNewsMediaKey } from '../../../lib/media';
 import { routes } from '../../../lib/navigation';
 import { site } from '../../../lib/site';
-import { selectRelatedWiki } from '../../../lib/wiki-query';
+import { selectRelatedWiki, wikiSectionLabel } from '../../../lib/wiki-query';
 
 /**
  * One published wiki page: its title and summary, the media its `media:` key
@@ -24,6 +24,10 @@ import { selectRelatedWiki } from '../../../lib/wiki-query';
  *
  * `related` is resolved against the published selection, so an id naming an
  * unknown or withheld page renders no link instead of a dead one.
+ *
+ * The breadcrumb names the section with the same approved label the indexes
+ * name it with (`wikiSectionLabel`), not the raw URL segment, so a leaf page
+ * cannot call its section something the index that lists it does not.
  */
 export async function getStaticPaths() {
     const entries = await getPublishedWiki();
@@ -50,7 +54,7 @@ const { Content } = await render(entry);
         <p class="wiki-breadcrumb">
             <a href={routes.wiki}>{site.name} wiki</a>
             <span>·</span>
-            <a href={routes.wikiSection(entry.data.section)}>{entry.data.section}</a>
+            <a href={routes.wikiSection(entry.data.section)}>{wikiSectionLabel(entry.data.section)}</a>
         </p>
         <header class="wiki-header">
             <h1 id="wiki-title">{entry.data.title}</h1>

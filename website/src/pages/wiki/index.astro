@@ -4,7 +4,7 @@ import { getPublishedWiki } from '../../features/wiki/query';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { routes } from '../../lib/navigation';
 import { site } from '../../lib/site';
-import { groupWikiBySection, wikiSectionLabel } from '../../lib/wiki-query';
+import { groupWikiBySection, wikiIndexDescription, wikiSectionLabel } from '../../lib/wiki-query';
 
 /**
  * The wiki tree's root index: every published page, grouped by section.
@@ -17,12 +17,14 @@ import { groupWikiBySection, wikiSectionLabel } from '../../lib/wiki-query';
  *
  * Copy: the heading is the tree's own name and the eyebrow is the programme
  * name, both of which already exist; the wiki's authoring voice belongs to the
- * wiki content cards, not to this route.
+ * wiki content cards, not to this route. The title and the description are the
+ * reviewed index strings (`src/lib/wiki-query.ts`), passed explicitly rather
+ * than inherited from the site defaults.
  */
 const groups = groupWikiBySection(await getPublishedWiki());
 ---
 
-<BaseLayout title={`Wiki | ${site.name}`}>
+<BaseLayout title={`Wiki | ${site.name}`} description={wikiIndexDescription}>
     <section class="wiki-index" aria-labelledby="wiki-index-title">
         <div class="section-heading">
             <SectionHeading eyebrow={site.name} title="Wiki" titleId="wiki-index-title" level={1} />

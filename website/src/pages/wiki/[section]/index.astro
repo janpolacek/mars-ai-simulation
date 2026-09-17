@@ -4,7 +4,7 @@ import { getPublishedWiki } from '../../../features/wiki/query';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { routes } from '../../../lib/navigation';
 import { site } from '../../../lib/site';
-import { groupWikiBySection, wikiSectionLabel } from '../../../lib/wiki-query';
+import { groupWikiBySection, wikiSectionDescriptions, wikiSectionLabel } from '../../../lib/wiki-query';
 
 /**
  * One section index: the published pages of that section only.
@@ -15,6 +15,11 @@ import { groupWikiBySection, wikiSectionLabel } from '../../../lib/wiki-query';
  * error route instead of an empty page carrying a heading over no content. The
  * sibling leaf routes are generated from the same array, so this index cannot
  * list a page that has no route, or omit one that has.
+ *
+ * The title is the approved section label plus the site suffix, and the
+ * description is that section's reviewed string (`src/lib/wiki-query.ts`): the
+ * label names the section here exactly as the root index names it, and neither
+ * is inherited from the site defaults.
  */
 export async function getStaticPaths() {
     const groups = groupWikiBySection(await getPublishedWiki());
@@ -27,7 +32,10 @@ const group = groups.find((candidate) => candidate.section === section);
 const entries = group?.entries ?? [];
 ---
 
-<BaseLayout title={`${wikiSectionLabel(section)} wiki | ${site.name}`}>
+<BaseLayout
+    title={`${wikiSectionLabel(section)} | ${site.name}`}
+    description={wikiSectionDescriptions[section]}
+>
     <section class="wiki-section" aria-labelledby="wiki-section-title">
         <p class="wiki-breadcrumb">
             <a href={routes.wiki}>{site.name} wiki</a>
