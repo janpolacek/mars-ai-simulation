@@ -17,7 +17,7 @@ Allowed tools: `hermes kanban create`, `hermes kanban link`, `hermes kanban show
 inspection/editing. This skill owns card creation; other skills do not create or
 reassign cards unless they say so. Do not publish, deploy, alter provider
 configuration, or make a canon or release decision — releasability and canon
-confirmation belong to the `mars-ai-simulator-editor` role.
+confirmation belong to the `mars-ai-simulator-reviewer` role.
 
 Reject a missing brief, invalid slug, unspecified timeline step, duplicate slug,
 or any request that would reveal private future material.
@@ -47,20 +47,15 @@ hermes kanban create "Draft article: <slug>" --parent <RESEARCH> \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: draft. Read the brief and source pack; prepare website/news/<slug>.mdx. Acceptance: the article preserves draft status and traces every material claim to the source pack. Leave the simulated record date unset: the editorial gate assigns it from docs/SCENARIO.md, and a value chosen here is not binding."
 
-hermes kanban create "SEO pass: <slug>" --parent <DRAFT> \
-  --assignee mars-ai-simulator-seo \
-  --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: seo. Read the draft, the brief, and the source pack; review reader intent, title, meta description, slug, heading order, internal links, and structured data, and write the package to .agents/work/seo/<slug>.md. Apply only the metadata you own (title, description, slug, heading order, internal links) in website/news/<slug>.mdx. Acceptance: one clear reader intent, honest metadata, no keyword stuffing, no later-step disclosure in metadata, and every change recorded in the package."
-
-hermes kanban create "Create visual assets: <slug>" --parent <SEO> \
+hermes kanban create "Create visual assets: <slug>" --parent <DRAFT> \
   --assignee mars-ai-simulator-visuals \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
   --body "Stage: assets. Read the brief and draft; write .agents/work/assets/<slug>/assets.md. Acceptance: the manifest records private provenance, placement, alt text, caption, tool, and rights."
 
 hermes kanban create "Editorial final gate: <slug>" --parent <IMAGES> \
-  --assignee mars-ai-simulator-editor \
+  --assignee mars-ai-simulator-reviewer \
   --workspace dir:/home/janpolacek/Projects/mars-ai-simulator \
-  --body "Stage: review. The merged editorial role runs the continuity check and the editorial gate in one pass: read the draft, the source pack, the SEO package, the asset manifest, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, and spoiler safety, then the copy and the published surface. Assign the article's simulated record date (frontmatter simulatedDate) from the milestone table in docs/SCENARIO.md that the released step covers, verify it on the built page, and name the milestone line in the record. Write the continuity verdict to .agents/work/continuity/<slug>.md and the review to .agents/work/reviews/<slug>.md, and record the release decision on this card. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, the article carries a record date drawn from a locked milestone line, the review is approved with no unresolved material failure, and the release decision names the exact public scope."
+  --body "Stage: review. The reviewer-in-chief runs the continuity check and editorial gate in one pass: read the draft with its integrated SEO package, the source pack, the asset manifest, the released timeline step, and docs/SCENARIO.md; verify chronology, canon consistency, plausibility, spoiler safety, copy, and the published surface. Assign the article's simulated record date (frontmatter simulatedDate) from the milestone table in docs/SCENARIO.md that the released step covers, verify it on the built page, and name the milestone line in the record. Write the continuity verdict to .agents/work/continuity/<slug>.md and the review to .agents/work/reviews/<slug>.md, and record the release decision on this card. Acceptance: every claim agrees with the released step and the scenario, no later-step fact or Asteria Field detail appears, the article carries a record date drawn from a locked milestone line, the review is approved with no unresolved material failure, and the release decision names the exact public scope."
 
 hermes kanban create "Build and deploy: <slug>" --parent <REVIEW> \
   --assignee mars-ai-simulator-dev \
@@ -68,14 +63,13 @@ hermes kanban create "Build and deploy: <slug>" --parent <REVIEW> \
   --body "Stage: deploy. Validate locally after the recorded editorial release decision; record the build result or the exact deployment blocker. Acceptance: build, guard, and preview pass, the release decision is recorded on the review card, the built page states the article's simulated record date under its in-fiction label, and the flip is pushed with a verified URL."
 
 hermes kanban link <RESEARCH> <DRAFT>
-hermes kanban link <DRAFT> <SEO>
-hermes kanban link <SEO> <IMAGES>
+hermes kanban link <DRAFT> <IMAGES>
 hermes kanban link <IMAGES> <REVIEW>
 hermes kanban link <REVIEW> <DEPLOY>
 ```
 
 The editorial gate is one card because continuity verification, the editorial review, and the
-release decision are one role's work (`mars-ai-simulator-editor`). It is the last gate before the
+release decision are one role's work (`mars-ai-simulator-reviewer`). It is the last gate before the
 build card.
 
 **Card direction:** each stage card's `--parent` is the _previous stage_, and the
@@ -92,8 +86,8 @@ re-spawning the coordinator on the epic.
 The Article container card is created by the commission run alongside its graph,
 so the worker that later picks the container up does **not** create the graph —
 it verifies that one already exists. The default behaviour is fail-closed: on
-claim, the worker reads each child with `hermes kanban show`, checks the five
-blocking edges RESEARCH→DRAFT→SEO→IMAGES→REVIEW→DEPLOY, confirms the artifact
+claim, the worker reads each child with `hermes kanban show`, checks the four
+blocking edges RESEARCH→DRAFT→IMAGES→REVIEW→DEPLOY, confirms the artifact
 paths exist on disk, and closes the container with `kanban_complete` (or
 `kanban_block` if a gate answer is genuinely missing), **creating nothing**.
 
@@ -141,19 +135,18 @@ export.
 
 ## Required outputs
 
-| Stage    | Card                 | Assignee profile            | Artifact                                                               |
-| -------- | -------------------- | --------------------------- | ---------------------------------------------------------------------- |
-| research | Research source pack | `mars-ai-simulator-planner` | `.agents/work/sources/<slug>.md`                                       |
-| draft    | Draft article        | `mars-ai-simulator-writer`  | `website/news/<slug>.mdx`                                              |
-| seo      | SEO pass             | `mars-ai-simulator-seo`     | `.agents/work/seo/<slug>.md`                                           |
-| assets   | Create visual assets | `mars-ai-simulator-visuals` | `.agents/work/assets/<slug>/assets.md`                                 |
-| review   | Editorial final gate | `mars-ai-simulator-editor`  | `.agents/work/reviews/<slug>.md` + `.agents/work/continuity/<slug>.md` |
-| deploy   | Build and deploy     | `mars-ai-simulator-dev`     | deployment record on the card                                          |
+| Stage    | Card                 | Assignee profile             | Artifact                                                               |
+| -------- | -------------------- | ---------------------------- | ---------------------------------------------------------------------- |
+| research | Research source pack | `mars-ai-simulator-planner`  | `.agents/work/sources/<slug>.md`                                       |
+| draft    | Draft article        | `mars-ai-simulator-writer`   | `website/news/<slug>.mdx`                                              |
+| assets   | Create visual assets | `mars-ai-simulator-visuals`  | `.agents/work/assets/<slug>/assets.md`                                 |
+| review   | Editorial final gate | `mars-ai-simulator-reviewer` | `.agents/work/reviews/<slug>.md` + `.agents/work/continuity/<slug>.md` |
+| deploy   | Build and deploy     | `mars-ai-simulator-dev`      | deployment record on the card                                          |
 
 Create the artifact templates from the brief at `.agents/work/briefs/<slug>.md`
-during the claimed workflow card. Acceptance checks: the six child cards carry
-the required assignee profile and stage name; the chain is RESEARCH -> DRAFT -> SEO
--> IMAGES -> REVIEW -> DEPLOY, with five blocking edges; all artifact
+during the claimed workflow card. Acceptance checks: the five child cards carry
+the required assignee profile and stage name; the chain is RESEARCH -> DRAFT
+-> IMAGES -> REVIEW -> DEPLOY, with four blocking edges; all artifact
 templates exist.
 Complete the orchestration card only after those checks pass.
 
@@ -234,7 +227,7 @@ request a corrective card linked as a blocking dependency
 
 ## Approval boundary
 
-The merged editorial role (`mars-ai-simulator-editor`) decides releasability and confirms canon:
+The reviewer-in-chief role (`mars-ai-simulator-reviewer`) decides releasability and confirms canon:
 its recorded release decision on the review card is the approval, and no separate human approval
 sentence is needed before an article goes public. What the editorial gate does **not** grant is
 anything outside the released material — making a later timeline step's facts public is new

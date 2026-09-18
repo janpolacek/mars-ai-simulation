@@ -10,8 +10,8 @@ exists. Role authority lives with the agent, not in this repository; the
 The private mission timeline (`docs/timeline/`) is continuity material only: never
 place its unreleased content in public routes, metadata, assets, or summaries.
 
-Agents prepare bounded, reviewable deliverables. The merged editorial role
-(`mars-ai-simulator-editor`, editor-in-chief) alone decides whether a package is
+Agents prepare bounded, reviewable deliverables. The reviewer-in-chief role
+(`mars-ai-simulator-reviewer`) alone decides whether a package is
 releasable and confirms it against released canon: no human approval is required for
 an article's releasability or canon confirmation, and its recorded release decision on
 the card is that approval. A human alone authors new scenario canon, advances the
@@ -35,11 +35,11 @@ services without a separate current human instruction.
   (`hermes kanban comment <id> "..."`), never only in chat.
 - Cite a canonical source for every material factual claim.
 - Editorial approval is required before technical validation, and that approval is
-  the release decision: `mars-ai-simulator-editor` confirms canon and records the
+  the release decision: `mars-ai-simulator-reviewer` confirms canon and records the
   release, so no separate human approval is needed before a public deployment.
 - Every published news article carries one **simulated record date** — the date, inside
   the fiction, on which the article was written. It is the frontmatter field `simulatedDate`,
-  and `mars-ai-simulator-editor` alone assigns and verifies it, from the milestone table in
+  `simulatedDate`, and `mars-ai-simulator-reviewer` alone assigns and verifies it, from the milestone table in
   `docs/SCENARIO.md` for the step being released. A date that table does not hold is new
   scenario canon and stays with the human story owner; a missing value is a gap to name, not
   a value to invent. The published surface states the date under a label that presents it as
@@ -113,12 +113,12 @@ This task-tracking guidance is not permission to override repository, user, or
 orchestrator instructions.
 
 - **Conservative (default)**: Use the Hermes kanban board for task tracking. Do not run git commits or git pushes unless explicitly asked. At handoff, report changed files, validation, suggested next commands, and the proposed card status.
-- **Developer role (`mars-ai-simulator-dev`) — explicit current human instruction, 2026-09-17**: the developer commits and pushes its own card's scoped change as part of finishing the card; a card dispatched to that role is the clear authority to commit and push, with no further approval step. Stage only the paths the card touched, put the card id in the commit message, rebase before pushing, and report the commit SHA and push result on the card. Every other role keeps the conservative default above. A push is not inert: `main` is wired to the
+- **Developer role (`mars-ai-simulator-dev`) — explicit current human instruction, 2026-09-17**: the developer commits and pushes its own card's scoped change as part of finishing the card; a card dispatched to that role is the clear authority to commit and push, with no further approval step. Stage only the paths the card touched, put the card id in the commit message, rebase before pushing, and report the commit SHA and push result on the card. **Reviewer-in-chief (`mars-ai-simulator-reviewer`) may also commit and push reviewer-owned scoped changes** (review/release records and approved content corrections) when the card requires it; the reviewer must stage only owned paths and report the SHA and push result. Every other role keeps the conservative default above. A push is not inert: `main` is wired to the
   connected Cloudflare Workers Build, so **every push to `main` is the automatic production deploy**
   (human instruction, 2026-09-17: "deployment is made automatically by commit/push"). What stays out
   of reach for every agent is the deploy _action_ itself — no `wrangler deploy`, no hosting account,
   DNS or provider configuration, no credential — and a push that carries content into the public site
-  is a publication: the release decision recorded by `mars-ai-simulator-editor` on the
+  is a publication: the release decision recorded by `mars-ai-simulator-reviewer` on the
   review card must exist before the flip is pushed.
 - **Minimal**: Keep tool instruction files as pointers to `docs/INSTRUCTIONS.md`; use the same conservative git policy unless active instructions say otherwise.
 - **Team-maintainer**: Only when the repository explicitly opts in, agents may complete cards, run quality gates, commit, and push as part of session close. A current "do not commit" or "do not push" instruction still wins.

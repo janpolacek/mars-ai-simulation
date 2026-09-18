@@ -8,7 +8,7 @@ description: Apply the final editorial and factual-quality gate to a prepared Re
 Required inputs: the claimed kanban card, article draft, source pack, asset
 manifest and candidate assets, brief, and applicable public canon. Read
 `AGENTS.md`, `docs/INSTRUCTIONS.md`, your own role definition (your agent's `SOUL.md` —
-the `mars-ai-simulator-editor` profile owns this gate, and since 2026-09-17 it holds the
+the `mars-ai-simulator-reviewer` profile owns this gate, and since 2026-09-17 it holds the
 continuity and release authority too), and
 `.agents/skills/copy-editing/SKILL.md` first.
 
