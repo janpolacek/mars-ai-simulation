@@ -28,13 +28,17 @@ local GPU, no ComfyUI server, and no credential of your own.
 1. **Probe the backend before the first generation.**
 
    ```sh
-   hermes auth status openai-codex      # expect: logged in
+   hermes auth status openai-codex      # expect: logged in (this profile)
    ```
 
-   Anything other than `logged in` is a stop, not a puzzle: report the status on the card
-   and say what is missing. The sign-in is the operator's action (device flow); never start
-   one, never type or store a credential, and never route around the subscription with an
-   API key — the ChatGPT API path carries no credits (`429 credit_balance_exhausted`).
+   The credential is **per profile**: this skill runs in the `mars-ai-simulator-visuals`
+   profile, which is where the sign-in was made, so a `logged out` seen from any other profile
+   says nothing about this role (measured 2026-09-18: the same command answers `logged out` in
+   `mars-ai-simulator-dev`). Anything other than `logged in` **in this profile** is a stop, not
+   a puzzle: report the status on the card and say what is missing. The sign-in is the
+   operator's action (device flow); never start one, never type or store a credential, and
+   never route around the subscription with an API key — the ChatGPT API path carries no
+   credits (`429 credit_balance_exhausted`).
 2. **Generate.** Text to image: `image_generate(prompt=…, aspect_ratio=…)`, where
    `aspect_ratio` is `landscape` (16:9), `square` (1:1), or `portrait` (16:9 tall); take the
    ratio from the card and record it. To edit or transform an existing image, pass
