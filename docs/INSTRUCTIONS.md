@@ -54,9 +54,12 @@ hashed copies under `/_astro/`; nothing is copied into `website/public/`. Articl
 copy is authored as MDX directly in `website/news/` for publication. Do not create
 a parallel repository-root `assets/` directory.
 
-`tools/visual-generator/` is a processor, not a store: its `spec.json`, `assets/` and `stories/`
-paths are disposable scratch, git-ignored, with approved inputs copied out of `docs/` before a run
-and a human-selected result copied back into `docs/` afterwards.
+Imagery is produced through the hosted `image_generate` path (provider `openai-codex`, model
+`gpt-image-2-medium`), and its candidates and provenance stay outside this repository. The local
+generator is retired: `tools/visual-generator/` now sits read-only at
+`tools/archive/visual-generator/`, where its `spec.json`, `assets/` and `stories/` paths remain
+disposable git-ignored scratch — the documented fallback, with approved inputs copied out of
+`docs/` before a run and a human-selected result copied back into `docs/` afterwards.
 
 ## Canon and information safety
 

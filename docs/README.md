@@ -34,8 +34,10 @@ order of work.
   `publication: draft|published` deciding whether the site renders it.
 - **Task state** is the Hermes kanban board; [`.agents/README.md`](../.agents/README.md)
   and `AGENTS.md` hold the commands.
-- **Generation scratch** is `tools/visual-generator/`, git-ignored, never a source
-  root.
+- **Generation scratch** is the visuals profile's image cache
+  (`~/.hermes/profiles/mars-ai-simulator-visuals/cache/images/`), outside the repository;
+  the retired local generator's `tools/archive/visual-generator/` scratch is git-ignored and
+  never a source root.
 
 Nothing in this folder is a public route. What may become public, and when, is set
 by `docs/timeline/` and the release controls in [SCENARIO.md](SCENARIO.md).

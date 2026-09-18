@@ -20,9 +20,10 @@ rim; Earth and the Moon appear as a small paired cue at upper right.
 A small Sun rises behind its upper-left edge, while blue Earth and a smaller
 Moon point appear at upper right._
 
-**Private provenance:** the selected GPT Image candidate and its exact generation record are
-scratch material in the local visual-generator workspace, which keeps no permanent assets; the
-approved mark above plus its SHA-256 is the durable record. Approval, refinement history, and
+**Private provenance:** the selected GPT Image candidate and its generation record (the
+`imagegen_request_id` plus the cache filename) are scratch material in the visuals profile's
+image cache, outside this repository, which keeps no permanent assets; the approved mark above
+plus its SHA-256 is the durable record. Approval, refinement history, and
 validation were recorded in the retired issue tracker as `mars-ai-simulator-2tm`; that pre-kanban
 history is archived read-only at `docs/beads-archive.jsonl`.
 

@@ -53,11 +53,13 @@ mission photography. How the harness works is documented in [docs/HARNESS.md](do
 - **Local models** — the writing, review, and reasoning passes run on models served on the
   operator's own machine. Which model serves which role is machine-local, held in each
   Hermes profile rather than in this repository.
-- **ComfyUI** — the imagery is rendered locally by the generator in
-  [`tools/visual-generator/`](tools/visual-generator/README.md). That folder is scratch: its
-  inputs are copied out of `docs/`, its candidates and run records are git-ignored, and only
-  a human-selected export is copied back into the subject's dossier under `docs/`. Its
-  README lists the model files each stage loads.
+- **Hosted image generation** — imagery is produced through the Hermes `image_generate` tool
+  (provider `openai-codex`, model `gpt-image-2-medium`). Candidates and their provenance stay in
+  the visuals profile's image cache, outside this repository, and only a human-selected export
+  is copied into the subject's dossier under `docs/`. The earlier local ComfyUI generator,
+  [`tools/visual-generator/`](tools/archive/visual-generator/README.md), was retired on
+  2026-09-17 and is kept read-only under [`tools/archive/`](tools/archive/README.md) as the
+  documented fallback.
 - **Astro 7 with MDX** — builds the site; [`website/`](website/README.md) is the
   application, and articles are authored as MDX in [`website/news/`](website/news/).
 - **Cloudflare Workers** — serves the static build through Workers Static Assets
@@ -136,7 +138,7 @@ therefore a publication, and needs the human approval recorded on its release ca
 docs/        Documentation, the locked scenario, and one dossier per subject
 .agents/     Project-local task skills, and the working papers for articles in flight
 website/     The Astro application and its build scripts
-tools/       The local image-generation workspace (its scratch output is git-ignored)
+tools/       Retired tools, kept read-only; their scratch output stays git-ignored
 ```
 
 - [`docs/`](docs/README.md) — what the project is, what is true inside the fiction, the
@@ -148,8 +150,9 @@ tools/       The local image-generation workspace (its scratch output is git-ign
   material, not documentation.
 - [`website/`](website/README.md) — the Astro application: routes, content schema, build
   guards, and [`website/news/`](website/news/), where article copy is authored as MDX.
-- [`tools/visual-generator/`](tools/visual-generator/README.md) — the local ComfyUI
-  generator. It holds no permanent assets; approved exports live in `docs/`.
+- [`tools/archive/`](tools/archive/README.md) — retired tools. `visual-generator/` is the local
+  ComfyUI generator, retired 2026-09-17. It holds no permanent assets; approved exports live in
+  `docs/`.
 
 Whole-repository files: [`AGENTS.md`](AGENTS.md) (how contributors work, and the kanban
 commands), [`dprint.json`](dprint.json) (formatter configuration), and

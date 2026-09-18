@@ -58,11 +58,14 @@ Commands, the contributor sequence, and the content-workflow policy are in
   per-role assignment is machine-local, held in the Hermes profile, and not recorded in this
   repository; the project's purpose statement names the experiment as testing local models
   and agent orchestration ([General information](GENERAL.md) §Purpose).
-- **Image generation.** Imagery is produced locally through ComfyUI, driven from
-  [`tools/visual-generator/`](../tools/visual-generator/README.md), which owns the model
-  inventory, the stage graphs, and the run records. That folder is a processor, not a store:
-  its inputs are copied out of `docs/`, its scratch is git-ignored, and an approved export is
-  copied back into the subject's dossier under `docs/` after a human selects it.
+- **Image generation.** Imagery is produced through the Hermes `image_generate` tool on the
+  hosted `openai-codex` provider (model `gpt-image-2-medium`). Candidates, prompts, and their
+  provenance stay in the visuals profile's image cache, outside this repository, and an approved
+  export is copied into the subject's dossier under `docs/` after a human selects it. The local
+  ComfyUI generator, [`tools/visual-generator/`](../tools/archive/visual-generator/README.md) —
+  which owns the model inventory, the stage graphs, and the run records — was retired on
+  2026-09-17 and is kept read-only under [`tools/archive/`](../tools/archive/README.md) as the
+  documented fallback.
 - **Site.** Astro with MDX builds the static site, Cloudflare Workers serves it through
   Workers Static Assets, and Node 26.8.2 is pinned through `fnm`. The
   [website README](../website/README.md) owns the commands, the routing, the content schema,

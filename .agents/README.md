@@ -18,19 +18,19 @@ guidance.
 
 ## Skill catalog
 
-| Skill                     | Owning profile                                  | Purpose                                                                      |
-| ------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- |
-| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice | Draft one source-aware article                                               |
-| `brand-voice`             | Cross-cutting                                   | Keep public prose grounded and candid                                        |
-| `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice | Polish copy without changing canon                                           |
-| `create-article-workflow` | Profile `mars-ai-simulator-planner`             | Create the serial article task graph                                         |
+| Skill                     | Owning profile                                  | Purpose                                                                                                 |
+| ------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice | Draft one source-aware article                                                                          |
+| `brand-voice`             | Cross-cutting                                   | Keep public prose grounded and candid                                                                   |
+| `copy-editing`            | Profile `mars-ai-simulator-editor`, brand voice | Polish copy without changing canon                                                                      |
+| `create-article-workflow` | Profile `mars-ai-simulator-planner`             | Create the serial article task graph                                                                    |
 | `editorial-review`        | Profile `mars-ai-simulator-editor`              | Run the continuity check, the final editorial gate, the simulated record date, and the release decision |
-| `image-generation`        | Profile `mars-ai-simulator-visuals`             | Prepare reviewable visual candidates and metadata                            |
-| `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`             | Render vehicle references and scenes with the local ComfyUI tool             |
-| `project-documentation`   | Owning profile's `SOUL.md`                      | Revise project guidance and runbooks                                         |
-| `research-and-fact-check` | Profile `mars-ai-simulator-planner`             | Build a claim-level source pack                                              |
-| `seo-content`             | Profile `mars-ai-simulator-seo`                 | Review honest search intent and metadata                                     |
-| `site-deployment`         | Profile `mars-ai-simulator-dev`                 | Validate locally and prepare authorised release inputs                       |
+| `image-generation`        | Profile `mars-ai-simulator-visuals`             | Prepare reviewable visual candidates and metadata                                                       |
+| `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`             | Render vehicle references and scenes through the retired local ComfyUI fallback                         |
+| `project-documentation`   | Owning profile's `SOUL.md`                      | Revise project guidance and runbooks                                                                    |
+| `research-and-fact-check` | Profile `mars-ai-simulator-planner`             | Build a claim-level source pack                                                                         |
+| `seo-content`             | Profile `mars-ai-simulator-seo`                 | Review honest search intent and metadata                                                                |
+| `site-deployment`         | Profile `mars-ai-simulator-dev`                 | Validate locally and prepare authorised release inputs                                                  |
 
 Task tracking is not a project skill: the Hermes kanban board and its commands
 are described in [AGENTS.md](../AGENTS.md), the article graph mechanics are in
@@ -44,3 +44,14 @@ material, not documentation — the documentation tree is mapped in
 
 If a new skill introduces a new responsibility or approval boundary, update the
 corresponding agent profile's `SOUL.md` first, then add the skill to this catalog.
+
+## Retired tools
+
+`tools/visual-generator/`, the local ComfyUI generator behind the `mars-story-toolset`
+fallback and the earlier `image-generation` procedure, was retired by the operator on
+2026-09-17 (_archive tool inside project to generate images (sunset), since we use gpt images
+for much better quality_) and moved out of the live tool tree to
+`tools/archive/visual-generator/` (card `t_ad6d3fb3`). The production path is the hosted
+`image_generate` tool — provider `openai-codex`, model `gpt-image-2-medium` — documented in
+[`image-generation`](skills/image-generation/SKILL.md). Do not restore the local tool, and do
+not run it as the production path, without a current human instruction.

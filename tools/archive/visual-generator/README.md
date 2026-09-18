@@ -1,3 +1,15 @@
+> **Retired 2026-09-17 — do not use, and do not restore.** Red Horizon imagery is produced
+> through the hosted `image_generate` tool (provider `openai-codex`, model
+> `gpt-image-2-medium`); the live procedure is
+> [`image-generation`](../../../.agents/skills/image-generation/SKILL.md). This generator was
+> moved out of the live tool tree to `tools/archive/visual-generator/` by card `t_ad6d3fb3` on
+> the operator's 2026-09-17 instruction (_archive tool inside project to generate images
+> (sunset), since we use gpt images for much better quality_), and is kept read-only as the
+> last-resort local fallback and as the historical record of the ComfyUI stages. The fallback's
+> procedure is [`mars-story-toolset`](../../../.agents/skills/mars-story-toolset/SKILL.md). Every
+> instruction below is historical: it describes the tool as it was while it was the production
+> path.
+
 # Local ComfyUI generator
 
 A small, standard-library-only driver for the local ComfyUI server. It renders one vehicle in three

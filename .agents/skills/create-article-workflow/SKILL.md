@@ -135,8 +135,9 @@ skill. The handoff locations are not public web routes; `website/news/` is the
 direct MDX publication source. Draft MDX may be staged there only with
 `publication: draft`, which the website filters out; cleared articles use
 `publication: published`. The asset manifest is the authoritative handoff
-record; raw candidate files, prompts, and generation records remain in
-`tools/visual-generator/` until a human selects an approved stable export.
+record; raw candidate files, prompts, and generation records stay in the visuals
+profile's image cache, outside the repository, until a human selects an approved stable
+export.
 
 ## Required outputs
 
@@ -171,18 +172,23 @@ moment:
   preserve continuity from (exact paths), the allowed canon facts, the forbidden
   spoiler facts, the intended alt-text meaning, and the artifact to write
   (`.agents/work/assets/<slug>/assets.md`).
-- The visuals agent owns how the image is rendered, including the local ComfyUI
-  lifecycle: it starts the server for the card and stops it before completing
-  (`comfyctl stop`), then reports `comfyctl status` in its handoff so the GPU is
-  free for the next role. The start must land in the server's own systemd unit
-  (`systemd-run --user --unit=comfyui-server … comfyctl start`), never as a child
-  of the worker shell: a worker cgroup is capped at 4 GiB and a 4–8 GB model load
-  inside it gets the worker OOM-killed mid-card. The card body may require that
-  state in the handoff but must not dictate prompts or model choices. See the
-  profile skill `mars-visual-studio` for the model inventory and pitfalls.
+- The visuals agent owns how the image is rendered: the hosted `image_generate` tool
+  (provider `openai-codex`, model `gpt-image-2-medium`), after a
+  `hermes auth status openai-codex` probe that reports `logged in`. The card body should
+  require that probe result in the handoff, plus the `imagegen_request_id` and the cache
+  filename of every candidate — the pair that replaces the old ComfyUI sidecar as the
+  private provenance record. If the hosted path is unavailable, the local ComfyUI fallback
+  applies and its rules hold there: the server starts in its own uncapped systemd unit with
+  the server process itself as the unit's main process (wrapping `comfyctl start` in
+  `systemd-run` leaves no server running) and stops before the card completes, reporting
+  the final `comfyctl status` so the GPU is free for the next role — a worker cgroup is
+  capped at 4 GiB and a 4–8 GB model load inside it gets the worker OOM-killed mid-card.
+  The card body may require that state in the handoff but must not dictate prompts or model
+  choices. See the project skill `image-generation` for the procedure, the candidate cache,
+  and the pitfalls.
 - Create exactly one IMAGES card per article, and never two image cards that can
-  become ready at once: one local 8 GB GPU serialises generations, each taking
-  minutes.
+  become ready at once: candidates are produced one at a time, each taking minutes, and
+  the local fallback serialises on the machine's single 8 GB GPU.
 
 ## Record dates in the graph
 

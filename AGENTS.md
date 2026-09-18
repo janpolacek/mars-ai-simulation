@@ -25,8 +25,9 @@ services without a separate current human instruction.
 - `docs/` is the project documentation root; per-article working papers belong
   under `.agents/work/` and approved assets stay with their subject dossier under
   `docs/` (see the [docs map](docs/README.md)). Do not create a parallel root
-  `assets/` directory; `tools/visual-generator/` is tool-local scratch only — inputs are copied out
-  of `docs/`, and only a human-selected export is copied back into `docs/`.
+  `assets/` directory; image candidates are produced through the hosted image path and kept
+  outside the repository, and only a human-selected export is copied into `docs/`. The retired
+  local generator now sits read-only at `tools/archive/visual-generator/`.
 - The Hermes kanban board is the source of truth for article state and
   dependencies.
 - Claim one ready card before editing; work only within its acceptance criteria.

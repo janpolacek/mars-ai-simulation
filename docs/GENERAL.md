@@ -96,9 +96,10 @@ The rules for where each kind of file lives are in
   artifacts, approved stable assets, editorial documentation, and project-local
   skills. Workflow artifacts are never public routes unless a human approves and
   the site explicitly includes them.
-- `tools/visual-generator/` is a processor, not a store: its prompts, references,
-  generated candidates, and run records stay there, are ignored by Git, and are not
-  a second project source root.
+- Image generation is a processor, not a store: the hosted path's prompts, references,
+  generated candidates, and their provenance stay outside this repository, and the retired
+  local generator's `tools/archive/visual-generator/` scratch is ignored by Git. Neither is a
+  second project source root.
 - The Hermes kanban board contains durable work state, task dependencies,
   handoffs, and approval decisions. It is not a content-management system.
 - Do not create a parallel project-root `assets/` directory. Articles are authored
