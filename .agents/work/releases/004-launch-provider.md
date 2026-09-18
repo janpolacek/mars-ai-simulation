@@ -450,9 +450,383 @@ covering the launch-vehicle designation it now releases — which is the require
 
 ## Revision history of this record
 
-| Revision          | SHA-256                                                      | Author                                    | What moved                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ----------------- | ------------------------------------------------------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1 — this revision | recorded on card `t_1105aa0d` (self-embedding is impossible) | `mars-ai-simulator-editor` (`t_1105aa0d`) | status `released`; the release decision and the exact public scope; gates 004-A…004-E with their required wordings, recorded answers and applied scope; the containment checklist resolved line by line; the media-key outcome (none); the applied flip diff with the reconstruction proof; released hashes; the record-date verification on the live surface; the six-rule review (C2); the live-origin, article-page and card tables; the withheld-marker scan; conditions C1–C7 statused; observations O-1–O-7 |
+| Revision                              | SHA-256                                                                                                                                                                                                                                        | Author                                      | What moved                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 — first release                     | recorded on card `t_1105aa0d` (self-embedding is impossible)                                                                                                                                                                                   | `mars-ai-simulator-editor` (`t_1105aa0d`)   | status `released`; the release decision and the exact public scope; gates 004-A…004-E with their required wordings, recorded answers and applied scope; the containment checklist resolved line by line; the media-key outcome (none); the applied flip diff with the reconstruction proof; released hashes; the record-date verification on the live surface; the six-rule review (C2); the live-origin, article-page and card tables; the withheld-marker scan; conditions C1–C7 statused; observations O-1–O-7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 2 — revision (this revision)          | recorded on card `t_3ad3378a` (self-embedding is impossible); companion review `.agents/work/reviews/004-launch-provider-revision.md` §7, companion continuity `.agents/work/continuity/004-launch-provider-revision.md`                       | `mars-ai-simulator-reviewer` (`t_3ad3378a`) | status `released for revision` pending card F's push; the re-gate verdict `approved`; the verbatim frontmatter delta card E verified (media / mediaAlt 347 chars / mediaLabel 33 chars with U+00B7; no mediaCaption); the constructed post-delta sha256 `2875165efc5dab1603e2d0d3fd966d3f5f595b755e7cd7087820125dd9c62a70` (4,468 B) and the plate's canonical-path sha256 `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b`; the build-hash row and the local derivative hashes carried from card D's build proof (`e5eb03e`, `dist/_astro/canonical.B5Cinj0C_ZPsHQo.webp` sha256 `0dd2bf64…`, 1024×1280 re-encode); the on-main plumbing `e5eb03e` carries (`media.ts` key + tuple + resolver, `features/news/media.ts` resolver, `assets.ts` import, `news-media.test.mjs` four cases; 119 insertions, four paths only, ff push `5646ebd..e5eb03e`); the new voiding condition (below); the public-scope supersession (below); the preconditions (below)                                                |
+| 3 — live verification of the revision | recorded on card `t_d7e3aa8b` (self-embedding is impossible); pre-append sha256 `de7042c6b3d4bcd29d04bc0621f3d478c20b31138c7ef3f958edd13d18bdd57b` (69,206 B, file as it was at the end of Revision 2); post-append sha256 in the card comment | `mars-ai-simulator-reviewer` (`t_d7e3aa8b`) | status `released for revision (verified live)`; the live origin serves the post-delta bytes byte-for-byte (`/news/004-launch-provider/` 200, 10,371 B, sha256 `59e03ffa…` MATCH to card F's `live_origin.article`); the placed plate's derivative serves byte-for-byte (`/_astro/canonical.B5Cinj0C_ZPsHQo.webp` 200, 21,566 B, sha256 `0dd2bf64…` MATCH); home and newsroom cards byte-identical to card F's tables; `mediaAlt` sha256 `20d1f41e…` MATCH to card A's approved (347 chars / 347 bytes / ASCII); `mediaLabel` sha256 `f3437f4b…` MATCH to card A's approved (33 chars / 34 bytes with U+00B7); the article body unchanged; `simulatedDate: 2030-03-11` preserved; record-date label appears exactly once on the article page and once on each of `/` and `/news/` cards; 0 ISO dates, 0 `<time>` elements, 0 date-bearing meta tags; 0 withheld-marker hits across every served surface; `Ariane 64` remains the only real-world string (5 occurrences on the article page); card-body fields "Revision date | 2026-09-17" and "Article sha256 (revised) | from card D's commit" corrected in this section (actual recording date 2026-09-18 CEST; article sha256 from card F's commit `a47812c`); the shared-checkout `dist/` is **not** the live surface (mtime predates card F's push, carries a different webp filename) — the live origin is the authoritative surface; preconditions P1–P4 all SATISFIED at this verdict; six observations (O-R3-1 … O-R3-6) recorded, none blocking; the voiding condition from Revision 2 stands unchanged |
+
+---
+
+## Revision 2 — append, recorded by `t_3ad3378a`
+
+The gate verdict recorded on `t_3ad3378a` voids the §"Release decision"
+above and replaces it with the one recorded in this revision. **The
+public scope rows of the first record are partly superseded** — the rows
+for "_Plate and emitted derivative_" and the relevant rows of the
+frontmatter metadata are updated to include the `launch-vehicle-reference`
+key, its plate, and its strings. Every other row of the first record's
+public-scope table still holds: the route, the card on `/` and `/news/`,
+the `Ariane 64` designation as the only real-world name, and every row
+of the containment checklist (the body is unchanged by this revision).
+
+### What the previous public-scope rows now supersede
+
+| First-release row                            | What the revision supersedes                                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontmatter metadata                         | adds `media: launch-vehicle-reference`, `mediaAlt` (347 chars, ASCII, sha256 `20d1f41e…`), `mediaLabel` (33 chars, 34 bytes, U+00B7, sha256 `f3437f4b…`); **no `mediaCaption`** — the key renders no caption and the schema rejects one. The prior `title`, `category`, `status`, `summary`, `linkLabel`, `order`, `accent` rows are unchanged. `simulatedDate: 2030-03-11` is preserved.             |
+| Plate and emitted derivative                 | **None** → `docs/vehicles/ariane/canonical.png` (sha256 `cf3323bf…`, 1122 × 1402, 4:5 portrait, 1,040,823 B), rendered through the new `launch-vehicle-reference` key, **uncropped**; **one plate, one alt, no caption**; emitted derivative `dist/_astro/canonical.B5Cinj0C_ZPsHQo.webp` (sha256 `0dd2bf64…`, 1024 × 1280, **re-encode**; C2PA caBX chunk does **not** travel into the served webp). |
+| Strings published with it                    | unchanged except for the addition of the label and alt above                                                                                                                                                                                                                                                                                                                                          |
+| Released body                                | unchanged                                                                                                                                                                                                                                                                                                                                                                                             |
+| Article route (`/news/004-launch-provider/`) | unchanged route — now also renders `<figure class="article-media">` around the plate (article body unchanged; the rendered figure is the new element on this revision)                                                                                                                                                                                                                                |
+| Card on `/` and `/news/`                     | unchanged card list and ordering; the 004 card's image cell grows from 580.7 px (placeholder) to 805.7 px (measured on D's throwaway copy) and renders `media.plates[0]`; all four card link labels and link targets unchanged                                                                                                                                                                        |
+| Provider / vehicle designation strings       | unchanged: `Ariane 64` is still the only real-world string on any surface; 5 occurrences on the article page after the revision (body ×4, summary ×1), exactly as before                                                                                                                                                                                                                              |
+
+### The new voiding condition
+
+> **Any change to the revised bytes** — the constructed post-delta MDX
+> sha256 `2875165efc5dab1603e2d0d3fd966d3f5f595b755e7cd7087820125dd9c62a70`
+> (4,468 B), or the plate's `docs/` path sha256
+> `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b`, or
+> the on-main plumbing paths
+> (`website/src/lib/media.ts`,
+> `website/src/features/news/media.ts`,
+> `website/src/lib/assets.ts`,
+> `website/test/news-media.test.mjs`) — **voids this revision and
+> returns the package to the editorial gate.**
+
+### Preconditions attached to the revision's release decision
+
+| #  | Condition                                                                                                                                                                                                                                                                                                                                    | Owner                                   | Where it discharges                             |
+| -- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ----------------------------------------------- |
+| P1 | The build card (`t_6607da8c`) reproduces the post-delta MDX bytes byte-for-byte (`2875165e…`) and pushes them through the same path-limited recipe, and discharges card A's **C1** (human story owner's rights/account statement) before the push. The flip remains the publication step (`AGENTS.md`) and card F's own record reaffirms it. | `mars-ai-simulator-dev` on `t_6607da8c` | Card F                                          |
+| P2 | The C2PA `caBX` chunk on the placed plate is not stripped or falsified; re-encodes by the build may move it (card D measured no carry to the served webp — a measured re-encode, not a deliberate strip); no human edit to the PNG                                                                                                           | `mars-ai-simulator-dev` on `t_6607da8c` | Card F (live verification after the push)       |
+| P3 | `simulatedDate: 2030-03-11` is preserved on `docs/SCENARIO.md:188`; this revision sets no new record date                                                                                                                                                                                                                                    | this card                               | Card E (verified, recorded in §5 of the review) |
+| P4 | No `website/`, `docs/` (other than the plate on disk at the admitted path), `tools/visual-generator/`, or `scripts/guards.mjs` write by this card                                                                                                                                                                                            | this card                               | Card E (verified, recorded in §2 of the review) |
+
+### Inputs this revision rests on
+
+- Selection record: `.agents/work/reviews/ariane-plates-selection.md`
+  §6, §8, §9, §10 (card `t_58c90eb5`, parent task's release conditions C1–C7).
+- Plumbing proof: card `t_5da0efad` (card D) commit `e5eb03e` (pushed
+  `5646ebd..e5eb03e`, `rev-list origin/main..HEAD` = 0 at verdict);
+  build cell measurements recorded on `t_5da0efad` and re-asserted by
+  this card (carousel, news index, article figure, emitted derivative).
+- Editorial review (this revision): `.agents/work/reviews/004-launch-provider-revision.md` §7, `approved`.
+- Continuity companion (this revision): `.agents/work/continuity/004-launch-provider-revision.md`, `continuity clear`.
+- Throwaway artefacts (outside the repository):
+  `/tmp/rh-004-e-gate/construct_post_delta.py`,
+  `/tmp/rh-004-e-gate/schema_check.cjs`,
+  `/tmp/rh-004-e-gate/schema_red_first.cjs`,
+  `/tmp/rh-004-e-gate/containment_scan.py`,
+  `/tmp/rh-004-e-gate/bundle_media.cjs`,
+  `/tmp/rh-004-e-gate/{pre-delta,post-delta,media.cjs}.{mdx,cjs,py}`.
+- Live origin at this verdict: `https://mars-ai-simulation.janpolacek.workers.dev`
+  (2026-09-18 22:5x CEST); the live verification of the _previous_
+  release still applies, and the push of this revision is what will
+  render the plate — the gate does not produce a live origin measurement
+  for the post-delta bytes (card F's live origin verification will).
+- HEAD / origin/main at this verdict: `fd2554f8dd4c42fca07b253643dfcce64ea0182b`.
+
+---
+
+## Revision 3 — append, recorded by `t_d7e3aa8b`
+
+Card G of the ariane-plates-incorporation graph (planner `t_723e991f`). Card G
+closes the loop: it appends the revision record the editorial re-gate (card E)
+recorded and confirms the live origin. Card G did not edit `website/`, did not
+commit, did not push.
+
+The card-body field "Revision date" states `2026-09-17 (CEST)`, but card G
+itself was created `2026-09-17 18:06 UTC` (`20:06 CEST`); the re-gate (card E)
+ran on `2026-09-18 22:5x CEST`; the build card (card F) pushed
+`2026-09-18 ~22:56 CEST`; this card records the live verification and writes
+this section on **`2026-09-18 ~23:10 CEST`**. The "2026-09-17" value in the
+card body matches the original release record's date, not the revision date —
+this section uses the actual recording date, **2026-09-18 (CEST)**, because
+that is when the work happened.
+
+The release decision in card E's §7 (`approved` with the voiding condition on
+the revised bytes and the on-main plumbing) is what licensed card F's push.
+Card F reproduced the post-delta bytes **byte-for-byte**, discharged card A's
+condition C1 (the human story owner's rights/account statement for the six
+plates — recorded on card C at `2026-09-18 20:42 CEST`), and pushed. The live
+origin (this card's strongest available measurement) serves the revised bytes
+and the placed plate; this section carries the verification.
+
+### What this revision is — supersession and unchanged rows
+
+The **public scope rows of Revision 2 are partly superseded** by the live
+verification below, and the **public scope rows of Revision 1 are partly
+superseded by Revision 2** — Revision 2 added the plate, the label, and the alt
+text; Revision 3 confirms the live origin carries those revisions after the
+push. Every other row of both prior revisions still holds (route, the card on
+`/` and `/news/`, `Ariane 64` as the only real-world string on any surface, and
+every row of the containment checklist — the body is unchanged across both
+revisions).
+
+The **voiding condition** recorded in Revision 2 stands: any change to the
+post-delta MDX bytes (`2875165e…`, 4,468 B) **or** the plate's `docs/` path
+bytes (`cf3323bf…`) **or** the on-main plumbing paths
+(`website/src/lib/media.ts`, `website/src/features/news/media.ts`,
+`website/src/lib/assets.ts`, `website/test/news-media.test.mjs`) voids the
+revision and returns the package to the editorial gate.
+
+### Live origin — the authoritative surface
+
+The shared checkout's `website/dist/` is **not** the live surface and was not
+used as evidence: its mtime is `2026-09-18 21:32 CEST` (predates card F's
+push at ~22:56 CEST) and its emitted derivative filename
+(`dist/_astro/canonical.C1rFlAX3_12caC6.webp`) does **not** match what the
+live origin serves. Card F built in a detached worktree
+(`/tmp/verify-t_6607da8c`) and the live origin serves that build's bytes —
+which is what the byte-identity check below measures.
+
+Live measurements: **2026-09-18 ~23:05–23:10 CEST**, in-page
+`fetch(path, {cache: 'no-store'})` over
+`https://mars-ai-simulation.janpolacek.workers.dev`, `arrayBuffer()` →
+`crypto.subtle.digest('SHA-256', …)`. Every measurement below is the live
+origin's bytes at this verdict, not from the build card's own worktree.
+
+| URL                                      | Status  | Bytes  | sha256 (first 8) | What it is                                                                                                                 |
+| ---------------------------------------- | ------- | ------ | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `/news/004-launch-provider/`             | 200     | 10,371 | `59e03ffa`       | **the released article page**, byte-identical to card F's recorded `live_origin.article`                                   |
+| `/`                                      | 200     | 19,801 | `7fd12757`       | home, byte-identical to card F's `live_origin.home`                                                                        |
+| `/news/`                                 | 200     | 12,851 | `4251ce35`       | newsroom, byte-identical to card F's `live_origin.newsroom`                                                                |
+| `/_astro/canonical.B5Cinj0C_ZPsHQo.webp` | 200     | 21,566 | `0dd2bf64`       | **the placed plate's emitted derivative**, byte-identical to card F's `live_origin.derivative`                             |
+| `/robots.txt`                            | 200     | 1,248  | `8fa3036c`       | robots, byte-identical to card F's `live_origin.robots`                                                                    |
+| `/news/001-project-announcement/`        | 200     | 11,882 | `5029911a`       | article 001 — unchanged on this revision                                                                                   |
+| `/news/002-payload-selection/`           | 200     | 14,310 | `2e6075d6`       | article 002 — moved since the gate's measurement (`a8eb93c7…`); Form A `coalition` → `programme` amendment at `t_2c6c5d7a` |
+| `/news/003-vehicle-design/`              | 200     | 11,380 | `4f1277c1`       | article 003 — unchanged on this revision                                                                                   |
+| `/about/`                                | 200     | 8,815  | `7389b7da`       | about, byte-length matches card F's; title `About Red Horizon \| How a fictional Mars mission is made`                     |
+| `/wiki/`                                 | 200     | 6,211  | `4d15313e`       | wiki index — moved since the gate's measurement (`821a2d84…`, 4,599 B); wiki siblings published in the meantime            |
+| `/wiki/vehicle/`                         | **200** | 5,009  | `9718b7cc`       | wiki vehicle index — **published since the gate's measurement (gate said 404)**; title `Vehicles \| Red Horizon`           |
+| `/wiki/vehicle/rh-01-pathfinder/`        | **200** | 16,543 | `6acd6cd5`       | RH-01 Pathfinder leaf — **published since the gate's measurement (gate said 404)**; about the rover, no launcher content   |
+| `/news/does-not-exist/`                  | 404     | 0      | `e3b0c442`       | 404 probe — no soft-404 that could serve an unpublished slug                                                               |
+| `/sitemap.xml`                           | 404     | 0      | `e3b0c442`       | sitemap (pre-existing site-wide; the site is built without `SITE_URL`)                                                     |
+
+### The article page — content checks (live, measured)
+
+| Check                                                         | Measured                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Document title                                                | `🐴 The launch architecture, chosen. \| Red Horizon` — the writer's drafted title, no byline                                                                                                                                                                                                                       |
+| `h1` / heading structure                                      | one `h1` = `The launch architecture, chosen.`; **no `h2`**; kicker `Launch architecture 04 · Architecture selected`                                                                                                                                                                                                |
+| `<figure>` on the page                                        | **1** (`figure.article-media`)                                                                                                                                                                                                                                                                                     |
+| `<img>` in the figure                                         | src `/_astro/canonical.B5Cinj0C_ZPsHQo.webp`, `width=1024 height=1280`, `naturalWidth=1024 naturalHeight=1280`, alt = the 347-char ASCII string below                                                                                                                                                              |
+| `mediaAlt` sha256 (live, on the rendered alt attribute)       | `20d1f41ed8c11ff6f80830775231f21439d67e520219e44be9b3df3d8a690bdd` — **MATCH** to card A's approved `20d1f41e…`                                                                                                                                                                                                    |
+| `mediaAlt` chars / bytes                                      | 347 chars, 347 bytes, ASCII only                                                                                                                                                                                                                                                                                   |
+| `mediaLabel` text                                             | `Ariane 64 · engineering reference` (rendered in `<span class="image-label">`)                                                                                                                                                                                                                                     |
+| `mediaLabel` sha256 (live, on the rendered label text)        | `f3437f4bef10ec16ba13a2042625b17b0301f1911a03f3e3aaf72abc26481c06` — **MATCH** to card A's approved `f3437f4b…`                                                                                                                                                                                                    |
+| `mediaLabel` chars / bytes                                    | 33 chars, 34 bytes (U+00B7 at index 10)                                                                                                                                                                                                                                                                            |
+| Record-date label occurrences on `/news/004-launch-provider/` | **1** — `Simulated record date · 11 March 2030` (element class `article-date`)                                                                                                                                                                                                                                     |
+| Record-date label occurrences on `/`                          | **4** — one per card (12 October 2026, 19 March 2027, 13 July 2029, 11 March 2030)                                                                                                                                                                                                                                 |
+| Record-date label occurrences on `/news/`                     | **4** — same four                                                                                                                                                                                                                                                                                                  |
+| Machine-readable dates (any surface)                          | **0** ISO tokens, **0** `<time>` elements, **0** date-bearing meta tags; `description` = the 153-character summary                                                                                                                                                                                                 |
+| Canonical / OG                                                | no `<link rel="canonical">` (site built without `SITE_URL`, pre-existing site-wide)                                                                                                                                                                                                                                |
+| Article links (full inventory)                                | nav and footer (`/#top`, `/news/`, `/wiki/`, `/#mission`, `/#timeline`, `/about/`) plus the article's own three links — `/#mission` (fiction disclosure), `/news/003-vehicle-design/`, `/news/001-project-announcement/`. All targets 200; no external link                                                        |
+| `Ariane 64` occurrences on the article page                   | **5** (body ×4, summary ×1) — same as Revision 2's count                                                                                                                                                                                                                                                           |
+| Article body phrases preserved                                | "no real agency, launcher operator, or launch facility is a partner" ×2; "endorsed" ×3; "No launch day or time has been announced" + "2031 launch window" + "not been announced" ×2; "uncrewed" ×1; "fictional" ×5; "integrated with a launcher" ×1 — the negation the dossier binds is held in both prose and alt |
+
+### The card on `/` and `/news/` for step 004
+
+The 004 card on both surfaces renders the placed plate as `<img>` (not the
+amber placeholder) and the label below it. Measured live:
+
+| Check              | `/news/`                                                                                                                         | `/`                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Card rendered      | `<article class="news-card is-active" data-slide="3" aria-hidden="false">`                                                       | `<article class="news-card" data-slide="3" aria-hidden="true" hidden="">`          |
+| 004 image cell     | `<img src="/_astro/canonical.B5Cinj0C_ZPsHQo.webp" alt="…" width=1024 height=1280 loading="lazy">` with `--plate-fill: url(...)` | same (carousel inactive state)                                                     |
+| 004 label          | `<span class="image-label">Ariane 64 · engineering reference</span>`                                                             | same                                                                               |
+| 004 kicker         | `Launch architecture 04 · Architecture selected`                                                                                 | same                                                                               |
+| 004 heading        | `<h2>The launch architecture, chosen.</h2>`                                                                                      | `<h3>The launch architecture, chosen.</h3>` (the home uses h3 inside the carousel) |
+| 004 summary        | "Red Horizon One's delivery architecture is decided: an Ariane 64 launcher, a cruise stage for the transfer to Mars, …"          | same                                                                               |
+| 004 date           | `<p class="news-date">Simulated record date · 11 March 2030</p>`                                                                 | same                                                                               |
+| 004 link label     | `Launch architecture briefing`                                                                                                   | same                                                                               |
+| 004 link target    | `/news/004-launch-provider/`                                                                                                     | same                                                                               |
+| Card-list ordering | 4 cards (001, 002, 003, 004)                                                                                                     | same                                                                               |
+
+### Withheld-marker scan (live, every served byte)
+
+Scanned every served route above plus the whole released article file, by
+family, reporting hit counts only (no withheld value is written into this
+record or into the repository):
+
+| Family                                                                                                                             | Result on the released article and every live route                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| The two landing-region coordinate markers (`gatedTextMarkers`, `guards.mjs`)                                                       | **0**                                                                                                                   |
+| Withheld timeline paths (`docs/timeline/…`)                                                                                        | **0**                                                                                                                   |
+| Institution / operating-company family (`Arianespace`, `CNES`, `ESA`, `Kourou`, `FEI STU`)                                         | **0** on the article, `/`, `/news/`, 001, 003, `/about/`, `/wiki/`, `/wiki/vehicle/`, `/wiki/vehicle/rh-01-pathfinder/` |
+| Launch-facility family                                                                                                             | **0**                                                                                                                   |
+| Withheld launch-day forms (`17 February 2031`, `11 February 2031`, `13 January 2031`, `30 August 2030`, `22 November 2030`)        | **0**                                                                                                                   |
+| Asteria Field / landing-design material (`AF-*`, `Asteria Field`, `landing site`, `ellipse`, `science zone`, `hazard`, `traverse`) | 0 on this article (5 pre-existing hits on article 001, which released that material)                                    |
+
+The two landing-region coordinate markers (`'18° 42'`, `'226° 14'`) named by
+the card body's confirmation list are **absent** from every served byte at
+this verdict. No launch-day form beyond the 2031 window appears. No
+real-institution string appears on any served surface other than the article's
+own `Ariane 64` designation. The plate's `mediaAlt` carries "no real agency
+is named or implied" — the alt text does not name one.
+
+### Card-by-card chain (A → C → D → E → F → G)
+
+| Card | Id           | Assignee                     | Status at this verdict                                      | What it produced                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---- | ------------ | ---------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A    | `t_58c90eb5` | `mars-ai-simulator-editor`   | done — selection verdict recorded                           | `.agents/work/reviews/ariane-plates-selection.md`; admitted `docs/vehicles/ariane/canonical.png` (`cf3323bf…`) on canon and rights; plates 5–6 withheld fail-closed; **C2PA `caBX` chunk measured in-file**: `gpt-image` 2.0 / OpenAI Media Service API / signed `OpenAI OpCo, LLC` / `trainedAlgorithmicMedia` / `c2pa.created` 2026-09-17                                                                                                                                                                                        |
+| C    | `t_8b6f0ae2` | `mars-ai-simulator-dev`      | done — placement verified (no copy, no rename)              | hash `cf3323bf…` at `docs/vehicles/ariane/canonical.png` re-verified on disk; file already at the admitted canonical name (no-op); withheld plates sit byte-identical where they are (Gate F)                                                                                                                                                                                                                                                                                                                                      |
+| D    | `t_5da0efad` | `mars-ai-simulator-dev`      | done — plumbing pushed `5646ebd..e5eb03e`                   | `website/src/lib/media.ts` (`launch-vehicle-reference` key + requirement tuple `{ plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false }`), `website/src/features/news/media.ts` resolver entry at `:99-101`, `website/src/lib/assets.ts` import at `:9`, `website/test/news-media.test.mjs` four cases (`:130-137`, `:154`, `:185`, `:301-311`, `:318`); 119 insertions, four paths only, ff push, rev-list = 0 at D's verdict                                                                                       |
+| E    | `t_3ad3378a` | `mars-ai-simulator-reviewer` | done — re-gate verdict `approved` with the release decision | `.agents/work/reviews/004-launch-provider-revision.md` §7 (the release decision for the revision), `.agents/work/continuity/004-launch-provider-revision.md` (`continuity clear`); constructed post-delta MDX sha256 `2875165efc5dab1603e2d0d3fd966d3f5f595b755e7cd7087820125dd9c62a70` (4,468 B) — body unchanged, `mediaLabel`/`mediaAlt` value hashes match card A's §8 byte-for-byte, `newsMediaIssues()` returns `[]`, red-first proof catches three planted schema failures                                                  |
+| F    | `t_6607da8c` | `mars-ai-simulator-dev`      | done — applied and pushed                                   | frontmatter delta applied byte-for-byte (`2875165e…`, +439 B / 3 lines, body unchanged); committed path-limited `a47812c5ba75c492ee5ef4a01d5abcc0361efe65` (`--no-verify`; pre-commit hook `dprint` pass would reflow the article prose and change bytes named by the release decision); pushed `fd2554f..a47812c` clean fast-forward, rev-list = 0; live origin byte-identity measured in a detached worktree (`/tmp/verify-t_6607da8c`); all four gates green (build/check-dist exit 0, lint exit 0, typecheck 0/0/0, 166 tests) |
+| G    | `t_d7e3aa8b` | `mars-ai-simulator-reviewer` | running — this section                                      | the live verification recorded above; no `website/` edit, no commit, no push, no further deploy                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+### Preconditions attached to the revision's release decision — status
+
+The Revision 2 record's P1–P4 preconditions are statused here:
+
+| #  | Condition (from Revision 2)                                                                                                                                                                                                        | Status at this verdict                                                                                                                                                                                                                                                                                                                                                                            |
+| -- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P1 | Card F reproduces the post-delta MDX bytes byte-for-byte (`2875165e…`) and pushes them, discharging card A's **C1** before the push                                                                                                | **SATISFIED.** Card F applied `2875165e…` cmp-identical to card E's post-delta artefact (`byte_fidelity: cmp-identical`), and **C1 was discharged 2026-09-18 20:42 CEST on card C** (per card F's handoff metadata: `release_decision: card E t_3ad3378a approved …; C1 discharged 2026-09-18 20:42 statement`). The flip is on the live origin and the article route serves the post-delta bytes |
+| P2 | The C2PA `caBX` chunk on the placed plate is not stripped or falsified; re-encodes by the build may move it (card D measured no carry to the served webp — a measured re-encode, not a deliberate strip); no human edit to the PNG | **MEASURED, NOT REGRESSED.** Card F recorded the served derivative's sha256 (`0dd2bf64…`, 21,566 B) as the build's webp re-encode; this card re-hashes it at the live origin and finds `0dd2bf64c6c0cfd9933f653f02e11529e8d1b5d105b6a0aa1f50dda50f2ab61a` — **MATCH** to card D and card F's measurements. No human edit to the PNG by any card in this graph                                     |
+| P3 | `simulatedDate: 2030-03-11` is preserved on `docs/SCENARIO.md:188`; this revision sets no new record date                                                                                                                          | **SATISFIED.** The live article page carries `Simulated record date · 11 March 2030` exactly once; the on-disk MDX carries `simulatedDate: 2030-03-11`; no card in this graph wrote `docs/SCENARIO.md`                                                                                                                                                                                            |
+| P4 | No `website/`, `docs/` (other than the plate on disk at the admitted path), `tools/visual-generator/`, or `scripts/guards.mjs` write by this card                                                                                  | **SATISFIED.** This card's only write is this section of this record; no `website/`, no `docs/`, no `tools/visual-generator/`, no `scripts/guards.mjs` write. Card F's push wrote `website/news/004-launch-provider.mdx` (+3 lines, byte-for-byte) and is the only `website/` write in the chain                                                                                                  |
+
+### Observations — recorded, none blocking this revision
+
+- **O-R3-1 — the wiki vehicle routes that the gate predicted as 404 are now 200.**
+  The re-gate (card E, observation O-2) recorded `/wiki/vehicle/` and
+  `/wiki/vehicle/rh-01-pathfinder/` as **404** at the gate's verdict
+  (`2026-09-18 22:5x CEST`); both are now **200** at this card's verdict
+  (`2026-09-18 23:0x CEST`). The wiki vehicle index
+  (`/wiki/vehicle/`, 5,009 B, sha256 `9718b7cc…`, title `Vehicles | Red Horizon`)
+  lists **only** the RH-01 Pathfinder leaf — a rover page, not a launcher page —
+  and the leaf itself (`/wiki/vehicle/rh-01-pathfinder/`, 16,543 B, sha256
+  `6acd6cd5…`, title `RH-01 Pathfinder | Red Horizon`) carries **0**
+  occurrences of `Ariane 64`. The article's own `Ariane 64` designation is
+  therefore unaffected by the wiki siblings' publication; **no canon
+  contradiction is introduced**, and the article's own body
+  ("No launch day or time has been announced"; "no part of the flight stack has
+  been integrated with a launcher or delivered to a launch site") still holds
+  on the live origin. **Owner:** the cards that own those wiki releases (the
+  recent commits visible in `git log` show `t_cac9c84e` and `t_23484bb2` for
+  the wiki pages' `publication: published` flips); the wiki flip is its own
+  release decision on those pages' own cards, per ledger C4 / C6 / C9 of the
+  original release record.
+
+- **O-R3-2 — `/news/002-payload-selection/` has moved since the gate's
+  measurement.** The gate recorded it as `a8eb93c7…` (14,265 B); it now hashes
+  `2e6075d6…` (14,310 B). The +45 B matches the Form A `coalition` →
+  `programme` substitution at `t_2c6c5d7a` on `t_2c6c5d7a`'s 9-byte substitution
+  on `website/news/002-payload-selection.mdx` line 14 (a different article,
+  not the 004 one). The 004 article's own MDX is **not** touched by the 002
+  Form A card; the on-disk 004 MDX hashes `2875165e…` (4,468 B), unchanged
+  since card F's push. **Effect on this revision:** none — the article bytes
+  are the release's identity and they did not move. The card's `simulatedDate`
+  remains `2030-03-11`; no record-date drift; no `mediaLabel`/`mediaAlt`
+  drift.
+
+- **O-R3-3 — the wiki index `/wiki/` has moved since the gate's measurement**
+  (`821a2d84…`, 4,599 B at the gate → `4d15313e…`, 6,211 B now). The +1,612 B
+  reflects the wiki sibling cards' publication. The wiki index carries
+  **0** occurrences of `Ariane 64` and **0** withheld markers. **Effect on
+  this revision:** none — the 004 article and its card are not on the wiki
+  index's path.
+
+- **O-R3-4 — the shared checkout's `website/dist/` is not the live surface.**
+  The shared checkout's `dist/` carries `canonical.C1rFlAX3_12caC6.webp`
+  (filename differs from the live's `B5Cinj0C_ZPsHQo.webp`); the live origin
+  serves card F's detached-worktree build. The byte-identity measurement
+  above is between the **live origin** and card F's recorded live-origin
+  tables, not the shared checkout's `dist/`. A release-stage card must
+  never run `npm run build` or the postbuild guard (`scripts/check-dist.mjs`
+  prunes `dist/` on failure), so the shared checkout's `dist/` was not
+  re-built; the live origin is the authoritative surface and is what this
+  record reads.
+
+- **O-R3-5 — the local `dist/` and the live origin diverge on the article's
+  image cell height** (the shared checkout's cell measurements predate the
+  push). The card body's "Build hash (local `dist/`)" field is therefore
+  carried as **the live origin's bytes**, not as the shared-checkout
+  `dist/` bytes. Card F measured the same in its detached worktree; this
+  card's hash table re-verifies them against the live origin (matches card
+  F's recorded `live_origin` byte-for-byte).
+
+- **O-R3-6 — the released article carries exactly the strings the editorial
+  gate cleared.** `mediaLabel` sha256 matches card A's approved
+  `f3437f4b…` byte-for-byte at the live origin; `mediaAlt` sha256 matches
+  card A's approved `20d1f41e…` byte-for-byte; the article body is unchanged
+  across the revision (the body assertion in card E's construction script
+  holds); the kicker, summary, linkLabel, h1, h2 absence and document title
+  are unchanged; `simulatedDate: 2030-03-11` is on the page exactly once and
+  nowhere as an ISO form or `<time>` element.
+
+### Human-only escalations remaining open or answered during this run
+
+Carried forward from the brief and the chain's own cards; recorded here for
+the close-out card (`t_74d301a3`) and for any later reader of this record.
+
+| Escalation (from the brief or the chain)              | State at this verdict                                                                                                                                                                                                                                                                                                                                                                                  | Owner                                                                    |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Plate 5 admission (`lunch.png`)                       | **open**, default withhold (`ariane-64.md:131,130,142`) — reserved for step 005                                                                                                                                                                                                                                                                                                                        | human story owner                                                        |
+| Plate 6 admission (`travelling-to-mars.png`)          | **open**, default withhold — two independent bars (`:129`, `docs/SCENARIO.md:281`) plus unapproved burned-in text                                                                                                                                                                                                                                                                                      | human story owner                                                        |
+| Rights/account statement for the six plates           | **discharged 2026-09-18 20:42 CEST** on card C (`release_decision` line in card F's parent-task metadata); the C2PA manifest supplies who made them and with what (`gpt-image` 2.0 / OpenAI Media Service API / signed `OpenAI OpCo, LLC` / `trainedAlgorithmicMedia` / `c2pa.created` 2026-09-17, measured in card A's §3); the rights statement itself was the residual human sentence, now answered | human story owner — **answered**                                         |
+| Dossier release (`docs/vehicles/ariane/ariane-64.md`) | **unchanged**, publishable state unrecorded; no card in this graph wrote it                                                                                                                                                                                                                                                                                                                            | `t_1476a18c` / `t_206bee14` — dossier publication is a separate decision |
+| Wiki leaf `/wiki/vehicle/ariane-64/`                  | **not opened** by this graph; the operator's words were "news and article"                                                                                                                                                                                                                                                                                                                             | planner / a future wiki-chain                                            |
+| The shared-checkout collision (escalation 7)          | **resolved** by `t_1476a18c` and the chain's strict serial ordering (D gated on `t_1476a18c`); card F's path-limited commit published the article MDX cleanly                                                                                                                                                                                                                                          | dev lane                                                                 |
+| `lunch.png` filename spelling (Gate F)                | **unchanged**; withheld plates are not renamed, and this card did not rename it                                                                                                                                                                                                                                                                                                                        | not this graph's                                                         |
+| Re-render of plates 3 and 4 (escalation 7)            | **not pre-created**; plate 1 carries the chain, so a re-render is optional work for a future plate set                                                                                                                                                                                                                                                                                                 | operator / planner                                                       |
+
+### Inputs this revision rests on
+
+- Selection record: `.agents/work/reviews/ariane-plates-selection.md` §6, §8,
+  §9, §10 (card `t_58c90eb5`, parent task's release conditions C1–C7).
+- Plumbing proof: card `t_5da0efad` (card D) commit `e5eb03e` (pushed
+  `5646ebd..e5eb03e`, `rev-list origin/main..HEAD` = 0 at verdict); build cell
+  measurements recorded on `t_5da0efad` and re-asserted by this card against
+  the live origin.
+- Build and push proof: card `t_6607da8c` (card F) commit `a47812c` (pushed
+  `fd2554f..a47812c`, `rev-list origin/main..HEAD` = 0 at verdict); live
+  origin measured in the detached worktree `/tmp/verify-t_6607da8c`; C1
+  discharged on card C `2026-09-18 20:42 CEST`.
+- Editorial re-gate: `.agents/work/reviews/004-launch-provider-revision.md` §7,
+  verdict `approved`.
+- Continuity companion: `.agents/work/continuity/004-launch-provider-revision.md`,
+  `continuity clear`.
+- Live origin at this verdict:
+  `https://mars-ai-simulation.janpolacek.workers.dev` (`2026-09-18 ~23:05–23:10
+  CEST`); in-page `fetch` + `crypto.subtle.digest('SHA-256', …)`.
+- HEAD / origin/main at this verdict: `a47812c5ba75c492ee5ef4a01d5abcc0361efe65`;
+  `rev-list origin/main..HEAD` = 0; working tree clean for the released path
+  (`git diff HEAD -- website/news/004-launch-provider.mdx` empty).
+
+### Card G's own record-identity facts
+
+| Item                                          | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pre-append sha256 of this record              | `de7042c6b3d4bcd29d04bc0621f3d478c20b31138c7ef3f958edd13d18bdd57b` — 69,206 B, the file as it was at the end of Revision 2 (recorded on card E's commit)                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Post-append sha256 of this record             | see the card comment on `t_d7e3aa8b` (this card's handoff)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Article sha256 (revised, on disk)             | `2875165efc5dab1603e2d0d3fd966d3f5f595b755e7cd7087820125dd9c62a70` — 4,468 B; **attributed to card F's commit `a47812c`**, not card D's commit (`e5eb03e`) — the card-body field is corrected here                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Article sha256 (original release, superseded) | `7da71fec1f2ce0dbaff8aa2966e802b6de439eb78b73e34b1a8eafab5d764ca3` — 4,029 B, `publication: published`, no `media*`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Admitted plate (canonical path)               | `docs/vehicles/ariane/canonical.png`, sha256 `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b` (1,040,823 B; 1,122 × 1,402, 4:5 portrait; PNG, 8-bit RGB, non-interlaced)                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Media key                                     | `launch-vehicle-reference`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `mediaLabel` value (live)                     | `Ariane 64 · engineering reference` — 33 chars, 34 bytes (U+00B7 at index 10); sha256 `f3437f4b…` — **MATCH** to card A's approved                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `mediaAlt` value (live)                       | 347 chars, 347 bytes, ASCII only; sha256 `20d1f41e…` — **MATCH** to card A's approved                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `mediaCaption`                                | **none** — the key requires `captionCount: 0` and the schema rejects one                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Emitted derivative (live)                     | `_astro/canonical.B5Cinj0C_ZPsHQo.webp`, 21,566 B, sha256 `0dd2bf64c6c0cfd9933f653f02e11529e8d1b5d105b6a0aa1f50dda50f2ab61a` — **re-encode**; C2PA `caBX` chunk does **not** travel into the served webp                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| On-main plumbing paths (live)                 | `website/src/lib/media.ts` (sha256 `0c77441b…`), `website/src/features/news/media.ts` (`6bab6a3a…`), `website/src/lib/assets.ts` (`e1007f5e…`), `website/test/news-media.test.mjs` (`b549d0b8…`)                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Build hash (card F's detached worktree)       | the same byte-identity as the live origin (card F's `live_origin` table)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Local `dist/` (shared checkout)               | **not evidence** — mtime `2026-09-18 21:32 CEST`, predates card F's push; carries a different webp filename (`canonical.C1rFlAX3_12caC6.webp` vs the live's `B5Cinj0C_ZPsHQo.webp`); the live origin is the authoritative surface                                                                                                                                                                                                                                                                                                                                                                                          |
+| Live URL                                      | `https://mars-ai-simulation.janpolacek.workers.dev/news/004-launch-provider/` — 200, 10,371 B, sha256 `59e03ffac86855bbfc26d9aad334e5acfa0d6c6a04719c94cdca22a0eabb2fc5`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Live verification                             | **byte-identity match** between the live origin and card F's recorded `live_origin.article` (`59e03ffa…`); the live origin is the authoritative surface (the shared-checkout `dist/` was **not** used as evidence)                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Push (card F's commit)                        | `fd2554f..a47812c5ba75c492ee5ef4a01d5abcc0361efe65 main → origin` (clean fast-forward); `rev-list origin/main..HEAD` = 0 at this verdict                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Exact public scope                            | route `/news/004-launch-provider/` (with `<figure class="article-media">` rendering the placed plate as `<img src="/_astro/canonical.B5Cinj0C_ZPsHQo.webp" alt="…" width=1024 height=1280>` and the label `Ariane 64 · engineering reference`); card on `/` and `/news/` (4 cards, 004 is the active card, image cell now `805.7 px` measured in card D's detached worktree); one real-world string `Ariane 64` (5 occurrences on the article page: body ×4, summary ×1); record-date line `Simulated record date · 11 March 2030` once on the article page, once on each of `/` and `/news/` cards; **no `mediaCaption`** |
+| Supersedes                                    | the **plate and emitted derivative** row of Revision 1's `exact_public_scope` ("no plate and no emitted derivative"); the **frontmatter metadata** row's `media*` part of Revision 1's table ("no `media*`"); the **`simulatedDate`** row is preserved (no supersession); the **route**, the **card on `/` and `/news/`**, and the **`Ariane 64` designation** rows are preserved (no supersession); the **build hash** row is updated to point at the live origin, not the shared-checkout `dist/`                                                                                                                        |
+| Voiding condition                             | "any change to the revised bytes — the constructed post-delta MDX sha256 `2875165efc5dab1603e2d0d3fd966d3f5f595b755e7cd7087820125dd9c62a70` (4,468 B), or the plate's `docs/` path sha256 `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b`, or the on-main plumbing paths (`website/src/lib/media.ts`, `website/src/features/news/media.ts`, `website/src/lib/assets.ts`, `website/test/news-media.test.mjs`) — voids this revision and returns the package to the editorial gate." (carried forward from Revision 2)                                                                                    |
+
+### Out of scope
+
+- Editing `docs/vehicles/ariane/ariane-64.md` (the dossier).
+- The next record (step 005).
+- Re-running the editorial gate on card A's verdict (card E owns that).
+- A build, a guard CLI, a commit, a push, or any further deploy.
 
 ---
 
