@@ -6,6 +6,7 @@ import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-lo
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
+import launchVehicleReferenceSource from '../../../docs/vehicles/ariane/canonical.png';
 import vehicleStudioReferenceSource from '../../../docs/vehicles/pathfinder/canonical.png';
 
 /**
@@ -119,3 +120,22 @@ export const payloadSensorIllustration: ImageMetadata = payloadSensorIllustratio
  * release card wires the `vehicle-references` media key into renders it.
  */
 export const vehicleStudioReference: ImageMetadata = vehicleStudioReferenceSource;
+
+/**
+ * The approved studio reference of the Ariane 64 launch vehicle, imported from
+ * its canonical `docs/vehicles/ariane/` copy.
+ *
+ * Release: step 004 (2026-09-17), recorded by the editorial gate on
+ * `t_58c90eb5` (`.agents/work/reviews/ariane-plates-selection.md` §8, §10).
+ * The placed asset is `canonical.png` — sha256 `cf3323bf…`, 1,122 × 1,402,
+ * 1,040,823 B — and card C verified that it already sits at its admitted
+ * canonical name. It is the only file of the ariane dossier this site imports;
+ * the dossier's other studio renders are approved or withheld canonical
+ * references that nothing places (`front-left` is an admitted alternative
+ * only), so this is the one plate the `launch-vehicle-reference` key resolves.
+ *
+ * It is illustrative artwork, not mission imagery: the studio views are renders
+ * of a fictional vehicle for a fictional programme, and only the article the
+ * release card wires the `launch-vehicle-reference` media key into renders it.
+ */
+export const launchVehicleReference: ImageMetadata = launchVehicleReferenceSource;

@@ -3,6 +3,7 @@ import {
     asteriaPlate02,
     asteriaPlate03,
     identityMark,
+    launchVehicleReference,
     payloadSensorIllustration,
     vehicleStudioReference,
 } from '../../lib/assets';
@@ -77,6 +78,26 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'vehicle-references': {
         plates: [{ src: vehicleStudioReference, label: 'RH-01 Pathfinder · studio reference' }],
+    },
+    /**
+     * One approved studio reference of the Ariane 64 launch vehicle (card
+     * `t_58c90eb5`, step `004-launch-provider`).
+     *
+     * The asset is `docs/vehicles/ariane/canonical.png`, the primary studio
+     * view the editorial gate admitted and released (`.agents/work/reviews/
+     * ariane-plates-selection.md` §10, hash `cf3323bf…`). The label is the one
+     * approved with it and carries a U+00B7 MIDDLE DOT, which must not be
+     * normalised. No `provenance` line: this key renders no caption, so the
+     * "illustrative artwork" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     *
+     * Only this plate is placed. The dossier's other studio renders are
+     * canonical references that nothing imports; nothing in them matches a
+     * guard marker, and `scripts/guards.mjs` keeps its `timeline`-only withheld
+     * directory set.
+     */
+    'launch-vehicle-reference': {
+        plates: [{ src: launchVehicleReference, label: 'Ariane 64 · engineering reference' }],
     },
 };
 

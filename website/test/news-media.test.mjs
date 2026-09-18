@@ -50,6 +50,19 @@ const vehicleFrontmatter = {
     mediaLabel: 'RH-01 Pathfinder · studio reference',
 };
 
+/**
+ * The one-plate key the 004 launcher studio reference resolves through (card
+ * `t_58c90eb5`): one alt entry, no caption, and the label the editorial
+ * verdict approved for it — with a U+00B7 MIDDLE DOT that must not be
+ * normalised.
+ */
+const launcherFrontmatter = {
+    media: 'launch-vehicle-reference',
+    mediaAlt:
+        'Illustrative artwork, not a photograph: a white uncrewed heavy-lift launcher with one central core and four strap-on boosters, two on each side, five dark engine bells at its base and a short fairing on top, standing on a plain studio floor. A stand-in for the launcher this fictional mission is planned around; no real agency is named or implied.',
+    mediaLabel: 'Ariane 64 · engineering reference',
+};
+
 const fieldsOf = (issues) => issues.map((issue) => issue.field);
 
 describe('media keys and their requirements', () => {
@@ -59,11 +72,13 @@ describe('media keys and their requirements', () => {
             'asteria-plates',
             'payload-sensor-illustration',
             'vehicle-references',
+            'launch-vehicle-reference',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
         expect(isNewsMediaKey('payload-sensor-illustration')).toBe(true);
         expect(isNewsMediaKey('vehicle-references')).toBe(true);
+        expect(isNewsMediaKey('launch-vehicle-reference')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -107,6 +122,20 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    /*
+     * Step 004's key (card `t_58c90eb5`). The same one-plate, one-alt,
+     * no-caption, optional-label shape as `vehicle-references`, so the approved
+     * article frontmatter is written against the same contract.
+     */
+    it('requires one plate, one alt, no caption and no label for launch-vehicle-reference', () => {
+        expect(newsMediaRequirements['launch-vehicle-reference']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -122,7 +151,7 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['media']);
         expect(issues[0].message).toContain(
-            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references',
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference',
         );
     });
 
@@ -146,6 +175,22 @@ describe('media keys and their requirements', () => {
 
     it('accepts the approved one-plate vehicle frontmatter, label included', () => {
         expect(newsMediaIssues(vehicleFrontmatter)).toEqual([]);
+    });
+
+    it('accepts the approved one-plate launcher frontmatter, label included', () => {
+        expect(newsMediaIssues(launcherFrontmatter)).toEqual([]);
+    });
+
+    it('fails the launcher key with no alt, a blank alt, or a caption it never renders', () => {
+        expect(fieldsOf(newsMediaIssues({ media: 'launch-vehicle-reference' }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...launcherFrontmatter, mediaAlt: ['  '] }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...launcherFrontmatter, mediaCaption: 'A caption nobody renders' }))).toEqual(
+            [
+                'mediaCaption',
+            ],
+        );
+        // `requiresLabel: false` for this key, so an absent label is not an issue.
+        expect(newsMediaIssues({ ...launcherFrontmatter, mediaLabel: undefined })).toEqual([]);
     });
 
     it('fails the vehicle key with no alt, a blank alt, or a caption it never renders', () => {
@@ -247,11 +292,30 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('vehicle');
     });
 
+    /*
+     * The 004 launcher studio reference (card `t_58c90eb5`). The label is the
+     * approved string and carries the same U+00B7 MIDDLE DOT the 003 label
+     * does; the plate is imported from its canonical `docs/vehicles/ariane/`
+     * copy.
+     */
+    it('resolves launch-vehicle-reference to exactly one plate with the approved label', () => {
+        const set = newsMedia['launch-vehicle-reference'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Ariane 64 · engineering reference');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the dossier, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('canonical');
+        expect(String(set.plates[0].src)).toContain('ariane');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
         expect(resolveNewsMedia('payload-sensor-illustration')).toBe(newsMedia['payload-sensor-illustration']);
         expect(resolveNewsMedia('vehicle-references')).toBe(newsMedia['vehicle-references']);
+        expect(resolveNewsMedia('launch-vehicle-reference')).toBe(newsMedia['launch-vehicle-reference']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

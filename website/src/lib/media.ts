@@ -19,6 +19,7 @@ export const newsMediaKeys = [
     'asteria-plates',
     'payload-sensor-illustration',
     'vehicle-references',
+    'launch-vehicle-reference',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -58,6 +59,18 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * renders are deliberately not placed, so only one plate resolves.
      */
     'vehicle-references': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved studio reference of the Ariane 64 launch vehicle (card
+     * `t_58c90eb5`, step `004-launch-provider`).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts` must
+     * resolve the key to exactly one plate or the build fails, so the key
+     * cannot be declared without the released artwork behind it. The label is
+     * optional on this key (`requiresLabel: false`) as the editorial verdict
+     * decided, and `captionCount: 0` means the schema rejects a per-plate
+     * caption — the same one-plate shape the `vehicle-references` key uses.
+     */
+    'launch-vehicle-reference': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {
