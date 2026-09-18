@@ -76,6 +76,14 @@ once and the index can already hold another worker's entries.
   blob). The guard protects only a path staged in the shared index that still has an unstaged
   remainder and is committed **without** a pathspec.
 
+- **Gate a card on the owner instead of hunk-splitting a file another card is still writing.** A
+  path's working-tree copy can carry two edit families at once (`website/src/lib/assets.ts` held
+  the 002-swap imports and the release-comment amendment); any commit of that path publishes both
+  families, whole file. The ariane graph gated card D (`t_5da0efad`) on `t_1476a18c` for exactly
+  this reason, and the close-out card (`t_74d301a3`) then found the shared set already published
+  (operator `1d6adff`) and committed none of it. Measured 2026-09-17/18 — the hunk-split blob
+  recipe above is for when the owner's pass cannot wait.
+
 - **Validate the exact pushed commit in a detached worktree, never in the shared checkout.** The
   shared tree holds other cards' half-applied change sets — measured 2026-09-17, and still true:
   a deleted tracked payload source (`docs/payload/payload-sensor-illustration.png`) and an
