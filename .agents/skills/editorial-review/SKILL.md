@@ -372,6 +372,33 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   role instead of writing a field the build will reject. A frontmatter key the schema does not
   declare is a build failure, not a harmless extra.
 
+- **`kanban_create(parents=[X])` records `parent_id=X, child_id=new_card`** — the new card
+  waits on X being done, **not** the other way around. To make the new card the parent of
+  an existing card (the corrective→review flow this skill names), omit `parents=[…]` on
+  creation and use `kanban_link(parent_id=new_card, child_id=review)` separately. The
+  kernel's cycle-check rejects the inverse edge while the wrong-direction edge exists,
+  so `kanban_link(parent_id=corrective, child_id=review)` fails until the wrong-direction
+  edges are removed. Operator cleanup: `hermes kanban archive <miscreated duplicate>`
+  then `hermes kanban unlink <old_edge>` (the MCP `kanban_*` tool set exposes no
+  `archive` / `unlink` — those are operator-only via the `hermes kanban` CLI), then
+  `hermes kanban link <corrective> <review>`. Record the cleanup steps in the corrective
+  card's comments so the operator can run them in one pass; do not silently leave the
+  gate in a `needs_input` state pretending the link is right.
+
+- **`kanban_block(kind="dependency")` only waits on an incomplete upstream parent of the
+  blocked card.** If the blocked card's only actual parent is already `done`, the kernel
+  converts the request to `kind="needs_input"` (sticky until a human unblocks) instead of
+  parking in `todo` where the dispatcher would respawn it. The kernel's note reads
+  exactly that way: _"kind='dependency' only waits on an incomplete parent; no parent is
+  open, so this was recorded as needs_input …"_. Treat the conversion as a structural
+  signal that the corrective's link direction is wrong, not a tool fault; do not retry
+  the same call expecting a different result.
+
+- **`dprint fmt` round-trips drift markdown-table cell padding**, so a self-referential
+  post-format hash in the review record keeps changing on every invocation. Bind the
+  verdict row instead; the article hash is stable across the round-trip (no `.mdx`
+  plugin), so quote the article hash and drop the self-hash from the record.
+
 - A **gate-ledger card** whose gates are canon authorship, release-order or public-identity questions
   is a hold, not a package verdict. `kanban_complete` on it **releases its parent-gated children** — on
   the step-004 launch-provider ledger that is the draft card, and a writer handed a blank canon choice
