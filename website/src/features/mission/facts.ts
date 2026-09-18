@@ -15,7 +15,7 @@ export const missionIntro = {
     eyebrow: 'Mission brief',
     title: 'The programme at a glance',
     description:
-        'A clear public record of a fictional Mars mission, from early coalition planning to the work of its first surface vehicle.',
+        'A clear public record of a fictional Mars mission, from early programme planning to the work of its first surface vehicle.',
 };
 
 export const missionFacts: readonly MissionFact[] = [
