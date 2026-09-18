@@ -3,13 +3,14 @@
  *
  * The release controls in `docs/SCENARIO.md` keep the mission timeline private.
  * Step 003 (2026-09-17) released the surface-vehicle dossier's prose and its
- * approved studio references and held its scene image back, so the withheld set
- * is one directory plus one file of the released dossier:
- * `gatedDirectoryNames` and `gatedFilePathSegments` below. Those paths used to
- * be protected by a copy step that simply did not copy their files: a reference
- * that bypassed the copy would have shipped silently, and a stale generated
- * copy was invisible to `git status`. These guards fail the build instead of
- * relying on a reviewer to notice.
+ * approved studio references and held its scene image back; step 004's plate
+ * review released one Ariane 64 engineering-reference plate and held two more
+ * plates back. The withheld set is therefore one directory plus the individually
+ * withheld files below (`gatedDirectoryNames` and `gatedFilePathSegments`).
+ * Those paths used to be protected by a copy step that simply did not copy their
+ * files: a reference that bypassed the copy would have shipped silently, and a
+ * stale generated copy was invisible to `git status`. These guards fail the
+ * build instead of relying on a reviewer to notice.
  *
  * Every withheld path is written as separate path segments so that this file
  * does not itself contain a reference into a gated path.
@@ -59,9 +60,18 @@ export const gatedSourceDirectories = gatedDirectoryNames.map((name) =>
  * both scanners: the directory name above used to be the only thing protecting
  * this file, so retiring that name without this rule would leave it protected
  * by nothing — which is exactly what `website/test/guards.test.mjs` measures.
+ *
+ * Step 004's plate review (`.agents/work/reviews/ariane-plates-selection.md`)
+ * released one Ariane 64 plate for the `launch-vehicle-reference` key and
+ * withheld two more fail-closed: the pad lift-off is step 005 scope, and the
+ * in-transit plate carries a roundel mark and unapproved burned-in text. They
+ * join the same per-file rule so an import of either plate fails the build; the
+ * released Ariane 64 plate is deliberately not listed here.
  */
 export const gatedFilePathSegments = [
     [gatedTreeDirectory, 'vehicles', 'pathfinder', 'contact-arm-scene.png'],
+    [gatedTreeDirectory, 'vehicles', 'ariane', 'lunch.png'],
+    [gatedTreeDirectory, 'vehicles', 'ariane', 'travelling-to-mars.png'],
 ];
 
 /** Absolute paths of the individually withheld files. */

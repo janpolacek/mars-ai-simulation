@@ -21,8 +21,10 @@
  * It also pins both retirements: the landing-region name released for article
  * 001 and the surface-vehicle dossier released at step 003 (both 2026-09-17)
  * are no longer gated, while every other marker and every withheld path — the
- * whole mission timeline, and the vehicle dossier's scene image on its own —
- * stays in force.
+ * whole mission timeline, the vehicle dossier's scene image on its own, and the
+ * two Ariane 64 plates step 004 withheld — stays in force. The released Ariane
+ * 64 plate must stay outside that set; the guard block at the bottom measures
+ * both halves.
  */
 import { execFile } from 'node:child_process';
 import { existsSync, lstatSync, realpathSync } from 'node:fs';
@@ -693,9 +695,14 @@ describe('guard retirement: the released vehicle material and the withheld scene
     it('retires the vehicle dossier directory and keeps the timeline withheld', () => {
         expect(gatedDirectoryNames).toContain('timeline');
         expect(gatedDirectoryNames).not.toContain('vehicle');
-        // Non-vacuity for the per-file rule below: exactly one file is withheld
-        // individually, and it is the dossier's scene image.
-        expect(gatedSourceFiles.map((file) => basename(file))).toEqual(['contact-arm-scene.png']);
+        // Non-vacuity for the per-file rule below: exactly three files are
+        // withheld individually — the surface-vehicle dossier's scene image and
+        // the two Ariane 64 plates step 004 withheld.
+        expect(gatedSourceFiles.map((file) => basename(file)).sort()).toEqual([
+            'contact-arm-scene.png',
+            'lunch.png',
+            'travelling-to-mars.png',
+        ]);
     });
 
     it('passes a build output that carries the released vehicle strings', async () => {
@@ -803,6 +810,109 @@ describe('guard retirement: the released vehicle material and the withheld scene
         expect(kinds).toContain('gated-name');
         expect(kinds).toContain('gated-content');
     });
+});
+
+describe('guard scope: the Ariane 64 plates step 004 withheld', () => {
+    /*
+     * Step 004's plate review (card A, `t_58c90eb5`) admitted one plate for
+     * the public `launch-vehicle-reference` key and withheld the two plates
+     * below fail-closed. The withheld pair now carries the same per-file rule
+     * as the surface-vehicle scene image, and the released designation is
+     * deliberately outside it — a marker that gated the released plate would
+     * be the wrong direction for this release. Both halves are measured here:
+     * a reference into either withheld plate fails the source scan, a copied
+     * or re-encoded derivative of either fails the build output, and the
+     * released plate keeps passing everywhere.
+     */
+    const withheldArianePlates = ['lunch.png', 'travelling-to-mars.png'];
+
+    it('withholds exactly the two Ariane 64 plates and keeps the released plate out', () => {
+        const names = gatedSourceFiles.map((file) => basename(file));
+        for (const name of withheldArianePlates) {
+            expect(names).toContain(name);
+        }
+        expect(names).not.toContain('canonical.png');
+    });
+
+    it('passes a source reference into the released Ariane 64 plate', async () => {
+        const root = await temporaryDirectory('rh-guard-ariane-released-');
+        const file = join(root, 'src', 'lib', 'planted.ts');
+        await mkdir(join(root, 'src', 'lib'), { recursive: true });
+        await writeFile(file, `import plate from '../../../docs/vehicles/ariane/canonical.png';\n`);
+
+        expect(await scanSourceForGatedReferences({ directory: root })).toEqual([]);
+    });
+
+    it('passes a build output that carries the released Ariane 64 plate derivative', async () => {
+        const sources = await collectGatedSources();
+        const dist = await temporaryDirectory('rh-guard-ariane-released-dist-');
+        await mkdir(join(dist, '_astro'), { recursive: true });
+        await writeFile(join(dist, '_astro', 'canonical.ABCD1234.webp'), 're-encoded placeholder bytes');
+
+        expect(await checkDist({ directory: dist, sources })).toEqual([]);
+    });
+
+    for (const withheldName of withheldArianePlates) {
+        it(`still fails a source reference that resolves to the withheld ${withheldName}`, async () => {
+            const root = await temporaryDirectory('rh-guard-ariane-reference-');
+            const file = join(root, 'src', 'lib', 'planted.ts');
+            await mkdir(join(root, 'src', 'lib'), { recursive: true });
+            const withheld = gatedSourceFiles.find((entry) => basename(entry) === withheldName);
+            expect(withheld, `${withheldName} is not in the withheld-source set`).toBeDefined();
+            /*
+             * Written so this file holds no literal path into the withheld
+             * file: the `./` segment is normalised away by the resolution,
+             * which is then the only reason the offence fires.
+             */
+            const reference = `${relative(dirname(file), dirname(withheld))}/./${basename(withheld)}`;
+            await writeFile(file, `import plate from '${reference}';\n`);
+
+            const offences = await scanSourceForGatedReferences({ directory: root });
+
+            expect(offences.map((offence) => offence.kind)).toEqual(['gated-file-reference']);
+            expect(offences[0].file).toBe(file);
+            expect(offences[0].detail).toBe(reference);
+        });
+
+        it(`still fails a source file that names the withheld ${withheldName} outright`, async () => {
+            const root = await temporaryDirectory('rh-guard-ariane-literal-');
+            const file = join(root, 'src', 'pages', 'planted.astro');
+            await mkdir(join(root, 'src', 'pages'), { recursive: true });
+            const withheld = gatedSourceFiles.find((entry) => basename(entry) === withheldName);
+            expect(withheld, `${withheldName} is not in the withheld-source set`).toBeDefined();
+            const withheldPath = relative(projectDirectory, withheld).split('/').join('/');
+            await writeFile(file, `<img src="/${withheldPath}" alt="" />\n`);
+
+            const offences = await scanSourceForGatedReferences({ directory: root });
+
+            expect(offences.map((offence) => offence.kind)).toContain('gated-file');
+            expect(offences[0].file).toBe(file);
+        });
+
+        it(`still fails a build output that carries the withheld ${withheldName} or a derivative`, async () => {
+            const sources = await collectGatedSources();
+            const source = sources.find((entry) => basename(entry.path) === withheldName);
+            expect(source, `${withheldName} is not in the withheld-source set`).toBeDefined();
+
+            // A copied file fails by name and by content hash...
+            const copied = await temporaryDirectory('rh-guard-ariane-copied-');
+            await mkdir(join(copied, 'assets'), { recursive: true });
+            await copyFile(source.path, join(copied, 'assets', source.name));
+            const copiedKinds = (await checkDist({ directory: copied, sources })).map((offence) => offence.kind);
+
+            expect(copiedKinds).toContain('gated-name');
+            expect(copiedKinds).toContain('gated-content');
+
+            // ...and a re-encoded derivative fails by leading name token,
+            // which is the name an emitted copy of it would carry.
+            const emitted = await temporaryDirectory('rh-guard-ariane-emitted-');
+            await mkdir(join(emitted, '_astro'), { recursive: true });
+            await writeFile(join(emitted, '_astro', `${source.stem}.ABCD1234.webp`), 're-encoded placeholder bytes');
+            const emittedKinds = (await checkDist({ directory: emitted, sources })).map((offence) => offence.kind);
+
+            expect(emittedKinds).toContain('gated-name-stem');
+        });
+    }
 });
 
 describe('publication gate', () => {
