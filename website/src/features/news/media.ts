@@ -45,8 +45,10 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
     /**
      * One illustration for the 002 payload article (card `t_4b49346b`).
      *
-     * The asset is the editor-approved candidate (`t_327899d5`); the label is
-     * the one approved with it. No `provenance` line: the registry prints it
+     * The asset is `docs/payload/03-dust-scanning.png` (the operator's
+     * 2026-09-17 swap instruction), which replaced the editor-approved
+     * `01-spectral-sampling` plate this key shipped with; the label is the one
+     * approved with the key. No `provenance` line: the registry prints it
      * only through `plateCaptionText()`, which runs for plate sets, and this key
      * renders no caption — the "illustrative artwork" statement reaches the
      * reader through the article's approved `mediaAlt` instead.
@@ -58,7 +60,7 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      * One approved studio reference of the surface vehicle (card `t_accf6f7a`,
      * step `003-vehicle-design`).
      *
-     * The asset is `docs/vehicle/canonical.png`, the primary studio view the
+     * The asset is `docs/vehicles/pathfinder/canonical.png`, the primary studio view the
      * editorial gate confirmed by content hash (`t_1e84c815`,
      * `.agents/work/reviews/003-vehicle-design.md` §2). The label is the one
      * approved with it and carries a U+00B7 MIDDLE DOT, which must not be

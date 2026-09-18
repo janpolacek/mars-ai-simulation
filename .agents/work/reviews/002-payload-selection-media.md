@@ -151,6 +151,13 @@ the whole second sentence are the manifest's wording and describe the pixels acc
 Only `01-spectral-sampling` may be exported. A later switch to 03 needs one new editor sentence
 (this record does not pre-authorise it) plus the corrected alt.
 
+> **Supersession pointer, inserted 2026-09-17 20:10 CEST (card `t_00b65567`, appended, not
+> rewritten):** the rule in the two lines above is superseded — the switch it anticipates was made
+> by the operator's instruction of 2026-09-17, and the editor sentence it requires is recorded in
+> **§11 Revision 2** below. The plate for the 002 band is now `03-dust-and-contact-closeup`
+> (`47d39a0b…`), not `01-spectral-sampling`; the rejection rows above (lines 147–149) stand
+> unchanged, and the row 147 verdict "usable as an alternative only" is superseded by §11.1.
+
 ## 5. Corrections to the manifest's evidence claims (not to its decision)
 
 Recorded because a downstream reader would otherwise carry them forward as facts:
@@ -294,3 +301,259 @@ byte-stable across the whole run; this record is the only file this gate added t
 **Final label: `approved`** (editor sign-off on the 002 news-card media choice, card
 `t_327899d5`, 2026-09-17 — an editorial sign-off only; human canon and release approval remain
 required before any public deployment)
+
+---
+
+## 11. Revision 2 — the operator's 2026-09-17 plate swap (card `t_00b65567`)
+
+Appended 2026-09-17 20:10–20:20 CEST by `mars-ai-simulator-editor`. Revision 1 (§1–§10 and the
+label above) is preserved as written: this section supersedes it only where §11.5 says so.
+Revision 1 measured 49,588 B / 296 lines / SHA-256
+`eb99eb266e2c076109db12ee4e3c00d18f1c7b38b57244c5cfb3fcd12707360b`. No other record cites this
+file by hash (checked: the three citations in `.agents/work/releases/` and the two in
+`.agents/work/briefs/` name it by path and label), so the append does not break a citation.
+
+What happened: the operator directed a plate swap in this shared checkout on 2026-09-17 ~19:50
+CEST — verbatim, _"replace payload/01-spectral-sampling.png with payload-03-dust-scanning.png"_ —
+and an uncarded session applied it (the article's `media:` key, `website/src/lib/assets.ts`,
+`website/src/features/news/media.ts`, `website/news/002-payload-selection.mdx` `mediaAlt`, and two
+tests now point at the swapped file; nothing is committed; `HEAD` = `origin/main` = `5a59f34`).
+Revision 1's closing rule allows the switch but reserves the sentence for this role. This section
+is that sentence, at the size of the measured facts.
+
+### 11.1 The decision
+
+> **Editor decision, 002 news-card plate (2026-09-17, card `t_00b65567`,
+> `mars-ai-simulator-editor`):** the plate the swap instruction names and the checkout has
+> imported — `docs/payload/03-dust-scanning.png`, SHA-256
+> `a70d306cb50622f859b1ebad3e2f494491feaebd26e3f157650ec91d056e2415` — is **returned for
+> revision**: those bytes are the render §4 row 149 entered as `03-attempt2-REJECTED-side-mattes-stars`
+> (`rejected (confirmed)`), and my own measurement finds in them the two defects that row names —
+> **124 px of solid black at each side edge** (12.1 % of the width per side, 24.2 % of the frame,
+> against the brief's edge-to-edge square) and a **starry sky over a horizon** — so it must not be
+> published, imported, or referenced anywhere. The plate released for the 002 news-card band
+> instead is candidate **`03-dust-and-contact-closeup`**, SHA-256
+> `47d39a0bbe4e69992f3aa5c005015b2373aa19b0d4126787536701cf3562aed9`, exported to the stable
+> dossier path **`docs/payload/payload-sensor-illustration.png`** at that hash and carrying the
+> corrected alt text in §11.4 — the one editor sentence Revision 1 line 151 requires, and the
+> corrected alt it names as the other half of the switch.
+
+The decision rests on the pixels, not on the instruction: an instruction from the programme owner
+makes a plate _eligible_ for this role's ruling, and it cannot make a render carry a composition
+the brief forbids (see §11.2). It is this role's call to make — the human waived their own sign-off
+on the media choice on `t_5a62fb28` Gate 1, quoted in §2 above, and §Verdict already records that
+"any swap invalidates this sign-off and needs one fresh editor line". This is that line.
+
+### 11.2 Why the placed bytes fail, on the measured ground
+
+| Finding                                          | Measurement (2026-09-17 20:0x CEST)                                                                                                                                                                                                                                                                                                                                                            | Verdict       |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Side mattes: the square is not edge-to-edge      | Two runs of **124 px of solid black at the left and right edges** (column mean luminance 0.6–3.5/255), i.e. **12.1 % of the width per side and 24.2 % of the frame**; void-black fraction of the whole plate **0.2409**. The render's own prompt required "fills the whole square frame edge to edge with one continuous scene, no inset panel, no matte, no border, no frame and no vignette" | **FAIL**      |
+| The scene inside the bars is bright and mid-tone | Centre-strip mean luminance **123.2**, top-left quadrant **83.8**, top-right **91.0** — so the bars read as two solid black stripes flanking a lit picture, not as a deliberate black-field plate. On the band's light plate (`#eeebe5`, `tokens.css:22`) the frame reads as a mis-exported, pillarboxed image                                                                                 | **FAIL**      |
+| Star field over a horizon                        | Own vision read of the placed file (2026-09-17 20:0x): a hazy, star-filled sky with specks "throughout the upper half … extending down to the horizon line" and a "distinct, roughly level horizon line" over cracked ground. The render's own prompt forbade exactly this ("no star field, no starry sky, no constellations"), and the accepted slot-03 concept asks for "no horizon, no sky" | **FAIL**      |
+| Rejected-render identity                         | The placed bytes are `sha256 = a70d306c…`, byte-identical (1,721,053 B) to `tools/visual-generator/stories/002-payload-selection/candidates/03-attempt2-REJECTED-side-mattes-stars.png`; the run record's own `reject_reason` is "black side mattes … and a star field across the upper area despite the prompt. Vision read 2026-09-17 10:11"                                                 | **confirmed** |
+| The file name does not identify the plate        | `03-dust-scanning` appears in no manifest, no review row and no scratch candidate — only as this import. Revision 1's §3/§4 candidate set is `01-spectral-sampling`, `02-two-views-one-ground`, `03-dust-and-contact-closeup` (and two rejected attempts). The name cannot be traced to a reviewed artefact                                                                                    | **recorded**  |
+
+A decision that the matte and star-field defects were acceptable would have to be argued on the
+band, and it is not arguable on these numbers: a quarter of the frame is chrome-black bars around a
+lit scene, and the upper half carries a starry sky. §Review table row 50/56 states the same rule
+positively for the two accepted candidates ("scene is full-bleed with no black margin"; "no
+horizon, no sky, no stars"), and row 149 rejected this render for the same two reasons.
+
+### 11.3 Alt-text verdict — returned
+
+The `mediaAlt` the uncarded session wrote (working-tree article, line 11) reads: _"Illustrative
+artwork, not mission photography: a close view of cracked, dust-covered ground with a thin line of
+light running along a fissure across it, under a broad shaft of warm light in which fine dust
+grains catch points of light in the air above."_
+
+**Returned**, on two counts:
+
+1. It does not describe the plate it is attached to. The placed bytes are a **wide** view with a
+   **sky and a horizon**; the alt calls them "a close view of … ground" and names neither the sky
+   nor the horizon, so a reader who cannot see the image is told the top half of the picture does
+   not exist.
+2. It re-labels the rejected feature as an accepted one: the star-like field becomes "fine dust
+   grains catch[ing] points of light in the air above", which is how the framing defect would slip
+   past a reader. That is the same class of failure Revision 1 row 57 recorded against the
+   manifest's own 03 alt.
+
+What survives and is re-confirmed: the **"Illustrative artwork, not mission photography"**
+statement is present and must survive — for a one-plate key `set.provenance` is never emitted
+(§6), so the alt text is the only place it reaches a reader — and the string carries none of the
+four gated text markers, no date, no coordinate and no hardware claim.
+
+### 11.4 The plate released instead, and the alt text it needs
+
+| Field              | Value                                                                                                                                                                                                                                                                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Candidate id       | `03-dust-and-contact-closeup`                                                                                                                                                                                                                                                                                                          |
+| SHA-256 (ruled on) | `47d39a0bbe4e69992f3aa5c005015b2373aa19b0d4126787536701cf3562aed9`                                                                                                                                                                                                                                                                     |
+| Private scratch    | `tools/visual-generator/stories/002-payload-selection/candidates/03-dust-and-contact-closeup.png` (1,788,007 B, 1024 × 1024 RGB, git-ignored)                                                                                                                                                                                          |
+| Export path        | **`docs/payload/payload-sensor-illustration.png`** — the stable filename the manifest's own §"Proposed stable export" plans for whichever candidate is selected, and the path the key, the dossier file and both media tests carried on `origin/main` before the swap. It keeps a scratch slot number out of the served `/_astro/` URL |
+| Label              | Unchanged: `Red Horizon // payload sensor illustration`                                                                                                                                                                                                                                                                                |
+| Caption            | None — the key is `{ plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false }` (`src/lib/media.ts:49`)                                                                                                                                                                                                                      |
+
+**Approved alt text (adopt verbatim, replacing the string in §11.3):**
+
+> Illustrative artwork, not mission photography: a close-up of a rough, dust-caked rock surface lit
+> at a grazing angle, split by a jagged diagonal fissure, with fine dust grains catching points of
+> light in the air above it. A stand-in image for a payload built to inspect rock texture and
+> airborne dust at close range.
+
+Why this candidate and this wording:
+
+- It is the only slot-03 render that passes every reject rule, and it is the render Revision 1
+  recorded as "the strongest alternative if 01 ever falls away — with a rewritten alt and a fresh
+  editor line". Both halves are supplied here, so it needs no further pass.
+- Own vision read of `47d39a0b…` (2026-09-17 20:0x): full-bleed to all four edges, **0 px**
+  near-black column runs at either edge, void-black fraction **0.0005**, no horizon, no sky, no
+  star field; a rough, cracked, dust-caked rock surface with a **jagged diagonal fissure** and
+  airborne dust specks above it. The alt above describes those measurements and deliberately
+  promises **no** level pale line, which is the error Revision 1 row 57 recorded against the
+  manifest's 03 alt ("no level pale line; a diagonal fissure the alt omits").
+- Legibility, measured rather than assumed: the plate's label corner (mean sRGB 98.4, 34.0, 17.1)
+  gives the chip text (`#fff8e8`, `tokens.css:24`, over `rgba(1,0,0,0.78)`) **4.8:1** — above the
+  WCAG AA threshold of 4.5:1 for normal text, below AAA — and the plate corner stands **10.0:1**
+  against the band's light plate, so the artwork still reads as a plate on light ground. For the
+  record: my compositing method returns 4.8–5.6:1 across the three candidates where §Review table
+  row 63 records 17.3–19.8:1; the difference is method, not measurement drift, and **no candidate
+  fails AA under either**. The margin is thin enough that the dev card should confirm the chip at
+  the deployed band width, which §8 item 5 already asks for.
+- The candidate covers the two scopes the alt names — airborne dust and close contact inspection —
+  so the wording claims nothing the pixels do not show and nothing about hardware.
+
+### 11.5 Supersession ledger
+
+| Item                                                 | Was                                                           | Now                                                                                                                                                                                                                                   |
+| ---------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| §4 line 151-152, the export rule                     | "Only `01-spectral-sampling` may be exported …"               | **Superseded** by §11.1: the exported plate is `03-dust-and-contact-closeup` (`47d39a0b…`)                                                                                                                                            |
+| §4 row 147, `03-dust-and-contact-closeup` verdict    | "usable as an alternative only — not approved for export"     | **Superseded** in verdict (now the named plate); its measurements (no black field, muddiest of the three on a light plate) stand and are accepted as the plate's known cost                                                           |
+| §4 row 149, `03-attempt2-REJECTED-side-mattes-stars` | `rejected (confirmed)`                                        | **Stands, and is reconfirmed on the bytes** — this is the render the swap placed                                                                                                                                                      |
+| §3, the approved candidate table for the band        | `01-spectral-sampling` named as the single asset for the band | **Superseded as the band's assignment**; the sign-off on `01` itself (composition, alt, label) is not revoked — `01` becomes an approved, unplaced candidate, byte-identical at `docs/payload/01-spectral-sampling.png` (`8839f66a…`) |
+| §11.3 alt verdict                                    | the session's rewritten alt string                            | **Returned**; replaced by the §11.4 string                                                                                                                                                                                            |
+
+Nothing else in Revision 1 changes. In particular: the "no caption" contract, the label, the
+provenance note that a one-plate key prints no `set.provenance`, and the §8 items all stand.
+
+### 11.6 What the next owner must change, and the one file that must not be published
+
+Owner: `mars-ai-simulator-dev` on **`t_1476a18c`** (the publication card, held behind this card —
+the operator creates it, not this role).
+
+1. Place the released bytes at `docs/payload/payload-sensor-illustration.png`, SHA-256
+   `47d39a0b…` (copy from the scratch candidate above, or move the untracked
+   `docs/payload/04-dust-and-contact-closeup.png`, which holds the same bytes). Prove the hash of
+   the copied file.
+2. `website/src/lib/assets.ts`: the import goes back to
+   `'../../../docs/payload/payload-sensor-illustration.png'` (the `origin/main` path), and its doc
+   comment must record this decision instead of the swap (it currently names the rejected bytes as
+   what the site renders).
+3. `website/src/features/news/media.ts`: the label stays as it is; its comment must record this
+   decision instead of the swap.
+4. `website/news/002-payload-selection.mdx`: `mediaAlt` becomes the §11.4 string **verbatim** — no
+   other frontmatter field moves (`media:`, `mediaLabel:`, `publication: published`,
+   `simulatedDate: 2027-03-19`, `order: 2` all stay). Required end state: the frontmatter delta
+   against `origin/main` is exactly that one line, so the published article keeps one
+   `simulatedDate` and the date is not touched by a media change.
+5. `website/test/media-scope.test.mjs`: `payloadSource` and the
+   `expect(payloadSourceName).toBe(…)` assertion go back to `payload-sensor-illustration.png`
+   (`origin/main`'s form).
+6. `website/test/news-media.test.mjs`: the payload assertion goes back to
+   `toContain('payload-sensor-illustration')` (`origin/main`'s form).
+7. **Do not publish, import or reference `docs/payload/03-dust-scanning.png`** (`a70d306c…`) — it
+   is returned material. Keep it (and the untracked `01`/`02`/`04` dossier copies) out of the
+   published set and report them as held decision material; the scratch tree remains the archive.
+   If the untracked rejected copy is deleted from `docs/payload/`, say so and name the scratch
+   original that still holds it.
+8. Validate as the dev card already requires (`npm test`, `npm run build`, `check-dist`, `lint`,
+   `typecheck`) and quote the real output.
+
+### 11.7 Continuity, spoiler and confidentiality verdict
+
+- **Chronology and record date: unaffected.** This decision advances no timeline step; the
+  article's record date (`simulatedDate: 2027-03-19`, `docs/SCENARIO.md` milestone table, assigned
+  on `t_531698d9`) is not in scope and does not move. The live page still prints it under the
+  in-fiction label (measured below).
+- **Canon: no claim changes.** The plate is illustrative artwork for a fictional programme. The
+  released candidate depicts rock surface and airborne dust only — no vehicle, no launcher, no
+  landing area, no date, no coordinate, no real agency, no insignia. Both the bytes and the alt
+  text carry none of the four gated text markers and no step-003+ fact.
+- **Spoiler safety: clear.** The plate's file name (`payload-sensor-illustration.png`) and the
+  label carry nothing gated; the returned name (`03-dust-scanning`) is neither gated nor public
+  once it is not imported.
+- **Confidentiality of this section:** withheld material appears by location, not by value (the
+  gated markers as the list in `website/scripts/guards.mjs`, the private timeline as a directory
+  named by role). The two short prompt quotes reproduced here are from the git-ignored scratch tree
+  and contain no withheld name, coordinate or date.
+- **Rights: unchanged and still live work.** Both renders come from the same local model set
+  recorded in the manifest, so the swap changes no rights class; §8 item 3 (the model files' own
+  licences, unread) stays open as live work for its existing owner, now covering a published
+  illustration rather than a future one.
+
+### 11.8 The published surface, measured at verdict time
+
+Measured 2026-09-17 20:0x CEST in-page on the live origin (a local `dist/` is not the live
+surface — `origin/main` is what the push-triggered build serves):
+
+| Surface                                                                         | Value                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `https://mars-ai-simulation.janpolacek.workers.dev/news/002-payload-selection/` | HTTP 200, 14,265 B; title `🐴 Choosing what a Mars rover carries.                                                                                                                                                                                                               | Red Horizon``; 0 hits for ``dust-scanning``; 1 hit for ``payload-sensor-illustration` |
+| The plate the live route renders                                                | `/_astro/payload-sensor-illustration.BprT2vSN_ZRie9U.webp`, HTTP 200, `image/webp`, 54,982 B, SHA-256 `9860e70059a792c5a20bdd677e134230f754ebbd6c15d02440329e4553025f43` (the `BprT2vSN` fragment is the same source fragment §8 recorded for the 01 plate at the earlier gate) |
+| The live alt text                                                               | The Revision 1 approved 01 alt, verbatim ("several coloured beams of light … a payload built to sense what a rock is made of")                                                                                                                                                  |
+| The live record-date line                                                       | `Simulated record date · 19 March 2027` — the in-fiction label, no machine-readable date                                                                                                                                                                                        |
+
+Consequence: the live article is **not** in a broken state. It renders the approved `01` plate
+under the approved alt, so returning the swap withholds nothing that is currently public; the
+returned bytes simply must not reach the deploy.
+
+### 11.9 Release decision
+
+- **Released:** the corrected 002 plate change — `docs/payload/payload-sensor-illustration.png` at
+  SHA-256 `47d39a0b…`, the `assets.ts` import above, the §11.4 `mediaAlt` string, label unchanged —
+  may be published to the public route `/news/002-payload-selection/`, after the sibling
+  `t_206bee14` decision releases the rest of the change set and the dev card's validation is green.
+  The dev card's push is the deploy (`main` is wired to the automatic build); this sentence is the
+  release decision that must exist before it.
+- **Withheld:** `docs/payload/03-dust-scanning.png`, SHA-256 `a70d306c…`, must not be published,
+  imported, or referenced by any surface; while it stays imported the change set is not
+  releasable.
+- **Condition:** if the dev card cannot place `47d39a0b…` at the required hash, hold the card and
+  report it — the article must not be published with the swapped file as a fallback.
+
+### 11.10 Outstanding items and owners
+
+1. **The dev card (`t_1476a18c`) applies §11.6** — next owner, `mars-ai-simulator-dev`. Its body
+   names the editor decision card as `t_f21c4b93`; **no such card exists on the board** (checked
+   2026-09-17 20:0x) and the card's own parent edge points at `t_00b65567`, so the decision card is
+   this one. The wording fix belongs to the card's owner (the operator) — this role does not edit
+   another card.
+2. **If the story owner meant the returned composition itself** — a wide lit ground under a sky
+   with a level line of light — no reviewed candidate carries it, and as rendered it fails two
+   reject rules, so it would need a **fresh, compliant render** under a corrected prompt. That is a
+   direction from the story owner plus a visuals card, not a release decision, and it is the only
+   part of this card's question this role deliberately does not answer. The plate released today
+   is `47d39a0b…`; an operator who prefers the fresh-render path holds `t_1476a18c` before it
+   publishes.
+3. **Model licences (§8 item 3)** — still open, still live work, same owner recommendation.
+4. **Label chip at the deployed band width (§8 item 5)** — confirm in the dev card's preview; the
+   measured contrast passes AA (§11.4) but with little headroom.
+5. **`docs/README.md` dossier row for `docs/payload/` (§8 item 4)** — still owed;
+   `project-documentation` under that file's own rule. `docs/README.md` currently names no
+   `payload` dossier.
+
+### 11.11 State at verdict time
+
+| Check                     | Value                                                                                                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Time                      | 2026-09-17 20:02–20:20 CEST                                                                                                                                                     |
+| `HEAD` / `origin/main`    | both `5a59f340c56e1ed2a8cb0b3167589816c3af5392`; nothing committed or pushed by this card                                                                                       |
+| Placed plate (returned)   | `docs/payload/03-dust-scanning.png` `a70d306c…`, 1,721,053 B                                                                                                                    |
+| Released plate (scratch)  | `…/candidates/03-dust-and-contact-closeup.png` `47d39a0b…`, 1,788,007 B                                                                                                         |
+| Dossier today             | `01` `8839f66a…` · `02` `8fb37ac5…` · `03-dust-scanning` `a70d306c…` · `04-dust-and-contact-closeup` `47d39a0b…`; `payload-sensor-illustration.png` deleted in the working tree |
+| Article                   | working tree `8dc22a4f…` (swap wiring + §11.3 alt); `origin/main` `7b69bd7f…` (live)                                                                                            |
+| Files this revision wrote | `.agents/work/reviews/002-payload-selection-media.md` only — no `website/`, no `docs/`, no commit, no push, no deploy, nothing copied out of scratch                            |
+| Scratch used              | `/tmp/rh_plate_probe.py` (stdlib PNG decoder) and `/tmp/rh_chip_contrast.py` (chip contrast) — both outside the repository                                                      |
+
+**Revision 2 final label: `changes_requested`** — the swap as placed is returned; the plate named
+in §11.1 is released for the 002 band, and the placement it requires is §11.6.

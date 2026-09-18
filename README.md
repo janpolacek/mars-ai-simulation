@@ -166,7 +166,7 @@ docs/
   README.md                                           the file-by-file map of the folder
   HARNESS.md                                          the agent harness and its human gates
   timeline/                                           the private release order, one file per step
-  brand/  vehicle/  area/                             one dossier per subject, with its assets
+  brand/  vehicles/  area/                             one dossier per subject, with its assets
 ```
 
 - [`docs/GENERAL.md`](docs/GENERAL.md) — intent, audience, vocabulary, and the
@@ -179,7 +179,8 @@ docs/
 - [`docs/timeline/`](docs/timeline/README.md) — the private release order: one numbered file
   per mission step, which controls when a fact may become public.
 - [`docs/brand/`](docs/brand/BRAND.md) — the approved visual identity and its mark.
-- [`docs/vehicle/`](docs/vehicle/VEHICLE.md) — the RH-01 Pathfinder dossier and its reference
+- [`docs/vehicles/`](docs/vehicles/) — one folder per vehicle: `ariane/` holds the Ariane 64
+  launch-vehicle dossier, `pathfinder/` the RH-01 Pathfinder rover dossier and its reference
   renders.
 - [`docs/area/`](docs/area/AREA.md) — the Asteria Field dossier and its map plates.
 - [`docs/README.md`](docs/README.md) — the file-by-file map of the whole folder.

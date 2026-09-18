@@ -36,7 +36,10 @@ export const gatedTreeDirectory = 'docs';
  * `vehicle` stood here until 2026-09-17, when step 003 released the dossier's
  * prose and its approved studio references (`.agents/work/reviews/003-vehicle-design.md`
  * §8.1); the one file of it that stays withheld is in `gatedFilePathSegments`
- * below. `timeline` is unchanged.
+ * below. `timeline` is unchanged. The released dossier lives under
+ * `docs/vehicles/pathfinder/` since the 2026-09-17 split of `docs/vehicle/` into
+ * one folder per vehicle (`vehicles/ariane/`, `vehicles/pathfinder/`); the
+ * withheld file keeps its per-file rule at the new path.
  */
 export const gatedDirectoryNames = ['timeline'];
 
@@ -58,7 +61,7 @@ export const gatedSourceDirectories = gatedDirectoryNames.map((name) =>
  * by nothing — which is exactly what `website/test/guards.test.mjs` measures.
  */
 export const gatedFilePathSegments = [
-    [gatedTreeDirectory, 'vehicle', 'contact-arm-scene.png'],
+    [gatedTreeDirectory, 'vehicles', 'pathfinder', 'contact-arm-scene.png'],
 ];
 
 /** Absolute paths of the individually withheld files. */

@@ -1,16 +1,23 @@
 ---
 name: article-drafting
-description: Draft one accessible Red Horizon article strictly from its brief and source pack.
+description: Draft one accessible Red Horizon article or wiki reference page strictly from its brief and source pack.
 ---
 
 # Article drafting
 
 Required inputs: the claimed kanban card, `.agents/work/briefs/<slug>.md`,
-`.agents/work/sources/<slug>.md`, the article template, and the relevant writer and
+`.agents/work/sources/<slug>.md`, the article or wiki template, and the relevant writer and
 brand-voice contracts. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
 your own role definition (your agent's `SOUL.md` — the `mars-ai-simulator-writer` profile),
 `.agents/skills/brand-voice/SKILL.md`, and the source
 pack before writing.
+
+The skill covers **two related deliverables**: the news article graph
+(`website/news/<slug>.mdx`) and the wiki reference-entry graph
+(`website/wiki/<section>/<slug>.mdx`). The wiki variant follows the rules below
+under **Reference entry (wiki)**, force-loaded on every wiki writer card via
+`--skills article-drafting`. The wiki schema has no `simulatedDate` field; no
+wiki page may present one.
 
 Allowed tools: repository editing, source-pack inspection, and the `hermes kanban`
 worker commands (`show`, `claim`, `comment`, `complete`). A worker may only
@@ -32,6 +39,72 @@ each material claim traces to the source pack; no private timeline material is
 present; Markdown headings and links are usable. Record paths and checks as a
 card comment (`hermes kanban comment <id> "..."`) and in
 `website/news/<slug>.mdx` before `hermes kanban complete`.
+
+## Reference entry (wiki)
+
+The wiki graph is a **reference entry**, not a news article. The wiki MDX lives at
+`website/wiki/<slug>.mdx` (flat under the collection's `base: ./wiki`; the URL is
+`/wiki/<section>/<slug>/` — the section comes from the frontmatter, not the
+directory). A nested path like `website/wiki/<section>/<slug>.mdx` produces
+`/wiki/<section>/<section>/<slug>/` and fails the build with
+`TypeError: Missing parameter: section` (the glob loader has no
+`generateId`). The site asserts the flat shape in
+`website/test/wiki-index.test.mjs` and the SEO structural review recommends it
+(`.agents/work/seo/wiki-collection.md:58`).
+
+The schema (`website/src/content.config.ts:78-117`) requires `title`, `section`,
+`publication`, `order`, `summary` and accepts `related`, `canonicalDocs`, and the
+same media fields as news. The page is a single subject, stable enough to be
+linked to from anywhere and re-read unchanged.
+This section is the wiki voice rule; record it once here so page N is not
+re-litigated by each writer.
+
+- **No news structure.** No news lead / inverted pyramid; no announcement or
+  "has been selected" framing; no dateline; no journalist attribution; no
+  "recently / latest / now / this week / this year"; no promise of future
+  events ("will soon", "is expected to"). The page describes what its subject
+  _is_, in a stable present, not what happened.
+- **Subject headings.** Structure the body by **subject headings** — identity
+  and control facts (canonical dossier's "Control record"), description,
+  constraints, relationships — not by narrative chronology. The canonical
+  dossier in `docs/` is the model.
+- **Traceability.** Every material claim traces to the canonical dossier; name
+  it in `canonicalDocs:`. Where the dossier is silent, name the gap or omit
+  the claim. The source pack (`.agents/work/sources/wiki-<slug>.md`) holds the
+  per-claim citations.
+- **`summary` is a reference gloss** of the subject (renders as the index deck
+  and the meta description, ≤155 chars); never a news standfirst.
+- **Cross-links.** `related:` for wiki→wiki cross-links (resolves against the
+  published selection, so unknown or withheld ids produce no link); inline
+  `/news/<slug>/` links to the published article that first released a fact.
+  A `/news/<slug>/` link is only valid after that file exists in `dist/`.
+- **No record date.** The wiki schema has no `simulatedDate` field; no wiki
+  page may present one. Do not write "as of", "in [year]" or any date string
+  that implies a fictional day of writing. A wiki page is not "written on" a
+  date.
+- **Media reuse only.** A wiki page carries `media:` only when an existing
+  media key is reused (`vehicle-references`, `asteria-plates`,
+  `programme-identity`, `payload-sensor-illustration`). The key's requirements
+  (`plateCount`, `altCount`, `captionCount`, `requiresLabel`) come from
+  `src/lib/media.ts` and apply to the wiki frontmatter the same way they do for
+  news. A new media key is a decision plus a dev card, never a discovery by
+  the visuals worker.
+- **Wiki-path independence.** The page is a wiki leaf, not an article. No link
+  to `docs/timeline/`. No performance figures (speed, range, mass) unless
+  released in the canonical dossier. No Ariane 64 or any other launch vehicle
+  unless the canonical dossier names it as released canon. No real-institution
+  claim beyond the SCENARIO research-grounding sources (no endorsement, no
+  partnership).
+- **Set `publication: draft` on staging.** The build filters drafts out; the
+  editorial gate flips `publication: published` on its release decision.
+
+Acceptance for a wiki draft: title fits the wiki deck (≤60 chars with `| Red
+Horizon` suffix), summary is a reference gloss (≤155 chars), body is subject
+heading-led, every claim traces to the source pack, no `simulatedDate`, no
+release date, no news structure. The SEO pass remeasures title/summary length
+on the built page; the editorial gate re-measures on the built page. Record
+paths and checks as a card comment and in the MDX file before
+`hermes kanban complete`.
 
 ## Pitfalls
 
@@ -90,6 +163,6 @@ card comment (`hermes kanban comment <id> "..."`) and in
   authoring card owns the red build, not the site card). The fail-closed draft state is **no
   `media` key at all** — the release record's Gate 1 default, amber `news-placeholder` — with
   the alt text and label left in the asset manifest for the release card. For a plate under
-  `docs/vehicle/` the site card that registers the key also needs a `guards.mjs` repair:
+  `docs/vehicles/pathfinder/` the site card that registers the key also needs a `guards.mjs` repair:
   `vehicle` is a gated directory name, so the resolver's import fails `check-dist`'s source
   scan. Report that dependency on the card instead of registering the key yourself.

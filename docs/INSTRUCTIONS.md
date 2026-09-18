@@ -38,7 +38,8 @@ reconcile it.
 `docs/` is the project documentation root, and [README.md](README.md) inside it maps
 every file and folder. Its shape: the four root files that own intent, canon, rules,
 and plan; `docs/timeline/` for the private release order; and one folder per subject
-holding that subject's dossier together with its assets — `docs/vehicle/`,
+holding that subject's dossier together with its assets — `docs/vehicles/`, which
+holds one folder per vehicle (the launcher and the surface rover), plus
 `docs/area/`, and `docs/brand/`.
 
 Per-article working papers live outside `docs/`, under `.agents/work/`: briefs in
@@ -48,7 +49,7 @@ They are working material, not documentation and not public routes. Task procedu
 are the project skills under `.agents/skills/`.
 
 Approved media stays with its subject: the identity mark under `docs/brand/`, the
-vehicle renders under `docs/vehicle/`, and the Asteria Field map plates under
+vehicle renders under `docs/vehicles/`, and the Asteria Field map plates under
 `docs/area/`. The website imports it from there at build time and emits its own
 hashed copies under `/_astro/`; nothing is copied into `website/public/`. Article
 copy is authored as MDX directly in `website/news/` for publication. Do not create

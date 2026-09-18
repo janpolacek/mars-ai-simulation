@@ -22,18 +22,18 @@ historical record of the ComfyUI stages. Do not restore it to `tools/`, and do n
 production path. It is a processor with a disposable scratch area: nothing in it is canon.
 
 - **Input:** copy the identity or scene text out of the vehicle and area dossiers under
-  `docs/vehicle/` and `docs/area/` into a scratch `spec.json` next to the tool, and copy any
+  `docs/vehicles/` and `docs/area/` into a scratch `spec.json` next to the tool, and copy any
   reference image you need out of `docs/` into the tool before running.
 - **Output:** candidates, run records and the spec stay in the scratch paths (`spec.json`,
   `assets/`, `stories/`), all git-ignored and deletable at any time. A human-selected export is
   copied into `docs/` (with a manifest entry) by the site engineer — never by this tool, and never
   by committing a generated file.
 - Do not add project presets, dossiers, or accumulated renders to the tool: the approved vehicle,
-  area and brand assets already live under `docs/vehicle/`, `docs/area/`, and `docs/brand/`.
+  area and brand assets already live under `docs/vehicles/`, `docs/area/`, and `docs/brand/`.
 
 ## Before you render: check what already exists
 
-`docs/vehicle/` already carries an approved canonical reference and derived views
+`docs/vehicles/pathfinder/` already carries an approved canonical reference and derived views
 (`canonical.png`, `front-left.png`, `side-view.png`, `rear-right.png`, `contact-arm*.png`). Reuse
 them. Run the `canonical` or `angles` stages only when the card asks for a vehicle, view, or detail
 that has no approved source yet. `scenes` is the usual job: three reference views in, one field

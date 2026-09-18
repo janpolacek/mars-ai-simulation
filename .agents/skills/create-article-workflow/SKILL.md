@@ -160,7 +160,7 @@ Complete the orchestration card only after those checks pass.
 ## The IMAGES card is a visual brief
 
 The stage-4 card body tells `mars-ai-simulator-visuals` _what_ to depict, never
-only that assets are needed. Before creating it, check `docs/vehicle/`,
+only that assets are needed. Before creating it, check `docs/vehicles/`,
 `docs/area/`, `docs/brand/`, and the approved exports recorded in earlier
 manifests under `.agents/work/assets/` for an image that already carries the
 moment:
@@ -252,3 +252,54 @@ their assignee profiles, the five blocking edges, and the artifact paths. Use
 commands and outcomes as card comments and in the repository artifact. The board
 is local to this machine and has no cross-machine sync, so the durable record for
 a task is the artifact under `.agents/work/` plus the card's result and comments.
+
+## Planning a non-article graph (asset incorporation, revisions, close-outs)
+
+An operator can commission a graph that is not a fresh article — placing new vehicle
+plates, revising an already-published article, cleaning up held paths. Four rules keep
+that graph honest.
+
+**Re-scan the board immediately before AND after creating cards.** The board is live and
+other sessions write to it mid-run. Read it once while drafting and then again after
+`kanban_create` returns: an operator-created card can appear in between and duplicate a
+card you were about to file, and a card you were waiting on can complete under you. Group
+existing cards by the **artifact path they name**, never by title — two cards can share a
+title and own different files, and two same-purpose cards can share a file and different
+titles. When a duplicate is found, a card body cannot be edited: add an
+**"AUTHORITATIVE SCOPE AMENDMENT"** comment stating that the body is the original draft
+and the comment governs, and re-point the card's purpose rather than leaving it to be
+dispatched against a stale scope. Correct the stale lines in sibling card bodies the same
+way — a body that names a rescoped card, or a dependency that no longer exists, will
+mislead its worker.
+
+**`git add <path>` stages the whole file, not your hunk.** When two dev cards in one
+shared `dir:` workspace would touch the same file, chain them (`--parent`) and let the
+second rebase, rather than running them concurrently. Check each path a card must commit
+for a _foreign uncommitted edit in the same working-tree copy_: committing it publishes
+that other card's half-applied work. On a repository whose `main` auto-deploys, that is a
+live-content hazard (one card's import switched while another card's frontmatter still
+names the old asset). If the collision is real, gate the later card on the card that owns
+the file — and say in the brief which files forced it, with the measured evidence.
+
+**Never write "do not commit or push" into a `mars-ai-simulator-dev` card** — a dev card
+is commit-and-push authority. Get the gate-before-publication property by _sequencing_
+instead: the card that writes the public bytes runs after the gate card that approved
+them, and any dev card that must run earlier commits only work that is **inert on the
+public surface** (a registry key nothing declares yet, an unused resolver, tests). State
+in the card why its commit is inert, and have it end with a clean tree and
+`git rev-list --count origin/main..HEAD` = 0.
+
+**When a card's acceptance depends on a human gate, that card blocks — it does not
+silently skip the push.** Make the card say which escalation gates it and that it must
+`kanban_block(kind="needs_input")` (after doing any non-public part of the work, such as
+copying a file inside an already-untracked folder) rather than completing as if the push
+had happened. Plates with unrecorded provenance are the common case: no PNG text chunk
+naming a producer, tool or model means **unresolved rights = no public placement**, and
+the editorial role may not infer an origin.
+
+For a **revision** of an already-published article, the release decision names the bytes
+and _any_ change to them voids it, so the graph carries a re-gate _and_ a revision record
+appended to the same release file. Keep the graph small and strictly serial — one dev
+lane, one editor lane — and name every escalation with the default the chain proceeds
+with, so an unanswered human gate never blocks the _start_ of the chain, only the
+publication it gates.

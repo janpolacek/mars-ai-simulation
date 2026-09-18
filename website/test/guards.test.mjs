@@ -714,7 +714,7 @@ describe('guard retirement: the released vehicle material and the withheld scene
         const root = await temporaryDirectory('rh-guard-vehicle-reference-');
         const file = join(root, 'src', 'lib', 'planted.ts');
         await mkdir(join(root, 'src', 'lib'), { recursive: true });
-        await writeFile(file, `import plate from '../../../docs/vehicle/canonical.png';\n`);
+        await writeFile(file, `import plate from '../../../docs/vehicles/pathfinder/canonical.png';\n`);
 
         expect(await scanSourceForGatedReferences({ directory: root })).toEqual([]);
     });

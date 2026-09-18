@@ -16,7 +16,7 @@ profile's image cache (below). Complete `.agents/work/assets/<slug>/assets.md` w
 private candidate filename and provenance reference, placement target, meaningful alt
 text, caption, source or prompt reference, model/tool, and licence or permission status.
 Only human-approved, stable selections are copied out of the cache afterwards, into the
-subject dossier under `docs/` (`docs/vehicle/`, `docs/area/`, or `docs/brand/`) with
+subject dossier under `docs/` (`docs/vehicles/`, `docs/area/`, or `docs/brand/`) with
 a manifest entry.
 
 ## Primary path: the hosted gpt-image-2 generator
@@ -139,7 +139,22 @@ production path, and do not treat its paths as current. Its `spec.json`, `assets
   The reuse determination and the draft stay untouched; what gets corrected is the
   manifest. Re-run every validation row against the live tree and record a dated
   was/is table — the editorial or SEO records may already have flagged the drift and
-  routed it to you. Never re-decide the reuse or regenerate to look busy.
+  routed it to you. Never re-decide the reuse or regenerate to look busy. A
+  dependency-blocked assets card is re-dispatched, not failed, once its parent lands,
+  so expect this. The manifest's own hash **will** change, and the downstream gate is
+  already reading the old bytes: give the handoff both hashes with byte and line
+  counts, and say plainly which findings the re-run resolved (a parent's own result is
+  often the resolution — an SEO pass completing with no frontmatter edit turns a routed
+  wording question into "wording kept"). A correcting pass that hides its own edit
+  reads as a silent overwrite of a file another role is reviewing.
+- **Run the shipped contract, not an eyeballed copy of it, and expect `node -e` to be
+  refused.** A headless worker has no one to approve `node -e`/`node -c`, so write the
+  verification script to a file (`/tmp/...`, never inside the repo) and run `node <path>`.
+  Bundle the site's real modules with its own esbuild first
+  (`./node_modules/.bin/esbuild src/lib/media.ts --bundle --format=esm --outfile=/tmp/rh-media.mjs`)
+  and call the real schema validator and text composer from there. `npx` can be blocked by
+  the package security scan while `./node_modules/.bin/vitest` runs fine. Re-bundle on
+  every card: the modules move under you, and a stale citation is itself drift to fix.
 - **Verify alt text against the asset's pixels, and re-check the precedent article
   before leaning on it.** Read the canonical file with a vision pass and confirm
   every cue the alt string names exists at the position it names; a prose

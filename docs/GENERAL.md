@@ -42,7 +42,7 @@ and its governance, the flight-system architecture, the calendar, and the budget
 are locked in [Red Horizon scenario](SCENARIO.md), which owns them. This file does
 not restate them, because a second copy here would drift from the canon as it
 changes. The [private timeline](timeline/README.md) owns the order in which those
-facts may become public, and the [vehicle dossier](vehicle/VEHICLE.md) and
+facts may become public, and the [vehicle dossier](vehicles/pathfinder/VEHICLE.md) and
 [area dossier](area/AREA.md) own the vehicle and landing-region detail.
 
 The boundaries that hold everywhere in the project:
@@ -57,17 +57,17 @@ The boundaries that hold everywhere in the project:
 Use these terms as written. The linked owner file holds the definition; this table
 is only the shared vocabulary.
 
-| Term              | Meaning                                                                               | Owner                                  |
-| ----------------- | ------------------------------------------------------------------------------------- | -------------------------------------- |
-| Red Horizon       | The fictional Mars programme, and the fiction's public name                           | [Scenario](SCENARIO.md)                |
-| Red Horizon One   | The programme's first mission                                                         | [Scenario](SCENARIO.md)                |
-| RH-01 Pathfinder  | The mission's surface rover; the subject of the canonical vehicle dossier             | [Vehicle dossier](vehicle/VEHICLE.md)  |
-| Asteria Field     | The fictional landing and traverse region; not an official place name                 | [Area dossier](area/AREA.md)           |
-| Timeline step     | One numbered file under `docs/timeline/`; the unit that controls release order        | [Timeline](timeline/README.md)         |
-| Dossier           | A reference document about one subject, not per-article work                          | [docs map](README.md)                  |
-| Working paper     | A per-article artifact under `.agents/work/`: brief, source pack, manifest, or review | [docs map](README.md)                  |
-| Publication state | Where a fact or page sits between private scenario and published content              | [below](#canon-drafts-and-publication) |
-| Preparing         | The site's opening public state: identity, promise, and disclosure only               | [Delivery plan](PLAN.md) Phase 1       |
+| Term              | Meaning                                                                               | Owner                                             |
+| ----------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Red Horizon       | The fictional Mars programme, and the fiction's public name                           | [Scenario](SCENARIO.md)                           |
+| Red Horizon One   | The programme's first mission                                                         | [Scenario](SCENARIO.md)                           |
+| RH-01 Pathfinder  | The mission's surface rover; the subject of the canonical vehicle dossier             | [Vehicle dossier](vehicles/pathfinder/VEHICLE.md) |
+| Asteria Field     | The fictional landing and traverse region; not an official place name                 | [Area dossier](area/AREA.md)                      |
+| Timeline step     | One numbered file under `docs/timeline/`; the unit that controls release order        | [Timeline](timeline/README.md)                    |
+| Dossier           | A reference document about one subject, not per-article work                          | [docs map](README.md)                             |
+| Working paper     | A per-article artifact under `.agents/work/`: brief, source pack, manifest, or review | [docs map](README.md)                             |
+| Publication state | Where a fact or page sits between private scenario and published content              | [below](#canon-drafts-and-publication)            |
+| Preparing         | The site's opening public state: identity, promise, and disclosure only               | [Delivery plan](PLAN.md) Phase 1                  |
 
 ## Canon, drafts, and publication
 

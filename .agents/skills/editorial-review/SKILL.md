@@ -273,6 +273,25 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   `plateCaptionText()` for plate sets) and the card chip is drawn from
   `mediaLabel`, so the "illustrative, not mission photography" statement has to
   live in the alt text and an unset label renders an empty chip.
+- A **plate swap** is a fresh media decision, and the instruction that orders it can name a file
+  that exists nowhere: on 002 the operator's "replace payload/01-spectral-sampling.png with
+  payload-03-dust-scanning.png" names a file whose bytes are the render the record had already
+  rejected (`03-attempt2-REJECTED-side-mattes-stars`), while the reviewed alternative sits on disk
+  under a different name. Hash the placed bytes against the scratch candidate tree (`sha256sum`
+  both) **before** reading the instruction as a choice, then judge the bytes rather than the
+  instruction: re-measure the defects the reject rules name with a stdlib PNG probe — near-black
+  **column runs from each edge** (a matte/pillarbox) around a bright scene — and keep a vision read
+  for the composition claim (a star field or a horizon the brief forbade). An operator instruction
+  makes a plate eligible for this role's ruling; it cannot make a render carry a composition the
+  brief forbids.
+- A returned plate must name its replacement in the form the dev card can execute: candidate id,
+  **sha256**, the scratch path, the **stable export path** the key and its tests were built around
+  (never the scratch slot name, which travels into the served `/_astro/` filename), the label, and
+  the alt string with its own byte count and sha256 so byte fidelity is provable. State which review
+  rows the decision supersedes and which stand, and keep separate the one thing that is not the
+  editor's to answer — an owner who wanted the returned composition itself needs a fresh render
+  under a corrected prompt, a story-owner direction rather than a release decision — instead of
+  stalling the chain on a question the pixels already settle.
 - When a candidate rests on a delegated human gate, quote the human's words and
   the operator's gate-by-gate reading of them, then say plainly whether the choice
   is yours — an upstream manifest's cautious "the choice is the human's" written
@@ -304,6 +323,17 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   claimed hunks is what lets every claim row that passed before carry over, so the second pass only
   re-judges the changed items — 003 pass 2: two hunks, 28 rows carried, verdict `continuity clear`. Put
   your own reconstruction in the record, not the writer's helper.
+- Restore the original **line wrap** when you reverse-apply a corrective, and confirm it against a
+  **second, independent** artifact. A longer replacement clause can reflow a line break, and the moved
+  word is one space either way: on 004 the correction moved 3,991 → 3,999 bytes, and reverse-applying the
+  clause text alone derived the right byte count with the wrong digest because it kept the corrected
+  wrap. The independent check that settles it is the earlier pass's own throwaway build copy of the
+  article with its frontmatter delta undone — two reconstructions agreeing on the earlier hash is what
+  lets every earlier row carry; one agreeing only on the byte count is not.
+- A scratch build copy made **before** a tree refactor cannot be reused after it: its `assets.ts`
+  imports and its `docs/` symlink resolve against the moved paths. Rebuild the copy fresh from the
+  current tree — site under `<copy>/website/`, `docs/` symlinked as its sibling, `node_modules` entries
+  linked one by one — and rerun both builds rather than trusting the earlier copy's output.
 - Measure the **fail-closed state on the live origin** and say which surface each claim came from. A local
   checkout can be many commits behind `origin/main`, and `origin/main` is what the push-triggered build
   deploys: on 003 the local `dist/` had no `/wiki/` route while the live origin already served a wiki
@@ -361,6 +391,42 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   Report the coverage as a release-engineering item with a named owner (a dev card adds a marker, and
   the step that releases the material retires it in the same change) instead of treating a missing
   marker as a blocker or as proof the material is safe.
+
+- A **gate-ledger** card that was held `blocked` flips its correct terminal action once the answers
+  land: record each answer **verbatim** on the card, then `kanban_complete` — that completion is the
+  mechanism the card body names as "what happens after the gates are answered", and it is what
+  promotes the parent-gated draft / dossier / wiki cards out of `todo` (verify in the DB that they
+  reach `ready` after the completion). Before completing, record **fidelity per gate**: which answers
+  arrived in the card body's exact required form, which arrived in its alternative ("not required" or
+  negative) form, and which are a deferral rather than a template form. A board-wide scan for the
+  answer sentences must show they exist in exactly one place; a planner's handoff comment that lists
+  the templates is not an answer.
+- The load-bearing part of a discharged gate record is the **cleared / not-cleared scope of real-world
+  names**, because that is what the downstream writer reads. An answer recorded in the "not required —
+  no real provider or institution named" form is not an approval of a sentence that names one:
+  reconcile the two readings in favour of the fail-closed default, cite the sources that condition a
+  real-named mention on that gate (article brief, draft card body, canon proposal), state the re-open
+  mechanism (a verbatim approval covering the exact sentence), and say plainly that containment is not
+  a stall when the allowed angle does not need the real name. Never widen an answer to cover what it
+  did not say.
+- A gate answer can **move a name between the released and withheld sets**. State the split explicitly
+  and re-point the guard markers: a marker covering material the step now releases fails the production
+  build, so only the still-withheld families (institution / operator / facility names, the next step's
+  dates, the existing coordinate markers) may carry one, with retirement shipping in the same change as
+  the release that frees them.
+- A publication **STATE** grant can be node-specific. On a release-order advance whose wording names
+  one wiki node, check whether a sibling leaf's own state was settled before treating it as released: a
+  grant naming the step-004 node does not settle the step-003 leaf, and the unrecorded state stays a
+  named condition on the planner's card.
+- A card body's frontmatter instruction can be **unimplementable against the schema**: `title:
+  z.string()` is required with no default, so a card telling the writer to "leave the title unset"
+  produces a build failure, not a default. Read `src/content.config.ts` before repeating the
+  instruction, resolve it in the record in favour of the schema and the gate's fail-closed default, and
+  route the correction as a comment on the owning card rather than editing that card.
+- Answering the gates does **not** supply the record date. With no article yet to date, keep the value
+  unset, name the gap, and hand the release card a constraint set instead of a value: the floor (the
+  previous step's anchor), the ceiling (the next step's row, which the record withholds), the candidate
+  rows in the window, and which of them would falsify the article's own framing if used.
 - A present-tense negative claim in an already-published article ("no launch vehicle has been named")
   is order-sensitive against a later step: true today, stale the moment the step that names it is
   released, and unfalsifiable only once the article's own record date is on its face. Record it as a
@@ -403,6 +469,80 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   duplication is a release-safety issue, not board tidiness. Also flag any output path two cards write
   concurrently (here `.agents/work/sources/<slug>.md`) as a hotspot with the hash you measured.
 
+- A **not-settled negative written as internal state** is a claim-level FAIL even when the sentence's
+  intent is the step's own "no date is being promised" framing: the test is (a) does any released or
+  private canon _contradict_ the state as of the article's record date, and (b) does the wording
+  regress against the published form of the same claim? On step 004, "No launch day or time has been
+  **set**" and "it has not been **narrowed** to a day" both fail — locked canon fixes the launch day,
+  and 002 / 003 write "chosen **publicly**" / "**is being stated**" / "has been **stated**" — while
+  "no part of the flight stack has been integrated with a launcher" passes, because canon does not
+  contradict it (the integration window opens later) and it is the negation of the step's forbidden
+  positive. The remedy is the qualifier, never a canon change; route it as a corrective (the fix
+  changes factual meaning, so it is not the gate's own edit and not a stylistic pass), and say which
+  published sentence is the counter-example so the writer cannot read the finding as taste.
+- When a card body's record-date instruction names no row the milestone table holds (e.g. "the assigned
+  date is the announcement date, not the calendar row"), resolve it in the record instead of stalling:
+  pick the row whose state matches what the _finished article_ claims — the earliest row at which its
+  own "what remains" framing, and every one of its negatives, still holds — name the superseded phrasing
+  and the resolution, and hand the **constraint** forward. That same compatibility constraint is what a
+  corrective must not break: state in the corrective body that the corrected clauses must still be true
+  on the assigned date, so one round trip settles both the wording and the date.
+- The shared tree can move **without a running card and without a commit** (a `docs/vehicle/` →
+  `docs/vehicles/` split here, staged renames plus edits to `guards.mjs`, `assets.ts`, the media
+  registry and three docs). Re-hash every input at verdict time, re-point the record's path and hash
+  citations, add a movement table naming what moved and what it does _not_ touch, and let an unchanged
+  article hash be what makes the verdict stand. Re-read a moved dossier's own claims before clearing
+  them, and flag the moved files the next card is also scoped to touch as a hotspot with the new hashes.
+- A frontmatter-change scratch copy must **mirror the site's directory depth**: put the copied site in
+  `<copy>/website/` with `docs/` symlinked as its sibling at `<copy>/docs`, or `assets.ts`'
+  `../../../docs/...` imports fail with `UNRESOLVED_IMPORT` before the build starts. Link the package
+  entries **including** `node_modules/.bin` so `npm run build` and its postbuild guard run the project's
+  own CLI, and skip only the caches (`.astro`, `.vite`) so the content layer stays in the throwaway root.
+
+- On a **release card** the flip has already been applied and pushed, so verify the delta by
+  **re-deriving it from the released bytes**: reverse-apply the authorised frontmatter change to the
+  published file and require the approved revision's hash **exactly**. That single reconstruction is
+  what proves no third change rode along, and it survives git presenting the whole file as added
+  because the draft was untracked in the shared checkout (004: 3,999 B → 4,029 B, +30 B = the inserted
+  `simulatedDate` line and `draft` → `published`). Record the arithmetic, not just the two hashes.
+- When the build card's private worktree is already gone, the **live origin is the authoritative
+  released surface**: validate read-only against it (`fetch(path, {cache:'no-store'})` +
+  `crypto.subtle`), compare the route's byte count and sha256 with the build card's own recorded build
+  output, and state plainly that the shared checkout's `dist/` is **not** evidence (it can predate the
+  push and siblings build into it). Never run the build or the postbuild guard from a release card —
+  the guard prunes `dist/` when it fails.
+- A concurrent sibling card can **commit** in the shared checkout without pushing: `HEAD` moves ahead
+  of `origin/main` while the article and the live surface do not move at all. Re-check
+  `HEAD` / `origin/main` / the article hash at the very end, prove the released path appears in **none**
+  of the sibling's commits (`git log origin/main..HEAD --name-only`), and record the movement with its
+  timestamp and that proof as a numbered observation — a moved `HEAD` is not a moved release.
+- A gate that clears a **designation** does not clear the **dossier that documents it**, and a recorded
+  fail-closed wording constraint can name the dossier among the protected surfaces. Before any hygiene
+  card publishes `docs/`, scan that dossier for the still-withheld families (institution/operator/
+  facility strings, withheld launch-day forms, `docs/timeline/` paths) and record the counts with a
+  named owner: "the designation is released" is not "the dossier is publishable" (step 004: the
+  launcher dossier carries all four families and its publication state is unrecorded).
+
+- A **date-less collection takes no record date, and the absence is the check.** The wiki schema
+  (`website/src/content.config.ts:78-117`) declares no date field at all, so a wiki page must carry
+  none — an undeclared key is a build failure, not a harmless extra — and the correct gate output is
+  "no value, absence by design": verify the file carries no four-digit year, month name or "as of"
+  construction, and that the layout emits no `datePublished`/`lastmod`. Only news carries a
+  `simulatedDate`. Do not draw one from the milestone table for a page whose schema cannot hold it.
+- A sibling working paper's **numbers are not measurements you can quote**: a stale anchor arrives
+  with stale arithmetic (the wiki SEO record quoted the alt as 449 characters while stating "measured
+  length: 383", and the file's string is 451). Anchor the verdict on the file's own hash, quote your
+  own measured value, and let immaterial documentation drift be **superseded in the record with the
+  owning role named** — no corrective card for a record whose number no shipped artifact depends on,
+  per the same rule that keeps a gate from repairing another worker's file.
+- A **wiki page** has no timeline row to match: check the path convention instead.
+  `website/wiki/<slug>.mdx` with `section:` in frontmatter yields `/wiki/<section>/<slug>/`; a nested
+  `website/wiki/<section>/<slug>.mdx` gets loader id `<section>/<slug>` and renders
+  `/wiki/<section>/<section>/<slug>/` with `TypeError: Missing parameter: section`. Card bodies still
+  name the nested path, so resolve it in the record and state that the flat convention binds later
+  pages.
+
 Acceptance checks: every review-table row passes, the record's final status is
-`approved`, the article carries one `simulatedDate` drawn from a milestone line in
-`docs/SCENARIO.md` with that line named in the record, and no material failure remains unresolved.
+`approved`, a **news** article carries one `simulatedDate` drawn from a milestone line in
+`docs/SCENARIO.md` with that line named in the record (a page whose collection declares no date field
+carries none, and the record says why), and no material failure remains unresolved.

@@ -5,8 +5,8 @@ import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-re
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
-import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
-import vehicleStudioReferenceSource from '../../../docs/vehicle/canonical.png';
+import payloadSensorIllustrationSource from '../../../docs/payload/03-dust-scanning.png';
+import vehicleStudioReferenceSource from '../../../docs/vehicles/pathfinder/canonical.png';
 
 /**
  * The approved identity mark, and the only import of it in the site.
@@ -77,18 +77,25 @@ export const asteriaPlate02: ImageMetadata = asteriaRegionalContextSource;
 export const asteriaPlate03: ImageMetadata = asteriaLocalOperationsSource;
 
 /**
- * The 002 sensor illustration, imported from its canonical `docs/payload/`
- * copy.
+ * The 002 sensor illustration, imported from its `docs/payload/` dossier.
  *
- * Chosen and signed off by the editor (card `t_327899d5`, 2026-09-17) under the
- * human story owner's Gate 1 delegation recorded on `t_5a62fb28`, from the three
- * candidates the visuals card produced (`t_a9964b8d`). The approved candidate is
- * `01-spectral-sampling`, SHA-256 `8839f66a…`; card `t_4b49346b` copied that
- * file to the canonical path unchanged — no re-encode, crop or redraw — and the
- * export re-hashes to the same digest.
+ * The placed plate is the dust-scanning render the operator's 2026-09-17 swap
+ * instruction names (`03-dust-scanning.png`, SHA-256 `a70d306c…`), replacing
+ * the plate card `t_4b49346b` exported (`01-spectral-sampling`, SHA-256
+ * `8839f66a…`, approved by the editor on `t_327899d5`). The dossier keeps all
+ * four 002 candidate renders; `02-two-views-one-ground` and
+ * `04-dust-and-contact-closeup` are not placed by anything.
+ *
+ * Recorded rather than hidden, because a downstream reader would otherwise
+ * carry the review forward as current: `03-dust-scanning.png` is the render
+ * `.agents/work/reviews/002-payload-selection-media.md` §4 entered as
+ * `03-attempt2-REJECTED-side-mattes-stars` (black side mattes, a star field),
+ * and that review's export rule — "only `01-spectral-sampling` may be
+ * exported" — no longer describes what this site renders. The swap carries no
+ * editor line on the record yet.
  *
  * It is illustrative artwork, not mission imagery: no payload hardware is
- * depicted or named, and the approved alt text carries that statement to the
+ * depicted or named, and the article's `mediaAlt` carries that statement to the
  * reader (a one-plate key renders no per-plate caption, so the registry cannot
  * print it). Only the `payload-sensor-illustration` media key renders this
  * asset, and only the article the release card wires that key into.
@@ -97,7 +104,7 @@ export const payloadSensorIllustration: ImageMetadata = payloadSensorIllustratio
 
 /**
  * The approved studio reference of the surface vehicle, imported from its
- * canonical `docs/vehicle/` copy.
+ * canonical `docs/vehicles/pathfinder/` copy.
  *
  * Release: step 003 (2026-09-17), recorded by the editorial gate on
  * `t_1e84c815` (`.agents/work/reviews/003-vehicle-design.md` §2, §8.1). The

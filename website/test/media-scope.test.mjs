@@ -50,8 +50,8 @@ afterAll(async () => {
 const distDirectory = resolve(websiteDirectory, 'dist');
 const hasBuild = existsSync(join(distDirectory, 'index.html'));
 
-/** The canonical source file behind the one currently-unpublished media key. */
-const payloadSource = resolve(projectDirectory, 'docs', 'payload', 'payload-sensor-illustration.png');
+/** The source file behind the one currently-unpublished media key. */
+const payloadSource = resolve(projectDirectory, 'docs', 'payload', '03-dust-scanning.png');
 
 /** The name the registry resolves that key to, read off the shipped registry. */
 const payloadSourceName = basename(String(newsMedia['payload-sensor-illustration'].plates[0].src));
@@ -87,10 +87,10 @@ describe('the emitted-asset rule', () => {
      * renamed, the asset moves out of `docs/payload/`), the cases below would
      * otherwise pass on a file that no longer exists.
      */
-    it('plants the canonical payload source under the name its key emits', () => {
-        expect(payloadSourceName).toBe('payload-sensor-illustration.png');
+    it('plants the payload source under the name its key emits', () => {
+        expect(payloadSourceName).toBe('03-dust-scanning.png');
         expect(existsSync(payloadSource)).toBe(true);
-        expect(emittedPayload).toMatch(/^payload-sensor-illustration\.[A-Za-z0-9_-]+\.png$/);
+        expect(emittedPayload).toMatch(/^03-dust-scanning\.[A-Za-z0-9_-]+\.png$/);
     });
 
     it('flags the payload illustration when the output carries it unreferenced', async () => {
