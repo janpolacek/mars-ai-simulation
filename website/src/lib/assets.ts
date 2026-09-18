@@ -5,7 +5,7 @@ import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-re
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
-import payloadSensorIllustrationSource from '../../../docs/payload/03-dust-scanning.png';
+import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
 import vehicleStudioReferenceSource from '../../../docs/vehicles/pathfinder/canonical.png';
 
 /**
@@ -79,20 +79,20 @@ export const asteriaPlate03: ImageMetadata = asteriaLocalOperationsSource;
 /**
  * The 002 sensor illustration, imported from its `docs/payload/` dossier.
  *
- * The placed plate is the dust-scanning render the operator's 2026-09-17 swap
- * instruction names (`03-dust-scanning.png`, SHA-256 `a70d306c…`), replacing
- * the plate card `t_4b49346b` exported (`01-spectral-sampling`, SHA-256
- * `8839f66a…`, approved by the editor on `t_327899d5`). The dossier keeps all
- * four 002 candidate renders; `02-two-views-one-ground` and
- * `04-dust-and-contact-closeup` are not placed by anything.
+ * The placed plate is the released 002 candidate — `03-dust-and-contact-closeup`,
+ * SHA-256 `47d39a0b…` — exported to the stable dossier path
+ * `payload-sensor-illustration.png` by the editor's 2026-09-17 decision on card
+ * `t_00b65567` (recorded in `.agents/work/reviews/002-payload-selection-media.md`
+ * §11.4), replacing the plate card `t_4b49346b` first exported
+ * (`01-spectral-sampling`, SHA-256 `8839f66a…`, which stays an approved,
+ * unplaced candidate). The dossier keeps its other 002 candidate renders; only
+ * the stable export is placed.
  *
- * Recorded rather than hidden, because a downstream reader would otherwise
- * carry the review forward as current: `03-dust-scanning.png` is the render
- * `.agents/work/reviews/002-payload-selection-media.md` §4 entered as
+ * The operator's 2026-09-17 swap candidate (SHA-256 `a70d306c…`) was returned
+ * by that decision: the bytes are the render the review entered as
  * `03-attempt2-REJECTED-side-mattes-stars` (black side mattes, a star field),
- * and that review's export rule — "only `01-spectral-sampling` may be
- * exported" — no longer describes what this site renders. The swap carries no
- * editor line on the record yet.
+ * so no site source imports or references it. The decision and its supersession
+ * ledger are the §11 record named above.
  *
  * It is illustrative artwork, not mission imagery: no payload hardware is
  * depicted or named, and the article's `mediaAlt` carries that statement to the

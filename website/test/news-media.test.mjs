@@ -223,9 +223,9 @@ describe('plate registry', () => {
         expect(set.plates).toHaveLength(1);
         expect(set.plates[0].label).toBe('Red Horizon // payload sensor illustration');
         expect(isPlateSet(set)).toBe(false);
-        // The plate points at a file of the canonical docs/payload dossier, not
-        // a copy under website/public.
-        expect(String(set.plates[0].src)).toContain('03-dust-scanning');
+        // The plate points at the canonical docs/ export, not a copy under
+        // website/public.
+        expect(String(set.plates[0].src)).toContain('payload-sensor-illustration');
     });
 
     /*

@@ -45,13 +45,16 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
     /**
      * One illustration for the 002 payload article (card `t_4b49346b`).
      *
-     * The asset is `docs/payload/03-dust-scanning.png` (the operator's
-     * 2026-09-17 swap instruction), which replaced the editor-approved
-     * `01-spectral-sampling` plate this key shipped with; the label is the one
-     * approved with the key. No `provenance` line: the registry prints it
-     * only through `plateCaptionText()`, which runs for plate sets, and this key
-     * renders no caption — the "illustrative artwork" statement reaches the
-     * reader through the article's approved `mediaAlt` instead.
+     * The asset is `docs/payload/payload-sensor-illustration.png` — the
+     * released 002 candidate (`03-dust-and-contact-closeup`, SHA-256
+     * `47d39a0b…`) exported to the stable dossier path by the editor's
+     * 2026-09-17 decision on `t_00b65567`; the label is the one approved with
+     * the key. The operator's swap candidate (SHA-256 `a70d306c…`) was
+     * returned by that decision and no site source imports it. No `provenance`
+     * line: the registry prints it only through `plateCaptionText()`, which runs
+     * for plate sets, and this key renders no caption — the "illustrative
+     * artwork" statement reaches the reader through the article's approved
+     * `mediaAlt` instead.
      */
     'payload-sensor-illustration': {
         plates: [{ src: payloadSensorIllustration, label: 'Red Horizon // payload sensor illustration' }],
