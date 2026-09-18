@@ -131,3 +131,112 @@ durable copy.
    index deck.
 4. **No dev work yet**: `t_8b35da8f` (build + publish) stays `todo` until the gate
    clears.
+
+## Revision 2 — post-corrective re-gate (2026-09-19 00:33 CEST)
+
+Status at this revision: **`approved`**. The single F1 finding from the prior pass
+(`summary` length 178 → 155 rule) is closed by the writer corrective `t_cfa2d0cd`,
+which edited only `website/wiki/ariane-64.mdx:6`. The wiki draft's post-corrective hash
+`69148866244667fca0c0ca5d92a024b7a14b906c06958688839b698cd719d720` matches the
+corrective's recorded post-edit hash byte-for-byte (7,167 B; byte delta vs. the prior
+`8bb55dd1b4969c8fe8b50f3682c4a1e4add4190563b66104c7a02ffc489e6526` = −25 B, exactly the
+summary delta 153 − 178 = −25 B). Lines 1–5 and lines 7+ of the file are byte-identical
+to the prior pass; only line 6 changed. The reverse-construct of the prior file (line 6
+reverted to the prior 178-char string) re-hashes to the prior `8bb55dd1…`.
+
+### Verdict row at this revision
+
+| #  | Check                                                                                                                      | Result                  | Notes                                                                                                                                                                                                                                                                                                                       |
+| -- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | Brief, source pack, dossier, asset manifest, and corrected MDX read in full                                                | PASS                    | All five paths re-read this pass; hashes match the inputs the parent (`t_f15eef66`) recorded. The corrective touched only the frontmatter `summary` field.                                                                                                                                                                  |
+| 2  | Wiki schema (`src/content.config.ts:73-117`) accepts the corrected frontmatter                                             | PASS                    | `SCHEMA PARSE: PASS` for the corrected draft; frontmatter keys: `title, section, publication, order, summary, canonicalDocs, related, media, mediaAlt, mediaLabel`.                                                                                                                                                         |
+| 3  | Media-key contract (`src/lib/media.ts:73`) accepts the frontmatter                                                         | PASS                    | `launch-vehicle-reference: { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false }`; the draft declares exactly that. `newsMediaIssues()` returns `[]`.                                                                                                                                                       |
+| 4  | `related:` resolves against the published wiki set                                                                         | PASS                    | All three ids (`rh-01-pathfinder`, `red-horizon`, `asteria-field`) resolve against `selectPublishedWiki()`; the live origin serves each at 200.                                                                                                                                                                             |
+| 5  | Source-asset provenance                                                                                                    | PASS                    | `docs/vehicles/ariane/canonical.png` sha256 `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b`, 1,040,823 B, 1,122 × 1,402 PNG — byte-identical to the prior gate and to `ariane-plates-selection.md` §10.                                                                                                  |
+| 6  | Approved alt text and label                                                                                                | PASS                    | `mediaAlt` is the 347-char ASCII string in `ariane-plates-selection.md` §9 (byte-for-byte); `mediaLabel` is `Ariane 64 · engineering reference` (U+00B7). The corrective did not touch either.                                                                                                                              |
+| 7  | Caption / second-plate / crop scope                                                                                        | PASS                    | Key renders one plate and no per-plate caption. No `mediaCaption` declared. No crop.                                                                                                                                                                                                                                        |
+| 8  | Step-004 cleared scope and the six accurate/non-endorsing rules (`.agents/work/briefs/004-launch-provider-canon.md:87-96`) | PASS                    | The page names only the vehicle designation, the four-booster configuration, the uncrewed/non-reusable/in-transit-free negation the dossier binds, and the four-element interface framing. 0 hits on the institution/operator/facility family. Engine names (`Vulcain 2.1`, `Vinci`) on lines 27, 52 are dossier-supported. |
+| 9  | Release-order advance — step 004 cleared                                                                                   | PASS (context)          | Gate 004-A, 004-B, 004-C all answered; release record applied `publication: published` to article 004 (`4d1795a`); the wiki launch-vehicle node is in scope at step 004 per the gate-004-C answer.                                                                                                                          |
+| 10 | Record-date question (no value because the wiki schema has none)                                                           | PASS (absent by design) | The wiki schema declares no `simulatedDate` field. The draft carries no four-digit year, month name, or "as of" construction; the wiki layout emits no `datePublished`/`lastmod`. **No milestone row is drawn; the absence is the check.**                                                                                  |
+| 11 | Continuity verdict (companion record, Revision 2)                                                                          | `continuity clear`      | All 17 rows in `.agents/work/continuity/wiki-ariane-64.md` pass; the prior FAIL on summary length is closed by the corrective.                                                                                                                                                                                              |
+| 12 | Page structure (subject-heading wiki voice, no news lead)                                                                  | PASS                    | Six `##` subject headings; no dateline, no journalist attribution, no future-event promise, no "as of".                                                                                                                                                                                                                     |
+| 13 | **`summary` length ≤155 chars (wiki skill reference-gloss rule)**                                                          | **PASS** (recheck)      | **Draft `summary` frontmatter is 153 chars** (≤155 rule; reference-gloss form; opens with the vehicle designation, then states the programme-interface framing as a connective clause). Both required facts preserved. The corrective closed F1.                                                                            |
+| 14 | Withheld-marker scan (draft, alt text, related-list labels)                                                                | PASS                    | Direct grep returns 0 for the two landing-region coordinate markers, `docs/timeline/` paths, the six withheld launch-day forms, the institution/operator/facility family, the AF-* unit set, and the landing-design and Asteria Field design details.                                                                       |
+| 15 | Link wording (full anchor inventory on `/wiki/vehicle/ariane-64/` once published)                                          | PASS                    | Four anchors on the wiki leaf (`/news/004-launch-provider/`, `/wiki/red-horizon/`, `/wiki/rh-01-pathfinder/`, `/wiki/asteria-field/`); no two near-identical labels point at different destinations. Three are wiki→wiki `related`; one is the released article.                                                            |
+| 16 | `coalition` term on line 61                                                                                                | PASS (out of scope)     | One occurrence, mirrored by `wiki/red-horizon`. Not blocking.                                                                                                                                                                                                                                                               |
+| 17 | Order-sensitivity of negatives in already-published copy                                                                   | PASS                    | The page's only dated claim is the 2031 window; no present-tense negative is restated.                                                                                                                                                                                                                                      |
+| 18 | Concurrent work probed for interference                                                                                    | PASS                    | No concurrent card writes to `website/wiki/ariane-64.mdx`; the writer corrective is `done`; the SEO / Form A / build cards are not in scope at this gate.                                                                                                                                                                   |
+| 19 | `git status` / source-asset hash re-check immediately before verdict                                                       | PASS                    | `git status --short` clean for the gate's owned paths; `docs/vehicles/ariane/canonical.png` re-hashed to the released sha. `git log origin/main..HEAD` empty.                                                                                                                                                               |
+| 20 | No external action of any kind                                                                                             | PASS                    | No commit, no push, no deploy, no hosting/DNS/credential use, no media upload; no `publication:` field flipped; `website/wiki/ariane-64.mdx` is read-only this run (writer's corrective `t_cfa2d0cd` is the only party that edited it).                                                                                     |
+
+### Findings carried forward and closed by this revision
+
+| #  | Finding                                                                                                                                          | Status this revision                                                                                                                                 | Owner                                                         |
+| -- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| F1 | `summary` frontmatter was 178 chars, exceeding the wiki skill's ≤155-char reference-gloss rule and the established peer pattern (154, 154, 149). | **CLOSED** — the corrective trimmed to 153 chars; line 6 only; byte delta equals summary delta; both required facts preserved; reference-gloss form. | `mars-ai-simulator-writer` (`t_cfa2d0cd`, `done`)             |
+| O1 | Engine model names (`Vulcain 2.1`, `Vinci`) appear in the wiki draft (lines 27, 52) but not in the released article 004.                         | Observation stands (continuity-clear).                                                                                                               | reviewer record                                               |
+| O2 | `coalition` term on line 61 — one occurrence mirroring `wiki/red-horizon`'s pre-existing usage.                                                  | Observation stands (out of scope).                                                                                                                   | future Form A pass                                            |
+| O3 | Five withheld plates (including `lunch.png` and `travelling-to-mars.png`) sit untracked in `docs/vehicles/ariane/` with no `guards.mjs` marker.  | Observation stands (hotspot).                                                                                                                        | future dev card (already on `ariane-plates-selection.md` O-1) |
+| O4 | `body word count ~1023`. The wiki skill imposes no hard limit.                                                                                   | Observation stands.                                                                                                                                  | writer / SEO                                                  |
+
+### Release decision
+
+**Approved.** The package is releasable against the step-004 cleared scope. The
+release decision is recorded here as the gate's own sentence — no separate human
+approval is required.
+
+- **Exact public scope**: `/wiki/vehicle/ariane-64/` route, one published wiki leaf
+  with the corrected `summary` (153 chars), `media: launch-vehicle-reference`,
+  `mediaAlt` = the 347-char approved string, `mediaLabel` = `Ariane 64 · engineering
+  reference`, `related: [rh-01-pathfinder, red-horizon, asteria-field]`, the four
+  `/news/004…/`, `/wiki/red-horizon/`, `/wiki/rh-01-pathfinder/`, `/wiki/asteria-field/`
+  anchors, and the one plate `docs/vehicles/ariane/canonical.png`
+  (sha `cf3323bf5dfb45e77b3400cd0d0dc1b107359a1d9403a6d7442a480d1228c44b`).
+- **Article hash at the release decision**: `website/wiki/ariane-64.mdx`
+  sha256 `69148866244667fca0c0ca5d92a024b7a14b906c06958688839b698cd719d720`
+  (7,167 B, `publication: draft`).
+- **`simulatedDate`**: not applicable — the wiki schema (`src/content.config.ts:78-117`)
+  declares no `simulatedDate` field. A wiki page must carry none; absence is the check.
+- **Conditions**: no image generation or copy; the placed plate is the released hash,
+  byte-for-byte; the alt text and label ship verbatim from `ariane-plates-selection.md`
+  §9; no `mediaCaption`; no crop.
+- **Where the `publication:` flip is applied**: by the build card `t_8b35da8f`
+  (`mars-ai-simulator-dev`). The merged editorial role's authority covers the release
+  decision and the record; the build card applies the frontmatter change, runs the
+  build / typecheck / lint / tests / guard, and pushes to `main` (which the connected
+  Cloudflare Workers Build deploys automatically). No second, divergent flip may be
+  applied by any other card.
+- **Re-publish guarantee**: the corrected `summary` length and the body bytes are what
+  bind the next build. Any subsequent edit to `website/wiki/ariane-64.mdx` invalidates
+  this decision until a re-verification pass records the new hash.
+
+### Validation completed at this revision
+
+- `git status --short` clean for the gate's owned paths
+  (`.agents/work/reviews/wiki-ariane-64.md`, `.agents/work/continuity/wiki-ariane-64.md`).
+- `git log origin/main..HEAD` empty.
+- `docs/vehicles/ariane/canonical.png` re-hashed to the released `cf3323bf…`.
+- `website/wiki/ariane-64.mdx` re-hashed to `69148866…` (7,167 B); unchanged by
+  `dprint fmt` (configured plugins match no `.mdx`).
+- Wiki schema parse via the project's own `src/content.config.ts` and
+  `newsMediaIssues()` from `src/lib/media.ts`: PASS, no media issues.
+- `related:` list resolves all three ids against the published wiki set.
+- Live origin probed: `/wiki/vehicle/ariane-64/` 404 (fail-closed today);
+  `/wiki/vehicle/` lists only `RH-01 Pathfinder`; `/news/004-launch-provider/` 200;
+  released article 0 hits on the withheld families.
+- Withheld-marker scan on the draft, alt text, and related-link labels: 0 hits on the
+  institution/operator/facility family, the six withheld launch-day forms, the AF-*
+  unit set, the landing-design details, and the `docs/timeline/` paths.
+
+### Next recommended owner and action
+
+1. **`mars-ai-simulator-dev` (card `t_8b35da8f`)** — Build and publish the wiki leaf
+   per the scope recorded above: stage `website/wiki/ariane-64.mdx` only (plus any
+   path the build card's own scope touches); commit message `t_8b35da8f: publish Ariane
+   64 wiki leaf`; rebase; push `main`; report commit SHA and push result on
+   `t_8b35da8f`. The postbuild guard must pass (no `dist/` route for the slug yet,
+   and the live origin should serve `/wiki/vehicle/ariane-64/` at 200 after the
+   push triggers the Cloudflare Workers Build). No second `publication:` flip may be
+   applied by any other card.
+2. **No further card from this gate.** The gate is complete; `t_8b35da8f` is the next
+   owner.

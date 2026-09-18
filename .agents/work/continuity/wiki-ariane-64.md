@@ -7,8 +7,9 @@ Slug: `wiki-ariane-64`. Card `t_26a204bf` (`mars-ai-simulator-reviewer`), stage:
 Inputs read this pass: `.agents/work/briefs/wiki-ariane-64.md`,
 `.agents/work/sources/wiki-ariane-64.md`, `.agents/work/assets/wiki-ariane-64/assets.md`
 (`manifest_sha256: 51d9416685d65b74a484c41c4d8733070431064c7205ea8ea531a0bdbf86dccf`),
-`website/wiki/ariane-64.mdx` (`8bb55dd1b4969c8fe8b50f3682c4a1e4add4190563b66104c7a02ffc489e6526`,
-7,192 B, `publication: draft`), `docs/vehicles/ariane/ariane-64.md`, `docs/SCENARIO.md`,
+`website/wiki/ariane-64.mdx` — see Revision 2 below for the post-corrective hash
+`69148866244667fca0c0ca5d92a024b7a14b906c06958688839b698cd719d720` (7,167 B, `publication: draft`),
+`docs/vehicles/ariane/ariane-64.md`, `docs/SCENARIO.md`,
 `.agents/work/reviews/004-launch-provider-gates.md` §R3.1–§R3.3 + §5 (the cleared step-004
 scope), `.agents/work/reviews/ariane-plates-selection.md` §9–§10 (the approved plate
 form), `.agents/work/releases/004-launch-provider.md` §"The release decision" + §"Withheld-
@@ -34,7 +35,7 @@ marker scan", the three published wiki leaves, the live origin.
 | 14 | Fail-closed state on the live origin                                                              | PASS (measured)            | `/wiki/vehicle/ariane-64/` 404 (browser_exec, "HTTP ERROR 404", "This page can't be found"); `/wiki/vehicle/` lists only `RH-01 Pathfinder` (the wiki vehicle section index does not advertise the draft). The wiki `vehicle` section page renders; the leaf does not — fail-closed today.                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | 15 | Released-article coverage of the cleared step-004 scope                                           | PASS (context)             | The released article 004 (`/news/004-launch-provider/`, live `200`) names `Ariane 64` × 6, with `Kourou`, `Europe`, `Arianespace`, `FEI`, `17 February` **all at 0 hits**; the wiki page is consistent with this cleared scope and adds the **engineering-reference** detail a reference entry is supposed to carry.                                                                                                                                                                                                                                                                                                                                                                                                 |
 | 16 | Order-sensitivity of negatives in already-published copy                                          | PASS                       | The wiki page's only dated claim is the 2031 window ("a 2031 window, as released by the programme's announcement"); no present-tense negative ("no launch vehicle has been named", "no launch day has been announced") is restated. Article 001's release of "2031 launch window" is the only calendar sentence the wiki page depends on.                                                                                                                                                                                                                                                                                                                                                                            |
-| 17 | Page schema + content rules from the wiki skill                                                   | PARTIAL                    | Subject-heading structure (six `##` headings: Identity and name · Four-booster configuration · Role in the flight stack · Interface to the programme's payload · Visual identity · Related records) — PASS. No news lead, no dateline, no journalist attribution, no future-event promise — PASS. `related:` ids resolve against the published set — PASS. **`summary` length 178 chars** (the file's actual summary) **exceeds the wiki skill's ≤155-char reference-gloss rule** — FAIL: see the corresponding finding in `.agents/work/reviews/wiki-ariane-64.md` row 13.                                                                                                                                          |
+| 17 | Page schema + content rules from the wiki skill                                                   | PASS (post-corrective)     | Subject-heading structure (six `##` headings: Identity and name · Four-booster configuration · Role in the flight stack · Interface to the programme's payload · Visual identity · Related records) — PASS. No news lead, no dateline, no journalist attribution, no future-event promise — PASS. `related:` ids resolve against the published set — PASS. **`summary` length 153 chars (post-corrective)** — PASS: see the corresponding `## Revision 2` block below. The prior verdict row 17 was PARTIAL on summary length (178 chars > ≤155); that finding is closed by the corrective `t_cfa2d0cd` (sha `69148866…`) and the recheck in Revision 2 row 17.                                                      |
 
 ## Continuity clear — but one editorial finding blocks release
 
@@ -90,3 +91,64 @@ Live measurement at 2026-09-19 00:02–00:04 CEST via `browser_exec`:
 - **Observation — `coalition` term appears once on line 61**. Mirrors the `wiki/red-horizon` page's pre-existing usage; the Form A rename (`t_2c6c5d7a`) was scoped to article 004 only. A wiki rename is a separate Form A card and out of scope here. Not blocking; recorded as an editorial-coherence observation so a future Form A pass knows to extend to wiki pages if asked.
 
 - **Observation — withheld plates in `docs/vehicles/ariane/` are untracked**. Per the `ariane-plates-selection.md` O-1 finding, the dossier directory holds six plates; only one (`canonical.png`) is released; the other five (including `lunch.png` and `travelling-to-mars.png`) sit untracked with no `guards.mjs` marker. The wiki draft imports none of them — measured at the resolver (`src/features/news/media.ts:99-101`); only the released plate resolves through `launch-vehicle-reference`. **Hotspot for any card that runs `git add docs/`** — already named in the plates-selection record; not new here.
+
+## Revision 2 — post-corrective re-gate (2026-09-19 00:33 CEST)
+
+The writer corrective `t_cfa2d0cd` (`mars-ai-simulator-writer`, `done`, completed
+2026-09-19 00:27 CEST) trimmed the `summary` frontmatter on
+`website/wiki/ariane-64.mdx:6` from 178 to 153 chars (≤155 rule) while preserving both
+required facts (four-booster Ariane 6 variant as Red Horizon One's launch vehicle; injection
+and payload-adapter interface placing the flight stack on its Mars trajectory). The
+corrective's post-edit hash `69148866244667fca0c0ca5d92a024b7a14b906c06958688839b698cd719d720`
+matches the wiki draft re-hashed at this gate's verdict.
+
+This revision re-states the gate's verdict against the corrected draft and supersedes the
+prior revision (whose draft hash `8bb55dd1…` is recorded above for the change-history
+chain). No body content, alt text, media key, related links, source asset, or schema
+structure changed — only the `summary` value on line 6.
+
+### Re-hash and reverse-verification
+
+| Item                                        | Value                                                                                                                                | Notes                                                                                                          |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `website/wiki/ariane-64.mdx` (this re-gate) | `69148866244667fca0c0ca5d92a024b7a14b906c06958688839b698cd719d720`                                                                   | 7,167 B, `publication: draft`; byte delta 7,167 − 7,192 = **−25 B**, exactly the summary delta 153 − 178       |
+| Prior hash (superseded)                     | `8bb55dd1b4969c8fe8b50f3682c4a1e4add4190563b66104c7a02ffc489e6526`                                                                   | 7,192 B                                                                                                        |
+| `summary` length (this re-gate)             | 153 chars (ASCII)                                                                                                                    | ≤155 rule satisfied                                                                                            |
+| `summary` length (prior)                    | 178 chars (ASCII)                                                                                                                    | the FAIL closed by the corrective                                                                              |
+| `dprint fmt` effect                         | none — `~/.dprint/bin/dprint fmt website/wiki/ariane-64.mdx` reports "No files found to format with the specified plugins" (exit 14) | the configured plugins match no `.mdx`; the bytes are exactly the writer's post-edit state                     |
+| Only line 6 changed                         | confirmed by `splitlines(keepends=True)` line-by-line diff — line 6 only; lines 1–5 + lines 7+ byte-identical                        | reverse-construct of the prior file (line 6 reverted to the prior 178-char string) re-hashes to the prior hash |
+
+### Recheck rows (passes carry over from the prior pass; the only re-judged items are the rows the line-6 change could affect)
+
+| #  | Check                                                    | Result              | Notes                                                                                                                                                                                                                                                                           |
+| -- | -------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | Brief, source pack, dossier, asset manifest, MDX re-read | PASS                | All five paths re-read this pass; hashes match the inputs the parent (`t_f15eef66`) recorded. The corrective touched only the frontmatter `summary` field; everything else is byte-identical to the prior gate's reading.                                                       |
+| 2  | Wiki schema parse                                        | PASS                | The schema check (`_gate-wiki-ariane-64-recheck.mjs`, run from `website/`) reports `SCHEMA PARSE: PASS` for the corrected draft; frontmatter keys: `title, section, publication, order, summary, canonicalDocs, related, media, mediaAlt, mediaLabel`.                          |
+| 13 | Media-key contract (`src/lib/media.ts:73`)               | PASS                | `newsMediaIssues()` returns `[]` — `launch-vehicle-reference` matches its `plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false` requirements.                                                                                                                     |
+| 17 | Wiki skill `summary` length rule (≤155 chars)            | PASS (this recheck) | `summary` is 153 chars (≤155), reads as a reference gloss of the subject (opens with the vehicle designation, then states the programme-interface framing as a connective clause), preserves both required facts from the prior summary. No "selected as" announcement framing. |
+
+### Live-origin recheck at verdict time (browser_exec, 2026-09-19 00:30 CEST)
+
+| Route                             |  Status |  Bytes | SHA-256 (in-page fetch + crypto.subtle)                                         |
+| --------------------------------- | ------: | -----: | ------------------------------------------------------------------------------- |
+| `/wiki/vehicle/ariane-64/`        | **404** |      0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` (empty body) |
+| `/wiki/vehicle/`                  |     200 |  5,009 | `9718b7cc96598636fb2eef0ff078465316c9bbab8f338dd82d28a260c33fdc2f`              |
+| `/wiki/vehicle/rh-01-pathfinder/` |     200 | 16,543 | `6acd6cd545cfdbc71d77df63178b716668c71deb225f384e6761b09908a637bc`              |
+| `/wiki/area/asteria-field/`       |     200 | 15,444 | `73df57c163718f90fbded7dcad6eacc1f1acb23d68d0968402693212232f67c2`              |
+| `/wiki/project/red-horizon/`      |     200 | 11,178 | `09e0ea194c547a8e1ded31938e0845aabd5f0d7bb5a942fc14b3cc5b9b11ee1c`              |
+| `/news/004-launch-provider/`      |     200 | 10,371 | `59e03ffac86855bbfc26d9aad334e5acfa0d6c6a04719c94cdca22a0eabb2fc5`              |
+
+`/wiki/vehicle/` index lists only `RH-01 Pathfinder` (4 anchors on the index, no
+`ariane-64` link). The corrected draft is fail-closed today; the live origin still does
+not serve the leaf. `/news/004-launch-provider/` carries the `Simulated record date ·
+11 March 2030` line under the in-fiction label, with the cleared-scope meta description
+intact.
+
+### Verdict at this revision
+
+Continuity verdict: `continuity clear` (post-corrective). The only re-judged item (row 17)
+now PASSes with the corrected `summary` length. The package is releasable against the
+step-004 cleared scope and the gate's release decision is recorded on `.agents/work/reviews/wiki-ariane-64.md`
+(Revision 2).
+
+No commit, push, deploy, build, or external action by this continuity record.
