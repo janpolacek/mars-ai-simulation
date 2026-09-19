@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import asteriaMarsLocatorSource from '../../../docs/area/asteria-field-01-mars-locator.png';
 import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-regional-context.png';
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
+import egressSource from '../../../docs/area/asteria-field-egress-01.png';
 import surfacePanoramaSource from '../../../docs/area/asteria-field-panorama-02.png';
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
@@ -177,3 +178,22 @@ export const launchLiftOff: ImageMetadata = launchLiftOffSource;
  * (sha256 `9fc4bd2e…`) is usable as an alternative only, not placed.
  */
 export const surfacePanorama: ImageMetadata = surfacePanoramaSource;
+
+/**
+ * The egress plate, imported from its canonical `docs/area/` copy and
+ * rendered through the `egress` media key (card `t_b9751c8c`, step
+ * `009-first-surface-checks`).
+ *
+ * Release: reviewer gate t_f3dd8fd2 (run 372), 2026-09-19. The placed
+ * asset is `01-egress.png` — sha256 `4c3968e9…`, 1200×896 PNG 8-bit
+ * RGB non-interlaced — the corrected candidate approved in the
+ * re-gate: clearly visible inclined ramp, stationary rover fully on
+ * the ramp, no wheel tracks behind, contact arm stowed, six wheels,
+ * warm-white body with muted red panels, dark deck, short mast.
+ *
+ * It is illustrative artwork, not mission photography: the alt text
+ * carries that statement, and the key renders no per-plate caption,
+ * so the "illustrative, not mission photography" statement reaches
+ * the reader through `mediaAlt` instead. Only this plate is placed.
+ */
+export const egress: ImageMetadata = egressSource;

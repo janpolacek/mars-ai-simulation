@@ -22,6 +22,7 @@ export const newsMediaKeys = [
     'launch-vehicle-reference',
     'launch-lift-off',
     'surface-panorama',
+    'egress',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -99,6 +100,20 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * approved `mediaAlt` instead.
      */
     'surface-panorama': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved egress plate of RH-01 leaving the landing platform
+     * (card `t_b9751c8c`, step `009-first-surface-checks`).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails, so
+     * the key cannot be declared without the released artwork behind it.
+     * `requiresLabel: false` as the editorial gate decided — the label
+     * is optional here, not required. No `provenance` line: this key
+     * renders no caption, so the "illustrative artwork, not mission
+     * photography" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     */
+    'egress': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {

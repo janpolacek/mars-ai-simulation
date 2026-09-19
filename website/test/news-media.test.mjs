@@ -100,6 +100,7 @@ describe('media keys and their requirements', () => {
             'launch-vehicle-reference',
             'launch-lift-off',
             'surface-panorama',
+            'egress',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
@@ -108,6 +109,7 @@ describe('media keys and their requirements', () => {
         expect(isNewsMediaKey('launch-vehicle-reference')).toBe(true);
         expect(isNewsMediaKey('launch-lift-off')).toBe(true);
         expect(isNewsMediaKey('surface-panorama')).toBe(true);
+        expect(isNewsMediaKey('egress')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -188,6 +190,15 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    it('requires one plate, one alt, no caption and no label for egress', () => {
+        expect(newsMediaRequirements['egress']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -203,7 +214,7 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['media']);
         expect(issues[0].message).toContain(
-            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference, launch-lift-off, surface-panorama',
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference, launch-lift-off, surface-panorama, egress',
         );
     });
 
@@ -417,6 +428,17 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('asteria-field-panorama-02');
     });
 
+    it('resolves egress to exactly one plate with the approved label', () => {
+        const set = newsMedia['egress'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('RH-01 Pathfinder · egress');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the dossier, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('asteria-field-egress-01');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
@@ -425,6 +447,7 @@ describe('plate registry', () => {
         expect(resolveNewsMedia('launch-vehicle-reference')).toBe(newsMedia['launch-vehicle-reference']);
         expect(resolveNewsMedia('launch-lift-off')).toBe(newsMedia['launch-lift-off']);
         expect(resolveNewsMedia('surface-panorama')).toBe(newsMedia['surface-panorama']);
+        expect(resolveNewsMedia('egress')).toBe(newsMedia['egress']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

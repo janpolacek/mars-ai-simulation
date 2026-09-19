@@ -2,6 +2,7 @@ import {
     asteriaPlate01,
     asteriaPlate02,
     asteriaPlate03,
+    egress,
     identityMark,
     launchLiftOff,
     launchVehicleReference,
@@ -139,6 +140,25 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'surface-panorama': {
         plates: [{ src: surfacePanorama, label: 'RH-01 Pathfinder · first surface panorama' }],
+    },
+    /**
+     * One approved egress plate of RH-01 leaving the landing platform
+     * (card `t_b9751c8c`, step `009-first-surface-checks`).
+     *
+     * The asset is `docs/area/asteria-field-egress-01.png` — the
+     * corrected candidate approved in the re-gate (run 372),
+     * sha256 `4c3968e9…`, 1200×896 — with a clearly visible inclined
+     * ramp, stationary rover fully on the ramp, no wheel tracks
+     * behind, contact arm stowed, six wheels, warm-white body with
+     * muted red panels, dark deck, short mast. The label carries a
+     * U+00B7 MIDDLE DOT that must not be normalised. No
+     * `provenance` line: this key renders no caption, so the
+     * "illustrative artwork, not mission photography" statement
+     * reaches the reader through the article's approved `mediaAlt`
+     * instead.
+     */
+    'egress': {
+        plates: [{ src: egress, label: 'RH-01 Pathfinder · egress' }],
     },
 };
 
