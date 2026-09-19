@@ -18,19 +18,20 @@ guidance.
 
 ## Skill catalog
 
-| Skill                     | Owning profile                                    | Purpose                                                                                                 |
-| ------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice   | Draft one source-aware article                                                                          |
-| `brand-voice`             | Cross-cutting                                     | Keep public prose grounded and candid                                                                   |
-| `copy-editing`            | Profile `mars-ai-simulator-reviewer`, brand voice | Polish copy without changing canon                                                                      |
-| `create-article-workflow` | Profile `mars-ai-simulator-planner`               | Create the serial article task graph                                                                    |
-| `editorial-review`        | Profile `mars-ai-simulator-reviewer`              | Run the continuity check, the final editorial gate, the simulated record date, and the release decision |
-| `image-generation`        | Profile `mars-ai-simulator-visuals`               | Prepare reviewable visual candidates and metadata                                                       |
-| `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`               | Render vehicle references and scenes through the retired local ComfyUI fallback                         |
-| `project-documentation`   | Owning profile's `SOUL.md`                        | Revise project guidance and runbooks                                                                    |
-| `research-and-fact-check` | Profile `mars-ai-simulator-planner`               | Build a claim-level source pack                                                                         |
-| `seo-content`             | Profile `mars-ai-simulator-writer`                | Apply honest search intent and metadata during drafting                                                 |
-| `site-deployment`         | Profile `mars-ai-simulator-dev`                   | Validate locally and prepare authorised release inputs                                                  |
+| Skill                     | Owning profile                                             | Purpose                                                                                                 |
+| ------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `article-drafting`        | Profile `mars-ai-simulator-writer`, brand voice            | Draft one source-aware article                                                                          |
+| `brand-voice`             | Cross-cutting                                              | Keep public prose grounded and candid                                                                   |
+| `copy-editing`            | Profile `mars-ai-simulator-reviewer`, brand voice          | Polish copy without changing canon                                                                      |
+| `create-article-workflow` | Profile `mars-ai-simulator-planner`                        | Create the serial article task graph                                                                    |
+| `editorial-review`        | Profile `mars-ai-simulator-reviewer`                       | Run the continuity check, the final editorial gate, the simulated record date, and the release decision |
+| `image-generation`        | Profile `mars-ai-simulator-visuals`                        | Prepare reviewable visual candidates and metadata                                                       |
+| `image-index`             | Cross-cutting (maintained by `mars-ai-simulator-reviewer`) | Single index of every project image (`.agents/work/image-index.md`); consult it before requesting art   |
+| `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`                        | Render vehicle references and scenes through the retired local ComfyUI fallback                         |
+| `project-documentation`   | Owning profile's `SOUL.md`                                 | Revise project guidance and runbooks                                                                    |
+| `research-and-fact-check` | Profile `mars-ai-simulator-planner`                        | Build a claim-level source pack                                                                         |
+| `seo-content`             | Profile `mars-ai-simulator-writer`                         | Apply honest search intent and metadata during drafting                                                 |
+| `site-deployment`         | Profile `mars-ai-simulator-dev`                            | Validate locally and prepare authorised release inputs                                                  |
 
 Task tracking is not a project skill: the Hermes kanban board and its commands
 are described in [AGENTS.md](../AGENTS.md), the article graph mechanics are in
