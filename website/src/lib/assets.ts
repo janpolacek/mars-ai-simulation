@@ -5,15 +5,16 @@ import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-re
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import egressSource from '../../../docs/area/asteria-field-egress-01.png';
 import surfacePanoramaSource from '../../../docs/area/asteria-field-panorama-02.png';
-import firstDriveSource from '../../../docs/mission/first-drive.png';
-import cruiseCorrectionSource from '../../../docs/mission/cruise-correction.png';
+import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
+import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
+import archiveFinalReportSource from '../../../docs/mission/archive-final-report.png';
 import cruiseCheckoutSource from '../../../docs/mission/cruise-checkout.png';
+import cruiseCorrectionSource from '../../../docs/mission/cruise-correction.png';
 import cruiseFinalApproachSource from '../../../docs/mission/cruise-final-approach.png';
+import firstDriveSource from '../../../docs/mission/first-drive.png';
 import landingConfirmationSource from '../../../docs/mission/landing-confirmation.png';
 import readinessReviewSource from '../../../docs/mission/readiness-review.png';
 import stackArrivalSource from '../../../docs/mission/stack-arrival.png';
-import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
-import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
 import launchVehicleReferenceSource from '../../../docs/vehicles/ariane/canonical.png';
 import launchLiftOffSource from '../../../docs/vehicles/ariane/lunch.png';
@@ -283,3 +284,24 @@ export const landingConfirmation: ImageMetadata = landingConfirmationSource;
  * Illustrative artwork, not documentary.
  */
 export const firstDrive: ImageMetadata = firstDriveSource;
+
+/**
+ * The approved plate of the closed record shelf, imported from its
+ * canonical `docs/mission/` copy and rendered through the
+ * `archive-final-report` media key (card `t_8d3e08e4` → `t_44dc0760`,
+ * step `011-archive-final-report`).
+ *
+ * Release: 2026-09-20, approved by the editorial gate on `t_44dc0760`.
+ * The placed asset is `archive-final-report-1` (SHA-256
+ * `5f8b1e64…`), 1344×768, 16:9, 8-bit RGB PNG — closed leather-bound
+ * volumes on a dark wooden shelf in warm amber light, with muted rust
+ * tones and a single cool teal-green accent. Illustrative artwork, not
+ * mission photography: the alt text carries that statement, and the key
+ * renders no caption, so the "illustrative artwork, not mission
+ * photography" statement reaches the reader through the article's
+ * approved `mediaAlt` instead.
+ *
+ * Only this plate is placed; candidate 2 did not generate and was not
+ * re-generated (one-plate key).
+ */
+export const archiveFinalReport: ImageMetadata = archiveFinalReportSource;

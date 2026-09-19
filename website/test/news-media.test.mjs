@@ -108,6 +108,7 @@ describe('media keys and their requirements', () => {
             'cruise-final-approach',
             'landing-confirmation',
             'first-drive',
+            'archive-final-report',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
@@ -124,6 +125,7 @@ describe('media keys and their requirements', () => {
         expect(isNewsMediaKey('cruise-final-approach')).toBe(true);
         expect(isNewsMediaKey('landing-confirmation')).toBe(true);
         expect(isNewsMediaKey('first-drive')).toBe(true);
+        expect(isNewsMediaKey('archive-final-report')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -276,6 +278,15 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    it('requires one plate, one alt, no caption and no label for archive-final-report', () => {
+        expect(newsMediaRequirements['archive-final-report']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -297,6 +308,14 @@ describe('media keys and their requirements', () => {
 
     it('accepts the one-plate payload frontmatter', () => {
         expect(newsMediaIssues(payloadFrontmatter)).toEqual([]);
+    });
+
+    it('accepts the approved one-plate archive-final-report frontmatter', () => {
+        expect(newsMediaIssues({
+            media: 'archive-final-report',
+            mediaAlt:
+                'Illustrative artwork, not mission photography: closed leather-bound volumes on a dark wooden shelf in warm amber light, with muted rust tones and a single cool teal-green accent. A stand-in for the completed record of the fictional Red Horizon mission: the calibrated science archive and final engineering report, completed on 30 June 2036.',
+        })).toEqual([]);
     });
 
     it('fails the payload key with no alt or one blank alt, and keeps its label optional', () => {
@@ -592,6 +611,22 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('first-drive');
     });
 
+    /*
+     * Step 011's key (card `t_8d3e08e4` → `t_44dc0760`).
+     * The label is the approved string and carries the same U+00B7
+     * MIDDLE DOT the other labels do.
+     */
+    it('resolves archive-final-report to exactly one plate with the approved label', () => {
+        const set = newsMedia['archive-final-report'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · archive and final report');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the mission archive, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('archive-final-report');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
@@ -608,6 +643,7 @@ describe('plate registry', () => {
         expect(resolveNewsMedia('cruise-final-approach')).toBe(newsMedia['cruise-final-approach']);
         expect(resolveNewsMedia('landing-confirmation')).toBe(newsMedia['landing-confirmation']);
         expect(resolveNewsMedia('first-drive')).toBe(newsMedia['first-drive']);
+        expect(resolveNewsMedia('archive-final-report')).toBe(newsMedia['archive-final-report']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

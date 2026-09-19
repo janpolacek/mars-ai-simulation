@@ -1,21 +1,22 @@
 import {
+    archiveFinalReport,
     asteriaPlate01,
     asteriaPlate02,
     asteriaPlate03,
+    cruiseCheckout,
+    cruiseCorrection,
+    cruiseFinalApproach,
     egress,
+    firstDrive,
     identityMark,
+    landingConfirmation,
     launchLiftOff,
     launchVehicleReference,
     payloadSensorIllustration,
+    readinessReview,
+    stackArrival,
     surfacePanorama,
     vehicleStudioReference,
-    stackArrival,
-    readinessReview,
-    cruiseCorrection,
-    cruiseCheckout,
-    cruiseFinalApproach,
-    landingConfirmation,
-    firstDrive,
 } from '../../lib/assets';
 import type { NewsMediaKey } from '../../lib/media';
 
@@ -215,6 +216,25 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'first-drive': {
         plates: [{ src: firstDrive, label: 'RH-01 Pathfinder · first drive' }],
+    },
+    /**
+     * One approved illustration of the closed record shelf (card
+     * `t_8d3e08e4` → `t_44dc0760`, step `011-archive-final-report`).
+     *
+     * The asset is `docs/mission/archive-final-report.png` — candidate
+     * `archive-final-report-1` (SHA-256 `5f8b1e64…`), 1344×768, 16:9,
+     * 8-bit RGB PNG, approved by the editorial gate on `t_44dc0760`.
+     * The label is the one approved with it and carries a U+00B7
+     * MIDDLE DOT that must not be normalised. No `provenance` line: this
+     * key renders no caption, so the "illustrative artwork, not mission
+     * photography" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     *
+     * Only this plate is placed; candidate 2 did not generate and was
+     * not re-generated (one-plate key).
+     */
+    'archive-final-report': {
+        plates: [{ src: archiveFinalReport, label: 'Red Horizon · archive and final report' }],
     },
 };
 

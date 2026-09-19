@@ -30,6 +30,7 @@ export const newsMediaKeys = [
     'cruise-final-approach',
     'landing-confirmation',
     'first-drive',
+    'archive-final-report',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -176,13 +177,19 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      */
     'landing-confirmation': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
     /**
-     * One approved illustration of RH-01 after its first controlled drive
-     * (card `t_b30fae21`, audit item #7).
+     * One approved illustration of the closed record shelf (card
+     * `t_8d3e08e4` → `t_44dc0760`, step `011-archive-final-report`).
      *
      * `plateCount: 1` is the binding half: `src/features/news/media.ts`
-     * must resolve the key to exactly one plate or the build fails.
-     * `requiresLabel: false` as the editorial gate decided.
+     * must resolve the key to exactly one plate or the build fails, so
+     * the key cannot be declared without the released artwork behind it.
+     * `requiresLabel: false` as the editorial gate decided — the label
+     * is optional here, not required. No `provenance` line: this key
+     * renders no caption, so the "illustrative artwork, not mission
+     * photography" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
      */
+    'archive-final-report': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
     'first-drive': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
