@@ -76,6 +76,18 @@ const liftOffFrontmatter = {
     mediaLabel: 'Ariane 64 · lift-off',
 };
 
+/**
+ * The one-plate key the 009 first surface panorama resolves through
+ * (card `t_2d42e950`, step `009-health-packet-panorama`): one alt
+ * entry, no caption, and the label the editorial gate approved for it.
+ */
+const surfacePanoramaFrontmatter = {
+    media: 'surface-panorama',
+    mediaAlt:
+        "Illustrative panorama of the fictional Red Horizon mission's landing terrain at Asteria Field from the rover's first mast-height view: a wide rocky plain scattered with dark rocks and dust ripples, a pale layered mesa near the horizon under a dusty ochre sky, with the edge of the landing platform and part of the rover's wheel just visible in one corner for scale. Not mission photography.",
+    mediaLabel: 'RH-01 Pathfinder · first surface panorama',
+};
+
 const fieldsOf = (issues) => issues.map((issue) => issue.field);
 
 describe('media keys and their requirements', () => {
@@ -87,6 +99,7 @@ describe('media keys and their requirements', () => {
             'vehicle-references',
             'launch-vehicle-reference',
             'launch-lift-off',
+            'surface-panorama',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
@@ -94,6 +107,7 @@ describe('media keys and their requirements', () => {
         expect(isNewsMediaKey('vehicle-references')).toBe(true);
         expect(isNewsMediaKey('launch-vehicle-reference')).toBe(true);
         expect(isNewsMediaKey('launch-lift-off')).toBe(true);
+        expect(isNewsMediaKey('surface-panorama')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -165,6 +179,15 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    it('requires one plate, one alt, no caption and no label for surface-panorama', () => {
+        expect(newsMediaRequirements['surface-panorama']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -180,7 +203,7 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['media']);
         expect(issues[0].message).toContain(
-            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference, launch-lift-off',
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference, launch-lift-off, surface-panorama',
         );
     });
 
@@ -212,6 +235,24 @@ describe('media keys and their requirements', () => {
 
     it('accepts the approved one-plate lift-off frontmatter, label included', () => {
         expect(newsMediaIssues(liftOffFrontmatter)).toEqual([]);
+    });
+
+    it('accepts the approved one-plate surface-panorama frontmatter, label included', () => {
+        expect(newsMediaIssues(surfacePanoramaFrontmatter)).toEqual([]);
+    });
+
+    it('fails the surface-panorama key with no alt or one blank alt', () => {
+        expect(fieldsOf(newsMediaIssues({ media: 'surface-panorama' }))).toEqual(['mediaAlt']);
+        expect(fieldsOf(newsMediaIssues({ ...surfacePanoramaFrontmatter, mediaAlt: ['  '] }))).toEqual(['mediaAlt']);
+        // `requiresLabel: false` for this key, so an absent label is not an issue.
+        expect(newsMediaIssues({ ...surfacePanoramaFrontmatter, mediaLabel: undefined })).toEqual([]);
+    });
+
+    it('fails a caption on the surface-panorama key rather than ignoring it', () => {
+        const issues = newsMediaIssues({ ...surfacePanoramaFrontmatter, mediaCaption: 'A caption nobody renders' });
+
+        expect(fieldsOf(issues)).toEqual(['mediaCaption']);
+        expect(issues[0].message).toContain('remove mediaCaption');
     });
 
     it('fails the launcher key with no alt, a blank alt, or a caption it never renders', () => {
@@ -360,6 +401,22 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('ariane');
     });
 
+    /*
+     * The 009 first surface panorama (card `t_2d42e950`).
+     * The label is the approved string and carries the same U+00B7
+     * MIDDLE DOT the other labels do.
+     */
+    it('resolves surface-panorama to exactly one plate with the approved label', () => {
+        const set = newsMedia['surface-panorama'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('RH-01 Pathfinder · first surface panorama');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the dossier, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('asteria-field-panorama-02');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
@@ -367,6 +424,7 @@ describe('plate registry', () => {
         expect(resolveNewsMedia('vehicle-references')).toBe(newsMedia['vehicle-references']);
         expect(resolveNewsMedia('launch-vehicle-reference')).toBe(newsMedia['launch-vehicle-reference']);
         expect(resolveNewsMedia('launch-lift-off')).toBe(newsMedia['launch-lift-off']);
+        expect(resolveNewsMedia('surface-panorama')).toBe(newsMedia['surface-panorama']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

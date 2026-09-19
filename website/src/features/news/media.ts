@@ -6,6 +6,7 @@ import {
     launchLiftOff,
     launchVehicleReference,
     payloadSensorIllustration,
+    surfacePanorama,
     vehicleStudioReference,
 } from '../../lib/assets';
 import type { NewsMediaKey } from '../../lib/media';
@@ -118,6 +119,26 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'launch-lift-off': {
         plates: [{ src: launchLiftOff, label: 'Ariane 64 · lift-off' }],
+    },
+    /**
+     * One approved first surface panorama of the Asteria Field terrain
+     * (card `t_2d42e950`, step `009-health-packet-panorama`).
+     *
+     * The asset is `docs/area/asteria-field-panorama-02.png`
+     * — the 02-terrain-forward candidate, SHA-256 `fec43bac…`,
+     * released by the 009 editorial gate (`.agents/work/reviews/
+     * 009-health-packet-panorama.md` §14). The label is the one
+     * approved with it and carries a U+00B7 MIDDLE DOT, which must
+     * not be normalised. No `provenance` line: this key renders no
+     * caption, so the "illustrative artwork, not mission photography"
+     * statement reaches the reader through the article's approved
+     * `mediaAlt` instead.
+     *
+     * Only this plate is placed; the sibling candidate `01-rover-scene`
+     * (SHA-256 `9fc4bd2e…`) is usable as an alternative only, not placed.
+     */
+    'surface-panorama': {
+        plates: [{ src: surfacePanorama, label: 'RH-01 Pathfinder · first surface panorama' }],
     },
 };
 

@@ -21,6 +21,7 @@ export const newsMediaKeys = [
     'vehicle-references',
     'launch-vehicle-reference',
     'launch-lift-off',
+    'surface-panorama',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -84,6 +85,20 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * exactly one plate or the build fails.
      */
     'launch-lift-off': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved first surface panorama of the Asteria Field terrain
+     * (card `t_2d42e950`, step `009-health-packet-panorama`).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails, so
+     * the key cannot be declared without the released artwork behind it.
+     * `requiresLabel: false` as the editorial gate decided — the label
+     * is optional here, not required. No `provenance` line: this key
+     * renders no caption, so the "illustrative artwork, not mission
+     * photography" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     */
+    'surface-panorama': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {

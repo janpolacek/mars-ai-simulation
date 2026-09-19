@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import asteriaMarsLocatorSource from '../../../docs/area/asteria-field-01-mars-locator.png';
 import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-regional-context.png';
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
+import surfacePanoramaSource from '../../../docs/area/asteria-field-panorama-02.png';
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
@@ -160,3 +161,19 @@ export const launchVehicleReference: ImageMetadata = launchVehicleReferenceSourc
  * `launch-lift-off` media key into renders it.
  */
 export const launchLiftOff: ImageMetadata = launchLiftOffSource;
+
+/**
+ * The first surface panorama plate, imported from its canonical
+ * `docs/area/` copy and rendered through the `surface-panorama` media
+ * key (card `t_2d42e950`, step `009-health-packet-panorama`).
+ *
+ * Release: reviewer gate t_26edaeda, 2026-09-19. The placed asset is
+ * candidate 02-terrain-forward — sha256 `fec43bacc306b73a09e181b26bf964dd79feb7c94dc21645e4b2e0f32c402c9b`,
+ * 1344×768 PNG 8-bit RGB non-interlaced. It is illustrative artwork,
+ * not mission photography: the alt text carries that statement, and the
+ * key renders no per-plate caption, so the "illustrative, not mission
+ * photography" statement reaches the reader through `mediaAlt` instead.
+ * Only this plate is placed; the sibling candidate `01-rover-scene`
+ * (sha256 `9fc4bd2e…`) is usable as an alternative only, not placed.
+ */
+export const surfacePanorama: ImageMetadata = surfacePanoramaSource;
