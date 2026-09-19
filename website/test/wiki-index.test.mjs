@@ -225,10 +225,13 @@ const fixturePages = [fixtureVehicleControl, fixtureProjectControl, fixtureDraft
 function fixturePageSource({ title, section, publication, order, summary, related, body }) {
     const state = publication ? `publication: ${publication}\n` : '';
     const links = related ? `related:\n  - ${related}\n` : '';
+    const media = publication === 'published'
+        ? `media: vehicle-references\nmediaAlt: 'Illustrative artwork of the fictional RH-01 rover in its clean baseline configuration.'\n`
+        : '';
     return `---
 title: '${title}'
 section: ${section}
-${state}${links}order: ${order}
+${state}${links}${media}order: ${order}
 summary: '${summary}'
 ---
 

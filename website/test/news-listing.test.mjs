@@ -224,11 +224,14 @@ const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixtureNewest, 
 function fixtureArticleSource({ title, closing, order, publication, simulatedDate }) {
     const state = publication ? `publication: ${publication}\n` : '';
     const date = simulatedDate ? `simulatedDate: ${simulatedDate}\n` : '';
+    const media = publication === 'published'
+        ? `media: vehicle-references\nmediaAlt: 'Illustrative artwork of the fictional RH-01 rover in its clean baseline configuration.'\n`
+        : '';
     return `---
 title: '${title}'
 category: Listing fixture
 status: ${publication === 'published' ? 'Published' : 'Draft'}
-${state}${date}summary: 'An article the listing suite writes for itself into a throwaway project root.'
+${state}${date}${media}summary: 'An article the listing suite writes for itself into a throwaway project root.'
 linkLabel: 'Listing fixture'
 order: ${order}
 ---

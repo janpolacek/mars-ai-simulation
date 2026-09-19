@@ -252,11 +252,14 @@ const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixturePublishe
 /** One fixture article, written in the shape the content schema expects. */
 function fixtureArticleSource({ title, closing, order, publication }) {
     const state = publication ? `publication: ${publication}\n` : '';
+    const media = publication === 'published'
+        ? `media: vehicle-references\nmediaAlt: 'Illustrative artwork of the fictional RH-01 rover in its clean baseline configuration.'\n`
+        : '';
     return `---
 title: '${title}'
 category: Guard fixture
 status: ${publication === 'published' ? 'Published' : 'Draft'}
-${state}summary: 'An article the guard suite writes for itself into a throwaway project root.'
+${state}${media}summary: 'An article the guard suite writes for itself into a throwaway project root.'
 linkLabel: 'Guard fixture'
 order: ${order}
 ---

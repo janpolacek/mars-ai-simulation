@@ -275,12 +275,14 @@ const undatedArticle = {
  */
 function fixtureArticleSource({ title, order, simulatedDate }) {
     const date = simulatedDate ? `simulatedDate: ${simulatedDate}\n` : '';
+    const media =
+        `media: vehicle-references\nmediaAlt: 'Illustrative artwork of the fictional RH-01 rover in its clean baseline configuration.'\n`;
     return `---
 title: '${title}'
 category: Simulated date fixture
 status: Published
 publication: published
-${date}summary: 'An article the simulated-date suite writes for itself into a throwaway project root.'
+${date}${media}summary: 'An article the simulated-date suite writes for itself into a throwaway project root.'
 linkLabel: 'Simulated date fixture'
 order: ${order}
 ---
