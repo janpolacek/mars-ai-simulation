@@ -1,10 +1,16 @@
 # Mars AI Simulation
 
-**Mars AI Simulation is a test harness for autonomous multi-agent AI work.** A human
-operator runs a roster of specialised agents — planner, writer, editor, continuity, SEO,
-visuals, and developer — that research, draft, review, illustrate, implement, and validate
-a real website end to end. The orchestration is the experiment; the fiction the team
-produces is the workload that makes it observable.
+**Mars AI Simulation is a testbed for Hermes Agent and its multi-agent flow.** The purpose
+is the experiment: a human operator runs a roster of specialised agents — planner, writer,
+reviewer, visuals, and developer — that research, draft, review, illustrate, implement, and
+validate a real website end to end, and the question being tested is whether that
+orchestration can carry a real project. The orchestration is the experiment; the fiction
+the team produces is the workload that makes it observable.
+
+The operation is deliberately budget-first: every role runs on a cheap or free model
+([Models and budget](#models-and-budget)), because what is being tested is the flow, not
+the model. Strong frontier models would raise the cost without adding anything to the
+experiment.
 
 The site they produce is live:
 **[Red Horizon — a Mars mission in progress](https://mars-ai-simulation.janpolacek.workers.dev/)**.
@@ -26,9 +32,9 @@ and [docs/timeline/](docs/timeline/README.md), and are not repeated here.
 
 Every page published on the site is work an AI agent produced, and the project states which
 parts of that are autonomous. Agents do the research, the draft, the continuity and
-editorial review passes, the search and metadata review, the image generation on a local
-ComfyUI installation, the implementation of the site, and its local validation. A human does
-not write the pages.
+editorial review passes, the search and metadata review, the image generation through a
+hosted image model with a local ComfyUI fallback, the implementation of the site, and its
+local validation. A human does not write the pages.
 
 What a human holds is every decision that makes something public: approving canon,
 deciding that a page is published, and releasing it. Agents never approve canon or
@@ -50,16 +56,13 @@ mission photography. How the harness works is documented in [docs/HARNESS.md](do
 - **Hermes Agent** (Nous Research) — the runtime the agent roles run on, with its
   **kanban board** as the shared task and handoff record: one card is one deliverable, and
   a card's comments are where evidence, decisions, and handoffs are written down.
-- **Local models** — the writing, review, and reasoning passes run on models served on the
-  operator's own machine. Which model serves which role is machine-local, held in each
-  Hermes profile rather than in this repository.
-- **Hosted image generation** — imagery is produced through the Hermes `image_generate` tool
-  (provider `openai-codex`, model `gpt-image-2-medium`). Candidates and their provenance stay in
-  the visuals profile's image cache, outside this repository, and only a human-selected export
-  is copied into the subject's dossier under `docs/`. The earlier local ComfyUI generator,
-  [`tools/visual-generator/`](tools/archive/visual-generator/README.md), was retired on
-  2026-09-17 and is kept read-only under [`tools/archive/`](tools/archive/README.md) as the
-  documented fallback.
+- **Image generation** — imagery is produced through the Hermes `image_generate` tool
+  (provider `openai-codex`, model `gpt-image-2-medium`). The hosted GPT model produces the
+  better images, and published imagery comes from this path. The local ComfyUI installation
+  (Flux 2 Klein for text-to-image, Qwen-Image-Edit for edits) produces visibly worse
+  renders and is used only as a fallback when the hosted quota is exhausted. Candidates and
+  their provenance stay in the visuals profile's image cache, outside this repository, and
+  only a human-selected export is copied into the subject's dossier under `docs/`.
 - **Astro 7 with MDX** — builds the site; [`website/`](website/README.md) is the
   application, and articles are authored as MDX in [`website/news/`](website/news/).
 - **Cloudflare Workers** — serves the static build through Workers Static Assets
@@ -91,6 +94,30 @@ the harness runs — a screenshot of the operator's local harness, not mission i
 Both are screenshots of the operator's own machine, so they show working state rather
 than canon. Their source paths, capture dates, and hashes are recorded in
 [`docs/harness/`](docs/harness/README.md).
+
+## Models and budget
+
+The experiment is about the multi-agent flow, so every role runs on a cheap or free
+model — deliberately no frontier model. The current assignment (2026-09-19) lives in each
+Hermes profile on the operator's machine:
+
+| Role (Hermes profile)                   | Model                                 | Provider     |
+| --------------------------------------- | ------------------------------------- | ------------ |
+| Planner (`mars-ai-simulator-planner`)   | `deepseek-v4-flash`                   | opencode-zen |
+| Reviewer (`mars-ai-simulator-reviewer`) | `deepseek-v4-flash`                   | opencode-zen |
+| Writer (`mars-ai-simulator-writer`)     | `inclusionai/ling-3.0-flash-fin:free` | NousResearch |
+| Visuals (`mars-ai-simulator-visuals`)   | `inclusionai/ling-3.0-flash-fin:free` | NousResearch |
+| Developer (`mars-ai-simulator-dev`)     | `inclusionai/ling-3.0-flash-fin:free` | NousResearch |
+
+Both are hosted, budget-tier APIs (opencode.ai's Zen relay and the NousResearch inference
+API); nothing in the roster runs on a frontier model. Staying mostly on budget is the
+point: the operation costs almost nothing to run, and the capability ceiling of the models
+is part of what the orchestration has to absorb. Earlier passes tried other budget tiers —
+`upstage/solar-pro4:free`, `minimax-m3`, `deepseek-v4.1-flash`, `gpt-5.6-luna` — before
+settling on the pair above. Image models are the one deliberate exception to the budget
+rule, and they show it: the hosted GPT model (`gpt-image-2-medium`) produces the good
+imagery, while the local Flux 2 Klein / Qwen-Image-Edit fallback produces visibly worse
+renders and is only pulled in when the hosted quota runs out.
 
 ## Build and run it
 
@@ -138,7 +165,6 @@ therefore a publication, and needs the human approval recorded on its release ca
 docs/        Documentation, the locked scenario, and one dossier per subject
 .agents/     Project-local task skills, and the working papers for articles in flight
 website/     The Astro application and its build scripts
-tools/       Retired tools, kept read-only; their scratch output stays git-ignored
 ```
 
 - [`docs/`](docs/README.md) — what the project is, what is true inside the fiction, the
@@ -150,9 +176,6 @@ tools/       Retired tools, kept read-only; their scratch output stays git-ignor
   material, not documentation.
 - [`website/`](website/README.md) — the Astro application: routes, content schema, build
   guards, and [`website/news/`](website/news/), where article copy is authored as MDX.
-- [`tools/archive/`](tools/archive/README.md) — retired tools. `visual-generator/` is the local
-  ComfyUI generator, retired 2026-09-17. It holds no permanent assets; approved exports live in
-  `docs/`.
 
 Whole-repository files: [`AGENTS.md`](AGENTS.md) (how contributors work, and the kanban
 commands), [`dprint.json`](dprint.json) (formatter configuration), and

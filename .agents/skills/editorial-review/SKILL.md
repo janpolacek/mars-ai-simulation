@@ -372,6 +372,18 @@ field (`simulatedDate` in `website/news/<slug>.mdx`), so it lands on the same su
   role instead of writing a field the build will reject. A frontmatter key the schema does not
   declare is a build failure, not a harmless extra.
 
+- A writer draft can omit a **schema-required frontmatter key** entirely even when the brief never
+  lists it (007: `status` at `content.config.ts:18` is `z.string()` with no default; the writer's
+  frontmatter had title/category/publication/order/accent/media/mediaAlt/summary/linkLabel but no
+  `status`, which would fail the build). Audit the draft against the schema's required keys before
+  the verdict, not only against the brief's list. Adding the missing key at the gate is a metadata
+  correction, not a factual-meaning change, when the value restates the article's own record (007:
+  `status: Approach and arrival preparation underway` mirrors the article's opening claim); record
+  it as an explicit editorial correction with the before/after hash and the choice rationale, and
+  name the writer omission so the repair is not silent. Do not send a one-line metadata completion
+  back as a corrective card when the value is fully determined by the record and the schema leaves
+  no second valid state.
+
 - **`kanban_create(parents=[X])` records `parent_id=X, child_id=new_card`** — the new card
   waits on X being done, **not** the other way around. To make the new card the parent of
   an existing card (the corrective→review flow this skill names), omit `parents=[…]` on
