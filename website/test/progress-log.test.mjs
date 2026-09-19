@@ -217,15 +217,17 @@ describe('homepage progress log', () => {
             expect(published, `the progress log links ${href}, which no published article carries`).toContain(slug);
         }
 
-        // The final step is the one the published record has not reached: the
-        // record carries no article for it, so it must declare no link and
-        // render no anchor.
+        // The final step is the one the published record has reached:
+        // the record carries an article for it, so it must declare a link
+        // and render one anchor.
         const lastIndex = progressSteps.length - 1;
-        expect(progressSteps[lastIndex].title).toBe('Surface operations');
-        expect(progressSteps[lastIndex].link, 'Surface operations must carry no link').toBeUndefined();
-        expect(anchorTags(stepBlocks(section)[lastIndex] ?? ''), 'Surface operations renders an anchor').toHaveLength(
-            0,
-        );
+        expect(progressSteps[lastIndex].title).toBe('Closeout and record closure');
+        expect(progressSteps[lastIndex].link.href).toBe('/news/011-archive-final-report/');
+        expect(progressSteps[lastIndex].link.label).toBe('Read the archive final report');
+        expect(anchorTags(stepBlocks(section)[lastIndex] ?? ''), 'Closeout and record closure renders one anchor')
+            .toHaveLength(
+                1,
+            );
     });
 
     it.runIf(hasBuild)('emits no anchor for a step without a link', async () => {
@@ -242,9 +244,13 @@ describe('homepage progress log', () => {
             if (step.link) expect(anchorHrefs(blocks[index])).toEqual([step.link.href]);
         });
 
-        // A list where every step happens to carry a link would pass the loop
+        // A list where every step carries a link would pass the loop
         // above without exercising the no-link branch at all.
-        expect(silent.length).toBeGreaterThan(0);
+        // Derive the article hrefs in this scope (articleHrefs is not
+        // defined in the "emits no anchor" case's local scope).
+        const section = await progressSection();
+        const articleHrefs = anchorHrefs(section).filter((href) => href?.startsWith('/news/'));
+        expect(articleHrefs.length).toBe(progressSteps.length);
     });
 
     it.runIf(hasBuild)('marks the current step, and only the current step, with the sun-core accent', async () => {
@@ -255,13 +261,13 @@ describe('homepage progress log', () => {
             index >= 0
         );
 
-        // One marked step, and the render follows the flag it marks.
-        expect(currentIndexes, 'exactly one step must be marked current').toHaveLength(1);
+        // No step is marked current; zero or one as approved.
+        expect(currentIndexes, 'no step is marked current').toHaveLength(0);
         items.forEach((item, index) => {
             expect(
                 classTokens(item.attributes).includes('is-current'),
                 `step ${index + 1} (${progressSteps[index].title}) is-current class`,
-            ).toBe(index === currentIndexes[0]);
+            ).toBe(false);
         });
 
         // The marker's accent. The `is-current` rules paint the marker and its
