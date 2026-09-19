@@ -15,14 +15,14 @@ export const missionIntro = {
     eyebrow: 'Mission brief',
     title: 'The programme at a glance',
     description:
-        'A clear public record of a fictional Mars mission, from early programme planning to the work of its first surface vehicle.',
+        "A clear public record of a fictional Mars mission, from early programme planning through surface operations to the completion of the calibrated science archive and final engineering report — closing the mission's public record.",
 };
 
 export const missionFacts: readonly MissionFact[] = [
     { label: 'Name', value: 'Red Horizon' },
-    { label: 'Current state', value: 'Mission architecture' },
-    { label: 'Launch date', value: 'To be announced' },
-    { label: 'Landing date', value: 'To be announced' },
+    { label: 'Current state', value: 'Calibrated science archive and final engineering report completed' },
+    { label: 'Launch date', value: '17 Feb 2031' },
+    { label: 'Landing date', value: '16 Sep 2031' },
     {
         label: 'Objective',
         value: 'Map local terrain, examine rocks in context, and test careful remote operations on Mars.',
