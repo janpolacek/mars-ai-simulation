@@ -5,9 +5,10 @@ import { isPublishedEntry, selectPublicNews } from '../../lib/publication';
 export type NewsEntry = CollectionEntry<'news'>;
 
 /**
- * Published news items, in frontmatter order — the one selection every surface
- * consumes: the homepage carousel (`NewsCarousel.astro`), the newsroom index
- * (`NewsList.astro`) and the detail-route generator (`src/pages/news/[slug].astro`).
+ * Published news items, newest simulated record date first — the one selection
+ * every surface consumes: the homepage carousel (`NewsCarousel.astro`), the
+ * newsroom index (`NewsList.astro`) and the detail-route generator
+ * (`src/pages/news/[slug].astro`).
  *
  * The publication state is filtered at collection-query level as well as in the
  * selection helper, so a draft cannot reach a listing, a card, or a route by

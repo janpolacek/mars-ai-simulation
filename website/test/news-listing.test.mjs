@@ -198,16 +198,37 @@ const fixturePublishedControl = {
     publication: 'published',
 };
 
-const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixturePublishedControl];
+/** The published article dated newest: every listing surface must show it first. */
+const fixtureNewest = {
+    slug: '804-listing-fixture-newest',
+    title: 'Listing fixture: the newest simulated record date, which every listing must show first',
+    closing: 'The newest-dated fixture closes on this sentence, which the build must lead with.',
+    order: 804,
+    publication: 'published',
+    simulatedDate: '2031-02-17',
+};
+
+/** The published article dated between the newest and the undated control. */
+const fixtureMiddle = {
+    slug: '805-listing-fixture-middle',
+    title: 'Listing fixture: a mid-range simulated record date',
+    closing: 'The middle-dated fixture closes on this sentence, between the newest and the undated control.',
+    order: 805,
+    publication: 'published',
+    simulatedDate: '2029-07-13',
+};
+
+const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixtureNewest, fixtureMiddle, fixturePublishedControl];
 
 /** One fixture article, written in the shape the content schema expects. */
-function fixtureArticleSource({ title, closing, order, publication }) {
+function fixtureArticleSource({ title, closing, order, publication, simulatedDate }) {
     const state = publication ? `publication: ${publication}\n` : '';
+    const date = simulatedDate ? `simulatedDate: ${simulatedDate}\n` : '';
     return `---
 title: '${title}'
 category: Listing fixture
 status: ${publication === 'published' ? 'Published' : 'Draft'}
-${state}summary: 'An article the listing suite writes for itself into a throwaway project root.'
+${state}${date}summary: 'An article the listing suite writes for itself into a throwaway project root.'
 linkLabel: 'Listing fixture'
 order: ${order}
 ---
@@ -326,6 +347,11 @@ describe('the published selection is the listing set', () => {
      * and an item with no `publication` field at all. The schema defaults that
      * missing field to `draft` (`src/content.config.ts`), so it must be held back
      * exactly like the explicit draft.
+     *
+     * None of these fixtures declares a `simulatedDate`, so this set exercises
+     * the documented fallback: published items without a simulated date sort
+     * after every dated one, and among themselves by frontmatter `order`
+     * ascending — the sequence the frontmatter already declared.
      */
     const fixtures = [
         { id: '003-third-mission-update', data: { publication: 'published', order: 3 } },
@@ -335,7 +361,7 @@ describe('the published selection is the listing set', () => {
         { id: '005-no-state-declared', data: { order: 5 } },
     ];
 
-    it('selects every published item, in frontmatter order, and nothing else', () => {
+    it('selects every published item, undated ones in frontmatter order, and nothing else', () => {
         const selected = selectPublicNews(fixtures);
 
         expect(selected.length).toBeGreaterThan(1);
@@ -355,6 +381,55 @@ describe('the published selection is the listing set', () => {
 
     it('gives one listing entry per published item, so no surface can disagree', () => {
         expect(selectPublicNews(fixtures).length).toBe(3);
+    });
+
+    /**
+     * The ordering contract: a published item's simulated record date owns its
+     * position — newest first — and an item the editor has not dated yet sorts
+     * after every dated item, in the deterministic sequence its frontmatter
+     * `order` already declared.
+     */
+    const orderedFixtures = [
+        { id: '003-third-mission-update', data: { publication: 'published', order: 3, simulatedDate: '2029-07-13' } },
+        { id: '001-project-announcement', data: { publication: 'published', order: 1, simulatedDate: '2026-10-12' } },
+        { id: '004-newest', data: { publication: 'published', order: 4, simulatedDate: '2031-02-17' } },
+        { id: '006-undated', data: { publication: 'published', order: 6 } },
+        { id: '002-payload-selection', data: { publication: 'published', order: 2, simulatedDate: '2027-03-19' } },
+        { id: '005-undated', data: { publication: 'published', order: 5 } },
+    ];
+
+    it('sorts published items newest simulated record date first', () => {
+        const selected = selectPublicNews(orderedFixtures);
+
+        expect(selected.map((entry) => entry.id)).toEqual([
+            '004-newest', // 2031-02-17
+            '003-third-mission-update', // 2029-07-13
+            '002-payload-selection', // 2027-03-19
+            '001-project-announcement', // 2026-10-12
+            // No date: after every dated item, in frontmatter order.
+            '005-undated',
+            '006-undated',
+        ]);
+    });
+
+    it('sorts an unquoted Date-shaped simulatedDate exactly like the string form', () => {
+        // An unquoted `YYYY-MM-DD` in YAML frontmatter arrives as a UTC-midnight
+        // `Date`; the selector must order it identically to the quoted string.
+        const mixed = [
+            { id: 'older', data: { publication: 'published', order: 1, simulatedDate: new Date('2026-10-12') } },
+            { id: 'newer', data: { publication: 'published', order: 2, simulatedDate: '2031-02-17' } },
+        ];
+
+        expect(selectPublicNews(mixed).map((entry) => entry.id)).toEqual(['newer', 'older']);
+    });
+
+    it('breaks a shared simulated date, and the undated fallback, by frontmatter order', () => {
+        const tied = [
+            { id: 'later-in-order', data: { publication: 'published', order: 8, simulatedDate: '2030-03-11' } },
+            { id: 'earlier-in-order', data: { publication: 'published', order: 7, simulatedDate: '2030-03-11' } },
+        ];
+
+        expect(selectPublicNews(tied).map((entry) => entry.id)).toEqual(['earlier-in-order', 'later-in-order']);
     });
 
     /**
@@ -452,6 +527,27 @@ describe('the built site lists every published item', () => {
 
         expect(cardLabelHrefs(fixtureHtml), `${fixtureName} rendered no newsroom card at all`).toContain(
             `/news/${fixturePublishedControl.slug}/`,
+        );
+    }, fixtureBuildTimeout);
+
+    it('renders the fixture homepage carousel and newsroom newest simulated date first', async () => {
+        const fixture = await fixtureBuild();
+        const home = await readFile(join(fixture.dist, 'index.html'), 'utf8');
+        const index = await readFile(join(fixture.dist, 'news', 'index.html'), 'utf8');
+
+        // The three published fixture articles, in the only order the selector
+        // may produce: newest simulated date first, then the undated control in
+        // frontmatter order. Both built surfaces must agree with the one
+        // selection that also generates the detail routes.
+        const expected = [
+            `/news/${fixtureNewest.slug}/`,
+            `/news/${fixtureMiddle.slug}/`,
+            `/news/${fixturePublishedControl.slug}/`,
+        ];
+
+        expect(cardLabelHrefs(home), 'the carousel does not lead with the newest simulated date').toEqual(expected);
+        expect(cardLabelHrefs(index), 'the newsroom index does not lead with the newest simulated date').toEqual(
+            expected,
         );
     }, fixtureBuildTimeout);
 });
