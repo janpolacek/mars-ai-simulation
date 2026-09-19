@@ -7,6 +7,7 @@ import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
 import launchVehicleReferenceSource from '../../../docs/vehicles/ariane/canonical.png';
+import launchLiftOffSource from '../../../docs/vehicles/ariane/lunch.png';
 import vehicleStudioReferenceSource from '../../../docs/vehicles/pathfinder/canonical.png';
 
 /**
@@ -139,3 +140,23 @@ export const vehicleStudioReference: ImageMetadata = vehicleStudioReferenceSourc
  * release card wires the `launch-vehicle-reference` media key into renders it.
  */
 export const launchVehicleReference: ImageMetadata = launchVehicleReferenceSource;
+
+/**
+ * The approved pad lift-off plate of the Ariane 64 launcher, imported from its
+ * canonical `docs/vehicles/ariane/` copy.
+ *
+ * Release: step 005 (2026-09-19), recorded by the editorial gate on
+ * `t_fd724cd9` (`.agents/work/reviews/005-launch.md` §10). The placed asset is
+ * `lunch.png` — sha256 `c4744fff…`, 1,122 × 1,402, 2,054,094 B — the pad
+ * lift-off frame step 004 deliberately withheld for step 005
+ * (`.agents/work/reviews/ariane-plates-selection.md` §6 row 5). It is the
+ * second file of the ariane dossier this site imports; the dossier's in-transit
+ * plate `travelling-to-mars.png` stays withheld (`scripts/guards.mjs` fails the
+ * build if any reference resolves to it, and the matching
+ * `withheldArianePlates` row pins it in `test/guards.test.mjs`).
+ *
+ * It is illustrative artwork, not mission photography: the alt text carries
+ * that statement, and only the article the release card wires the
+ * `launch-lift-off` media key into renders it.
+ */
+export const launchLiftOff: ImageMetadata = launchLiftOffSource;

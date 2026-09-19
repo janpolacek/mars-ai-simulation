@@ -3,6 +3,7 @@ import {
     asteriaPlate02,
     asteriaPlate03,
     identityMark,
+    launchLiftOff,
     launchVehicleReference,
     payloadSensorIllustration,
     vehicleStudioReference,
@@ -98,6 +99,25 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'launch-vehicle-reference': {
         plates: [{ src: launchVehicleReference, label: 'Ariane 64 · engineering reference' }],
+    },
+    /**
+     * One approved pad lift-off plate of the Ariane 64 launcher (card
+     * `t_d562771d`, step `005-launch`).
+     *
+     * The asset is `docs/vehicles/ariane/lunch.png`, the pad lift-off frame the
+     * step-004 plate review withheld for step 005 and the 005 editorial gate
+     * released (`.agents/work/reviews/005-launch.md` §10). The label is the one
+     * approved with it and carries a U+00B7 MIDDLE DOT, which must not be
+     * normalised. No `provenance` line: this key renders no caption, so the
+     * "illustrative artwork, not mission photography" statement reaches the
+     * reader through the article's approved `mediaAlt` instead.
+     *
+     * Only this plate is placed. The dossier's in-transit render
+     * `travelling-to-mars.png` stays withheld — `scripts/guards.mjs` fails the
+     * build on a reference to it.
+     */
+    'launch-lift-off': {
+        plates: [{ src: launchLiftOff, label: 'Ariane 64 · lift-off' }],
     },
 };
 

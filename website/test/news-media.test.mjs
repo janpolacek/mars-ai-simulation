@@ -63,6 +63,19 @@ const launcherFrontmatter = {
     mediaLabel: 'Ariane 64 · engineering reference',
 };
 
+/**
+ * The one-plate key the 005 pad lift-off resolves through (card `t_d562771d`,
+ * step `005-launch`): one alt entry, no caption, and the label the editorial
+ * gate approved with it — carrying the same U+00B7 MIDDLE DOT the other
+ * Ariane labels use, which must not be normalised.
+ */
+const liftOffFrontmatter = {
+    media: 'launch-lift-off',
+    mediaAlt:
+        'Illustrative artwork, not mission photography: a white uncrewed heavy-lift launcher lifts off and climbs from its pad, one central core with four strap-on boosters and five firing engine bells, bright engine flame and heavy trailing smoke, two lattice towers beside the pad, blue sky with clouds. A stand-in for the launcher this fictional mission is planned around; no real agency is named or implied.',
+    mediaLabel: 'Ariane 64 · lift-off',
+};
+
 const fieldsOf = (issues) => issues.map((issue) => issue.field);
 
 describe('media keys and their requirements', () => {
@@ -73,12 +86,14 @@ describe('media keys and their requirements', () => {
             'payload-sensor-illustration',
             'vehicle-references',
             'launch-vehicle-reference',
+            'launch-lift-off',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
         expect(isNewsMediaKey('payload-sensor-illustration')).toBe(true);
         expect(isNewsMediaKey('vehicle-references')).toBe(true);
         expect(isNewsMediaKey('launch-vehicle-reference')).toBe(true);
+        expect(isNewsMediaKey('launch-lift-off')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -136,6 +151,20 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    /*
+     * Step 005's key (card `t_d562771d`). The same one-plate, one-alt,
+     * no-caption, optional-label shape as the two studio-reference keys, so the
+     * approved article frontmatter is written against the same contract.
+     */
+    it('requires one plate, one alt, no caption and no label for launch-lift-off', () => {
+        expect(newsMediaRequirements['launch-lift-off']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -151,7 +180,7 @@ describe('media keys and their requirements', () => {
 
         expect(fieldsOf(issues)).toEqual(['media']);
         expect(issues[0].message).toContain(
-            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference',
+            'media must be one of: programme-identity, asteria-plates, payload-sensor-illustration, vehicle-references, launch-vehicle-reference, launch-lift-off',
         );
     });
 
@@ -179,6 +208,10 @@ describe('media keys and their requirements', () => {
 
     it('accepts the approved one-plate launcher frontmatter, label included', () => {
         expect(newsMediaIssues(launcherFrontmatter)).toEqual([]);
+    });
+
+    it('accepts the approved one-plate lift-off frontmatter, label included', () => {
+        expect(newsMediaIssues(liftOffFrontmatter)).toEqual([]);
     });
 
     it('fails the launcher key with no alt, a blank alt, or a caption it never renders', () => {
@@ -310,12 +343,30 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('ariane');
     });
 
+    /*
+     * The 005 pad lift-off (card `t_d562771d`). The label is the approved
+     * string and carries the same U+00B7 MIDDLE DOT the 003/004 labels do; the
+     * plate is imported from its canonical `docs/vehicles/ariane/` copy.
+     */
+    it('resolves launch-lift-off to exactly one plate with the approved label', () => {
+        const set = newsMedia['launch-lift-off'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Ariane 64 · lift-off');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the dossier, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('lunch');
+        expect(String(set.plates[0].src)).toContain('ariane');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
         expect(resolveNewsMedia('payload-sensor-illustration')).toBe(newsMedia['payload-sensor-illustration']);
         expect(resolveNewsMedia('vehicle-references')).toBe(newsMedia['vehicle-references']);
         expect(resolveNewsMedia('launch-vehicle-reference')).toBe(newsMedia['launch-vehicle-reference']);
+        expect(resolveNewsMedia('launch-lift-off')).toBe(newsMedia['launch-lift-off']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

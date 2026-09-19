@@ -20,6 +20,7 @@ export const newsMediaKeys = [
     'payload-sensor-illustration',
     'vehicle-references',
     'launch-vehicle-reference',
+    'launch-lift-off',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -71,6 +72,18 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * caption — the same one-plate shape the `vehicle-references` key uses.
      */
     'launch-vehicle-reference': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved pad lift-off plate of the Ariane 64 launcher (card
+     * `t_d562771d`, step `005-launch`).
+     *
+     * The same one-plate, one-alt, no-caption, optional-label shape as the two
+     * launcher/vehicle studio references: the plate is the step-005 event image
+     * (`docs/vehicles/ariane/lunch.png`), released by the 005 editorial gate
+     * and retired from the build guard in the same commit. `plateCount: 1` is
+     * the binding half — `src/features/news/media.ts` must resolve the key to
+     * exactly one plate or the build fails.
+     */
+    'launch-lift-off': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {

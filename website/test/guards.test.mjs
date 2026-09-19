@@ -695,12 +695,12 @@ describe('guard retirement: the released vehicle material and the withheld scene
     it('retires the vehicle dossier directory and keeps the timeline withheld', () => {
         expect(gatedDirectoryNames).toContain('timeline');
         expect(gatedDirectoryNames).not.toContain('vehicle');
-        // Non-vacuity for the per-file rule below: exactly three files are
+        // Non-vacuity for the per-file rule below: exactly two files are
         // withheld individually — the surface-vehicle dossier's scene image and
-        // the two Ariane 64 plates step 004 withheld.
+        // the one Ariane 64 plate step 004 withheld that step 005 did not
+        // release (the pad lift-off plate was retired on the 005 build card).
         expect(gatedSourceFiles.map((file) => basename(file)).sort()).toEqual([
             'contact-arm-scene.png',
-            'lunch.png',
             'travelling-to-mars.png',
         ]);
     });
@@ -815,39 +815,48 @@ describe('guard retirement: the released vehicle material and the withheld scene
 describe('guard scope: the Ariane 64 plates step 004 withheld', () => {
     /*
      * Step 004's plate review (card A, `t_58c90eb5`) admitted one plate for
-     * the public `launch-vehicle-reference` key and withheld the two plates
-     * below fail-closed. The withheld pair now carries the same per-file rule
-     * as the surface-vehicle scene image, and the released designation is
-     * deliberately outside it — a marker that gated the released plate would
-     * be the wrong direction for this release. Both halves are measured here:
-     * a reference into either withheld plate fails the source scan, a copied
-     * or re-encoded derivative of either fails the build output, and the
-     * released plate keeps passing everywhere.
+     * the public `launch-vehicle-reference` key and withheld two plates
+     * fail-closed: the pad lift-off (`lunch.png`) and the in-transit plate.
+     * Step 005 released the pad lift-off on 2026-09-19
+     * (`.agents/work/reviews/005-launch.md` §10) and the 005 build card
+     * retired it from this guard set, so the remaining withheld plate below
+     * carries the same per-file rule as the surface-vehicle scene image, and
+     * the released designations are deliberately outside it — a marker that
+     * gated a released plate would be the wrong direction for this release.
+     * Both halves are measured here: a reference into the withheld plate fails
+     * the source scan, a copied or re-encoded derivative of it fails the build
+     * output, the retired pad lift-off plate passes everywhere, and the
+     * released studio plate keeps passing everywhere.
      */
-    const withheldArianePlates = ['lunch.png', 'travelling-to-mars.png'];
+    const withheldArianePlates = ['travelling-to-mars.png'];
 
-    it('withholds exactly the two Ariane 64 plates and keeps the released plate out', () => {
+    it('withholds exactly the one Ariane 64 plate still gated and keeps the released plates out', () => {
         const names = gatedSourceFiles.map((file) => basename(file));
         for (const name of withheldArianePlates) {
             expect(names).toContain(name);
         }
+        expect(names).not.toContain('lunch.png');
         expect(names).not.toContain('canonical.png');
     });
 
-    it('passes a source reference into the released Ariane 64 plate', async () => {
+    it('passes a source reference into the released Ariane 64 plates', async () => {
         const root = await temporaryDirectory('rh-guard-ariane-released-');
         const file = join(root, 'src', 'lib', 'planted.ts');
         await mkdir(join(root, 'src', 'lib'), { recursive: true });
-        await writeFile(file, `import plate from '../../../docs/vehicles/ariane/canonical.png';\n`);
+        await writeFile(
+            file,
+            "import studio from '../../../docs/vehicles/ariane/canonical.png';\nimport liftOff from '../../../docs/vehicles/ariane/lunch.png';\n",
+        );
 
         expect(await scanSourceForGatedReferences({ directory: root })).toEqual([]);
     });
 
-    it('passes a build output that carries the released Ariane 64 plate derivative', async () => {
+    it('passes a build output that carries the released Ariane 64 plate derivatives', async () => {
         const sources = await collectGatedSources();
         const dist = await temporaryDirectory('rh-guard-ariane-released-dist-');
         await mkdir(join(dist, '_astro'), { recursive: true });
         await writeFile(join(dist, '_astro', 'canonical.ABCD1234.webp'), 're-encoded placeholder bytes');
+        await writeFile(join(dist, '_astro', 'lunch.ABCD1234.webp'), 're-encoded placeholder bytes');
 
         expect(await checkDist({ directory: dist, sources })).toEqual([]);
     });
