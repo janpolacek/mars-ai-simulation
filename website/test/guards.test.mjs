@@ -250,16 +250,17 @@ const fixturePublishedControl = {
 const fixtureArticles = [fixtureDraft, fixtureWithheldByDefault, fixturePublishedControl];
 
 /** One fixture article, written in the shape the content schema expects. */
-function fixtureArticleSource({ title, closing, order, publication }) {
+function fixtureArticleSource({ title, closing, order, publication, textOnly }) {
     const state = publication ? `publication: ${publication}\n` : '';
-    const media = publication === 'published'
+    const media = publication === 'published' && !textOnly
         ? `media: vehicle-references\nmediaAlt: 'Illustrative artwork of the fictional RH-01 rover in its clean baseline configuration.'\n`
         : '';
+    const textOnlyField = textOnly ? 'textOnly: true\n' : '';
     return `---
 title: '${title}'
 category: Guard fixture
 status: ${publication === 'published' ? 'Published' : 'Draft'}
-${state}${media}summary: 'An article the guard suite writes for itself into a throwaway project root.'
+${state}${textOnlyField}${media}summary: 'An article the guard suite writes for itself into a throwaway project root.'
 linkLabel: 'Guard fixture'
 order: ${order}
 ---

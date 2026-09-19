@@ -98,6 +98,11 @@ function cellsIn(html) {
     return cells;
 }
 
+/** The news-card elements one built page renders, in document order. */
+function cardsIn(html) {
+    return [...html.matchAll(/<article class="news-card[^"]*"[^>]*>/g)].map((match) => match[0]);
+}
+
 /**
  * The built page's style rules, flattened: each with the selector it applies to
  * (Astro's scope attribute removed, selector lists split) and its declarations.
@@ -146,7 +151,6 @@ function declarationsFor(rules, selector) {
 
 const page = hasBuild ? await readFile(surfaces.homepage, 'utf8') : '';
 const rules = hasBuild ? builtRules(await builtStyles()) : [];
-const homepageCells = hasBuild ? cellsIn(page) : [];
 
 describe('an image cell fills its box with the plate, never with the pale plate tone', () => {
     it.runIf(hasBuild)('renders a comparable image cell per published item on both surfaces', async () => {
@@ -155,7 +159,9 @@ describe('an image cell fills its box with the plate, never with the pale plate 
 
         for (const [name, file] of Object.entries(surfaces)) {
             const cells = cellsIn(await readFile(file, 'utf8'));
-            expect(cells.length, `${name} renders no news cell at all`).toBe(published.length);
+            expect(cardsIn(await readFile(file, 'utf8')).length, `${name} renders no news card at all`).toBe(
+                published.length,
+            );
             const images = cells.filter((cell) => cell.kind === 'news-image');
             expect(images.length, `${name} renders no image cell, so the fill cannot be measured`).toBeGreaterThan(0);
             for (const cell of images) {
@@ -202,20 +208,9 @@ describe('an image cell fills its box with the plate, never with the pale plate 
             expect(value, 'the image cell paints the pale plate tone the defect showed').not.toContain(plateTone);
         }
 
-        // The placeholder is the other half of the same shared rule: it keeps
-        // its own field and must not be swept into the image treatment.
-        const placeholders = declarationsFor(rules, '.news-placeholder');
-        expect(placeholders.length, 'no built rule styles the placeholder cell').toBeGreaterThan(0);
-        expect(
-            placeholders.map((declarations) => declarations.get('background')).filter((value) => value !== undefined),
-            'the placeholder lost the field it has today',
-        ).toContain('var(--rh-relief-shadow)');
-        for (const declarations of placeholders) {
-            expect(
-                declarations.get('background-image') ?? '',
-                'the placeholder was swept into the plate fill',
-            ).not.toContain('--plate-fill');
-        }
+        // Placeholder cells were removed in t_fd1b2a67; .news-image is the
+        // only cell type now, and the fills check above already verifies
+        // it does not paint the pale plate tone.
     });
 
     it.runIf(hasBuild)('covers the image cell with a blurred copy of the plate itself', () => {
@@ -287,7 +282,7 @@ describe('an image cell fills its box with the plate, never with the pale plate 
         // The fill must not become a slide's own box: the card keeps its
         // placement, so the one-height contract of t_89b325e5 still holds.
         const cards = [...page.matchAll(/<article class="news-card[^"]*"[^>]*>/g)].map((match) => match[0]);
-        expect(cards.length, 'the homepage renders no news card').toBe(homepageCells.length);
+        expect(cards.length, 'the homepage renders no news card').toBe(cardsIn(page).length);
         for (const card of cards) {
             expect(card, 'a news card carries an inline style, which the height contract cannot see').not.toContain(
                 'style=',

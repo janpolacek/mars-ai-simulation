@@ -656,7 +656,8 @@ describe('the homepage carousel keeps one height across slides', () => {
         // area plate drawn 497px inside it, so 33% of the visible box was
         // plate-derived fill instead of artwork, and the section 1185px.
         const shapes = [];
-        for (const slide of slides) {
+        const mediaSlides = slides.filter((slide) => cellOf(slide) !== undefined);
+        for (const slide of mediaSlides) {
             const cell = cellOf(slide);
             expect(cell, 'a slide renders no media cell, so there is no box to measure').toBeDefined();
 

@@ -372,12 +372,17 @@ describe('media keys and their requirements', () => {
         );
     });
 
+    it('accepts a text-only published article without a media key', () => {
+        expect(newsMediaIssues({ media: undefined, publication: 'published', textOnly: true })).toEqual([]);
+    });
+
     it('accepts a draft without a media key', () => {
         expect(newsMediaIssues({ media: undefined, publication: 'draft' })).toEqual([]);
     });
 
     it('accepts a published article with a valid media key', () => {
-        expect(newsMediaIssues({ media: 'stack-arrival', publication: 'published', mediaAlt: 'Illustrative artwork.' })).toEqual([]);
+        expect(newsMediaIssues({ media: 'stack-arrival', publication: 'published', mediaAlt: 'Illustrative artwork.' }))
+            .toEqual([]);
     });
 
     it('fails a three-plate key that lists two alts instead of three', () => {

@@ -61,6 +61,13 @@ const news = defineCollection({
             mediaAlt: z.union([z.string(), z.array(z.string())]).optional(),
             mediaLabel: z.string().optional(),
             mediaCaption: z.union([z.string(), z.array(z.string())]).optional(),
+            /**
+             * Text-only articles carry no media key. Set by the editorial
+             * gate for dignified closes and other records where imagery
+             * would be out of place; the media guard exempts these from
+             * the `media is required for published articles` check.
+             */
+            textOnly: z.boolean().optional(),
             accent: z.enum(['oxide', 'amber']).default('oxide'),
         })
         .superRefine((data, context) => {
@@ -108,6 +115,12 @@ const wiki = defineCollection({
             mediaAlt: z.union([z.string(), z.array(z.string())]).optional(),
             mediaLabel: z.string().optional(),
             mediaCaption: z.union([z.string(), z.array(z.string())]).optional(),
+            /**
+             * Text-only articles carry no media key. Set by the editorial
+             * gate for dignified closes and other records where imagery
+             * would be out of place.
+             */
+            textOnly: z.boolean().optional(),
         })
         .superRefine((data, context) => {
             for (const issue of newsMediaIssues({ ...data, publication: data.publication })) {

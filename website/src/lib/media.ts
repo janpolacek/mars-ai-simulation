@@ -224,15 +224,17 @@ function textIssue(field: 'mediaAlt' | 'mediaCaption', media: NewsMediaKey, coun
 export function newsMediaIssues(data: {
     media?: string | undefined;
     publication?: string | undefined;
+    textOnly?: boolean | undefined;
     mediaAlt?: NewsMediaText | undefined;
     mediaLabel?: string | undefined;
     mediaCaption?: NewsMediaText | undefined;
 }): NewsMediaIssue[] {
-    const { media, publication } = data;
+    const { media, publication, textOnly } = data;
 
-    // Build-time guard: any published news entry must declare a media key.
+    // Build-time guard: any published news entry must declare a media key,
+    // unless it is a text-only article approved by the editorial gate.
     // Unpublished drafts stay exempt.
-    if (publication === 'published' && media === undefined) {
+    if (publication === 'published' && media === undefined && !textOnly) {
         return [{ field: 'media', message: `media is required for published articles` }];
     }
 
