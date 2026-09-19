@@ -9,6 +9,13 @@ import {
     payloadSensorIllustration,
     surfacePanorama,
     vehicleStudioReference,
+    stackArrival,
+    readinessReview,
+    cruiseCorrection,
+    cruiseCheckout,
+    cruiseFinalApproach,
+    landingConfirmation,
+    firstDrive,
 } from '../../lib/assets';
 import type { NewsMediaKey } from '../../lib/media';
 
@@ -159,6 +166,55 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'egress': {
         plates: [{ src: egress, label: 'RH-01 Pathfinder · egress' }],
+    },
+    /**
+     * One approved illustration of the flight stack at the launch
+     * campaign site (card `t_b30fae21`, audit item #1).
+     */
+    'stack-arrival': {
+        plates: [{ src: stackArrival, label: 'Red Horizon · stack at launch campaign site' }],
+    },
+    /**
+     * One approved illustration of the flight stack under review in the
+     * integration hall (card `t_b30fae21`, audit item #2).
+     */
+    'readiness-review': {
+        plates: [{ src: readinessReview, label: 'Red Horizon · stack under review' }],
+    },
+    /**
+     * One approved illustration of the first trajectory-correction burn
+     * in deep space (card `t_b30fae21`, audit item #3).
+     */
+    'cruise-correction': {
+        plates: [{ src: cruiseCorrection, label: 'Red Horizon · first correction burn' }],
+    },
+    /**
+     * One approved illustration of the cruise checkout in deep space
+     * (card `t_b30fae21`, audit item #4).
+     */
+    'cruise-checkout': {
+        plates: [{ src: cruiseCheckout, label: 'Red Horizon · cruise checkout' }],
+    },
+    /**
+     * One approved illustration of the final correction burn with Mars
+     * ahead (card `t_b30fae21`, audit item #5).
+     */
+    'cruise-final-approach': {
+        plates: [{ src: cruiseFinalApproach, label: 'Red Horizon · final approach correction' }],
+    },
+    /**
+     * One approved illustration of the landing platform on the surface
+     * with the rover aboard (card `t_b30fae21`, audit item #6).
+     */
+    'landing-confirmation': {
+        plates: [{ src: landingConfirmation, label: 'Red Horizon · landing confirmed' }],
+    },
+    /**
+     * One approved illustration of RH-01 after its first controlled drive
+     * (card `t_b30fae21`, audit item #7).
+     */
+    'first-drive': {
+        plates: [{ src: firstDrive, label: 'RH-01 Pathfinder · first drive' }],
     },
 };
 

@@ -71,16 +71,7 @@ const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simu
             />
             <span class="image-label">{cardLabel}</span>
         </div>
-    ) : (
-         <div
-             class:list={['news-placeholder', item.data.accent === 'amber' && 'placeholder-amber']}
-             aria-hidden="true"
-         >
-             <span class="placeholder-number">{String(index + 1).padStart(2, '0')}</span>
-             <span class="placeholder-rule"></span>
-             <span class="placeholder-caption">{item.data.category}</span>
-         </div>
-     )}
+    ) : undefined}
     <div class="news-copy">
         <p class="card-kicker">{item.data.category} <span>·</span> {item.data.status}</p>
         {headingLevel === 2 ? <h2>{item.data.title}</h2> : <h3>{item.data.title}</h3>}
@@ -159,18 +150,17 @@ const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simu
 }
 
 /*
- * One cell for an image and for a placeholder without one, so the carousel's
- * height (card `t_89b325e5`) does not depend on which of the two it holds.
+ * One cell for an image, so the carousel's height
+ * (card `t_89b325e5`) does not depend on which it holds.
  *
  * The cell's own fill is never `--rh-surface-plate`: that pale paper tone
  * (#eeebe5) showed as a band above and below every plate whose ratio was not
  * the cell's — 215px of a 645x645 cell at 1280x800, which a reader sees as a
  * white background (card `t_f97d6184`). The image cell takes the section's own
- * field as its fallback instead, and paints the plate over it below; the
- * placeholder keeps the field it has had (its own rule, `--rh-relief-shadow`).
+ * field as its fallback instead, and paints the plate over it below;
+ * there is no placeholder anymore.
  */
-.news-image,
-.news-placeholder {
+.news-image {
     position: relative;
     min-height: 22rem;
     overflow: hidden;
@@ -212,8 +202,7 @@ const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simu
  * shared cell below: the element is this file's own, only the ancestor is
  * reached.
  */
-:global(.news-carousel) .news-image,
-:global(.news-carousel) .news-placeholder {
+:global(.news-carousel) .news-image {
     aspect-ratio: 3 / 2;
     /*
      * A definite width, so the ratio decides the cell's *height* and nothing
@@ -282,42 +271,6 @@ const simulatedDate = item.data.simulatedDate ? simulatedDateText(item.data.simu
     color: var(--rh-text-primary);
     font-size: 0.63rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.news-placeholder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: var(--rh-relief-shadow);
-    padding: 3rem;
-}
-
-.placeholder-amber {
-    background: var(--rh-surface-amber);
-    color: var(--rh-void-black);
-}
-
-.placeholder-number {
-    font-size: clamp(7rem, 17vw, 14rem);
-    font-weight: 750;
-    letter-spacing: -0.1em;
-    line-height: 0.75;
-    opacity: 0.9;
-}
-
-.placeholder-rule {
-    width: 55%;
-    margin-top: 2rem;
-    border-top: 2px solid currentColor;
-    opacity: 0.5;
-}
-
-.placeholder-caption {
-    margin-top: 0.75rem;
-    font-size: 0.68rem;
-    font-weight: 750;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
 }
 
@@ -391,8 +344,7 @@ a.card-label:focus-visible {
         grid-template-columns: 1fr;
     }
 
-    .news-image,
-    .news-placeholder {
+    .news-image {
         min-height: 15rem;
     }
 
@@ -404,22 +356,13 @@ a.card-label:focus-visible {
      * (`min-height: 23rem`) is the taller half here, and its height is what the
      * card reads; a ratio on the cell would only take box away from it.
      */
-    :global(.news-carousel) .news-image,
-    :global(.news-carousel) .news-placeholder {
+    :global(.news-carousel) .news-image {
         aspect-ratio: auto;
     }
 
     .news-copy {
         min-height: 23rem;
         padding: 2rem 1.5rem 2.5rem;
-    }
-
-    .news-placeholder {
-        padding: 2rem;
-    }
-
-    .placeholder-number {
-        font-size: 8rem;
     }
 }
 </style>

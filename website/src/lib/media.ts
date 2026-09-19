@@ -23,6 +23,13 @@ export const newsMediaKeys = [
     'launch-lift-off',
     'surface-panorama',
     'egress',
+    'stack-arrival',
+    'readiness-review',
+    'cruise-correction',
+    'cruise-checkout',
+    'cruise-final-approach',
+    'landing-confirmation',
+    'first-drive',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -114,6 +121,69 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * approved `mediaAlt` instead.
      */
     'egress': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the flight stack at the launch
+     * campaign site (card `t_b30fae21`, audit item #1).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'stack-arrival': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the flight stack under review in the
+     * integration hall (card `t_b30fae21`, audit item #2).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'readiness-review': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the first trajectory-correction burn
+     * in deep space (card `t_b30fae21`, audit item #3).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'cruise-correction': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the cruise checkout in deep space
+     * (card `t_b30fae21`, audit item #4).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'cruise-checkout': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the final correction burn with Mars
+     * ahead (card `t_b30fae21`, audit item #5).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'cruise-final-approach': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the landing platform on the surface
+     * with the rover aboard (card `t_b30fae21`, audit item #6).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'landing-confirmation': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of RH-01 after its first controlled drive
+     * (card `t_b30fae21`, audit item #7).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails.
+     * `requiresLabel: false` as the editorial gate decided.
+     */
+    'first-drive': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 
 export function isNewsMediaKey(value: string): value is NewsMediaKey {
@@ -153,11 +223,19 @@ function textIssue(field: 'mediaAlt' | 'mediaCaption', media: NewsMediaKey, coun
  */
 export function newsMediaIssues(data: {
     media?: string | undefined;
+    publication?: string | undefined;
     mediaAlt?: NewsMediaText | undefined;
     mediaLabel?: string | undefined;
     mediaCaption?: NewsMediaText | undefined;
 }): NewsMediaIssue[] {
-    const { media } = data;
+    const { media, publication } = data;
+
+    // Build-time guard: any published news entry must declare a media key.
+    // Unpublished drafts stay exempt.
+    if (publication === 'published' && media === undefined) {
+        return [{ field: 'media', message: `media is required for published articles` }];
+    }
+
     if (media === undefined) return [];
 
     if (!isNewsMediaKey(media)) {

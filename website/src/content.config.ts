@@ -64,7 +64,7 @@ const news = defineCollection({
             accent: z.enum(['oxide', 'amber']).default('oxide'),
         })
         .superRefine((data, context) => {
-            for (const issue of newsMediaIssues(data)) {
+            for (const issue of newsMediaIssues({ ...data, publication: data.publication })) {
                 context.addIssue({ code: 'custom', path: [issue.field], message: issue.message });
             }
         }),
@@ -110,7 +110,7 @@ const wiki = defineCollection({
             mediaCaption: z.union([z.string(), z.array(z.string())]).optional(),
         })
         .superRefine((data, context) => {
-            for (const issue of newsMediaIssues(data)) {
+            for (const issue of newsMediaIssues({ ...data, publication: data.publication })) {
                 context.addIssue({ code: 'custom', path: [issue.field], message: issue.message });
             }
         }),

@@ -101,6 +101,13 @@ describe('media keys and their requirements', () => {
             'launch-lift-off',
             'surface-panorama',
             'egress',
+            'stack-arrival',
+            'readiness-review',
+            'cruise-correction',
+            'cruise-checkout',
+            'cruise-final-approach',
+            'landing-confirmation',
+            'first-drive',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
@@ -110,6 +117,13 @@ describe('media keys and their requirements', () => {
         expect(isNewsMediaKey('launch-lift-off')).toBe(true);
         expect(isNewsMediaKey('surface-panorama')).toBe(true);
         expect(isNewsMediaKey('egress')).toBe(true);
+        expect(isNewsMediaKey('stack-arrival')).toBe(true);
+        expect(isNewsMediaKey('readiness-review')).toBe(true);
+        expect(isNewsMediaKey('cruise-correction')).toBe(true);
+        expect(isNewsMediaKey('cruise-checkout')).toBe(true);
+        expect(isNewsMediaKey('cruise-final-approach')).toBe(true);
+        expect(isNewsMediaKey('landing-confirmation')).toBe(true);
+        expect(isNewsMediaKey('first-drive')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -192,6 +206,69 @@ describe('media keys and their requirements', () => {
 
     it('requires one plate, one alt, no caption and no label for egress', () => {
         expect(newsMediaRequirements['egress']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for stack-arrival', () => {
+        expect(newsMediaRequirements['stack-arrival']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for readiness-review', () => {
+        expect(newsMediaRequirements['readiness-review']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for cruise-correction', () => {
+        expect(newsMediaRequirements['cruise-correction']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for cruise-checkout', () => {
+        expect(newsMediaRequirements['cruise-checkout']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for cruise-final-approach', () => {
+        expect(newsMediaRequirements['cruise-final-approach']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for landing-confirmation', () => {
+        expect(newsMediaRequirements['landing-confirmation']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
+    it('requires one plate, one alt, no caption and no label for first-drive', () => {
+        expect(newsMediaRequirements['first-drive']).toEqual({
             plateCount: 1,
             altCount: 1,
             captionCount: 0,
@@ -286,6 +363,21 @@ describe('media keys and their requirements', () => {
         ]);
         // `requiresLabel: false` for this key, so an absent label is not an issue.
         expect(newsMediaIssues({ ...vehicleFrontmatter, mediaLabel: undefined })).toEqual([]);
+    });
+
+    it('fails a published article without a media key', () => {
+        expect(fieldsOf(newsMediaIssues({ media: undefined, publication: 'published' }))).toEqual(['media']);
+        expect(newsMediaIssues({ media: undefined, publication: 'published' })[0].message).toContain(
+            'media is required for published articles',
+        );
+    });
+
+    it('accepts a draft without a media key', () => {
+        expect(newsMediaIssues({ media: undefined, publication: 'draft' })).toEqual([]);
+    });
+
+    it('accepts a published article with a valid media key', () => {
+        expect(newsMediaIssues({ media: 'stack-arrival', publication: 'published', mediaAlt: 'Illustrative artwork.' })).toEqual([]);
     });
 
     it('fails a three-plate key that lists two alts instead of three', () => {
@@ -439,6 +531,62 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('asteria-field-egress-01');
     });
 
+    it('resolves stack-arrival to exactly one plate', () => {
+        const set = newsMedia['stack-arrival'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · stack at launch campaign site');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('stack-arrival');
+    });
+
+    it('resolves readiness-review to exactly one plate', () => {
+        const set = newsMedia['readiness-review'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · stack under review');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('readiness-review');
+    });
+
+    it('resolves cruise-correction to exactly one plate', () => {
+        const set = newsMedia['cruise-correction'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · first correction burn');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('cruise-correction');
+    });
+
+    it('resolves cruise-checkout to exactly one plate', () => {
+        const set = newsMedia['cruise-checkout'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · cruise checkout');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('cruise-checkout');
+    });
+
+    it('resolves cruise-final-approach to exactly one plate', () => {
+        const set = newsMedia['cruise-final-approach'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · final approach correction');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('cruise-final-approach');
+    });
+
+    it('resolves landing-confirmation to exactly one plate', () => {
+        const set = newsMedia['landing-confirmation'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · landing confirmed');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('landing-confirmation');
+    });
+
+    it('resolves first-drive to exactly one plate', () => {
+        const set = newsMedia['first-drive'];
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('RH-01 Pathfinder · first drive');
+        expect(isPlateSet(set)).toBe(false);
+        expect(String(set.plates[0].src)).toContain('first-drive');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
@@ -448,6 +596,13 @@ describe('plate registry', () => {
         expect(resolveNewsMedia('launch-lift-off')).toBe(newsMedia['launch-lift-off']);
         expect(resolveNewsMedia('surface-panorama')).toBe(newsMedia['surface-panorama']);
         expect(resolveNewsMedia('egress')).toBe(newsMedia['egress']);
+        expect(resolveNewsMedia('stack-arrival')).toBe(newsMedia['stack-arrival']);
+        expect(resolveNewsMedia('readiness-review')).toBe(newsMedia['readiness-review']);
+        expect(resolveNewsMedia('cruise-correction')).toBe(newsMedia['cruise-correction']);
+        expect(resolveNewsMedia('cruise-checkout')).toBe(newsMedia['cruise-checkout']);
+        expect(resolveNewsMedia('cruise-final-approach')).toBe(newsMedia['cruise-final-approach']);
+        expect(resolveNewsMedia('landing-confirmation')).toBe(newsMedia['landing-confirmation']);
+        expect(resolveNewsMedia('first-drive')).toBe(newsMedia['first-drive']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });

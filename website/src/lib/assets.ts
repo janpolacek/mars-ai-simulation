@@ -5,6 +5,13 @@ import asteriaRegionalContextSource from '../../../docs/area/asteria-field-02-re
 import asteriaLocalOperationsSource from '../../../docs/area/asteria-field-03-local-operations.png';
 import egressSource from '../../../docs/area/asteria-field-egress-01.png';
 import surfacePanoramaSource from '../../../docs/area/asteria-field-panorama-02.png';
+import firstDriveSource from '../../../docs/mission/first-drive.png';
+import cruiseCorrectionSource from '../../../docs/mission/cruise-correction.png';
+import cruiseCheckoutSource from '../../../docs/mission/cruise-checkout.png';
+import cruiseFinalApproachSource from '../../../docs/mission/cruise-final-approach.png';
+import landingConfirmationSource from '../../../docs/mission/landing-confirmation.png';
+import readinessReviewSource from '../../../docs/mission/readiness-review.png';
+import stackArrivalSource from '../../../docs/mission/stack-arrival.png';
 import identityMarkSource from '../../../docs/brand/logo-bg-black.png';
 import identityMarkTransparentSource from '../../../docs/brand/logo-transparent.png';
 import payloadSensorIllustrationSource from '../../../docs/payload/payload-sensor-illustration.png';
@@ -197,3 +204,82 @@ export const surfacePanorama: ImageMetadata = surfacePanoramaSource;
  * the reader through `mediaAlt` instead. Only this plate is placed.
  */
 export const egress: ImageMetadata = egressSource;
+
+/**
+ * The flight stack at the launch campaign site, imported from its
+ * `docs/mission/` copy and rendered through the `stack-arrival` media
+ * key (card `t_b30fae21`, audit item #1).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * The image depicts the flight stack assembled and upright inside a
+ * clean industrial preparation hall. It is illustrative artwork, not
+ * documentary: the alt text carries that statement.
+ */
+export const stackArrival: ImageMetadata = stackArrivalSource;
+
+/**
+ * The flight stack under review in the integration hall, imported from
+ * its `docs/mission/` copy and rendered through the `readiness-review`
+ * media key (card `t_b30fae21`, audit item #2).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * The mood is a methodical systems check — composed, calm, nothing
+ * dramatic. Illustrative artwork, not documentary.
+ */
+export const readinessReview: ImageMetadata = readinessReviewSource;
+
+/**
+ * The first trajectory-correction burn in deep space, imported from its
+ * `docs/mission/` copy and rendered through the `cruise-correction`
+ * media key (card `t_b30fae21`, audit item #3).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * A generic cruise-stage stand-in fires a small correction burn.
+ * Illustrative artwork, not documentary.
+ */
+export const cruiseCorrection: ImageMetadata = cruiseCorrectionSource;
+
+/**
+ * The cruise checkout in deep space, imported from its `docs/mission/`
+ * copy and rendered through the `cruise-checkout` media key
+ * (card `t_b30fae21`, audit item #4).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * The same generic cruise-stage stand-in holds station with arrays
+ * deployed, no engine firing. Illustrative artwork, not documentary.
+ */
+export const cruiseCheckout: ImageMetadata = cruiseCheckoutSource;
+
+/**
+ * The final correction burn with Mars ahead, imported from its
+ * `docs/mission/` copy and rendered through the `cruise-final-approach`
+ * media key (card `t_b30fae21`, audit item #5).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * Mars now appears clearly ahead while the same stand-in fires its
+ * final correction. Illustrative artwork, not documentary.
+ */
+export const cruiseFinalApproach: ImageMetadata = cruiseFinalApproachSource;
+
+/**
+ * The landing platform on the surface with the rover aboard, imported
+ * from its `docs/mission/` copy and rendered through the
+ * `landing-confirmation` media key (card `t_b30fae21`, audit item #6).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * The moment of confirmation: landed, powered, everything still on
+ * the platform. Illustrative artwork, not documentary.
+ */
+export const landingConfirmation: ImageMetadata = landingConfirmationSource;
+
+/**
+ * RH-01 after its first controlled drive, imported from its
+ * `docs/mission/` copy and rendered through the `first-drive` media
+ * key (card `t_b30fae21`, audit item #7).
+ *
+ * Release: 2026-09-19, generated for the published-image audit.
+ * The rover on a rocky plain at Asteria Field with two clean wheel-track
+ * lines behind it. Drive evidence per the article's own milestone.
+ * Illustrative artwork, not documentary.
+ */
+export const firstDrive: ImageMetadata = firstDriveSource;
