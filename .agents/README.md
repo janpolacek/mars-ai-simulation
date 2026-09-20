@@ -26,7 +26,7 @@ guidance.
 | `create-article-workflow` | Profile `mars-ai-simulator-planner`                        | Create the serial article task graph                                                                    |
 | `editorial-review`        | Profile `mars-ai-simulator-reviewer`                       | Run the continuity check, the final editorial gate, the simulated record date, and the release decision |
 | `image-generation`        | Profile `mars-ai-simulator-visuals`                        | Prepare reviewable visual candidates and metadata                                                       |
-| `image-index`             | Cross-cutting (maintained by `mars-ai-simulator-reviewer`) | Single index of every project image (`.agents/work/image-index.md`); consult it before requesting art   |
+| `image-index`             | Cross-cutting (maintained by `mars-ai-simulator-reviewer`) | Single index of every project image (`docs/IMAGES.md`); consult it before requesting art                |
 | `mars-story-toolset`      | Profile `mars-ai-simulator-visuals`                        | Render vehicle references and scenes through the retired local ComfyUI fallback                         |
 | `project-documentation`   | Owning profile's `SOUL.md`                                 | Revise project guidance and runbooks                                                                    |
 | `research-and-fact-check` | Profile `mars-ai-simulator-planner`                        | Build a claim-level source pack                                                                         |

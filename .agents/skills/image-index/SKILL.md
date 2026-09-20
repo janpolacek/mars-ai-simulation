@@ -1,12 +1,12 @@
 ---
 name: image-index
-description: Consult the single image index (.agents/work/image-index.md) before requesting, reusing, or describing any Red Horizon image.
+description: Consult the single image catalog (docs/IMAGES.md) before requesting, reusing, or describing any Red Horizon image.
 ---
 
 # Image index
 
 The single reference for every project image lives at
-`.agents/work/image-index.md`. The writer, the reviewer, and the image
+`docs/IMAGES.md`. The writer, the reviewer, and the image
 visualizer must consult it **before** requesting new art, deciding a reuse,
 or describing an existing asset. Read `AGENTS.md`, `docs/INSTRUCTIONS.md`,
 and your own role definition before a media decision; this skill owns the
@@ -16,7 +16,7 @@ convention around the index, not any role's authority.
 
 **A missing entry means "does not exist — request it".**
 
-If an image you need has no row in `.agents/work/image-index.md`, it is not
+If an image you need has no row in `docs/IMAGES.md`, it is not
 available to place, reuse, or describe — it must be generated (visuals card)
 before any article, wiki page, or site surface can carry it. Never name an
 asset from memory, from a neighbour article's media key, or from a path a
@@ -61,8 +61,8 @@ is an unindexed candidate at best, and a leak vector at worst.
   `docs/*/...`); do not upgrade a `candidate` or `withheld` row on your own
   authority. Approving a candidate, or placing an approved-unplaced asset, is
   the editorial gate's decision and needs its recorded release sentence.
-- The index is a working paper under `.agents/work/`, never a public route,
-  and never carries the private timeline's content.
+- The catalog lives at `docs/IMAGES.md` — a documentation file, never a public
+  route — and never carries the private timeline's content.
 
 ## Verifying before you reuse
 

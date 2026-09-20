@@ -53,7 +53,8 @@ vehicle renders under `docs/vehicles/`, and the Asteria Field map plates under
 `docs/area/`. The website imports it from there at build time and emits its own
 hashed copies under `/_astro/`; nothing is copied into `website/public/`. Article
 copy is authored as MDX directly in `website/news/` for publication. Do not create
-a parallel repository-root `assets/` directory.
+a parallel repository-root `assets/` directory. The image catalog — every project image
+with its path, description, status and SHA-256 — lives at `docs/IMAGES.md`.
 
 Imagery is produced through the hosted `image_generate` path (provider `openai-codex`, model
 `gpt-image-2-medium`), and its candidates and provenance stay outside this repository. The local
