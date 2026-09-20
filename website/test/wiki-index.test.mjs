@@ -142,12 +142,11 @@ describe('the wiki selection', () => {
 });
 
 describe('one query drives all three wiki surfaces', () => {
-    it('renders the wiki entry in the header and in the footer from one definition', () => {
+    it('renders the wiki entry in the header from one definition', () => {
         const entry = navigation.find((item) => item.href === '/wiki/');
 
         expect(entry, 'navigation.ts has no /wiki/ entry').toBeDefined();
         expect(entry.label).toBe('Wiki');
-        expect(entry.footerOnly, 'the wiki entry is a header item as well as a footer one').not.toBe(true);
         expect(headerNavigation.map((item) => item.href)).toContain('/wiki/');
     });
 
@@ -639,7 +638,7 @@ describe('the built wiki tree', () => {
         ).toBe(descriptions.length);
     }, fixtureBuildTimeout);
 
-    it('renders the wiki entry in the header and the footer of every wiki route', async () => {
+    it('renders the wiki entry in the header of every wiki route', async () => {
         const fixture = await fixtureBuild();
         const { routes } = await fixtureOutput(fixture.dist);
         const wikiRoutes = routes.filter((route) => route.startsWith('/wiki/'));
@@ -649,9 +648,10 @@ describe('the built wiki tree', () => {
         for (const route of wikiRoutes) {
             const html = await readFile(join(fixture.dist, ...route.split('/').filter(Boolean)), 'utf8');
             // `<a href="/wiki/">Wiki</a>` is the nav link exactly as
-            // `SiteHeader`/`SiteFooter` render it (Astro adds its scope attribute
-            // to the element), so this counts chrome links and not breadcrumbs.
-            expect(countMatches(html, /<a\b[^>]*href="\/wiki\/"[^>]*>Wiki<\/a>/g), `${route} nav`).toBe(2);
+            // `SiteHeader` renders it (Astro adds its scope attribute to the
+            // element), so this counts the chrome link and not breadcrumbs; the
+            // footer carries no links, so one occurrence means header-only.
+            expect(countMatches(html, /<a\b[^>]*href="\/wiki\/"[^>]*>Wiki<\/a>/g), `${route} nav`).toBe(1);
         }
     }, fixtureBuildTimeout);
 

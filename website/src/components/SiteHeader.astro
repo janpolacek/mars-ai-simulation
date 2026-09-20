@@ -14,7 +14,9 @@ const wordmarkHref = homeAnchor('top');
         <span>{site.name}</span>
     </a>
     <nav aria-label="Primary navigation">
-        {headerNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        {headerNavigation.map((item) => item.external ? (
+            <a href={item.href} rel="noreferrer noopener" target="_blank">{item.label}</a>
+        ) : <a href={item.href}>{item.label}</a>)}
     </nav>
 </header>
 
@@ -45,7 +47,10 @@ const wordmarkHref = homeAnchor('top');
 
 nav {
     display: flex;
-    gap: clamp(1rem, 3vw, 2.75rem);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    column-gap: clamp(1rem, 3vw, 2.75rem);
+    row-gap: 0.4rem;
 }
 
 nav a {
@@ -66,7 +71,8 @@ nav a:focus-visible {
     }
 
     nav {
-        gap: 0.85rem;
+        column-gap: 0.85rem;
+        row-gap: 0.3rem;
     }
 
     nav a {

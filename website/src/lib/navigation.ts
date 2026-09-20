@@ -1,9 +1,11 @@
 /**
  * Route paths and the single navigation map.
  *
- * Both the header and the footer render `navigation`, so a link is defined
- * once. `homeAnchor` links back to a section of the homepage, which is the only
- * page that carries the mission and progress sections today.
+ * The header renders `navigation` (`headerNavigation` below); the footer no
+ * longer renders links — it carries the label and note only — so the map has a
+ * single consumer and no footer-only concept remains. `homeAnchor` links back
+ * to a section of the homepage, which is the only page that carries the
+ * mission and progress sections today.
  */
 export const routes = {
     home: '/',
@@ -24,22 +26,18 @@ export function homeAnchor(id: string): string {
     return `${routes.home}#${id}`;
 }
 
+/** The repository this fictional mission is built and published from. */
+export const githubUrl = 'https://github.com/janpolacek/mars-ai-simulation';
+
 export interface NavItem {
     label: string;
     href: string;
     /**
-     * Render this item in the footer only. Both consumers read `navigation`,
-     * but the header renders `headerNavigation` below. At the site's own minimum
-     * width (`body { min-width: 20rem }`, a 320 px layout viewport) the page's
-     * content edge is at 300 px and the four header items measure 187 px of nav,
-     * whose right edge lands at 311 px — 11 px into the page's 20 px gutter,
-     * measured in the built site (`clientWidth === scrollWidth === 320` with and
-     * without `Wiki`, so the item adds no horizontal scroll); the three-item
-     * state ends exactly on that edge. A further header item is what overflows,
-     * which is why `About` is footer-only. The `About` label itself is unchanged
-     * either way.
+     * Render this item as an external link: it opens in a new tab and drops
+     * the referrer. The header applies `rel="noreferrer noopener" target="_blank"`
+     * to items that set it.
      */
-    footerOnly?: boolean;
+    external?: boolean;
 }
 
 /**
@@ -52,17 +50,20 @@ export interface NavItem {
  * is published (`src/lib/wiki-query.ts`), so the tree can be built and linked to
  * before any of its content is released.
  *
- * `About` is the Phase 1 link to `/about/`. It is defined once here; the footer
- * renders it as the persistent link the plan asks for, and the header carries
- * the four items that fit its minimum width.
+ * `About` is the Phase 1 link to `/about/`, defined once here and rendered in
+ * the header like the rest. `GitHub` is the repository link, the header's only
+ * external item. Whether an item wraps onto a second line at the site's
+ * minimum width is a layout property the header measures, not a property of
+ * the map (see `media-and-layout-contracts.md`).
  */
 export const navigation: readonly NavItem[] = [
     { label: 'News', href: routes.news },
     { label: 'Wiki', href: routes.wiki },
     { label: 'Mission', href: homeAnchor('mission') },
     { label: 'Roadmap', href: homeAnchor('timeline') },
-    { label: 'About', href: routes.about, footerOnly: true },
+    { label: 'About', href: routes.about },
+    { label: 'GitHub', href: githubUrl, external: true },
 ];
 
-/** The header's view of `navigation` — every item that is not footer-only. */
-export const headerNavigation: readonly NavItem[] = navigation.filter((item) => item.footerOnly !== true);
+/** The header's view of `navigation` — every item; the footer renders no links. */
+export const headerNavigation: readonly NavItem[] = navigation;

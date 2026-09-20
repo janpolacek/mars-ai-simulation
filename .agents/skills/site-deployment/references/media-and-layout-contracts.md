@@ -86,6 +86,18 @@ only by measuring them.
   re-expressed — assert `visibility: hidden` present _and_ `display: none`
   absent, and say so in the handoff rather than dropping the check.
 
+- The six-item header (News, Wiki, Mission, Roadmap, About, GitHub — the last
+  external, rendered `target="_blank"` with `rel="noreferrer noopener"`) wraps
+  to two rows at ≤ 480 px and one row from 760 px, measured on the built site at
+  320/360/480/760/761/1000/1280 px: never any horizontal overflow
+  (`documentElement.scrollWidth <= innerWidth` — at 320 px exactly equal,
+  320 = 320, with the nav's right edge at 300 px, nav width 176 px, two rows,
+  header height 76 px; the vertical scrollbar makes `clientWidth` 305 = 320 −
+  15, so a `scrollWidth > clientWidth` comparison reads as horizontal overflow
+  when there is none). `flex-wrap: wrap` on the header nav does the work —
+  labels and gaps are untouched — and the header only ever grows vertically.
+  One row from 760 px up: 364 px of nav at 761 px (right edge 674 px), 442 px
+  at 1280 px (right edge 1193 px).
 - A slide that stays in the layout does **not** fetch its `loading="lazy"` image,
   and showing it changes no geometry, so nothing re-triggers that decision: the
   picture stays blank (measured, fresh cache-disabled session). Promote the image
