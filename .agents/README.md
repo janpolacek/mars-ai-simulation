@@ -45,8 +45,8 @@ material, not documentation — the documentation tree is mapped in
 milestone articles, the four wiki pages, and the homepage current-state work) was
 archived on 2026-09-20: snapshot `~/mars-ai-simulator-work-2026-09-20.tar.gz`, the
 pre-cleanup tree tagged `archive/work-cycle-2026-09-20`, and the papers removed from
-the working tree (see [work/README.md](work/README.md)); the live image registry
-`work/image-index.md` was kept in place.
+the working tree (see [work/README.md](work/README.md)); the image registry was
+kept in place and moved to `docs/IMAGES.md` on 2026-09-20 as the image catalog.
 
 If a new skill introduces a new responsibility or approval boundary, update the
 corresponding agent profile's `SOUL.md` first, then add the skill to this catalog.

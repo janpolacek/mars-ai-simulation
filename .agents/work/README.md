@@ -2,7 +2,7 @@
 
 Per-article working papers for the active card cycle live here: `briefs/`,
 `sources/`, `assets/<slug>/`, `drafts/`, `seo/`, `reviews/`, `continuity/`,
-`releases/`, plus the live image registry `image-index.md` (see
+`releases/`, plus the image catalog `docs/IMAGES.md` (see
 `.agents/skills/image-index/SKILL.md`). Papers are pipeline working material,
 not documentation — the docs map is `docs/README.md`, and the definitive task
 record is the Hermes kanban card for each piece of work.
