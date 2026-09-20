@@ -41,7 +41,12 @@ authority for each card lives in the assignee profile's `SOUL.md`, not here.
 Per-article working papers live in [work/](work/): briefs, source packs, asset
 manifests, and editorial reviews for articles in flight. They are pipeline working
 material, not documentation — the documentation tree is mapped in
-[docs/README.md](../docs/README.md).
+[docs/README.md](../docs/README.md). The first full cycle (articles 001–011, the
+milestone articles, the four wiki pages, and the homepage current-state work) was
+archived on 2026-09-20: snapshot `~/mars-ai-simulator-work-2026-09-20.tar.gz`, the
+pre-cleanup tree tagged `archive/work-cycle-2026-09-20`, and the papers removed from
+the working tree (see [work/README.md](work/README.md)); the live image registry
+`work/image-index.md` was kept in place.
 
 If a new skill introduces a new responsibility or approval boundary, update the
 corresponding agent profile's `SOUL.md` first, then add the skill to this catalog.
