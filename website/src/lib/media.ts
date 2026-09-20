@@ -31,6 +31,7 @@ export const newsMediaKeys = [
     'landing-confirmation',
     'first-drive',
     'archive-final-report',
+    'end-of-life',
 ] as const;
 
 export type NewsMediaKey = (typeof newsMediaKeys)[number];
@@ -190,6 +191,21 @@ export const newsMediaRequirements: Record<NewsMediaKey, NewsMediaRequirement> =
      * approved `mediaAlt` instead.
      */
     'archive-final-report': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
+    /**
+     * One approved illustration of the end-of-life declaration at
+     * Asteria Field (card `t_5c74d1fe` → `t_6065f75a`, step
+     * `011-end-of-life`).
+     *
+     * `plateCount: 1` is the binding half: `src/features/news/media.ts`
+     * must resolve the key to exactly one plate or the build fails, so
+     * the key cannot be declared without the released artwork behind it.
+     * `requiresLabel: false` as the editorial gate decided — the label
+     * is optional here, not required. No `provenance` line: this key
+     * renders no caption, so the "illustrative artwork, not mission
+     * photography" statement reaches the reader through the article's
+     * approved `mediaAlt` instead.
+     */
+    'end-of-life': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
     'first-drive': { plateCount: 1, altCount: 1, captionCount: 0, requiresLabel: false },
 };
 

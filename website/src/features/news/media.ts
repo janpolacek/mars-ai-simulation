@@ -7,6 +7,7 @@ import {
     cruiseCorrection,
     cruiseFinalApproach,
     egress,
+    endOfLife,
     firstDrive,
     identityMark,
     landingConfirmation,
@@ -235,6 +236,26 @@ export const newsMedia: Record<NewsMediaKey, NewsMediaSet> = {
      */
     'archive-final-report': {
         plates: [{ src: archiveFinalReport, label: 'Red Horizon · archive and final report' }],
+    },
+    /**
+     * One approved illustration of the end-of-life declaration at
+     * Asteria Field (card `t_5c74d1fe` → `t_6065f75a`, step
+     * `011-end-of-life`).
+     *
+     * The asset is `docs/mission/end-of-life.png` — candidate
+     * `end-of-life-candidate-1` (SHA-256 `d55d0105…`), 1344×768,
+     * 16:9, 8-bit RGB PNG, approved by the editorial gate on
+     * `t_6065f75a`. The label is the one approved with it and carries
+     * a U+00B7 MIDDLE DOT that must not be normalised. No `provenance`
+     * line: this key renders no caption, so the "illustrative artwork,
+     * not mission photography" statement reaches the reader through the
+     * article's approved `mediaAlt` instead.
+     *
+     * Only this plate is placed; candidate 2 was not selected
+     * (alternative only).
+     */
+    'end-of-life': {
+        plates: [{ src: endOfLife, label: 'Red Horizon · end of life' }],
     },
 };
 

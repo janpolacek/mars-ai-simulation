@@ -11,6 +11,7 @@ import archiveFinalReportSource from '../../../docs/mission/archive-final-report
 import cruiseCheckoutSource from '../../../docs/mission/cruise-checkout.png';
 import cruiseCorrectionSource from '../../../docs/mission/cruise-correction.png';
 import cruiseFinalApproachSource from '../../../docs/mission/cruise-final-approach.png';
+import endOfLifeSource from '../../../docs/mission/end-of-life.png';
 import firstDriveSource from '../../../docs/mission/first-drive.png';
 import landingConfirmationSource from '../../../docs/mission/landing-confirmation.png';
 import readinessReviewSource from '../../../docs/mission/readiness-review.png';
@@ -305,3 +306,25 @@ export const firstDrive: ImageMetadata = firstDriveSource;
  * re-generated (one-plate key).
  */
 export const archiveFinalReport: ImageMetadata = archiveFinalReportSource;
+
+/**
+ * The approved plate of the end-of-life declaration at Asteria Field,
+ * imported from its canonical `docs/mission/` copy and rendered through
+ * the `end-of-life` media key (card `t_5c74d1fe` → `t_6065f75a`, step
+ * `011-end-of-life`).
+ *
+ * Release: 2026-09-20, approved by the editorial gate on `t_6065f75a`.
+ * The placed asset is `end-of-life-candidate-1` (SHA-256
+ * `d55d0105…`), 1344×768, 16:9, 8-bit RGB PNG — a lone relay station
+ * mast-plus-antenna silhouette on the Asteria Field plain at dusk, its
+ * steerable-downlink dish raised and an abstract soft teal glow near its
+ * base, under a warm rust-toned sky with a cool teal band. Illustrative
+ * artwork, not mission photography: the alt text carries that statement,
+ * and the key renders no caption, so the "illustrative artwork, not
+ * mission photography" statement reaches the reader through the article's
+ * approved `mediaAlt` instead.
+ *
+ * Only this plate is placed; candidate 2 was not selected
+ * (alternative only).
+ */
+export const endOfLife: ImageMetadata = endOfLifeSource;

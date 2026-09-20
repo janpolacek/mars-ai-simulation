@@ -109,6 +109,7 @@ describe('media keys and their requirements', () => {
             'landing-confirmation',
             'first-drive',
             'archive-final-report',
+            'end-of-life',
         ]);
         expect(isNewsMediaKey('programme-identity')).toBe(true);
         expect(isNewsMediaKey('asteria-plates')).toBe(true);
@@ -126,6 +127,7 @@ describe('media keys and their requirements', () => {
         expect(isNewsMediaKey('landing-confirmation')).toBe(true);
         expect(isNewsMediaKey('first-drive')).toBe(true);
         expect(isNewsMediaKey('archive-final-report')).toBe(true);
+        expect(isNewsMediaKey('end-of-life')).toBe(true);
         expect(isNewsMediaKey('asteria-field')).toBe(false);
     });
 
@@ -287,6 +289,15 @@ describe('media keys and their requirements', () => {
         });
     });
 
+    it('requires one plate, one alt, no caption and no label for end-of-life', () => {
+        expect(newsMediaRequirements['end-of-life']).toEqual({
+            plateCount: 1,
+            altCount: 1,
+            captionCount: 0,
+            requiresLabel: false,
+        });
+    });
+
     it('accepts the existing programme-identity frontmatter', () => {
         expect(newsMediaIssues({ media: 'programme-identity', mediaAlt: 'The Red Horizon programme mark.' })).toEqual(
             [],
@@ -315,6 +326,14 @@ describe('media keys and their requirements', () => {
             media: 'archive-final-report',
             mediaAlt:
                 'Illustrative artwork, not mission photography: closed leather-bound volumes on a dark wooden shelf in warm amber light, with muted rust tones and a single cool teal-green accent. A stand-in for the completed record of the fictional Red Horizon mission: the calibrated science archive and final engineering report, completed on 30 June 2036.',
+        })).toEqual([]);
+    });
+
+    it('accepts the approved one-plate end-of-life frontmatter', () => {
+        expect(newsMediaIssues({
+            media: 'end-of-life',
+            mediaAlt:
+                'Illustrative artwork of the end-of-life declaration: a lone relay station mast-plus-antenna silhouette on the Asteria Field plain at dusk, its steerable-downlink dish raised and an abstract soft teal glow near its base, under a warm rust-toned sky with a cool teal band. Not mission photography.',
         })).toEqual([]);
     });
 
@@ -627,6 +646,17 @@ describe('plate registry', () => {
         expect(String(set.plates[0].src)).toContain('archive-final-report');
     });
 
+    it('resolves end-of-life to exactly one plate with the approved label', () => {
+        const set = newsMedia['end-of-life'];
+
+        expect(set.plates).toHaveLength(1);
+        expect(set.plates[0].label).toBe('Red Horizon · end of life');
+        expect([...set.plates[0].label].filter((character) => character.codePointAt(0) === 0x00b7)).toHaveLength(1);
+        expect(isPlateSet(set)).toBe(false);
+        // One plate of the mission end-of-life, imported from its canonical docs/ copy.
+        expect(String(set.plates[0].src)).toContain('end-of-life');
+    });
+
     it('resolves every declared key and nothing else', () => {
         expect(resolveNewsMedia('asteria-plates')).toBe(newsMedia['asteria-plates']);
         expect(resolveNewsMedia('programme-identity')).toBe(newsMedia['programme-identity']);
@@ -644,6 +674,7 @@ describe('plate registry', () => {
         expect(resolveNewsMedia('landing-confirmation')).toBe(newsMedia['landing-confirmation']);
         expect(resolveNewsMedia('first-drive')).toBe(newsMedia['first-drive']);
         expect(resolveNewsMedia('archive-final-report')).toBe(newsMedia['archive-final-report']);
+        expect(resolveNewsMedia('end-of-life')).toBe(newsMedia['end-of-life']);
         expect(resolveNewsMedia(undefined)).toBeUndefined();
     });
 });
