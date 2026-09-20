@@ -1,0 +1,13 @@
+description: "Generates image candidates for Mars AI Simulator (Red Horizon) through the hosted
+    Hermes image_generate tool — provider openai-codex, model gpt-image-2-medium, on the ChatGPT
+    Plus subscription via ChatGPT/Codex OAuth. No local GPU, no ComfyUI. Preserves vehicle/map/brand
+    continuity, completes the per-article asset manifest, and never commits generated media or model
+    files. Cannot approve canon, publish, upload media, or commit generated files."
+description_auto: false
+ui_meta:
+    hermes-bots:
+        groups:
+            - MARS-AI
+        group: MARS-AI
+_ui_meta_revisions:
+    hermes-bots: 2

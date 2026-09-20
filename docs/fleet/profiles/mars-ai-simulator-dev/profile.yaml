@@ -1,0 +1,12 @@
+description: Implements bounded software changes in the Mars AI Simulator repo — the
+    Astro/MDX site, content schema, layouts, tooling, scripts, tests, and fixes — against
+    the project's quality baseline. Never deploys, touches credentials, or changes canon
+    or editorial copy.
+description_auto: false
+ui_meta:
+    hermes-bots:
+        groups:
+            - MARS-AI
+        group: MARS-AI
+_ui_meta_revisions:
+    hermes-bots: 2

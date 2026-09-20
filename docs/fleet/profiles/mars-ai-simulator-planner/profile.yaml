@@ -1,0 +1,11 @@
+description: Owns the task graph, story sequencing, and handoffs for Red Horizon releases.
+    Turns the private mission arc into a paced backlog of public possibilities without
+    disclosing future events or overruling the human story owner.
+description_auto: false
+ui_meta:
+    hermes-bots:
+        groups:
+            - MARS-AI
+        group: MARS-AI
+_ui_meta_revisions:
+    hermes-bots: 2

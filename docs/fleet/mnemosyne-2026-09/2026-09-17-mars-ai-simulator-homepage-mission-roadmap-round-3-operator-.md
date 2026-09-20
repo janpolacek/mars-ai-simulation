@@ -1,0 +1,11 @@
+---
+id: c24a708e
+date: 2026-09-17T18:00:57Z
+category: project
+tags: mars-ai-simulator,homepage,roadmap,progress-log,kanban,commission
+source: tool
+---
+
+# Mars AI Simulator — homepage mission roadmap, round 3 (operator commission, 2026
+
+Mars AI Simulator — homepage mission roadmap, round 3 (operator commission, 2026-09-17 20:00 CEST). Human complaint verbatim: "mission roadmap has only 3 steps .. add more; change also first milestone title "Announced Coalition and purpose" .. refrase that, coalition seem political". Operator filed planner card t_9f4bbea2 (workspace dir:/home/janpolacek/Projects/mars-ai-simulator), parent t_116ca903 — the writer card already in flight since 19:47 (raised by the editorial role on the 004 publication) that decides the step-004 link and the current flag; t_9f4bbea2 is filed as its child so round 3 reads that deck and does not duplicate or race it, and its dev transcription must depend on t_116ca903's transcription (single writer of website/src/features/progress/steps.ts). State at commission: steps.ts sha256 1236ead7…, three steps (1 Announced/"Coalition and purpose"→001, 2 In hand/"Mission architecture" current:true→003, 3 Ahead/"Surface operations" no link); published record 001 (2026-10-12), 002 (2027-03-19), 003 (2029-07-13), 004 (2030-03-11); progress-log.test.mjs sha 4fc56e74… asserts exactly one current, one anchor per linked step, and the LAST step title === 'Surface operations' with no link (L219-223) — a longer list either keeps it unreached and last or moves that test in the same card. The word "coalition" sits on the public surface 6 times in 5 files (steps.ts:33, news/001:77, news/002:87, news/004:14, mission/facts.ts:18, mission/Hero.astro:12); the card scopes the rename to the roadmap panel and requires the other five to be surfaced as a separate human decision, not silently rewritten. Record's own wording available for the rename: article 001 "Ten national programme teams" (001:22-24) and "a shared objective" (001:77). Only released forward statement usable for a new step: article 004 "What sits between this decision and the flight is integration and readiness work." Dispatch verified live (gateway active; card promoted/claimed by the writer worker at 19:47).

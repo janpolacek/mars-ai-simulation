@@ -1,0 +1,9 @@
+Red Horizon / mars-ai-simulator: every push to `main` is the automatic Cloudflare Workers production deploy (human instruction 2026-09-17, recorded in AGENTS.md) — the deploy action itself (wrangler, credentials, DNS) stays out of reach for all agents, so a dev push that carries content into the build output is a publication, not an inert push. Verify the live origin after pushing.
+§
+there is no `events` table. In a dispatched worker session the `hermes kanban <verb>` CLIs are refused ('delegate_task child contexts cannot mutate Kanban tasks') even for read-only `list` — use the kanban_* tools, and read the board read-only from SQLite with a small script file;
+§
+skill_manage() cannot edit the Mars AI Simulator project skills that live in the repository (.agents/skills/*/SKILL.md): it fails with "Skill 'x' not found in active profile 'mars-ai-simulator-dev'". Edit those with the patch/write_file tools and commit them like any other repo change.
+§
+Red Horizon shared checkout: the human operator (Ján Polaček) also commits/pushes directly to main with no board card (2026-09-18 `1d6adff` swept the whole docs/vehicles/ariane/ folder, incl. four withheld plates + a rewritten dossier, into the public repo mid-graph), and off-board sessions can carry uncarded mid-card edits. Before publishing: measure `git status --short` + hashes twice, never `git add -A`, hold any path whose writer is unrecorded, and re-check a folder a card calls 'untracked' — it may already be tracked-and-remote.
+§
+Hermes kanban_create defaults to workspace_kind='scratch' (a fresh tmp dir) — for repo work always pass workspace_kind='dir' + absolute workspace_path, or the dispatched worker gets a directory with no repository in it; there is no kanban update tool to re-point a card after creation, only a comment to warn the worker.

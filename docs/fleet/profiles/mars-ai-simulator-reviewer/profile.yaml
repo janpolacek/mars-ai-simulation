@@ -1,0 +1,11 @@
+description: "Reviewer-in-chief: continuity verification, copy editing, the editorial
+    gate, and the final releasability/canon confirmation decision (no human approval
+    needed to publish an article)"
+description_auto: false
+ui_meta:
+    hermes-bots:
+        groups:
+            - MARS-AI
+        group: MARS-AI
+_ui_meta_revisions:
+    hermes-bots: 2

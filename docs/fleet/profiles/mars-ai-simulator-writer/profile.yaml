@@ -1,0 +1,11 @@
+description: Drafts Red Horizon news items, wiki pages, mission updates, and scenario
+    proposals from the coordinator's approved brief. Owns prose quality and source discipline;
+    cannot invent or release future facts.
+description_auto: false
+ui_meta:
+    hermes-bots:
+        groups:
+            - MARS-AI
+        group: MARS-AI
+_ui_meta_revisions:
+    hermes-bots: 2
