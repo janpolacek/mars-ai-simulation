@@ -13,7 +13,10 @@ the model. Strong frontier models would raise the cost without adding anything t
 experiment.
 
 The site they produce is live:
-**[Red Horizon — a Mars mission in progress](https://mars-ai-simulation.janpolacek.workers.dev/)**.
+
+**https://mars-ai-simulation.janpolacek.workers.dev** — _Red Horizon, a Mars mission in
+progress_
+
 To build it for that origin yourself, see [Build and run it](#build-and-run-it) below.
 
 ## Red Horizon, in brief
@@ -147,16 +150,9 @@ in [`dprint.json`](dprint.json) download on the first run. The tracked tree stil
 `dprint` would reformat, so run `format:check` to see the current state — a repository-wide
 reflow is its own change, not part of an unrelated one.
 
-The public origin is a build input, not a constant. `website/astro.config.mjs` reads
-`SITE_URL` and emits no canonical link when it is unset, so a release build supplies it:
-
-```sh
-SITE_URL=https://mars-ai-simulation.janpolacek.workers.dev npm run build
-```
-
-No domain or origin is hard-coded in the repository. No agent runs a deploy command, and
-none is needed: `main` is connected to the Cloudflare Workers Build, so a push to `main`
-deploys the build automatically. A push that carries a release into the public site is
+No agent runs a deploy command, and none is needed: the build happens in Cloudflare.
+`main` is connected to the Cloudflare Workers Build, so a push to `main` builds and
+deploys the site automatically. A push that carries a release into the public site is
 therefore a publication, and needs the human approval recorded on its release card.
 
 ## Repository layout
