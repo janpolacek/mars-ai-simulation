@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mars-ai-simulation.janpolacek.workers.dev/sitemap.xml
